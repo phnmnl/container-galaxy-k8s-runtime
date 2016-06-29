@@ -1,0 +1,17 @@
+<tool id="midcor" name="midcor" version="0.1.0">
+<stdio>
+<exit_code range="1:" />
+</stdio>
+<command><![CDATA[
+runMidcor.R -i "$input1" -o "$output1"
+]]></command>
+<inputs>
+<param type="data" name="input1" format="csv" />
+</inputs>
+<outputs>
+    <data name="output1" format="csv" label="Corrected isotopologues file"/>
+</outputs>
+<help><![CDATA[
+TODO: Fill in help.
+]]></help>
+</tool>

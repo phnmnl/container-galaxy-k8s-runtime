@@ -1,0 +1,68 @@
+<tool id="iso2flux" name="iso2flux" version="0.1.0">
+<stdio>
+<exit_code range="1:" />
+</stdio>
+<command><![CDATA[
+echo 'Working directory is '\$PWD;
+#if str( $tracing_model ) != None:
+#set $tracing_model_wext = str( $tracing_model ) + '.xlsx'
+ln -s "$tracing_model" "$tracing_model_wext";
+#end if
+run_iso2flux.py -e "$tracing_data"
+#if str( $tracing_model ) != None:
+  -l "$tracing_model_wext"
+#end if
+
+-s "$sbml_model"
+
+#if str( $parameters ) != None:
+-p "$parameters"
+#end if
+#if str( $constraints ) != None:
+-c "$constraints"
+#end if
+
+-t "$incubation_time"
+-f "$experimental_factor"
+
+#if str( $confidence.compute ) == "no":
+-q
+#end if
+]]></command>
+<!-- -p, -l -s are optional; tracing data, time and experimental factor are required
+ Missing -q quick mode.
+ -->
+<inputs>
+    <param type="data" name="tracing_data" format="csv" />
+    <param type="data" name="tracing_model" format="xlsx"/>
+    <param type="data" name="sbml_model" format="xml"/>
+    <param type="data" name="parameters" format="csv" optional="True"/>
+    <param type="data" name="constraints" format="csv" optional="True"/>
+    <param type="float" name="incubation_time" value="1"/>
+    <param type="text" name="experimental_factor" value="Factor"/>
+    <conditional name="confidence">
+        <param name="compute" label="Compute confidence intervals" type="select">
+            <option value="yes">Yes</option>
+            <option value="no" selected="true">No</option>
+        </param>
+    </conditional>
+</inputs>
+<outputs>
+    <data name="unconstrained_fluxes" format="csv" from_work_dir="unconstrained_fluxes.csv" label="Unconstrained fluxes"/>
+    <data name="best_label" format="csv" from_work_dir="best_label.csv" label="Best label"/>
+    <data name="best_fluxes" format="csv" from_work_dir="best_fluxes.csv" label="Best fluxes after adjustment"/>
+    <data name="fluxes_confidence" format="csv" frow_work_dir="confidence.csv" label="Confidence intervals for fluxes">
+        <filter>( confidence['compute'] == "yes")</filter>
+    </data>
+    <!--
+     Outputs:
+     - unconstrained fluxes (csv) : prefix+"unconstrained_fluxes.csv"
+     - best label (best tracer) (csv) : prefix+"best_label.csv"
+     - best fluxes (best adjustement) (csv) : prefix+"best_fluxes.csv"
+     - confidence for fluxes (csv) : prefix+"confidence.csv"
+    -->
+
+</outputs>
+<help><![CDATA[
+]]></help>
+</tool>

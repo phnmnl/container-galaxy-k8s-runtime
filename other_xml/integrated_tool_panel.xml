@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<toolbox>
+    <!--
+    This is Galaxy's integrated tool panel and should be modified directly only for
+    reordering tools inside a section. Each time Galaxy starts up, this file is
+    synchronized with the various tool config files: tools, sections and labels
+    added to one of these files, will be added also here in the appropriate place,
+    while elements removed from the tool config files will be correspondingly
+    deleted from this file.
+    To modify locally managed tools (e.g. from tool_conf.xml) modify that file
+    directly and restart Galaxy. Whenever possible Tool Shed managed tools (e.g.
+    from shed_tool_conf.xml) should be managed from within the Galaxy interface or
+    via its API - but if changes are necessary (such as to hide a tool or re-assign
+    its section) modify that file and restart Galaxy.
+    -->
+    <section id="getext" name="Get Data" version="">
+        <tool id="upload1" />
+        <tool id="ucsc_table_direct1" />
+        <tool id="ucsc_table_direct_archaea1" />
+        <tool id="ebi_sra_main" />
+        <tool id="biomart" />
+        <tool id="gramenemart" />
+        <tool id="modENCODEfly" />
+        <tool id="flymine" />
+        <tool id="modmine" />
+        <tool id="mousemine" />
+        <tool id="ratmine" />
+        <tool id="yeastmine" />
+        <tool id="modENCODEworm" />
+        <tool id="wormbase" />
+        <tool id="zebrafishmine" />
+        <tool id="eupathdb" />
+        <tool id="genomespace_file_browser_prod" />
+        <tool id="genomespace_importer" />
+    </section>
+    <section id="send" name="Send Data" version="">
+        <tool id="genomespace_exporter" />
+    </section>
+    <section id="liftOver" name="Lift-Over" version="">
+        <tool id="liftOver1" />
+    </section>
+    <section id="textutil" name="Text Manipulation" version="">
+        <tool id="addValue" />
+        <tool id="cat1" />
+        <tool id="Condense characters1" />
+        <tool id="Cut1" />
+        <tool id="mergeCols1" />
+        <tool id="Convert characters1" />
+        <tool id="createInterval" />
+        <tool id="ChangeCase" />
+        <tool id="Paste1" />
+        <tool id="Remove beginning1" />
+        <tool id="random_lines1" />
+        <tool id="Show beginning1" />
+        <tool id="Show tail1" />
+        <tool id="trimmer" />
+        <tool id="wc_gnu" />
+        <tool id="secure_hash_message_digest" />
+    </section>
+    <section id="filter" name="Filter and Sort" version="">
+        <tool id="Filter1" />
+        <tool id="sort1" />
+        <tool id="Grep1" />
+        <label id="gff" text="GFF" version="" />
+        <tool id="Extract_features1" />
+        <tool id="gff_filter_by_attribute" />
+        <tool id="gff_filter_by_feature_count" />
+        <tool id="gtf_filter_by_attribute_values_list" />
+    </section>
+    <section id="group" name="Join, Subtract and Group" version="">
+        <tool id="join1" />
+        <tool id="comp1" />
+        <tool id="Grouping1" />
+    </section>
+    <section id="convert" name="Convert Formats" version="">
+        <tool id="bed2gff1" />
+        <tool id="gff2bed1" />
+        <tool id="MAF_To_BED1" />
+        <tool id="MAF_To_Interval1" />
+        <tool id="MAF_To_Fasta1" />
+        <tool id="Sff_extractor" />
+        <tool id="wig_to_bigWig" />
+        <tool id="bed_to_bigBed" />
+    </section>
+    <section id="features" name="Extract Features" version="">
+        <tool id="gene2exon1" />
+    </section>
+    <section id="fetchSeq" name="Fetch Sequences" version="">
+        <tool id="Extract genomic DNA 1" />
+    </section>
+    <section id="fetchAlign" name="Fetch Alignments" version="">
+        <tool id="Interval2Maf_pairwise1" />
+        <tool id="Interval2Maf1" />
+        <tool id="Interval_Maf_Merged_Fasta2" />
+        <tool id="GeneBed_Maf_Fasta2" />
+        <tool id="maf_stats1" />
+        <tool id="MAF_Thread_For_Species1" />
+        <tool id="MAF_Limit_To_Species1" />
+        <tool id="maf_limit_size1" />
+        <tool id="maf_by_block_number1" />
+        <tool id="MAF_Reverse_Complement_1" />
+        <tool id="MAF_filter" />
+    </section>
+    <section id="scores" name="Get Genomic Scores" version="">
+        <tool id="wiggle2simple1" />
+        <tool id="aggregate_scores_in_intervals2" />
+    </section>
+    <section id="stats" name="Statistics" version="">
+        <tool id="Summary_Statistics1" />
+        <tool id="Count1" />
+    </section>
+    <section id="plots" name="Graph/Display Data" version="">
+        <tool id="qual_stats_boxplot" />
+        <tool id="vcf_to_maf_customtrack1" />
+    </section>
+    <section id="hgv" name="Phenotype Association" version="">
+        <tool id="hgv_codingSnps" />
+        <tool id="hgv_add_scores" />
+        <tool id="hgv_sift" />
+        <tool id="hgv_linkToGProfile" />
+        <tool id="hgv_david" />
+        <tool id="hgv_ldtools" />
+        <tool id="hgv_pass" />
+        <tool id="hgv_gpass" />
+        <tool id="hgv_beam" />
+        <tool id="hgv_lps" />
+        <tool id="master2pgSnp" />
+    </section>
+    <label id="ngs" text="NGS Toolbox Beta" version="" />
+    <section id="cshl_library_information" name="NGS: QC and manipulation" version="">
+        <label id="illumina" text="Illumina data" version="" />
+        <label id="454" text="Roche-454 data" version="" />
+        <label id="solid" text="AB-SOLiD data" version="" />
+        <tool id="solid2fastq" />
+        <tool id="solid_qual_stats" />
+        <tool id="solid_qual_boxplot" />
+        <label id="generic_fastq" text="Generic FASTQ manipulation" version="" />
+        <label id="fastx_toolkit_fastq" text="FASTX-Toolkit for FASTQ data" version="" />
+    </section>
+    <section id="ngs_mapping" name="NGS: Mapping" version="">
+        <label id="illumina" text="Illumina" version="" />
+        <label id="roche_454" text="Roche-454" version="" />
+        <label id="ab_solid" text="AB-SOLiD" version="" />
+    </section>
+    <section id="samtools" name="NGS: SAM Tools" version="">
+    </section>
+    <section id="uppsala" name="Uppsala Demo with k8s" version="">
+        <tool id="upps_blankfilter" />
+        <tool id="BatchFeatureRemoval" />
+        <tool id="log2transformation" />
+        <tool id="splitter" />
+        <tool id="cv" />
+    </section>
+    <section id="phenomenal" name="PhenoMeNal H2020" version="">
+        <tool id="iso2flux" />
+        <tool id="midcor" />
+        <tool id="isodyn" />
+    </section>
+</toolbox>

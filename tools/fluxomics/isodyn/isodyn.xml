@@ -1,0 +1,29 @@
+<tool id="isodyn" name="isodyn" version="0.1.0">
+<stdio>
+<exit_code range="1:" />
+</stdio>
+<command><![CDATA[
+isodyn "$parameters_file" "$experimental_input" > "$tracing_distributions"
+]]></command>
+<inputs>
+    <param type="data" name="parameters_file" format="txt" /> <!-- Parameters file -->
+    <param type="data" name="experimental_input" format="txt" /> <!-- Experimental data file -->
+    <!--
+         TODO Vitaly needs to modify Isodyn to take as the experimental input the results from midcor
+         -->
+</inputs>
+<outputs>
+    <data name="tracing_distributions" format="txt"/> <!-- Flux & tracing distributions -->
+    <data name="numeral_set" format="txt"/>
+    <!--
+         TODO finish this file set recognition.
+         Variable number of outputs for fluxes, numbered from the smallest number used as file name in the working
+         directory
+         So if there is a file named "3" on the working directory, then files created will be named 4, 5, 6....
+         each one of this has a different fluxes distributions.
+         -->
+</outputs>
+<help><![CDATA[
+TODO: Fill in help.
+]]></help>
+</tool>

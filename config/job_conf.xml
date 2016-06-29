@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!-- A sample job config for sketching the k8s use case with shared fs -->
+<job_conf>
+    <plugins>
+        <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner" workers="4"/>
+        <plugin id="k8s" type="runner" load="galaxy.jobs.runners.kubernetes:KubernetesJobRunner">
+            <param id="k8s_use_service_account">true</param>
+            <param id="k8s_persistent_volume_claim_name">galaxy-pvc</param>
+            <!-- The following mount path needs to be the initial part of the "file_path" and "new_file_path" paths
+            set in universe_wsgi.ini (or equivalent general galaxy config file).
+            -->
+            <param id="k8s_persistent_volume_claim_mount_path">/opt/galaxy_data</param>
+            <param id="k8s_namespace">default</param>
+            <!-- Allows pods to retry up to this number of times, before marking the Job as failed -->
+            <param id="k8s_pod_retrials">1</param>
+        </plugin>
+    </plugins>
+    <handlers>
+        <handler id="main"/>
+    </handlers>
+    <destinations default="local">
+        <destination id="local" runner="local"/>
+        <destination id="blankfilter-container" runner="k8s">
+            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">ex-blankfilter</param>
+            <param id="docker_tag_override">latest</param>
+            <!--
+            <param id="container_port_80">8080</param>
+            -->
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+        <destination id="batchfeature-container" runner="k8s">
+            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">ex-bfr</param>
+            <param id="docker_tag_override">latest</param>
+            <!--
+            <param id="container_port_80">8080</param>
+            -->
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+        <destination id="log2transformation-container" runner="k8s">
+            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">ex-log2transformation</param>
+            <param id="docker_tag_override">latest</param>
+            <!--
+            <param id="container_port_80">8080</param>
+            -->
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+        <destination id="iso2flux-container" runner="k8s">
+            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">iso2flux</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">1</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+        <destination id="midcor-container" runner="k8s">
+            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">midcor</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+        <destination id="isodyn-container" runner="k8s">
+            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">isodyn</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+
+    </destinations>
+    <tools>
+        <!-- Tools can be configured to use specific destinations or handlers,
+             identified by either the "id" or "tags" attribute.  If assigned to
+             a tag, a handler or destination that matches that tag will be
+             chosen at random.
+         -->
+        <tool id="BatchFeatureRemoval" destination="batchfeature-container"/>
+        <tool id="upps_blankfilter" destination="blankfilter-container"/>
+        <tool id="log2transformation" destination="log2transformation-container"/>
+        <tool id="iso2flux" destination="iso2flux-container"/>
+        <tool id="midcor" destination="midcor-container"/>
+        <tool id="isodyn" destination="isodyn-container"/>
+    </tools>
+</job_conf>
