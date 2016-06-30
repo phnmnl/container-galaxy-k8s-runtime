@@ -142,8 +142,8 @@
     -->
   </section>
   <section name="PhenoMeNal H2020" id="phenomenal">
-    <tool file="phenomenal/iso2flux/iso2flux.xml"/>
-    <tool file="phenomenal/midcor/midcor.xml"/>
-    <tool file="phenomenal/isodyn/isodyn.xml"/>
+    <tool file="fluxomics/iso2flux/iso2flux.xml"/>
+    <tool file="fluxomics/midcor/midcor.xml"/>
+    <tool file="fluxomics/isodyn/isodyn.xml"/>
   </section>
 </toolbox>

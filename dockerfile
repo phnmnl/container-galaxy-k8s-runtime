@@ -11,7 +11,7 @@ COPY config/galaxy.ini config/galaxy.ini
 COPY config/job_conf.xml config/job_conf.xml
 COPY config/tool_conf.xml config/tool_conf.xml
 COPY other_xml/integrated_tool_panel.xml integrated_tool_panel.xml
-COPY tools/. tools/
+COPY tools/fluxomics tools/fluxomics
 
 EXPOSE 8080
 
