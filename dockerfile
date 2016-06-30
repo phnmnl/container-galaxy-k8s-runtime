@@ -2,7 +2,14 @@ FROM ubuntu:14.04
 MAINTAINER PhenoMeNal-H2020 Project <phenomenal-h2020-users@googlegroups.com>
 LABEL Description="Galaxy test for running inside Kubernetes."
 
-RUN apt-get -y update && apt-get install -y git 
+RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transport-https software-properties-common wget && \
+    apt-get update -qq && \
+    apt-get install --no-install-recommends -y mercurial python-psycopg2 sudo python-virtualenv \
+    libyaml-dev libffi-dev libssl-dev \
+    curl git python-pip python-gnuplot python-psutil && \
+    pip install --upgrade pip && \
+    apt-get purge -y software-properties-common && \
+    apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN git clone https://github.com/phnmnl/galaxy.git
 WORKDIR galaxy
 RUN git checkout feature/allfeats
