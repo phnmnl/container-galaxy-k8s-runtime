@@ -151,7 +151,7 @@
         <tool id="splitter" />
         <tool id="cv" />
     </section>
-    <section id="phenomenal" name="PhenoMeNal H2020" version="">
+    <section id="phenomenal" name="PhenoMeNal Fluxomics" version="">
         <tool id="iso2flux" />
         <tool id="midcor" />
         <tool id="isodyn" />
