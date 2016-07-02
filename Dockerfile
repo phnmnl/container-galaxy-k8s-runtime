@@ -19,6 +19,8 @@ COPY config/job_conf.xml config/job_conf.xml
 COPY config/tool_conf.xml config/tool_conf.xml
 COPY other_xml/integrated_tool_panel.xml integrated_tool_panel.xml
 COPY tools/fluxomics tools/fluxomics
+RUN virtualenv .venv
+RUN /bin/bash -c "source .venv/bin/activate && pip install -r requirements.txt && deactivate"
 
 # Galaxy runs on python < 3.5, so https://github.com/kelproject/pykube/issues/29 recommends
 ENV PYKUBE_KUBERNETES_SERVICE_HOST kubernetes
