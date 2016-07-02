@@ -20,7 +20,11 @@ COPY config/tool_conf.xml config/tool_conf.xml
 COPY other_xml/integrated_tool_panel.xml integrated_tool_panel.xml
 COPY tools/fluxomics tools/fluxomics
 RUN virtualenv .venv
-RUN /bin/bash -c "source .venv/bin/activate && pip install -r requirements.txt && deactivate"
+RUN /bin/bash -c "source .venv/bin/activate && \
+                  pip install 'pip>=8.1' && \
+                  pip install -r requirements.txt \
+                      --index-url https://wheels.galaxyproject.org/simple && \
+                  deactivate"
 
 # Galaxy runs on python < 3.5, so https://github.com/kelproject/pykube/issues/29 recommends
 ENV PYKUBE_KUBERNETES_SERVICE_HOST kubernetes
