@@ -125,8 +125,7 @@
         <tool id="hgv_beam" />
         <tool id="hgv_lps" />
         <tool id="master2pgSnp" />
-    </section>
-    <label id="ngs" text="NGS Toolbox Beta" version="" />
+    </section> 
     <section id="cshl_library_information" name="NGS: QC and manipulation" version="">
         <label id="illumina" text="Illumina data" version="" />
         <label id="454" text="Roche-454 data" version="" />
@@ -144,6 +143,7 @@
     </section>
     <section id="samtools" name="NGS: SAM Tools" version="">
     </section>
+    <label id="phenomenal" text="PhenoMeNal Tools" version="" />
     <section id="uppsala" name="Uppsala Demo with k8s" version="">
         <tool id="upps_blankfilter" />
         <tool id="BatchFeatureRemoval" />
@@ -151,7 +151,7 @@
         <tool id="splitter" />
         <tool id="cv" />
     </section>
-    <section id="phenomenal" name="PhenoMeNal Fluxomics" version="">
+    <section id="phenomenal" name="Fluxomics" version="">
         <tool id="iso2flux" />
         <tool id="midcor" />
         <tool id="isodyn" />

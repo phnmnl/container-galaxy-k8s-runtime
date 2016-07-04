@@ -18,7 +18,7 @@ COPY config/galaxy.ini config/galaxy.ini
 COPY config/job_conf.xml config/job_conf.xml
 COPY config/tool_conf.xml config/tool_conf.xml
 COPY other_xml/integrated_tool_panel.xml integrated_tool_panel.xml
-COPY tools/fluxomics tools/fluxomics
+COPY tools/phenomenal tools/phenomenal
 RUN virtualenv .venv
 RUN /bin/bash -c "source .venv/bin/activate && \
                   pip install 'pip>=8.1' && \

@@ -132,18 +132,18 @@
   <section id="samtools" name="NGS: SAM Tools">
   </section>
   <section name="Uppsala Workshop" id="uppsala">
-            <tool file="uppsala/BlankFilter/BlankFilter.xml"/>
-            <tool file="uppsala/BatchFeatureRemoval/BatchFeatureRemoval.xml"/>
-            <tool file="uppsala/log2transformation/log2transformation.xml"/>
-            <tool file="uppsala/splitter/splitter.xml"/>
-            <tool file="uppsala/CV/CV.xml"/>
+	  <tool file="phenomenal/uppsala/BlankFilter/BlankFilter.xml"/>
+	  <tool file="phenomenal/uppsala/BatchFeatureRemoval/BatchFeatureRemoval.xml"/>
+          <tool file="phenomenal/uppsala/log2transformation/log2transformation.xml"/>
+          <tool file="phenomenal/uppsala/splitter/splitter.xml"/>
+          <tool file="phenomenal/uppsala/CV/CV.xml"/>
     <!--        <tool file="uppsala/Merger/Merger.xml"/>
             <tool file="uppsala/FeatureSelection/FeatureSelection.xml"/>
     -->
   </section>
   <section name="PhenoMeNal H2020" id="phenomenal">
-    <tool file="fluxomics/iso2flux/iso2flux.xml"/>
-    <tool file="fluxomics/midcor/midcor.xml"/>
-    <tool file="fluxomics/isodyn/isodyn.xml"/>
+    <tool file="phenomenal/fluxomics/iso2flux/iso2flux.xml"/>
+    <tool file="phenomenal/fluxomics/midcor/midcor.xml"/>
+    <tool file="phenomenal/fluxomics/isodyn/isodyn.xml"/>
   </section>
 </toolbox>
