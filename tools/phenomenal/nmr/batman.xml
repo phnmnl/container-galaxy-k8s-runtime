@@ -1,0 +1,51 @@
+<tool id="batman-nmr" name="BATMAN">
+     <description>BATMAN</description>
+     <requirements>
+       <container type="docker">docker-registry.phenomenal-h2020.eu/phnmnl/batman</container>
+     </requirements>
+     <command><![CDATA[
+runBATMAN.R -i ${nmr_spectra_input}
+            -o \$PWD
+#if str( $options_file ) != None:
+            -p ${options_file}
+#end if
+#if str( $metabolite_template ) != None:
+            -u ${metabolite_template}
+#end if
+#if str( $target_metabolites ) != None:
+            -l ${target_metabolites}
+#end if
+       ]]>
+     </command>
+     <inputs>
+         <param name="nmr_spectra_input" type="data" format="txt" label="NMR Dataset"/>
+         <param name="options_file" type="data" format="txt" label="BATMAN options"/>
+         <param name="metabolite_template" type="data" format="txt" label="pre-defined metabolites template, multi_data_user.csv"/>
+         <param name="target_metabolites" type="data" format="txt" label="target metabolites list"/>
+     </inputs>
+     <outputs>
+         <data name="RelCon" format="tabular" from_work_dir="results/RelCon.txt" label="Relative concentrations"/>
+         <data name="MultipletsPpmShifts" format="tabular" from_work_dir="results/MultipletsPpmShifts.txt" label="Multiplets PPM Shifts"/>
+         <data name="RelConCreInt" format="tabular" from_work_dir="results/RelConCreInt.txt" label="Relative concentrations ?"/>
+
+         <collection name="spectra" type="list" labels="Stack from ${on_string}">
+             <discover_datasets pattern="(?P&lt;name&gt;specFit_.+_)\.pdf$" ext="pdf" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;L_.+)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;NMRdata_mod_.+)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;beta_sam_.+_rr_0)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;beta_.+_rr_0)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;delta_draw_mean_.+)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;delta_sam_.+)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;lambda_sam_.+_rr_0)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;metaFit_sam_.+_rr_0)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;metaIndFit_sam_.+_rr_0)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;metaTempHR_.+_rr_0)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;metaTemp_.+_rr_0)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;specFitHR_.+_rr_0)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;specFit_.+_rr_0)\.txt$" ext="tabular" directory="results" />
+             <discover_datasets pattern="(?P&lt;name&gt;theta_sam_.+_rr_0)\.txt$" ext="tabular" directory="results" />
+         </collection>
+     </outputs>
+     <help>
+     </help>
+ </tool>

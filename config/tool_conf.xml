@@ -147,4 +147,7 @@
     <tool file="phenomenal/fluxomics/midcor/midcor.xml"/>
     <tool file="phenomenal/fluxomics/isodyn/isodyn.xml"/>
   </section>
+  <section name="NMR" id="pheno-nmr">
+    <tool file="phenomenal/nmr/batman.xml"/>
+  </section>
 </toolbox>
