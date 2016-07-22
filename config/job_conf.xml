@@ -77,6 +77,10 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
+	<destination id="batman-container" runner="k8s">
+            <param id="docker_enabled">true</param>
+        </destination>
+
 
     </destinations>
     <tools>
@@ -90,6 +94,7 @@
         <tool id="log2transformation" destination="log2transformation-container"/>
         <tool id="iso2flux" destination="iso2flux-container"/>
         <tool id="midcor" destination="midcor-container"/>
-        <tool id="isodyn" destination="isodyn-container"/>
+	<tool id="isodyn" destination="isodyn-container"/>
+	<tool id="batman-nmr" destination="batman-container"/>
     </tools>
 </job_conf>
