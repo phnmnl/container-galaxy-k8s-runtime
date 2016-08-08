@@ -19,6 +19,7 @@ COPY config/job_conf.xml config/job_conf.xml
 COPY config/tool_conf.xml config/tool_conf.xml
 COPY other_xml/integrated_tool_panel.xml integrated_tool_panel.xml
 COPY tools/phenomenal tools/phenomenal
+
 RUN virtualenv .venv
 RUN /bin/bash -c "source .venv/bin/activate && \
                   pip install 'pip>=8.1' && \
@@ -28,6 +29,10 @@ RUN /bin/bash -c "source .venv/bin/activate && \
 
 # Galaxy runs on python < 3.5, so https://github.com/kelproject/pykube/issues/29 recommends
 ENV PYKUBE_KUBERNETES_SERVICE_HOST kubernetes
+
+COPY html/partners.png static/partners.png
+COPY html/PhenoMeNal_logo.png static/PhenoMeNal_logo.png
+COPY html/welcome.html static/welcome.html
 
 EXPOSE 8080
 
