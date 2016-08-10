@@ -17,7 +17,6 @@ RUN echo "-e git+https://github.com/pcm32/pykube.git@feature/allMergedFeatures#e
 COPY config/galaxy.ini config/galaxy.ini
 COPY config/job_conf.xml config/job_conf.xml
 COPY config/tool_conf.xml config/tool_conf.xml
-COPY other_xml/integrated_tool_panel.xml integrated_tool_panel.xml
 COPY tools/phenomenal tools/phenomenal
 
 RUN virtualenv .venv
