@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/). This file was automatically generated using CTD2Galaxy.-->
+<!--Proposed Tool Section: [File Handling]-->
+<tool id="nmrmlconv" name="nmrmlconv" version="0.1">
+  <requirements>
+        <container type="docker">phnmnl/nmrmlconv</container>
+  </requirements>
+  <description>Converts vendor RAW NMR to nmrML.</description>
+  <command><![CDATA[
+    mkdir -p \$PWD/tmp;
+    unzip -q -d \$PWD/tmp $infile;
+    java -jar /usr/local/share/nmrML/converter.jar -l create -b -z -t $venformat -i \$PWD/tmp -o $outfile;
+  ]]>
+  </command>
+  <inputs>
+    <param name="infile" type="data" format="zip" optional="False" label="Input file in zip format to convert" />
+    <param name="venformat" type="select" value="Bruker" optional="True" label="Vendor format" help="See below.">
+      <option value="bruker" selected="True">Bruker</option>
+      <option value="varian">Varian</option>
+      <option value="jeol">Jeol</option>
+      <option value="tecmag">TecMag</option>
+      <option value="nmrstar">NMR Star</option>
+      <option value="chemmagnetics">ChemMagnetics</option>
+      <option value="geomega">GE Omega</option>
+      <option value="galactic">Galactic</option>
+      <option value="jcamp">JCAMP</option>
+      <option value="lybrics">Lybrics</option>
+      <option value="nuts">Nuts</option>
+      <option value="nicolet">Nicolet</option>
+      <option value="netcdf">netCDF</option>
+    </param>
+  </inputs>
+  <outputs>
+    <data name="outfile" type="text" format="nmrML" label="nmrML file" />
+  </outputs>
+  <help>
+nmrML is an open mark-up language for NMR data. This tool converts RAW vendor NMR data to nmrML format.
+  </help>
+</tool>

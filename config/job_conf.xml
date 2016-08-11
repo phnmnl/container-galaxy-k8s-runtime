@@ -77,6 +77,61 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
+	<destination id="batman-container" runner="k8s">
+            <param id="docker_enabled">true</param>
+        </destination>
+	<destination id="w4m-univariate-container" runner="k8s">
+	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">univariate</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+	<destination id="w4m-multivariate-container" runner="k8s">
+	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">multivariate</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+        <destination id="w4m-biosigner-container" runner="k8s">
+	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">biosigner</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+	<destination id="msconvert2-container" runner="k8s">
+	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">pwiz</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+        <destination id="nmrmlconv-container" runner="k8s">
+	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">nmrmlconv</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+	<destination id="rtest-container" runner="k8s">
+	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">rtest</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+
+
+
+
 
     </destinations>
     <tools>
@@ -90,6 +145,15 @@
         <tool id="log2transformation" destination="log2transformation-container"/>
         <tool id="iso2flux" destination="iso2flux-container"/>
         <tool id="midcor" destination="midcor-container"/>
-        <tool id="isodyn" destination="isodyn-container"/>
+	<tool id="isodyn" destination="isodyn-container"/>
+	<tool id="batman-nmr" destination="batman-container"/>
+	<tool id="Univariate" destination="w4m-univariate-container"/>
+	<tool id="Multivariate" destination="w4m-multivariate-container"/>
+	<tool id="Biosigner" destination="w4m-biosigner-container"/>
+	<tool id="msconvert2" destination="msconvert2-container"/>
+	<tool id="nmrmlconv" destination="nmrmlconv-container"/>
+	<tool id="show_chromatogram" destination="rtest-container"/>
+	
+
     </tools>
 </job_conf>

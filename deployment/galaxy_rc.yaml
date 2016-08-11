@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: galaxy-k8s 
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+         app: galaxy-k8s
+    spec:
+      containers:
+      - name: galaxy-k8s
+        image: docker-registry.phenomenal-h2020.eu/phnmnl/galaxy-k8s-runtime
+        command: ["/bin/bash","-c","mkdir -p /opt/galaxy_data/database-sqlite && ./run.sh --daemon && tail -f paster.log"]
+        lifecycle: 
+          preStop:
+            exec:
+               command:
+                   - "./run.sh"
+                   - "--stop" 
+        ports:
+          - containerPort: 8080
+        volumeMounts:
+          - mountPath: "/opt/galaxy_data"
+            name: galaxy-pvc
+      volumes:
+        - name: galaxy-pvc
+          persistentVolumeClaim:
+              claimName: galaxy-pvc

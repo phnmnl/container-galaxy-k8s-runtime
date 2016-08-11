@@ -1,0 +1,10 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: galaxy-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 15Gi

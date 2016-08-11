@@ -1,0 +1,15 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pv-galaxy-nfs
+  labels:
+    type: nfs
+spec:
+  capacity:
+    storage: 30Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retained
+  nfs:
+    path: /Users/jdoe/galaxy_data_folders/kube-cluster
+    server: 192.168.64.1

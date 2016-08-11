@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/). This file was automatically generated using CTD2Galaxy.-->
+<!--Proposed Tool Section: [File Handling]-->
+<tool id="show_chromatogram" name="show_chromatogram" version="1.0">
+  <requirements>
+    <container type="docker">phnmnl/rtest</container>
+  </requirements>
+  <description>Shows the chromatogram of a single mzML file.</description>
+  <command><![CDATA[
+    /show_chromatogram.r $infile $outfile 2>&1
+  ]]></command>
+  <inputs>
+    <param name="infile" type="data" format="mzml" value="&lt;class 'CTDopts.CTDopts._Null'&gt;" optional="False" label="Input mzML file." />
+  </inputs>
+  <outputs>
+    <data name="outfile" format="png"/>
+  </outputs>
+  <help>Produces a PNG image file out of an mzML file as input.</help>
+</tool>
