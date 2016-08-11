@@ -9,7 +9,7 @@
   <command><![CDATA[
     mkdir -p \$PWD/tmp;
     unzip -q -d \$PWD/tmp $infile;
-    java -jar /usr/local/share/nmrML/converter.jar -l create -b -z -t $venformatt -i \$PWD/tmp -o $outfile;
+    java -jar /usr/local/share/nmrML/converter.jar -l create -b -z -t $venformat -i \$PWD/tmp -o $outfile;
   ]]>
   </command>
   <inputs>
