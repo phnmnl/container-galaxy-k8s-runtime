@@ -1,0 +1,24 @@
+---
+- hosts: all 
+  
+  vars:
+     db_engine: "{{ lookup('env','GALAXY_SEC_DB_ENGINE') }}"
+     db_user_name: "{{ lookup('env','GALAXY_SEC_DB_USER') }}"
+     db_user_pass: "{{ lookup('env','GALAXY_SEC_DB_PASS') | replace('\n', '') }}"
+     db_host: "{{ lookup('env','GALAXY_SEC_DB_HOST') }}"
+     db_name: "{{ lookup('env','GALAXY_SEC_DB_NAME') }}"
+     
+#  tasks:
+#  - name: transform loaded secrets into ansible variables.
+#    include_vars:
+#        file: /galaxy/secrets/secrets.yaml
+  tasks:
+  - name: set database postgres connection properties 
+    ini_file:
+        dest: /galaxy/config/galaxy.ini
+        section: "app:main"
+        option: database_connection        
+        value: "{{ db_engine }}://{{ db_user_name}}:{{ db_user_pass }}@{{ db_host }}/{{ db_name }}"
+    when: db_engine != "" and db_user_name != "" and db_host != "" and db_name != ""
+
+

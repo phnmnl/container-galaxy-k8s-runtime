@@ -1,0 +1,92 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+        name: postgresql-server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+         app: postgresql-server
+    spec:
+      containers:
+      - name: postgresql-server
+        image: postgres:9.3
+        env:
+          - name: "PGDATA"
+            value: "/var/lib/postgresql/data/pg_data_galaxy"
+          - name: "POSTGRES_DB"
+            value: "galaxydb"
+          - name: "POSTGRES_USER"
+            value: "galaxy"
+          - name: "POSTGRES_PASSWORD"
+            valueFrom:
+              secretKeyRef:
+                      name: galaxy-postgres-secret
+                      key: password 
+        ports:
+          - containerPort: 5432
+        volumeMounts:
+          - mountPath: "/var/lib/postgresql/data"
+            name: galaxy-pvc
+      volumes:
+        - name: galaxy-pvc
+          persistentVolumeClaim:
+              claimName: galaxy-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql-for-galaxy
+spec:
+  ports:
+   - name: tcp 
+     port: 5432
+     targetPort: 5432
+  selector:
+    app: postgresql-server
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+    name: galaxy-k8s 
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+         app: galaxy-k8s
+    spec:
+      containers:
+      - name: galaxy-k8s
+        image: docker-registry.phenomenal-h2020.eu/phnmnl/galaxy-k8s-runtime
+        env:
+            - name: "GALAXY_SEC_DB_ENGINE"
+              value: "postgresql"
+            - name: "GALAXY_SEC_DB_USER"
+              value: "galaxy"
+            - name: "GALAXY_SEC_DB_PASS"
+              valueFrom:
+                secretKeyRef:
+                      name: galaxy-postgres-secret
+                      key: password
+            - name: "GALAXY_SEC_DB_HOST"
+              value: "postgresql-for-galaxy"
+            - name: "GALAXY_SEC_DB_NAME"
+              value:  "galaxydb"
+        command: ["/bin/bash","-c","./ansible/runDBConfig.sh > config_db.log && ./run.sh --daemon && tail -f paster.log"]
+        lifecycle: 
+          preStop:
+            exec:
+               command:
+                   - "./run.sh"
+                   - "--stop" 
+        ports:
+          - containerPort: 8080
+        volumeMounts:
+          - mountPath: "/opt/galaxy_data"
+            name: galaxy-pvc
+      volumes:
+        - name: galaxy-pvc
+          persistentVolumeClaim:
+              claimName: galaxy-pvc
