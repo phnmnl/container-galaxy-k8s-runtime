@@ -7,6 +7,7 @@
      db_user_pass: "{{ lookup('env','GALAXY_SEC_DB_PASS') | replace('\n', '') }}"
      db_host: "{{ lookup('env','GALAXY_SEC_DB_HOST') }}"
      db_name: "{{ lookup('env','GALAXY_SEC_DB_NAME') }}"
+     google_analytics_code: "{{ lookup('env','GOOGLE_ANALYTICS_CODE') }}"
      
   tasks:
   - name: set database postgres connection properties 
@@ -17,4 +18,11 @@
         value: "{{ db_engine }}://{{ db_user_name}}:{{ db_user_pass }}@{{ db_host }}/{{ db_name }}"
     when: db_engine != "" and db_user_name != "" and db_host != "" and db_name != ""
 
+  - name: set google analytics code 
+    ini_file:
+        dest: /galaxy/config/galaxy.ini
+        section: "app:main"
+        option: ga_code
+        value: {{ google_analytics_code }}
+    when: google_analytics_code != ""
 
