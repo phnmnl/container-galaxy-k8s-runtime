@@ -1,0 +1,14 @@
+---
+- hosts: all 
+  
+  vars:
+     google_analytics_code: "{{ lookup('env','GOOGLE_ANALYTICS_CODE') }}"
+     
+  tasks:
+  - name: set google analytics code 
+    ini_file:
+        dest: /galaxy/config/galaxy.ini
+        section: "app:main"
+        option: ga_code
+        value: {{ google_analytics_code }}
+    when: google_analytics_code != ""
