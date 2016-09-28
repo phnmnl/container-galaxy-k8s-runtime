@@ -74,7 +74,7 @@ spec:
               value: "postgresql-for-galaxy"
             - name: "GALAXY_SEC_DB_NAME"
               value:  "galaxydb"
-        command: ["/bin/bash","-c","./ansible/runDBConfig.sh > config_db.log && ./run.sh --daemon && tail -f paster.log"]
+        command: ["/bin/bash","-c","./ansible/run_galaxy_config.sh > config_db.log && ./run.sh --daemon && tail -f paster.log"]
         lifecycle: 
           preStop:
             exec:
