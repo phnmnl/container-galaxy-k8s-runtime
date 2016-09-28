@@ -8,10 +8,6 @@
      db_host: "{{ lookup('env','GALAXY_SEC_DB_HOST') }}"
      db_name: "{{ lookup('env','GALAXY_SEC_DB_NAME') }}"
      
-#  tasks:
-#  - name: transform loaded secrets into ansible variables.
-#    include_vars:
-#        file: /galaxy/secrets/secrets.yaml
   tasks:
   - name: set database postgres connection properties 
     ini_file:
