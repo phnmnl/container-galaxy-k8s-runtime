@@ -127,8 +127,8 @@
     wrapper.py -inputzip "$inputzip"
                -jsontxt "$jsontxt"
                -html_file "$html_file"
-               -out_dir "$html_file.extra_files_path"
-               -study_title "$name_of_study"
+	       -out_dir "$html_file.extra_files_path"
+	       -study_title "$name_of_study"
                --s_submission_date "$s_submission_date"
                --s_release_date "$s_release_date"
                --s_description "$s_description"
@@ -171,7 +171,13 @@
                --organism_variant_iri "$organism_variant_iri"
                --organism_part_text "$organism_part_text"
                --organism_part_ref "$organism_part_ref"
-               --organism_part_iri "$organism_part_iri"]]>
+	       --organism_part_iri "$organism_part_iri";
+
+	       ln -s "$html_file.extra_files_path"/"$name_of_study" study_dir;
+
+	       cd study_dir;
+	       zip isa.zip i_* a_* s_* && mv isa.zip "$ISA_zip";
+	       ]]>
     </command>
 
     <inputs>
@@ -185,7 +191,22 @@
         <expand macro="icontactmacro"/>
     </inputs>
     <outputs>
+<!--
+Notes:
+
+- Multiple a_ files
+- Single s_ as per mzml2isa definition (ISA does allow more than one s_ file).
+- Single i_ file.
+--> 
         <data format="html" name="html_file" label="" />
+        <data name="ISA_zip" format="zip" label="ISA Zip file"/>
+          <collection type="list" label="A Files" name="a_files">
+		<discover_datasets pattern="(?P&lt;designation&gt;a_.+)\.txt" directory="study_dir" format="tabular"/>
+	  </collection>
+	<collection type="list" label="S Files" name="s_files">
+		<discover_datasets pattern="(?P&lt;designation&gt;s_.+)\.txt" directory="study_dir" format="tabular"/>
+	</collection>
+	<data name="i_file" format="tabular" label="I File" from_work_dir="study_dir/i_Investigation.txt" visible="true"/>
     </outputs>
     <tests>
         <test>
