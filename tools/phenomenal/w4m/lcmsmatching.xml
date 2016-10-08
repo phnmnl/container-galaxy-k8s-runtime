@@ -1,0 +1,550 @@
+<tool id="lcmsmatching" name="LC/MS matching" version="3.1">
+
+	<description>Annotation of MS peaks using matching on a spectra database.</description>
+
+	<requirements>
+		<requirement type="package" version="3.2.2">R</requirement>
+		<requirement type="package" version="1.20.0">r-getopt</requirement>
+		<requirement type="package" version="1.0.0">r-stringr</requirement>
+		<requirement type="package" version="1.8.3">r-plyr</requirement>
+		<requirement type="package" version="3.98">r-xml</requirement>
+		<requirement type="package" version="1.0_6">r-bitops</requirement>
+		<requirement type="package" version="1.95">r-rcurl</requirement>
+		<requirement type="package" version="1.3">r-rjsonio</requirement>
+	</requirements>
+
+	<code file="list-chrom-cols.py"/>
+
+	<!--~~~~~~~
+	~ COMMAND ~
+	~~~~~~~~-->
+
+	<command>
+		<![CDATA[
+		## @@@BEGIN_CHEETAH@@@
+		search-mz -i "$mzrtinput"
+
+		## Database
+		#if $db.dbtype == "inhouse"
+			-d file
+			--db-fields "$db.dbfields"
+			--db-ms-modes "$db.dbmsmodes"
+		#end if
+		#if $db.dbtype == "peakforest"
+			-d peakforest
+			--db-token "$db.dbtoken"
+		#end if
+			--url "$db.dburl"
+
+		## M/Z matching
+		-m $mzmode -p $mzprec -s $mzshift
+
+		## Precursor matching
+		#if $prec.match == "true"
+			--precursor-match --pos-prec "$prec.pos" --neg-prec "$prec.neg"
+		#end if
+		#if $prec.match == "true" and $chromcols:
+			--precursor-rt-tol $tolz
+		#end if
+
+		## Chromatographic columns options and retention matching 
+		#if $chromcols:
+			-c "$chromcols" --check-cols --rttolx $tolx --rttoly $toly
+		#end if
+
+		## Table outputs 
+		-o "$mainoutput" --peak-output-file "$peaksoutput" --same-rows --same-cols
+
+		## HTML output 
+		--html-output-file "$htmloutput" --no-main-table-in-html-output
+
+		## Fields of input file
+		--input-col-names "$inputfields"
+
+		## Ouput setting
+		#if $out.enabled == "true"
+			--output-col-names "$out.outputfields"
+			--molids-sep "$out.molidssep"
+		#else
+			--molids-sep "|"
+		#end if
+		## @@@END_CHEETAH@@@
+	]]></command>
+
+	<!--~~~~~~
+	~ INPUTS ~
+	~~~~~~~-->
+
+	<inputs>
+
+		<!-- DATABASE -->
+
+		<conditional name="db">
+
+			<param name="dbtype" label="Database" type="select" refresh_on_change="true">
+				<option value="inhouse">In-house</option>
+				<option value="peakforest">Peakforest</option>
+			</param>
+
+			<when value="inhouse">
+				<!-- Database file -->
+				<param name="dburl" label="Database file" type="data" format="tabular,tsv" refresh_on_change="true" help="Decimal: '.', missing: NA, mode: character and numerical, sep: tabular. Retention time values must be in seconds."/>
+
+				<!-- File database field names -->
+				<param name="dbfields" label="File database column names" type="text" size="256" value="mztheo=mztheo,chromcolrt=chromcolrt,compoundid=compoundid,chromcol=chromcol,msmode=msmode,attr=attr,peakcomp=peakcomp,fullnames=fullnames,compoundmass=compoundmass,compoundcomp=compoundcomp,inchi=inchi,inchikey=inchikey,pubchem=pubchem,chebi=chebi,hmdb=hmdb,kegg=kegg" refresh_on_change="true" help=""/>
+
+				<!-- File database MS modes -->
+				<param name="dbmsmodes" label="File database MS modes" type="text" size="32" value="pos=POS,neg=NEG" help=""/>
+
+				<param name="dbtoken" type="text" size="32" value="" hidden="true"/>
+			</when>
+
+			<when value="peakforest">
+				<param name="dburl" type="text" size="128" value="https://peakforest-alpha.inra.fr/rest" refresh_on_change="true"/>
+
+				<param name="dbtoken" label="Peakforest security token" type="text" size="32" value="" refresh_on_change="true" help="If you do not have yet a Peakforest token, go to Peakforest website and request one from your account."/>
+
+				<param name="dbfields" type="text" size="32" value="" hidden="true"/>
+			</when>
+		</conditional>
+
+		<!-- INPUT -->
+
+			<!-- Input file -->
+			<param name="mzrtinput" label="Input file - MZ(/RT) values" type="data" format="tabular,tsv" help="Decimal: '.', missing: NA, mode: character and numerical, sep: tabular. RT values must be in seconds."/>
+
+			<!-- Input field names -->
+			<param name="inputfields" label="Input file column names" type="text" size="32" value="mz=mzmed,rt=rtmed" help=""/>
+
+		<!-- M/Z MATCHING -->
+
+			<!-- Mode -->
+			<param name="mzmode" label="MS mode" type="select" display="radio" multiple="false" help="">
+				<option value="pos">Positive</option>
+				<option value="neg">Negative</option>
+			</param>
+
+			<!-- MZ matching parameters -->
+			<param name="mzprec" label="M/Z precision (in ppm)" type="float" help="" value="5"/>
+			<param name="mzshift" label="M/Z shift (in ppm)" type="float" help="" value="0"/>
+
+		<!-- RETENTION TIME PARAMETERS -->
+
+			<!-- List of chromatographic columns -->
+			<param name="chromcols" type="select" label="Chromatographic columns" multiple="true" dynamic_options="get_chrom_cols(dbtype = db['dbtype'], dburl = db['dburl'], dbtoken = db['dbtoken'], dbfields = db['dbfields'])" help="Select here the set of chromatographic columns against which the retention time matching will be run."/>
+
+			<!-- Tolerances -->
+			<param name="tolx" label="RTX retention time tolerance, parameter x (in seconds)" type="float" help="" value="5"/>
+			<param name="toly" label="RTY retention time tolerance, parameter y" type="float" help="" value="0.8"/>
+			<param name="tolz" label="RTZ retention time tolerance, used when precursor matching is enabled." type="float" help="" value="5"/>
+
+		<!-- PRECURSOR MATCH -->
+		<conditional name="prec">
+
+			<param name="match" label="Precursor match" type="select">
+				<option value="false">Off</option>
+				<option value="true">On</option>
+			</param>
+
+			<when value="false"></when>
+			<when value="true">
+				<!-- Negative precursors -->
+				<param name="neg" label="List of negative precursors" type="text" size="128" value="[(M-H)]-,[M-H]-,[(M+Cl)]-,[M+Cl]-" help="">
+					<sanitizer>
+						<valid initial="string.printable">
+							<remove value='"'/>
+						</valid>
+						<mapping initial="none">
+							<add source='"' target='\"'/>
+						</mapping>
+					</sanitizer>
+				</param>
+
+				<!-- Positive precursors -->
+				<param name="pos" label="List of positive precursors" type="text" size="128" value="[(M+H)]+,[M+H]+,[(M+Na)]+,[M+Na]+,[(M+K)]+,[M+K]+" help="">
+					<sanitizer>
+						<valid initial="string.printable">
+							<remove value='"'/>
+						</valid>
+						<mapping initial="none">
+							<add source='"' target='\"'/>
+						</mapping>
+					</sanitizer>
+				</param>
+			</when>
+		</conditional>
+
+		<!-- OUTPUT -->
+		<conditional name="out">
+
+			<param name="enabled" label="Output settings" type="select">
+				<option value="false">Off</option>
+				<option value="true">On</option>
+			</param>
+
+			<when value="false"></when>
+			<when value="true">
+
+				<!-- Output field names -->
+				<param name="outputfields" label="Output column names" type="text" size="256" value="mz=mz,rt=rt,chromcol=chromcol,chromcolrt=chromcolrt,compoundid=compoundid,attr=attr,peakcomp=peakcomp,intensity=intensity,relative.intensity=relative.intensity,mzexp=mzexp,mztheo=mztheo,fullnames=fullnames,compoundmass=compoundmass,compoundcomp=compoundcomp,inchi=inchi,inchikey=inchikey,pubchem=pubchem,chebi=chebi,hmdb=hmdb,kegg=kegg" help=""/>
+
+				<!-- Molecule IDs separator character -->
+				<param name="molidssep" label="Molecule IDs separator character" type="text" size="3" value="|" help="">
+					<sanitizer>
+						<valid initial="string.printable">
+							<remove value='"'/>
+						</valid>
+						<mapping initial="none">
+							<add source='"' target='\"'/>
+						</mapping>
+					</sanitizer>
+				</param>
+			</when>
+		</conditional>
+
+	</inputs>
+
+	<!--~~~~~~~
+	~ OUTPUTS ~
+	~~~~~~~~-->
+
+	<outputs>
+
+		<!-- Output file -->
+		<data name="mainoutput"  label="lcmsmatch_${mzrtinput.name}" format="tabular"/>
+		<data name="peaksoutput" label="lcmsmatch_${mzrtinput.name}_peaks" format="tabular"/>
+		<data name="htmloutput"  label="lcmsmatch_${mzrtinput.name}.html" format="html"/>
+
+	</outputs>
+
+	<!--~~~~~
+	~ TESTS ~
+	~~~~~~-->
+
+	<tests>
+
+		<!-- File database test -->
+		<test>
+			<param name="dbtype" value="inhouse"/>
+			<param name="dburl" value="filedb.tsv"/>
+			<param name="dbfields" value=""/>
+			<param name="dbmsmodes" value=""/>
+			<param name="mzrtinput" value="mz-input-small.tsv"/>
+			<param name="inputfields" value=""/>
+			<param name="mzmode" value="pos"/>
+			<output name="mainoutput" file="filedb-small-mz-match-output.tsv"/>
+			<output name="peaksoutput" file="filedb-small-mz-match-peaks-output.tsv"/>
+			<output name="htmloutput" file="filedb-small-mz-match-html-output.html"/>
+		</test>
+
+		<!-- File database test -->
+<!--
+		<test>
+			<param name="dbtype" value="peakforest"/>
+			<param name="dbtoken" value="@PEAKFOREST_TOKEN@"/>
+			<param name="mzrtinput" value="mz-input-small.tsv"/>
+			<param name="inputfields" value=""/>
+			<param name="mzmode" value="pos"/>
+			<output name="mainoutput">
+				<assert_contents>
+					<has_text text="mz"/>
+				</assert_contents>
+			</output>
+		</test>
+-->
+	</tests>
+
+	<!--~~~~
+	~ HELP ~
+	~~~~~-->
+
+	<help>
+<!-- @@@BEGIN_RST@@@ -->
+
+==============
+LC/MS matching
+==============
+
+This tool performs LC/MS matching on an input list of MZ/RT values, using either a provided in-house single file database or a connection to Peakforest database.
+
+--------
+Database
+--------
+
+When selecting the database, you have the choice between a Peakforest database or an in-house file.
+
+For the Peakforest database, a default REST web base address is already provided. But you can change it of you want to use a custom database. A field is also available for setting a token key in case the access to the Peakforest database you want to use is restricted. This is the case of the default database.
+
+For the in-house file, please refer to the paragraph "Single file database" below.
+
+-----------
+Input files
+-----------
+
+Be careful to always provide UTF-8 encoded files, unless you do not use special characters at all. For instance, greek letters in molecule names give errors if the file is in latin1 (ISO 8859-1) or Windows 1252 (not distinguishable from latin1) encoding.
+
+Single file database
+====================
+
+The database used is provided as a single file, in tabular format, through the *Database file* field. This file contains a list of MS peaks, with retention times.
+Peaks are "duplicated" as much as necessary. For instance if 3 retention times are available on a compound with 10 peaks in positive mode, then there will be 30 lines for this compounds in positive mode.
+
+The file must contain a header with the column names. The names are free, but must be provided through the *File database column names* field.
+In this field, each column is identified with a tag, and the columns names are listed as a comma separated list of tag/name couples (separated by character `=`). The allowed tags are the following ones:
+
++--------------+------------+------------------------------------------------------------------------------------------------------------+
+| Column tag   | Compulsory | Values                                                                                                     |
++==============+============+============================================================================================================+
+|    mztheo    |    Yes     | The m/z values.                                                                                            |
++--------------+------------+------------------------------------------------------------------------------------------------------------+
+|    mode      |    Yes     | The MS mode.                                                                                               |
++--------------+------------+------------------------------------------------------------------------------------------------------------+
+|     molid    |    Yes     | This is the identifier of your compound.                                                                   |
++--------------+------------+------------------------------------------------------------------------------------------------------------+
+|     colrt    |    No      | The retention time values in seconds.                                                                      |
++--------------+------------+------------------------------------------------------------------------------------------------------------+
+|      col     |    No      | The chromatographic column associated with the retention time. Compulsory if retention times are provided. |
++--------------+------------+------------------------------------------------------------------------------------------------------------+
+|     attr     |    No      | The attribution of the peak (e.g.: ``[(M+H)-(H2O)-(NH3)]+``).                                              |
++--------------+------------+------------------------------------------------------------------------------------------------------------+
+|     comp     |    No      | The composition of the peak (e.g.: ``C6 H10 N O``).                                                        |
++--------------+------------+------------------------------------------------------------------------------------------------------------+
+|   molcomp    |    No      | The composition of the molecule. (e.g.: ``C6H14N2O2``).                                                    |
++--------------+------------+------------------------------------------------------------------------------------------------------------+
+|   molmass    |    No      | The mass of the molecule.                                                                                  |
++--------------+------------+------------------------------------------------------------------------------------------------------------+
+|   molnames   |    No      | The names of the molecule, as a semicolon separated list.                                                  |
++--------------+------------+------------------------------------------------------------------------------------------------------------+
+|     inchi    |    No      | The InChI of the molecule.                                                                                 |
++--------------+------------+------------------------------------------------------------------------------------------------------------+
+|    inchikey  |    No      | The InChI key of the molecule.                                                                             |
++--------------+------------+------------------------------------------------------------------------------------------------------------+
+|   pubchem    |    No      | The PubChem ID of the molecule.                                                                            |
++--------------+------------+------------------------------------------------------------------------------------------------------------+
+|   chebi      |    No      | The ChEBI ID of the molecule.                                                                              |
++--------------+------------+------------------------------------------------------------------------------------------------------------+
+|    hmdb      |    No      | The HMDB ID of the molecule.                                                                               |
++--------------+------------+------------------------------------------------------------------------------------------------------------+
+|    kegg      |    No      | The KEGG ID of the molecule.                                                                               |
++--------------+------------+------------------------------------------------------------------------------------------------------------+
+
+The field *File database MS modes* allows you to personalize the MS mode identifiers. The value of the field is a comma separated list of mode/name couples (separated by character `=`)..
+For instance, if in your database file you use characters '+' and '-' to identify the modes, then you must set the field to `pos=+,neg=-`.
+
+Example of database file (totally fake, no meaning):
+
++-------+-------+------------+--------------------+-------------------------+-----------+-------+---------------+-----------+--------------+
+| molid | mode  | mz         | composition        | attribution             | col       | rt    | molcomp       | molmass   | molnames     |
++-------+-------+------------+--------------------+-------------------------+-----------+-------+---------------+-----------+--------------+
+| A10   | "POS" | 112.07569  | "P9Z6W410 O"       | "[(M+H)-(H2O)-(NH3)]+"  | "colzz"   | 5.69  | "J114L6M62O2" | 146.10553 | "Blablaine'" |
++-------+-------+------------+--------------------+-------------------------+-----------+-------+---------------+-----------+--------------+
+| A10   | "POS" | 112.07569  | "P9Z6W410 O"       | "[(M+H)-(H2O)-(NH3)]+"  | "col12"   | 0.8   | "J114L6M62O2" | 146.10553 | "Blablaine"  |
++-------+-------+------------+--------------------+-------------------------+-----------+-------+---------------+-----------+--------------+
+| A10   | "POS" | 112.07569  | "P9Z6W410 O"       | "[(M+H)-(H2O)-(NH3)]+"  | "somecol" | 8.97  | "J114L6M62O2" | 146.10553 | "Blablaine"  |
++-------+-------+------------+--------------------+-------------------------+-----------+-------+---------------+-----------+--------------+
+| A10   | "POS" | 191.076694 | "P92Z6W413 Na2 O2" | "[(M-H+2Na)]+"          | "colAA"   | 1.58  | "J114L6M62O2" | 146.10553 | "Blablaine"  |
++-------+-------+------------+--------------------+-------------------------+-----------+-------+---------------+-----------+--------------+
+| A10   | "POS" | 191.076694 | "P92Z6W413 Na2 O2" | "[(M-H+2Na)]+"          | "colzz2"  | 4.08  | "J114L6M62O2" | 146.10553 | "Blablaine"  |
++-------+-------+------------+--------------------+-------------------------+-----------+-------+---------------+-----------+--------------+
+| A10   | "POS" | 294.221687 | "U1113P94ZW429 O4" | "[(2M+H)]+ (13C)"       | "somecol" | 8.97  | "J114L6M62O2" | 146.10553 | "Blablaine"  |
++-------+-------+------------+--------------------+-------------------------+-----------+-------+---------------+-----------+--------------+
+| A10   | "POS" | 72.080775  | "P9Z4W410 O0"      | "[(M+H)-(J15L2M6O2)]+"  | "hcoltt"  | 0.8   | "J114L6M62O2" | 146.10553 | "Blablaine"  |
++-------+-------+------------+--------------------+-------------------------+-----------+-------+---------------+-----------+--------------+
+| A10   | "POS" | 112.07569  | "P9Z6W410 O"       | "[(M+H)-(H2O)-(NH3)]+"  | "colzz3"  | 4.54  | "J114L6M62O2" | 146.10553 | "Blablaine"  |
++-------+-------+------------+--------------------+-------------------------+-----------+-------+---------------+-----------+--------------+
+| A10   | "POS" | 72.080775  | "P9Z4W410 O0"      | "[(M+H)-(J15L2M6O2)]+"  | "colzz3"  | 4.54  | "J114L6M62O2" | 146.10553 | "Blablaine"  |
++-------+-------+------------+--------------------+-------------------------+-----------+-------+---------------+-----------+--------------+
+| A10   | "POS" | 72.080775  | "P9Z4W410 O0"      | "[(M+H)-(J15L2M6O2)]+"  | "colpp"   | 0.89  | "J114L6M62O2" | 146.10553 | "Blablaine"  |
++-------+-------+------------+--------------------+-------------------------+-----------+-------+---------------+-----------+--------------+
+| A10   | "POS" | 145.097154 | "P92Z6W413 O2"     | "[(M+H)-(H2)]+"         | "hcoltt"  | 0.8   | "J114L6M62O2" | 146.10553 | "Blablaine"  |
++-------+-------+------------+--------------------+-------------------------+-----------+-------+---------------+-----------+--------------+
+
+MZ/RT input file
+================
+
+The input to provide is a file, in a tabular format (or TSV: Tab Seperated Values), containing the list of MZ/RT values.
+
+The following columns will be used:
+
++--------------+------------+---------------------------------------+
+| Column tag   | Compulsory | Values                                |
++==============+============+=======================================+
+|      mz      |    Yes     | The m/z values.                       |
++--------------+------------+---------------------------------------+
+|      rt      |    No      | The retention time values in seconds. |
++--------------+------------+---------------------------------------+
+
+The file may contain a header line, in which case you have to provide the column names through the *Input file column names* field, which consists in a comma separated list of tag/name couples (separated by character `=`). If your file does not contain a header line, then you must provide the column numbers. Examples:
+
+ * With a header line having name MASS for mz column and RET for rt column: `mz=MASS,rt=RET`.
+ * With no header line: `mz=1,rt=2`.
+
+Since the MS spectrum mode can not be known from the file, an *MS mode* radio button field is provided for setting the mode.
+
+Example of file input:
+
++-------------+-------------+
+| mz          | rt          |
++-------------+-------------+
+| 75.02080998 | 49.38210915 |
++-------------+-------------+
+| 75.05547146 | 0.658528069 |
++-------------+-------------+
+| 75.08059797 | 1743.94267  |
++-------------+-------------+
+| 76.03942694 | 51.23158899 |
++-------------+-------------+
+| 76.07584477 | 50.51249853 |
++-------------+-------------+
+| 76.07593168 | 0.149308136 |
++-------------+-------------+
+
+------------
+M/Z matching
+------------
+
+In the simplest form of the algorithm only the *m/z* values are matched against the database peaks. This happens if both *Retention time match* and *Precursor match* are off.
+
+The first parameter is the MS mode, specified through the *MS mode* parameter.
+
+The parameters *M/Z precision* and *M/Z shift* are used by the algorithm in the following formula in order to match an *m/z* value:
+
+	mz (1 + (- shift - precision) / 10^6) &lt; mztheo &lt; mz (1 + (- shift - precision) / 10^6)
+
+Where *mztheo* is the theoretical mass of the database peak that is tested. If this double inequality is true, then the *m/z* value is matched with this peak.
+
+--------------------
+Retention time match
+--------------------
+
+If at least one column is checked inside the *Columns* parameter section, then retention time is also matched, in addition to the *m/z* value, according to the following formula:
+
+	rt - x - rt^y &lt; colrt &lt; rt + x + rt^y
+
+Where *x* is the value of the parameter *RTX* and *y* the value of the parameter *RTY*.
+
+If for a reference compound the database does not contain retention time for at least one of the specified columns, then only the *m/z* value is matched against the peaks of the reference compound. This means that in the results you can find compounds that do no match the provided retention time value.
+
+The *RTZ* parameter is used in the *Precursor match* algorithm (see below).
+
+---------------
+Precursor match
+---------------
+
+If the "Precursor match" option is enabled inside the parameters section, then a more sophisticated version of the algorithm, which is executed in two steps, is used.
+
+This algorithm takes two more parameters, one for each MS mode. These are the lists of precursors. Since the matching is run for one MS mode only, only one of the two parameters is used. Inside the single file database, all the peaks whose **attr** column value is equal to one of the precursor listed in *List of negative precursors* or *List of positive precursors*, depending on the mode, are considered as precursor peaks.
+
+M/Z matching using precursor matching
+=====================================
+
+ 1. Using the normal M/Z matching algorithm described above, we first look only for precursor peaks ([(M+H)]+, [(M+Na)]+, [(M+Cl)]-, ...).
+ 2. From step 1, we construct a list of matched molecules.
+ 3. We look at all peaks inside the molecule list obtained in step 2, using the normal M/Z matching algorithm described above.
+
+MZ/RT matching using precursor matching
+=======================================
+
+ 1. Using the normal MZ/RT matching algorithm described above, we first look only for precursor peaks ([(M+H)]+, [(M+Na)]+, [(M+Cl)]-, ...).
+ 2. From step 1, we construct a list of matched molecules, retaining the matched retention time of each molecule.
+ 3. For each input couple (m/z,rt), we look at all peaks inside the molecules taken from step 2, whose matched retention time between *rt - z* and *rt + z*, where *z* is the value of parameter *RTZ*.
+
+---------------
+Output settings
+---------------
+
+The *Output column names* parameter is used to customize the columns of the output files. As with the *File database column names* parameter, each column is identified with a tag, and the columns names are listed as a comma separated list of tag/name couples (separated by character `=`). The allowed tags are the following ones:
+
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+| Column tag   | Values                                                                                                                          |
++==============+=================================================================================================================================+
+|      mz      | The m/z values from the input file.                                                                                             |
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+|   mztheo     | The m/z values from the database.                                                                                               |
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+|     molid    | This is the identifier of your compound.                                                                                        |
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+|      rt      | The retention time values in seconds from the input file.                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+|      col     | The chromatographic column associated with the retention time.                                                                  |
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+|     colrt    | The retention time associated with the matched chromatographic column.                                                          |
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+|  msmatching  | The list IDs of matched molecules. IDs are separated by the character specified in the *Molecule IDs separator character* field |
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+|     attr     | The attribution of the peak (e.g.: ``[(M+H)-(H2O)-(NH3)]+``).                                                                   |
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+|     comp     | The composition of the peak (e.g.: ``C6 H10 N O``).                                                                             |
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+|   molcomp    | The composition of the molecule. (e.g.: ``C6H14N2O2``).                                                                         |
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+|   molmass    | The mass of the molecule.                                                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+|   molnames   | The names of the molecule, as a semicolon separated list.                                                                       |
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+|     inchi    | The InChI of the molecule.                                                                                                      |
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+|    inchikey  | The InChI key of the molecule.                                                                                                  |
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+|   pubchem    | The PubChem ID of the molecule.                                                                                                 |
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+|   chebi      | The ChEBI ID of the molecule.                                                                                                   |
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+|    hmdb      | The HMDB ID of the molecule.                                                                                                    |
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+|    kegg      | The KEGG ID of the molecule.                                                                                                    |
++--------------+---------------------------------------------------------------------------------------------------------------------------------+
+
+The *Molecule IDs separator character* is used to customize the character used to separate the molecule IDs of the **molid** column inside the *main* output file.
+
+Output files
+============
+
+Three files are output by the tool.
+
++-------------+--------------------------------------+--------------------------------------------------------+
+|   Outputs   |              File name               |                      Description                       |
++-------------+--------------------------------------+--------------------------------------------------------+
+| Main output | lcmsmatching_{input_file_name}       | Contains the list of compounds that have been matched. |
++-------------+--------------------------------------+--------------------------------------------------------+
+| Peak list   | lcmsmatching_peaks_{input_file_name} | Contains all matched database peaks.                   |
++-------------+--------------------------------------+--------------------------------------------------------+
+| HTML output | lcmsmatching_{input_file_name}.html  | Contains the two tables on one page.                   |
++-------------+--------------------------------------+--------------------------------------------------------+
+
+The **main** output is identical to the input file, to which is added an *msmatching* column. This column contains a list of IDs of the compounds that have been matched for this couple of (m/z, rt) values.
+
+The **peak list** output contains all database peaks that have been matched, for each (m/z, rt) input couple. Thus for each (m/z, rt) couple, there will be zero, one or more matched peaks output. The columns output are *mz*, *rt*, *id*, *mztheo*, *col*, *colrt*, *attribution* and *composition*, where *id* is the compound ID, *mztheo* is the theoretical mass of the fragment, *col* is the matched column and *colrt* is the retention time measured on the column for the reference compound.
+
+The **HTML** output contains the peak table with links toward HMDB, KEGG, ChEBI and PubChem public databases, when IDs are available.
+
+=====
+About
+=====
+
+.. class:: infomark
+
+**Author**
+	Pierrick Roger (pierrick.roger@cea.fr) wrote this MS matching method.
+	MetaboHUB: The French National Infrastructure for Metabolomics and Fluxomics (http://www.metabohub.fr/en).
+
+.. class:: infomark
+
+**Acknowledgement**
+	Data and algorithms have been kindly provided by Christophe Junot at *DSV/IBITEC-S/SPI* (*CEA/Saclay*), from a former application developped by Cyrille Petat and Arnaud Martel at *DSV/IBITEC-S/DIR* (*CEA/Saclay*).
+
+.. class:: infomark
+
+**Please cite**
+	R Core Team (2013). R: A language and Environment for Statistical Computing. http://www.r-project.org
+
+<!-- @@@END_RST@@@ -->
+	</help>
+
+	<!--~~~~~~~~~
+	~ CITATIONS ~
+	~~~~~~~~~~-->
+
+	<citations/>
+
+</tool>
