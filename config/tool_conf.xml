@@ -48,7 +48,10 @@
           <tool file="phenomenal/uppsala/CV/CV.xml"/>
             <tool file="uppsala/Merger/Merger.xml"/>
             <tool file="uppsala/FeatureSelection/FeatureSelection.xml"/>
-  </section>
+    </section>
+    <section name="Transfer" id="metabolomics_transfer">
+	    <tool file="phenomenal/transfer/metabolights-downloader.xml"/>
+    </section>
   <section name="Fluxomics" id="pheno-fluxomics">
     <tool file="phenomenal/fluxomics/iso2flux/iso2flux.xml"/>
     <tool file="phenomenal/fluxomics/midcor/midcor.xml"/>
