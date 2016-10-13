@@ -23,6 +23,6 @@
         dest: /galaxy/config/galaxy.ini
         section: "app:main"
         option: ga_code
-        value: {{ google_analytics_code }}
+        value: "{{ google_analytics_code }}"
     when: google_analytics_code != ""
 
