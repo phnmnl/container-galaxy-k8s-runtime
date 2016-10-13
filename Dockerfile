@@ -32,6 +32,8 @@ ENV PYKUBE_KUBERNETES_SERVICE_HOST kubernetes
 COPY html/partners.png static/partners.png
 COPY html/PhenoMeNal_logo.png static/PhenoMeNal_logo.png
 COPY html/welcome.html static/welcome.html
+COPY ansible ansible
+RUN chmod u+x /galaxy/ansible/run_galaxy_config.sh
 
 EXPOSE 8080
 
