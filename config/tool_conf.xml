@@ -51,6 +51,7 @@
     </section>
     <section name="Transfer" id="metabolomics_transfer">
 	    <tool file="phenomenal/transfer/metabolights-downloader.xml"/>
+	    <tool file="phenomenal/transfer/metabolights-labs-uploader.xml"/>
     </section>
   <section name="Fluxomics" id="pheno-fluxomics">
     <tool file="phenomenal/fluxomics/iso2flux/iso2flux.xml"/>

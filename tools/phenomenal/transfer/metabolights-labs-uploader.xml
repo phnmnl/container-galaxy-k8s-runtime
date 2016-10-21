@@ -1,0 +1,58 @@
+<tool id="mtbls-labs-uploader" name="MetaboLights Labs Uploader" version="0.1.0">
+    <description>Download public and private MetaboLights studies</description>
+
+    
+    <command><![CDATA[
+	    ln -s "$maf_file" maf.zip;
+            ln -s "$data_file" data.tar;
+	    ln -s "$isa_file" isa.zip;
+	    uploadToMetaboLightsLabs.py -t "$metabolights_labs_key" 
+	    #if str( $maf_file ) != None:
+	    -i maf.zip data.tar isa.zip
+	    #else:
+	    -i data.tar isa.zip
+	    #end if
+	    #if str( $labs_project_id ) != None and str( $new_project.create ) == "no":
+	    -p "$labs_project_id" 
+	    #end if
+	    #if str( $new_project.create ) == "yes":
+	    -n
+	    #end if
+	    -s dev
+	    ]]>
+    </command>
+
+    <inputs>
+	<param name="metabolights_labs_key" format="txt" type="text" label="MetaboLights Labs Key"  help="You should get this from the MetaboLights Labs Website"/>
+        <param name="maf_file" type="data" format="zip" label="Zip file containing MAF files." help="The MAF Zip file is optional" optional="true"/>
+        <param name="isa_file" type="data" format="zip" label="Zip file containing ISA files." optional="false"/>
+	<param name="data_file" type="data" format="tar" label="TAR file containing RAW data files"  help="" optional="true"/>
+	<conditional name="new_project">
+          <param name="create" label="Create new project" type="select">
+            <option value="yes">Yes</option>
+            <option value="no" selected="true">No</option>
+          </param>
+        </conditional>
+        <param name="labs_project_id" format="txt" type="text" label="Existing MetaboLights Labs Project ID"  help="Enter the MetaboLights Labs Project ID if you want to add files to an existing project"/>
+     </inputs>
+    <outputs> 
+	<data name="log_file" format="txt" label="Uploader Log" from_work_dir="cli.log" visible="true"/>
+    </outputs>
+    <tests>
+        <test>
+        </test>
+    </tests>
+    <help><![CDATA[
+**Overview**
+ A program to upload metabolomics data to MetaboLights Labs, previously to converting them to studies. 
+    ]]></help>
+    <citations>
+        <citation type="doi">10.1002/0471250953.bi1413s53</citation>
+        <citation type="doi">10.1007/s11306-015-0879-3</citation>
+        <citation type="doi">10.1038/ng.1054</citation>
+    </citations>
+</tool>
+
+
+
+

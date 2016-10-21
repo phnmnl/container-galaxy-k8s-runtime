@@ -152,6 +152,14 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
+        <destination id="mtbls-labs-uploader-container" runner="k8s">
+	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">mtbl-labs-uploader</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
 
 
 
@@ -180,6 +188,7 @@
 	<tool id="show_chromatogram" destination="rtest-container"/>
 	<tool id="mzml2isa" destination="mzml2isa-container"/>
 	<tool id="mtbls-downloader" destination="mtbls-downloader-container"/>
+	<tool id="mtbls-labs-uploader" destination="mtbls-labs-uploader-container"/>
 	
 
     </tools>
