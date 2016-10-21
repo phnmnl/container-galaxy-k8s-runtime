@@ -1,5 +1,5 @@
 <tool id="mtbls-labs-uploader" name="MetaboLights Labs Uploader" version="0.1.0">
-    <description>Download public and private MetaboLights studies</description>
+    <description>Uploads data to a user workspace's within the MetaboLights Labs staging area at the European Bioinformatics Institute (EBI).</description>
 
     
     <command><![CDATA[
