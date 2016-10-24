@@ -3,7 +3,12 @@
 
     
     <command><![CDATA[
+ #if $aspera_password: 
     export ASPERA_SCP_PASS="$aspera_password";
+ #else
+    export ASPERA_SCP_PASS="Xz68YfDe";
+ #end if
+
 
     #set $path_elements = str($file_path).split('/')
     #set $study = $path_elements[-1]
@@ -21,8 +26,8 @@
     </command>
 
     <inputs>
-        <param name="file_path" type="text" label="Study path at MetaboLights FTP Server" help="This should be obtained from the MetaboLights website." />
-        <param optional="true" format="txt" name="aspera_password" type="text" label="Password for download"  help=""/>
+	    <param name="file_path" type="text" label="Study path at MetaboLights FTP Server" help="This should be obtained from the MetaboLights website. For public studies, for MTBLS253 would be: /studies/public/MTBLS253" />
+        <param optional="true" format="txt" name="aspera_password" type="text" label="Password for download"  help="For public studies, leave the password blank, the default will be used."/>
      </inputs>
     <outputs>
 
