@@ -111,7 +111,7 @@
         #set $i_pub_author = $invest_meta.i_pub_author
     #end if
 
-    #if ($exp_meta.exp_select=="show"):
+    #if $exp_meta.exp_select=="show":
     	#set $organism_text = $exp_meta.organism_text
         #set $organism_ref = $exp_meta.organism_ref
         #set $organism_iri = $exp_meta.organism_iri
@@ -124,7 +124,12 @@
     #end if
 
 
-    wrapper.py -inputzip "$inputzip"
+    wrapper.py 
+    #if $data_file.input == "zip_file":
+               -inputzip "$data_file.zip_input"
+    #else
+               -inputzip "$data_file.tar_input"
+    #end if
                -jsontxt "$jsontxt"
                -html_file "$html_file"
 	       -out_dir "$html_file.extra_files_path"
@@ -173,7 +178,7 @@
                --organism_part_ref "$organism_part_ref"
 	       --organism_part_iri "$organism_part_iri";
 
-	       ln -s "$html_file.extra_files_path"/"$name_of_study" study_dir;
+	       ln -s '$html_file.extra_files_path/$name_of_study' study_dir;
 
 	       cd study_dir;
 	       zip isa.zip i_* a_* s_* && mv isa.zip "$ISA_zip";
@@ -182,7 +187,18 @@
 
     <inputs>
         <param name="name_of_study" type="text" label="Name study" help="This should not contain any spaces as the name will be used a prefix for ISA-tab file names" />
-        <param format="zip" name="inputzip" type="data" label="mzML zip file"  help="A zipped folder of mzML files"/>
+	<conditional name="data_file">
+            <param name="input" type="select" label="Choose your inputs method" >
+                <option value="zip_file" selected="true">Zip file from your history containing your mzML files</option>
+                <option value="tar_file">TAR file from your history containing your mzML files</option>
+            </param>
+            <when value="zip_file">
+		<param format="zip" name="zip_input" type="data" label="mzML zip file"  help="A zipped folder of mzML files"/>
+	    </when>
+            <when value="tar_file">
+		<param format="tar" name="tar_input" type="data" label="mzML TAR file"  help="A tarred folder of mzML files"/>
+	    </when>
+        </conditional>
         <param optional="true" format="txt" name="jsontxt" type="data" label="Additional user Metadata in json"  help="A user can add additional metadata directory through a json file"/>
         <expand macro="studymacro"/>
         <expand macro="investmacro"/>
