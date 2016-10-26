@@ -6,11 +6,7 @@ Version: 1.0.0
 
 ## Short Description
 
-<!-- 
-This should only be 20, hopefully a single sentence.
--->
-
-PhenoMeNal Galaxy with PhenoMeNal branded skin.
+Galaxy is an open, web-based platform for data intensive biomedical research.
 
 ## Description
 The PhenoMeNal Galaxy has reached a stage where proof-of-concept integration between VMIs and containers is operational, and where initial services make it possible to carry out pieces of analysis workflows within the Galaxy. This tool provision virtual infrastructures using contextualization tools (MANTL, Terraform, and Ansible) and demonstrated them to instantiate PhenoMeNal Galaxy on local hardware, private cloud installations, and public cloud providers. 
@@ -29,9 +25,6 @@ The PhenoMeNal Galaxy has reached a stage where proof-of-concept integration bet
 ## Instrument Data Types
 
 ## Screenshots
-
-Screen shots obtained from the original rNMR page.
-![screenshot](screenshots/fl-galaxy.png)
 
 ## Tool Authors
 
@@ -57,7 +50,7 @@ Screen shots obtained from the original rNMR page.
 For local individual installation:
 
 ```bash
-docker pull docker-registry.phenomenal-h2020.eu/phnmnl/galaxy-k8s-branded
+docker pull docker-registry.phenomenal-h2020.eu/phnmnl/galaxy-k8s-runtime
 ```
 
 ## Usage Instructions
@@ -65,7 +58,7 @@ docker pull docker-registry.phenomenal-h2020.eu/phnmnl/galaxy-k8s-branded
 For direct docker usage:
 
 ```bash
-docker run docker-registry.phenomenal-h2020.eu/phnmnl/galaxy-k8s-branded ...
+docker run docker-registry.phenomenal-h2020.eu/phnmnl/galaxy-k8s-runtime ...
 ```
 
 ## Publications
