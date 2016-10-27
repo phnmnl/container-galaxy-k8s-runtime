@@ -1,7 +1,7 @@
 
 ![Logo](logo.png)
 
-# PhenoMeNaL Galaxy
+# Galaxy
 Version: 1.0.0
 
 ## Short Description
@@ -9,7 +9,7 @@ Version: 1.0.0
 Galaxy is an open, web-based platform for data intensive biomedical research.
 
 ## Description
-The PhenoMeNal Galaxy has reached a stage where proof-of-concept integration between VMIs and containers is operational, and where initial services make it possible to carry out pieces of analysis workflows within the Galaxy. This tool provision virtual infrastructures using contextualization tools (MANTL, Terraform, and Ansible) and demonstrated them to instantiate PhenoMeNal Galaxy on local hardware, private cloud installations, and public cloud providers. 
+Increased reliance on computational approaches in the life sciences has revealed grave concerns about how accessible and reproducible computation-reliant results truly are. Galaxy http://usegalaxy.org, an open web-based platform for genomic research, addresses these problems. Galaxy automatically tracks and manages data provenance and provides support for capturing the context and intent of computational methods. Galaxy Pages are interactive, web-based documents that provide users with a medium to communicate a complete computational analysis.
 
 ## Key features
 
@@ -34,16 +34,16 @@ The PhenoMeNal Galaxy has reached a stage where proof-of-concept integration bet
 
 ## Container Contributors
 
-- [Sijin He](https://github.com/sh107) (EMBL-EBI)
+- [Pablo Moreno](https://github.com/pcm32) (EMBL-EBI)
 
 ## Website
 
-- http://public.phenomenal-h2020.eu/
+- https://galaxyproject.org/
 
 
 ## Git Repository
 
-- https://github.com/phnmnl/container-phenomenal-branded-galaxy.git
+- https://github.com/phnmnl/container-galaxy-k8s-runtime.git
 
 ## Installation 
 
