@@ -128,6 +128,14 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
+        <destination id="metfrag-cli-container" runner="k8s">
+            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">metfrag-cli</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
 	<destination id="rtest-container" runner="k8s">
 	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>

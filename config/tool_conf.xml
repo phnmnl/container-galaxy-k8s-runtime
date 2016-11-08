@@ -66,6 +66,7 @@
 	  <tool file="phenomenal/ms/msconvert2.xml"/>
 	  <tool file="phenomenal/ms/show_chromatogram.xml"/>
 	  <tool file="phenomenal/ms/mzml2isa/mzml2isa.xml"/>
+          <tool file=/phenomenal/ms/metfrag.xml"/>
   </section>
   <section name="W4M" id="pheno-w4m">
 	  <tool file="phenomenal/w4m/univariate.xml"/>

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="metfragcli" name="metfragcli" version="0.2">
+  <requirements>
+        <container type="docker">phnmnl/metfrag-cli</container>
+  </requirements>
+  <description>MetFrag.</description>
+  <command><![CDATA[
+        java -jar /usr/local/bin/MetFragCLI.jar PeakListPath=$infile MetFragDatabaseType=$MetFragDatabaseType IonizedPrecursorMass=$IonizedPrecursorMass DatabaseSearchRelativeMassDeviation=$DatabaseSearchRelativeMassDeviation FragmentPeakMatchAbsoluteMassDeviation=$FragmentPeakMatchAbsoluteMassDeviation FragmentPeakMatchRelativeMassDeviation=$FragmentPeakMatchRelativeMassDeviation PrecursorIonMode=$PrecursorIonMode IsPositiveIonMode=$IsPositiveIonMode MetFragScoreTypes=FragmenterScore MetFragScoreWeights=$MetFragScoreWeights MetFragCandidateWriter=CSV SampleName=Galaxy ResultsPath=/tmp MaximumTreeDepth=$MaximumTreeDepth MetFragPreProcessingCandidateFilter=UnconnectedCompoundFilter;
+        if [ $? -eq 0 ]; then cat /tmp/Galaxy.csv > $outfile; else exit 1; fi;
+  ]]>
+  </command>
+  <inputs>
+    <param name="infile" type="data" format="txt" optional="False" label="Input file with peak list in tsv/txt format" />
+    <param name="MetFragDatabaseType" type="select" value="PubChem" optional="False" label="Database" help="Database to which queries are sent. At the moment, only PubChem is supported.">
+      <option value="PubChem" selected="True">PubChem</option>
+    </param>
+    <param name="IonizedPrecursorMass" type="text" value="345.0874" optional="False" label="Mass Index" help="Enter ionized precursor mass, neutral mass or mass of sum formula here." />
+    <param name="DatabaseSearchRelativeMassDeviation" type="text" value="5" optional="False" label="Relative mass deviation of database search" help="Relative mass deviation used for database search." />
+    <param name="FragmentPeakMatchAbsoluteMassDeviation" type="text" value="0.001" optional="False" label="Fragment peak match absolute mass deviation" help="Absolute mass deviation for fragment peaks to be matched." />
+    <param name="FragmentPeakMatchRelativeMassDeviation" type="text" value="5" optional="False" label="Fragment peak match relative mass deviation" help="Relative mass deviation for fragment peaks to be matched." />
+    <param name="PrecursorIonMode" type="select" value="-1" optional="False" label="Precursor ion mode" help="Adduct type of precursor ion.">
+      <option value="-1" selected="True">[M-H]-</option>
+      <option value="1" selected="True">[M+H]+</option>
+    </param>
+    <param name="IsPositiveIonMode" type="select" value="FALSE" optional="False" label="Ion Mode" help="Ion mode that was used (either positive or negative).">
+      <option value="FALSE" selected="True">Positive mode</option>
+      <option value="TRUE">Negative mode</option>
+    </param>
+    <param name="MetFragScoreWeights" type="text" value="1.0" optional="False" label="MetFrag Score Weights" help="Weight used for scoring in MetFrag." />
+    <param name="MaximumTreeDepth" type="text" value="1" optional="False" label="Maximum depth tree" help="Maximum depth of fragmentation tree." />
+  </inputs>
+  <outputs>
+    <data name="outfile" type="text" format="csv" label="csv outfile file" />
+  </outputs>
+  <help>MetFrag: In silico fragmentation for computer assisted identification of metabolite mass spectra.</help>
+</tool>
+
