@@ -1,0 +1,21 @@
+<tool id="metabomatching-pre" name="metabomatching">
+     <description>metabomatching</description>
+     <requirements>
+       <container type="docker">docker-registry.phenomenal-h2020.eu/phnmnl/metabomatching</container>
+     </requirements>
+     <command><![CDATA[octave-cli metabomatching.m]]>
+     </command>
+     <inputs>
+         <param name="association_statistics_input" type="data" format="tsv" label="Association Statistics Dataset"/>
+<!--     <param name="options_file" type="data" format="tsv" label="metabomatching options"/> 
+         <param name="cas_control" type="data" format="csv" label="CAS control"/>
+         <param name="description" type="data" format="csv" label="description"/> -->
+     </inputs>
+     <outputs>
+         <data name="Scores" format="tsv" from_work_dir="scores.tsv" label="metabomatching scores"/>
+<!--     <data name="Parameters" format="tsv" from_work_dir="parameters.out.tsv" label="metabomatching options"/> -->
+         <data name="Figure" format="svg" from_work_dir="output.svg" label="metabomatching SVG"/>
+     </outputs>
+     <help>
+     </help>
+ </tool>
