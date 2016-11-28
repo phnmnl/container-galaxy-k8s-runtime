@@ -3,7 +3,9 @@
      <requirements>
        <container type="docker">docker-registry.phenomenal-h2020.eu/phnmnl/metabomatching</container>
      </requirements>
-     <command><![CDATA[octave-cli metabomatching.m]]>
+     <command><![CDATA[
+		metabomatching.sh -i "$association_statistics_input" -s "$Scores" -S "$Figure"
+	]]>
      </command>
      <inputs>
          <param name="association_statistics_input" type="data" format="tsv" label="Association Statistics Dataset"/>
@@ -12,9 +14,9 @@
          <param name="description" type="data" format="csv" label="description"/> -->
      </inputs>
      <outputs>
-         <data name="Scores" format="tsv" from_work_dir="scores.tsv" label="metabomatching scores"/>
+         <data name="Scores" format="tsv" label="${tool.name} ${association_statistics_input.name} scores"/>
 <!--     <data name="Parameters" format="tsv" from_work_dir="parameters.out.tsv" label="metabomatching options"/> -->
-         <data name="Figure" format="svg" from_work_dir="output.svg" label="metabomatching SVG"/>
+         <data name="Figure" format="svg" label="${tool.name} ${association_statistics_input.name} SVG"/>
      </outputs>
      <help>
      </help>
