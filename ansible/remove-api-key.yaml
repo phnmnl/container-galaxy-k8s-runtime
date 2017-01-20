@@ -1,0 +1,16 @@
+---
+- hosts: all
+  tasks:
+  - name: remove master api key
+    ini_file:
+        dest: /galaxy/config/galaxy.ini
+        section: "app:main"
+        option: master_api_key
+        state: absent
+
+  - name: prohibit creation of users if not by admin
+    ini_file:
+        dest: /galaxy/config/galaxy.ini
+        section: "app:main"
+        option: allow_user_creation
+        value: "False"
