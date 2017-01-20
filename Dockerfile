@@ -1,6 +1,10 @@
 FROM ubuntu:14.04
 MAINTAINER PhenoMeNal-H2020 Project <phenomenal-h2020-users@googlegroups.com>
-LABEL Description="Galaxy test for running inside Kubernetes."
+
+LABEL Description="Galaxy 16.07-phenomenal for running inside Kubernetes."
+LABEL software="Galaxy"
+LABEL software.version="16.07-pheno"
+LABEL version="0.1"
 
 RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transport-https software-properties-common wget && \
     apt-get update -qq && \
