@@ -210,6 +210,7 @@
         <tool id="midcor" destination="midcor-container"/>
 	<tool id="isodyn" destination="isodyn-container"/>
 	<tool id="batman-nmr" destination="batman-container"/>
+	<tool id="mtbls-dwnld" destination="w4m-mtbls-dwnld-container"/>
 	<tool id="Univariate" destination="w4m-univariate-container"/>
 	<tool id="Multivariate" destination="w4m-multivariate-container"/>
 	<tool id="Biosigner" destination="w4m-biosigner-container"/>
