@@ -24,9 +24,19 @@ if len(password) < 6:
     print("User not added!!!")
     exit(1)
 
-# Initiating Galaxy connection
-gi = bioblend.galaxy.GalaxyInstance(galaxy_url, galaxy_api_key)
+try:
+    # Initiating Galaxy connection
+    gi = bioblend.galaxy.GalaxyInstance(galaxy_url, galaxy_api_key)
+    # Check if user doesn't exist already
+    users = gi.users.get_users()
+    for user in users:
+        if user['email'] == email:
+            print("Admin user already exists...")
+            sys.exit(0)
 
-# Create a new user
-new_user = gi.users.create_local_user(username, email, password)
-print("User created!")
+    # Create a new user if no user with that email is available.
+    new_user = gi.users.create_local_user(username, email, password)
+    print("User "+new_user['username']+" created!")
+except (RuntimeError, StandardError):
+    print("Something went wrong when trying to create the user")
+    sys.exit(1)

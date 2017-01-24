@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -o errexit
+
 sudo apt-get update -y && sudo apt-get install -y --no-install-recommends ansible
 ansible-playbook -i "localhost," -c local ansible/set-galaxy-config-values.yaml
 echo "Playbook for galaxy config run."
@@ -8,6 +11,7 @@ if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GA
 	# ini file will be set already at this point with these variables, we only need to start galaxy
 	# wait for it to be available for API calls and create the new user
 	echo "Set up galaxy database for admin user setup..."
+	rm -f paster.pid
 	./run.sh --daemon
 	# Running ./run.sh --daemon --wait doesn't work for single instances set up, discuss with galaxy core.
 	# Using similar logic inside run.sh in the meantime. 
@@ -30,7 +34,6 @@ if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GA
 	source .venv/bin/activate
 	python ansible/create_admin_user.py $GALAXY_API_KEY $GALAXY_ADMIN_USER $GALAXY_ADMIN_EMAIL $GALAXY_ADMIN_PASSWORD
 	deactivate
-	echo "User created, stopping galaxy..."
 	./run.sh --stop-daemon
 	echo "Galaxy stopped, removing key.."
 	ansible-playbook -i "localhost," -c local ansible/remove-api-key.yaml
