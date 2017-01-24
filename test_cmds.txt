@@ -1,0 +1,1 @@
+bash /galaxy/container-simple-checks.sh
