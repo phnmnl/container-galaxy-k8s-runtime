@@ -20,7 +20,7 @@ email = sys.argv[3]
 password = sys.argv[4]
 
 if len(password) < 6:
-    print("Pasword for admin user on Galaxy needs to be of at least 6 characters")
+    print("Password for admin user on Galaxy needs to be of at least 6 characters")
     print("User not added!!!")
     exit(1)
 
