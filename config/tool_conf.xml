@@ -70,10 +70,11 @@
           <tool file="phenomenal/ms/metfrag.xml"/>
   </section>
   <section name="W4M" id="pheno-w4m">
-	  <tool file="phenomenal/w4m/univariate.xml"/>
+	  <tool file="phenomenal/w4m/mtbls-dwnld_config.xml"/>
+	  <tool file="phenomenal/w4m/univariate_config.xml"/>
 	  <tool file="phenomenal/w4m/multivariate_config.xml"/>
 	  <tool file="phenomenal/w4m/biosigner_config.xml"/>
-	  <tool file="phenomenal/w4m/lcmsmatching.xml"/>
+	  <tool file="phenomenal/w4m/lcmsmatching_config.xml"/>
   </section>
   <section name="Post-Processing" id="pheno-postprocessing">
     <tool file="phenomenal/postProcessing/metaboliteidconverter.xml"/>

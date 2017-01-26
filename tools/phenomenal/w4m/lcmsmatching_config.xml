@@ -1,4 +1,4 @@
-<tool id="lcmsmatching" name="LC/MS matching" version="3.1">
+<tool id="lcmsmatching" name="LC/MS matching" version="3.1.6">
 
 	<description>Annotation of MS peaks using matching on a spectra database.</description>
 
@@ -91,7 +91,7 @@
 				<param name="dburl" label="Database file" type="data" format="tabular,tsv" refresh_on_change="true" help="Decimal: '.', missing: NA, mode: character and numerical, sep: tabular. Retention time values must be in seconds."/>
 
 				<!-- File database field names -->
-				<param name="dbfields" label="File database column names" type="text" size="256" value="mztheo=mztheo,chromcolrt=chromcolrt,compoundid=compoundid,chromcol=chromcol,msmode=msmode,attr=attr,peakcomp=peakcomp,fullnames=fullnames,compoundmass=compoundmass,compoundcomp=compoundcomp,inchi=inchi,inchikey=inchikey,pubchem=pubchem,chebi=chebi,hmdb=hmdb,kegg=kegg" refresh_on_change="true" help=""/>
+				<param name="dbfields" label="File database column names" type="text" size="256" value="mztheo=mztheo,chromcolrt=chromcolrt,compoundid=compoundid,chromcol=chromcol,msmode=msmode,peakattr=peakattr,peakcomp=peakcomp,fullnames=fullnames,compoundmass=compoundmass,compoundcomp=compoundcomp,inchi=inchi,inchikey=inchikey,pubchem=pubchem,chebi=chebi,hmdb=hmdb,kegg=kegg" refresh_on_change="true" help=""/>
 
 				<!-- File database MS modes -->
 				<param name="dbmsmodes" label="File database MS modes" type="text" size="32" value="pos=POS,neg=NEG" help=""/>
@@ -186,7 +186,7 @@
 			<when value="true">
 
 				<!-- Output field names -->
-				<param name="outputfields" label="Output column names" type="text" size="256" value="mz=mz,rt=rt,chromcol=chromcol,chromcolrt=chromcolrt,compoundid=compoundid,attr=attr,peakcomp=peakcomp,intensity=intensity,relative.intensity=relative.intensity,mzexp=mzexp,mztheo=mztheo,fullnames=fullnames,compoundmass=compoundmass,compoundcomp=compoundcomp,inchi=inchi,inchikey=inchikey,pubchem=pubchem,chebi=chebi,hmdb=hmdb,kegg=kegg" help=""/>
+				<param name="outputfields" label="Output column names" type="text" size="256" value="mz=mz,rt=rt,chromcol=chromcol,chromcolrt=chromcolrt,compoundid=compoundid,peakattr=peakattr,peakcomp=peakcomp,intensity=intensity,relative.intensity=relative.intensity,mzexp=mzexp,mztheo=mztheo,fullnames=fullnames,compoundmass=compoundmass,compoundcomp=compoundcomp,inchi=inchi,inchikey=inchikey,pubchem=pubchem,chebi=chebi,hmdb=hmdb,kegg=kegg" help=""/>
 
 				<!-- Molecule IDs separator character -->
 				<param name="molidssep" label="Molecule IDs separator character" type="text" size="3" value="|" help="">

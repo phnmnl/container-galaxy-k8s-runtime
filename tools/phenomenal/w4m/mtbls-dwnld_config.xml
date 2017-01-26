@@ -1,0 +1,84 @@
+<tool id="mtbls-dwnld" name="Metabolights downloader" version="1.2.0">
+
+	<description>Import ISA TAB data format from public and private MetaboLights studies</description>
+
+	<!--~~~~~~~
+	~ COMMAND ~
+	~~~~~~~~-->
+
+	<command><![CDATA[
+		## @@@BEGIN_CHEETAH@@@
+		mtbls-dwnld
+		#if $token:
+			-t "$token"
+		#end if
+		-M
+		-H "$html_output"
+		-o "$html_output.files_path"
+		-w
+		-s "$w4m_sample_metadata"
+		-v "$w4m_variable_metadata"
+		-m "$w4m_data_matrix"
+		-S "$sample_na_filtering"
+		-V "$variable_na_filtering"
+		"$study"
+		## @@@END_CHEETAH@@@
+	]]></command>
+
+	<!--~~~~~~
+	~ INPUTS ~
+	~~~~~~~-->
+
+	<inputs>
+		<param name="study" type="text" label="Study path at MetaboLights FTP Server" help="This should be obtained from the MetaboLights website."/>
+		<param optional="true" format="txt" name="token" type="text" label="Token or password"  help="Token must be obtained from the Metabolights database website."/>
+		<param name="sample_na_filtering" type="text" label="Sample metadata columns NA filtering" help="The rows that contain NA value in the specified columns will be filtered out. Column names must be separated by commas."/>
+		<param name="variable_na_filtering" type="text" label="Variable metadata columns NA filtering" help="The rows that contain NA value in the specified columns will be filtered out. Column names must be separated by commas."/>
+	</inputs>
+
+    <outputs>
+<!-- DEBUG galaxy.datatypes.registry WARNING 2016-10-26 07:19:30,511 unknown mimetype in data factory isatab
+ -->
+        <data name="html_output" label="ISA-Tab of ${study}.html" format="html"/>
+        <data name="w4m_sample_metadata" label="W4M sample metadata.tsv" format="tabular"/>
+        <data name="w4m_variable_metadata" label="W4M variable metadata.tsv" format="tabular"/>
+        <data name="w4m_data_matrix" label="W4M data matrix.tsv" format="tabular"/>
+
+        <!-- Using new type by inheriting only from HTML, no class definition -->
+   		<!--     <data name="isatab_output_inherit_html" label="ISA-Tab of $study - inherit HTML.isatabhtml" format="isatabhtml"/> -->
+        <!-- Put the following line inside "config/datatypes_conf.xml":
+	  <datatype extension="isatabhtml" type="galaxy.datatypes.text:Html" subclass="True"/>
+-->
+
+		<!-- Using new composite type, creating new class. -->
+        <!-- <data name="isatab_output_composite" label="ISA-Tab of $study - composite.isatab" format="isatab"/> -->
+        <!-- Put the following line inside "config/datatypes_conf.xml":
+	  				<datatype extension="isatab" type="galaxy.datatypes.isatab:ISATab"/>
+			Then make a symbolic link to "isatab.py" inside "lib/galaxy/datatypes".
+		-->
+    </outputs>
+
+	<!-- TESTS {{{1 -->
+	<tests>
+		<test>
+			<param name="study" value="MTBLS30"/>
+			<output name="html_output" file="mtbls30.html"/>
+			<!--			<output name="w4m_sample_metadata" file="mtbls30-w4m-sample-metadata.tsv"/>
+			<output name="w4m_variable_metadata" file="mtbls30-w4m-variable-metadata.tsv"/>
+			<output name="w4m_data_matrix" file="mtbls30-w4m-sample-variable-matrix.tsv"/>
+-->
+		</test>
+	</tests>
+
+    <help><![CDATA[
+**Overview**
+A tool to transfer MetaboLights studies. 
+    ]]></help>
+
+	<!-- CITATIONS {{{1 -->
+    <citations>
+        <citation type="doi">10.1002/0471250953.bi1413s53</citation>
+        <citation type="doi">10.1007/s11306-015-0879-3</citation>
+        <citation type="doi">10.1038/ng.1054</citation>
+    </citations>
+</tool>

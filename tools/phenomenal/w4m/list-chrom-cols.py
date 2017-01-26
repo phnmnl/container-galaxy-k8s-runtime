@@ -29,7 +29,7 @@ def get_chrom_cols(dbtype, dburl, dbtoken = None, dbfields = None):
             fields = dict(u.split("=") for u in dbfields.split(","))
             if 'chromcol' in fields:
                 col_field = fields['chromcol']
-
+                
         # Get all column names from file
         with open(dburl if isinstance(dburl, str) else dburl.get_file_name(), 'rb') as dbfile:
             reader = csv.reader(dbfile, delimiter = "\t", quotechar='"')
