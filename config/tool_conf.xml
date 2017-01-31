@@ -62,6 +62,7 @@
 	  <tool file="phenomenal/nmr/batman.xml"/>
 	  <tool file="phenomenal/nmr/nmrmlconv.xml"/>
 	  <tool file="phenomenal/nmr/metabomatching-pre.xml"/>
+	  <tool file="phenomenal/nmr/nmrml2isa/nmrml2isa.xml"/>
   </section>
   <section name="MS" id="pheno-ms">
 	  <tool file="phenomenal/ms/msconvert2.xml"/>
