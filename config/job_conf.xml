@@ -77,6 +77,14 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
+        <destination id="ramid-container" runner="k8s">
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">ramid</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
 	<destination id="batman-container" runner="k8s">
             <param id="docker_enabled">true</param>
         </destination>
@@ -216,6 +224,7 @@
         <tool id="log2transformation" destination="log2transformation-container"/>
         <tool id="iso2flux" destination="iso2flux-container"/>
         <tool id="midcor" destination="midcor-container"/>
+        <tool id="ramid" destination="ramid-container"/>
 	<tool id="isodyn" destination="isodyn-container"/>
 	<tool id="batman-nmr" destination="batman-container"/>
 	<tool id="mtbls-dwnld" destination="w4m-mtbls-dwnld-container"/>

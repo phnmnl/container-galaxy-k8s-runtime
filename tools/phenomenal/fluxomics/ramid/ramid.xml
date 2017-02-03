@@ -1,0 +1,18 @@
+<tool id="ramid" name="ramid" version="0.1.0">
+<stdio>
+<exit_code range="1:" />
+</stdio>
+<command><![CDATA[
+runRamid.R -i "$inputExchange" -o "$outputExchange" -z "$zipped_data"
+]]></command>
+<inputs>
+	<param type="data" name="inputExchange" format="csv" />
+	<param type="data" name="zipped_data" format="zip" />
+</inputs>
+<outputs>
+    <data name="outputExchange" format="csv" label="Corrected isotopologues file"/>
+</outputs>
+<help><![CDATA[
+TODO: Fill in help.
+]]></help>
+</tool>
