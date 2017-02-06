@@ -11,7 +11,7 @@ runRamid.R -i "$inputExchange" -o "$outputExchange" -z "$zipped_data"
 	<param type="data" name="zipped_data" format="zip" />
 </inputs>
 <outputs>
-    <data name="outputExchange" format="csv" label="Corrected isotopologues file"/>
+    <data name="outputExchange" format="csv" label="Isotopologues file"/>
 </outputs>
 <help>
 ==============

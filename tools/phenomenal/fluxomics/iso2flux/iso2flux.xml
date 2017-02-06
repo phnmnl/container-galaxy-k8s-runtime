@@ -2,7 +2,7 @@
 <stdio>
 <exit_code range="1:" />
 </stdio>
-<description>Flux analysis software that allows to perform 13C Metabolic Flux Analysis on a sub-network of a large scale model.</description>
+<description>13C Metabolic Flux Analysis on a sub-network of a large scale model.</description>
 <command><![CDATA[
 echo 'Working directory is '\$PWD;
 run_iso2flux.py -e "$tracing_data"
