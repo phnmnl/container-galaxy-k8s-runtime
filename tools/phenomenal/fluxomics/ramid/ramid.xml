@@ -1,0 +1,67 @@
+<tool id="ramid" name="ramid" version="0.1.0">
+<stdio>
+<exit_code range="1:" />
+</stdio>
+<description>Evaluates the peaks of mass isotopomer distribution (MID), making them ready for correction for natural isotope occurrence.</description>
+<command><![CDATA[
+runRamid.R -i "$inputExchange" -o "$outputExchange" -z "$zipped_data"
+]]></command>
+<inputs>
+	<param type="data" name="inputExchange" format="csv" />
+	<param type="data" name="zipped_data" format="zip" />
+</inputs>
+<outputs>
+    <data name="outputExchange" format="csv" label="Corrected isotopologues file"/>
+</outputs>
+<help>
+==============
+RaMID
+==============
+
+Version: 1.0
+
+-----------------
+Short description
+-----------------
+
+R-program to read CDF files, created by mass spectrometer, and evaluate the mass spectra of 13C-labeled metabolites
+
+-----------
+Description
+-----------
+
+RaMID is a computer program designed to read the machine-generated files saved in netCDF format containing registered time course of m/z chromatograms. It evaluates the peaks of mass isotopomer distribution (MID) making them ready for further correction for natural isotope occurrence. To create the docker image the github repository "https://github.com/seliv55/RaMID" is used.
+
+------------
+Key features
+------------
+
+- Primary processing of 13C mass isotopomer data obtained with GCMS
+
+-------------
+Functionality
+-------------
+
+- Preprocessing of raw data
+- Initiation of workflows
+
+----------
+Approaches
+----------
+
+- Isotopic Labeling Analysis / 13C
+
+---------------------
+Instrument Data Types
+---------------------
+
+- MS
+
+-------------
+Data Analysis
+-------------
+
+RaMID reads the CDF files presented in the working directory, and then separates the time courses for selected m/z peaks corresponding to specific mass isotopomers; corrects baseline for each selected mz; choses the time points where the distribution of peaks is less contaminated by other compounds and thus is the most representative of the real analyzed distribution of mass isotopomers; evaluates this distribution, and saves it in files readable by MIDcor, a program, which performs the next step of analysis, i.e. correction of the RaMID spectra for natural isotope occurrence, which is necessary to perform a fluxomic analysis. Correction for H+ loss produced by electron impact, natural occurring isotopes, and peaks overlapping.
+
+</help>
+</tool>
