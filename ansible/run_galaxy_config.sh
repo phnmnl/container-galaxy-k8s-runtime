@@ -43,12 +43,12 @@ if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GA
 	log "Galaxy is up and ready for API calls..."
 	log "Running admin user creation..."
 	source .venv/bin/activate
-	python ansible/create_admin_user.py $GALAXY_API_KEY $GALAXY_ADMIN_USER $GALAXY_ADMIN_EMAIL $GALAXY_ADMIN_PASSWORD >&2
+	python ansible/configure_galaxy.py $GALAXY_API_KEY $GALAXY_ADMIN_USER $GALAXY_ADMIN_EMAIL $GALAXY_ADMIN_PASSWORD >&2
 	deactivate
 	./run.sh --stop-daemon
-	echo "Galaxy stopped, removing key.."
+	log "Galaxy instance configured and stopped.  Removing the master API key"
 	ansible-playbook -i "localhost," -c local ansible/remove-api-key.yaml
 	# galaxy is started again as part of the next command outside of this script.
 fi
 
-
+exit 0
