@@ -22,8 +22,7 @@ run_iso2flux.py -e "$tracing_data"
 -c "$constraints"
 #end if
 
--t "$incubation_time"
--f "$experimental_factor"
+
 
 #if str( $confidence.compute ) == "no":
 -q
@@ -38,8 +37,6 @@ run_iso2flux.py -e "$tracing_data"
     <param type="data" name="sbml_model" format="xml"/>
     <param type="data" name="parameters" format="csv" optional="True"/>
     <param type="data" name="constraints" format="csv" optional="True"/>
-    <param type="float" name="incubation_time" value="1"/>
-    <param type="text" name="experimental_factor" value="Factor"/>
     <conditional name="confidence">
         <param name="compute" label="Compute confidence intervals" type="select">
             <option value="yes">Yes</option>
