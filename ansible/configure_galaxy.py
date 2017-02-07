@@ -102,15 +102,6 @@ def configure_admin_user(options):
     Log.info("Created API key for admin user %s", admin_user['email'])
     return admin_user
 
-
-"""
-If user already exists, create_local_user raises bioblend.ConnectionError with
- * status_code: 400
- * e.body with json-encoded dictionary:
-     - err_code: 400008
-     - err_msg: u'User with that email already exists.\n\nPublic name is taken; please choose another'
-"""
-
 def main(args):
     options = parse_args(args)
 
