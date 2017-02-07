@@ -2,6 +2,7 @@
 
 import argparse
 import fnmatch
+import json
 import logging
 import os
 import re
@@ -50,13 +51,43 @@ def get_wf_files(wf_dir):
             yield os.path.join(root, f)
 
 def upload_workflows(galaxy, wf_files):
+    # We need to avoid uploading workflows that are already installed.
+    # To do this, we query galaxy for its list of installed workflows and then
+    # use that to filter.
+    #
+    # Getting all workflows is potentially bad (there could be a lot), at least
+    # through bioblend, there currently is no way to query for specific workflows.
+    # Note that `show_workflows` offers to query by name and id, but its implementation
+    # actually queries all workflows and then filters on the client side.
+
+    existing_workflows_by_uuid = { w['latest_workflow_uuid']: w for w in galaxy.workflows.get_workflows() }
+
+    some_errors = False
     count = 0
     for filename in wf_files:
-        result = galaxy.workflows.import_workflow_from_local_path(filename)
-        Log.info("Imported workflow '%s'.", result['name'])
-        count += 1
-
+        try:
+            with open(filename) as f:
+                local_wf = json.load(f)
+            installed_wf = existing_workflows_by_uuid.get(local_wf['uuid'])
+            if installed_wf:
+                Log.info("Skipping workflow file %s", os.path.basename(filename))
+                Log.info("Workflow called '%s' with same uuid (%s) already installed",
+                        installed_wf['name'], installed_wf['latest_workflow_uuid'])
+            else:
+                result = galaxy.workflows.import_workflow_json(local_wf)
+                Log.info("Imported workflow '%s' with uuid %s.", result['name'], local_wf['uuid'])
+                existing_workflows_by_uuid[local_wf['uuid']] = { # add new wf to our local dict
+                        u'name': local_wf['name'],
+                        u'latest_workflow_uuid': local_wf['uuid']
+                }
+                count += 1
+        except (RuntimeError, StandardError) as e:
+            Log.error("Error importing workflow file %s", filename)
+            Log.exception(e)
+            some_errors = True
     Log.info("Imported %d workflows into the instance", count)
+    if some_errors:
+        Log.error("Some workflows weren't imported because of errors")
 
 
 def configure_admin_user(options):
