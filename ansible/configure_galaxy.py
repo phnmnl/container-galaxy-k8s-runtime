@@ -78,12 +78,16 @@ def configure_admin_user(options):
     users = gi.users.get_users()
     for user in users:
         if user['email'] == options.user_email:
+            Log.debug("Found user with matching email %s", user['email'])
             if user['username'] != options.username:
                 raise RuntimeError(
                     "Found user with provided email ({}) but username ({}) doesn't match the one provided ({})".
                     format(options.user_email, user['username'], options.username))
+            # get_users() returns partial records.  We need to get the user details
+            user = gi.users.show_user(user['id'])
             if not user['is_admin']:
-                raise RuntimeError("Found user with provided email ({}) but it does not have admin priviledges".format(options.user_email))
+                raise RuntimeError("Found user with provided email ({}) but it does not have admin priviledges".
+                        format(options.user_email))
 
             Log.info("Admin user found with id %s", user['id'])
             admin_user = user
