@@ -37,6 +37,7 @@ COPY html/partners.png static/partners.png
 COPY html/PhenoMeNal_logo.png static/PhenoMeNal_logo.png
 COPY html/welcome.html static/welcome.html
 COPY ansible ansible
+COPY workflows workflows
 COPY container-simple-checks.sh container-simple-checks.sh
 COPY test_cmds.txt test_cmds.txt
 RUN chmod u+x /galaxy/ansible/run_galaxy_config.sh
