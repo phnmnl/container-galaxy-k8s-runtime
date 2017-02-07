@@ -41,7 +41,7 @@ def parse_args(args):
     if not os.path.isdir(options.workflow_dir) or not os.access(options.workflow_dir, os.R_OK | os.X_OK):
         parser.error("Specified workflow directory ({}) is either inaccessible or not readable".format(options.workflow_dir))
 
-    Log.debug("Parsed command line options:  %s", options)
+    # This prints a password. Keep disabled unless debugging -> Log.debug("Parsed command line options:  %s", options)
     return options
 
 def get_wf_files(wf_dir):
