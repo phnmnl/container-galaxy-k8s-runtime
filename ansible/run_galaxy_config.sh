@@ -1,6 +1,11 @@
 #!/bin/bash
 
+
+###
+# This script expects to run in the galaxy root directory
+
 my_name="$(basename "${0}")"
+WorkflowDir='./workflows'
 
 function log() {
   echo -e $(date +"%F %T") "[ ${my_name} ]"  -- $@ >&2
@@ -43,7 +48,9 @@ if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GA
 	log "Galaxy is up and ready for API calls..."
 	log "Running admin user creation..."
 	source .venv/bin/activate
-	python ansible/configure_galaxy.py $GALAXY_API_KEY $GALAXY_ADMIN_USER $GALAXY_ADMIN_EMAIL $GALAXY_ADMIN_PASSWORD >&2
+	log "Workflow directory: ${WorkflowDir}"
+	python ansible/configure_galaxy.py --workflow-dir "${WorkflowDir}" \
+		$GALAXY_API_KEY $GALAXY_ADMIN_USER $GALAXY_ADMIN_EMAIL $GALAXY_ADMIN_PASSWORD >&2
 	deactivate
 	./run.sh --stop-daemon
 	log "Galaxy instance configured and stopped.  Removing the master API key"
