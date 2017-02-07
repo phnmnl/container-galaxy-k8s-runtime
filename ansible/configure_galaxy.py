@@ -33,12 +33,13 @@ def parse_args(args):
 
     options = parser.parse_args(args)
 
+    Log.debug("Galaxy config running from %s", os.path.abspath('.'))
     if len(options.user_password) < 6:
         parser.error("Password needs to be at least 6 characters long.  User not added!")
     if not re.match(r'[^@]+@[^@]+\.[^@]+', options.user_email):
         parser.error("Email address has an invalid syntax.  User not added!")
-    if not os.path.exists(options.workflow_dir) or not os.access(options.workflow_dir, os.R_OK | os.X_OK):
-        parser.error("Specified workflow directory ({}) is either  inaccessible or not readable".format(options.workflow_dir))
+    if not os.path.isdir(options.workflow_dir) or not os.access(options.workflow_dir, os.R_OK | os.X_OK):
+        parser.error("Specified workflow directory ({}) is either inaccessible or not readable".format(options.workflow_dir))
 
     Log.debug("Parsed command line options:  %s", options)
     return options
