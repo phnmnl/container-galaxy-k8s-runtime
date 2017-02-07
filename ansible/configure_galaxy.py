@@ -10,6 +10,8 @@ import sys
 import bioblend.galaxy as bg
 
 DefaultGalaxyUrl = "http://127.0.0.1:8080"
+
+LogFormat = '%(levelname)s\t[ %(name)s ]\t%(message)s'
 Log = logging.getLogger('ConfigGalaxy')
 
 def parse_args(args):
@@ -117,7 +119,7 @@ def main(args):
     Log.info("Galaxy configuration completed")
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(format=LogFormat, level=logging.DEBUG)
     try:
         main(sys.argv[1:])
     except (RuntimeError, StandardError) as e:
