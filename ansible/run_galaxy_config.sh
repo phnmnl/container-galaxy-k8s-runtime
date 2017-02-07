@@ -8,7 +8,8 @@ my_name="$(basename "${0}")"
 WorkflowDir='./workflows'
 
 function log() {
-  echo -e $(date +"%F %T") "[ ${my_name} ]"  -- $@ >&2
+  # Date not necessary -- k8s already dates all log entries
+  echo -e "[ ${my_name} ]" -- $@ >&2
 }
 
 function error_trap() {
@@ -31,12 +32,13 @@ if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GA
 	./run.sh --daemon
 	# Running ./run.sh --daemon --wait doesn't work for single instances set up, discuss with galaxy core.
 	# Using similar logic inside run.sh in the meantime.
+	start_time=$(date +%s)
 	while true; do
                 sleep 1
                 printf "." >&2
                 # Grab the current pid from the pid file
                 if ! current_pid_in_file=$(cat paster.pid); then
-                    log "A Galaxy process died, interrupting"
+                    log "Galaxy process died, interrupting"
                     exit 1
                 fi
                 # Search for all pids in the logs and tail for the last one
@@ -45,7 +47,8 @@ if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GA
                 # and we've succesfully started
                 [ -n "$latest_pid" ] && [ "$latest_pid" -eq "$current_pid_in_file" ] && break
         done
-	log "Galaxy is up and ready for API calls..."
+	end_time=$(date +%s)
+	log "Galaxy is up and ready for API calls after $((${end_time} - ${start_time})) seconds."
 	log "Running admin user creation..."
 	source .venv/bin/activate
 	log "Workflow directory: ${WorkflowDir}"
