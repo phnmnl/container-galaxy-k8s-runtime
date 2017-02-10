@@ -16,7 +16,6 @@ RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transpo
     apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN git clone --depth 1 --single-branch --branch feature/allfeats https://github.com/phnmnl/galaxy.git
 WORKDIR galaxy
-RUN git checkout feature/allfeats
 RUN echo "-e git+https://github.com/pcm32/pykube.git@feature/allMergedFeatures#egg=pykube" >> requirements.txt
 COPY config/galaxy.ini config/galaxy.ini
 COPY config/job_conf.xml config/job_conf.xml
@@ -37,6 +36,7 @@ COPY html/partners.png static/partners.png
 COPY html/PhenoMeNal_logo.png static/PhenoMeNal_logo.png
 COPY html/welcome.html static/welcome.html
 COPY ansible ansible
+COPY workflows workflows
 COPY container-simple-checks.sh container-simple-checks.sh
 COPY test_cmds.txt test_cmds.txt
 RUN chmod u+x /galaxy/ansible/run_galaxy_config.sh
