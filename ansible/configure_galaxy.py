@@ -15,6 +15,9 @@ DefaultGalaxyUrl = "http://127.0.0.1:8080"
 LogFormat = '%(levelname)s\t[ %(name)s ]\t%(message)s'
 Log = logging.getLogger('ConfigGalaxy')
 
+# Steps
+StepWf = 'wf'
+
 def parse_args(args):
     parser = argparse.ArgumentParser(
         description="Upload the workflows from a directory into the specified Galaxy server")
@@ -24,13 +27,14 @@ def parse_args(args):
     parser.add_argument('user_email', help="E-mail for admin user")
     parser.add_argument('user_password', help="Password for admin user (at least 6 characters)")
 
+    parser.add_argument('--skip-steps', choices=(StepWf,),
+                        help="Configuration steps to skip", default=list())
     parser.add_argument('--galaxy-url',
                         help="Galaxy URL (default: {})".format(DefaultGalaxyUrl),
                         default=DefaultGalaxyUrl)
 
     parser.add_argument('--workflow-dir',
-                        help="Directory containing workflow files to be uploaded (must have .ga extension; default: '.')",
-                        default='.')
+                        help="Directory containing workflow files to be uploaded (must have .ga extension; default: '.')")
 
     options = parser.parse_args(args)
 
@@ -39,8 +43,15 @@ def parse_args(args):
         parser.error("Password needs to be at least 6 characters long.  User not added!")
     if not re.match(r'[^@]+@[^@]+\.[^@]+', options.user_email):
         parser.error("Email address has an invalid syntax.  User not added!")
-    if not os.path.isdir(options.workflow_dir) or not os.access(options.workflow_dir, os.R_OK | os.X_OK):
-        parser.error("Specified workflow directory ({}) is either inaccessible or not readable".format(options.workflow_dir))
+
+    if StepWf not in options.skip_steps:
+        if not options.workflow_dir:
+            parser.error("You must specificy a workflow directory (unless you skip the workflow configuration step)")
+
+        if not os.path.isdir(options.workflow_dir) or \
+           not os.access(options.workflow_dir, os.R_OK | os.X_OK):
+            parser.error("Specified workflow directory ({}) is either inaccessible or not readable".
+                         format(options.workflow_dir))
 
     # This prints a password. Keep disabled unless debugging -> Log.debug("Parsed command line options:  %s", options)
     return options
@@ -118,7 +129,7 @@ def configure_admin_user(options):
             user = gi.users.show_user(user['id'])
             if not user['is_admin']:
                 raise RuntimeError("Found user with provided email ({}) but it does not have admin priviledges".
-                        format(options.user_email))
+                                   format(options.user_email))
 
             Log.info("Admin user found with id %s", user['id'])
             admin_user = user
@@ -139,10 +150,14 @@ def main(args):
     Log.info("Configuring admin user")
     admin_user = configure_admin_user(options)
 
-    Log.info("Adding workflows")
-    gi = bg.GalaxyInstance(options.galaxy_url, admin_user['api_key'])
-    wf_files = get_wf_files(options.workflow_dir)
-    upload_workflows(gi, wf_files)
+    if StepWf not in options.skip_steps:
+        Log.info("Adding workflows")
+        gi = bg.GalaxyInstance(options.galaxy_url, admin_user['api_key'])
+        wf_files = get_wf_files(options.workflow_dir)
+        upload_workflows(gi, wf_files)
+    else:
+        Log.info("Skipping workflow configuration step by user request")
+
     Log.info("Galaxy configuration completed")
 
 if __name__ == '__main__':
