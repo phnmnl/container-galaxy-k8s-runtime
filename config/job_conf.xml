@@ -21,7 +21,7 @@
     <destinations default="local">
         <destination id="local" runner="local"/>
         <destination id="blankfilter-container" runner="k8s">
-            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">ex-blankfilter</param>
             <param id="docker_tag_override">latest</param>
@@ -32,7 +32,7 @@
             <param id="docker_enabled">true</param>
         </destination>
         <destination id="batchfeature-container" runner="k8s">
-            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">ex-bfr</param>
             <param id="docker_tag_override">latest</param>
@@ -43,7 +43,7 @@
             <param id="docker_enabled">true</param>
         </destination>
         <destination id="log2transformation-container" runner="k8s">
-            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">ex-log2transformation</param>
             <param id="docker_tag_override">latest</param>
@@ -70,7 +70,7 @@
             <param id="docker_enabled">true</param>
         </destination>
         <destination id="isodyn-container" runner="k8s">
-            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">isodyn</param>
             <param id="docker_tag_override">latest</param>
@@ -89,7 +89,7 @@
             <param id="docker_enabled">true</param>
         </destination>
 	<destination id="w4m-mtbls-dwnld-container" runner="k8s">
-	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">mtbls-dwnld</param>
             <param id="docker_tag_override">latest</param>
@@ -97,7 +97,7 @@
             <param id="docker_enabled">true</param>
         </destination>
 	<destination id="w4m-univariate-container" runner="k8s">
-	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">univariate</param>
             <param id="docker_tag_override">latest</param>
@@ -105,7 +105,7 @@
             <param id="docker_enabled">true</param>
         </destination>
 	<destination id="w4m-multivariate-container" runner="k8s">
-	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">multivariate</param>
             <param id="docker_tag_override">latest</param>
@@ -113,7 +113,7 @@
             <param id="docker_enabled">true</param>
         </destination>
         <destination id="w4m-biosigner-container" runner="k8s">
-	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">biosigner</param>
             <param id="docker_tag_override">latest</param>
@@ -121,7 +121,7 @@
             <param id="docker_enabled">true</param>
         </destination>
 	<destination id="w4m-lcmsmatching-container" runner="k8s">
-	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">lcmsmatching</param>
             <param id="docker_tag_override">latest</param>
@@ -129,7 +129,7 @@
             <param id="docker_enabled">true</param>
         </destination>
 	<destination id="msconvert2-container" runner="k8s">
-	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">pwiz</param>
             <param id="docker_tag_override">latest</param>
@@ -137,7 +137,7 @@
             <param id="docker_enabled">true</param>
         </destination>
         <destination id="nmrmlconv-container" runner="k8s">
-	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">nmrmlconv</param>
             <param id="docker_tag_override">latest</param>
@@ -145,7 +145,7 @@
             <param id="docker_enabled">true</param>
         </destination>
         <destination id="metfrag-cli-container" runner="k8s">
-            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">metfrag-cli</param>
             <param id="docker_tag_override">latest</param>
@@ -153,7 +153,7 @@
             <param id="docker_enabled">true</param>
         </destination>
 	<destination id="rtest-container" runner="k8s">
-	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">rtest</param>
             <param id="docker_tag_override">latest</param>
@@ -161,7 +161,7 @@
             <param id="docker_enabled">true</param>
         </destination>
         <destination id="mzml2isa-container" runner="k8s">
-	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">mzml2isa</param>
             <param id="docker_tag_override">latest</param>
@@ -177,7 +177,7 @@
             <param id="docker_enabled">true</param>
         </destination>
 	<destination id="mtbls-downloader-container" runner="k8s">
-	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">scp-aspera</param>
             <param id="docker_tag_override">latest</param>
@@ -185,7 +185,7 @@
             <param id="docker_enabled">true</param>
         </destination>
         <destination id="mtbls-labs-uploader-container" runner="k8s">
-	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">mtbl-labs-uploader</param>
             <param id="docker_tag_override">latest</param>
@@ -193,24 +193,29 @@
             <param id="docker_enabled">true</param>
         </destination>
         <destination id="container-metaboliteidconverter" runner="k8s">
-           <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+           <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
            <param id="docker_owner_override">phnmnl</param>
            <param id="docker_image_override">metaboliteidconverter</param>
            <param id="docker_tag_override">latest</param>
            <param id="max_pod_retrials">3</param>
            <param id="docker_enabled">true</param>
         </destination>
-	<destination id="metabomatching-pre-container" runner="k8s">
-	    <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+	    <destination id="metabomatching-pre-container" runner="k8s">
+	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">metabomatching-pre</param>
             <param id="docker_tag_override">latest</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
-
-
-
+        <destination id="leidenuniv-ms-vfetc-container" runner="k8s">
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">ms-vfetc</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
 
     </destinations>
     <tools>
@@ -225,23 +230,23 @@
         <tool id="iso2flux" destination="iso2flux-container"/>
         <tool id="midcor" destination="midcor-container"/>
         <tool id="ramid" destination="ramid-container"/>
-	<tool id="isodyn" destination="isodyn-container"/>
-	<tool id="batman-nmr" destination="batman-container"/>
-	<tool id="mtbls-dwnld" destination="w4m-mtbls-dwnld-container"/>
-	<tool id="Univariate" destination="w4m-univariate-container"/>
-	<tool id="Multivariate" destination="w4m-multivariate-container"/>
-	<tool id="Biosigner" destination="w4m-biosigner-container"/>
-	<tool id="lcmsmatching" destination="w4m-lcmsmatching-container"/>
-	<tool id="msconvert2" destination="msconvert2-container"/>
-	<tool id="nmrmlconv" destination="nmrmlconv-container"/>
-	<tool id="show_chromatogram" destination="rtest-container"/>
-	<tool id="mzml2isa" destination="mzml2isa-container"/>
-	<tool id="nmrml2isa" destination="nmrml2isa-container"/>
-	<tool id="mtbls-downloader" destination="mtbls-downloader-container"/>
-	<tool id="mtbls-labs-uploader" destination="mtbls-labs-uploader-container"/>
-	<tool id="metfragcli" destination="metfrag-cli-container"/>
-	 <tool id="Metabolite_ID_Converter" destination="container-metaboliteidconverter" />
-	<tool id="metabomatching-pre" destination="metabomatching-pre-container"/>
-
+        <tool id="isodyn" destination="isodyn-container"/>
+        <tool id="batman-nmr" destination="batman-container"/>
+        <tool id="mtbls-dwnld" destination="w4m-mtbls-dwnld-container"/>
+        <tool id="Univariate" destination="w4m-univariate-container"/>
+        <tool id="Multivariate" destination="w4m-multivariate-container"/>
+        <tool id="Biosigner" destination="w4m-biosigner-container"/>
+        <tool id="lcmsmatching" destination="w4m-lcmsmatching-container"/>
+        <tool id="msconvert2" destination="msconvert2-container"/>
+        <tool id="nmrmlconv" destination="nmrmlconv-container"/>
+        <tool id="show_chromatogram" destination="rtest-container"/>
+        <tool id="mzml2isa" destination="mzml2isa-container"/>
+        <tool id="nmrml2isa" destination="nmrml2isa-container"/>
+        <tool id="mtbls-downloader" destination="mtbls-downloader-container"/>
+        <tool id="mtbls-labs-uploader" destination="mtbls-labs-uploader-container"/>
+        <tool id="metfragcli" destination="metfrag-cli-container"/>
+        <tool id="Metabolite_ID_Converter" destination="container-metaboliteidconverter" />
+        <tool id="metabomatching-pre" destination="metabomatching-pre-container"/>
+        <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
     </tools>
 </job_conf>
