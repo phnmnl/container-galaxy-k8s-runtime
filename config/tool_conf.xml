@@ -40,6 +40,7 @@
     <tool file="plotting/boxplot.xml" />
   </section>
   <label id="phenomenal" text="PhenoMeNal H2020 Tools" />
+  <!--
   <section name="Uppsala Workshop" id="uppsala">
     <tool file="phenomenal/uppsala/BlankFilter/BlankFilter.xml"/>
     <tool file="phenomenal/uppsala/BatchFeatureRemoval/BatchFeatureRemoval.xml"/>
@@ -49,6 +50,7 @@
     <tool file="uppsala/Merger/Merger.xml"/>
     <tool file="uppsala/FeatureSelection/FeatureSelection.xml"/>
   </section>
+  -->
   <section name="Transfer" id="metabolomics_transfer">
     <tool file="phenomenal/transfer/metabolights-downloader.xml"/>
     <tool file="phenomenal/transfer/metabolights-labs-uploader.xml"/>
