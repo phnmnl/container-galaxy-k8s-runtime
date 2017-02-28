@@ -57,7 +57,7 @@
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">iso2flux</param>
-            <param id="docker_tag_override">dev_v0.2_cv0.2.23</param>
+            <param id="docker_tag_override">v0.2_cv1.0.28</param>
             <param id="max_pod_retrials">1</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -65,7 +65,7 @@
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">midcor</param>
-            <param id="docker_tag_override">dev_v1.0_cv0.2.30</param>
+            <param id="docker_tag_override">v1.0_cv0.2.32</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -81,7 +81,7 @@
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">ramid</param>
-            <param id="docker_tag_override">dev_v1.0_cv0.1.4</param>
+            <param id="docker_tag_override">v1.0_cv0.1.7</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>

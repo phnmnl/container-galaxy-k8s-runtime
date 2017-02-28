@@ -1,4 +1,4 @@
-<tool id="iso2flux" name="iso2flux" version="0.2">
+<tool id="iso2flux" name="iso2flux" version="1.0">
 <stdio>
 <exit_code range="1:" />
 </stdio>
@@ -41,7 +41,8 @@ run_iso2flux.py -e "$tracing_data"
     </conditional>
 </inputs>
 <outputs>
-    <data name="best_fit" format="csv" from_work_dir="best_fit.csv" label="Best Fit"/>
+    <data name="best_fit_fluxes" format="csv" from_work_dir="best_fluxes.csv" label="Best fit fluxes"/>
+    <data name="best_fit_label" format="csv" from_work_dir="best_label.csv" label="Best fit label"/>
     <data name="constrained_sbml_model" format="xml" from_work_dir="constrained_model.xml" label="SBML model constrained with the results of 13C analysis"/>
     <data name="fluxes_confidence" format="csv" frow_work_dir="confidence.csv" label="Confidence intervals for all fluxes">
         <filter>( confidence['compute'] == "yes")</filter>
