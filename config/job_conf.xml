@@ -180,8 +180,8 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">scp-aspera</param>
-            <param id="docker_tag_override">latest</param>
-            <param id="max_pod_retrials">3</param>
+            <param id="docker_tag_override">v3.5.4.102989-linux-64_cv0.1.5</param>
+            <param id="max_pod_retrials">1</param>
             <param id="docker_enabled">true</param>
         </destination>
         <destination id="mtbls-labs-uploader-container" runner="k8s">
