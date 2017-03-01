@@ -86,6 +86,11 @@
             <param id="docker_enabled">true</param>
         </destination>
 	<destination id="batman-container" runner="k8s">
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">batman</param>
+            <param id="docker_tag_override">v1.2.1.0.7_cv1.0.34</param>
+            <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
 	<destination id="w4m-mtbls-dwnld-container" runner="k8s">
