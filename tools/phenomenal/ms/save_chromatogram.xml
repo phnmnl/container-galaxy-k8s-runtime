@@ -8,7 +8,7 @@
 -->
   <description>Saves the chromatogram of a single mzML file.</description>
   <command><![CDATA[
-    /usr/local/bin/save_chromatogram.r $infile $outfile 2>&1
+    save_chromatogram.r $infile $outfile 2>&1
   ]]></command>
   <inputs>
     <param name="infile" type="data" format="mzml" value="&lt;class 'CTDopts.CTDopts._Null'&gt;" optional="False" label="Input mzML file." />
