@@ -71,6 +71,7 @@
   </section>
   <section name="MS" id="pheno-ms">
     <tool file="phenomenal/ms/msconvert2.xml"/>
+    <tool file="phenomenal/ms/save_chromatogram.xml"/>
     <tool file="phenomenal/ms/show_chromatogram.xml"/>
     <tool file="phenomenal/ms/mzml2isa/mzml2isa.xml"/>
     <tool file="phenomenal/ms/metfrag.xml"/>
