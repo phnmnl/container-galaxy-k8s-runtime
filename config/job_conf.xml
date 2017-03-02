@@ -200,10 +200,10 @@
            <param id="max_pod_retrials">3</param>
            <param id="docker_enabled">true</param>
         </destination>
-	    <destination id="metabomatching-pre-container" runner="k8s">
+	    <destination id="container-metabomatching" runner="k8s">
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">metabomatching-pre</param>
+            <param id="docker_image_override">metabomatching</param>
             <param id="docker_tag_override">latest</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
@@ -246,7 +246,7 @@
         <tool id="mtbls-labs-uploader" destination="mtbls-labs-uploader-container"/>
         <tool id="metfragcli" destination="metfrag-cli-container"/>
         <tool id="Metabolite_ID_Converter" destination="container-metaboliteidconverter" />
-        <tool id="metabomatching-pre" destination="metabomatching-pre-container"/>
+        <tool id="metabomatching" destination="container-metabomatching"/>
         <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
     </tools>
 </job_conf>
