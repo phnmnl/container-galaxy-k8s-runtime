@@ -19,40 +19,7 @@
         <handler id="main"/>
     </handlers>
     <destinations default="local">
-        <destination id="local" runner="local"/>
-        <destination id="blankfilter-container" runner="k8s">
-            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">ex-blankfilter</param>
-            <param id="docker_tag_override">latest</param>
-            <!--
-            <param id="container_port_80">8080</param>
-            -->
-            <param id="max_pod_retrials">3</param>
-            <param id="docker_enabled">true</param>
-        </destination>
-        <destination id="batchfeature-container" runner="k8s">
-            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">ex-bfr</param>
-            <param id="docker_tag_override">latest</param>
-            <!--
-            <param id="container_port_80">8080</param>
-            -->
-            <param id="max_pod_retrials">3</param>
-            <param id="docker_enabled">true</param>
-        </destination>
-        <destination id="log2transformation-container" runner="k8s">
-            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">ex-log2transformation</param>
-            <param id="docker_tag_override">latest</param>
-            <!--
-            <param id="container_port_80">8080</param>
-            -->
-            <param id="max_pod_retrials">3</param>
-            <param id="docker_enabled">true</param>
-        </destination>
+        <destination id="local" runner="local"/>	
         <destination id="iso2flux-container" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
