@@ -124,10 +124,10 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
-	<destination id="rtest-container" runner="k8s">
+	<destination id="xcms-container" runner="k8s">
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">rtest</param>
+            <param id="docker_image_override">xcms</param>
             <param id="docker_tag_override">latest</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
@@ -211,7 +211,8 @@
         <tool id="lcmsmatching" destination="w4m-lcmsmatching-container"/>
         <tool id="msconvert2" destination="msconvert2-container"/>
         <tool id="nmrmlconv" destination="nmrmlconv-container"/>
-        <tool id="show_chromatogram" destination="rtest-container"/>
+	<tool id="save_chromatogram" destination="xcms-container"/>
+        <tool id="show_chromatogram" destination="xcms-container"/>
         <tool id="mzml2isa" destination="mzml2isa-container"/>
         <tool id="nmrml2isa" destination="nmrml2isa-container"/>
         <tool id="mtbls-downloader" destination="mtbls-downloader-container"/>
