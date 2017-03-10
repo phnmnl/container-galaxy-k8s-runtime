@@ -29,10 +29,10 @@ This release version uses the following tools, tagged at these release versions:
 | [Batman]() | [container-batman](https://github.com/phnmnl/container-batman/releases/tag/v1.2.1.0.7_cv1.0) | [v1.2.1.0.7_cv1.0](http://phenomenal-h2020.eu/jenkins/job/container-batman/34/) | P. Moreno, J. Gao | EMBL-EBI, Imperial College London | |
 | [metfrag-cli]() | [container-metfrag-cli](https://github.com/phnmnl/container-metfrag-cli/releases/tag/v2.4.2_cv0.2) | [v2.4.2_cv0.2](http://phenomenal-h2020.eu/jenkins/job/container-metfrag-cli/17/) | Kristian Peters | IPB Halle | |
 | w4m - metabolights downloader ||||||
-| [w4m - univariate]() | [container-univariate] | [v2.2.3_cv1.2](http://phenomenal-h2020.eu/jenkins/job/container-univariate/28/) | Pierrick Roger Mele | CEA ||
-| [w4m - multivariate]() | [container-multivariate] | [v2.3.10_cv1.1](http://phenomenal-h2020.eu/jenkins/job/container-multivariate/18/) | Pierrick Roger Mele | CEA ||
+| [w4m - univariate]() | [container-univariate](https://github.com/phnmnl/container-univariate) | [v2.2.3_cv1.2](http://phenomenal-h2020.eu/jenkins/job/container-univariate/28/) | Pierrick Roger Mele | CEA ||
+| [w4m - multivariate]() | [container-multivariate](https://github.com/phnmnl/container-multivariate) | [v2.3.10_cv1.1](http://phenomenal-h2020.eu/jenkins/job/container-multivariate/18/) | Pierrick Roger Mele | CEA ||
 | [w4m - biosigner]() |[container-biosigner]|[v2.2.7_cv1.1](http://phenomenal-h2020.eu/jenkins/job/container-biosigner/12/) | Pierrick Roger Mele | CEA ||
-| [w4m - LC/MS matching]() |[container-lcmsmatching]|[v3.1.6_cv1.3](http://phenomenal-h2020.eu/jenkins/job/container-lcmsmatching/61/)|Pierrick Roger Mele | CEA ||
+| [w4m - LC/MS matching]() |[container-lcmsmatching](https://github.com/phnmnl/container-lcmsmatching) |[v3.1.6_cv1.3](http://phenomenal-h2020.eu/jenkins/job/container-lcmsmatching/61/)|Pierrick Roger Mele | CEA ||
 | [metabolite ID converter]() | [container-MetaboliteIDConverter](https://github.com/phnmnl/container-MetaboliteIDConverter/releases/tag/v0.5.1_cv1.0) | [v0.5.1_cv1.0](http://phenomenal-h2020.eu/jenkins/job/container-metaboliteidconverter/26/) | Benjamin Merlet | INRA | |
 Note: maintainers are for containers, not necessarily tool authors. Follow links to learn about tool authors.
 
