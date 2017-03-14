@@ -1,0 +1,48 @@
+<tool id="metabomatching" name="metabomatching">
+     <description>metabomatching</description>
+     <requirements>
+       <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/metabomatching</container>
+     </requirements>
+     <command>
+       <![CDATA[metabomatching.sh -i "$association_statistics_input" -p "$parameters_in" -s "$scores" -S "$figure"]]>
+     </command>
+     <inputs>
+         <param name="association_statistics_input" type="data" format="tsv" label="Association Statistics Dataset"/>
+         <param name="parameters_in" type="data" format="tsv" label="Parameters"/>
+     </inputs>
+     <outputs>
+         <data name="scores" format="tsv" from_work_dir="scores.tsv" label="metabomatching.scores"/>
+         <data name="figure" format="pdf" from_work_dir="output.pdf" label="metabomatching.pdf"/>
+     </outputs>
+     <help>
+-----------
+Description
+-----------
+
+Metabomatching identifies metabolites using genetic spiking. A basic description is provided below, full documentation here https://github.com/rrueedi/metabomatching/blob/master/documentation/howto.pdf
+
+-----------
+Input Files 
+-----------
+	
+Association Statistics Dataset (Pseudospectra)
+	| This (1+3K)-column tab-separated file contains the association statistics (effect size, standard error, and p-value) for the K variables on which metabomatching is to be run
+	| 
+
+Parameters
+	| This two-column tab-separated file controls both the way metabomatching is run and the way results are displayed.
+	|
+
+------------
+Output Files
+------------
+	
+Scores
+	| This (3+K)-column tab-separated file contains the metabomatching scores for the K provided pseudospectra,  with one row for each reference metabolite.
+	|
+
+Figure (PDF)
+	| The results, presented as a K page PDF file.
+	|
+	</help>
+ </tool>

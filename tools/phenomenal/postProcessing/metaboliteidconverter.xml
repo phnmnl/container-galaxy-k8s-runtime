@@ -1,0 +1,47 @@
+<tool id="Metabolite_ID_Converter" name="Metabolite_ID_Converter" version="0.4">
+	<description>Enrich Metabolomic output datasets</description>
+	<requirements>
+		<container type="docker">docker-registry.phenomenal-h2020.eu/phnmnl/metaboliteidconverter</container>
+	</requirements>
+	<!-- This is the shell comand that is being executed -->
+	<command>
+		<![CDATA[
+		java -jar /Javafiles/dist/phnmnl-enrichment/phnmnl-enrichment.jar 
+			-inDB "$inputDB" 
+			-inFile "$inputfile" 
+			-outFile "$file_out"
+			#if str( $if.headers ) == "yes":
+				-headers
+			#end if
+		]]>
+	</command>
+
+	<!-- This is where the input parameters are defined. The variables name attribute are used in the command tag above -->
+	<inputs>
+		<param type="data" name="inputfile" format="tabular" label="Input file (in tsv format)" />
+		<param name="inputDB" label="Name of the database to convert from" type="select" help="">
+			<option value="InChIKey" selected="true">InChIKey</option>
+			<option value="KEGG">KEGG Id</option>
+			<option value="ChEBI">ChEBI ID</option>
+			<option value="Chemical Name">Chemical Name</option>
+		</param>
+		<conditional name="if">
+			<param name="headers" label="Database names in file headers" type="select" help="">
+				<option value="yes">Yes</option>
+				<option value="no" selected="true">No</option>
+			</param>
+		</conditional>
+
+	</inputs>
+	<outputs>
+		<data name="file_out" label="${tool.name}_${inputfile.name}" format="tabular" ></data>
+	</outputs>
+
+	<!-- The help tag allows Galaxy to show a usage example on the tool page. See univariate.xml wrapper for the detailed syntax of the help tag-->
+	<help>
+
+	</help>
+	<!-- #if str( $if.headers ) == "yes":
+			-headers
+		#end if -->
+</tool>

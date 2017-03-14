@@ -1,0 +1,253 @@
+<tool id="mzml2isa" name="mzml2isa" version="0.1.0">
+    <description>Parser to get meta information from mzML files and create an ISA-Tab structure</description>
+    
+    <macros>
+        <import>mzml2isa_macros.xml</import>
+    </macros>
+
+    <code file="ontology_search.py" />
+
+    <requirements>
+        <requirement type="package" version="0.4.24">mzml2isa</requirement>
+    </requirements>
+
+    <stdio>
+        <exit_code range="1:" />
+    </stdio>
+    
+    <command interpreter="python"><![CDATA[
+    #set $s_submission_date = ""
+    #set $s_release_date = ""
+    #set $s_description = ""
+    #set $s_pubmed = ""
+    #set $s_pub_doi = ""
+    #set $s_pub_status = ""
+    #set $s_pub_author = ""
+    #set $s_pub_title = ""
+
+    #set $s_first_name = ""
+    #set $s_mid_initials = ""
+    #set $s_last_name = ""
+    #set $s_telephone = ""
+    #set $s_fax = ""
+    #set $s_affiliation = ""
+    #set $s_role = ""
+    #set $s_mail = ""
+    #set $s_address = ""
+
+    #set $i_submission_date = ""
+    #set $i_release_date = ""
+    #set $i_description = ""
+    #set $i_pubmed = ""
+    #set $i_pub_doi = ""
+    #set $i_pub_title = ""
+    #set $i_pub_status = ""
+    #set $i_pub_author = ""
+
+    #set $i_first_name = ""
+    #set $i_mid_initials = ""
+    #set $i_last_name = ""
+    #set $i_telephone = ""
+    #set $i_fax = ""
+    #set $i_affiliation = ""
+    #set $i_role = ""
+    #set $i_mail = ""
+    #set $i_address = ""
+
+    #set $organism_text = ""
+    #set $organism_ref = ""
+    #set $organism_iri = ""
+    #set $organism_variant_text = ""
+    #set $organism_variant_ref = ""
+    #set $organism_variant_iri = ""
+    #set $organism_part_text = ""
+    #set $organism_part_ref = ""
+    #set $organism_part_iri = ""
+
+
+    #if $study_meta.study_select=="show"
+    	#set $submission_date =  $study_meta.s_submission_date
+    	#set $s_release_date = $study_meta.s_release_date
+        #set $s_description = $study_meta.s_description
+    	#set $s_pubmed = $study_meta.s_pubmed
+    	#set $s_pub_doi = $study_meta.s_pub_doi
+        #set $s_pub_status = $study_meta.s_pub_status
+        #set $s_pub_author = $study_meta.s_pub_author
+        #set $s_pub_title = $study_meta.s_pub_title
+    #end if
+
+    #if ($s_contacts.s_contacts_select=="show"):
+    	#set $s_first_name = $s_contacts.s_first_name
+        #set $s_mid_initials = $s_contacts.s_mid_initials
+        #set $s_last_name = $s_contacts.s_last_name
+        #set $s_telephone = $s_contacts.s_telephone
+        #set $s_fax = $s_contacts.s_fax
+        #set $s_affiliation = $s_contacts.s_affiliation
+        #set $s_role = $s_contacts.s_role
+        #set $s_mail = $s_contacts.s_mail
+        #set $s_address = $s_contacts.s_address
+    #end if
+
+    #if ($i_contacts.i_contacts_select=="show"):
+    	#set $i_first_name = $i_contacts.i_first_name
+        #set $i_mid_initials = $i_contacts.i_mid_initials
+        #set $i_last_name = $i_contacts.i_last_name
+        #set $i_telephone = $i_contacts.i_telephone
+        #set $i_fax = $i_contacts.i_fax
+        #set $i_affiliation = $i_contacts.i_affiliation
+        #set $i_role = $i_contacts.i_role
+        #set $i_mail = $i_contacts.i_mail
+        #set $i_address = $i_contacts.i_address
+    #end if
+
+    #if ($invest_meta.invest_select=="show"):
+    	#set $i_submission_date = $invest_meta.i_submission_date
+        #set $i_release_date = $invest_meta.i_release_date 
+        #set $i_description = $invest_meta.i_description
+        #set $i_pubmed = $invest_meta.i_pubmed
+        #set $i_pub_doi = $invest_meta.i_pub_doi
+        #set $i_pub_title = $invest_meta.i_pub_title
+        #set $i_pub_status = $invest_meta.i_pub_status
+        #set $i_pub_author = $invest_meta.i_pub_author
+    #end if
+
+    #if $exp_meta.exp_select=="show":
+    	#set $organism_text = $exp_meta.organism_text
+        #set $organism_ref = $exp_meta.organism_ref
+        #set $organism_iri = $exp_meta.organism_iri
+        #set $organism_variant_text = $exp_meta.organism_variant_text 
+        #set $organism_variant_ref = $exp_meta.organism_variant_ref 
+        #set $organism_variant_iri = $exp_meta.organism_variant_iri
+        #set $organism_part_text = $exp_meta.organism_part_text
+        #set $organism_part_ref = $exp_meta.organism_part_ref 
+        #set $organism_part_iri = $exp_meta.organism_part_iri
+    #end if
+
+
+    wrapper.py 
+    #if $data_file.input == "zip_file":
+               -inputzip "$data_file.zip_input"
+    #else
+               -inputzip "$data_file.tar_input"
+    #end if
+               -jsontxt "$jsontxt"
+               -html_file "$html_file"
+	       -out_dir "$html_file.extra_files_path"
+	       -study_title "$name_of_study"
+               --s_submission_date "$s_submission_date"
+               --s_release_date "$s_release_date"
+               --s_description "$s_description"
+               --s_pubmed "$s_pubmed"
+               --s_pub_doi "$s_pub_doi"
+               --s_pub_status "$s_pub_status"
+               --s_pub_title "$s_pub_title"
+               --s_pub_author "$s_pub_author"
+               --s_first_name "$s_first_name"
+               --s_mid_initials "$s_mid_initials"
+               --s_last_name "$s_last_name"
+               --s_telephone "$s_telephone"
+               --s_fax "$s_fax"
+               --s_affiliation "$s_affiliation"
+               --s_role "$s_role"
+               --s_mail "$s_mail"
+               --s_address "$s_address"
+               --i_submission_date "$i_submission_date"
+               --i_release_date "$i_release_date"
+               --i_description "$i_description"
+               --i_pubmed "$i_pubmed"
+               --i_pub_doi "$i_pub_doi"
+               --i_pub_title "$i_pub_title"
+               --i_pub_status "$i_pub_status"
+               --i_pub_author "$i_pub_author"
+               --i_first_name "$i_first_name"
+               --i_mid_initials "$i_mid_initials"
+               --i_last_name "$i_last_name"
+               --i_telephone "$i_telephone"
+               --i_fax "$i_fax"
+               --i_affiliation "$i_affiliation"
+               --i_role "$i_role"
+               --i_mail "$i_mail"
+               --i_address "$i_address"
+               --organism_text "$organism_text"
+               --organism_ref "$organism_ref"
+               --organism_iri "$organism_iri"
+               --organism_variant_text "$organism_variant_text"
+               --organism_variant_ref "$organism_variant_ref"
+               --organism_variant_iri "$organism_variant_iri"
+               --organism_part_text "$organism_part_text"
+               --organism_part_ref "$organism_part_ref"
+	       --organism_part_iri "$organism_part_iri";
+
+	       ln -s '$html_file.extra_files_path/$name_of_study' study_dir;
+
+	       cd study_dir;
+	       zip isa.zip i_* a_* s_* && mv isa.zip "$ISA_zip";
+	       ]]>
+    </command>
+
+    <inputs>
+        <param name="name_of_study" type="text" label="Name study" help="This should not contain any spaces as the name will be used a prefix for ISA-tab file names" />
+	<conditional name="data_file">
+            <param name="input" type="select" label="Choose your inputs method" >
+                <option value="zip_file" selected="true">Zip file from your history containing your mzML files</option>
+                <option value="tar_file">TAR file from your history containing your mzML files</option>
+            </param>
+            <when value="zip_file">
+		<param format="zip" name="zip_input" type="data" label="mzML zip file"  help="A zipped folder of mzML files"/>
+	    </when>
+            <when value="tar_file">
+		<param format="tar" name="tar_input" type="data" label="mzML TAR file"  help="A tarred folder of mzML files"/>
+	    </when>
+        </conditional>
+        <param optional="true" format="txt" name="jsontxt" type="data" label="Additional user Metadata in json"  help="A user can add additional metadata directory through a json file"/>
+        <expand macro="studymacro"/>
+        <expand macro="investmacro"/>
+        <expand macro="expmacro"/>
+        <expand macro="scontactmacro"/>
+        <expand macro="icontactmacro"/>
+    </inputs>
+    <outputs>
+<!--
+Notes:
+
+- Multiple a_ files
+- Single s_ as per mzml2isa definition (ISA does allow more than one s_ file).
+- Single i_ file.
+--> 
+        <data format="html" name="html_file" label="" />
+        <data name="ISA_zip" format="zip" label="ISA Zip file"/>
+          <collection type="list" label="A Files" name="a_files">
+		<discover_datasets pattern="(?P&lt;designation&gt;a_.+)\.txt" directory="study_dir" format="tabular"/>
+	  </collection>
+	<collection type="list" label="S Files" name="s_files">
+		<discover_datasets pattern="(?P&lt;designation&gt;s_.+)\.txt" directory="study_dir" format="tabular"/>
+	</collection>
+	<data name="i_file" format="tabular" label="I File" from_work_dir="study_dir/i_Investigation.txt" visible="true"/>
+    </outputs>
+    <tests>
+        <test>
+            <param name="name_of_study" value="test" />
+            <param name="inputzip" value="metabolomics_study.zip" />
+            <output name="output" value="metabolomics_study/test/index.html" />
+        </test>
+    </tests>
+    <help><![CDATA[
+**Overview**
+ A program to automatically generate ISA-Tab metadata files from metabolomics raw XML (mzML and imzML) data files.
+
+ Additional meta-information not found within the mzML file can be added either through a JSON file or via the drop
+ down menus. However, it is recommended that the mzML2ISA tool is used to create a semi-completed ISA-Tab file structure
+ that is further annotated using ISAcreator https://github.com/ISA-tools/ISAcreator
+
+.. image::mzml2isa.png
+    ]]></help>
+    <citations>
+        <citation type="doi">10.1002/0471250953.bi1413s53</citation>
+        <citation type="doi">10.1007/s11306-015-0879-3</citation>
+        <citation type="doi">10.1038/ng.1054</citation>
+    </citations>
+</tool>
+
+
+
+

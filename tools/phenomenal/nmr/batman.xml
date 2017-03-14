@@ -18,15 +18,15 @@ runBATMAN.R -i ${nmr_spectra_input}
        ]]>
      </command>
      <inputs>
-         <param name="nmr_spectra_input" type="data" format="txt" label="NMR Dataset"/>
-         <param name="options_file" type="data" format="txt" label="BATMAN options"/>
+         <param name="nmr_spectra_input" type="data" format="txt" label="NMR Dataset ; A tabulated txt file including p.p.m and spectra"/>
+         <param name="options_file" type="data" format="txt" label="BATMAN options ; A txt file including BATMAN running options, such as number of spectra which must within the range given by the NMR data set. The file name MUST be batmanOptions.txt"/>
          <param name="metabolite_template" type="data" format="txt" label="pre-defined metabolites template, multi_data_user.csv"/>
          <param name="target_metabolites" type="data" format="txt" label="target metabolites list"/>
      </inputs>
      <outputs>
          <data name="RelCon" format="tabular" from_work_dir="results/RelCon.txt" label="Relative concentrations"/>
-         <data name="MultipletsPpmShifts" format="tabular" from_work_dir="results/MultipletsPpmShifts.txt" label="Multiplets PPM Shifts"/>
-         <data name="RelConCreInt" format="tabular" from_work_dir="results/RelConCreInt.txt" label="Relative concentrations ?"/>
+         <data name="MultipletsPpmShifts" format="tabular" from_work_dir="results/MultipletsPpmShifts.txt" label="A table (M x n) containing the posterior means of multiplets ppm shift for M multiplets as its rows."/>
+         <data name="RelConCreInt" format="tabular" from_work_dir="results/RelConCreInt.txt" label="Relative concentrations in the Confidence Interval of 95%"/>
 
          <collection name="spectra" type="list" labels="Stack from ${on_string}">
              <discover_datasets pattern="(?P&lt;name&gt;specFit_.+_)\.pdf$" ext="pdf" directory="results" />
@@ -46,6 +46,24 @@ runBATMAN.R -i ${nmr_spectra_input}
              <discover_datasets pattern="(?P&lt;name&gt;theta_sam_.+_rr_0)\.txt$" ext="tabular" directory="results" />
          </collection>
      </outputs>
-     <help>
+     <help><![CDATA[
+Four mandatory files: NMRdata.txt, batmanOptions.txt, multi_data_user.csv, metabolitesList.csv
+NMRdata.txt is the NMR spectra data for BATMAN to process peak fitting. 
+
+The NMRdata.txt is a tabulated file with the first column of data as p.p.m and the rest of columns as NMR spectra.
+
+batmanOptions.txt is used for controlling BATMAN performance including the number range of spectra to be processed (the max number must NOT be greater than the number of spectra provided in the NMRdata.txt), the number of parallel processes, the number of prior iterations and posterior ones, the global peak width and variation (in log10) etc. The detail can be found in the BATMAN document. Please modify the file accordingly on your local computer before uploading to Galaxy.
+
+multi_data_user.csv provides the characteristics of targeted metabolites NMR resonances. Please modify the file accordingly on your local computer before uploading to Galaxy.
+
+metabolitesList.csv includes the list of targeted metabolites. Please modify the file accordingly on your local computer before uploading to Galaxy.
+
+The demo test data sets (including NMRdata.txt, which is clinical blood serum NMR spectra. batmanOptions.txt. multi_data_user.csv, which includes 9 targeted compounds. and metabolitesList.csv)        
+can be downloaded from
+https://github.com/jianlianggao/batman/tree/master/test_data/test_data_new
+
+
+      ]]>
+     
      </help>
  </tool>

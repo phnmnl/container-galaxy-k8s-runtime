@@ -1,0 +1,69 @@
+<tool id="mtbls-downloader" name="MetaboLights Downloader" version="0.1.0">
+    <description>Download public and private MetaboLights studies</description>
+
+    
+    <command><![CDATA[
+ #if $aspera_password: 
+    export ASPERA_SCP_PASS="$aspera_password";
+ #else
+    export ASPERA_SCP_PASS="Xz68YfDe";
+ #end if
+
+
+    #set $path_elements = str($file_path).split('/')
+    #set $study = $path_elements[-1]
+
+    ascp -QT -l 1g fasp-ml@fasp.ebi.ac.uk:$file_path . ;
+    cd "$study";
+    zip isa.zip i_*.txt s_*.txt a_*.txt && mv isa.zip "$ISA_zip";
+    zip maf.zip m_*.t* && mv maf.zip "$MAF_zip";
+    mv i_Investigation.txt ../;
+    mv s_*.txt ../;
+    mv a_*.txt ../;
+    mv m_*.t* ../;
+    tar -cf "$RAW_data" * 
+	       ]]>
+    </command>
+
+    <inputs>
+	    <param name="file_path" type="text" label="Study path at MetaboLights FTP Server" help="This should be obtained from the MetaboLights website. For public studies, for MTBLS253 would be: /studies/public/MTBLS253" />
+        <param optional="true" format="txt" name="aspera_password" type="text" label="Password for download"  help="For public studies, leave the password blank, the default will be used."/>
+     </inputs>
+    <outputs>
+
+        <data format="html" name="html_file" label="" />
+	<data name="ISA_zip" format="zip" label="ISA Zip file"/>
+	<data name="MAF_zip" format="zip" label="MAF Zip file"/>
+	<data name="RAW_data" format="tar" label="RAW Data tar file"/>
+          <collection type="list" label="A Files" name="a_files">
+		<discover_datasets pattern="(?P&lt;designation&gt;a_.+)\.txt" directory="study_dir" format="tabular"/>
+	  </collection>
+	<collection type="list" label="S Files" name="s_files">
+		<discover_datasets pattern="(?P&lt;designation&gt;s_.+)\.txt" format="tabular"/>
+	</collection>
+	<collection type="list" label="MAF Files" name="maf_files">
+		<discover_datasets pattern="(?P&lt;designation&gt;m_.+)\.t.+" format="tabular"/>
+	</collection>
+	<data name="i_file" format="tabular" label="I File" from_work_dir="i_Investigation.txt" visible="true"/>
+    </outputs>
+    <tests>
+        <test>
+            <param name="name_of_study" value="test" />
+            <param name="inputzip" value="metabolomics_study.zip" />
+            <output name="output" value="metabolomics_study/test/index.html" />
+        </test>
+    </tests>
+    <help><![CDATA[
+**Overview**
+ A program to download complete MetaboLights studies. 
+    ]]></help>
+    <citations>
+        <citation type="doi">10.1002/0471250953.bi1413s53</citation>
+        <citation type="doi">10.1007/s11306-015-0879-3</citation>
+        <citation type="doi">10.1038/ng.1054</citation>
+    </citations>
+</tool>
+
+
+
+

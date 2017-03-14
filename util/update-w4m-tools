@@ -1,0 +1,33 @@
+#!/bin/bash
+# vi: fdm=marker
+
+# Constants {{{1
+################################################################
+
+TOOLS="mtbls-dwnld univariate multivariate biosigner lcmsmatching"
+TOOLS_DIR=../tools/phenomenal/w4m/
+CONTAINER_PREFIX=container-registry.phenomenal-h2020.eu/phnmnl/
+
+# MAIN {{{1
+################################################################
+
+# Loop on all tools
+for tool in $TOOLS ; do
+
+	# Pull container
+	docker pull $CONTAINER_PREFIX$tool:latest
+
+	# Extract tool source code from container
+	docker rm $tool
+	docker run --name $tool --entrypoint=true $CONTAINER_PREFIX$tool
+	rm -rf tool_src
+	docker cp $tool:/files/$tool tool_src
+
+	# Copy files
+	[ -e tool_src/${tool}_config.xml ] && cp tool_src/${tool}_config.xml $TOOLS_DIR
+	for python_script in $(ls tool_src/*.py 2>/dev/null) ; do cp $python_script $TOOLS_DIR ; done
+	[ -d tool_src/static ] && cp -r tool_src/static $TOOLS_DIR
+
+	# Modify tool command line in XML config file 
+	sed -e 's/Rscript//' -e 's!\$__tool_directory__/!!' -i '' $TOOLS_DIR${tool}_config.xml
+done

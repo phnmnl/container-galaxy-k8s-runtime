@@ -1,0 +1,47 @@
+---
+- hosts: all 
+  
+  vars:
+     db_engine: "{{ lookup('env','GALAXY_SEC_DB_ENGINE') }}"
+     db_user_name: "{{ lookup('env','GALAXY_SEC_DB_USER') }}"
+     db_user_pass: "{{ lookup('env','GALAXY_SEC_DB_PASS') | replace('\n', '') }}"
+     db_host: "{{ lookup('env','GALAXY_SEC_DB_HOST') }}"
+     db_name: "{{ lookup('env','GALAXY_SEC_DB_NAME') }}"
+     google_analytics_code: "{{ lookup('env','GOOGLE_ANALYTICS_CODE') }}"
+     galaxy_admin_email: "{{ lookup('env','GALAXY_ADMIN_EMAIL') }}"
+     galaxy_api_key: "{{ lookup('env','GALAXY_API_KEY') }}"
+     
+  tasks:
+  - name: set database postgres connection properties 
+    ini_file:
+        dest: /galaxy/config/galaxy.ini
+        section: "app:main"
+        option: database_connection        
+        value: "{{ db_engine }}://{{ db_user_name}}:{{ db_user_pass }}@{{ db_host }}/{{ db_name }}"
+    when: db_engine != "" and db_user_name != "" and db_host != "" and db_name != ""
+
+  - name: set google analytics code 
+    ini_file:
+        dest: /galaxy/config/galaxy.ini
+        section: "app:main"
+        option: ga_code
+        value: "{{ google_analytics_code }}"
+    when: google_analytics_code != ""
+
+  - name: set admin email
+    ini_file:
+        dest: /galaxy/config/galaxy.ini
+        section: "app:main"
+        option: admin_users
+        value: "{{ galaxy_admin_email }}"
+    when: galaxy_admin_email != ""
+
+  - name: set master API key
+    ini_file:
+        dest: /galaxy/config/galaxy.ini
+        section: "app:main"
+        option: master_api_key
+        value: "{{ galaxy_api_key }}"
+    when: galaxy_api_key != ""
+
+

@@ -1,0 +1,112 @@
+<macros>
+    <xml name="studymacro" >
+      <conditional name="study_meta">
+            <param name="study_select" type="select" label="Add study meta" help="">
+                <option value="hide" selected="true">Hide</option>
+                <option value="show">Show</option>
+            </param>
+            <when value="hide"/>
+            <when value="show">
+                <!--<param name="study_title" type="text" label="Study Title"/>-->
+                <param name="s_submission_date" type="text" label="Submission date" help="Date in format YYYY-MM-DD e.g 2016-07-03"/>
+                <param name="s_release_date" type="text" label="Release date" help="Date in format YYYY-MM-DD e.g 2016-07-03"/>
+                <param name="s_description" type="text" label="Description" size="30" help="Short description of the study"/>
+                <param name="s_pubmed" type="text" label="Publication PubMed identifier"/>
+                <param name="s_pub_doi" type="text" label="Publication DOI"/>
+                <param name="s_pub_title" type="text" label="Publication Title"/>
+                <param name="s_pub_status" type="select" label="Publication Status" dynamic_options = "getNames('status')"/>
+                <param name="s_pub_author" type="text" label="Publication Authors"/>
+
+            </when>
+        </conditional>
+    </xml>
+
+    <xml name="investmacro">
+        <conditional name="invest_meta">
+            <param name="invest_select" type="select" label="Add investigation meta" help="">
+                <option value="hide" selected="true">Hide</option>
+                <option value="show">Show</option>
+            </param>
+            <when value="hide"/>
+            <when value="show">
+                <param name="i_submission_date" type="text" label="Submission date" help="Date in format YYYY-MM-DD e.g 2016-07-03"/>
+                <param name="i_release_date" type="text" label="Release date"  help="Date in format YYYY-MM-DD e.g 2016-07-03"/>
+                <param name="i_description" type="text" label="Description" size="30" help="Short description of the investigation"/>
+                <param name="i_pubmed" type="text" label="Publication PubMed identifier"/>
+                <param name="i_pub_doi" type="text" label="Publication DOI"/>
+                <param name="i_pub_title" type="text" label="Publication Title"/>
+                <param name="i_pub_status" type="select" label="Publication Status" dynamic_options = "getNames('status')"/>
+                <param name="i_pub_author" type="text" label="Publication Authors"/>
+            </when>
+        </conditional>
+    </xml>
+
+    <xml name="scontactmacro">
+        <conditional name="s_contacts">
+            <param name="s_contacts_select" type="select" label="Add contact (study)" help="">
+            <option value="hide" selected="true">Hide</option>
+            <option value="show">Show</option>
+            </param>
+            <when value="hide"/>
+            <when value="show">
+              <param name="s_first_name" type="text" label="First name" />
+              <param name="s_mid_initials" type="text" label="Mid initials"/>
+              <param name="s_last_name" type="text" label="Last name"/>
+              <param name="s_telephone" type="text" label="Telephone"/>
+              <param name="s_fax" type="text" label="fax"/>
+              <param name="s_affiliation" type="text" label="Affiliation"/>
+              <param name="s_role" type="select" label="Role" help="Role in study publication" dynamic_options = "getNames('role')"/>
+              <param name="s_mail" type="text" label="Mail"/>
+              <param name="s_address" type="text" label="Address"/>
+             </when>
+       </conditional>
+    </xml>
+
+
+    <xml name="icontactmacro">
+        <conditional name="i_contacts">
+            <param name="i_contacts_select" type="select" label="Add contact (investigation)" help="">
+            <option value="hide" selected="true">Hide</option>
+            <option value="show">Show</option>
+            </param>
+            <when value="hide"/>
+            <when value="show">
+              <param name="i_first_name" type="text" label="First name" />
+              <param name="i_mid_initials" type="text" label="Mid initials"/>
+              <param name="i_last_name" type="text" label="Last name"/>
+              <param name="i_telephone" type="text" label="Telephone"/>
+              <param name="i_fax" type="text" label="fax"/>
+              <param name="i_affiliation" type="text" label="Affiliation"/>
+              <param name="i_role" type="select" label="Role" help="Role in investigation publication" dynamic_options = "getNames('role')"/>
+              <param name="i_mail" type="text" label="Mail"/>
+              <param name="i_address" type="text" label="Address"/>
+             </when>
+       </conditional>
+    </xml>
+
+
+
+    <xml name="expmacro">
+      <conditional name="exp_meta">
+            <param name="exp_select" type="select" label="Add experimental meta" help="">
+                <option value="hide" selected="true">Hide</option>
+                <option value="show">Show</option>
+            </param>
+            <when value="hide"/>
+
+            <when value="show">
+                <param name="organism_text" type="text" label="Organism name (text)"  help="Ontological names can be search for on http://www.ontobee.org/ e.g. Homo sapiens"/>
+                <param name="organism_ref" type="text" label="Organism name (ontology reference)" help="e.g. NCBITAXON"/>
+                <param name="organism_iri" type="text" label="Organism name (link to ontology source)" help="e.g. http://purl.obolibrary.org/obo/NCBITaxon_9606"/>
+                <param name="organism_variant_text" type="text" label="Organism variant (text)" help="e.g. Saccharomyces cerevisiae M3836" />
+                <param name="organism_variant_ref" type="text" label="Organism variant (ontology reference)"  help="e.g. NCBITAXON"/>
+                <param name="organism_variant_iri" type="text" label="Organism variant (link to ontology source)" help="e.g. http://purl.obolibrary.org/obo/NCBITaxon_1162671"/>
+                <param name="organism_part_text" type="text" label="Organism part (text)" help="e.g. lacrimal artery"/>
+                <param name="organism_part_ref" type="text" label="Organism part (ontology reference)"  help="e.g. UBERON"/>
+                <param name="organism_part_iri" type="text" label="Organism part (link to ontology source)" help="e.g. http://purl.obolibrary.org/obo/UBERON_0001622"/>
+
+            </when>
+        </conditional>
+    </xml>
+
+</macros>

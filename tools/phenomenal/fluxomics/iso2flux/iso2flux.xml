@@ -1,16 +1,13 @@
-<tool id="iso2flux" name="iso2flux" version="0.1.0">
+<tool id="iso2flux" name="iso2flux" version="1.0">
 <stdio>
 <exit_code range="1:" />
 </stdio>
+<description>13C Metabolic Flux Analysis on a sub-network of a large scale model.</description>
 <command><![CDATA[
 echo 'Working directory is '\$PWD;
-#if str( $tracing_model ) != None:
-#set $tracing_model_wext = str( $tracing_model ) + '.xlsx'
-ln -s "$tracing_model" "$tracing_model_wext";
-#end if
 run_iso2flux.py -e "$tracing_data"
 #if str( $tracing_model ) != None:
-  -l "$tracing_model_wext"
+  -l "$tracing_model"
 #end if
 
 -s "$sbml_model"
@@ -22,8 +19,6 @@ run_iso2flux.py -e "$tracing_data"
 -c "$constraints"
 #end if
 
--t "$incubation_time"
--f "$experimental_factor"
 
 #if str( $confidence.compute ) == "no":
 -q
@@ -34,12 +29,10 @@ run_iso2flux.py -e "$tracing_data"
  -->
 <inputs>
     <param type="data" name="tracing_data" format="csv" />
-    <param type="data" name="tracing_model" format="xlsx"/>
+    <param type="data" name="tracing_model" format="csv"/>
     <param type="data" name="sbml_model" format="xml"/>
     <param type="data" name="parameters" format="csv" optional="True"/>
     <param type="data" name="constraints" format="csv" optional="True"/>
-    <param type="float" name="incubation_time" value="1"/>
-    <param type="text" name="experimental_factor" value="Factor"/>
     <conditional name="confidence">
         <param name="compute" label="Compute confidence intervals" type="select">
             <option value="yes">Yes</option>
@@ -48,21 +41,28 @@ run_iso2flux.py -e "$tracing_data"
     </conditional>
 </inputs>
 <outputs>
-    <data name="unconstrained_fluxes" format="csv" from_work_dir="unconstrained_fluxes.csv" label="Unconstrained fluxes"/>
-    <data name="best_label" format="csv" from_work_dir="best_label.csv" label="Best label"/>
-    <data name="best_fluxes" format="csv" from_work_dir="best_fluxes.csv" label="Best fluxes after adjustment"/>
-    <data name="fluxes_confidence" format="csv" frow_work_dir="confidence.csv" label="Confidence intervals for fluxes">
+    <data name="best_fit_fluxes" format="csv" from_work_dir="best_fluxes.csv" label="Best fit fluxes"/>
+    <data name="best_fit_label" format="csv" from_work_dir="best_label.csv" label="Best fit label"/>
+    <data name="constrained_sbml_model" format="xml" from_work_dir="constrained_model.xml" label="SBML model constrained with the results of 13C analysis"/>
+    <data name="fluxes_confidence" format="csv" frow_work_dir="confidence.csv" label="Confidence intervals for all fluxes">
         <filter>( confidence['compute'] == "yes")</filter>
     </data>
-    <!--
-     Outputs:
-     - unconstrained fluxes (csv) : prefix+"unconstrained_fluxes.csv"
-     - best label (best tracer) (csv) : prefix+"best_label.csv"
-     - best fluxes (best adjustement) (csv) : prefix+"best_fluxes.csv"
-     - confidence for fluxes (csv) : prefix+"confidence.csv"
-    -->
 
 </outputs>
 <help><![CDATA[
+A script that performs 13C Metabolic Flux Analysis with the software Iso2flux. It will find the flux distribution most consistent with experimental tracer data and (if not disabled) also estimate confidence interval for fluxes.  
+Options:
+experimental_data_file= Name of the processed Metabolights file containing isotopologues distribution.
+tracing_model= Name of the CSV file describing the label propagation rules
+sbml_model= Name of the SBML file describing the constraint based model that will be used
+parameters= Name of the CSV file defining additional parameters for Iso2flux (Optional)
+constraints= Name of the file containing additional constraints for the constraint model (Optional)
+quick_analysis Disables the confidence interval analysis (Optional)
+
+Output:
+best_fit.csv:The simulated fluxes and label distribution that are most consistent with experimental measurements
+constrained_sbml_model.xml: A SBML model constraiend with the results of the 13C analysis.
+confidence.csv:The lower and upper limits of the confidence intervals for fluxes
+
 ]]></help>
 </tool>
