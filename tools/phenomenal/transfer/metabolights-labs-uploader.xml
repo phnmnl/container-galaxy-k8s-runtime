@@ -23,7 +23,7 @@
     </command>
 
     <inputs>
-	<param name="metabolights_labs_key" format="txt" type="text" label="MetaboLights Labs Key"  help="You should get this from the MetaboLights Labs Website"/>
+	<param name="metabolights_labs_key" format="txt" type="text" label="MetaboLights Labs Key"  help="You should get this from the MetaboLights Labs Website or the MetaboLights website (see help below)"/>
         <param name="maf_file" type="data" format="zip" label="Zip file containing MAF files." help="The MAF Zip file is optional" optional="true"/>
         <param name="isa_file" type="data" format="zip" label="Zip file containing ISA files." optional="false"/>
 	<param name="data_file" type="data" format="tar" label="TAR file containing RAW data files"  help="" optional="true"/>
@@ -44,7 +44,12 @@
     </tests>
     <help><![CDATA[
 **Overview**
- A program to upload metabolomics data to MetaboLights Labs, previously to converting them to studies. 
+
+A program to upload metabolomics data to MetaboLights Labs, previously to converting them to studies. The aim of the tool is to assist researchers in the deposition of metabolomics data into MetaboLights, by providing upload facilities for data and meta-data that should be part of a deposition, but that are not completely finalized to be directly deposited. The MetaboLights Labs interface provides the user with the ability to make necessary adjustments to go from those files uploaded to a properly formatted MetaboLights Study for deposition.
+
+**How to get your MetaboLights Labs Key**
+
+Go to https://wwwdev.ebi.ac.uk/metabolights, press on the login button to the top right (or create an account if you don't have one). Once logged in, in the section of account options, press the "My Account" button. In this new page you will see a form, scroll down to the bottom of it to find your MetaboLights API Key (it is the same key for Labs). Press the copy button to the right, which will add the key to your clipboard. You can paste it now in the MetaboLights Labs Key field in the Galaxy tool above.
     ]]></help>
     <citations>
         <citation type="doi">10.1002/0471250953.bi1413s53</citation>

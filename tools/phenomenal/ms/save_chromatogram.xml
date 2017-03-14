@@ -1,20 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Statistics]-->
-<tool id="show_chromatogram" name="show_chromatogram" version="1.1">
+<tool id="save_chromatogram" name="save_chromatogram" version="1.1">
 <!--
   <requirements>
     <container type="docker">phnmnl/xcms</container>
   </requirements>
 -->
-  <description>Shows the chromatogram of a single mzML file.</description>
+  <description>Saves the chromatogram of a single mzML file.</description>
   <command><![CDATA[
-    show_chromatogram.r $infile $outfile 2>&1
+    save_chromatogram.r $infile $outfile 2>&1
   ]]></command>
   <inputs>
     <param name="infile" type="data" format="mzml" value="&lt;class 'CTDopts.CTDopts._Null'&gt;" optional="False" label="Input mzML file." />
   </inputs>
   <outputs>
-    <data name="outfile" format="png"/>
+    <data name="outfile" format="csv"/>
   </outputs>
-  <help>Produces a PNG image file out of an mzML file as input.</help>
+  <help>Saves the chromatogram RT/TIC out of an mzML file in CSV format.</help>
 </tool>
