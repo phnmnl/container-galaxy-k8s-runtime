@@ -19,21 +19,27 @@ This release version uses the following tools, tagged at these release versions:
 
 | Tool | Container | Tag | Maintainer | Affiliation | Docs |
 |------|-----------|-----|------------|-------------|------|
+| [batman]() | [container-batman](https://github.com/phnmnl/container-batman/releases/tag/v1.2.1.0.7_cv1.0) | [v1.2.1.0.7_cv1.0](http://phenomenal-h2020.eu/jenkins/job/container-batman/34/) | P. Moreno, J. Gao | EMBL-EBI, Imperial College London | |
 | [ms-vfetc](https://github.com/leidenuniv-lacdr-abs/ms-vfetc/tree/v0.4) | [container-ms-vfetc](https://github.com/phnmnl/container-ms-vfetc/commit/cd04be499d7a2de79e0e5f93075d6d2e65902323) | [v0.4_cv1.3](http://phenomenal-h2020.eu/jenkins/view/UL%20team/job/container-ms-vfetc/10/) | Michael van Vliet | Leiden University | [docs](https://github.com/leidenuniv-lacdr-abs/ms-vfetc/blob/v0.4/README.md) |
 | [iso2flux]() | [container-iso2flux](https://github.com/phnmnl/container-iso2flux/releases/tag/v0.2_cv1.0) | [v0.2_cv1.0](http://phenomenal-h2020.eu/jenkins/job/container-iso2flux/28/) | Pablo Moreno | EMBL-EBI | |
 | [ramid]() | [container-ramid](https://github.com/phnmnl/container-ramid/releases/tag/v1.0_cv0.1) | [v1.0_cv0.1](http://phenomenal-h2020.eu/jenkins/job/container-ramid/7) | Pablo Moreno | EMBL-EBI | |
 | [midcor]() | [container-midcor](https://github.com/phnmnl/container-midcor/releases/tag/v1.0_cv0.2) | [v1.0_cv0.2](http://phenomenal-h2020.eu/jenkins/job/container-midcor/32/) | Pablo Moreno | EMBL-EBI | |
 | [mtbls-dwnloader]() | [container-scp-aspera](https://github.com/phnmnl/container-scp-aspera/releases/tag/v3.5.4.102989-linux-64_cv0.1) | [v3.5.4.102989-linux-64_cv0.1](http://phenomenal-h2020.eu/jenkins/job/container-scp-aspera/5/) | Pablo Moreno | EMBL-EBI | |
 | [nmrml2isa]() | [container-nmrml2isa](https://github.com/phnmnl/container-nmrml2isa/releases/tag/v0.3.0_cv0.1) | [v0.3.0_cv0.1](http://phenomenal-h2020.eu/jenkins/job/container-nmrml2isa/10/) | P. Moreno, T. Lawson | EMBL-EBI, U. of Birmingham | |
-| [mzml2isa]() | [container-mzml2isa]() | [v0.4.28_cv0.2]() | P. Moreno, K. Peters | EMBL-EBI, IPB Halle | |
-| [Batman]() | [container-batman](https://github.com/phnmnl/container-batman/releases/tag/v1.2.1.0.7_cv1.0) | [v1.2.1.0.7_cv1.0](http://phenomenal-h2020.eu/jenkins/job/container-batman/34/) | P. Moreno, J. Gao | EMBL-EBI, Imperial College London | |
+| [mzml2isa]() | [container-mzml2isa](https://github.com/phnmnl/container-mzml2isa/releases/tag/v0.4.28_cv0.2) | [v0.4.28_cv0.2](http://phenomenal-h2020.eu/jenkins/view/%20A.-%20Container%20tools/job/container-mzml2isa/23/) | P. Moreno, K. Peters | EMBL-EBI, IPB Halle | |
 | [metfrag-cli]() | [container-metfrag-cli](https://github.com/phnmnl/container-metfrag-cli/releases/tag/v2.4.2_cv0.2) | [v2.4.2_cv0.2](http://phenomenal-h2020.eu/jenkins/job/container-metfrag-cli/17/) | Kristian Peters | IPB Halle | |
-| w4m - metabolights downloader ||||||
-| [w4m - univariate]() | [container-univariate] | [v2.2.3_cv1.2](http://phenomenal-h2020.eu/jenkins/job/container-univariate/28/) | Pierrick Roger Mele | CEA ||
-| [w4m - multivariate]() | [container-multivariate] | [v2.3.10_cv1.1](http://phenomenal-h2020.eu/jenkins/job/container-multivariate/18/) | Pierrick Roger Mele | CEA ||
-| [w4m - biosigner]() |[container-biosigner]|[v2.2.7_cv1.1](http://phenomenal-h2020.eu/jenkins/job/container-biosigner/12/) | Pierrick Roger Mele | CEA ||
-| [w4m - LC/MS matching]() |[container-lcmsmatching]|[v3.1.6_cv1.3](http://phenomenal-h2020.eu/jenkins/job/container-lcmsmatching/61/)|Pierrick Roger Mele | CEA ||
+| [w4m - MetaboLights Downloader]() | [container-mtbls-dwnld](https://github.com/phnmnl/container-mtbls-dwnld/releases/tag/v1.2.0_cv1.1) | [v1.2.0_cv1.1](http://phenomenal-h2020.eu/jenkins/view/%20A.-%20Container%20tools/job/container-mtbls-dwnld/12/) | Pierrick Roger Mele | CEA ||
+| [w4m - univariate]() | [container-univariate](https://github.com/phnmnl/container-univariate/releases/tag/v2.2.3_cv1.2) | [v2.2.3_cv1.2](http://phenomenal-h2020.eu/jenkins/job/container-univariate/28/) | Pierrick Roger Mele | CEA ||
+| [w4m - multivariate]() | [container-multivariate](https://github.com/phnmnl/container-multivariate/releases/tag/v2.3.10_cv1.1) | [v2.3.10_cv1.1](http://phenomenal-h2020.eu/jenkins/job/container-multivariate/18/) | Pierrick Roger Mele | CEA ||
+| [w4m - biosigner]() |[container-biosigner](https://github.com/phnmnl/container-biosigner/releases/tag/v2.2.7_cv1.1)|[v2.2.7_cv1.1](http://phenomenal-h2020.eu/jenkins/job/container-biosigner/12/) | Pierrick Roger Mele | CEA ||
+| [w4m - LC/MS matching]() |[container-lcmsmatching](https://github.com/phnmnl/container-lcmsmatching/releases/tag/v3.1.6_cv1.3)|[v3.1.6_cv1.3](http://phenomenal-h2020.eu/jenkins/job/container-lcmsmatching/61/)|Pierrick Roger Mele | CEA ||
 | [metabolite ID converter]() | [container-MetaboliteIDConverter](https://github.com/phnmnl/container-MetaboliteIDConverter/releases/tag/v0.5.1_cv1.0) | [v0.5.1_cv1.0](http://phenomenal-h2020.eu/jenkins/job/container-metaboliteidconverter/26/) | Benjamin Merlet | INRA | |
+| [NMRMLConv]() | [container-nmrmlconv](https://github.com/phnmnl/container-nmrmlconv/releases/tag/v1.1b_cv0.1) | [v1.1b_cv0.1](http://phenomenal-h2020.eu/jenkins/view/%20A.-%20Container%20tools/job/container-nmrmlconv/31/) | Kristian Peters | IPB | |
+| [metfrag-cli]() | [container-metfrag](https://github.com/phnmnl/container-metfrag-cli/releases/tag/v2.4.2_cv0.2) | [v2.4.2_cv0.2](http://phenomenal-h2020.eu/jenkins/view/%20A.-%20Container%20tools/job/container-metfrag-cli/17/) | C. Ruttkies, K. Peters | IPB Halle | |
+| [xcms]() | [container-xcms](https://github.com/phnmnl/container-xcms/releases/tag/v1.50.1_cv0.4) | [v1.50.1_cv0.4](http://phenomenal-h2020.eu/jenkins/view/%20A.-%20Container%20tools/job/container-xcms/37/) | K. Peters, P. Moreno | IPB Halle, EMBL-EBI | |
+| [MetaboLights ASCP]() | [container-scp-aspera](https://github.com/phnmnl/container-scp-aspera/releases/tag/v3.5.4.102989-linux-64_cv0.1) | [v3.5.4.102989-linux-64_cv0.1](http://phenomenal-h2020.eu/jenkins/view/%20A.-%20Container%20tools/job/container-scp-aspera/5/) | Pablo Moreno | EMBL-EBI | |
+| [metabomatching]() | [container-metabomatching](https://github.com/phnmnl/container-metabomatching/releases/tag/release%2F0.3) | [v0.1.0_cv0.3](http://phenomenal-h2020.eu/jenkins/view/%20A.-%20Container%20tools/job/container-metabomatching/29/) | Rico Rueedi | Unil | |
+
 Note: maintainers are for containers, not necessarily tool authors. Follow links to learn about tool authors.
 
 
@@ -96,8 +102,6 @@ helm install galaxy-helm-repo/galaxy-simple
 ```
 
 This helm chart accepts plenty of options, and there is also another helm chart for production deployment with more options. For more details see [this link](https://github.com/phnmnl/phenomenal-h2020/wiki/QuickStart-Installation-for-Local-PhenoMeNal-Workflow).
-
-
 
 
 ## Usage Instructions
