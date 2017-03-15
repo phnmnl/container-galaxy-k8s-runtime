@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="camera-group-corr" name="camera-group-corr" version="0.1">
+  <description></description>
+  <command><![CDATA[
+	/usr/local/bin/groupCorr.r input=$input output=$output correlation=$correlation pvalue=$pvalue;  
+  ]]>
+  </command>
+  <inputs>
+    <param name="input" type="data" format="txt" optional="False" label="Input RData file" />
+    <param name="correlation" type="text" value="0.8"  label="Correlation" help="" />
+    <param name="pvalue" type="text" value="0.05"  label="P-Value" help="" />
+  </inputs>
+  <outputs>
+    <data name="output" type="data" format="txt" label="camera-group-corr data" />
+  </outputs>
+  <help>.</help>
+</tool>

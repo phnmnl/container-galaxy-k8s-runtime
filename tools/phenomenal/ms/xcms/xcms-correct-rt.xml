@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="xcms-correct-rt" name="xcms-correct-rt" version="0.1">
+  <description></description>
+  <command><![CDATA[
+	/usr/local/bin/retCor.r input=$input output=$output method=$method;
+  ]]>
+  </command>
+  <inputs>
+    <param name="input" type="data" format="txt" optional="False" label="Input RData file" />
+    <param name="method" type="select" value="loess" label="Method" help="">
+      <option value="loess" selected="True">loess</option>
+      <option value="obiwarp" selected="False">obiwarp</option>
+    </param>
+  </inputs>
+  <outputs>
+    <data name="output" type="text" format="txt" label="xcms-correct-rt data" />
+  </outputs>
+  <help>.</help>
+</tool>

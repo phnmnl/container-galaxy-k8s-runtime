@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="camera-find-isotopes" name="camera-find-isotopes" version="0.1">
+  <description></description>
+  <command><![CDATA[
+	/usr/local/bin/findIsotopes.r input=$input output=$output maxcharge=$maxcharge;
+  ]]>
+  </command>
+  <inputs>
+    <param name="input" type="data" format="txt" optional="False" label="Input RData file" />
+    <param name="maxcharge" type="text" format="txt" value="3" optional="False" label="" />
+  </inputs>
+  <outputs>
+    <data name="output" type="data" format="txt" label="camera-find-isotopes data" />
+  </outputs>
+  <help>.</help>
+</tool>

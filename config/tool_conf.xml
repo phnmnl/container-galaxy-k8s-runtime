@@ -78,6 +78,20 @@
     <tool file="phenomenal/ms/mzml2isa/mzml2isa.xml"/>
     <tool file="phenomenal/ms/metfrag.xml"/>
     <tool file="phenomenal/ms/ms-vfetc.xml"/>     
+    <tool file="phenomenal/ms/xcms/xcms-find-peaks.xml"/>
+    <tool file="phenomenal/ms/xcms/xcms-collect-peaks.xml"/>
+    <tool file="phenomenal/ms/xcms/xcms-group-peaks.xml"/>
+    <tool file="phenomenal/ms/xcms/xcms-correct-rt.xml"/>
+    <tool file="phenomenal/ms/xcms/xcms-fill-peaks.xml"/>
+    <tool file="phenomenal/ms/camera/camera-annotate-peaks.xml"/>
+    <tool file="phenomenal/ms/camera/camera-group-fwhm.xml"/>
+    <tool file="phenomenal/ms/camera/camera-group-corr.xml"/>
+    <tool file="phenomenal/ms/camera/camera-find-isotopes.xml"/>
+    <tool file="phenomenal/ms/camera/camera-find-adducts.xml"/>
+    <tool file="phenomenal/ms/metfrag/msnbase-read-msms.xml"/>
+    <tool file="phenomenal/ms/metfrag/map-msms2camera.xml"/>
+    <tool file="phenomenal/ms/metfrag/msms2metfrag.xml"/>
+    <tool file="phenomenal/ms/metfrag/metfrag-cli-batch.xml"/>
   </section>
   <section name="W4M" id="pheno-w4m">
     <tool file="phenomenal/w4m/mtbls-dwnld_config.xml"/>

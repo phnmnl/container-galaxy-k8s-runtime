@@ -188,7 +188,30 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
-
+	<destination id="metfrag-cli-batch-container" runner="k8s">
+            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">metfrag-cli-batch</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">1</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+	<destination id="camera-container" runner="k8s">
+            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">camera</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">1</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+	 <destination id="msnbase-container" runner="k8s">
+            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">msnbase</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">1</param>
+            <param id="docker_enabled">true</param>
+        </destination>
     </destinations>
     <tools>
         <!-- Tools can be configured to use specific destinations or handlers,
@@ -221,5 +244,19 @@
         <tool id="Metabolite_ID_Converter" destination="container-metaboliteidconverter" />
         <tool id="metabomatching" destination="metabomatching-container"/>
         <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
+	<tool id="metfrag-cli-batch" destination="metfrag-cli-batch-container" />
+	<tool id="xcms-find-peaks" destination="xcms-container" />
+        <tool id="xcms-collect-peaks" destination="xcms-container" />
+        <tool id="xcms-group-peaks" destination="xcms-container" />
+        <tool id="xcms-correct-rt" destination="xcms-container" />
+        <tool id="xcms-fill-peaks" destination="xcms-container" />
+        <tool id="camera-annotate-peaks" destination="camera-container" />
+        <tool id="camera-group-fwhm" destination="camera-container" />
+        <tool id="camera-group-corr" destination="camera-container" />
+        <tool id="camera-find-isotopes" destination="camera-container" />
+        <tool id="camera-find-adducts" destination="camera-container" />
+        <tool id="msnbase-read-msms" destination="msnbase-container" />
+        <tool id="map-msms2camera" destination="msnbase-container" />
+        <tool id="msms2metfrag" destination="msnbase-container" />	
     </tools>
 </job_conf>

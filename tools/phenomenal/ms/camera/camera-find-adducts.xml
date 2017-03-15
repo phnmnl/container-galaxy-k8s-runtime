@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="camera-find-adducts" name="camera-find-adducts" version="0.1">
+  <description></description>
+  <command><![CDATA[
+	/usr/local/bin/findAdducts.r input=$input output=$output ppm=$ppm polarity=$polarity;
+  ]]>
+  </command>
+  <inputs>
+    <param name="input" type="data" format="txt" optional="False" label="Input RData file" />
+    <param name="ppm" type="text" format="txt" value="10" optional="False" label="PPM" />
+    <param name="polarity" type="select" value="positive" label="Polarity" help="">
+      <option value="positive" selected="True">positive</option>
+      <option value="negative" selected="False">negative</option>
+    </param>	
+  </inputs>
+  <outputs>
+    <data name="output" type="data" format="txt" label="camera-find-adducts data" />
+  </outputs>
+  <help>.</help>
+</tool>
