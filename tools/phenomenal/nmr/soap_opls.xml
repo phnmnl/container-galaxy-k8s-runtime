@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Statistics]-->
+<tool id="soap_opls" name="soap_opls" version="1.0">
+<!--
+  <requirements>
+    <container type="docker">phnmnl/soap-nmr</container>
+  </requirements>
+-->
+  <description>Plot post-processed NMRglue data.</description>
+  <command><![CDATA[
+    soap_opls.r $infile $outfile 2>&1;
+  ]]></command>
+  <inputs>
+    <param name="infile" type="data" format="csv" optional="False" label="Dataset matrix of NMRglue post-processed data." />
+  </inputs>
+  <outputs>
+    <data name="outfile" format="pdf" />
+  </outputs>
+  <help>Plot post-processed NMRglue data.</help>
+</tool>
+

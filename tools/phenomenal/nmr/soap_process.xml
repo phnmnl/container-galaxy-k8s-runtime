@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Statistics]-->
+<tool id="soap_process" name="soap_process" version="1.0">
+<!--
+  <requirements>
+    <container type="docker">phnmnl/soap-nmr</container>
+  </requirements>
+-->
+  <description>Post-processes NMRglue data.</description>
+  <command><![CDATA[
+    soap_process.r $spectrafile $ppmfile $fidfile $outfile 2>&1;
+  ]]></command>
+  <inputs>
+    <param name="spectrafile" type="data" format="csv" optional="False" label="Input NMR spectra CSV file." />
+    <param name="ppmfile" type="data" format="csv" optional="False" label="Input NMR PPM CSV file." />
+    <param name="fidfile" type="data" format="csv" optional="False" label="Input NMR FID CSV file." />
+  </inputs>
+  <outputs>
+    <data name="outfile" format="csv" label="Dataset Matrix used for statistics." />
+  </outputs>
+  <help>Post-processes NMRglue data.</help>
+</tool>
+
