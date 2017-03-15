@@ -1,7 +1,7 @@
 <tool id="metabomatching" name="metabomatching">
      <description>metabomatching</description>
      <requirements>
-       <container type="docker">docker-registry.phenomenal-h2020.eu/phnmnl/metabomatching</container>
+       <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/metabomatching</container>
      </requirements>
      <command>
        <![CDATA[metabomatching.sh -i "$association_statistics_input" -p "$parameters_in" -s "$scores" -S "$figure"]]>
@@ -33,6 +33,11 @@ Parameters
 	| This two-column tab-separated file controls both the way metabomatching is run and the way results are displayed.
 	|
 
+Test Files
+	| The following two files can be downloaded from GitHub, then uploaded via *Get Data* to run metabomatching on test data.
+	| association statistics file: https://github.com/rrueedi/metabomatching-pre/blob/master/test/ps.test.multi/test.pseudospectrum.tsv
+	| parameters file: https://github.com/rrueedi/metabomatching-pre/blob/master/test/parameters.gxy.1.tsv
+	
 ------------
 Output Files
 ------------
