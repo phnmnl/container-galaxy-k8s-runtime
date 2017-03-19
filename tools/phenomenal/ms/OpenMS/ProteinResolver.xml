@@ -83,7 +83,7 @@
 ]]></command>
   <inputs>
     <param name="param_fasta" type="data" format="fasta" optional="False" label="Input database file" help="(-fasta) "/>
-    <param name="param_in" type="data" format="consensusXML" multiple="true" optional="True" size="30" label="Input file(s) holding experimental data" help="(-in) ">
+    <param name="param_in" type="data" format="consensusxml" multiple="true" optional="True" size="30" label="Input file(s) holding experimental data" help="(-in) ">
       <sanitizer>
         <valid initial="string.printable">
           <remove value="'"/>

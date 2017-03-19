@@ -122,7 +122,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="featureXML,consensusXML" multiple="true" optional="False" size="30" label="Input files to align (all must have the same file type)" help="(-in) ">
+    <param name="param_in" type="data" format="featurexml,consensusxml" multiple="true" optional="False" size="30" label="Input files to align (all must have the same file type)" help="(-in) ">
       <sanitizer>
         <valid initial="string.printable">
           <remove value="'"/>
@@ -131,7 +131,7 @@
       </sanitizer>
     </param>
     <param name="param_threads" type="integer" value="1" label="Sets the number of threads allowed to be used by the TOPP tool" help="(-threads) "/>
-    <param name="param_reference_file" type="data" format="featureXML,consensusXML" optional="True" label="File to use as reference" help="(-file) "/>
+    <param name="param_reference_file" type="data" format="featurexml,consensusxml" optional="True" label="File to use as reference" help="(-file) "/>
     <param name="param_reference_index" type="integer" min="0" optional="True" value="0" label="Use one of the input files as reference ('1' for the first file, etc.)" help="(-index) &lt;br&gt;If '0', no explicit reference is set - the algorithm will select a reference"/>
     <param name="param_algorithm_min_run_occur" type="integer" min="2" optional="True" value="2" label="Minimum number of runs (incl" help="(-min_run_occur) reference, if any) in which a peptide must occur to be used for the alignment. &lt;br&gt;Unless you have very few runs or identifications, increase this value to focus on more informative peptides"/>
     <param name="param_algorithm_max_rt_shift" type="float" min="0.0" optional="True" value="0.5" label="Maximum realistic RT difference for a peptide (median per run vs" help="(-max_rt_shift) reference). Peptides with higher shifts (outliers) are not used to compute the alignment. &lt;br&gt;If 0, no limit (disable filter); if &gt; 1, the final value in seconds; if &lt;= 1, taken as a fraction of the range of the reference RT scale"/>
@@ -203,7 +203,7 @@
   </inputs>
   <outputs>
     <data name="param_out" metadata_source="param_in" format="input"/>
-    <data name="param_trafo_out" format="trafoXML"/>
+    <data name="param_trafo_out" format="trafoxml"/>
   </outputs>
   <help>Corrects retention time distortions between maps based on common peptide identifications.
 

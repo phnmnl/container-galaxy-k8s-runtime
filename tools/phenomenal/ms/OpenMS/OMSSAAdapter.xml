@@ -178,7 +178,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="mzML" optional="False" label="Input file" help="(-in) "/>
+    <param name="param_in" type="data" format="mzml" optional="False" label="Input file" help="(-in) "/>
     <param name="param_precursor_mass_tolerance" type="float" value="1.5" label="Precursor mass tolerance (Default: Dalton)" help="(-precursor_mass_tolerance) "/>
     <param name="param_precursor_mass_tolerance_unit_ppm" display="radio" type="boolean" truevalue="-precursor_mass_tolerance_unit_ppm" falsevalue="" checked="false" optional="True" label="If this flag is set, ppm is used as precursor mass tolerance unit" help="(-precursor_mass_tolerance_unit_ppm) "/>
     <param name="param_fragment_mass_tolerance" type="float" value="0.3" label="Fragment mass error in Dalton" help="(-fragment_mass_tolerance) "/>
@@ -3395,9 +3395,9 @@
       <option value="CNBr">CNBr</option>
       <option value="Asp-N">Asp-N</option>
       <option value="Formic_acid">Formic_acid</option>
-      <option value="glutamyl endopeptidase">glutamyl endopeptidase</option>
-      <option value="unspecific cleavage">unspecific cleavage</option>
       <option value="no cleavage">no cleavage</option>
+      <option value="unspecific cleavage">unspecific cleavage</option>
+      <option value="glutamyl endopeptidase">glutamyl endopeptidase</option>
       <option value="TrypChymo">TrypChymo</option>
       <option value="Trypsin/P">Trypsin/P</option>
       <option value="Lys-C/P">Lys-C/P</option>

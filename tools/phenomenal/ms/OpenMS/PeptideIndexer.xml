@@ -132,11 +132,11 @@
       <option value="Asp-N_ambic">Asp-N_ambic</option>
       <option value="Chymotrypsin">Chymotrypsin</option>
       <option value="CNBr">CNBr</option>
-      <option value="proline endopeptidase">proline endopeptidase</option>
-      <option value="no cleavage">no cleavage</option>
       <option value="unspecific cleavage">unspecific cleavage</option>
       <option value="glutamyl endopeptidase">glutamyl endopeptidase</option>
       <option value="2-iodobenzoate">2-iodobenzoate</option>
+      <option value="proline endopeptidase">proline endopeptidase</option>
+      <option value="no cleavage">no cleavage</option>
       <option value="V8-E">V8-E</option>
       <option value="leukocyte elastase">leukocyte elastase</option>
     </param>

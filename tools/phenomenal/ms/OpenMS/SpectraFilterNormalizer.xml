@@ -48,7 +48,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="mzML" optional="False" label="input file" help="(-in) "/>
+    <param name="param_in" type="data" format="mzml" optional="False" label="input file" help="(-in) "/>
     <param name="param_threads" type="integer" value="1" label="Sets the number of threads allowed to be used by the TOPP tool" help="(-threads) "/>
     <param name="param_algorithm_method" display="radio" type="select" optional="False" value="to_one" label="Normalize via dividing by TIC ('to_TIC') per spectrum or normalize to max" help="(-method) intensity of one ('to_one') per spectrum">
       <option value="to_one" selected="true">to_one</option>
@@ -78,7 +78,7 @@
     </expand>
   </inputs>
   <outputs>
-    <data name="param_out" format="mzML"/>
+    <data name="param_out" format="mzml"/>
   </outputs>
   <help>Normalizes intensity of peak spectra.
 

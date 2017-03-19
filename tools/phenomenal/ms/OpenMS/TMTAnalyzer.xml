@@ -91,7 +91,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="mzML" optional="False" label="input raw/picked data file" help="(-in) "/>
+    <param name="param_in" type="data" format="mzml" optional="False" label="input raw/picked data file" help="(-in) "/>
     <param name="param_threads" type="integer" value="1" label="Sets the number of threads allowed to be used by the TOPP tool" help="(-threads) "/>
     <param name="param_id_pool" type="text" size="30" label="ID pool file to DocumentID's for all generated output files" help="(-id_pool) Disabled by default. (Set to 'main' to use C:/Program Files/OpenMS-2.1.0/share/OpenMS/IDPool/IDPool.txt)">
       <sanitizer>
@@ -171,7 +171,7 @@
     </expand>
   </inputs>
   <outputs>
-    <data name="param_out" format="consensusXML"/>
+    <data name="param_out" format="consensusxml"/>
     <data name="param_out_mzq" format="data"/>
     <data name="param_out_stats" format="data"/>
   </outputs>

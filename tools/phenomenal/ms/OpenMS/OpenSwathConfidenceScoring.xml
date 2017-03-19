@@ -66,9 +66,9 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="featureXML" optional="False" label="Input file (OpenSwath results)" help="(-in) "/>
-    <param name="param_lib" type="data" format="traML" optional="False" label="Assay library" help="(-lib) "/>
-    <param name="param_trafo" type="data" format="trafoXML" optional="True" label="Retention time transformation" help="(-trafo) "/>
+    <param name="param_in" type="data" format="featurexml" optional="False" label="Input file (OpenSwath results)" help="(-in) "/>
+    <param name="param_lib" type="data" format="traml" optional="False" label="Assay library" help="(-lib) "/>
+    <param name="param_trafo" type="data" format="trafoxml" optional="True" label="Retention time transformation" help="(-trafo) "/>
     <param name="param_decoys" type="integer" min="0" optional="True" value="1000" label="Number of decoy assays to select from the library for every true assay (0 for &quot;all&quot;)" help="(-decoys) "/>
     <param name="param_transitions" type="integer" min="0" optional="True" value="6" label="Number of transitions per feature to consider (highest intensities first; 0 for &quot;all&quot;)" help="(-transitions) "/>
     <param name="param_threads" type="integer" value="1" label="Sets the number of threads allowed to be used by the TOPP tool" help="(-threads) "/>
@@ -99,7 +99,7 @@
     </expand>
   </inputs>
   <outputs>
-    <data name="param_out" format="featureXML"/>
+    <data name="param_out" format="featurexml"/>
   </outputs>
   <help>Compute confidence scores for OpenSwath results
 

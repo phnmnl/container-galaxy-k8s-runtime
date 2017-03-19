@@ -57,7 +57,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="mzML" optional="False" label="Input file containing chromatograms (converted mzXML file)" help="(-in) "/>
+    <param name="param_in" type="data" format="mzml" optional="False" label="Input file containing chromatograms (converted mzXML file)" help="(-in) "/>
     <param name="param_tr" type="data" format="" optional="False" label="transition file" help="(-tr) "/>
     <param name="param_precursor_tolerance" type="float" value="0.1" label="Precursor tolerance when mapping (in Th)" help="(-precursor_tolerance) "/>
     <param name="param_product_tolerance" type="float" value="0.1" label="Product tolerance when mapping (in Th)" help="(-product_tolerance) "/>
@@ -87,7 +87,7 @@
     </expand>
   </inputs>
   <outputs>
-    <data name="param_out" format="mzML"/>
+    <data name="param_out" format="mzml"/>
   </outputs>
   <help>MRMMapper maps measured chromatograms (mzML) and the transitions used (TraML)
 

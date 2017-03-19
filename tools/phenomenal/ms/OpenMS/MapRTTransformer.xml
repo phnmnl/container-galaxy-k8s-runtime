@@ -96,8 +96,8 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="featureXML,consensusXML,mzML" optional="True" label="Input file to transform (separated by blanks)" help="(-in) "/>
-    <param name="param_trafo_in" type="data" format="trafoXML" optional="False" label="Transformation to apply" help="(-trafo_in) "/>
+    <param name="param_in" type="data" format="featurexml,consensusxml,mzml" optional="True" label="Input file to transform (separated by blanks)" help="(-in) "/>
+    <param name="param_trafo_in" type="data" format="trafoxml" optional="False" label="Transformation to apply" help="(-trafo_in) "/>
     <param name="param_invert" display="radio" type="boolean" truevalue="-invert" falsevalue="" checked="false" optional="True" label="Invert transformation (approximatively) before applying it" help="(-invert) "/>
     <param name="param_store_original_rt" display="radio" type="boolean" truevalue="-store_original_rt" falsevalue="" checked="false" optional="True" label="Store the original retention times (before transformation) as meta data in the output file" help="(-store_original_rt) "/>
     <param name="param_threads" type="integer" value="1" label="Sets the number of threads allowed to be used by the TOPP tool" help="(-threads) "/>
@@ -165,7 +165,7 @@
   </inputs>
   <outputs>
     <data name="param_out" metadata_source="param_in" format="input"/>
-    <data name="param_trafo_out" format="trafoXML"/>
+    <data name="param_trafo_out" format="trafoxml"/>
   </outputs>
   <help>Applies retention time transformations to maps.
 

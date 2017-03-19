@@ -124,10 +124,10 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="mzML" optional="False" label="Input file" help="(-in) "/>
+    <param name="param_in" type="data" format="mzml" optional="False" label="Input file" help="(-in) "/>
     <param name="param_database" type="data" format="" optional="False" label="FASTA file or pro file" help="(-database) Non-existing relative file-names are looked up via'OpenMS.ini:id_db_dir'"/>
     <param name="param_xtandem_executable" type="data" format="text" value="tandem.exe" label="X! Tandem executable of the installation" help="(-xtandem_executable) e.g. 'tandem.exe'"/>
-    <param name="param_default_config_file" type="data" format="mzML" optional="True" value="CHEMISTRY/XTandem_default_input.xml" label="Default parameters input file, defaulting to the ones in the OpenMS/share folder.All parameters of this adapter take precedence over this file! Use it for parameters not available here!" help="(-default_config_file) "/>
+    <param name="param_default_config_file" type="data" format="mzml" optional="True" value="CHEMISTRY/XTandem_default_input.xml" label="Default parameters input file, defaulting to the ones in the OpenMS/share folder.All parameters of this adapter take precedence over this file! Use it for parameters not available here!" help="(-default_config_file) "/>
     <param name="param_ignore_adapter_param" display="radio" type="boolean" truevalue="-ignore_adapter_param" falsevalue="" checked="false" optional="True" label="The config given in 'default_config_file' is used exclusively! No matter what other parameters (apart from -in,-out,-database,-xtandem_executable) are saying" help="(-ignore_adapter_param) "/>
     <param name="param_precursor_mass_tolerance" type="float" value="10.0" label="Precursor mass tolerance" help="(-precursor_mass_tolerance) "/>
     <param name="param_fragment_mass_tolerance" type="float" value="0.3" label="Fragment mass erro" help="(-fragment_mass_tolerance) "/>
@@ -3356,14 +3356,14 @@
       <option value="Asp-N">Asp-N</option>
       <option value="PepsinA">PepsinA</option>
       <option value="Formic_acid">Formic_acid</option>
-      <option value="leukocyte elastase">leukocyte elastase</option>
+      <option value="glutamyl endopeptidase">glutamyl endopeptidase</option>
       <option value="unspecific cleavage">unspecific cleavage</option>
       <option value="TrypChymo">TrypChymo</option>
-      <option value="Trypsin/P">Trypsin/P</option>
-      <option value="V8-E">V8-E</option>
-      <option value="V8-DE">V8-DE</option>
-      <option value="glutamyl endopeptidase">glutamyl endopeptidase</option>
       <option value="2-iodobenzoate">2-iodobenzoate</option>
+      <option value="Trypsin/P">Trypsin/P</option>
+      <option value="V8-DE">V8-DE</option>
+      <option value="V8-E">V8-E</option>
+      <option value="leukocyte elastase">leukocyte elastase</option>
       <option value="Chymotrypsin">Chymotrypsin</option>
       <option value="Asp-N_ambic">Asp-N_ambic</option>
     </param>

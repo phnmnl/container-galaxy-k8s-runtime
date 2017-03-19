@@ -54,7 +54,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="mzML" optional="False" label="input raw data file" help="(-in) "/>
+    <param name="param_in" type="data" format="mzml" optional="False" label="input raw data file" help="(-in) "/>
     <param name="param_threads" type="integer" value="1" label="Sets the number of threads allowed to be used by the TOPP tool" help="(-threads) "/>
     <param name="param_algorithm_frame_length" type="integer" value="11" label="The number of subsequent data points used for smoothing" help="(-frame_length) &lt;br&gt;This number has to be uneven. If it is not, 1 will be added"/>
     <param name="param_algorithm_polynomial_order" type="integer" value="4" label="Order or the polynomial that is fitted" help="(-polynomial_order) "/>
@@ -86,7 +86,7 @@
     </expand>
   </inputs>
   <outputs>
-    <data name="param_out" format="mzML"/>
+    <data name="param_out" format="mzml"/>
   </outputs>
   <help>Removes noise from profile spectra by using a Savitzky Golay filter. Requires uniform (equidistant) data.
 

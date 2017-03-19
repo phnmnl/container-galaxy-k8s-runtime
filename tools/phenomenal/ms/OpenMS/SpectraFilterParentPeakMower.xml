@@ -69,7 +69,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="mzML" optional="False" label="input file" help="(-in) "/>
+    <param name="param_in" type="data" format="mzml" optional="False" label="input file" help="(-in) "/>
     <param name="param_threads" type="integer" value="1" label="Sets the number of threads allowed to be used by the TOPP tool" help="(-threads) "/>
     <param name="param_algorithm_window_size" type="float" value="2.0" label="The size of the m/z window where the peaks are removed, +/- window_size" help="(-window_size) "/>
     <param name="param_algorithm_default_charge" type="integer" value="2" label="If the precursor has no charge set, the default charge is assumed" help="(-default_charge) "/>
@@ -103,7 +103,7 @@
     </expand>
   </inputs>
   <outputs>
-    <data name="param_out" format="mzML"/>
+    <data name="param_out" format="mzml"/>
   </outputs>
   <help>Applies thresholdfilter to peak spectra.
 

@@ -128,7 +128,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="mzML" multiple="true" optional="False" size="30" label="Input files to align (all must have the same file type)" help="(-in) ">
+    <param name="param_in" type="data" format="mzml" multiple="true" optional="False" size="30" label="Input files to align (all must have the same file type)" help="(-in) ">
       <sanitizer>
         <valid initial="string.printable">
           <remove value="'"/>
@@ -210,8 +210,8 @@
     </expand>
   </inputs>
   <outputs>
-    <data name="param_out" format="mzML"/>
-    <data name="param_trafo_out" format="trafoXML"/>
+    <data name="param_out" format="mzml"/>
+    <data name="param_trafo_out" format="trafoxml"/>
   </outputs>
   <help>Corrects retention time distortions between maps by spectrum alignment.
 

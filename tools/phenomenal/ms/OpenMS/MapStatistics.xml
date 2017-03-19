@@ -65,7 +65,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="featureXML,consensusXML" optional="False" label="Input file" help="(-in) "/>
+    <param name="param_in" type="data" format="featurexml,consensusxml" optional="False" label="Input file" help="(-in) "/>
     <param name="param_in_type" display="radio" type="select" optional="True" label="Input file type -- default: determined from file extension or content" help="(-in_type) ">
       <option value="featureXML">featureXML</option>
       <option value="consensusXML">consensusXML</option>
