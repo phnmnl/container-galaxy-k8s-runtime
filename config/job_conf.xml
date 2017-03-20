@@ -212,7 +212,7 @@
             <param id="max_pod_retrials">1</param>
             <param id="docker_enabled">true</param>
         </destination>
-	<destination id="nmrglue-container" runner="k8s">
+        	<destination id="nmrglue-container" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">nmrglue</param>
@@ -228,8 +228,8 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
-	<destination id="container-openms" runner="k8s">
-            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+	   <destination id="container-openms" runner="k8s">
+	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">openms</param>
             <param id="docker_tag_override">latest</param>
@@ -243,6 +243,10 @@
              a tag, a handler or destination that matches that tag will be
              chosen at random.
          -->
+	<tool id="consensusXMLToXcms" destination="camera-container" />
+        <tool id="cameraToFeatureXML" destination="camera-container" />
+        <tool id="featureXMLToCAMERA" destination="camera-container" />
+        <tool id="featureXMLToXcms" destination="camera-container" />
 	<tool id="AdditiveSeries" destination="container-openms"/> 
 	<tool id="BaselineFilter" destination="container-openms"/> 
 	<tool id="CompNovo" destination="container-openms"/> 
@@ -374,8 +378,8 @@
         <tool id="camera-find-adducts" destination="camera-container" />
         <tool id="msnbase-read-msms" destination="msnbase-container" />
         <tool id="map-msms2camera" destination="msnbase-container" />
-        <tool id="msms2metfrag" destination="msnbase-container" />	
-	<tool id="mtbls_nmrglue" destination="nmrglue-container"/>
+        <tool id="msms2metfrag" destination="msnbase-container" />
+        <tool id="mtbls_nmrglue" destination="nmrglue-container"/>
         <tool id="soap_process" destination="soap-nmr-container"/>
         <tool id="soap_opls" destination="soap-nmr-container"/>
 	<tool id="zip-collection" destination="camera-container"/>

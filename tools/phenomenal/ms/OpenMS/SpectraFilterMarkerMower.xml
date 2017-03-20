@@ -45,7 +45,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="mzML" optional="False" label="input file" help="(-in) "/>
+    <param name="param_in" type="data" format="mzml" optional="False" label="input file" help="(-in) "/>
     <param name="param_threads" type="integer" value="1" label="Sets the number of threads allowed to be used by the TOPP tool" help="(-threads) "/>
     <expand macro="advanced_options">
       <param name="param_version" type="text" size="30" value="2.1.0" label="Version of the tool that generated this parameters file" help="(-version) ">
@@ -71,7 +71,7 @@
     </expand>
   </inputs>
   <outputs>
-    <data name="param_out" format="mzML"/>
+    <data name="param_out" format="mzml"/>
   </outputs>
   <help>Applies thresholdfilter to peak spectra.
 

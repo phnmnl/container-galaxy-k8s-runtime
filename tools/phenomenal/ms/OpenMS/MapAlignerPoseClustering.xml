@@ -137,7 +137,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="featureXML,mzML" multiple="true" optional="False" size="30" label="Input files to align (all must have the same file type)" help="(-in) ">
+    <param name="param_in" type="data" format="featurexml,mzml" multiple="true" optional="False" size="30" label="Input files to align (all must have the same file type)" help="(-in) ">
       <sanitizer>
         <valid initial="string.printable">
           <remove value="'"/>
@@ -146,7 +146,7 @@
       </sanitizer>
     </param>
     <param name="param_threads" type="integer" value="1" label="Sets the number of threads allowed to be used by the TOPP tool" help="(-threads) "/>
-    <param name="param_reference_file" type="data" format="featureXML,mzML" optional="True" label="File to use as reference (same file format as input files required)" help="(-file) "/>
+    <param name="param_reference_file" type="data" format="featurexml,mzml" optional="True" label="File to use as reference (same file format as input files required)" help="(-file) "/>
     <param name="param_reference_index" type="integer" min="0" optional="True" value="0" label="Use one of the input files as reference ('1' for the first file, etc.)" help="(-index) &lt;br&gt;If '0', no explicit reference is set - the algorithm will select a reference"/>
     <param name="param_algorithm_max_num_peaks_considered" type="integer" min="-1" optional="True" value="1000" label="The maximal number of peaks/features to be considered per map" help="(-max_num_peaks_considered) To use all, set to '-1'"/>
     <param name="param_algorithm_superimposer_mz_pair_max_distance" type="float" min="0.0" optional="True" value="0.5" label="Maximum of m/z deviation of corresponding elements in different maps" help="(-mz_pair_max_distance)  This condition applies to the pairs considered in hashing"/>
@@ -212,7 +212,7 @@
   </inputs>
   <outputs>
     <data name="param_out" metadata_source="param_in" format="input"/>
-    <data name="param_trafo_out" format="trafoXML"/>
+    <data name="param_trafo_out" format="trafoxml"/>
   </outputs>
   <help>Corrects retention time distortions between maps using a pose clustering approach.
 

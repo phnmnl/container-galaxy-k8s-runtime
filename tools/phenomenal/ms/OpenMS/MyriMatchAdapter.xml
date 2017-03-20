@@ -152,7 +152,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="mzML" optional="False" label="Input file" help="(-in) "/>
+    <param name="param_in" type="data" format="mzml" optional="False" label="Input file" help="(-in) "/>
     <param name="param_precursor_mass_tolerance" type="float" value="1.5" label="Precursor mono mass tolerance" help="(-precursor_mass_tolerance) "/>
     <param name="param_precursor_mass_tolerance_unit" display="radio" type="select" optional="False" value="Da" label="Unit to be used for precursor mass tolerance" help="(-precursor_mass_tolerance_unit) ">
       <option value="Da" selected="true">Da</option>

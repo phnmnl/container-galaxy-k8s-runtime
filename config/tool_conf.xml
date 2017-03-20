@@ -31,7 +31,7 @@
     <tool file="filters/joiner.xml" />
     <tool file="filters/compare.xml" />
     <tool file="stats/grouping.xml" />
-    <tool file="transfer/grouping.xml" />
+    <tool file="phenomenal/transfer/zip-collection.xml"/>
   </section>
   <section id="stats" name="Statistics">
     <tool file="stats/gsummary.xml" />
@@ -55,7 +55,6 @@
   <section name="Transfer" id="metabolomics_transfer">
     <tool file="phenomenal/transfer/metabolights-downloader.xml"/>
     <tool file="phenomenal/transfer/metabolights-labs-uploader.xml"/>
-    <tool file="phenomenal/transfer/zip-collection.xml"/>
   </section>
   <section name="Fluxomics" id="pheno-fluxomics">
     <tool file="phenomenal/fluxomics/ramid/ramid.xml"/>
@@ -190,6 +189,10 @@
 	<tool file="phenomenal/ms/OpenMS/TMTAnalyzer.xml"/> 
 	<tool file="phenomenal/ms/OpenMS/TOFCalibration.xml"/> 
 	<tool file="phenomenal/ms/OpenMS/XTandemAdapter.xml"/> 
+	<tool file="phenomenal/ms/convertCAMERAToOpenMS/cameraToFeatureXML.xml"/> 
+	<tool file="phenomenal/ms/convertCAMERAToOpenMS/consensusXMLToXcms.xml"/> 
+	<tool file="phenomenal/ms/convertCAMERAToOpenMS/featureXMLToCAMERA.xml"/> 
+	<tool file="phenomenal/ms/convertCAMERAToOpenMS/featureXMLToXcms.xml"/> 
   </section>
   <section name="W4M" id="pheno-w4m">
     <tool file="phenomenal/w4m/mtbls-dwnld_config.xml"/>
@@ -202,3 +205,4 @@
     <tool file="phenomenal/postProcessing/metaboliteidconverter.xml"/>
   </section>
 </toolbox>
+>>>>>>> 326a334594c182f677accb529879edb9c3d90c43

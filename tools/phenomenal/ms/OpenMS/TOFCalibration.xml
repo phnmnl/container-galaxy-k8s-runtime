@@ -180,8 +180,8 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="mzML" optional="False" label="input peak or raw data file" help="(-in) "/>
-    <param name="param_ext_calibrants" type="data" format="mzML" optional="False" label="input file containing the external calibrant spectra (peak or raw data)" help="(-ext_calibrants) "/>
+    <param name="param_in" type="data" format="mzml" optional="False" label="input peak or raw data file" help="(-in) "/>
+    <param name="param_ext_calibrants" type="data" format="mzml" optional="False" label="input file containing the external calibrant spectra (peak or raw data)" help="(-ext_calibrants) "/>
     <param name="param_ref_masses" type="data" format="txt" optional="False" label="input file containing reference masses of the external calibrant spectra (one per line)" help="(-ref_masses) "/>
     <param name="param_tof_const" type="data" format="tabular" optional="False" label="File containing TOF conversion constants" help="(-tof_const) These can be either two or three constants &lt;br&gt;per set, depending on the conversion type. Either one set for all calibrant spectra  &lt;br&gt;(tab separated), or one for each spectrum. &lt;br&gt;For a detailed description, please have a look at the doxygen documentation.(one set, tab separated, per line)"/>
     <param name="param_peak_data" display="radio" type="boolean" truevalue="-peak_data" falsevalue="" checked="false" optional="True" label="set this flag, if you have peak data, not raw data (the picking parameters are accessible only from the INI file)" help="(-peak_data) "/>
@@ -251,7 +251,7 @@
     </expand>
   </inputs>
   <outputs>
-    <data name="param_out" format="mzML"/>
+    <data name="param_out" format="mzml"/>
   </outputs>
   <help>Applies time of flight calibration.
 

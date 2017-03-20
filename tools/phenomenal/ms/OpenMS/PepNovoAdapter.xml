@@ -103,7 +103,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="mzML" optional="False" label="input file" help="(-in) "/>
+    <param name="param_in" type="data" format="mzml" optional="False" label="input file" help="(-in) "/>
     <param name="param_pepnovo_executable" type="data" format="text" label="The &quot;PepNovo&quot; executable of the PepNovo installation" help="(-pepnovo_executable) "/>
     <param name="param_model_directory" type="text" size="30" label="Name of the directory where the model files are kept" help="(-model_directory) ">
       <sanitizer>

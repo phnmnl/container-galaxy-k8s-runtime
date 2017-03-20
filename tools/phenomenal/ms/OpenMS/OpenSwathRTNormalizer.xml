@@ -250,7 +250,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="mzML" multiple="true" optional="False" size="30" label="Input files separated by blank" help="(-in) ">
+    <param name="param_in" type="data" format="mzml" multiple="true" optional="False" size="30" label="Input files separated by blank" help="(-in) ">
       <sanitizer>
         <valid initial="string.printable">
           <remove value="'"/>
@@ -258,8 +258,8 @@
         </valid>
       </sanitizer>
     </param>
-    <param name="param_tr" type="data" format="tabular,traML" optional="False" label="transition file with the RT peptides ('TraML' or 'csv')" help="(-tr) "/>
-    <param name="param_rt_norm" type="data" format="trafoXML" optional="True" label="RT normalization file (how to map the RTs of this run to the ones stored in the library)" help="(-rt_norm) "/>
+    <param name="param_tr" type="data" format="tabular,traml" optional="False" label="transition file with the RT peptides ('TraML' or 'csv')" help="(-tr) "/>
+    <param name="param_rt_norm" type="data" format="trafoxml" optional="True" label="RT normalization file (how to map the RTs of this run to the ones stored in the library)" help="(-rt_norm) "/>
     <param name="param_min_rsq" type="float" value="0.95" label="Minimum r-squared of RT peptides regression" help="(-min_rsq) "/>
     <param name="param_min_coverage" type="float" value="0.6" label="Minimum relative amount of RT peptides to keep" help="(-min_coverage) "/>
     <param name="param_estimateBestPeptides" display="radio" type="boolean" truevalue="-estimateBestPeptides" falsevalue="" checked="false" optional="True" label="Whether the algorithms should try to choose the best peptides based on their peak shape for normalization. Use this option you do not expect all your peptides to be detected in a sample and too many 'bad' peptides enter the outlier removal step (" help="(-estimateBestPeptides) e.g. due to them being endogenous peptides or using a less curated list of peptides)"/>
@@ -414,7 +414,7 @@
     </expand>
   </inputs>
   <outputs>
-    <data name="param_out" format="trafoXML"/>
+    <data name="param_out" format="trafoxml"/>
   </outputs>
   <help>This tool will take a description of RT peptides and their normalized retention time to write out a transformation file on how to transform the RT space into the normalized space.
 

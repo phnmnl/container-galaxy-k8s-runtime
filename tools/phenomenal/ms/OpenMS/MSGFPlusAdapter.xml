@@ -136,7 +136,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="mzML" optional="False" label="Input file (MS-GF+ parameter '-s')" help="(-in) "/>
+    <param name="param_in" type="data" format="mzml" optional="False" label="Input file (MS-GF+ parameter '-s')" help="(-in) "/>
     <param name="param_executable" type="data" format="text" value="MSGFPlus.jar" label="MS-GF+ .jar file," help="(-executable) e.g. 'c:\program files\MSGFPlus.jar'"/>
     <param name="param_database" type="data" format="" optional="False" label="Protein sequence database (FASTA file; MS-GF+ parameter '-d')" help="(-database) Non-existing relative filenames are looked up via 'OpenMS.ini:id_db_dir'"/>
     <param name="param_add_decoys" display="radio" type="boolean" truevalue="-add_decoys" falsevalue="" checked="false" optional="True" label="Create decoy proteins (reversed sequences) and append them to the database for the search (MS-GF+ parameter '-tda')" help="(-add_decoys) This allows the calculation of FDRs, but should only be used if the database does not already contain decoys"/>

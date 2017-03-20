@@ -172,7 +172,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="mzML" optional="False" label="input file in mzML format." help="(-in) "/>
+    <param name="param_in" type="data" format="mzml" optional="False" label="input file in mzML format." help="(-in) "/>
     <param name="param_threads" type="integer" value="1" label="Sets the number of threads allowed to be used by the TOPP tool" help="(-threads) "/>
     <param name="param_Mascot_parameters_database" type="text" size="30" value="MSDB" label="Name of the sequence database" help="(-database) ">
       <sanitizer>

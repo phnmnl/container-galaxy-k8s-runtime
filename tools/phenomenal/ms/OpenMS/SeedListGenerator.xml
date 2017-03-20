@@ -56,7 +56,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="featureXML,consensusXML,mzML" optional="False" label="Input file (see below for details)" help="(-in) "/>
+    <param name="param_in" type="data" format="featurexml,consensusxml,mzml" optional="False" label="Input file (see below for details)" help="(-in) "/>
     <param name="param_use_peptide_mass" display="radio" type="boolean" truevalue="-use_peptide_mass" falsevalue="" checked="false" optional="True" label="[idXML input only] Use the monoisotopic mass of the best peptide hit for the m/z position (default: use precursor m/z)" help="(-use_peptide_mass) "/>
     <param name="param_threads" type="integer" value="1" label="Sets the number of threads allowed to be used by the TOPP tool" help="(-threads) "/>
     <expand macro="advanced_options">
@@ -83,7 +83,7 @@
     </expand>
   </inputs>
   <outputs>
-    <data name="param_out" format="featureXML"/>
+    <data name="param_out" format="featurexml"/>
   </outputs>
   <help>Generates seed lists for feature detection.
 
