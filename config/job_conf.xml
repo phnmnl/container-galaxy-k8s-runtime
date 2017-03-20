@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0"?>
 <!-- A sample job config for sketching the k8s use case with shared fs -->
 <job_conf>
