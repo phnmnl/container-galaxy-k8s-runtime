@@ -378,5 +378,6 @@
 	<tool id="mtbls_nmrglue" destination="nmrglue-container"/>
         <tool id="soap_process" destination="soap-nmr-container"/>
         <tool id="soap_opls" destination="soap-nmr-container"/>
+	<tool id="zip-collection" destination="camera-container"/>
     </tools>
 </job_conf>

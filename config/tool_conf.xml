@@ -31,6 +31,7 @@
     <tool file="filters/joiner.xml" />
     <tool file="filters/compare.xml" />
     <tool file="stats/grouping.xml" />
+    <tool file="transfer/grouping.xml" />
   </section>
   <section id="stats" name="Statistics">
     <tool file="stats/gsummary.xml" />
@@ -54,6 +55,7 @@
   <section name="Transfer" id="metabolomics_transfer">
     <tool file="phenomenal/transfer/metabolights-downloader.xml"/>
     <tool file="phenomenal/transfer/metabolights-labs-uploader.xml"/>
+    <tool file="phenomenal/transfer/zip-collection.xml"/>
   </section>
   <section name="Fluxomics" id="pheno-fluxomics">
     <tool file="phenomenal/fluxomics/ramid/ramid.xml"/>
