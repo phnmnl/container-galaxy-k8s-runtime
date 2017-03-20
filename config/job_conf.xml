@@ -116,8 +116,8 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
-	<destination id="nmrglue-container" runner="k8s">
-	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+        <destination id="nmrglue-container" runner="k8s">
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">nmrglue</param>
             <param id="docker_tag_override">latest</param>
@@ -227,7 +227,7 @@
         <tool id="lcmsmatching" destination="w4m-lcmsmatching-container"/>
         <tool id="msconvert2" destination="msconvert2-container"/>
         <tool id="nmrmlconv" destination="nmrmlconv-container"/>
-	<tool id="mtbls_nmrglue" destination="nmrmlglue-container"/>
+	<tool id="mtbls2nmrglue" destination="nmrglue-container"/>
 	<tool id="soap_process" destination="soap-nmr-container"/>
 	<tool id="soap_opls" destination="soap-nmr-container"/>
 	<tool id="save_chromatogram" destination="xcms-container"/>

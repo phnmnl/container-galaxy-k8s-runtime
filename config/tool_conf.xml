@@ -68,7 +68,7 @@
     <tool file="phenomenal/nmr/nmrmlconv.xml"/>
     <tool file="phenomenal/nmr/metabomatching.xml"/>
     <tool file="phenomenal/nmr/nmrml2isa/nmrml2isa.xml"/>
-    <tool file="phenomenal/nmr/mtbls_nmrglue.xml"/>
+    <tool file="phenomenal/nmr/mtbls2nmrglue.xml"/>
     <tool file="phenomenal/nmr/soap_process.xml"/>
     <tool file="phenomenal/nmr/soap_opls.xml"/>
   </section>
