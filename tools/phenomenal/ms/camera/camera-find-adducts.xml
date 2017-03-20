@@ -4,7 +4,7 @@
 <tool id="camera-find-adducts" name="camera-find-adducts" version="0.1">
   <description></description>
   <command><![CDATA[
-	/usr/local/bin/findAdducts.r input=$input output=$output ppm=$ppm polarity=$polarity;
+	/usr/local/bin/findAdducts.r input=$input output=$output ppm=$ppm polarity=$polarity output.pdf=$output_pdf;
   ]]>
   </command>
   <inputs>
@@ -17,6 +17,7 @@
   </inputs>
   <outputs>
     <data name="output" type="data" format="txt" label="camera-find-adducts data" />
+    <data name="output_pdf" type="data" format="pdf" label="camera-find-adducts plot" />
   </outputs>
   <help>.</help>
 </tool>
