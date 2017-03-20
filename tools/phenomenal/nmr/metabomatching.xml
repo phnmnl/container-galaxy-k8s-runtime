@@ -35,8 +35,8 @@ Parameters
 
 Test Files
 	| The following two files can be downloaded from GitHub, then uploaded via *Get Data* to run metabomatching on test data.
-	| association statistics file: https://github.com/rrueedi/metabomatching-pre/blob/master/test/ps.test.multi/test.pseudospectrum.tsv
-	| parameters file: https://github.com/rrueedi/metabomatching-pre/blob/master/test/parameters.gxy.1.tsv
+	| association statistics file: https://github.com/rrueedi/metabomatching/blob/master/test/ps.test.multi/test.pseudospectrum.tsv
+	| parameters file: https://github.com/rrueedi/metabomatching/blob/master/test/parameters.gxy.1.tsv
 	
 ------------
 Output Files
