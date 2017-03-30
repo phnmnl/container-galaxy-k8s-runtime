@@ -4,7 +4,7 @@
 <tool id="camera-find-adducts" name="camera-find-adducts" version="0.1">
   <description></description>
   <command><![CDATA[
-	/usr/local/bin/findAdducts.r input=$input output=$output ppm=$ppm polarity=$polarity output.pdf=$output_pdf;
+	/usr/local/bin/findAdducts.r input=$input output=$output ppm=$ppm polarity=$polarity output.pdf=$output_pdf plotpdf=$plotpdf;
   ]]>
   </command>
   <inputs>
@@ -13,6 +13,10 @@
     <param name="polarity" type="select" value="positive" label="Polarity" help="">
       <option value="positive" selected="True">positive</option>
       <option value="negative" selected="False">negative</option>
+    </param>
+    <param name="plotpdf" type="select" value="false" label="plotpdf" help="">
+      <option value="true" selected="False">True</option>
+      <option value="false" selected="True">False</option>
     </param>	
   </inputs>
   <outputs>

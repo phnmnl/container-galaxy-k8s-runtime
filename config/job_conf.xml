@@ -128,7 +128,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">xcms</param>
-            <param id="docker_tag_override">v1.50.1_cv0.4.37</param>
+            <param id="docker_tag_override">latest</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -247,6 +247,7 @@
         <tool id="cameraToFeatureXML" destination="camera-container" />
         <tool id="featureXMLToCAMERA" destination="camera-container" />
         <tool id="featureXMLToXcms" destination="camera-container" />
+		<tool id="xcmssplit" destination="xcms-container" />
 	<tool id="AdditiveSeries" destination="container-openms"/> 
 	<tool id="BaselineFilter" destination="container-openms"/> 
 	<tool id="CompNovo" destination="container-openms"/> 

@@ -83,6 +83,7 @@
     <tool file="phenomenal/ms/metfrag.xml"/>
     <tool file="phenomenal/ms/ms-vfetc.xml"/>     
     <tool file="phenomenal/ms/xcms/xcms-find-peaks.xml"/>
+	<tool file="phenomenal/ms/xcms/xcms-split-peaks.xml"/>
     <tool file="phenomenal/ms/xcms/xcms-collect-peaks.xml"/>
     <tool file="phenomenal/ms/xcms/xcms-group-peaks.xml"/>
     <tool file="phenomenal/ms/xcms/xcms-correct-rt.xml"/>
