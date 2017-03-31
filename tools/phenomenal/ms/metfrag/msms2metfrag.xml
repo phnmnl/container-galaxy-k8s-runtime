@@ -25,7 +25,7 @@
     </param>
   </inputs>
   <outputs>
-    <collection type="list" label="MetFrag Parameters" format="txt" name="spectrum" >
+    <collection type="list" label="MetFrag Parameters" format="txt" name="MetFrag Parameters" >
         <discover_datasets pattern="__designation_and_ext__" directory="outputfolder" />
     </collection>
   </outputs>
