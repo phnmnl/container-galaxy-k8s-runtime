@@ -14,7 +14,7 @@ RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transpo
     pip install --upgrade pip && \
     apt-get purge -y software-properties-common && \
     apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-RUN git clone --depth 1 --single-branch --branch feature/allfeats_no_interpreter_removal https://github.com/phnmnl/galaxy.git
+RUN git clone --depth 1 --single-branch --branch feature/k8s_supplementalGroup_support https://github.com/phnmnl/galaxy.git
 WORKDIR galaxy
 RUN echo "-e git+https://github.com/pcm32/pykube.git@feature/allMergedFeatures#egg=pykube" >> requirements.txt
 COPY config/galaxy.ini config/galaxy.ini
