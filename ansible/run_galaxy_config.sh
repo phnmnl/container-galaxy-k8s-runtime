@@ -23,6 +23,18 @@ sudo apt-get update -y && sudo apt-get install -y --no-install-recommends ansibl
 ansible-playbook -i "localhost," -c local ansible/set-galaxy-config-values.yaml
 log "Playbook for galaxy config run."
 
+if [ ! -z $SUPP_GROUPS ]
+  mv config/job_conf.xml config/job_conf.xml.original
+  sed s/\"k8s_supplemental_group_id\"\>0/\"k8s_supplemental_group_id\"\>$SUPP_GROUPS/ config/job_conf.xml.original > config/job_conf.xml
+  log "Changed supplemental group id from 0 to $SUPP_GROUPS on job_conf.xml"
+fi
+
+if [ ! -z $GALAXY_PVC ]
+  mv config/job_conf.xml config/job_conf.xml.original
+  sed s/k8s_persistent_volume_claim_name\"\>.*\</k8s_persistent_volume_claim_name\"\>$GALAXY_PVC\</ config/job_conf.xml.original > config/job_conf.xml
+  log "Set PersistentVolumeClaim to use with Galaxy to $GALAXY_PVC on job_conf.xml"
+fi
+
 # if admin email, api and password env variables are set, then start galaxy, run user creation and stop galaxy
 if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GALAXY_API_KEY ]; then
   # ini file will be set already at this point with these variables, we only need to start galaxy
