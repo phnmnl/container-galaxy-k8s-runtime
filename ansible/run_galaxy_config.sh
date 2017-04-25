@@ -47,6 +47,13 @@ if [ ! -z $GALAXY_PVC ]; then
   log "Set PersistentVolumeClaim to use with Galaxy to $GALAXY_PVC on job_conf.xml"
 fi
 
+if [ ! -z $GALAXY_TOOLS_PULL_POLICY ]; then
+  mv config/job_conf.xml config/job_conf.xml.original
+  sed s/k8s_pull_policy\"\>.*\</k8s_pull_policy\"\>$GALAXY_TOOLS_PULL_POLICY\</ config/job_conf.xml.original > config/job_conf.xml
+  log "Set k8s pull policy to use with Galaxy to $GALAXY_TOOLS_PULL_POLICY on job_conf.xml"
+fi
+
+
 # if admin email, api and password env variables are set, then start galaxy, run user creation and stop galaxy
 if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GALAXY_API_KEY ]; then
   # ini file will be set already at this point with these variables, we only need to start galaxy
