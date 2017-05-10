@@ -30,25 +30,25 @@ ansible-playbook -i "localhost," -c local ansible/set-galaxy-config-values.yaml
 log "Playbook for galaxy config run."
 
 if [ ! -z $SUPP_GROUPS ]; then
-  mv config/job_conf.xml config/job_conf.xml.original
+  cp config/job_conf.xml config/job_conf.xml.original
   sed s/\"k8s_supplemental_group_id\"\>0/\"k8s_supplemental_group_id\"\>$SUPP_GROUPS/ config/job_conf.xml.original > config/job_conf.xml
   log "Changed supplemental group id from 0 to $SUPP_GROUPS on job_conf.xml"
 fi
 
 if [ ! -z $FS_GROUP ]; then
-  mv config/job_conf.xml config/job_conf.xml.original
+  cp config/job_conf.xml config/job_conf.xml.original
   sed s/\"k8s_fs_group_id\"\>0/\"k8s_fs_group_id\"\>$FS_GROUP/ config/job_conf.xml.original > config/job_conf.xml
   log "Changed fs group id from 0 to $FS_GROUP on job_conf.xml"
 fi
 
 if [ ! -z $GALAXY_PVC ]; then
-  mv config/job_conf.xml config/job_conf.xml.original
+  cp config/job_conf.xml config/job_conf.xml.original
   sed s/k8s_persistent_volume_claim_name\"\>.*\</k8s_persistent_volume_claim_name\"\>$GALAXY_PVC\</ config/job_conf.xml.original > config/job_conf.xml
   log "Set PersistentVolumeClaim to use with Galaxy to $GALAXY_PVC on job_conf.xml"
 fi
 
 if [ ! -z $GALAXY_TOOLS_PULL_POLICY ]; then
-  mv config/job_conf.xml config/job_conf.xml.original
+  cp config/job_conf.xml config/job_conf.xml.original
   sed s/k8s_pull_policy\"\>.*\</k8s_pull_policy\"\>$GALAXY_TOOLS_PULL_POLICY\</ config/job_conf.xml.original > config/job_conf.xml
   log "Set k8s pull policy to use with Galaxy to $GALAXY_TOOLS_PULL_POLICY on job_conf.xml"
 fi
