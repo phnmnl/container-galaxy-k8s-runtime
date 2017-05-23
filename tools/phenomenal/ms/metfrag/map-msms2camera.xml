@@ -2,7 +2,7 @@
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
 <!--Proposed Tool Section: [PhenoMeNal]-->
 <tool id="map-msms2camera" name="map-msms2camera" version="0.1">
-  <description></description>
+  <description>Map MS/MS spectra to CAMERA annotaions by retention time and m/z information.</description>
   <command><![CDATA[
 	/usr/local/bin/mapMS2ToCamera.r inputCAMERA=$inputCAMERA inputMS2=$inputMS2 output=$output ppm=$ppm RT=$RT;
   ]]>

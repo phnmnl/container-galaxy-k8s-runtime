@@ -2,7 +2,7 @@
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
 <!--Proposed Tool Section: [PhenoMeNal]-->
 <tool id="xcms-fill-peaks" name="xcms-fill-peaks" version="0.1">
-  <description></description>
+  <description>For each sample, identify peak groups where that sample is not represented. For each of those peak groups, integrate the signal in the region of that peak group and create a new peak.</description>
   <command><![CDATA[
 	/usr/local/bin/fillPeaks.r input=$input output=$output;
   ]]>

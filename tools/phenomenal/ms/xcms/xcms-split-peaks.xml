@@ -2,13 +2,13 @@
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
 <!--Proposed Tool Section: [PhenoMeNal]-->
 <tool id="xcmssplit" name="xcmssplit" version="0.1">
-  <description></description>
+  <description>Split xcmsSet collection into several objects used for further processing.</description>
       <requirements>
     <container type="docker">phnmnl/xcms</container>
     </requirements>
   <command><![CDATA[
-  mkdir xcmsobjects;
-		/usr/local/bin/xcmssplitter.r input=$input output=xcmsobjects;
+ 	mkdir xcmsobjects;
+	/usr/local/bin/xcmssplitter.r input=$input output=xcmsobjects;
   ]]>
   </command>
   <inputs>

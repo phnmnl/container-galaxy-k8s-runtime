@@ -2,7 +2,7 @@
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
 <!--Proposed Tool Section: [PhenoMeNal]-->
 <tool id="msms2metfrag" name="msms2metfrag" version="0.1">
-  <description></description>
+  <description>Generate MetFrag parameters given MS/MS spectral information and CAMERA adduct annotation.</description>
   <command><![CDATA[
 	mkdir outputfolder;
 	/usr/local/bin/MS2ToMetFrag.r inputCAMERA=$inputCAMERA inputMS2=$inputMS2 output=outputfolder precursorppm=$precursorppm fragmentppm=$fragmentppm fragmentabs=$fragmentabs database=$database maxSpectra=$maxSpectra minPeaks=$minPeaks maxPrecursorMass=$maxPrecursorMass minPrecursorMass=$minPrecursorMass;

@@ -2,7 +2,9 @@
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
 <!--Proposed Tool Section: [PhenoMeNal]-->
 <tool id="camera-group-fwhm" name="camera-group-fwhm" version="0.1">
-  <description></description>
+  <description>Group peaks of a xsAnnotate object according to there retention
+     time into pseudospectra-groups. Uses the peak FWHMs as grouping
+     borders.</description>
   <command><![CDATA[
 	/usr/local/bin/groupFWHM.r input=$input output=$output sigma=$sigma perfwhm=$perfwhm intval=$intval;  
   ]]>

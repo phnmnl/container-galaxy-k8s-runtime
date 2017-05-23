@@ -2,7 +2,7 @@
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
 <!--Proposed Tool Section: [PhenoMeNal]-->
 <tool id="msnbase-read-msms" name="msnbase-read-msms" version="0.1">
-  <description></description>
+  <description>Read MS/MS spectra from mzML file(s).</description>
   <command><![CDATA[
 	/usr/local/bin/readMS2MSnBase.r input=$input output=$output;
   ]]>

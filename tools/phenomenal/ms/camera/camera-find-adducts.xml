@@ -2,7 +2,7 @@
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
 <!--Proposed Tool Section: [PhenoMeNal]-->
 <tool id="camera-find-adducts" name="camera-find-adducts" version="0.1">
-  <description></description>
+  <description>Perform precursor adduct annotation using CAMERA.</description>
   <command><![CDATA[
 	/usr/local/bin/findAdducts.r input=$input output=$output ppm=$ppm polarity=$polarity output.pdf=$output_pdf plotpdf=$plotpdf;
   ]]>

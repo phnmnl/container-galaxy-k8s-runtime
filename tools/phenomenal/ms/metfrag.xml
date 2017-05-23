@@ -5,7 +5,7 @@
   <requirements>
         <container type="docker">phnmnl/metfrag-cli</container>
   </requirements>
-  <description>MetFrag.</description>
+  <description>Run a single MetFrag query given a MS/MS peak list and the precursor m/z or molecular formula.</description>
   <command><![CDATA[
         java -jar /usr/local/bin/MetFragCLI.jar PeakListPath=$infile MetFragDatabaseType=$MetFragDatabaseType IonizedPrecursorMass=$IonizedPrecursorMass DatabaseSearchRelativeMassDeviation=$DatabaseSearchRelativeMassDeviation FragmentPeakMatchAbsoluteMassDeviation=$FragmentPeakMatchAbsoluteMassDeviation FragmentPeakMatchRelativeMassDeviation=$FragmentPeakMatchRelativeMassDeviation PrecursorIonMode=$PrecursorIonMode IsPositiveIonMode=$IsPositiveIonMode MetFragScoreTypes=FragmenterScore MetFragScoreWeights=$MetFragScoreWeights MetFragCandidateWriter=CSV SampleName=Galaxy ResultsPath=/tmp MaximumTreeDepth=$MaximumTreeDepth MetFragPreProcessingCandidateFilter=UnconnectedCompoundFilter;
         if [ $? -eq 0 ]; then cat /tmp/Galaxy.csv > $outfile; else exit 1; fi;

@@ -2,7 +2,7 @@
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
 <!--Proposed Tool Section: [PhenoMeNal]-->
 <tool id="camera-find-isotopes" name="camera-find-isotopes" version="0.1">
-  <description></description>
+  <description>Perform isotope annotation using CAMERA.</description>
   <command><![CDATA[
 	/usr/local/bin/findIsotopes.r input=$input output=$output maxcharge=$maxcharge;
   ]]>
