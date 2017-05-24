@@ -8,7 +8,7 @@
 -->
   <description>Plot post-processed NMRglue data.</description>
   <command><![CDATA[
-    soap_opls.r $infile $outfile 2>&1;
+    soap_opls.r $infile $outfile 2>&1
   ]]></command>
   <inputs>
     <param name="infile" type="data" format="csv" optional="False" label="Dataset matrix of NMRglue post-processed data." />

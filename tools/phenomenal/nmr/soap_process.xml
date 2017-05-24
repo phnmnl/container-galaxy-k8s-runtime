@@ -8,7 +8,7 @@
 -->
   <description>Post-processes NMRglue data.</description>
   <command><![CDATA[
-    soap_process.r $spectrafile $ppmfile $fidfile $outfile 2>&1;
+    soap_process.r $spectrafile $ppmfile $fidfile $outfile 2>&1
   ]]></command>
   <inputs>
     <param name="spectrafile" type="data" format="csv" optional="False" label="Input NMR spectra CSV file." />

@@ -10,6 +10,9 @@
      google_analytics_code: "{{ lookup('env','GOOGLE_ANALYTICS_CODE') }}"
      galaxy_admin_email: "{{ lookup('env','GALAXY_ADMIN_EMAIL') }}"
      galaxy_api_key: "{{ lookup('env','GALAXY_API_KEY') }}"
+     galaxy_dir: "/galaxy"
+     target_dir_tools: "{{ lookup('env','TOOLS_DEST_PVC') }}"
+     default_dir_tools: "{{ galaxy_dir }}/tools"
      
   tasks:
   - name: set database postgres connection properties 
@@ -43,5 +46,31 @@
         option: master_api_key
         value: "{{ galaxy_api_key }}"
     when: galaxy_api_key != ""
+
+  - name: create target dir for tools
+    file:
+       path: "{{ target_dir_tools }}"
+       state: directory
+       mode: 0755
+    when: target_dir_tools != ""
+
+  - name: delete exiting tools in tools specified location
+    shell: rm -rf {{ target_dir_tools }}/tools
+    when: target_dir_tools != ""
+
+  - name: copy tools to specified location, probably inside PVC.
+    shell: cp -r {{ default_dir_tools }} {{ target_dir_tools }}
+    when: target_dir_tools != ""
+
+  - name: change tools dir on ini file
+    ini_file:
+        dest: /galaxy/config/galaxy.ini
+        section: "app:main"
+        option: tool_path
+        value: "{{ target_dir_tools }}/tools"
+    when: target_dir_tools != ""
+
+
+
 
 

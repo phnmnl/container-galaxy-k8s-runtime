@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Statistics]-->
+<tool id="mtbls2nmrglue" name="mtbls2nmrglue" version="1.0">
+<!--
+  <requirements>
+    <container type="docker">phnmnl/nmrglue</container>
+  </requirements>
+-->
+  <description>Pre-processes NMR data.</description>
+  <command><![CDATA[
+    wget -O /data/${study}.zip "https://www.ebi.ac.uk/metabolights/${study}/files/${study}";
+    mtbls_nmrglue.py ${study} ${spectrafile} ${ppmfile} ${fidfile} 2>&1;
+  ]]></command>
+  <inputs>
+    <param name="study" type="text" value="MTBLS1" label="MTBLS study" />
+  </inputs>
+  <outputs>
+    <data name="spectrafile" format="csv" label="Output NMR spectra CSV file." />
+    <data name="ppmfile" format="csv" label="Output NMR PPM CSV file." />
+    <data name="fidfile" format="csv" label="Output NMR FID CSV file." />
+  </outputs>
+  <help>Pre-processes NMRglue data.</help>
+</tool>
+
