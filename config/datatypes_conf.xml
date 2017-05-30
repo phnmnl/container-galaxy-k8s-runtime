@@ -614,6 +614,10 @@
     <datatype extension="rdata.xcms.retcor" type="galaxy.datatypes.rdata_xcms_datatype:RdataXcmsRetcor" mimetype="application/x-gzip" subclass="true" display_in_upload="true" />
     <datatype extension="rdata.xcms.fillpeaks" type="galaxy.datatypes.rdata_xcms_datatype:RdataXcmsFillpeaks" mimetype="application/x-gzip" subclass="true" display_in_upload="true" />
 
+    <datatype extension="rdata.camera.positive" type="galaxy.datatypes.rdata_camera_datatype:RdataCameraPositive" mimetype="application/x-gzip" subclass="true" display_in_upload="true" />
+    <datatype extension="rdata.camera.negative" type="galaxy.datatypes.rdata_camera_datatype:RdataCameraNegative" mimetype="application/x-gzip" subclass="true" display_in_upload="true" />
+    <datatype extension="rdata.camera.quick" type="galaxy.datatypes.rdata_camera_datatype:RdataCameraQuick" mimetype="application/x-gzip" subclass="true" display_in_upload="true" />
+
   </registration>
   <sniffers>
     <!--
