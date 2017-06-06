@@ -5,7 +5,7 @@
   <description>Generate MetFrag parameters given MS/MS spectral information and CAMERA adduct annotation.</description>
   <command><![CDATA[
 	mkdir outputfolder;
-	/usr/local/bin/MS2ToMetFrag.r inputCAMERA=$inputCAMERA inputMS2=$inputMS2 output=outputfolder precursorppm=$precursorppm fragmentppm=$fragmentppm fragmentabs=$fragmentabs database=$database maxSpectra=$maxSpectra minPeaks=$minPeaks maxPrecursorMass=$maxPrecursorMass minPrecursorMass=$minPrecursorMass;
+	/usr/local/bin/MS2ToMetFrag.r inputCAMERA=$inputCAMERA inputMS2=$inputMS2 output=outputfolder precursorppm=$precursorppm fragmentppm=$fragmentppm fragmentabs=$fragmentabs database=$database maxSpectra=$maxSpectra minPeaks=$minPeaks maxPrecursorMass=$maxPrecursorMass minPrecursorMass=$minPrecursorMass mode=$mode;
   ]]>
   </command>
   <inputs>
@@ -18,6 +18,10 @@
     <param name="maxSpectra" type="text" format="txt" value="" optional="True" label="Maximum number spectra" />
     <param name="maxPrecursorMass" type="text" format="txt" value="" optional="True" label="Maximal precursor mass" />
     <param name="minPrecursorMass" type="text" format="txt" value="" optional="True" label="Minimal precursor mass" />
+    <param name="mode" type="select" value="pos" optional="False" label="Mode" help="Charge mode of measurement.">
+      <option value="pos" selected="True">pos</option>
+      <option value="neg" selected="False">neg</option>
+    </param>
     <param name="database" type="select" value="KEGG" optional="False" label="Database" help="Database to which queries are sent.">
       <option value="KEGG" selected="True">KEGG</option>
       <option value="PubChem" selected="False">PubChem</option>
