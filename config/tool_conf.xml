@@ -92,5 +92,6 @@
   </section>
   <section name="ISA tools" id="data-transform">
     <tool file="phenomenal/isatools/factors_summary.xml"/>
+    <tool file="phenomenal/isatools/isatab_validator.xml"/>
   </section>
 </toolbox>
