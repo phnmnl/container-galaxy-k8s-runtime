@@ -90,4 +90,7 @@
   <section name="Post-Processing" id="pheno-postprocessing">
     <tool file="phenomenal/postProcessing/metaboliteidconverter.xml"/>
   </section>
+  <section name="ISA tools" id="data-transform">
+    <tool file="phenomenal/isatools/factors_summary.xml"/>
+  </section>
 </toolbox>
