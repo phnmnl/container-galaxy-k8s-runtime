@@ -37,46 +37,55 @@
     <tool file="filters/uniq.xml" />
   </section>
   <section id="plots" name="Graph/Display Data">
-	  <tool file="plotting/boxplot.xml" />
+    <tool file="plotting/boxplot.xml" />
   </section>
   <label id="phenomenal" text="PhenoMeNal H2020 Tools" />
+  <!--
   <section name="Uppsala Workshop" id="uppsala">
-	  <tool file="phenomenal/uppsala/BlankFilter/BlankFilter.xml"/>
-	  <tool file="phenomenal/uppsala/BatchFeatureRemoval/BatchFeatureRemoval.xml"/>
-          <tool file="phenomenal/uppsala/log2transformation/log2transformation.xml"/>
-          <tool file="phenomenal/uppsala/splitter/splitter.xml"/>
-          <tool file="phenomenal/uppsala/CV/CV.xml"/>
-            <tool file="uppsala/Merger/Merger.xml"/>
-            <tool file="uppsala/FeatureSelection/FeatureSelection.xml"/>
-    </section>
-    <section name="Transfer" id="metabolomics_transfer">
-	    <tool file="phenomenal/transfer/metabolights-downloader.xml"/>
-	    <tool file="phenomenal/transfer/metabolights-labs-uploader.xml"/>
-    </section>
+    <tool file="phenomenal/uppsala/BlankFilter/BlankFilter.xml"/>
+    <tool file="phenomenal/uppsala/BatchFeatureRemoval/BatchFeatureRemoval.xml"/>
+    <tool file="phenomenal/uppsala/log2transformation/log2transformation.xml"/>
+    <tool file="phenomenal/uppsala/splitter/splitter.xml"/>
+    <tool file="phenomenal/uppsala/CV/CV.xml"/>
+    <tool file="uppsala/Merger/Merger.xml"/>
+    <tool file="uppsala/FeatureSelection/FeatureSelection.xml"/>
+  </section>
+  -->
+  <section name="Transfer" id="metabolomics_transfer">
+    <tool file="phenomenal/transfer/metabolights-downloader.xml"/>
+    <tool file="phenomenal/transfer/metabolights-labs-uploader.xml"/>
+  </section>
   <section name="Fluxomics" id="pheno-fluxomics">
-    <tool file="phenomenal/fluxomics/iso2flux/iso2flux.xml"/>
+    <tool file="phenomenal/fluxomics/ramid/ramid.xml"/>
     <tool file="phenomenal/fluxomics/midcor/midcor.xml"/>
+    <tool file="phenomenal/fluxomics/iso2flux/iso2flux.xml"/>
     <tool file="phenomenal/fluxomics/isodyn/isodyn.xml"/>
   </section>
   <section name="NMR" id="pheno-nmr">
-	  <tool file="phenomenal/nmr/batman.xml"/>
-	  <tool file="phenomenal/nmr/npc2batman.xml"/>
-    <tool file="phenomenal/nmr/npc-nmr.xml"/>
-	  <tool file="phenomenal/nmr/nmrmlconv.xml"/>
-	  <tool file="phenomenal/nmr/metabomatching-pre.xml"/>
+    <tool file="phenomenal/nmr/batman.xml"/>
+    <tool file="phenomenal/nmr/nmrmlconv.xml"/>
+    <tool file="phenomenal/nmr/metabomatching.xml"/>
+    <tool file="phenomenal/nmr/nmrml2isa/nmrml2isa.xml"/>
+    <tool file="phenomenal/nmr/mtbls2nmrglue.xml"/>
+    <tool file="phenomenal/nmr/soap_process.xml"/>
+    <tool file="phenomenal/nmr/soap_opls.xml"/>
   </section>
   <section name="MS" id="pheno-ms">
-	  <tool file="phenomenal/ms/msconvert2.xml"/>
-	  <tool file="phenomenal/ms/show_chromatogram.xml"/>
-	  <tool file="phenomenal/ms/mzml2isa/mzml2isa.xml"/>
-          <tool file="phenomenal/ms/metfrag.xml"/>
+    <!-- 
+    <tool file="phenomenal/ms/msconvert2.xml"/>
+    -->
+    <tool file="phenomenal/ms/save_chromatogram.xml"/>
+    <tool file="phenomenal/ms/show_chromatogram.xml"/>
+    <tool file="phenomenal/ms/mzml2isa/mzml2isa.xml"/>
+    <tool file="phenomenal/ms/metfrag.xml"/>
+    <tool file="phenomenal/ms/ms-vfetc.xml"/>     
   </section>
   <section name="W4M" id="pheno-w4m">
-	  <tool file="phenomenal/w4m/mtbls-dwnld_config.xml"/>
-	  <tool file="phenomenal/w4m/univariate_config.xml"/>
-	  <tool file="phenomenal/w4m/multivariate_config.xml"/>
-	  <tool file="phenomenal/w4m/biosigner_config.xml"/>
-	  <tool file="phenomenal/w4m/lcmsmatching_config.xml"/>
+    <tool file="phenomenal/w4m/mtbls-dwnld_config.xml"/>
+    <tool file="phenomenal/w4m/univariate_config.xml"/>
+    <tool file="phenomenal/w4m/multivariate_config.xml"/>
+    <tool file="phenomenal/w4m/biosigner_config.xml"/>
+    <tool file="phenomenal/w4m/lcmsmatching_config.xml"/>
   </section>
   <section name="Post-Processing" id="pheno-postprocessing">
     <tool file="phenomenal/postProcessing/metaboliteidconverter.xml"/>
