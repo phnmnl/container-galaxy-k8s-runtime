@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="camera-group-fwhm" name="camera-group-fwhm" version="0.1">
+  <description>Group peaks of a xsAnnotate object according to there retention
+     time into pseudospectra-groups. Uses the peak FWHMs as grouping
+     borders.</description>
+  <command><![CDATA[
+	/usr/local/bin/groupFWHM.r input=$input output=$output sigma=$sigma perfwhm=$perfwhm intval=$intval;  
+  ]]>
+  </command>
+  <inputs>
+    <param name="input" type="data" format="txt" optional="False" label="Input RData file" />
+    <param name="sigma" type="text" value="8"  label="Sigma" help="" />
+    <param name="perfwhm" type="text" value="0.6"  label="perFWHM" help="" />
+    <param name="intval" type="select" value="maxo" label="intval" help="">
+      <option value="into" selected="False">into</option>
+      <option value="maxo" selected="True">maxo</option>
+      <option value="intb" selected="False">intb</option>
+    </param>
+  </inputs>
+  <outputs>
+    <data name="output" type="data" format="txt" label="camera-group-fwhm data" />
+  </outputs>
+  <help>.</help>
+</tool>

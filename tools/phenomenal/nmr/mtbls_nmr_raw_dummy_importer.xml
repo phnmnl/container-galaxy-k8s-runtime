@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [File Handling]-->
+<tool id="mtbls_nmr_raw_dummy_importer" name="mtbls_nmr_raw_dummy_importer" version="0.1">
+<!--
+  <requirements>
+        <container type="docker">phnmnl/nmrmlconv</container>
+  </requirements>
+-->
+  <description>Imports RAW data for further conversion with nmrmlconv.</description>
+  <command><![CDATA[
+    mkdir -p /data/MTBLS1;
+    wget -O /data/MTBLS1.zip 'https://www.ebi.ac.uk/metabolights/MTBLS1/files/MTBLS1';
+    unzip -q -d /data/MTBLS1 /data/MTBLS1.zip;
+    mkdir -p outfolder;
+    mv /data/MTBLS1/*.zip outfolder/;
+  ]]>
+  </command>
+  <outputs>
+    <collection type="list" label="NMR RAW" format="zip" name="nmr_raw" >
+      <discover_datasets pattern="__designation_and_ext__" directory="outfolder" />
+    </collection>
+  </outputs>
+  <help>
+nmrML is an open mark-up language for NMR data. This tool converts RAW vendor NMR data to nmrML format.
+  </help>
+</tool>
+

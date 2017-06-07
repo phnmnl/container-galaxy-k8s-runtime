@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="metfrag-cli-batch" name="metfrag-cli-batch" version="0.1">
+  <requirements>
+        <container type="docker">phnmnl/metfrag-cli-batch</container>
+  </requirements>
+  <description>Run MetFrag with a given parameter set.</description>
+  <command><![CDATA[
+	java -jar /usr/local/bin/MetFragCLI.jar "`cat $inputfile` ResultsFile=$outputfile NumberThreads=1 $additionalparameters";
+  ]]>
+  </command>
+  <inputs>
+    <param name="inputfile" type="data" format="txt" optional="False" label="Input file containing MetFrag parameters" />
+    <param name="additionalparameters" type="text" value="" optional="True" label="Additional Parameters" help="Add additional parameters to the MetFrag command line. This can include e.g. access information for a local MetChem database instance." />
+  </inputs>
+  <outputs>
+    <data name="outputfile" type="text" format="csv" label="MetFrag result file" />
+  </outputs>
+  <help>Run MetFrag with given MetFrag parameters.</help>
+</tool>

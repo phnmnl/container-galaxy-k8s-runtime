@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/). This file was automatically generated using CTD2Galaxy.-->
+<!--Proposed Tool Section: [Quantitation]-->
+<tool id="ConsensusXMLToXcms" name="ConsensusXMLToXcms" version="1.0">
+  <description>Converts consensusXML file to xcmsSet</description>
+    <requirements>
+    <container type="docker">phnmnl/camera</container>
+    </requirements>
+  <command><![CDATA[
+ /usr/local/bin/consensusXMLToXcms.r input=$infile output=$outfile;
+ 
+
+]]></command>
+   <inputs>
+    <param name="infile" type="data" format="consensusxml" optional="False" label="Input file with peak list in tsv/txt format" />
+  </inputs>
+  <outputs>
+    <data name="outfile" type="data" format="rdata" label="RData output file" />
+  </outputs>
+  <help>A simple converter for consensusXML to xcmsSet</help>
+</tool>

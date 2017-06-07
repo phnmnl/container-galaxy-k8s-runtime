@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/). This file was automatically generated using CTD2Galaxy.-->
 <!--Proposed Tool Section: [File Handling]-->
-<tool id="nmrmlconv" name="nmrmlconv" version="0.1">
+<tool id="nmrmlconv" name="nmrmlconv" version="0.2">
   <requirements>
         <container type="docker">phnmnl/nmrmlconv</container>
   </requirements>
