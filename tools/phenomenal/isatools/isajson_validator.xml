@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tool id="isajson_validator" name="isajson_validator" version="1.0">
+  <description>Produce a validation report on an ISA-Tab ZIP archive</description>
+  <command><![CDATA[
+    run_validator.py $isa_file
+  ]]>
+  </command>
+  <inputs>
+      <param name="isa_file" type="data" format="json" label="ISA-JSON file." optional="false"/>
+  </inputs>
+  <outputs>
+    <data format="json" name="output" from_work_dir="report.json" label="Validation report in JSON format" />
+  </outputs>
+
+  <help>
+      This tool produces a validation report (in JSON format) for a given ISA-JSON.
+  </help>
+
+</tool>
