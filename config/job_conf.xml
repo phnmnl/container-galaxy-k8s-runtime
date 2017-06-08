@@ -266,8 +266,9 @@
         <tool id="Metabolite_ID_Converter" destination="container-metaboliteidconverter" />
         <tool id="metabomatching" destination="metabomatching-container"/>
         <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
+        <tool id="get_study" destination="container-mtblisa"/>
+        <tool id="get_study_json" destination="container-mtblisa"/>
         <tool id="factors_summary" destination="container-mtblisa"/>
-        <tool id="isatab_validator" destination="container-isatab-validator"/>
         <tool id="isajson_validator" destination="container-isajson-validator"/>
     </tools>
 </job_conf>
