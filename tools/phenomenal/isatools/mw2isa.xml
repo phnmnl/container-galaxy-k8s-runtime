@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tool id="isatab_validator" name="isatab_validator" version="1.0">
+  <description>Produce a validation report on an ISA-Tab ZIP archive</description>
+  <command><![CDATA[
+    run_validator.py $isa_file
+  ]]>
+  </command>
+  <inputs>
+    <param name="mw_study_id" type="text" label="Metabolomics Workbench Study Identifier"/>
+  </inputs>
+  <outputs>
+    <data format="zip" name="ISA_zip" label="NIH MW study in zipped ISA format" />
+  </outputs>
+
+  <help>
+      This tool produces an ISA-Tab ZIP archive given an NIH Metabolomics Workbench accession number.
+  </help>
+
+</tool>
