@@ -223,6 +223,14 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
+        <destination id="container-isajson-validator" runner="k8s">
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">isajson-validator</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
     </destinations>
     <tools>
         <!-- Tools can be configured to use specific destinations or handlers,
@@ -258,7 +266,9 @@
         <tool id="Metabolite_ID_Converter" destination="container-metaboliteidconverter" />
         <tool id="metabomatching" destination="metabomatching-container"/>
         <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
+        <tool id="get_study" destination="container-mtblisa"/>
+        <tool id="get_study_json" destination="container-mtblisa"/>
         <tool id="factors_summary" destination="container-mtblisa"/>
-        <tool id="isatab_validator" destination="container-isatab-validator"/>
+        <tool id="isajson_validator" destination="container-isajson-validator"/>
     </tools>
 </job_conf>
