@@ -1,0 +1,23 @@
+<tool id="escher-fluxomics" name="escher-fluxomics" version="0.1">
+<stdio>
+<exit_code range="1:" />
+</stdio>
+<description>Visualize fluxomics data on pre-layouted metabolic maps with Escher.</description>
+<command><![CDATA[
+best_fit_fluxes2escher_fluxes_csv "$best_fit_fluxes" "$best_fit_fluxes_json";
+create_site_for_data "$html_file.extra_files_path" "$layout_map_file" "$best_fit_fluxes_json";
+mv "$html_file.extra_files_path"/index.html "$html_file"	
+]]></command>
+<inputs>
+    <param type="data" name="best_fit_fluxes" format="csv" label="Best fit fluxes or equivalent"/>
+    <param type="data" name="layout_map_file" format="JSON"/>
+</inputs>
+<outputs>
+    <data name="best_fit_fluxes_json" format="JSON" label="Fluxes as JSON"/>
+    <data format="html" name="html_file" label="myToolOutput.html"/>
+</outputs>
+<help><![CDATA[
+
+
+]]></help>
+</tool>
