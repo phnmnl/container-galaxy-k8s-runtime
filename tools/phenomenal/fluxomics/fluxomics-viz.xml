@@ -17,6 +17,16 @@ mv "$html_file.extra_files_path"/index.html "$html_file"
     <data format="html" name="html_file" label="myToolOutput.html"/>
 </outputs>
 <help><![CDATA[
+Escher for Fluxomics
+^^^^^^^^^^^^^^^^^^^^
+
+This tool allows to overlay flux data on top of pre-layouted metabolic pathways. It provides the user a web-based interactive environment, Escher (https://escher.github.io/), which allows the user to view flux data on top of a previously layouted metabolic map. Through this environment, the user can both modify the visualization, load more data into it and/or generate static depictions of it in PNG/SVG. Please see https://youtu.be/qUipX-xzZjQ?t=55 for details on how to use its internal user interface for visualizing and editing networks. 
+
+It receives two arguments:
+
+1. Best fit fluxes CSV file: A file containing on its first column the ID of each reaction and on the second and third column the Minimum and Maximum fluxes as produced by Iso2Flux. Reaction IDs need to correspond to those available on the SBML used to generate the Layouted map in JSON (file number 2).
+2. Layouted map in JSON: This file can be obtained by providing an SBML file to the Escher drawing tool, drawing a desired network with Escher manually, and then saving this file through "Map" -> "Save map JSON (Ctrl+S)" option.
+
 
 
 ]]></help>
