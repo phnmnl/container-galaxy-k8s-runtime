@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [File Handling]-->
+<tool id="rnmr1d" name="rnmr1d" version="0.1">
+  <requirements>
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/rnmr1d</container>
+  </requirements>
+  <description>Preprocessing RAW NMR data with macro-commands.</description>
+  <command><![CDATA[
+    ls -al infile;
+    mkdir -p /data/input;
+    mkdir -p /data/output;
+    zip -9 /data/input/input.zip infile;
+    /opt/rnmr1d/exec/Rnmr1D --zip /data/input/input.zip --proccmd macrofile --outnorm PQN --cpu 8 --outdir /data/output | tee /opt/output/stdout.log;
+    cp -f /data/output/data_matrix.txt outfile;
+  ]]>
+  </command>
+  <inputs>
+    <param name="infile" type="data" format="nmrML" optional="False" label="Input nmrML file collection" />
+    <param name="macrofile" type="data" format="txt" optional="False" label="Macro-Command file" />
+  </inputs>
+  <outputs>
+    <data name="outfile" type="text" format="txt" label="data matrix" />
+  </outputs>
+  <help>
+Rnmr1D allows users to replay the macro-command sequence generated within NMRProcFlow. Moreover, without using NMRProcFlow, this module can also be used to replace any home-made script by a macro-command sequence.
+  </help>
+</tool>

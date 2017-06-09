@@ -2,12 +2,12 @@
 <!--Proposed Tool Section: [File Handling]-->
 <tool id="nmrmlconv" name="nmrmlconv" version="0.2">
   <requirements>
-        <container type="docker">phnmnl/nmrmlconv</container>
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/nmrmlconv</container>
   </requirements>
   <description>Converts vendor RAW NMR to nmrML.</description>
   <command><![CDATA[
     mkdir -p \$PWD/tmp;
-    unzip -q -d \$PWD/tmp $infile;
+    unzip -q -j -d \$PWD/tmp $infile;
     java -jar /usr/local/share/nmrML/converter.jar -l create -b -z -t $venformat -i \$PWD/tmp -o $outfile;
   ]]>
   </command>

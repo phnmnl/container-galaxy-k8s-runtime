@@ -4,7 +4,7 @@
 <tool id="camera-find-adducts" name="camera-find-adducts" version="0.1">
   <description>Perform precursor adduct annotation using CAMERA.</description>
   <command><![CDATA[
-	/usr/local/bin/findAdducts.r input=$input output=$output ppm=$ppm polarity=$polarity output.pdf=$output_pdf plotpdf=$plotpdf;
+	/usr/local/bin/findAdducts.r input=$input output=$output ppm=$ppm polarity=$polarity output.pdf=$output_pdf plotpdf=$plotpdf rules=$rules;
   ]]>
   </command>
   <inputs>
@@ -18,6 +18,10 @@
       <option value="true" selected="False">True</option>
       <option value="false" selected="True">False</option>
     </param>	
+    <param name="rules" type="select" value="primary" label="Rules" help="">
+      <option value="primary" selected="primary">primary</option>
+      <option value="extended" selected="extended">extended</option>
+    </param>
   </inputs>
   <outputs>
     <data name="output" type="data" format="txt" label="camera-find-adducts data" />

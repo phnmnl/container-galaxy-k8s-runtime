@@ -5,7 +5,7 @@
   <description>Generate MetFrag parameters given MS/MS spectral information and CAMERA adduct annotation.</description>
   <command><![CDATA[
 	mkdir outputfolder;
-	/usr/local/bin/MS2ToMetFrag.r inputCAMERA=$inputCAMERA inputMS2=$inputMS2 output=outputfolder precursorppm=$precursorppm fragmentppm=$fragmentppm fragmentabs=$fragmentabs database=$database maxSpectra=$maxSpectra minPeaks=$minPeaks maxPrecursorMass=$maxPrecursorMass minPrecursorMass=$minPrecursorMass mode=$mode;
+	/usr/local/bin/MS2ToMetFrag.r inputCAMERA=$inputCAMERA inputMS2=$inputMS2 output=outputfolder precursorppm=$precursorppm fragmentppm=$fragmentppm fragmentabs=$fragmentabs database=$database maxSpectra=$maxSpectra minPeaks=$minPeaks maxPrecursorMass=$maxPrecursorMass minPrecursorMass=$minPrecursorMass mode=$mode adductRules=$adductRules;
   ]]>
   </command>
   <inputs>
@@ -26,6 +26,10 @@
       <option value="KEGG" selected="True">KEGG</option>
       <option value="PubChem" selected="False">PubChem</option>
       <option value="MetChem" selected="False">MetChem</option>
+    </param>
+    <param name="adductRules" type="select" value="primary" optional="False" label="Adduct Rules" help="Precursor adduct rule set used for CAMERA.">
+      <option value="primary" selected="True">primary</option>
+      <option value="extended" selected="False">extended</option>
     </param>
   </inputs>
   <outputs>
