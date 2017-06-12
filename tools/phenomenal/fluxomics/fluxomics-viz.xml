@@ -14,7 +14,7 @@ mv "$html_file.extra_files_path"/index.html "$html_file"
 </inputs>
 <outputs>
     <data name="best_fit_fluxes_json" format="JSON" label="Fluxes as JSON"/>
-    <data format="html" name="html_file" label="myToolOutput.html"/>
+    <data format="html" name="html_file" label="Interactive pathways visualization"/>
 </outputs>
 <help><![CDATA[
 Escher for Fluxomics
