@@ -266,6 +266,15 @@
 	    <param id="max_pod_retrials">3</param>
 	    <param id="docker_enabled">true</param>
         </destination>
+    <destination id="container-mw2isa" runner="k8s">
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">mw2isa</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+    </destination>         
+
 	<destination id="msnbase-container" runner="k8s">
             <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
@@ -281,15 +290,7 @@
             <param id="docker_tag_override">latest</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
-        </destination>
-        <destination id="container-mw2isa" runner="k8s">
-            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">mw2isa</param>
-            <param id="docker_tag_override">latest</param>
-            <param id="max_pod_retrials">3</param>
-            <param id="docker_enabled">true</param>
-        </destination>        
+        </destination>       
     </destinations>
     <tools>
         <!-- Tools can be configured to use specific destinations or handlers,
@@ -452,6 +453,7 @@
     <tool id="get_study_json" destination="container-mtblisa"/>
     <tool id="factors_summary" destination="container-mtblisa"/>
 	<tool id="isajson_validator" destination="container-isajson-validator"/>
+    <tool id="isajson_validator" destination="container-isajson-validator"/>
 	<tool id="escher-fluxomics" destination="container-escher-fluxomics"/>
     <tool id="mw2isa" destination="container-mw2isa"/>
     </tools>
