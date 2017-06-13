@@ -277,7 +277,7 @@
         <tool id="get_study" destination="container-mtblisa"/>
         <tool id="get_study_json" destination="container-mtblisa"/>
         <tool id="factors_summary" destination="container-mtblisa"/>
-	<tool id="isajson_validator" destination="container-isajson-validator"/>
-	<tool id="escher-fluxomics" destination="container-escher-fluxomics"/>
+    	<tool id="isajson_validator" destination="container-isajson-validator"/>
+    	<tool id="escher-fluxomics" destination="container-escher-fluxomics"/>
     </tools>
 </job_conf>
