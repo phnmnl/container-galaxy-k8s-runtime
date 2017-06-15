@@ -239,6 +239,14 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
+        <destination id="container-escher-fluxomics" runner="k8s">
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">escher-fluxomics</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
         <destination id="container-json2isatab" runner="k8s">
            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
            <param id="docker_owner_override">phnmnl</param>
@@ -269,10 +277,10 @@
         <tool id="lcmsmatching" destination="w4m-lcmsmatching-container"/>
         <tool id="msconvert2" destination="msconvert2-container"/>
         <tool id="nmrmlconv" destination="nmrmlconv-container"/>
-    	<tool id="mtbls2nmrglue" destination="nmrglue-container"/>
-    	<tool id="soap_process" destination="soap-nmr-container"/>
-    	<tool id="soap_opls" destination="soap-nmr-container"/>
-	    <tool id="save_chromatogram" destination="xcms-container"/>
+    	  <tool id="mtbls2nmrglue" destination="nmrglue-container"/>
+      	<tool id="soap_process" destination="soap-nmr-container"/>
+      	<tool id="soap_opls" destination="soap-nmr-container"/>
+	      <tool id="save_chromatogram" destination="xcms-container"/>
         <tool id="show_chromatogram" destination="xcms-container"/>
         <tool id="mzml2isa" destination="mzml2isa-container"/>
         <tool id="nmrml2isa" destination="nmrml2isa-container"/>
@@ -292,5 +300,6 @@
         <tool id="isatab_validator" destination="container-isatab-validator"/>
         <tool id="isatab2json" destination="container-isatab2json"/>
         <tool id="json2isatab" destination="container-json2isatab"/>
+      	<tool id="escher-fluxomics" destination="container-escher-fluxomics"/>
     </tools>
 </job_conf>
