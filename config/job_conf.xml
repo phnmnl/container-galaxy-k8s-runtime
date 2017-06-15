@@ -10,9 +10,9 @@
             set in universe_wsgi.ini (or equivalent general galaxy config file).
             -->
             <param id="k8s_persistent_volume_claim_mount_path">/opt/galaxy_data</param>
-	    <param id="k8s_namespace">default</param>
-	    <param id="k8s_supplemental_group_id">0</param>
-	    <param id="k8s_fs_group_id">0</param>
+            <param id="k8s_namespace">default</param>
+            <param id="k8s_supplemental_group_id">0</param>
+            <param id="k8s_fs_group_id">0</param>
             <param id="k8s_pull_policy">IfNotPresent</param>
         <!-- Allows pods to retry up to this number of times, before marking the Job as failed -->
         <param id="k8s_pod_retrials">1</param>
@@ -231,22 +231,22 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
-<<<<<<< HEAD
         <destination id="container-isatab2json" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">isatab2json</param>
-=======
-        <destination id="container-escher-fluxomics" runner="k8s">
-            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">escher-fluxomics</param>
->>>>>>> develop
             <param id="docker_tag_override">latest</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
-<<<<<<< HEAD
+        <destination id="container-escher-fluxomics" runner="k8s">
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">escher-fluxomics</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
         <destination id="container-json2isatab" runner="k8s">
            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
            <param id="docker_owner_override">phnmnl</param>
@@ -255,8 +255,6 @@
            <param id="max_pod_retrials">3</param>
            <param id="docker_enabled">true</param>
         </destination>
-=======
->>>>>>> develop
     </destinations>
     <tools>
         <!-- Tools can be configured to use specific destinations or handlers,
@@ -298,14 +296,10 @@
         <tool id="study_factors" destination="container-mtblisa"/>
         <tool id="data_files" destination="container-mtblisa"/>
         <tool id="factors_summary" destination="container-mtblisa"/>
-<<<<<<< HEAD
         <tool id="isajson_validator" destination="container-isajson-validator"/>
         <tool id="isatab_validator" destination="container-isatab-validator"/>
         <tool id="isatab2json" destination="container-isatab2json"/>
         <tool id="json2isatab" destination="container-json2isatab"/>
-=======
-    	<tool id="isajson_validator" destination="container-isajson-validator"/>
     	<tool id="escher-fluxomics" destination="container-escher-fluxomics"/>
->>>>>>> develop
     </tools>
 </job_conf>
