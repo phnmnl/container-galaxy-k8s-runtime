@@ -11,11 +11,13 @@
     unzip -q -d /data/MTBLS1 /data/MTBLS1.zip;
     mkdir -p outfolder;
     mv /data/MTBLS1/*.zip outfolder/;
+    ls -al outfolder/;
   ]]>
   </command>
   <outputs>
     <collection type="list" label="NMR RAW" format="zip" name="nmr_raw" >
-      <discover_datasets pattern="__designation_and_ext__" directory="outfolder" />
+      <!-- <discover_datasets pattern="__designation_and_ext__" directory="outfolder" /> -->
+      <discover_datasets pattern="__name_and_ext__" directory="outfolder" visible="True" />
     </collection>
   </outputs>
   <help>

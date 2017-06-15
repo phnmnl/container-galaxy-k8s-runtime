@@ -4,8 +4,8 @@
 <tool id="xcms-find-peaks" name="xcms-find-peaks" version="0.1">
   <description>Find peaks in mzML file and generate a xcmsSet using XCMS centWave algorithm.</description>
   <command><![CDATA[
-	echo "/usr/local/bin/findPeaks.r input=$input output=$output ppm=$ppm peakwidthLow=$peakwidthLow peakwidthHigh=$peakwidthHigh noise=$noise polarity=$polarity";
-	/usr/local/bin/findPeaks.r input=$input output=$output ppm=$ppm peakwidthLow=$peakwidthLow peakwidthHigh=$peakwidthHigh noise=$noise polarity=$polarity;
+	ln -s ${input} ${input}.mzML;
+	/usr/local/bin/findPeaks.r input=${input}.mzML output=$output ppm=$ppm peakwidthLow=$peakwidthLow peakwidthHigh=$peakwidthHigh noise=$noise polarity=$polarity;
   ]]>
   </command>
   <inputs>

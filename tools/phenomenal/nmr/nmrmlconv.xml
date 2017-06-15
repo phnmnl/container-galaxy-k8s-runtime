@@ -6,9 +6,13 @@
   </requirements>
   <description>Converts vendor RAW NMR to nmrML.</description>
   <command><![CDATA[
+    echo $infile;
+    ls -al $infile;
     mkdir -p \$PWD/tmp;
-    unzip -q -j -d \$PWD/tmp $infile;
-    java -jar /usr/local/share/nmrML/converter.jar -l create -b -z -t $venformat -i \$PWD/tmp -o $outfile;
+    unzip -q -d \$PWD/tmp $infile;
+    ls -al \$PWD/tmp;
+    export samplename="ADG10003u_007";
+    java -jar /usr/local/share/nmrML/converter.jar -l create -b -z -t $venformat -a \$samplename -i \$PWD/tmp -o $outfile;
   ]]>
   </command>
   <inputs>
@@ -30,7 +34,7 @@
     </param>
   </inputs>
   <outputs>
-    <data name="outfile" type="text" format="nmrML" label="nmrML file" />
+    <data name="outfile" type="data" format="nmrML" label="nmrML file" />
   </outputs>
   <help>
 nmrML is an open mark-up language for NMR data. This tool converts RAW vendor NMR data to nmrML format.

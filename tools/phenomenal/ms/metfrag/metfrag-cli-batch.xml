@@ -7,6 +7,7 @@
   </requirements>
   <description>Run MetFrag with a given parameter set.</description>
   <command><![CDATA[
+	echo "java -jar /usr/local/bin/MetFragCLI.jar \"`cat $inputfile` ResultsFile=$outputfile NumberThreads=1 $additionalparameters\"";
 	java -jar /usr/local/bin/MetFragCLI.jar "`cat $inputfile` ResultsFile=$outputfile NumberThreads=1 $additionalparameters";
   ]]>
   </command>

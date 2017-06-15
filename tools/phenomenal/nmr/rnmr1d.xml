@@ -6,16 +6,18 @@
   </requirements>
   <description>Preprocessing RAW NMR data with macro-commands.</description>
   <command><![CDATA[
-    ls -al infile;
+    echo $infile;
+    echo $macrofile;
+    ls -al $infile;
     mkdir -p /data/input;
     mkdir -p /data/output;
-    zip -9 /data/input/input.zip infile;
-    /opt/rnmr1d/exec/Rnmr1D --zip /data/input/input.zip --proccmd macrofile --outnorm PQN --cpu 8 --outdir /data/output | tee /opt/output/stdout.log;
-    cp -f /data/output/data_matrix.txt outfile;
+    /opt/rnmr1d/exec/Rnmr1D --zip $infile --proccmd $macrofile --outnorm PQN --cpu 8 --outdir /data/output | tee /opt/output/stdout.log;
+    cp -f /data/output/data_matrix.txt $outfile;
   ]]>
   </command>
   <inputs>
-    <param name="infile" type="data" format="nmrML" optional="False" label="Input nmrML file collection" />
+    <!-- <param name="infile" type="data" format="nmrML" optional="False" multiple="True" label="Input nmrML file collection" /> -->
+    <param name="infile" type="data" format="zip" optional="False" label="Zipped nmrML file collection" />
     <param name="macrofile" type="data" format="txt" optional="False" label="Macro-Command file" />
   </inputs>
   <outputs>
