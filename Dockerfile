@@ -20,6 +20,7 @@ RUN echo "pykube==0.15.0" >> requirements.txt
 COPY config/galaxy.ini config/galaxy.ini
 COPY config/job_conf.xml config/job_conf.xml
 COPY config/tool_conf.xml config/tool_conf.xml
+COPY config/sanitize_whitelist.txt config/sanitize_whitelist.txt
 COPY tools/phenomenal tools/phenomenal
 
 RUN virtualenv .venv

@@ -61,6 +61,7 @@
     <tool file="phenomenal/fluxomics/midcor/midcor.xml"/>
     <tool file="phenomenal/fluxomics/iso2flux/iso2flux.xml"/>
     <tool file="phenomenal/fluxomics/isodyn/isodyn.xml"/>
+    <tool file="phenomenal/fluxomics/fluxomics-viz.xml"/>
   </section>
   <section name="NMR" id="pheno-nmr">
     <tool file="phenomenal/nmr/batman.xml"/>
@@ -206,5 +207,12 @@
   </section>
   <section name="Post-Processing" id="pheno-postprocessing">
     <tool file="phenomenal/postProcessing/metaboliteidconverter.xml"/>
+  </section>
+  <section name="ISA tools" id="isa-tools">
+    <tool file="phenomenal/isatools/get_study.xml"/>
+    <tool file="phenomenal/isatools/get_study_json.xml"/>
+    <tool file="phenomenal/isatools/factors_summary.xml"/>
+    <tool file="phenomenal/isatools/isatab_validator.xml"/>
+    <tool file="phenomenal/isatools/isajson_validator.xml"/>
   </section>
 </toolbox>
