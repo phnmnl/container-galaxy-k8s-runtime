@@ -8,13 +8,13 @@
   ]]>
   </command>
   <inputs>
-    <param name="inputCAMERA" type="data" format="txt" optional="False" label="camera-find-adducts data" />
-    <param name="inputMS2" type="data" multiple="True" format="txt" optional="False" label="msnbase-read-msms data" help="R data containing MS2 information" />
+    <param name="inputCAMERA" type="data" format="rdata" optional="False" label="camera-find-adducts data" />
+    <param name="inputMS2" type="data" multiple="True" format="rdata" optional="False" label="msnbase-read-msms data" help="R data containing MS2 information" />
     <param name="ppm" type="text" value="10"  label="PPM" help="" />
     <param name="RT" type="text" value="10"  label="RT" help="" />
   </inputs>
   <outputs>
-    <data name="output" type="data" format="txt" label="map-msms2camera data" />
+    <data name="output" type="data" format="rdata" label="map-msms2camera data" />
   </outputs>
   <help>.</help>
 </tool>

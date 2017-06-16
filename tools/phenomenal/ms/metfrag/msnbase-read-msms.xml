@@ -8,10 +8,10 @@
   ]]>
   </command>
   <inputs>
-    <param name="input" type="data" format="txt" optional="False" label="Input mzML file" help="Input mzML file containing MS2 information" />
+    <param name="input" type="data" format="rdata" optional="False" label="Input mzML file" help="Input mzML file containing MS2 information" />
   </inputs>
   <outputs>
-    <data name="output" type="data" format="txt" label="msnbase-read-msms data" />
+    <data name="output" type="data" format="rdata" label="msnbase-read-msms data" />
   </outputs>
   <help>.</help>
 </tool>

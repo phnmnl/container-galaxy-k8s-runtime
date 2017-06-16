@@ -8,10 +8,10 @@
   ]]>
   </command>
   <inputs>
-    <param name="input" type="data" format="txt" multiple="True" optional="False" label="Input RData file" />
+    <param name="input" type="data" format="rdata" multiple="True" optional="False" label="Input RData file" />
   </inputs>
   <outputs>
-    <data name="output" type="data" format="txt" label="xcms-collect-peaks data" />
+    <data name="output" type="data" format="rdata" label="xcms-collect-peaks data" />
   </outputs>
   <help>.</help>
 </tool>

@@ -10,7 +10,7 @@
   ]]>
   </command>
   <inputs>
-    <param name="input" type="data" format="txt" optional="False" label="Input RData file" />
+    <param name="input" type="data" format="rdata" optional="False" label="Input RData file" />
     <param name="sigma" type="text" value="8"  label="Sigma" help="" />
     <param name="perfwhm" type="text" value="0.6"  label="perFWHM" help="" />
     <param name="intval" type="select" value="maxo" label="intval" help="">
@@ -20,7 +20,7 @@
     </param>
   </inputs>
   <outputs>
-    <data name="output" type="data" format="txt" label="camera-group-fwhm data" />
+    <data name="output" type="data" format="rdata" label="camera-group-fwhm data" />
   </outputs>
   <help>.</help>
 </tool>

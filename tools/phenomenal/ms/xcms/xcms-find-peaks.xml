@@ -9,7 +9,7 @@
   ]]>
   </command>
   <inputs>
-    <param name="input" type="data" format="txt" optional="False" label="Input mzML file containing MS1 information" />
+    <param name="input" type="data" format="rdata" optional="False" label="Input mzML file containing MS1 information" />
     <param name="ppm" type="text" value="10"  label="PPM" help="" />
     <param name="peakwidthLow" type="text" value="4"  label="PeakWidthLow" help="" />
     <param name="peakwidthHigh" type="text" value="30"  label="PeakWidthHigh" help="" />
@@ -20,7 +20,7 @@
     </param>
   </inputs>
   <outputs>
-    <data name="output" type="data" format="txt" label="xcms-find-peaks data" />
+    <data name="output" type="data" format="rdata" label="xcms-find-peaks data" />
   </outputs>
   <help>.</help>
 </tool>

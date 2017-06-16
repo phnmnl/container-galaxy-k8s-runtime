@@ -8,11 +8,11 @@
   ]]>
   </command>
   <inputs>
-    <param name="input" type="data" format="txt" optional="False" label="Input RData file" />
+    <param name="input" type="data" format="rdata" optional="False" label="Input RData file" />
     <param name="maxcharge" type="text" format="txt" value="3" optional="False" label="" />
   </inputs>
   <outputs>
-    <data name="output" type="data" format="txt" label="camera-find-isotopes data" />
+    <data name="output" type="data" format="rdata" label="camera-find-isotopes data" />
   </outputs>
   <help>.</help>
 </tool>

@@ -8,10 +8,10 @@
   ]]>
   </command>
   <inputs>
-    <param name="input" type="data" format="txt" optional="False" label="Input RData file" />
+    <param name="input" type="data" format="rdata" optional="False" label="Input RData file" />
   </inputs>
   <outputs>
-    <data name="output" type="data" format="txt" label="camera-annotate-peaks data" />
+    <data name="output" type="data" format="rdata" label="camera-annotate-peaks data" />
   </outputs>
   <help>.</help>
 </tool>

@@ -11,8 +11,8 @@
 
 ]]></command>
    <inputs>
-    <param name="infile" type="data" format="rdata" optional="False" label="Input file with peak list in tsv/txt format" />
-    <param name="intensityColumn" type="select" value="into" optional="False" label="Intensity column" help="which intesity type use for featureXML">
+    <param name="infile" type="data" format="rdata" optional="False" label="Input file" />
+    <param name="intensityColumn" type="select" value="into" optional="False" label="Intensity column" help="which intensity type use for featureXML">
       <option value="into" selected="True">into</option>
 	  <option value="intb" selected="False">intb</option>
 	  <option value="maxo" selected="False">maxo</option>
