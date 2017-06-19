@@ -43,8 +43,8 @@ COPY test_cmds.txt test_cmds.txt
 RUN chmod u+x /galaxy/ansible/run_galaxy_config.sh
 
 # Missing XCMS datatypes for w4m
-RUN mv tools/phenomenal/xcms-w4m/galaxy/datatype_rdata_xcms/rdata_xcms_datatype.py /galaxy/lib/galaxy/datatypes/
-RUN mv tools/phenomenal/camera-w4m-2.2.0/galaxy/datatype_rdata_camera/rdata_camera_datatype.py /galaxy/lib/galaxy/datatypes/
+COPY external-datatypes/rdata_xcms_datatype.py /galaxy/lib/galaxy/datatypes/
+COPY external-datatypes/rdata_camera_datatype.py /galaxy/lib/galaxy/datatypes/
 COPY config/datatypes_conf.xml config/datatypes_conf.xml
 
 EXPOSE 8080
