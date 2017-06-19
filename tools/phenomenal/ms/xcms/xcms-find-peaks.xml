@@ -4,12 +4,21 @@
 <tool id="xcms-find-peaks" name="xcms-find-peaks" version="0.1">
   <description>Find peaks in mzML file and generate a xcmsSet using XCMS centWave algorithm.</description>
   <command><![CDATA[
+<<<<<<< HEAD
 	ln -s ${xcms_find_peaks_input_1} ${xcms_find_peaks_input_1}.mzML;
 	/usr/local/bin/findPeaks.r input=${xcms_find_peaks_input_1}.mzML output=$xcms_find_peaks_output_1 ppm=$ppm peakwidthLow=$peakwidthLow peakwidthHigh=$peakwidthHigh noise=$noise polarity=$polarity;
   ]]>
   </command>
   <inputs>
     <param name="xcms_find_peaks_input_1" type="data" format="mzml" optional="False" label="Input mzML file containing MS1 information" />
+=======
+	echo "/usr/local/bin/findPeaks.r input=$input output=$output ppm=$ppm peakwidthLow=$peakwidthLow peakwidthHigh=$peakwidthHigh noise=$noise polarity=$polarity";
+	/usr/local/bin/findPeaks.r input=$input output=$output ppm=$ppm peakwidthLow=$peakwidthLow peakwidthHigh=$peakwidthHigh noise=$noise polarity=$polarity;
+  ]]>
+  </command>
+  <inputs>
+    <param name="input" type="data" format="txt" optional="False" label="Input mzML file containing MS1 information" />
+>>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
     <param name="ppm" type="text" value="10"  label="PPM" help="" />
     <param name="peakwidthLow" type="text" value="4"  label="PeakWidthLow" help="" />
     <param name="peakwidthHigh" type="text" value="30"  label="PeakWidthHigh" help="" />
@@ -20,7 +29,11 @@
     </param>
   </inputs>
   <outputs>
+<<<<<<< HEAD
     <data name="xcms_find_peaks_output_1" type="data" format="rdata" label="xcms-find-peaks data" />
+=======
+    <data name="output" type="data" format="txt" label="xcms-find-peaks data" />
+>>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
   </outputs>
   <help>.</help>
 </tool>

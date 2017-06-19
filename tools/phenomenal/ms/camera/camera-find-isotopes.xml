@@ -4,6 +4,7 @@
 <tool id="camera-find-isotopes" name="camera-find-isotopes" version="0.1">
   <description>Perform isotope annotation using CAMERA.</description>
   <command><![CDATA[
+<<<<<<< HEAD
 	/usr/local/bin/findIsotopes.r input=$camera_find_isotopes_input_1 output=$camera_find_isotopes_output_1 maxcharge=$maxcharge;
   ]]>
   </command>
@@ -13,6 +14,17 @@
   </inputs>
   <outputs>
     <data name="camera_find_isotopes_output_1" type="data" format="rdata" label="camera-find-isotopes data" />
+=======
+	/usr/local/bin/findIsotopes.r input=$input output=$output maxcharge=$maxcharge;
+  ]]>
+  </command>
+  <inputs>
+    <param name="input" type="data" format="txt" optional="False" label="Input RData file" />
+    <param name="maxcharge" type="text" format="txt" value="3" optional="False" label="" />
+  </inputs>
+  <outputs>
+    <data name="output" type="data" format="txt" label="camera-find-isotopes data" />
+>>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
   </outputs>
   <help>.</help>
 </tool>

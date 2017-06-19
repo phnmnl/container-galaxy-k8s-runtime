@@ -4,6 +4,7 @@
 <tool id="xcms-collect-peaks" name="xcms-collect-peaks" version="0.1">
   <description>Combine xcmsSet objects into one collection used for further processing.</description>
   <command><![CDATA[
+<<<<<<< HEAD
 	/usr/local/bin/xcmsCollect.r input=$xcms_collect_peaks_input_1 output=$xcms_collect_peaks_output_1;
   ]]>
   </command>
@@ -12,6 +13,16 @@
   </inputs>
   <outputs>
     <data name="xcms_collect_peaks_output_1" type="data" format="rdata" label="xcms-collect-peaks data" />
+=======
+	/usr/local/bin/xcmsCollect.r input=$input output=$output;
+  ]]>
+  </command>
+  <inputs>
+    <param name="input" type="data" format="txt" multiple="True" optional="False" label="Input RData file" />
+  </inputs>
+  <outputs>
+    <data name="output" type="data" format="txt" label="xcms-collect-peaks data" />
+>>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
   </outputs>
   <help>.</help>
 </tool>

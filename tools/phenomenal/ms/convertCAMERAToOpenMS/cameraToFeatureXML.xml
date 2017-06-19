@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version='1.0' encoding='UTF-8'?>
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/). This file was automatically generated using CTD2Galaxy.-->
 <!--Proposed Tool Section: [Quantitation]-->
@@ -23,3 +24,30 @@
   </outputs>
   <help>A simple converter for CAMERA to featureXML</help>
 </tool>
+=======
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/). This file was automatically generated using CTD2Galaxy.-->
+<!--Proposed Tool Section: [Quantitation]-->
+<tool id="cameraToFeatureXML" name="cameraToFeatureXML" version="1.0">
+  <description>Converts CAMERA object to featureXML file</description>
+      <requirements>
+    <container type="docker">phnmnl/camera</container>
+    </requirements>
+  <command><![CDATA[
+  /usr/local/bin/cameraToFeatureXML.r input=$infile  intensityColumn=$intensityColumn output=$outfile;
+
+]]></command>
+   <inputs>
+    <param name="infile" type="data" format="rdata" optional="False" label="Input file with peak list in tsv/txt format" />
+    <param name="intensityColumn" type="select" value="into" optional="False" label="Intensity column" help="which intesity type use for featureXML">
+      <option value="into" selected="True">into</option>
+	  <option value="intb" selected="False">intb</option>
+	  <option value="maxo" selected="False">maxo</option>
+    </param>
+  </inputs>
+  <outputs>
+    <data name="outfile" type="data" format="featurexml" label="featureXML output file" />
+  </outputs>
+  <help>A simple converter for CAMERA to featureXML</help>
+</tool>
+>>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b

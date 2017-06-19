@@ -6,11 +6,19 @@
      time into pseudospectra-groups. Uses the peak FWHMs as grouping
      borders.</description>
   <command><![CDATA[
+<<<<<<< HEAD
 	/usr/local/bin/groupFWHM.r input=$camera_group_fwhm_input_1 output=$camera_group_fwhm_output_1 sigma=$sigma perfwhm=$perfwhm intval=$intval;  
   ]]>
   </command>
   <inputs>
     <param name="camera_group_fwhm_input_1" type="data" format="rdata" optional="False" label="Input RData file" />
+=======
+	/usr/local/bin/groupFWHM.r input=$input output=$output sigma=$sigma perfwhm=$perfwhm intval=$intval;  
+  ]]>
+  </command>
+  <inputs>
+    <param name="input" type="data" format="txt" optional="False" label="Input RData file" />
+>>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
     <param name="sigma" type="text" value="8"  label="Sigma" help="" />
     <param name="perfwhm" type="text" value="0.6"  label="perFWHM" help="" />
     <param name="intval" type="select" value="maxo" label="intval" help="">
@@ -20,7 +28,11 @@
     </param>
   </inputs>
   <outputs>
+<<<<<<< HEAD
     <data name="camera_group_fwhm_output_1" type="data" format="rdata" label="camera-group-fwhm data" />
+=======
+    <data name="output" type="data" format="txt" label="camera-group-fwhm data" />
+>>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
   </outputs>
   <help>.</help>
 </tool>

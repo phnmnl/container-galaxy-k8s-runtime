@@ -208,6 +208,7 @@
             <param id="docker_enabled">true</param>
         </destination>
 	<destination id="metfrag-cli-batch-container" runner="k8s">
+<<<<<<< HEAD
     	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
     	    <param id="docker_owner_override">phnmnl</param>
     	    <param id="docker_image_override">metfrag-cli-batch</param>
@@ -217,11 +218,23 @@
 	</destination>
 	<destination id="camera-container" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+=======
+            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">metfrag-cli-batch</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">1</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+	<destination id="camera-container" runner="k8s">
+            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+>>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">camera</param>
             <param id="docker_tag_override">latest</param>
             <param id="max_pod_retrials">1</param>
             <param id="docker_enabled">true</param>
+<<<<<<< HEAD
  	</destination>
 	<destination id="msnbase-container" runner="k8s">
     	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
@@ -278,6 +291,32 @@
 	    <param id="docker_tag_override">latest</param>
 	    <param id="max_pod_retrials">3</param>
 	    <param id="docker_enabled">true</param>
+=======
+        </destination>
+	<destination id="msnbase-container" runner="k8s">
+            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">msnbase</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">1</param>
+            <param id="docker_enabled">true</param>
+	</destination>
+        <destination id="container-openms" runner="k8s">
+	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">openms</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+	<destination id="metfrag-vis-container" runner="k8s">
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">metfrag-vis</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+>>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
 	</destination>
     </destinations>
     <tools>
@@ -437,10 +476,13 @@
         <tool id="map-msms2camera" destination="msnbase-container" />
         <tool id="msms2metfrag" destination="msnbase-container" />
 	<tool id="metfrag-vis" destination="metfrag-vis-container" />
+<<<<<<< HEAD
         <tool id="get_study" destination="container-mtblisa"/>
         <tool id="get_study_json" destination="container-mtblisa"/>
         <tool id="factors_summary" destination="container-mtblisa"/>
 	<tool id="isajson_validator" destination="container-isajson-validator"/>
 	<tool id="escher-fluxomics" destination="container-escher-fluxomics"/>
+=======
+>>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
     </tools>
 </job_conf>

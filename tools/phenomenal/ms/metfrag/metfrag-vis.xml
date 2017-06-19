@@ -5,20 +5,35 @@
   <description>Combine MetFrag results to a single PDF output.</description>
   <command><![CDATA[
   	mkdir /tmp/outputdir/;
+<<<<<<< HEAD
         bash /usr/local/bin/visualize-metfrag.sh $metfrag_vis_input_1 /tmp/outputdir/combined_top1_cands.csv $metfrag_vis_input_2;
         java -jar /usr/local/bin/ConvertMetFragCSV.jar csv=/tmp/outputdir/combined_top1_cands.csv output=/tmp/outputdir/combined_top1_cands.tex propertyWhiteList=Score,SampleName,Identifier,MolecularFormula,CompoundName,NumberPeaksUsed,NoExplPeaks,MetFragWebURL format=tex;
         pdflatex -output-directory /tmp/outputdir/ /tmp/outputdir/combined_top1_cands.tex;
         mv /tmp/outputdir/combined_top1_cands.pdf $metfrag_vis_output_1;
+=======
+        bash /usr/local/bin/visualize-metfrag.sh $resultFiles /tmp/outputdir/combined_top1_cands.csv $parameterFiles;
+        java -jar /usr/local/bin/ConvertMetFragCSV.jar csv=/tmp/outputdir/combined_top1_cands.csv output=/tmp/outputdir/combined_top1_cands.tex propertyWhiteList=Score,SampleName,Identifier,MolecularFormula,CompoundName,NumberPeaksUsed,NoExplPeaks,MetFragWebURL format=tex;
+        pdflatex -output-directory /tmp/outputdir/ /tmp/outputdir/combined_top1_cands.tex;
+        mv /tmp/outputdir/combined_top1_cands.pdf $output;
+>>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
         rm -rf /tmp/outputdir/;
         rm /tmp/*.png;
   ]]>
   </command>
   <inputs>
+<<<<<<< HEAD
     <param name="metfrag_vis_input_1" type="data" format="csv" multiple="True" optional="False" label="MetFrag result files" />
     <param name="metfrag_vis_input_2" type="data" format="txt" optional="True" multiple="True" label="MetFrag parameter files" />
   </inputs>
   <outputs>
 	<data name="metfrag_vis_output_1" type="data" format="pdf" label="metfrag-vis-results" />	
+=======
+    <param name="resultFiles" type="data" format="csv" multiple="True" optional="False" label="MetFrag result files" />
+    <param name="parameterFiles" type="data" format="txt" optional="True" multiple="True" label="MetFrag parameter files" />
+  </inputs>
+  <outputs>
+	<data name="output" type="data" format="pdf" label="metfrag-vis-results" />	
+>>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
   </outputs>
   <help>.</help>
 </tool>
