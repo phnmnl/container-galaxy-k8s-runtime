@@ -33,6 +33,7 @@ batmanOptions.txt is used for controlling BATMAN performance including the numbe
 multi_data_user.csv provides the characteristics of targeted metabolites NMR resonances. Please modify the file accordingly on your local computer before uploading to Galaxy.
 
 metabolitesList.csv includes the list of targeted metabolites. Please modify the file accordingly on your local computer before uploading to Galaxy.
+
        ]]>
      </help>
  </tool>

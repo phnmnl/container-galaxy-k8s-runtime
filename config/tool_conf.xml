@@ -71,6 +71,9 @@
     <tool file="phenomenal/nmr/soap_process.xml"/>
     <tool file="phenomenal/nmr/soap_opls.xml"/>
   </section>
+  <section name="STATS" id="pheno-stats">
+    <tool file="phenomenal/stats/papy.xml"/>
+  </section>
   <section name="MS" id="pheno-ms">
     <!-- 
     <tool file="phenomenal/ms/msconvert2.xml"/>
