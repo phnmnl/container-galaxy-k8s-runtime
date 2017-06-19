@@ -4,30 +4,17 @@
 <tool id="map-msms2camera" name="map-msms2camera" version="0.1">
   <description>Map MS/MS spectra to CAMERA annotaions by retention time and m/z information.</description>
   <command><![CDATA[
-<<<<<<< HEAD
 	/usr/local/bin/mapMS2ToCamera.r inputCAMERA=$map_msms2camera_input_1 inputMS2=$map_msms2camera_input_2 output=$map_msms2camera_output_1 ppm=$ppm RT=$RT;
   ]]>
   </command>
   <inputs>
     <param name="map_msms2camera_input_1" type="data" format="rdata" optional="False" label="camera-find-adducts data" />
     <param name="map_msms2camera_input_2" type="data" multiple="True" format="rdata" optional="False" label="msnbase-read-msms data" help="R data containing MS2 information" />
-=======
-	/usr/local/bin/mapMS2ToCamera.r inputCAMERA=$inputCAMERA inputMS2=$inputMS2 output=$output ppm=$ppm RT=$RT;
-  ]]>
-  </command>
-  <inputs>
-    <param name="inputCAMERA" type="data" format="txt" optional="False" label="camera-find-adducts data" />
-    <param name="inputMS2" type="data" multiple="True" format="txt" optional="False" label="msnbase-read-msms data" help="R data containing MS2 information" />
->>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
     <param name="ppm" type="text" value="10"  label="PPM" help="" />
     <param name="RT" type="text" value="10"  label="RT" help="" />
   </inputs>
   <outputs>
-<<<<<<< HEAD
     <data name="map_msms2camera_output_1" type="data" format="rdata" label="map-msms2camera data" />
-=======
-    <data name="output" type="data" format="txt" label="map-msms2camera data" />
->>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
   </outputs>
   <help>.</help>
 </tool>

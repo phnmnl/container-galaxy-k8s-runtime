@@ -3,7 +3,6 @@
 <!--Proposed Tool Section: [PhenoMeNal]-->
 <tool id="xcmssplit" name="xcmssplit" version="0.1">
   <description>Split xcmsSet collection into several objects used for further processing.</description>
-<<<<<<< HEAD
 <!--     <requirements>
     <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/xcms</container>
     </requirements>-->
@@ -18,22 +17,6 @@
   <outputs>
         <collection name="xcmsobj" type="list" label="xcms objects">
         	<discover_datasets pattern="__designation__" directory="xcmsobjects" visible="true" format="rdata" />
-=======
-      <requirements>
-    <container type="docker">phnmnl/xcms</container>
-    </requirements>
-  <command><![CDATA[
- 	mkdir xcmsobjects;
-	/usr/local/bin/xcmssplitter.r input=$input output=xcmsobjects;
-  ]]>
-  </command>
-  <inputs>
-    <param name="input" type="data" format="txt" optional="False" label="xcms object" />
-  </inputs>
-  <outputs>
-        <collection name="xcmsobj" type="list" label="xcms objects">
-        <discover_datasets pattern="__designation__" directory="xcmsobjects" visible="true" />
->>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
         </collection>
   </outputs>
   <help>.</help>

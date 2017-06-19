@@ -4,7 +4,6 @@
 <tool id="xcms-fill-peaks" name="xcms-fill-peaks" version="0.1">
   <description>For each sample, identify peak groups where that sample is not represented. For each of those peak groups, integrate the signal in the region of that peak group and create a new peak.</description>
   <command><![CDATA[
-<<<<<<< HEAD
 	/usr/local/bin/fillPeaks.r input=$xcms_fill_peaks_input_1 output=$xcms_fill_peaks_output_1;
   ]]>
   </command>
@@ -13,16 +12,6 @@
   </inputs>
   <outputs>
     <data name="xcms_fill_peaks_output_1" type="data" format="rdata" label="xcms-fill-peaks data" />
-=======
-	/usr/local/bin/fillPeaks.r input=$input output=$output;
-  ]]>
-  </command>
-  <inputs>
-    <param name="input" type="data" format="txt" optional="False" label="Input RData file" />
-  </inputs>
-  <outputs>
-    <data name="output" type="data" format="txt" label="xcms-fill-peaks data" />
->>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
   </outputs>
   <help>.</help>
 </tool>

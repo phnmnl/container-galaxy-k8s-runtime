@@ -2,7 +2,6 @@
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
 <!--Proposed Tool Section: [PhenoMeNal]-->
 <tool id="metfrag-cli-batch" name="metfrag-cli-batch" version="0.1">
-<<<<<<< HEAD
 <!--   <requirements>
         <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/metfrag-cli-batch</container>
   </requirements>-->
@@ -17,22 +16,6 @@
   </inputs>
   <outputs>
     <data name="metfrag_cli_batch_output_1" type="text" format="csv" label="MetFrag result file" />
-=======
-  <requirements>
-        <container type="docker">phnmnl/metfrag-cli-batch</container>
-  </requirements>
-  <description>Run MetFrag with a given parameter set.</description>
-  <command><![CDATA[
-	java -jar /usr/local/bin/MetFragCLI.jar "`cat $inputfile` ResultsFile=$outputfile NumberThreads=1 $additionalparameters";
-  ]]>
-  </command>
-  <inputs>
-    <param name="inputfile" type="data" format="txt" optional="False" label="Input file containing MetFrag parameters" />
-    <param name="additionalparameters" type="text" value="" optional="True" label="Additional Parameters" help="Add additional parameters to the MetFrag command line. This can include e.g. access information for a local MetChem database instance." />
-  </inputs>
-  <outputs>
-    <data name="outputfile" type="text" format="csv" label="MetFrag result file" />
->>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
   </outputs>
   <help>Run MetFrag with given MetFrag parameters.</help>
 </tool>

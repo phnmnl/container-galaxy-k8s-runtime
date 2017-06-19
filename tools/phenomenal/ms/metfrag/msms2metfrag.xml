@@ -5,21 +5,12 @@
   <description>Generate MetFrag parameters given MS/MS spectral information and CAMERA adduct annotation.</description>
   <command><![CDATA[
 	mkdir outputfolder;
-<<<<<<< HEAD
 	/usr/local/bin/MS2ToMetFrag.r inputCAMERA=$msms2metfrag_input_2 inputMS2=$msms2metfrag_input_1 output=outputfolder precursorppm=$precursorppm fragmentppm=$fragmentppm fragmentabs=$fragmentabs database=$database maxSpectra=$maxSpectra minPeaks=$minPeaks maxPrecursorMass=$maxPrecursorMass minPrecursorMass=$minPrecursorMass mode=$mode adductRules=$adductRules;
   ]]>
   </command>
   <inputs>
     <param name="msms2metfrag_input_1" type="data" format="rdata" optional="False" label="map-msms2camera data" />
     <param name="msms2metfrag_input_2" type="data" format="rdata" optional="False" label="camera-find-adducts data" />
-=======
-	/usr/local/bin/MS2ToMetFrag.r inputCAMERA=$inputCAMERA inputMS2=$inputMS2 output=outputfolder precursorppm=$precursorppm fragmentppm=$fragmentppm fragmentabs=$fragmentabs database=$database maxSpectra=$maxSpectra minPeaks=$minPeaks maxPrecursorMass=$maxPrecursorMass minPrecursorMass=$minPrecursorMass mode=$mode;
-  ]]>
-  </command>
-  <inputs>
-    <param name="inputMS2" type="data" format="txt" optional="False" label="map-msms2camera data" />
-    <param name="inputCAMERA" type="data" format="txt" optional="False" label="camera-find-adducts data" />
->>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
     <param name="precursorppm" type="text" format="txt" value="10" optional="False" label="Precursor PPM" />
     <param name="fragmentppm" type="text" format="txt" value="10" optional="False" label="Fragment PPM (mzppm)" />
     <param name="fragmentabs" type="text" format="txt" value="0.01" optional="False" label="Fragment Abs (mzabs)" />
@@ -36,13 +27,10 @@
       <option value="PubChem" selected="False">PubChem</option>
       <option value="MetChem" selected="False">MetChem</option>
     </param>
-<<<<<<< HEAD
     <param name="adductRules" type="select" value="primary" optional="False" label="Adduct Rules" help="Precursor adduct rule set used for CAMERA.">
       <option value="primary" selected="True">primary</option>
       <option value="extended" selected="False">extended</option>
     </param>
-=======
->>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
   </inputs>
   <outputs>
     <collection type="list" label="MetFrag Parameters" format="txt" name="MetFrag Parameters" >

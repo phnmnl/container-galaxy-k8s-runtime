@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version='1.0' encoding='UTF-8'?>
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/). This file was automatically generated using CTD2Galaxy.-->
 <!--Proposed Tool Section: [Quantitation]-->
@@ -10,7 +9,6 @@
   <command><![CDATA[
   ls /usr/local/bin;
   /usr/local/bin/featureXMLToXcms.r input=$infile sampleClass=$sampleClass output=$outfile;
-
 ]]></command>
    <inputs>
     <param name="infile" type="data" format="featurexml" optional="False" label="Input file with peak list in tsv/txt format" />
@@ -21,27 +19,3 @@
   </outputs>
   <help>A simple converter for featureXML to xcmsSet</help>
 </tool>
-=======
-<?xml version='1.0' encoding='UTF-8'?>
-<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/). This file was automatically generated using CTD2Galaxy.-->
-<!--Proposed Tool Section: [Quantitation]-->
-<tool id="featureXMLToXcms" name="featureXMLToXcms" version="1.0">
-  <description>Converts featureXML file to xcmsSet</description>
-    <requirements>
-    <container type="docker">phnmnl/camera</container>
-    </requirements>
-  <command><![CDATA[
-  ls /usr/local/bin;
-  /usr/local/bin/featureXMLToXcms.r input=$infile sampleClass=$sampleClass output=$outfile;
-
-]]></command>
-   <inputs>
-    <param name="infile" type="data" format="featurexml" optional="False" label="Input file with peak list in tsv/txt format" />
-	<param name="sampleClass" type="text" value="sampleClass" optional="False" label="Class of the sample" help="Class of the sample. For example disease" />
-  </inputs>
-  <outputs>
-    <data name="outfile" format="txt" label="RData output file" />
-  </outputs>
-  <help>A simple converter for featureXML to xcmsSet</help>
-</tool>
->>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b

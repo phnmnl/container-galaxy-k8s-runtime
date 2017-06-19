@@ -2,7 +2,6 @@
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
 <!--Proposed Tool Section: [PhenoMeNal]-->
 <tool id="xcms-correct-rt" name="xcms-correct-rt" version="0.1">
-<<<<<<< HEAD
   <description>Correct differences between retention times between different samples using the `retcor` generic method.</description>
   <command><![CDATA[
 	/usr/local/bin/retCor.r input=$xcms_correct_rt_input_1 output=$xcms_correct_rt_output_1 method=$method;
@@ -10,26 +9,13 @@
   </command>
   <inputs>
     <param name="xcms_correct_rt_input_1" type="data" format="rdata" optional="False" label="Input RData file" />
-=======
-  <description>Correct differences between retention times between different samples using the ‘retcor’ generic method.</description>
-  <command><![CDATA[
-	/usr/local/bin/retCor.r input=$input output=$output method=$method;
-  ]]>
-  </command>
-  <inputs>
-    <param name="input" type="data" format="txt" optional="False" label="Input RData file" />
->>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
     <param name="method" type="select" value="loess" label="Method" help="">
       <option value="loess" selected="True">loess</option>
       <option value="obiwarp" selected="False">obiwarp</option>
     </param>
   </inputs>
   <outputs>
-<<<<<<< HEAD
     <data name="xcms_correct_rt_output_1" type="text" format="rdata" label="xcms-correct-rt data" />
-=======
-    <data name="output" type="text" format="txt" label="xcms-correct-rt data" />
->>>>>>> 618018e67c92a9c6ca389001710e54e176274c9b
   </outputs>
   <help>.</help>
 </tool>
