@@ -2,18 +2,18 @@
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
 <!--Proposed Tool Section: [PhenoMeNal]-->
 <tool id="xcms-group-peaks" name="xcms-group-peaks" version="0.1">
-  <description>Group (or align) peaks using the XCMS ‘group’ generic method.</description>
+  <description>Group (or align) peaks using the XCMS `group` generic method.</description>
   <command><![CDATA[
-	/usr/local/bin/group.r input=$input output=$output bandwidth=$bandwidth mzwid=$mzwid;
+	/usr/local/bin/group.r input=$xcms_group_peaks_input_1 output=$xcms_group_peaks_output_1 bandwidth=$bandwidth mzwid=$mzwid;
   ]]>
   </command>
   <inputs>
-    <param name="input" type="data" format="rdata" optional="False" label="Input RData file" />
+    <param name="xcms_group_peaks_input_1" type="data" format="rdata" optional="False" label="Input RData file" />
     <param name="bandwidth" type="text" value="15"  label="Bandwidth" help="" />
     <param name="mzwid" type="text" value="0.005"  label="MzWid" help="" />
   </inputs>
   <outputs>
-    <data name="output" type="data" format="rdata" label="xcms-group-peaks data" />
+    <data name="xcms_group_peaks_output_1" type="data" format="rdata" label="xcms-group-peaks data" />
   </outputs>
   <help>.</help>
 </tool>

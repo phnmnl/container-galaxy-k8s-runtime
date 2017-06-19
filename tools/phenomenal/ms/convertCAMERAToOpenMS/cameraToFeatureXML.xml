@@ -3,9 +3,9 @@
 <!--Proposed Tool Section: [Quantitation]-->
 <tool id="cameraToFeatureXML" name="cameraToFeatureXML" version="1.0">
   <description>Converts CAMERA object to featureXML file</description>
-      <requirements>
-    <container type="docker">phnmnl/camera</container>
-    </requirements>
+<!--       <requirements>
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/camera</container>
+    </requirements>-->
   <command><![CDATA[
   /usr/local/bin/cameraToFeatureXML.r input=$infile  intensityColumn=$intensityColumn output=$outfile;
 

@@ -3,9 +3,9 @@
 <!--Proposed Tool Section: [Quantitation]-->
 <tool id="featureXMLToXcms" name="featureXMLToXcms" version="1.0">
   <description>Converts featureXML file to xcmsSet</description>
-    <requirements>
-    <container type="docker">phnmnl/camera</container>
-    </requirements>
+<!--     <requirements>
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/camera</container>
+    </requirements>-->
   <command><![CDATA[
   ls /usr/local/bin;
   /usr/local/bin/featureXMLToXcms.r input=$infile sampleClass=$sampleClass output=$outfile;

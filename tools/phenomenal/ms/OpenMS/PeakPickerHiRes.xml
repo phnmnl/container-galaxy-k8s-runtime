@@ -9,9 +9,9 @@
   </macros>
   <expand macro="stdio"/>
   <expand macro="requirements"/>
-    <requirements>
-    <container type="docker">phnmnl/openms</container>
-    </requirements>
+<!--     <requirements>
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/openms</container>
+    </requirements>-->
   <command><![CDATA[PeakPickerHiRes
 
 #if $param_in:

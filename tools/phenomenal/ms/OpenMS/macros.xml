@@ -4,9 +4,9 @@
      add additional macro files using the m/macros parameter -->
 <macros>
   <xml name="requirements">
-    <requirements>
+<!--     <requirements>
       <requirement type="binary">@EXECUTABLE@</requirement>
-    </requirements>
+    </requirements>-->
   </xml>
   <xml name="stdio">
     <stdio>

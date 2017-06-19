@@ -4,14 +4,14 @@
 <tool id="camera-annotate-peaks" name="camera-annotate-peaks" version="0.1">
   <description>Generate xsAnnotate object used for further CAMERA processing.</description>
   <command><![CDATA[
-	/usr/local/bin/xsAnnotate.r input=$input output=$output;
+	/usr/local/bin/xsAnnotate.r input=$camera_annotate_peaks_input_1 output=$camera_annotate_peaks_output_1;
   ]]>
   </command>
   <inputs>
-    <param name="input" type="data" format="rdata" optional="False" label="Input RData file" />
+    <param name="camera_annotate_peaks_input_1" type="data" format="rdata" optional="False" label="Input RData file" />
   </inputs>
   <outputs>
-    <data name="output" type="data" format="rdata" label="camera-annotate-peaks data" />
+    <data name="camera_annotate_peaks_output_1" type="data" format="rdata" label="camera-annotate-peaks data" />
   </outputs>
   <help>.</help>
 </tool>
