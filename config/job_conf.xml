@@ -266,6 +266,7 @@
 	    <param id="max_pod_retrials">3</param>
 	    <param id="docker_enabled">true</param>
         </destination>
+
     <destination id="container-mw2isa" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
