@@ -6,13 +6,13 @@ Author: lecorguille@sb-roscoff.fr
 """
 
 import logging
-import os,os.path,re
+import os.path,re
 from galaxy.datatypes.data import *
 from galaxy.datatypes.sniff import *
-from galaxy.datatypes.binary import * 
+from galaxy.datatypes.binary import *
 
 log = logging.getLogger(__name__)
-    
+
 
 class RdataCameraPositive( Binary ):
     file_ext = "rdata.camera.positive"
