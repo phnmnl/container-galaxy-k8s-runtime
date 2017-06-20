@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tool id="data_files" name="data_files" version="1.0">
+  <description>Get a MetaboLights study data files list</description>
+  <command><![CDATA[
+    echo "{ \"$factor_name\": \"$factor_value\" }" > query.json;
+    run_mtblisa.py --command GET_DATA_FILES --study $mtbls_id --query query.json
+  ]]>
+  </command>
+  <inputs>
+    <param name="mtbls_id" type="text" label="Metabolights Study Identifier"/>
+    <param name="factor_name" type="text" label="Factor name to filter on"/>
+    <param name="factor_value" type="text" label="Factor value to filter on"/>
+  </inputs>
+  <outputs>
+    <data format="json" name="output" from_work_dir="out.json" label="List of data files as JSON" />
+  </outputs>
+
+  <help>
+      This tool returns a list of data files for a given MetaboLights study based on a filter query using factor and factor value.
+  </help>
+
+</tool>

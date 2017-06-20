@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tool id="study_factor_values" name="study_factor_values" version="1.0">
+  <description>Get list of factor values for given factor used in a MetaboLights study</description>
+  <command><![CDATA[
+    run_mtblisa.py --command GET_FVS --study $mtbls_id --query $query
+  ]]>
+  </command>
+  <inputs>
+    <param name="mtbls_id" type="text" label="Metabolights Study Identifier"/>
+    <param name="query" type="text" label="Factor name"/>
+  </inputs>
+  <outputs>
+    <data format="json" name="output" from_work_dir="out.json" label="List of factor values as JSON" />
+  </outputs>
+
+  <help>
+      This tool gets a list of factor values for a given factor used in a given MetaboLights study.
+  </help>
+
+</tool>

@@ -211,8 +211,13 @@
   <section name="ISA tools" id="isa-tools">
     <tool file="phenomenal/isatools/get_study.xml"/>
     <tool file="phenomenal/isatools/get_study_json.xml"/>
+    <tool file="phenomenal/isatools/study_factors.xml"/>
+    <tool file="phenomenal/isatools/study_factor_values.xml"/>
+    <tool file="phenomenal/isatools/data_files.xml"/>
     <tool file="phenomenal/isatools/factors_summary.xml"/>
     <tool file="phenomenal/isatools/isatab_validator.xml"/>
     <tool file="phenomenal/isatools/isajson_validator.xml"/>
+    <tool file="phenomenal/isatools/isatab2json.xml"/>
+    <tool file="phenomenal/isatools/json2isatab.xml"/>
   </section>
 </toolbox>
