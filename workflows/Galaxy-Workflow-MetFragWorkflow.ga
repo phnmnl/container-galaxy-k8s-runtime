@@ -2,7 +2,7 @@
     "a_galaxy_workflow": "true", 
     "annotation": "", 
     "format-version": "0.1", 
-    "name": "MetFragWorkflow (imported from uploaded file) (imported from uploaded file) (imported from uploaded file)", 
+    "name": "MetFragWorkflow", 
     "steps": {
         "0": {
             "annotation": "", 
@@ -267,7 +267,7 @@
             }, 
             "post_job_actions": {}, 
             "tool_id": "msms2metfrag", 
-            "tool_state": "{\"__page__\": null, \"fragmentabs\": \"\\\"0.01\\\"\", \"maxSpectra\": \"\\\"\\\"\", \"fragmentppm\": \"\\\"15\\\"\", \"database\": \"\\\"MetChem\\\"\", \"msms2metfrag-input-1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"msms2metfrag-input-2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"minPeaks\": \"\\\"\\\"\", \"msms2metfrag_input_1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"msms2metfrag_input_2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"minPrecursorMass\": \"\\\"\\\"\", \"inputMS2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"mode\": \"\\\"pos\\\"\", \"precursorppm\": \"\\\"15\\\"\", \"adductRules\": \"\\\"primary\\\"\", \"inputCAMERA\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"maxPrecursorMass\": \"\\\"\\\"\"}", 
+            "tool_state": "{\"__page__\": null, \"fragmentabs\": \"\\\"0.01\\\"\", \"maxSpectra\": \"\\\"\\\"\", \"fragmentppm\": \"\\\"15\\\"\", \"database\": \"\\\"KEGG\\\"\", \"msms2metfrag-input-1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"msms2metfrag-input-2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"minPeaks\": \"\\\"\\\"\", \"msms2metfrag_input_1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"msms2metfrag_input_2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"minPrecursorMass\": \"\\\"\\\"\", \"inputMS2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"mode\": \"\\\"pos\\\"\", \"precursorppm\": \"\\\"15\\\"\", \"adductRules\": \"\\\"primary\\\"\", \"inputCAMERA\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"maxPrecursorMass\": \"\\\"\\\"\"}", 
             "tool_version": "0.1", 
             "type": "tool", 
             "uuid": "3dcfaa82-dd79-4110-aa31-e77d77a2211d", 
