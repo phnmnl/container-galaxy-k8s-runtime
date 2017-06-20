@@ -2,7 +2,7 @@
     "a_galaxy_workflow": "true", 
     "annotation": "", 
     "format-version": "0.1", 
-    "name": "MetFragWorkflow (imported from uploaded file) (imported from uploaded file)", 
+    "name": "MetFragWorkflow (imported from uploaded file) (imported from uploaded file) (imported from uploaded file)", 
     "steps": {
         "0": {
             "annotation": "", 
@@ -304,7 +304,7 @@
             }, 
             "post_job_actions": {}, 
             "tool_id": "metfrag-cli-batch", 
-            "tool_state": "{\"__page__\": null, \"metfrag_cli_batch_input_1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"metfrag-cli-batch-input-1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"inputfile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"additionalparameters\": \"\\\"LocalMetChemDatabase=metchem LocalMetChemDatabasePortNumber=5432 LocalMetChemDatabaseServerIp=msbi-koch.ipb-halle.de LocalMetChemDatabaseUser=metchemro LocalMetChemDatabasePassword=metchemro LocalMetChemDatabaseLibrary=lipidmaps\\\"\"}", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"metfrag_cli_batch_input_1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"additionalparameters\": \"\\\"\\\"\"}", 
             "tool_version": "0.1", 
             "type": "tool", 
             "uuid": "2b6dca1b-d0f5-4c9e-bff4-280fe6577710", 
@@ -321,7 +321,12 @@
                     "output_name": "metfrag_cli_batch_output_1"
                 }
             }, 
-            "inputs": [], 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Zip Data Collection", 
+                    "name": "input"
+                }
+            ], 
             "label": null, 
             "name": "Zip Data Collection", 
             "outputs": [
@@ -336,12 +341,12 @@
             }, 
             "post_job_actions": {}, 
             "tool_id": "zip-collection", 
-            "tool_state": "{\"input\": \"{\\\"values\\\": [{\\\"src\\\": \\\"hda\\\", \\\"id\\\": 79}]}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}", 
+            "tool_state": "{\"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}", 
             "tool_version": "0.1", 
             "type": "tool", 
             "uuid": "9949e4b1-ff6e-4006-8b39-55b2327ef25a", 
             "workflow_outputs": []
         }
     }, 
-    "uuid": "bd7392a3-ce4f-4c9d-9693-e65b7eead41e"
+    "uuid": "807f058f-084a-4425-a4c5-cb02ebb7fd0f"
 }
