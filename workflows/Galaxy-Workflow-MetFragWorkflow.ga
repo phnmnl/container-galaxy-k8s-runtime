@@ -1,0 +1,352 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "MetFragWorkflow", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "content_id": "xcms-find-peaks", 
+            "errors": null, 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool xcms-find-peaks", 
+                    "name": "xcms_find_peaks_input_1"
+                }
+            ], 
+            "label": null, 
+            "name": "xcms-find-peaks", 
+            "outputs": [
+                {
+                    "name": "xcms_find_peaks_output_1", 
+                    "type": "rdata"
+                }
+            ], 
+            "position": {
+                "left": 207, 
+                "top": 208
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "xcms-find-peaks", 
+            "tool_state": "{\"polarity\": \"\\\"positive\\\"\", \"__page__\": 0, \"peakwidthHigh\": \"\\\"30\\\"\", \"noise\": \"\\\"1000\\\"\", \"peakwidthLow\": \"\\\"4\\\"\", \"__rerun_remap_job_id__\": null, \"ppm\": \"\\\"15\\\"\", \"xcms-find-peaks-input-1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"xcms_find_peaks_input_1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "a0ff8170-2baf-4dde-b2c6-b373963f316f", 
+            "workflow_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "content_id": "msnbase-read-msms", 
+            "errors": null, 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool msnbase-read-msms", 
+                    "name": "msnbase_read_msms_input_1"
+                }
+            ], 
+            "label": null, 
+            "name": "msnbase-read-msms", 
+            "outputs": [
+                {
+                    "name": "msnbase_read_msms_output_1", 
+                    "type": "rdata"
+                }
+            ], 
+            "position": {
+                "left": 269, 
+                "top": 561
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "msnbase-read-msms", 
+            "tool_state": "{\"__page__\": 0, \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"msnbase-read-msms-input-1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"msnbase_read_msms_input_1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "0d06daa8-a87c-4b6a-8453-3c2bb735c817", 
+            "workflow_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "content_id": "camera-annotate-peaks", 
+            "errors": null, 
+            "id": 2, 
+            "input_connections": {
+                "camera_annotate_peaks_input_1": {
+                    "id": 0, 
+                    "output_name": "xcms_find_peaks_output_1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool camera-annotate-peaks", 
+                    "name": "camera_annotate_peaks_input_1"
+                }
+            ], 
+            "label": null, 
+            "name": "camera-annotate-peaks", 
+            "outputs": [
+                {
+                    "name": "camera_annotate_peaks_output_1", 
+                    "type": "rdata"
+                }
+            ], 
+            "position": {
+                "left": 528, 
+                "top": 210
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "camera-annotate-peaks", 
+            "tool_state": "{\"__page__\": 0, \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"camera-annotate-peaks-input-1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"camera_annotate_peaks_input_1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "bb6a966b-33cf-496f-824d-da77c53c017b", 
+            "workflow_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "content_id": "camera-group-fwhm", 
+            "errors": null, 
+            "id": 3, 
+            "input_connections": {
+                "camera_group_fwhm_input_1": {
+                    "id": 2, 
+                    "output_name": "camera_annotate_peaks_output_1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool camera-group-fwhm", 
+                    "name": "camera_group_fwhm_input_1"
+                }
+            ], 
+            "label": null, 
+            "name": "camera-group-fwhm", 
+            "outputs": [
+                {
+                    "name": "camera_group_fwhm_output_1", 
+                    "type": "rdata"
+                }
+            ], 
+            "position": {
+                "left": 220, 
+                "top": 397
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "camera-group-fwhm", 
+            "tool_state": "{\"camera_group_fwhm_input_1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": 0, \"intval\": \"\\\"maxo\\\"\", \"sigma\": \"\\\"5\\\"\", \"__rerun_remap_job_id__\": null, \"perfwhm\": \"\\\"0.9\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"camera-group-fwhm-input-1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "6cced407-e151-406f-ad94-0aba21677673", 
+            "workflow_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "content_id": "camera-find-adducts", 
+            "errors": null, 
+            "id": 4, 
+            "input_connections": {
+                "camera_find_adducts_input_1": {
+                    "id": 3, 
+                    "output_name": "camera_group_fwhm_output_1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool camera-find-adducts", 
+                    "name": "camera_find_adducts_input_1"
+                }
+            ], 
+            "label": null, 
+            "name": "camera-find-adducts", 
+            "outputs": [
+                {
+                    "name": "camera_find_adducts_output_1", 
+                    "type": "rdata"
+                }, 
+                {
+                    "name": "camera_find_adducts_output_2", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 523.5, 
+                "top": 387.5
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "camera-find-adducts", 
+            "tool_state": "{\"polarity\": \"\\\"positive\\\"\", \"__page__\": null, \"rules\": \"\\\"primary\\\"\", \"plotpdf\": \"\\\"false\\\"\", \"ppm\": \"\\\"10\\\"\", \"camera_find_adducts_input_1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input\": \"null\", \"camera-find-adducts-input-1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "a2753891-9448-4833-8f3a-25c50b335f1f", 
+            "workflow_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "content_id": "map-msms2camera", 
+            "errors": null, 
+            "id": 5, 
+            "input_connections": {
+                "map_msms2camera_input_1": {
+                    "id": 4, 
+                    "output_name": "camera_find_adducts_output_1"
+                }, 
+                "map_msms2camera_input_2": {
+                    "id": 1, 
+                    "output_name": "msnbase_read_msms_output_1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool map-msms2camera", 
+                    "name": "map_msms2camera_input_2"
+                }, 
+                {
+                    "description": "runtime parameter for tool map-msms2camera", 
+                    "name": "map_msms2camera_input_1"
+                }
+            ], 
+            "label": null, 
+            "name": "map-msms2camera", 
+            "outputs": [
+                {
+                    "name": "map_msms2camera_output_1", 
+                    "type": "rdata"
+                }
+            ], 
+            "position": {
+                "left": 608, 
+                "top": 585
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "map-msms2camera", 
+            "tool_state": "{\"RT\": \"\\\"10\\\"\", \"__page__\": 0, \"map_msms2camera_input_2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"map_msms2camera_input_1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"inputCAMERA\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"ppm\": \"\\\"15\\\"\", \"inputMS2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"map-msms2camera-input-1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"map-msms2camera-input-2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "5bfc774a-ec45-43d8-87c1-060a479ae399", 
+            "workflow_outputs": []
+        }, 
+        "6": {
+            "annotation": "", 
+            "content_id": "msms2metfrag", 
+            "errors": null, 
+            "id": 6, 
+            "input_connections": {
+                "msms2metfrag_input_1": {
+                    "id": 5, 
+                    "output_name": "map_msms2camera_output_1"
+                }, 
+                "msms2metfrag_input_2": {
+                    "id": 4, 
+                    "output_name": "camera_find_adducts_output_1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool msms2metfrag", 
+                    "name": "msms2metfrag_input_1"
+                }, 
+                {
+                    "description": "runtime parameter for tool msms2metfrag", 
+                    "name": "msms2metfrag_input_2"
+                }
+            ], 
+            "label": null, 
+            "name": "msms2metfrag", 
+            "outputs": [
+                {
+                    "name": "MetFrag Parameters", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 853.5, 
+                "top": 354.5
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "msms2metfrag", 
+            "tool_state": "{\"__page__\": null, \"fragmentabs\": \"\\\"0.01\\\"\", \"maxSpectra\": \"\\\"\\\"\", \"fragmentppm\": \"\\\"15\\\"\", \"database\": \"\\\"KEGG\\\"\", \"msms2metfrag-input-1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"msms2metfrag-input-2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"minPeaks\": \"\\\"\\\"\", \"msms2metfrag_input_1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"msms2metfrag_input_2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"minPrecursorMass\": \"\\\"\\\"\", \"inputMS2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"mode\": \"\\\"pos\\\"\", \"precursorppm\": \"\\\"15\\\"\", \"adductRules\": \"\\\"primary\\\"\", \"inputCAMERA\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"maxPrecursorMass\": \"\\\"\\\"\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "3dcfaa82-dd79-4110-aa31-e77d77a2211d", 
+            "workflow_outputs": []
+        }, 
+        "7": {
+            "annotation": "", 
+            "content_id": "metfrag-cli-batch", 
+            "errors": null, 
+            "id": 7, 
+            "input_connections": {
+                "metfrag_cli_batch_input_1": {
+                    "id": 6, 
+                    "output_name": "MetFrag Parameters"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool metfrag-cli-batch", 
+                    "name": "metfrag_cli_batch_input_1"
+                }
+            ], 
+            "label": null, 
+            "name": "metfrag-cli-batch", 
+            "outputs": [
+                {
+                    "name": "metfrag_cli_batch_output_1", 
+                    "type": "csv"
+                }
+            ], 
+            "position": {
+                "left": 938, 
+                "top": 552
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "metfrag-cli-batch", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"metfrag_cli_batch_input_1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"additionalparameters\": \"\\\"\\\"\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "2b6dca1b-d0f5-4c9e-bff4-280fe6577710", 
+            "workflow_outputs": []
+        }, 
+        "8": {
+            "annotation": "", 
+            "content_id": "zip-collection", 
+            "errors": null, 
+            "id": 8, 
+            "input_connections": {
+                "input": {
+                    "id": 7, 
+                    "output_name": "metfrag_cli_batch_output_1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Zip Data Collection", 
+                    "name": "input"
+                }
+            ], 
+            "label": null, 
+            "name": "Zip Data Collection", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "zip"
+                }
+            ], 
+            "position": {
+                "left": 1091.5, 
+                "top": 338.5
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "zip-collection", 
+            "tool_state": "{\"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "9949e4b1-ff6e-4006-8b39-55b2327ef25a", 
+            "workflow_outputs": []
+        }
+    }, 
+    "uuid": "807f058f-084a-4425-a4c5-cb02ebb7fd0f"
+}

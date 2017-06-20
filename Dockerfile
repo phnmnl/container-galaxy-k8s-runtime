@@ -4,7 +4,7 @@ MAINTAINER PhenoMeNal-H2020 Project <phenomenal-h2020-users@googlegroups.com>
 LABEL Description="Galaxy 17.01-phenomenal for running inside Kubernetes."
 LABEL software="Galaxy"
 LABEL software.version="17.01-pheno"
-LABEL version="1.0"
+LABEL version="1.1"
 
 RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transport-https software-properties-common wget && \
     apt-get update -qq && \
@@ -41,6 +41,11 @@ COPY workflows workflows
 COPY container-simple-checks.sh container-simple-checks.sh
 COPY test_cmds.txt test_cmds.txt
 RUN chmod u+x /galaxy/ansible/run_galaxy_config.sh
+
+# Missing XCMS datatypes for w4m
+COPY external-datatypes/rdata_xcms_datatype.py /galaxy/lib/galaxy/datatypes/
+COPY external-datatypes/rdata_camera_datatype.py /galaxy/lib/galaxy/datatypes/
+COPY config/datatypes_conf.xml config/datatypes_conf.xml
 
 EXPOSE 8080
 

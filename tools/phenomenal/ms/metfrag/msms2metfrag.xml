@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="msms2metfrag" name="msms2metfrag" version="0.1">
+  <description>Generate MetFrag parameters given MS/MS spectral information and CAMERA adduct annotation.</description>
+  <command><![CDATA[
+	mkdir outputfolder;
+	/usr/local/bin/MS2ToMetFrag.r inputCAMERA=$msms2metfrag_input_2 inputMS2=$msms2metfrag_input_1 output=outputfolder precursorppm=$precursorppm fragmentppm=$fragmentppm fragmentabs=$fragmentabs database=$database maxSpectra=$maxSpectra minPeaks=$minPeaks maxPrecursorMass=$maxPrecursorMass minPrecursorMass=$minPrecursorMass mode=$mode adductRules=$adductRules;
+  ]]>
+  </command>
+  <inputs>
+    <param name="msms2metfrag_input_1" type="data" format="rdata" optional="False" label="map-msms2camera data" />
+    <param name="msms2metfrag_input_2" type="data" format="rdata" optional="False" label="camera-find-adducts data" />
+    <param name="precursorppm" type="text" format="txt" value="10" optional="False" label="Precursor PPM" />
+    <param name="fragmentppm" type="text" format="txt" value="10" optional="False" label="Fragment PPM (mzppm)" />
+    <param name="fragmentabs" type="text" format="txt" value="0.01" optional="False" label="Fragment Abs (mzabs)" />
+    <param name="minPeaks" type="text" format="txt" value="" optional="True" label="Minimum number peaks" />
+    <param name="maxSpectra" type="text" format="txt" value="" optional="True" label="Maximum number spectra" />
+    <param name="maxPrecursorMass" type="text" format="txt" value="" optional="True" label="Maximal precursor mass" />
+    <param name="minPrecursorMass" type="text" format="txt" value="" optional="True" label="Minimal precursor mass" />
+    <param name="mode" type="select" value="pos" optional="False" label="Mode" help="Charge mode of measurement.">
+      <option value="pos" selected="True">pos</option>
+      <option value="neg" selected="False">neg</option>
+    </param>
+    <param name="database" type="select" value="KEGG" optional="False" label="Database" help="Database to which queries are sent.">
+      <option value="KEGG" selected="True">KEGG</option>
+      <option value="PubChem" selected="False">PubChem</option>
+      <option value="MetChem" selected="False">MetChem</option>
+    </param>
+    <param name="adductRules" type="select" value="primary" optional="False" label="Adduct Rules" help="Precursor adduct rule set used for CAMERA.">
+      <option value="primary" selected="True">primary</option>
+      <option value="extended" selected="False">extended</option>
+    </param>
+  </inputs>
+  <outputs>
+    <collection type="list" label="MetFrag Parameters" format="txt" name="MetFrag Parameters" >
+        <discover_datasets pattern="__designation_and_ext__" directory="outputfolder" />
+    </collection>
+  </outputs>
+  <help>.</help>
+</tool>

@@ -24,6 +24,10 @@ if [ -z $GALAXY_SEC_DB_ENGINE ]; then
   log "Galaxy sqlite directory created since we are not using postgresql"
 fi
 
+if [ -f config/galaxy.ini.injected ]; then
+  cp config/galaxy.ini.injected config/galaxy.ini
+  log "Replaced galaxy ini for the user's injected one"
+fi
 
 sudo apt-get update -y && sudo apt-get install -y --no-install-recommends ansible
 ansible-playbook -i "localhost," -c local ansible/set-galaxy-config-values.yaml
