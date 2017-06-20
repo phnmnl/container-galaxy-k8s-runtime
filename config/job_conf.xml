@@ -452,7 +452,7 @@
     <tool id="get_study_json" destination="container-mtblisa"/>
     <tool id="factors_summary" destination="container-mtblisa"/>
 	<tool id="isajson_validator" destination="container-isajson-validator"/>
-    <tool id="isajson_validator" destination="container-isajson-validator"/>
+    <tool id="isatab_validator" destination="container-isatab-validator"/>
 	<tool id="escher-fluxomics" destination="container-escher-fluxomics"/>
     <tool id="mw2isa" destination="container-mw2isa"/>
     </tools>
