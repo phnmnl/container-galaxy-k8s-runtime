@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/). This file was automatically generated using CTD2Galaxy.-->
+<!--Proposed Tool Section: [Targeted Experiments]-->
+<tool id="MRMMapper" name="MRMMapper" version="2.1.0">
+  <description>MRMMapper maps measured chromatograms (mzML) and the transitions used (TraML)</description>
+  <macros>
+    
+    <import>macros.xml</import>
+  </macros>
+  <expand macro="stdio"/>
+  <expand macro="requirements"/>
+<!--     <requirements>
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/openms</container>
+    </requirements>-->
+  <command><![CDATA[MRMMapper
+
+#if $param_in:
+  -in $param_in
+#end if
+#if $param_tr:
+  -tr $param_tr
+#end if
+#if $param_out:
+  -out $param_out
+#end if
+#if $param_precursor_tolerance:
+  -precursor_tolerance $param_precursor_tolerance
+#end if
+#if $param_product_tolerance:
+  -product_tolerance $param_product_tolerance
+#end if
+#if $param_no_strict:
+  -no-strict
+#end if
+#if $param_threads:
+  -threads $param_threads
+#end if
+#if $adv_opts.adv_opts_selector=='advanced':
+    #if $adv_opts.param_version:
+  -version     "$adv_opts.param_version"
+#end if
+    #if $adv_opts.param_log:
+  -log     "$adv_opts.param_log"
+#end if
+    #if $adv_opts.param_debug:
+  -debug $adv_opts.param_debug
+#end if
+    #if $adv_opts.param_no_progress:
+  -no_progress
+#end if
+    #if $adv_opts.param_force:
+  -force
+#end if
+    #if $adv_opts.param_test:
+  -test
+#end if
+#end if
+]]></command>
+  <inputs>
+    <param name="param_in" type="data" format="mzml" optional="False" label="Input file containing chromatograms (converted mzXML file)" help="(-in) "/>
+    <param name="param_tr" type="data" format="" optional="False" label="transition file" help="(-tr) "/>
+    <param name="param_precursor_tolerance" type="float" value="0.1" label="Precursor tolerance when mapping (in Th)" help="(-precursor_tolerance) "/>
+    <param name="param_product_tolerance" type="float" value="0.1" label="Product tolerance when mapping (in Th)" help="(-product_tolerance) "/>
+    <param name="param_no_strict" display="radio" type="boolean" truevalue="-no-strict" falsevalue="" checked="false" optional="True" label="run in non-strict mode and allow some chromatograms to not be mapped" help="(-no-strict) "/>
+    <param name="param_threads" type="integer" value="1" label="Sets the number of threads allowed to be used by the TOPP tool" help="(-threads) "/>
+    <expand macro="advanced_options">
+      <param name="param_version" type="text" size="30" value="2.1.0" label="Version of the tool that generated this parameters file" help="(-version) ">
+        <sanitizer>
+          <valid initial="string.printable">
+            <remove value="'"/>
+            <remove value="&quot;"/>
+          </valid>
+        </sanitizer>
+      </param>
+      <param name="param_log" type="text" size="30" label="Name of log file (created only when specified)" help="(-log) ">
+        <sanitizer>
+          <valid initial="string.printable">
+            <remove value="'"/>
+            <remove value="&quot;"/>
+          </valid>
+        </sanitizer>
+      </param>
+      <param name="param_debug" type="integer" value="0" label="Sets the debug level" help="(-debug) "/>
+      <param name="param_no_progress" display="radio" type="boolean" truevalue="-no_progress" falsevalue="" checked="false" optional="True" label="Disables progress logging to command line" help="(-no_progress) "/>
+      <param name="param_force" display="radio" type="boolean" truevalue="-force" falsevalue="" checked="false" optional="True" label="Overwrite tool specific checks" help="(-force) "/>
+      <param name="param_test" display="radio" type="boolean" truevalue="-test" falsevalue="" checked="false" optional="True" label="Enables the test mode (needed for internal use only)" help="(-test) "/>
+    </expand>
+  </inputs>
+  <outputs>
+    <data name="param_out" format="mzml"/>
+  </outputs>
+  <help>MRMMapper maps measured chromatograms (mzML) and the transitions used (TraML)
+
+
+For more information, visit http://ftp.mi.fu-berlin.de/OpenMS/release-documentation/html/TOPP_MRMMapper.html</help>
+</tool>

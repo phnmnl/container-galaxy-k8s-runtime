@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="metfrag-vis" name="metfrag-vis" version="0.1">
+  <description>Combine MetFrag results to a single PDF output.</description>
+  <command><![CDATA[
+  	mkdir /tmp/outputdir/;
+        bash /usr/local/bin/visualize-metfrag.sh $metfrag_vis_input_1 /tmp/outputdir/combined_top1_cands.csv $metfrag_vis_input_2;
+        java -jar /usr/local/bin/ConvertMetFragCSV.jar csv=/tmp/outputdir/combined_top1_cands.csv output=/tmp/outputdir/combined_top1_cands.tex propertyWhiteList=Score,SampleName,Identifier,MolecularFormula,CompoundName,NumberPeaksUsed,NoExplPeaks,MetFragWebURL format=tex;
+        pdflatex -output-directory /tmp/outputdir/ /tmp/outputdir/combined_top1_cands.tex;
+        mv /tmp/outputdir/combined_top1_cands.pdf $metfrag_vis_output_1;
+        rm -rf /tmp/outputdir/;
+        rm /tmp/*.png;
+  ]]>
+  </command>
+  <inputs>
+    <param name="metfrag_vis_input_1" type="data" format="csv" multiple="True" optional="False" label="MetFrag result files" />
+    <param name="metfrag_vis_input_2" type="data" format="txt" optional="True" multiple="True" label="MetFrag parameter files" />
+  </inputs>
+  <outputs>
+	<data name="metfrag_vis_output_1" type="data" format="pdf" label="metfrag-vis-results" />	
+  </outputs>
+  <help>.</help>
+</tool>

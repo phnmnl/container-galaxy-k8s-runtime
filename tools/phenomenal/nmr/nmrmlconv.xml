@@ -1,15 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/). This file was automatically generated using CTD2Galaxy.-->
 <!--Proposed Tool Section: [File Handling]-->
-<tool id="nmrmlconv" name="nmrmlconv" version="0.1">
+<tool id="nmrmlconv" name="nmrmlconv" version="0.2">
   <requirements>
-        <container type="docker">phnmnl/nmrmlconv</container>
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/nmrmlconv</container>
   </requirements>
   <description>Converts vendor RAW NMR to nmrML.</description>
   <command><![CDATA[
+    echo $infile;
+    ls -al $infile;
     mkdir -p \$PWD/tmp;
     unzip -q -d \$PWD/tmp $infile;
-    java -jar /usr/local/share/nmrML/converter.jar -l create -b -z -t $venformat -i \$PWD/tmp -o $outfile;
+    ls -al \$PWD/tmp;
+    export samplename="ADG10003u_007";
+    java -jar /usr/local/share/nmrML/converter.jar -l create -b -z -t $venformat -a \$samplename -i \$PWD/tmp -o $outfile;
   ]]>
   </command>
   <inputs>
@@ -31,7 +34,7 @@
     </param>
   </inputs>
   <outputs>
-    <data name="outfile" type="text" format="nmrML" label="nmrML file" />
+    <data name="outfile" type="data" format="nmrML" label="nmrML file" />
   </outputs>
   <help>
 nmrML is an open mark-up language for NMR data. This tool converts RAW vendor NMR data to nmrML format.

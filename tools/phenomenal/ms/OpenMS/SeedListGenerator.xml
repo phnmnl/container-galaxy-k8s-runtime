@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/). This file was automatically generated using CTD2Galaxy.-->
+<!--Proposed Tool Section: [Quantitation]-->
+<tool id="SeedListGenerator" name="SeedListGenerator" version="2.1.0">
+  <description>Generates seed lists for feature detection.</description>
+  <macros>
+    
+    <import>macros.xml</import>
+  </macros>
+  <expand macro="stdio"/>
+  <expand macro="requirements"/>
+<!--     <requirements>
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/openms</container>
+    </requirements>-->
+  <command><![CDATA[SeedListGenerator
+
+#if $param_in:
+  -in $param_in
+#end if
+
+#if $rep_param_out:
+-out
+  #for token in $rep_param_out:
+    #if " " in str(token):
+      "$token.param_out"
+    #else
+      $token.param_out
+    #end if
+  #end for
+#end if
+#if $param_use_peptide_mass:
+  -use_peptide_mass
+#end if
+#if $param_threads:
+  -threads $param_threads
+#end if
+#if $adv_opts.adv_opts_selector=='advanced':
+    #if $adv_opts.param_version:
+  -version     "$adv_opts.param_version"
+#end if
+    #if $adv_opts.param_log:
+  -log     "$adv_opts.param_log"
+#end if
+    #if $adv_opts.param_debug:
+  -debug $adv_opts.param_debug
+#end if
+    #if $adv_opts.param_no_progress:
+  -no_progress
+#end if
+    #if $adv_opts.param_force:
+  -force
+#end if
+    #if $adv_opts.param_test:
+  -test
+#end if
+#end if
+]]></command>
+  <inputs>
+    <param name="param_in" type="data" format="featurexml,consensusxml,mzml" optional="False" label="Input file (see below for details)" help="(-in) "/>
+    <param name="param_use_peptide_mass" display="radio" type="boolean" truevalue="-use_peptide_mass" falsevalue="" checked="false" optional="True" label="[idXML input only] Use the monoisotopic mass of the best peptide hit for the m/z position (default: use precursor m/z)" help="(-use_peptide_mass) "/>
+    <param name="param_threads" type="integer" value="1" label="Sets the number of threads allowed to be used by the TOPP tool" help="(-threads) "/>
+    <expand macro="advanced_options">
+      <param name="param_version" type="text" size="30" value="2.1.0" label="Version of the tool that generated this parameters file" help="(-version) ">
+        <sanitizer>
+          <valid initial="string.printable">
+            <remove value="'"/>
+            <remove value="&quot;"/>
+          </valid>
+        </sanitizer>
+      </param>
+      <param name="param_log" type="text" size="30" label="Name of log file (created only when specified)" help="(-log) ">
+        <sanitizer>
+          <valid initial="string.printable">
+            <remove value="'"/>
+            <remove value="&quot;"/>
+          </valid>
+        </sanitizer>
+      </param>
+      <param name="param_debug" type="integer" value="0" label="Sets the debug level" help="(-debug) "/>
+      <param name="param_no_progress" display="radio" type="boolean" truevalue="-no_progress" falsevalue="" checked="false" optional="True" label="Disables progress logging to command line" help="(-no_progress) "/>
+      <param name="param_force" display="radio" type="boolean" truevalue="-force" falsevalue="" checked="false" optional="True" label="Overwrite tool specific checks" help="(-force) "/>
+      <param name="param_test" display="radio" type="boolean" truevalue="-test" falsevalue="" checked="false" optional="True" label="Enables the test mode (needed for internal use only)" help="(-test) "/>
+    </expand>
+  </inputs>
+  <outputs>
+    <data name="param_out" format="featurexml"/>
+  </outputs>
+  <help>Generates seed lists for feature detection.
+
+
+For more information, visit http://ftp.mi.fu-berlin.de/OpenMS/release-documentation/html/TOPP_SeedListGenerator.html</help>
+</tool>

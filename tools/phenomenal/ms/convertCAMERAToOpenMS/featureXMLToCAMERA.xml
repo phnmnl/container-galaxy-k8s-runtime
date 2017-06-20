@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/). This file was automatically generated using CTD2Galaxy.-->
+<!--Proposed Tool Section: [Quantitation]-->
+<tool id="featureXMLToCAMERA" name="featureXMLToCAMERA" version="1.0">
+  <description>Converts featureXML file to CAMERA</description>
+<!--       <requirements>
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/camera</container>
+    </requirements>-->
+  <command><![CDATA[
+  /usr/local/bin/featureXMLToCAMERA.r input=$infile sampleClass=$sampleClass output=$outfile;
+  ]]></command>
+   <inputs>
+    <param name="infile" type="data" format="featurexml" optional="False" label="Input file with peak list in tsv/txt format" />
+	<param name="sampleClass" type="text" value="sampleClass" optional="False" label="Class of the sample" help="Class of the sample. For example disease" />
+  </inputs>
+  <outputs>
+    <data name="outfile" format="rdata" label="RData output file" />
+  </outputs>
+  <help>A simple converter for featureXML to CAMERA</help>
+</tool>
