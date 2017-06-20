@@ -10,12 +10,12 @@
             set in universe_wsgi.ini (or equivalent general galaxy config file).
             -->
             <param id="k8s_persistent_volume_claim_mount_path">/opt/galaxy_data</param>
-	    <param id="k8s_namespace">default</param>
-	    <param id="k8s_supplemental_group_id">0</param>
-	    <param id="k8s_fs_group_id">0</param>
-	    <param id="k8s_pull_policy">IfNotPresent</param>
-            <!-- Allows pods to retry up to this number of times, before marking the Job as failed -->
-            <param id="k8s_pod_retrials">1</param>
+            <param id="k8s_namespace">default</param>
+            <param id="k8s_supplemental_group_id">0</param>
+            <param id="k8s_fs_group_id">0</param>
+            <param id="k8s_pull_policy">IfNotPresent</param>
+        <!-- Allows pods to retry up to this number of times, before marking the Job as failed -->
+        <param id="k8s_pod_retrials">1</param>
         </plugin>
     </plugins>
     <handlers>
@@ -63,7 +63,7 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
-  <destination id="papy-container" runner="k8s">
+        <destination id="papy-container" runner="k8s">
             <param id="docker_enabled">true</param>
         </destination>      
 	<destination id="w4m-mtbls-dwnld-container" runner="k8s">
@@ -265,16 +265,15 @@
 	    <param id="docker_tag_override">latest</param>
 	    <param id="max_pod_retrials">3</param>
 	    <param id="docker_enabled">true</param>
-        </destination>
-
-    <destination id="container-mw2isa" runner="k8s">
+  </destination>
+  <destination id="container-mw2isa" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">mw2isa</param>
             <param id="docker_tag_override">latest</param>
             <param id="max_pod_retrials">1</param>
             <param id="docker_enabled">true</param>
-    </destination>
+  </destination>
 	<destination id="msnbase-container" runner="k8s">
             <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
@@ -282,15 +281,31 @@
 	    <param id="docker_tag_override">latest</param>
 	    <param id="max_pod_retrials">1</param>
 	    <param id="docker_enabled">true</param>
-	</destination>	    
+  </destination>
+        <destination id="container-isatab2json" runner="k8s">
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">isatab2json</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
         <destination id="container-openms" runner="k8s">
-	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+	          <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">openms</param>
             <param id="docker_tag_override">latest</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
-        </destination>       
+        </destination>
+        <destination id="container-json2isatab" runner="k8s">
+           <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+           <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">json2isatab</param>
+           <param id="docker_tag_override">latest</param>
+           <param id="max_pod_retrials">3</param>
+           <param id="docker_enabled">true</param>
+        </destination>
     </destinations>
     <tools>
         <!-- Tools can be configured to use specific destinations or handlers,
@@ -301,12 +316,16 @@
         <tool id="BatchFeatureRemoval" destination="batchfeature-container"/>
         <tool id="upps_blankfilter" destination="blankfilter-container"/>
         <tool id="log2transformation" destination="log2transformation-container"/>
-        <tool id="iso2flux" destination="iso2flux-container"/>
+	<!-- Fluxomics -->
+	<tool id="iso2flux" destination="iso2flux-container"/>
         <tool id="midcor" destination="midcor-container"/>
         <tool id="ramid" destination="ramid-container"/>
         <tool id="isodyn" destination="isodyn-container"/>
+	<tool id="escher-fluxomics" destination="container-escher-fluxomics"/>
+	<!-- ICL -->
         <tool id="batman-nmr" destination="batman-container"/>
-        <tool id="power-analysis" destination="papy-container"/>
+	<tool id="power-analysis" destination="papy-container"/>
+	<!-- W4M Sacurine -->
         <tool id="mtbls-dwnld" destination="w4m-mtbls-dwnld-container"/>
         <tool id="Univariate" destination="w4m-univariate-container"/>
         <tool id="Multivariate" destination="w4m-multivariate-container"/>
@@ -445,16 +464,21 @@
 	<tool id="XTandemAdapter" destination="container-openms"/> 
 	<!-- MetFrag -->
 	<tool id="metfrag-cli-batch" destination="metfrag-cli-batch-container" />
-    <tool id="msnbase-read-msms" destination="msnbase-container" />
-    <tool id="map-msms2camera" destination="msnbase-container" />
-    <tool id="msms2metfrag" destination="msnbase-container" />
+  <tool id="msnbase-read-msms" destination="msnbase-container" />
+  <tool id="map-msms2camera" destination="msnbase-container" />
+  <tool id="msms2metfrag" destination="msnbase-container" />
 	<tool id="metfrag-vis" destination="metfrag-vis-container" />
-    <tool id="get_study" destination="container-mtblisa"/>
-    <tool id="get_study_json" destination="container-mtblisa"/>
-    <tool id="factors_summary" destination="container-mtblisa"/>
-	<tool id="isajson_validator" destination="container-isajson-validator"/>
-    <tool id="isatab_validator" destination="container-isatab-validator"/>
-	<tool id="escher-fluxomics" destination="container-escher-fluxomics"/>
-    <tool id="mw2isa" destination="container-mw2isa"/>
+	<!-- ISA related tools -->
+        <tool id="get_study" destination="container-mtblisa"/>
+        <tool id="get_study_json" destination="container-mtblisa"/>
+        <tool id="study_factor_values" destination="container-mtblisa"/>
+        <tool id="study_factors" destination="container-mtblisa"/>
+        <tool id="data_files" destination="container-mtblisa"/>
+        <tool id="factors_summary" destination="container-mtblisa"/>
+        <tool id="isajson_validator" destination="container-isajson-validator"/>
+        <tool id="isatab_validator" destination="container-isatab-validator"/>
+        <tool id="isatab2json" destination="container-isatab2json"/>
+        <tool id="json2isatab" destination="container-json2isatab"/>
+        <tool id="mw2isa" destination="container-mw2isa"/>
     </tools>
 </job_conf>
