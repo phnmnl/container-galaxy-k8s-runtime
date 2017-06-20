@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tool id="mw2isa" name="mw2isa" version="1.0">
+  <description>A tool to obtain an ISA document from NIH Metabolomics Workbench</description>
+  <command><![CDATA[
+run_mwtab2isa.py "$mw_study_id" dir;
+  ]]>
+  </command>
+  <!-- mv "$mw_study_id".zip "$output_zip"; -->
+  <inputs>
+    <param name="mw_study_id" type="text" label="Metabolomics Workbench Study Identifier"/>
+  </inputs>
+  <outputs>
+    <!--<data name="ISA_zip" format="zip" label="MW study in ISA" from_work_dir="${mw_study_id}"/>-->
+    <data name="out.zip" format="zip" label="$(mw_study_id) Zip file" from_work_dir="out.zip"/>
+  </outputs>
+  
+  <help>
+    This tool produces an ISA-Tab ZIP archive given an NIH Metabolomics Workbench accession number.
+  </help>
+ 
+</tool>
