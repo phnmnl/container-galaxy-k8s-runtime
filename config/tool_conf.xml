@@ -66,8 +66,11 @@
     <tool file="phenomenal/fluxomics/fluxomics-viz.xml"/>
   </section>
   <section name="NMR" id="pheno-nmr">
-    <tool file="phenomenal/nmr/batman.xml"/>
+    <tool file="phenomenal/nmr/mtbls_nmr_raw_dummy_importer.xml"/>
     <tool file="phenomenal/nmr/nmrmlconv.xml"/>
+    <tool file="phenomenal/nmr/zip-nmrml-collection.xml"/>
+    <tool file="phenomenal/nmr/rnmr1d.xml"/>
+    <tool file="phenomenal/nmr/batman.xml"/>
     <tool file="phenomenal/nmr/metabomatching.xml"/>
     <tool file="phenomenal/nmr/nmrml2isa/nmrml2isa.xml"/>
     <tool file="phenomenal/nmr/mtbls2nmrglue.xml"/>
