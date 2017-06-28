@@ -122,6 +122,14 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
+        <destination id="rnmr1d-container" runner="k8s">
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">rnmr1d</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
         <destination id="nmrglue-container" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
@@ -333,13 +341,16 @@
         <tool id="lcmsmatching" destination="w4m-lcmsmatching-container"/>
         <tool id="msconvert2" destination="msconvert2-container"/>
         <!-- new NMR -->
+        <tool id="mtbls_nmr_raw_dummy_importer" destination="nmrmlconv-container"/>
         <tool id="nmrmlconv" destination="nmrmlconv-container"/>
+        <tool id="zip-nmrml-collection" destination="nmrmlconv-container"/>
+        <tool id="rnmr1d" destination="rnmr1d-container"/>
+        <tool id="rnmr1d-stacked-plot" destination="rnmr1d-container"/>
+        <!-- old NMR -->
 	<tool id="mtbls2nmrglue" destination="nmrglue-container"/>
 	<tool id="soap_process" destination="soap-nmr-container"/>
 	<tool id="soap_opls" destination="soap-nmr-container"/>
-    	<tool id="mtbls2nmrglue" destination="nmrglue-container"/>
-    	<tool id="soap_process" destination="soap-nmr-container"/>
-    	<tool id="soap_opls" destination="soap-nmr-container"/>
+    	<!-- other NMR -->
 	<tool id="save_chromatogram" destination="xcms-container"/>
         <tool id="show_chromatogram" destination="xcms-container"/>
         <tool id="mzml2isa" destination="mzml2isa-container"/>

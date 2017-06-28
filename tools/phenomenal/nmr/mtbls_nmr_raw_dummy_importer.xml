@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [File Handling]-->
-<tool id="mtbls_nmr_raw_dummy_importer" name="mtbls_nmr_raw_dummy_importer" version="0.1">
+<tool id="mtbls_nmr_raw_dummy_importer" name="mtbls_nmr_raw_dummy_importer" version="0.4">
   <requirements>
     <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/nmrmlconv</container>
   </requirements>
@@ -15,9 +15,9 @@
   ]]>
   </command>
   <outputs>
-    <collection type="list" label="NMR RAW" format="zip" name="nmr_raw" >
+    <collection type="list" label="NMR RAW" format="no_unzip.zip" name="nmr_raw" >
       <!-- <discover_datasets pattern="__designation_and_ext__" directory="outfolder" /> -->
-      <discover_datasets pattern="__name_and_ext__" directory="outfolder" visible="True" />
+      <discover_datasets pattern="__name__" directory="outfolder" format="no_unzip.zip" visible="True" />
     </collection>
   </outputs>
   <help>
