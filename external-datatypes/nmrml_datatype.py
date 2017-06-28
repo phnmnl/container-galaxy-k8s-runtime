@@ -16,7 +16,7 @@ from galaxy.datatypes.proteomics import *
 log = logging.getLogger(__name__)
 
 
-class MzML(ProteomicsXml):
+class NmrML(ProteomicsXml):
     """NmrML data"""
     edam_format = "format_3244"
     file_ext = "NmrML"

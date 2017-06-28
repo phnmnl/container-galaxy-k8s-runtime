@@ -15,7 +15,6 @@ from galaxy.datatypes.binary import *
 from galaxy.datatypes.interval import * 
 
 log = logging.getLogger(__name__)
-    
 
 class NoUnzip( Binary ):
     """FileSet containing N files"""
@@ -29,17 +28,8 @@ class NoUnzip( Binary ):
             return True
         else :
             return False 
-    
-    
+
 # the if is just for backwards compatibility...could remove this at some point
 if hasattr(Binary, 'register_sniffable_binary_format'):
     Binary.register_sniffable_binary_format('NoUnzip', 'no_unzip.zip', NoUnzip) 
-    
-    
-    
-    
-    
-    
-
-
 
