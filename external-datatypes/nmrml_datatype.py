@@ -5,7 +5,7 @@ NmrML datatype
 """
 
 import logging
-import os.path,re
+import re
 from galaxy.datatypes.data import *
 from galaxy.datatypes.sniff import *
 from galaxy.datatypes.binary import *
