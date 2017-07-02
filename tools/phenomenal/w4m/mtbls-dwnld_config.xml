@@ -1,5 +1,5 @@
 <!-- vi: se fdm=marker : -->
-<tool id="mtbls-dwnld" name="Metabolights downloader" version="2.0.4">
+<tool id="mtbls-dwnld" name="Metabolights downloader" version="2.0.5">
 
 	<description>Import ISA TAB data format from public and private MetaboLights studies</description>
 
