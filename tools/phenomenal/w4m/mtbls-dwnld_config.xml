@@ -16,7 +16,7 @@
 	<command><![CDATA[
 		## @@@BEGIN_CHEETAH@@@
 
-		$__tool_directory__/mtbls-dwnld
+		mtbls-dwnld
 
 		#if $token:
 			-t "$token"
