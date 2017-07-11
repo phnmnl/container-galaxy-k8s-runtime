@@ -259,7 +259,7 @@
 	    <param id="docker_enabled">true</param>
 	</destination>
 	<destination id="container-escher-fluxomics" runner="k8s">
-	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
 	    <param id="docker_owner_override">phnmnl</param>
 	    <param id="docker_image_override">escher-fluxomics</param>
 	    <param id="docker_tag_override">latest</param>
@@ -302,6 +302,14 @@
            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
            <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">json2isatab</param>
+           <param id="docker_tag_override">latest</param>
+           <param id="max_pod_retrials">3</param>
+           <param id="docker_enabled">true</param>
+         </destination>
+        <destination id="container-mtbls-factors-viz" runner="k8s">
+           <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+           <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">mtbls-factors-viz</param>
            <param id="docker_tag_override">latest</param>
            <param id="max_pod_retrials">3</param>
            <param id="docker_enabled">true</param>
@@ -474,7 +482,8 @@
         <tool id="study_factor_values" destination="container-mtblisa"/>
         <tool id="study_factors" destination="container-mtblisa"/>
         <tool id="data_files" destination="container-mtblisa"/>
-        <tool id="factors_summary" destination="container-mtblisa"/>
+	<tool id="factors_summary" destination="container-mtblisa"/>
+	<tool id="mtbls-factors-viz" destination="container-mtbls-factors-viz"/>
         <tool id="isajson_validator" destination="container-isajson-validator"/>
         <tool id="isatab_validator" destination="container-isatab-validator"/>
         <tool id="isatab2json" destination="container-isatab2json"/>
