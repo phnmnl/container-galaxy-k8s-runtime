@@ -42,7 +42,12 @@
                     "output_name": "nmr_raw"
                 }
             }, 
-            "inputs": [], 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool nmrmlconv", 
+                    "name": "infile"
+                }
+            ], 
             "label": null, 
             "name": "nmrmlconv", 
             "outputs": [
@@ -57,7 +62,7 @@
             }, 
             "post_job_actions": {}, 
             "tool_id": "nmrmlconv", 
-            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"venformat\": \"\\\"bruker\\\"\", \"infile\": \"{\\\"values\\\": [{\\\"src\\\": \\\"hda\\\", \\\"id\\\": 4118}]}\"}", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"venformat\": \"\\\"bruker\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
             "tool_version": "0.4", 
             "type": "tool", 
             "uuid": "7f8b6be5-b573-453c-b0c5-2b4f101d511f", 
@@ -74,7 +79,12 @@
                     "output_name": "outfile"
                 }
             }, 
-            "inputs": [], 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool ZIP nmrML Collection", 
+                    "name": "infiles"
+                }
+            ], 
             "label": null, 
             "name": "ZIP nmrML Collection", 
             "outputs": [
@@ -89,7 +99,7 @@
             }, 
             "post_job_actions": {}, 
             "tool_id": "zip-nmrml-collection", 
-            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infiles\": \"{\\\"values\\\": [{\\\"src\\\": \\\"hda\\\", \\\"id\\\": 4125}]}\"}", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infiles\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
             "tool_version": "0.4", 
             "type": "tool", 
             "uuid": "c06dd58f-e6c0-45d3-a06a-74939645e01a", 
@@ -106,7 +116,16 @@
                     "output_name": "outfile"
                 }
             }, 
-            "inputs": [], 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool rnmr1d", 
+                    "name": "infile"
+                }, 
+                {
+                    "description": "runtime parameter for tool rnmr1d", 
+                    "name": "macrofile"
+                }
+            ], 
             "label": null, 
             "name": "rnmr1d", 
             "outputs": [
@@ -117,16 +136,48 @@
             ], 
             "position": {
                 "left": 480.5, 
-                "top": 527
+                "top": 527.0000152587891
             }, 
             "post_job_actions": {}, 
             "tool_id": "rnmr1d", 
-            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile\": \"{\\\"values\\\": [{\\\"src\\\": \\\"hda\\\", \\\"id\\\": 4118}]}\", \"macrofile\": \"{\\\"values\\\": [{\\\"src\\\": \\\"hda\\\", \\\"id\\\": 4125}]}\"}", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"macrofile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
             "tool_version": "0.4", 
             "type": "tool", 
             "uuid": "0b52cf07-393f-42db-bfd2-191014582d8b", 
             "workflow_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "content_id": "rnmr1d-stacked-plot", 
+            "errors": null, 
+            "id": 4, 
+            "input_connections": {
+                "infile": {
+                    "id": 3, 
+                    "output_name": "outfile"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "rnmr1d-stacked-plot", 
+            "outputs": [
+                {
+                    "name": "outfile", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 483.1499938964844, 
+                "top": 677.0833282470703
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "rnmr1d-stacked-plot", 
+            "tool_state": "{\"__page__\": null, \"max_ppm_shift\": \"\\\"1\\\"\", \"plot_type\": \"\\\"perspective\\\"\", \"__rerun_remap_job_id__\": null, \"stack_height\": \"\\\"0.67\\\"\", \"infile\": \"{\\\"values\\\": [{\\\"src\\\": \\\"hda\\\", \\\"id\\\": 4658}]}\"}", 
+            "tool_version": "0.4", 
+            "type": "tool", 
+            "uuid": "d0e3e522-5fce-4b6d-a584-3a1048517b51", 
+            "workflow_outputs": []
         }
     }, 
-    "uuid": "450caaf2-691d-423d-b967-ad5666b529d8"
+    "uuid": "917e57ad-b6ce-4207-89c1-1b4e1699d9ac"
 }

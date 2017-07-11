@@ -70,6 +70,7 @@
     <tool file="phenomenal/nmr/nmrmlconv.xml"/>
     <tool file="phenomenal/nmr/zip-nmrml-collection.xml"/>
     <tool file="phenomenal/nmr/rnmr1d.xml"/>
+    <tool file="phenomenal/nmr/rnmr1d-stacked-plot.xml"/>
     <tool file="phenomenal/nmr/batman.xml"/>
     <tool file="phenomenal/nmr/metabomatching.xml"/>
     <tool file="phenomenal/nmr/nmrml2isa/nmrml2isa.xml"/>

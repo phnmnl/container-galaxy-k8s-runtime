@@ -28,17 +28,7 @@ class NoUnzip( Binary ):
             return True
         else :
             return False
-    
-    
+
 # the if is just for backwards compatibility...could remove this at some point
 if hasattr(Binary, 'register_sniffable_binary_format'):
     Binary.register_sniffable_binary_format('NoUnzip', 'no_unzip.zip', NoUnzip)
-    
-    
-    
-    
-    
-    
-
-
-
