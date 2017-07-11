@@ -45,6 +45,8 @@ RUN chmod u+x /galaxy/ansible/run_galaxy_config.sh
 # Missing XCMS datatypes for w4m
 COPY external-datatypes/rdata_xcms_datatype.py /galaxy/lib/galaxy/datatypes/
 COPY external-datatypes/rdata_camera_datatype.py /galaxy/lib/galaxy/datatypes/
+COPY external-datatypes/no_unzip_datatypes.py /galaxy/lib/galaxy/datatypes/
+COPY external-datatypes/nmrml_datatype.py /galaxy/lib/galaxy/datatypes/
 COPY config/datatypes_conf.xml config/datatypes_conf.xml
 
 EXPOSE 8080
