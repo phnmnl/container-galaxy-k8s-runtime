@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [File Handling]-->
+<tool id="rnmr1d-stacked-plot" name="rnmr1d-stacked-plot" version="0.4">
+  <requirements>
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/rnmr1d</container>
+  </requirements>
+  <description>Draw stacked plot of NMR FID.</description>
+  <command><![CDATA[
+    mkdir -p /data;
+    stacked-plot.r data_matrix_file=$infile pdf_output=$outfile stack_height=$stack_height max_ppm_shift=$max_ppm_shift plot_type=$plot_type;
+  ]]>
+  </command>
+  <inputs>
+    <param name="infile" type="data" format="txt" optional="False" label="NMR data matrix" />
+    <param name="stack_height" type="text" value="0.67" optional="False" label="Graphical height of stack (0 .. 1)" />
+    <param name="max_ppm_shift" type="text" value="1" optional="False" label="Maximum ppm shift (0 .. 1)" />
+    <param name="plot_type" type="select" value="perspective" optional="True" label="Plot type" >
+      <option value="simple">simple</option>
+      <option value="perspective" selected="True">perspective</option>
+    </param>
+  </inputs>
+  <outputs>
+    <data name="outfile" type="data" format="pdf" label="PDF Plot file" />
+  </outputs>
+  <help>
+Draw stacked plot of NMR FID spectra.
+  </help>
+</tool>
+

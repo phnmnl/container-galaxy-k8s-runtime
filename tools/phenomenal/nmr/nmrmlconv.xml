@@ -1,22 +1,29 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [File Handling]-->
-<tool id="nmrmlconv" name="nmrmlconv" version="0.2">
+<tool id="nmrmlconv" name="nmrmlconv" version="0.4">
   <requirements>
     <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/nmrmlconv</container>
   </requirements>
   <description>Converts vendor RAW NMR to nmrML.</description>
   <command><![CDATA[
-    echo $infile;
-    ls -al $infile;
-    mkdir -p \$PWD/tmp;
-    unzip -q -d \$PWD/tmp $infile;
-    ls -al \$PWD/tmp;
-    export samplename="ADG10003u_007";
-    java -jar /usr/local/share/nmrML/converter.jar -l create -b -z -t $venformat -a \$samplename -i \$PWD/tmp -o $outfile;
+    export indir=`dirname $infile`;
+    export cpfile=$infile.name;
+    export samplename=`basename \$cpfile .zip`;
+    echo "vendor: $venformat";
+    echo "infile: $infile";
+    echo "cpfile: \$cpfile";
+    echo "samplename: \$samplename";
+    cp -f $infile /tmp/\$cpfile;
+    mkdir -p /tmp/\$samplename;
+    unzip -q -d /tmp/\$samplename /tmp/\$cpfile;
+    export acqusfile=`find /tmp/\$samplename -name "acqus" -print`;
+    echo "acquisitionfile: \$acqusfile";
+    mv `dirname \$acqusfile`/* /tmp/\$samplename/;
+    java -jar /usr/local/share/nmrML/converter.jar -l create -b -z -t $venformat -a \$samplename -i /tmp/\$samplename -o $outfile;
   ]]>
   </command>
   <inputs>
-    <param name="infile" type="data" format="zip" optional="False" label="Input file in zip format to convert" />
+    <param name="infile" type="data" format="no_unzip.zip" optional="False" label="Input file in zip format to convert" />
     <param name="venformat" type="select" value="Bruker" optional="True" label="Vendor format" help="See below.">
       <option value="bruker" selected="True">Bruker</option>
       <option value="varian">Varian</option>
@@ -34,7 +41,7 @@
     </param>
   </inputs>
   <outputs>
-    <data name="outfile" type="data" format="nmrML" label="nmrML file" />
+    <data name="outfile" type="data" format="txt" label="${infile.display_name} converted with ${tool.name} (nmrML)" />
   </outputs>
   <help>
 nmrML is an open mark-up language for NMR data. This tool converts RAW vendor NMR data to nmrML format.
