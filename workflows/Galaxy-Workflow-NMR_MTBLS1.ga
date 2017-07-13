@@ -12,7 +12,7 @@
             "input_connections": {}, 
             "inputs": [], 
             "label": null, 
-            "name": "mtbls_nmr_raw_dummy_importer", 
+            "name": "mtbls_nmr_raw_importer", 
             "outputs": [
                 {
                     "name": "nmr_raw", 
@@ -21,21 +21,42 @@
             ], 
             "position": {
                 "left": 200, 
-                "top": 200
+                "top": 124.46875
             }, 
             "post_job_actions": {}, 
             "tool_id": "mtbls_nmr_raw_dummy_importer", 
-            "tool_state": "{}", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"mtbls_id\": \"\\\"MTBLS1\\\"\"}", 
             "tool_version": "0.4", 
             "type": "tool", 
-            "uuid": "597184f1-2a3d-454a-99b9-c0460bb81473", 
+            "uuid": "eedd08b8-ac4e-40e9-a56f-9ccd2ef08c95", 
             "workflow_outputs": []
         }, 
         "1": {
             "annotation": "", 
-            "content_id": "nmrmlconv", 
+            "content_id": null, 
             "errors": null, 
             "id": 1, 
+            "input_connections": {}, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 610.234375, 
+                "top": 598.40625
+            }, 
+            "tool_id": null, 
+            "tool_state": "{}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "1d74d9b9-9d7b-4b6a-af73-082d7a2cf76c", 
+            "workflow_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "content_id": "nmrmlconv", 
+            "errors": null, 
+            "id": 2, 
             "input_connections": {
                 "infile": {
                     "id": 0, 
@@ -57,25 +78,25 @@
                 }
             ], 
             "position": {
-                "left": 302.5, 
-                "top": 282
+                "left": 465, 
+                "top": 209.46875
             }, 
             "post_job_actions": {}, 
             "tool_id": "nmrmlconv", 
             "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"venformat\": \"\\\"bruker\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
             "tool_version": "0.4", 
             "type": "tool", 
-            "uuid": "7f8b6be5-b573-453c-b0c5-2b4f101d511f", 
+            "uuid": "35c476cd-9a42-4107-8194-e1bfb2e33fdd", 
             "workflow_outputs": []
         }, 
-        "2": {
+        "3": {
             "annotation": "", 
             "content_id": "zip-nmrml-collection", 
             "errors": null, 
-            "id": 2, 
+            "id": 3, 
             "input_connections": {
                 "infiles": {
-                    "id": 1, 
+                    "id": 2, 
                     "output_name": "outfile"
                 }
             }, 
@@ -94,26 +115,30 @@
                 }
             ], 
             "position": {
-                "left": 375, 
-                "top": 420
+                "left": 650, 
+                "top": 430.46875
             }, 
             "post_job_actions": {}, 
             "tool_id": "zip-nmrml-collection", 
             "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infiles\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
             "tool_version": "0.4", 
             "type": "tool", 
-            "uuid": "c06dd58f-e6c0-45d3-a06a-74939645e01a", 
+            "uuid": "282f7a90-15c7-479d-9e61-11129e47c7c7", 
             "workflow_outputs": []
         }, 
-        "3": {
+        "4": {
             "annotation": "", 
             "content_id": "rnmr1d", 
             "errors": null, 
-            "id": 3, 
+            "id": 4, 
             "input_connections": {
                 "infile": {
-                    "id": 2, 
+                    "id": 3, 
                     "output_name": "outfile"
+                }, 
+                "macrofile": {
+                    "id": 1, 
+                    "output_name": "output"
                 }
             }, 
             "inputs": [
@@ -135,29 +160,34 @@
                 }
             ], 
             "position": {
-                "left": 480.5, 
-                "top": 527.0000152587891
+                "left": 859, 
+                "top": 541.46875
             }, 
             "post_job_actions": {}, 
             "tool_id": "rnmr1d", 
             "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"macrofile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
             "tool_version": "0.4", 
             "type": "tool", 
-            "uuid": "0b52cf07-393f-42db-bfd2-191014582d8b", 
+            "uuid": "f2ff1a72-cde8-4b2f-bc67-3a229719fca6", 
             "workflow_outputs": []
         }, 
-        "4": {
+        "5": {
             "annotation": "", 
             "content_id": "rnmr1d-stacked-plot", 
             "errors": null, 
-            "id": 4, 
+            "id": 5, 
             "input_connections": {
                 "infile": {
-                    "id": 3, 
+                    "id": 4, 
                     "output_name": "outfile"
                 }
             }, 
-            "inputs": [], 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool rnmr1d-stacked-plot", 
+                    "name": "infile"
+                }
+            ], 
             "label": null, 
             "name": "rnmr1d-stacked-plot", 
             "outputs": [
@@ -167,17 +197,17 @@
                 }
             ], 
             "position": {
-                "left": 483.1499938964844, 
-                "top": 677.0833282470703
+                "left": 1085, 
+                "top": 673.5
             }, 
             "post_job_actions": {}, 
             "tool_id": "rnmr1d-stacked-plot", 
-            "tool_state": "{\"__page__\": null, \"max_ppm_shift\": \"\\\"1\\\"\", \"plot_type\": \"\\\"perspective\\\"\", \"__rerun_remap_job_id__\": null, \"stack_height\": \"\\\"0.67\\\"\", \"infile\": \"{\\\"values\\\": [{\\\"src\\\": \\\"hda\\\", \\\"id\\\": 4658}]}\"}", 
+            "tool_state": "{\"__page__\": null, \"max_ppm_shift\": \"\\\"1\\\"\", \"plot_type\": \"\\\"perspective\\\"\", \"__rerun_remap_job_id__\": null, \"stack_height\": \"\\\"0.67\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
             "tool_version": "0.4", 
             "type": "tool", 
-            "uuid": "d0e3e522-5fce-4b6d-a584-3a1048517b51", 
+            "uuid": "b1930b4a-af1b-440f-9dba-d6cd458d07df", 
             "workflow_outputs": []
         }
     }, 
-    "uuid": "917e57ad-b6ce-4207-89c1-1b4e1699d9ac"
+    "uuid": "c9495450-fb9e-4256-9277-ec0dd2c2b880"
 }
