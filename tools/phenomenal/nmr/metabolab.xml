@@ -1,0 +1,61 @@
+<tool id="metabolab" name="Metabolab">
+     <description>Processing vendor raw data for Multivariate analysis</description>
+     <requirements>
+       <container type="docker">docker-registry.phenomenal-h2020.eu/phnmnl/metabolab</container>
+     </requirements>
+     <command><![CDATA[     
+       echo $zipfile;
+       ls -al $zipfile;
+       cd /mydata;
+       pwd;
+       unzip $zipfile;
+       cp $script container_script.ml;
+       runMetabolab.sh;
+       mkdir isatab_files;
+       mv i_Investigation.txt a_* m_* s_* isatab_files;
+       zip -r isatab_files.zip isatab_files;
+       cp isatab_files.zip $isatabfileszipped;
+       zip -r myoutputBruker.zip myoutputBruker;
+       cp myoutputBruker.zip $brukerzip;
+       cp myoutput.mat $matforplstoolbox;
+       cp myoutput_batman.csv $batmancsv;
+       cp metabolabnotgui.mat $metabolabmatfile;
+       ]]>
+     </command>
+     <inputs>
+         <param name="zipfile" type="data" format="zip" optional="False" label="Raw vendor data in a zipfile"/>
+         <param name="script" type="data" format="txt" label="metabolab processing script,.ml file"/>
+     </inputs>
+     <outputs>
+         <data name="batmancsv" format="csv" from_work_dir="myoutput_batman.csv" label="peak intensities for Batman"/>
+         <data name="isatabfileszipped" format="zip" from_work_dir="isatab_files.zip" label="zip of isatab files for Metabolights"/>
+         <data name="metabolabmatfile" format="data" from_work_dir="metabolabnotgui.mat" label="Mat file for MetaboLab"/>
+         <data name="brukerzip" format="zip" from_work_dir="myoutputBruker.zip" label="zip of Bruker processed data"/>
+         <data name="matforplstoolbox" format="data" from_work_dir="myoutput.mat" label="Mat file for use in MATLab's PLS Toolbox"/>
+     </outputs>
+     <help><![CDATA[
+Demo dataset download link:
+
+https://github.com/phnmnl/container-metabolab/tree/develop/galaxy/testdata.zip
+
+
+
+Matching script:
+
+https://github.com/phnmnl/container-metabolab/tree/develop/galaxy/container_script.ml
+
+I had to follow the link, click on 'Raw' to view the raw file, 'select all' (CTL-A), 'copy' (CTL-C) & then paste this into myscript.ml to get the file content. There may be a better way!!
+
+
+     
+Two mandatory files: 
+
+-a zip file containing the raw data - when uploading this, set type to 'zip' not 'Auto-detect'
+
+-a script to control processing, container_script.ml. 
+
+There are some helpful videos about using MetaboLab in Galaxy or locally and about how the script controls processing on the following YouTube channel with ID: UC0i9FkJylyl6omwuEh2gEDQ
+
+       ]]>
+     </help>
+ </tool>
