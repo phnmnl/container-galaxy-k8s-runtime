@@ -13,7 +13,7 @@
   ]]>
   </command>
   <inputs>
-    <param name="infile" type="data" format="no_unzip.zip" optional="False" label="Zipped nmrML file collection" />
+    <param name="infile" type="data" format="no_unzip.zip" optional="False" label="Zipped nmrML file collection" help="nmrML files inside a zip file, all files at the root level." />
     <param name="macrofile" type="data" format="txt" optional="False" label="Macro-Command file" />
   </inputs>
   <outputs>
