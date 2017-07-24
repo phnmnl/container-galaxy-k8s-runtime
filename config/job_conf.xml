@@ -59,7 +59,7 @@
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">midcor</param>
-            <param id="docker_tag_override">v1.0_cv1.0.39</param>
+            <param id="docker_tag_override">v1.0_cv1.0.40</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
