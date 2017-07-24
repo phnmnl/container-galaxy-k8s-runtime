@@ -3,16 +3,22 @@
 
     
     <command><![CDATA[
+	    #if str( $maf_file ) != "None":
 	    ln -s "$maf_file" maf.zip;
-            ln -s "$data_file" data.tar;
-	    ln -s "$isa_file" isa.zip;
-	    uploadToMetaboLightsLabs.py -t "$metabolights_labs_key" 
-	    #if str( $maf_file ) != None:
-	    -i maf.zip data.tar isa.zip
-	    #else:
-	    -i data.tar isa.zip
 	    #end if
-	    #if str( $labs_project_id ) != None and str( $new_project.create ) == "no":
+	    #if str( $data_file) != "None":
+	    ln -s "$data_file" data.tar;
+	    #end if
+	    ln -s "$isa_file" isa.zip;
+	    uploadToMetaboLightsLabs.py -t "$metabolights_labs_key" -i 
+	    #if str( $maf_file ) != "None":
+	    maf.zip
+	    #end if
+	    #if str( $data_file) != "None":
+	    data.tar
+	    #end if
+	    isa.zip
+	    #if str( $labs_project_id ) != "None" and str( $new_project.create ) == "no":
 	    -p "$labs_project_id" 
 	    #end if
 	    #if str( $new_project.create ) == "yes":
