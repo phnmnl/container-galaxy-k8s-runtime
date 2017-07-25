@@ -24,13 +24,18 @@ Version: 1.0
 Short description
 -----------------
 
-R-program to read CDF files, created by mass spectrometer, and evaluate the mass spectra of 13C-labeled metabolites
+- **RaMID** is an R-program that reads netCDF files, created by mass spectrometer, and extracts and primarily corrects the mass spectra of 13C-labeled metabolites using a description provided in a file exchangeable with a database Metabolights (further called as exchange file) and then supplies this file with the evaluated spectra
 
 -----------
 Description
 -----------
 
-RaMID is a computer program designed to read the machine-generated files saved in netCDF format containing registered time course of m/z chromatograms. It evaluates the peaks of mass isotopomer distribution (MID) making them ready for further correction for natural isotope occurrence. To create the docker image the github repository "https://github.com/seliv55/RaMID" is used.
+RaMID reads the machine-generated files in netCDF format containing registered time course of m/z chromatograms. It evaluates the peaks of mass isotopomer distribution (MID) making them ready for further correction for natural isotope occurrence. To create the docker image the github repository "https://github.com/seliv55/RaMID" is used.
+
+Each netCDF file contains a spectral information corresponding to the metabolites registered in one injection to GC/MS machone, collected in zip archive. An additional information should be provided in an exchange file in the format of csv table, containing columns entitled as: 
+"Raw Data filename", "cells", "tracer molecule", "labelled positions", "abundance", "injection", "Replicate", "Incubation time", "Metabolite name", "CHEBI identifier", "fragment position to the parent molecule", "Empirical formula derivatized molecule/fragment", "retention(min)", "m/z monitored", "signal intensity", "isotopologue", "isotologue relative concentration".
+
+*RaMID* reads one by one the files indicated in the first column in the exchange file and contained in the provided zip archive. It extracts mass spectra of the metabolites of interest using the indicated region of m/z and retention time, corrects baseline, and writes the obtained data in the the exchange file in the column entitled "signal intensity". The “R” code of RaMID together with a description of its using (README.md) can be downloaded from https://github.com/seliv55/RaMID.
 
 ------------
 Key features
@@ -61,7 +66,9 @@ Instrument Data Types
 Data Analysis
 -------------
 
-RaMID reads the CDF files presented in the working directory, and then separates the time courses for selected m/z peaks corresponding to specific mass isotopomers; corrects baseline for each selected mz; choses the time points where the distribution of peaks is less contaminated by other compounds and thus is the most representative of the real analyzed distribution of mass isotopomers; evaluates this distribution, and saves it in files readable by MIDcor, a program, which performs the next step of analysis, i.e. correction of the RaMID spectra for natural isotope occurrence, which is necessary to perform a fluxomic analysis. Correction for H+ loss produced by electron impact, natural occurring isotopes, and peaks overlapping.
+RaMID reads the netCDF files presented in the working directory, and then separates the time courses for selected m/z peaks corresponding to specific mass isotopomers; corrects baseline for each selected mz; evaluates the distribution of mass isotopomers.
+
+This tool is adapted for using data contained in the database Metabolights, provided in the format accepted for the exchange file. Then it supplies the Metabolights with more data prepared for the next step of analysis peformed by MIDcor. The latter is a program, which corrects the RaMID spectra for natural isotope occurrence, which is necessary to perform a fluxomic analysis, for H+ loss produced by electron impact, and peaks overlapping.
 
 </help>
 </tool>
