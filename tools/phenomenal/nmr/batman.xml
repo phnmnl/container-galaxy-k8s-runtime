@@ -1,7 +1,7 @@
 <tool id="batman-nmr" name="BATMAN">
      <description>BATMAN</description>
      <requirements>
-       <container type="docker">docker-registry.phenomenal-h2020.eu/phnmnl/batman</container>
+       <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/batman</container>
      </requirements>
      <command><![CDATA[     
      runBATMAN.R -i ${nmr_spectra_input} -o \$PWD -p ${options_file} -u ${metabolite_template} -l ${target_metabolites}
