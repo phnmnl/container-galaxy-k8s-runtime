@@ -30,12 +30,9 @@ Short description
 Description
 -----------
 
-RaMID reads the machine-generated files in netCDF format containing registered time course of m/z chromatograms. It evaluates the peaks of mass isotopomer distribution (MID) making them ready for further correction for natural isotope occurrence. To create the docker image the github repository "https://github.com/seliv55/RaMID" is used.
+The presented here computational support for 13C tracer-based analysis of intracellular metabolic fluxes consists of several subsequent steps. They are the extraction of necessary data from raw mass spectrometer recording of 13C labeled metabolites, provided in a series of files of the NetCDF format; their correction for the natural isotope enrichment and possible overlapping of mass spectra; simulation of the corrected data using a kinetic model of underlying metabolic processes.
 
-Each netCDF file contains a spectral information corresponding to the metabolites registered in one injection to GC/MS machone, collected in zip archive. An additional information should be provided in an exchange file in the format of csv table, containing columns entitled as: 
-"Raw Data filename", "cells", "tracer molecule", "labelled positions", "abundance", "injection", "Replicate", "Incubation time", "Metabolite name", "CHEBI identifier", "fragment position to the parent molecule", "Empirical formula derivatized molecule/fragment", "retention(min)", "m/z monitored", "signal intensity", "isotopologue", "isotologue relative concentration".
-
-*RaMID* reads one by one the files indicated in the first column in the exchange file and contained in the provided zip archive. It extracts mass spectra of the metabolites of interest using the indicated region of m/z and retention time, corrects baseline, and writes the obtained data in the the exchange file in the column entitled "signal intensity". The “R” code of RaMID together with a description of its using (README.md) can be downloaded from https://github.com/seliv55/RaMID.
+RaMID supports the first step of analysis of 13C distribution in metabolites artificially enriched by this tracer. It reads the machine-generated files in netCDF format containing registered time course of mass spectra of metabolites. It evaluates the peaks of mass isotopomer distribution (MID) making them ready for further correction for natural isotope occurrence. To create the docker image the github repository "https://github.com/seliv55/RaMID" is used.
 
 ------------
 Key features
@@ -65,6 +62,11 @@ Instrument Data Types
 -------------
 Data Analysis
 -------------
+
+Each netCDF file contains a spectral information corresponding to the metabolites registered in one injection to gas chromatography/mass spectrometry machone, collected in zip archive. An additional information should be provided in a file exchangeable with Metabolights database in the format of csv table, containing columns entitled as: 
+"Raw Data filename", "cells", "tracer molecule", "labelled positions", "abundance", "injection", "Replicate", "Incubation time", "Metabolite name", "CHEBI identifier", "fragment position to the parent molecule", "Empirical formula derivatized molecule/fragment", "retention(min)", "m/z monitored", "signal intensity", "isotopologue", "isotologue relative concentration".
+
+*RaMID* reads one by one the files indicated in the first column in the exchange file and contained in the provided zip archive. It extracts mass spectra of the metabolites of interest specified by the indicated region of m/z and retention time, corrects baseline, and writes the obtained data in the the exchange file in the column entitled "signal intensity". The “R” code of RaMID together with a description of its using (README.md) can be downloaded from https://github.com/seliv55/RaMID.
 
 RaMID reads the netCDF files presented in the working directory, and then separates the time courses for selected m/z peaks corresponding to specific mass isotopomers; corrects baseline for each selected mz; evaluates the distribution of mass isotopomers.
 
