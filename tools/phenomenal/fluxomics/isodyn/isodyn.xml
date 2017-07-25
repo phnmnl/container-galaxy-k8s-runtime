@@ -25,6 +25,8 @@ isodyn "$tracing_data" "$parameters_file" s
          -->
 </outputs>
 <help><![CDATA[
-“Isodyn” is a C++-program that performs an analysis of stable isotope tracer data to assess metabolic flux profiles in living cells. Isodyn simulates the dynamics of isotopic isomer (isotopomer) distribution in central metabolic pathways, and, by changing its parameters, which reflect the characteristics of corresponding biochemical reactions, fit the simulated dynamics of mass isotopomers to that observed experimentally. The simulated metabolic fluxes that correspond to the best fit are assumed to reproduce the real fluxes in the analyzed biological object and conditions. Isodyn contains tools that check the goodness of fit and perform a statistical analysis of obtained metabolic fluxes.
+*Isodyn* is a C++-program that supports the third step of an analysis of 13C tracer data. It simulates the extracted by RaMID and corrected by MIDcor dynamics of 13C isotopomers distribution in central metabolic pathways using a corresponding kinetic model. Fit of the data by the model, that satisfies to the criteria for goodness of fit, assesses the metabolic flux profiles in the analyzed living cells under given conditions. Isodyn performs a statistical analysis of the obtained metabolic fluxes.
+
+*Isodyn* takes an output of MIDcor as input, specified by one of the input parameters. Then it determines a list of metabolites whose data the input file contains, determines the mean and standard  deviation for each metabolite available in the file, constructs the corresponding calculation of normalized squared deviations of calculated from measured data (χ2), and performs a series of simulations minimizing χ2 using Simulated annealing algorithm. The code of Isodyn with some examples of input is freely available from https://github.com/seliv55/isodyn.
 ]]></help>
 </tool>
