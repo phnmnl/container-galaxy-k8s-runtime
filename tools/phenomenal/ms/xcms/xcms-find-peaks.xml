@@ -9,12 +9,12 @@
   ]]>
   </command>
   <inputs>
-    <param name="xcms_find_peaks_input_1" type="data" format="mzml" optional="False" label="Input mzML file containing MS1 information" />
-    <param name="ppm" type="text" value="10"  label="PPM" help="" />
-    <param name="peakwidthLow" type="text" value="4"  label="PeakWidthLow" help="" />
-    <param name="peakwidthHigh" type="text" value="30"  label="PeakWidthHigh" help="" />
-    <param name="noise" type="text" value="1000"  label="Noise" help="" />
-    <param name="polarity" type="select" value="positive" label="Polarity" help="">
+    <param name="xcms_find_peaks_input_1" type="data" format="mzml" optional="False" label="mzML file" help="A mzML file that includes data from a MS measurement" />
+    <param name="ppm" type="text" value="10"  label="PPM" help="Maxmial tolerated m/z deviation in consecutive scans, in ppm (parts per million)" />
+    <param name="peakwidthLow" type="text" value="4"  label="PeakWidthLow" help="Minimum value of chromatographic peak width in seconds" />
+    <param name="peakwidthHigh" type="text" value="30"  label="PeakWidthHigh" help="Maximum value of chromatographic peak width in seconds" />
+    <param name="noise" type="text" value="1000"  label="Noise" help="Argument which is useful for data that was centroided without any intensity threshold, centroids with intensity smaller noise are omitted from ROI detection" />
+    <param name="polarity" type="select" value="positive" label="Polarity" help="Filter raw data for positive/negative scans">
       <option value="positive" selected="True">positive</option>
       <option value="negative" selected="False">negative</option>
     </param>
@@ -22,5 +22,106 @@
   <outputs>
     <data name="xcms_find_peaks_output_1" type="data" format="rdata" label="xcms-find-peaks data" />
   </outputs>
-  <help>.</help>
+  <help>
+ 
+.. class:: infomark
+
+| **Tool update: See the 'NEWS' section at the bottom of the page**
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+| **Payam Emami (payam.emami@medsci.uu.se)** and **Christoph Ruttkies (christoph.ruttkies@ipb-halle.de)** wrote and maintain this wrapper for XCMS-Set generation and peak detection.
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Please cite**
+
+R Core Team (2013). R: A language and Environment for Statistical Computing. http://www.r-project.org
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**References**
+
+| Smith, C.A., Want, E.J., O'Maille, G., Abagyan,R., Siuzdak and G. (2006). "XCMS: Processing mass spectrometry data for metabolite profiling using nonlinear peak alignment, matching and identification." Analytical Chemistry, 78, pp. 779-787.
+| Tautenhahn R, Boettcher C and Neumann S (2008). "Highly sensitive feature detection for high resolution LC/MS." BMC Bioinformatics, 9, pp. 504.
+| Benton HP, Want EJ and Ebbels TMD (2010). "Correction of mass calibration gaps in liquid chromatography-mass spectrometry metabolomics data." BIOINFORMATICS, 26, pp. 2488.
+
+---------------------------------------------------
+
+=====================
+XMCS Find Peaks
+=====================
+
+-----------
+Description
+-----------
+
+| This module handles the construction of XCMS-Set objects from mzML input files and finds peaks in batch mode.
+
+-----------
+Input files
+-----------
+
++------------------------------+------------+
+| File                         |   Format   |
++==============================+============+
+| 1) mzML file   	       |    mzML    |
++------------------------------+------------+
+
+----------
+Parameters
+----------
+	  
+mzML file
+	| A mzML file that includes data from a MS measurement
+        |
+
+PPM
+        | Maxmial tolerated m/z deviation in consecutive scans, in ppm (parts per million)
+        |
+
+PeakWidthLow
+	| Minimum value of chromatographic peak width in seconds
+	|
+
+PeakWidthHigh
+	| Maximum value of chromatographic peak width in seconds
+	|
+
+Noise
+	| Argument which is useful for data that was centroided without any intensity threshold, centroids with intensity smaller noise are omitted from ROI detection
+	|
+
+Polarity
+	| Filter raw data for positive/negative scans
+	|
+
+------------
+Output files
+------------
+	
+xcms_find_peaks_output_1.rdata
+	| A rdata file containing a XCMS-Set generated from the input mzML file
+        |
+
+---------------------------------------------------
+
+----
+NEWS
+----
+
+CHANGES IN VERSION 0.1
+========================
+
+First version
+  
+  </help>
 </tool>
