@@ -8,10 +8,10 @@
        ]]>
      </command>
      <inputs>
-         <param name="nmr_spectra_input" type="data" format="txt" label="NMR Dataset; A tabulated text file including p.p.m and spectra. Please download the demo data set from the link below. "/>
-         <param name="options_file" type="data" format="txt" label="BATMAN options; A text file including BATMAN running options, such as number of spectra which must within the range given by the NMR data set. The file name MUST be batmanOptions.txt"/>
-         <param name="metabolite_template" type="data" label="pre-defined metabolites template, multi_data_user.csv"/>
-         <param name="target_metabolites" type="data" label="target metabolites list"/>
+         <param name="nmr_spectra_input" type="data" format="txt" label="NMR Dataset." help="A tabulated text file including p.p.m and spectra in columns. Typical filename is NMRdata.txt. Please download the demo data set from the link below. "/>
+         <param name="options_file" type="data" format="txt" label="BATMAN options." help="A text file including BATMAN running options, such as number of spectra which must within the range given by the NMR data set. The typical filename is batmanOptions.txt"/>
+         <param name="metabolite_template" type="data" label="pre-defined metabolites template." help="This file includes metabolites identifiers, J_coupling information, chemical shift etc. The typical filename is multi_data_user.csv"/>
+         <param name="target_metabolites" type="data" label="targeted metabolites list." help="This file is a list of targeted metabolites. The typical filename is metabolitesList.csv "/>
      </inputs>
      <outputs>
          <data name="RelCon" format="tabular" from_work_dir="results/RelCon.txt" label="Relative concentrations"/>
