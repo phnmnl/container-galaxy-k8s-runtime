@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [File Handling]-->
 <tool id="mtbls_nmr_raw_dummy_importer" name="mtbls_nmr_raw_importer" version="0.4">
+  <description>A tool to import NMR data from MetaboLights (ebi.ac.uk/metabolights/) to Galaxy</description>
   <requirements>
     <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/nmrmlconv</container>
   </requirements>
-  <description>Imports RAW data for further conversion with nmrmlconv.</description>
-  <command><![CDATA[
+   <command><![CDATA[
     mkdir -p /data/"$mtbls_id";
     wget -O /data/"$mtbls_id".zip https://www.ebi.ac.uk/metabolights/"$mtbls_id"/files/"$mtbls_id";
     unzip -q -d /data/"$mtbls_id" /data/"$mtbls_id".zip;
@@ -23,8 +23,72 @@
       <discover_datasets pattern="__name__" directory="outfolder" format="no_unzip.zip" visible="True" />
     </collection>
   </outputs>
-  <help>
-This tool downloads a complete Metabolights NMR Study as a Zip file.
-  </help>
+  <help><![CDATA[
+
+.. class::infomark
+
+**Author**  
+Kristian Peters and Pablo Moreno, wrote this wrapper, Reza Salek, feedback and testing it.
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+**Script**
+
+Uses the command 'Get' to download public NMR studies from MetaboLights (ebi.ac.uk/metabolights/).
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+**Tool updates**
+
+See the **NEWS** section at the bottom of this page
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+================================================================================
+**mtbls_nmr_raw_importer**: Importing NMR data sets from MetaboLights.
+================================================================================
+
+-----------
+Description
+-----------
+
+This tool downloads a complete Metabolights NMR Study as a Zip file. You need to enter the correct accession number (e.g. MTBLS1). Only works with 1D NMR datasets. Please make sure the datasets are zipped as individual files, i.e. One sample, one zipped file. Also,  must include the Bruker folder structure have both FID and processing parameter to work.
+
+---------------------------------------------------
+
+-----------------
+Workflow position
+-----------------
+
+At the start of a workflow
+
+-----------
+Input files
+-----------
+
+MTBLS number
+
+------------
+Output files
+------------
+
+Zipped study file
+
+---------------------------------------------------
+
+----
+NEWS
+----
+
+More updates soon
+
+
+  ]]></help>
 </tool>
 
