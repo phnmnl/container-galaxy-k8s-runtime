@@ -28,7 +28,7 @@
 .. class::infomark
 
 **Author**  
-Kristian Peters and Pablo Moreno, wrote this wrapper, Reza Salek, feedback and testing it.
+Kristian Peters (IPB) and Pablo Moreno wrote this wrapper, Reza Salek (EMBL-EBI), feedback and testing it.
 
 ----------------------------------------------------------------------------------
 
@@ -36,7 +36,7 @@ Kristian Peters and Pablo Moreno, wrote this wrapper, Reza Salek, feedback and t
 
 **Script**
 
-Uses the command 'Get' to download public NMR studies from MetaboLights (ebi.ac.uk/metabolights/).
+Uses the command 'Get' to download public NMR studies from MetaboLights (http://ebi.ac.uk/metabolights/).
 
 ----------------------------------------------------------------------------------
 
@@ -58,7 +58,7 @@ See the **NEWS** section at the bottom of this page
 Description
 -----------
 
-This tool downloads a complete Metabolights NMR Study as a Zip file. You need to enter the correct accession number (e.g. MTBLS1). Only works with 1D NMR datasets. Please make sure the datasets are zipped as individual files, i.e. One sample, one zipped file. Also,  must include the Bruker folder structure have both FID and processing parameter to work.
+This tool downloads a complete Metabolights NMR Study as a Zip file. You need to enter the correct accession number (e.g. MTBLS1). Please make sure the datasets are Zipped as individual files, i.e. One sample, one zipped file. Also, must include the Bruker folder structure having both FID and processing parameter to work. Same for other vendor data.
 
 ---------------------------------------------------
 
@@ -66,19 +66,19 @@ This tool downloads a complete Metabolights NMR Study as a Zip file. You need to
 Workflow position
 -----------------
 
-At the start of a workflow
+At the start of a workflow, to download data from MetaboLights
 
 -----------
 Input files
 -----------
 
-MTBLS number
+MTBLS number, e.g. MTBLS1
 
 ------------
 Output files
 ------------
 
-Zipped study file
+Zipped study file as a Galaxy dataset collection
 
 ---------------------------------------------------
 

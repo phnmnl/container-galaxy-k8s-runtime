@@ -24,7 +24,7 @@
   </command>
   <inputs>
     <param name="infile" type="data" format="no_unzip.zip" optional="False" label="Input file in zip format to convert" />
-    <param name="venformat" type="select" value="Bruker" optional="True" label="Vendor format" help="See below.">
+    <param name="venformat" type="select" value="Bruker" optional="True" label="Vendor format" help="Choose the vendor data type that matches with the original vendor format as input. The default parameter is "Bruker" file format.">
       <option value="bruker" selected="True">Bruker</option>
       <option value="varian">Varian</option>
       <option value="jeol">Jeol</option>
@@ -151,5 +151,6 @@ NEWS
 ----
 
 More updates soon
+
   ]]></help>
 </tool>
