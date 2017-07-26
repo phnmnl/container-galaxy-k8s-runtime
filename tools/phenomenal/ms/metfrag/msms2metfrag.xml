@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
 <!--Proposed Tool Section: [PhenoMeNal]-->
-<tool id="msms2metfrag" name="msms2metfrag" version="0.1">
+<tool id="msms2metfrag" name="msms2metfrag" version="0.2">
   <description>Generate MetFrag parameters given MS/MS spectral information and CAMERA adduct annotation.</description>
   <command><![CDATA[
 	mkdir outputfolder;
@@ -26,6 +26,7 @@
       <option value="KEGG" selected="True">KEGG</option>
       <option value="PubChem" selected="False">PubChem</option>
       <option value="MetChem" selected="False">MetChem</option>
+      <option value="LocalCSV" selected="False">CSV</option>
     </param>
     <param name="adductRules" type="select" value="primary" optional="False" label="Adduct Rules" help="Adduct ruleset to be used">
       <option value="primary" selected="True">primary</option>
@@ -151,6 +152,12 @@ metfrag_parameters.txt
 ----
 NEWS
 ----
+
+CHANGES IN VERSION 0.2
+========================
+
+- added CSV as database
+
 
 CHANGES IN VERSION 0.1
 ========================
