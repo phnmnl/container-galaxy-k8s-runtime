@@ -8,12 +8,12 @@ pa.py $testdata_input $exp_cols $sample_size $effect_size $repeats $outcome_type
        ]]>
      </command>
      <inputs>
-         <param name="testdata_input" type="data" label="Test Dataset. Demo data set (TutorialData.csv) can be downloaded from the link below."/>
-         <param name="exp_cols" type="text" value="8" label="Number of columes in the test dataset for power analysis, can be either a single number, e.g., 8 or a range 2-16"/>
-         <param name="sample_size" type="text" value="0:100:501" label="Sample sizes matrix, e.g., 0:100:501, 0 is starting number, 100 is the interval towards 501, so this example provides sample size matrix as [1, 100, 200, 300, 400, 500]"/>
-         <param name="effect_size" type="text" value="0.05:0.05:0.7" label="Effect sizes matrix, e.g., 0.05:0.05:0.7, 0.05 is starting number, 0.05 (middle number) is the interval towards 0.7, so this example provides effect size matrix as [0.05, 0.1, 0.15, ... , 0.65]"/>
-         <param name="repeats" type="text" value="10" label="Number of repeats"/>
-         <param name="outcome_type" type="select" label="Outcome Variables Type" help="">
+         <param name="testdata_input" type="data" label="Test Dataset." help="Demo data set (TutorialData.csv) can be downloaded from the link below."/>
+         <param name="exp_cols" type="text" value="8" label="Number of columes in the test dataset for power analysis." help="Can be either a single number, e.g., 8 or a range 2-16"/>
+         <param name="sample_size" type="text" value="0:100:501" label="Sample sizes matrix." help="e.g., 0:100:501, 0 is starting number, 100 is the interval towards 501, so this example provides sample size matrix as [1, 100, 200, 300, 400, 500]"/>
+         <param name="effect_size" type="text" value="0.05:0.05:0.7" label="Effect sizes matrix" help="e.g., 0.05:0.05:0.7, 0.05 is starting number, 0.05 (middle number) is the interval towards 0.7, so this example provides effect size matrix as [0.05, 0.1, 0.15, ... , 0.65]"/>
+         <param name="repeats" type="text" value="10" label="Number of repeats" help="Default number is 10 repeats."/>
+         <param name="outcome_type" type="select" label="Outcome Variables Type" help="The methods of power being calculated.">
             <option value="0">Classification (discrete)</option>
             <option value="1">Regression (continuous)</option>
             <option value="2">Classification (discrete) and Regression (continuous)</option> 
@@ -31,6 +31,8 @@ pa.py $testdata_input $exp_cols $sample_size $effect_size $repeats $outcome_type
      <help><![CDATA[
      
      **Power Analysis tool in PYthon**
+     This Power Analysis tool estimates the statistical power and sample size by investigating the complex relationship between sample size, power, and effect size for real multivariate data sets. 
+     
      
      Demo data set and script for plotting single variables are in the .zip file from the link:
      https://github.com/jianlianggao/papy/blob/master/papy/papy_demoData_n_plot.zip?raw=true
