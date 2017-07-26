@@ -4,7 +4,7 @@
   <requirements>
     <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/nmrmlconv</container>
   </requirements>
-  <description>Converts vendor RAW NMR data to opne access nmrML format.</description>
+  <description>Converts vendor NMR RAW data to nmrML format.</description>
   <command><![CDATA[
     export indir=`dirname $infile`;
     export cpfile=$infile.name;
@@ -24,7 +24,7 @@
   </command>
   <inputs>
     <param name="infile" type="data" format="no_unzip.zip" optional="False" label="Input file in zip format to convert" />
-    <param name="venformat" type="select" value="Bruker" optional="True" label="Vendor format" help="Choose the vendor data type that matches with the original vendor format as input. The default parameter is "Bruker" file format.">
+    <param name="venformat" type="select" value="Bruker" optional="True" label="Vendor format" help="Choose the vendor data type that matches with the original vendor format as input. The default parameter is 'Bruker' file format.">
       <option value="bruker" selected="True">Bruker</option>
       <option value="varian">Varian</option>
       <option value="jeol">Jeol</option>
@@ -87,7 +87,7 @@ Uses nmrMLcreate (see Github <https://github.com/nmrML/nmrML> for nmrML developm
 
 **References**
 
-| Determan C. (2015)......
+| Jacob D, Deborde C, Lefebvre M, Maucourt M, Moing A. NMRProcFlow: a graphical and interactive tool dedicated to 1D spectra processing for NMR-based metabolomics. Metabolomics. 2017;13(4):36. doi:10.1007/s11306-017-1178-y.
 
 ---------------------------------------------------
 

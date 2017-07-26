@@ -32,6 +32,78 @@ ${infile.name},
   <outputs>
     <data name="outfile" type="data" format="no_unzip.zip" label="Zipped nmrML study" />
   </outputs>
-  <help>Create a zip archive of a nmrML collection.</help>
+ <help><![CDATA[
+    Create a zip archive of a nmrML collection.
+    Create a plot of an aligned NMR data matrix
+
+.. class::infomark
+
+**Author**  
+Kristian Peters (IPB) wrote this wrapper, Reza Salek (EMBL-EBI) feedback and testing it.
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+**Tool**
+
+A program to Zip NMR data
+
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+**Tool updates**
+
+See the **NEWS** section at the bottom of this page
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+================================================================================
+**zip-nmrml-collection**: To Zip NMR data
+================================================================================
+
+-----------
+Description
+-----------
+
+A simple module to Zip NMR data
+
+.. class:: infomark
+
+---------------------------------------------------
+
+-----------------
+Workflow position
+-----------------
+
+Right after the nmrMLConv in a workflow to Zip files and as input for rnmr1D
+
+-----------
+Input files
+-----------
+
+nmrML or Vendor NMR data files
+
+
+----------
+Parameters
+----------
+
+------------
+Output files
+------------
+
+Zipped NMR data
+
+----
+NEWS
+----
+
+More updates soon
+    ]]></help>
 </tool>
 

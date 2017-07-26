@@ -22,8 +22,101 @@
   <outputs>
     <data name="outfile" type="data" format="pdf" label="PDF Plot file" />
   </outputs>
-  <help>
-Draw stacked plot of NMR FID spectra.
-  </help>
+  <help><![CDATA[
+Create a plot of an aligned NMR data matrix
+
+.. class::infomark
+
+**Author**  
+Kristian Peters (IPB) wrote this wrapper, Reza Salek (EMBL-EBI) feedback and testing it. The rnmr1d-stacked-plot was written by Daneil Jacob (see below)
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+**Tool**
+
+A R program to plot NMR data
+
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+**Tool updates**
+
+See the **NEWS** section at the bottom of this page
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+================================================================================
+**rnmr1d-stacked-plot**: Plotting NMR data
+================================================================================
+
+-----------
+Description
+-----------
+
+NA
+
+.. class:: infomark
+
+**References**
+
+| Jacob D, Deborde C, Lefebvre M, Maucourt M, Moing A. NMRProcFlow: a graphical and interactive tool dedicated to 1D spectra processing for NMR-based metabolomics. Metabolomics. 2017;13(4):36. doi:10.1007/s11306-017-1178-y.
+
+---------------------------------------------------
+
+-----------------
+Workflow position
+-----------------
+
+Right after the nmrMLConv in a workflow or Galaxy nmrML/Vedor RAW NMR data 
+
+-----------
+Input files
+-----------
+
+Aligned NMR data matrix (CSV format)
+
+
+----------
+Parameters
+----------
+ | Graphical height of stack [0..1; default: 0.67]: Height of the peaks for the spectra in the plot
+ | Maximum ppm shift [0..1; default: 1]: The ppm shift
+ | Plot type options [perspective, simple]:
+ | Perspective: 3D view
+ | Simple: improved 2D view
+
+------------
+Output files
+------------
+
+Plot (PDF format)
+
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**License**
+Copyright (C) 2017 Daniel Jacob - INRA
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+----
+NEWS
+----
+
+More updates soon
+  ]]></help>
 </tool>
 

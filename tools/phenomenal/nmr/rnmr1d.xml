@@ -13,13 +13,105 @@
   ]]>
   </command>
   <inputs>
-    <param name="infile" type="data" format="no_unzip.zip" optional="False" label="Zipped nmrML file collection" help="nmrML files inside a zip file, all files at the root level." />
+    <param name="infile" type="data" format="no_unzip.zip" optional="False" label="Zipped nmrML data file collection" help="nmrML files inside a zip file, all files at the root level." />
     <param name="macrofile" type="data" format="txt" optional="False" label="Macro-Command file" />
   </inputs>
   <outputs>
     <data name="outfile" type="data" format="txt" label="NMR data matrix" />
   </outputs>
-  <help>
-Rnmr1D allows users to replay the macro-command sequence generated within NMRProcFlow. Moreover, without using NMRProcFlow, this module can also be used to replace any home-made script by a macro-command sequence.
-  </help>
+<help><![CDATA[
+Pre-process RAW NMR data with macro-commands using Rnmr1D.
+
+.. class::infomark
+
+**Author**  
+Kristian Peters wrote this wrapper, Reza Salek feedback and testing it. The Rnmr1D NMR data processing tool in "R" was written by Daneil Jacob (see below)
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+**Tool**
+
+A Java program to convert vendor NMR RAW data to open souece nmrML XML format
+
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+**Tool updates**
+
+See the **NEWS** section at the bottom of this page
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+================================================================================
+**Rnmr1D**: Processing nmrML or verndor NMR data
+================================================================================
+
+-----------
+Description
+-----------
+
+Rnmr1D is the main module from the NMRProcFlow web application (http://nmrprocflow.org) develped by  Daniel Jacob, for 1D NMR spectra data processing.
+Rnmr1D allows users to process their NMR spectra using set of macro-command sequence. Outside NMRProcFlow Rnmr1D become a CLI application allowing users to replay the macro-command sequence generated within NMRProcFlow. Moreover, without using NMRProcFlow, this module can also be used to replace any 'home-made script' by a macro-command sequence.
+
+.. class:: infomark
+
+**References**
+
+| Jacob D, Deborde C, Lefebvre M, Maucourt M, Moing A. NMRProcFlow: a graphical and interactive tool dedicated to 1D spectra processing for NMR-based metabolomics. Metabolomics. 2017;13(4):36. doi:10.1007/s11306-017-1178-y.
+
+---------------------------------------------------
+
+-----------------
+Workflow position
+-----------------
+
+Right after the nmrMLConv in a workflow or Galaxy nmrML/Vedor RAW NMR data 
+
+-----------
+Input files
+-----------
+
+Galaxy dataset nmrML or Vendor file format. Data input could be Zipped (preferrred) or unziped
+
+----------
+Parameters
+----------
+Use the macro editor for parameters
+
+------------
+Output files
+------------
+
+Output:
+ | NMR data matrix with aligned values (CSV format)
+ | Bucket file
+ | Spectra file
+
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**License**
+Copyright (C) 2017 Daniel Jacob - INRA
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+----
+NEWS
+----
+
+More updates soonocessing dor
+ ]]></help>
 </tool>
