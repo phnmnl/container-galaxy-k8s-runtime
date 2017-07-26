@@ -8,10 +8,9 @@
   <description>Run MetFrag with a given parameter set.</description>
   <command><![CDATA[
 	java -Xmx2048m -Xms1024m -jar /usr/local/bin/MetFragCLI.jar "`cat $metfrag_cli_batch_input_1` ResultsFile=$metfrag_cli_batch_output_1 NumberThreads=1 $additionalparameters "
-    	#if $input
+    	#if $metfrag_cli_batch_database_file != "None"
 		LocalDatabasePath=$metfrag_cli_batch_database_file
     	#end if
-	java -Xmx2048m -Xms1024m -jar /usr/local/bin/MetFragCLI.jar "`cat $metfrag_cli_batch_input_1` ResultsFile=$metfrag_cli_batch_output_1 NumberThreads=1 $additionalparameters " LocalDatabasePath=$metfrag_cli_batch_database_file;
   ]]>
   </command>
   <inputs>
