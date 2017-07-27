@@ -31,6 +31,8 @@ pa.py $testdata_input $exp_cols $sample_size $effect_size $repeats $outcome_type
      <help><![CDATA[
      
      **Power Analysis tool in PYthon**
+     This Power Analysis tool estimates the statistical power and sample size by investigating the complex relationship between sample size, power, and effect size for real multivariate data sets. 
+     
      
      Demo data set and script for plotting single variables are in the .zip file from the link:
      https://github.com/jianlianggao/papy/blob/master/papy/papy_demoData_n_plot.zip?raw=true
