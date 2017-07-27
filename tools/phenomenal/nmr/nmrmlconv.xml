@@ -57,7 +57,7 @@ Kristian Peters wrote this wrapper, Reza Salek feedback and testing it. The nmrM
 
 **Tool**
 
-A Java program to convert vendor NMR RAW data to open souece nmrML XML format
+A Java program to convert vendor NMR RAW data to open source nmrML XML format
 
 
 ----------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ See the **NEWS** section at the bottom of this page
 .. class:: infomark
 
 ================================================================================
-**nmrmlconvr**: Converting verndor NMR data to open access nmrML format
+**nmrmlconvr**: Converting vendor NMR data to open access nmrML format
 ================================================================================
 
 -----------
