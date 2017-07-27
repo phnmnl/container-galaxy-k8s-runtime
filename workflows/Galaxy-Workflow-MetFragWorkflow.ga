@@ -281,15 +281,10 @@
             "input_connections": {
                 "metfrag_cli_batch_input_1": {
                     "id": 6, 
-                    "output_name": "MetFrag Parameters"
+                    "output_name": "metfrag_parameters"
                 }
             }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool metfrag-cli-batch", 
-                    "name": "metfrag_cli_batch_input_1"
-                }
-            ], 
+            "inputs": [], 
             "label": null, 
             "name": "metfrag-cli-batch", 
             "outputs": [
@@ -299,15 +294,15 @@
                 }
             ], 
             "position": {
-                "left": 938, 
-                "top": 552
+                "left": 974.015625, 
+                "top": 611.40625
             }, 
             "post_job_actions": {}, 
             "tool_id": "metfrag-cli-batch", 
-            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"metfrag_cli_batch_input_1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"additionalparameters\": \"\\\"\\\"\"}", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"metfrag_cli_batch_input_1\": \"null\", \"additionalparameters\": \"\\\"\\\"\"}", 
             "tool_version": "0.1", 
             "type": "tool", 
-            "uuid": "2b6dca1b-d0f5-4c9e-bff4-280fe6577710", 
+            "uuid": "a526d4e9-e828-4204-9a53-4cbcca33e652", 
             "workflow_outputs": []
         }, 
         "8": {
@@ -348,5 +343,5 @@
             "workflow_outputs": []
         }
     }, 
-    "uuid": "807f058f-084a-4425-a4c5-cb02ebb7fd0f"
+    "uuid": "e2512b9e-4216-4bbf-a9b3-58edcb4587f9"
 }

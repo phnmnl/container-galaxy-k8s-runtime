@@ -2,19 +2,105 @@
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
 <!--Proposed Tool Section: [PhenoMeNal]-->
 <tool id="map-msms2camera" name="map-msms2camera" version="0.1">
-  <description>Map MS/MS spectra to CAMERA annotaions by retention time and m/z information.</description>
+  <description>Map MS/MS spectra to CAMERA annotations by retention time and m/z information.</description>
   <command><![CDATA[
 	/usr/local/bin/mapMS2ToCamera.r inputCAMERA=$map_msms2camera_input_1 inputMS2=$map_msms2camera_input_2 output=$map_msms2camera_output_1 ppm=$ppm RT=$RT;
   ]]>
   </command>
   <inputs>
-    <param name="map_msms2camera_input_1" type="data" format="rdata" optional="False" label="camera-find-adducts data" />
-    <param name="map_msms2camera_input_2" type="data" multiple="True" format="rdata" optional="False" label="msnbase-read-msms data" help="R data containing MS2 information" />
-    <param name="ppm" type="text" value="10"  label="PPM" help="" />
-    <param name="RT" type="text" value="10"  label="RT" help="" />
+    <param name="map_msms2camera_input_1" type="data" format="rdata" optional="False" label="camera-find-adducts data" help="A rdata file with a xsAnnotate object from one sample with annotated adduct information" />
+    <param name="map_msms2camera_input_2" type="data" multiple="True" format="rdata" optional="False" label="msnbase-read-msms data" help="A rdata file with MS/MS information retrieved from msnbase-read-msms" />
+    <param name="ppm" type="text" value="10"  label="PPM" help="The ppm error used for the mapping" />
+    <param name="RT" type="text" value="10"  label="RT" help="The retention time error (in seconds) used for the mapping" />
   </inputs>
   <outputs>
     <data name="map_msms2camera_output_1" type="data" format="rdata" label="map-msms2camera data" />
   </outputs>
-  <help>.</help>
+  <help>
+
+.. class:: infomark
+
+| **Tool update: See the 'NEWS' section at the bottom of the page**
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+| **Payam Emami (payam.emami@medsci.uu.se)** and **Christoph Ruttkies (christoph.ruttkies@ipb-halle.de)** wrote and maintain this wrapper for the mapping of MS/MS spectra corresponding features. 
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Please cite**
+
+R Core Team (2013). R: A language and Environment for Statistical Computing. http://www.r-project.org
+
+---------------------------------------------------
+
+=====================
+MAP MS/MS to CAMERA
+=====================
+
+-----------
+Description
+-----------
+
+| This module is used to map MS/MS spectra from retrieved by **msnbase-read-msms** to annotated CAMERA features retrieved from **camera-find-adducts**. The mapping is performed based on retention time and m/z values of the annotated features.
+
+
+-----------
+Input files
+-----------
+
++------------------------------+------------+
+| File                         |   Format   |
++==============================+============+
+| 1)  camera-find-adducts data |   rdata    |
++------------------------------+------------+
+| 2)  msnbase-read-msms data   |   rdata    |
++------------------------------+------------+
+
+----------
+Parameters
+----------
+
+camera-find-adducts data
+        | A rdata file with a xsAnnotate object from one sample with annotated adduct information
+        |
+
+msnbase-read-msms data
+	| A rdata file with MS/MS information retrieved from **msnbase-read-msms**
+        |
+
+PPM
+        | The ppm error used for the mapping
+        |
+
+RT
+        | The retention time error (in seconds) used for the mapping
+        |
+
+------------
+Output files
+------------
+
+map_msms2camera_output_1.rdata
+        | A rdata file containing the mapped MS/MS spectra
+        |
+
+---------------------------------------------------
+
+----
+NEWS
+----
+
+CHANGES IN VERSION 0.1
+========================
+
+First version
+
+  </help>
 </tool>
