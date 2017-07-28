@@ -49,7 +49,7 @@ nmrML is an open mark-up language for NMR data. This tool converts RAW vendor NM
 .. class::infomark
 
 **Author**  
-Kristian Peters wrote this wrapper, Reza Salek feedback and testing it. The nmrML converter was written by Daneil Jacob (see below)
+Kristian Peters (IPB-Halle) wrote this wrapper, Reza Salek (EMBL-EBI) feedback and testing it. The nmrML converter was written by Daneil Jacob (see below). Visit <http://www.nmrML.org> for more information. 
 
 ----------------------------------------------------------------------------------
 
@@ -96,6 +96,10 @@ Workflow position
 -----------------
 
 Right after the data importer in a workflow or Galaxy NMR RAW data in Vendor format
+
+.. image:: imp2nmrmlcov.png
+    :height: 175
+    :width: 320
 
 -----------
 Input files
