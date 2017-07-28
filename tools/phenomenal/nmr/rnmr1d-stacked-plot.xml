@@ -28,7 +28,7 @@ Create a plot of an aligned NMR data matrix
 .. class::infomark
 
 **Author**  
-Kristian Peters (IPB) wrote this wrapper, Reza Salek (EMBL-EBI) feedback and testing it. The rnmr1d-stacked-plot was written by Daneil Jacob (see below)
+Kristian Peters (IPB-Halle) wrote this wrapper, Reza Salek (EMBL-EBI) feedback and testing it. The rnmr1d-stacked-plot was written by Daneil Jacob (INRA) (see below)
 
 ----------------------------------------------------------------------------------
 
@@ -59,7 +59,7 @@ See the **NEWS** section at the bottom of this page
 Description
 -----------
 
-NA
+Create a plot of an aligned NMR data matrix
 
 .. class:: infomark
 
@@ -73,7 +73,11 @@ NA
 Workflow position
 -----------------
 
-Right after the nmrMLConv in a workflow or Galaxy nmrML/Vedor RAW NMR data 
+.. image:: plot.png
+    :height: 340
+    :width: 405
+
+Right after the Rnmr1D for plotting the results. 
 
 -----------
 Input files

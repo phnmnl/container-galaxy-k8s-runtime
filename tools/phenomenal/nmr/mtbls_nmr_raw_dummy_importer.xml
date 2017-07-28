@@ -58,7 +58,7 @@ See the **NEWS** section at the bottom of this page
 Description
 -----------
 
-This tool downloads a complete Metabolights NMR Study as a Zip file. You need to enter the correct accession number (e.g. MTBLS1). Please make sure the datasets are Zipped as individual files, i.e. One sample, one zipped file. Also, must include the Bruker folder structure having both FID and processing parameter to work. Same for other vendor data.
+This tool downloads a complete MetaboLights NMR Study as a Zip file. You need to enter the correct accession number (e.g. MTBLS1). Please make sure that the datasets are Zipped as individual files, i.e. One sample, one zipped file. Also, must include the Bruker folder structure having both FID and processing parameter to work (It is needed for nmrMl conversion).
 
 ---------------------------------------------------
 

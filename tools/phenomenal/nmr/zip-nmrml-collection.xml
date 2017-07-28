@@ -39,7 +39,7 @@ ${infile.name},
 .. class::infomark
 
 **Author**  
-Kristian Peters (IPB) wrote this wrapper, Reza Salek (EMBL-EBI) feedback and testing it.
+Kristian Peters (IPB-Halle) wrote this wrapper, Reza Salek (EMBL-EBI) feedback and testing it.
 
 ----------------------------------------------------------------------------------
 
@@ -80,7 +80,11 @@ A simple module to Zip NMR data
 Workflow position
 -----------------
 
-Right after the nmrMLConv in a workflow to Zip files and as input for rnmr1D
+Right after the nmrMLConv in a workflow to Zip files and as input for Rnmr1D
+
+.. image:: zipfile.png
+    :height: 240
+    :width: 320
 
 -----------
 Input files
@@ -93,11 +97,13 @@ nmrML or Vendor NMR data files
 Parameters
 ----------
 
+NA
+
 ------------
 Output files
 ------------
 
-Zipped NMR data
+Zipped NMR data Galaxy dataset collection
 
 ----
 NEWS

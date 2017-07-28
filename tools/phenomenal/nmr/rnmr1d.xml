@@ -25,7 +25,7 @@ Pre-process RAW NMR data with macro-commands using Rnmr1D.
 .. class::infomark
 
 **Author**  
-Kristian Peters wrote this wrapper, Reza Salek feedback and testing it. The Rnmr1D NMR data processing tool in "R" was written by Daneil Jacob (see below)
+Kristian Peters (IPB-Halle) wrote this wrapper, Reza Salek (EMBL-EBI) feedback and testing it. The Rnmr1D NMR data processing tool in "R" was written by Daneil Jacob (INRA) (see below)
 
 ----------------------------------------------------------------------------------
 
@@ -56,8 +56,8 @@ See the **NEWS** section at the bottom of this page
 Description
 -----------
 
-Rnmr1D is the main module from the NMRProcFlow web application (http://nmrprocflow.org) develped by  Daniel Jacob, for 1D NMR spectra data processing.
-Rnmr1D allows users to process their NMR spectra using set of macro-command sequence. Outside NMRProcFlow Rnmr1D become a CLI application allowing users to replay the macro-command sequence generated within NMRProcFlow. Moreover, without using NMRProcFlow, this module can also be used to replace any 'home-made script' by a macro-command sequence.
+Rnmr1D is the main module from the NMRProcFlow web application (http://nmrprocflow.org) develpped by Daniel Jacob (INRA), for 1D NMR spectra data processing.
+Rnmr1D allows users to process their NMR spectra using set of macro-command sequence. Outside NMRProcFlow Rnmr1D become a CLI application allowing users to replay the macro-command sequence generated within NMRProcFlow. Moreover, without using NMRProcFlow, this module can also be used to replace any 'home-made script' by a macro-command sequence. See Parameters for details. 
 
 .. class:: infomark
 
@@ -71,18 +71,22 @@ Rnmr1D allows users to process their NMR spectra using set of macro-command sequ
 Workflow position
 -----------------
 
-Right after the nmrMLConv in a workflow or Galaxy nmrML/Vedor RAW NMR data 
+Right after the nmrMLConv in a workflow or Galaxy nmrML/Vedor RAW NMR data
+
+.. image:: rnmr1d.png
+    :height: 425
+    :width: 392
 
 -----------
 Input files
 -----------
 
-Galaxy dataset nmrML or Vendor file format. Data input could be Zipped (preferrred) or unziped
+Galaxy dataset nmrML or Vendor file format. Data input could be Zipped (preferred) or as individual files
 
 ----------
 Parameters
 ----------
-Use the macro editor for parameters
+Use the macro editor for parameters, you need the have the correct Macro parameters as input for data processing (updated coming soon, currently as input .txt script file)
 
 ------------
 Output files
