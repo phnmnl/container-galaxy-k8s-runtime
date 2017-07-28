@@ -240,14 +240,17 @@ this would require changing the out_dir for wrapper.py back to $html_file.extra_
  A program to automatically generate ISA-Tab metadata files from nmrML data files.
 
  Additional meta-information not found within the nmrML file can be added either through a JSON file or via the drop
- down menus. However, it is recommended that the nmrML2ISA tool is used to create a semi-completed ISA-Tab file structure
+ down menus. However, it is recommended that the nmrML2ISA tool is used to create a semi-completed ISA-Tab file structure (Assay)
  that is further annotated using ISAcreator https://github.com/ISA-tools/ISAcreator
 
+.. class::infomark
+
+**Author**  
+Kristian Peters (IPB) wrote this wrapper, Reza Salek (EMBL-EBI) the nmrML2ISA conspet.
     ]]></help>
     <citations>
-        <citation type="doi">10.1002/0471250953.bi1413s53</citation>
+        <citation type="doi">10.1093/bioinformatics/btx169</citation>
         <citation type="doi">10.1007/s11306-015-0879-3</citation>
-        <citation type="doi">10.1038/ng.1054</citation>
     </citations>
 </tool>
 

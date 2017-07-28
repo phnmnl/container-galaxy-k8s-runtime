@@ -4,7 +4,7 @@
   <requirements>
     <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/nmrmlconv</container>
   </requirements>
-  <description>Converts vendor RAW NMR to nmrML.</description>
+  <description>Converts vendor NMR RAW data to nmrML format.</description>
   <command><![CDATA[
     export indir=`dirname $infile`;
     export cpfile=$infile.name;
@@ -24,7 +24,7 @@
   </command>
   <inputs>
     <param name="infile" type="data" format="no_unzip.zip" optional="False" label="Input file in zip format to convert" />
-    <param name="venformat" type="select" value="Bruker" optional="True" label="Vendor format" help="See below.">
+    <param name="venformat" type="select" value="Bruker" optional="True" label="Vendor format" help="Choose the vendor data type that matches with the original vendor format as input. The default parameter is 'Bruker' file format.">
       <option value="bruker" selected="True">Bruker</option>
       <option value="varian">Varian</option>
       <option value="jeol">Jeol</option>
@@ -43,7 +43,118 @@
   <outputs>
     <data name="outfile" type="data" format="txt" label="${infile.display_name} converted with ${tool.name} (nmrML)" />
   </outputs>
-  <help>
+  <help><![CDATA[
 nmrML is an open mark-up language for NMR data. This tool converts RAW vendor NMR data to nmrML format.
-  </help>
+
+.. class::infomark
+
+**Author**  
+Kristian Peters (IPB-Halle) wrote this wrapper, Reza Salek (EMBL-EBI) feedback and testing it. The nmrML converter was written by Daneil Jacob (see below). Visit <http://www.nmrML.org> for more information. 
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+**Tool**
+
+A Java program to convert vendor NMR RAW data to open source nmrML XML format
+
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+**Tool updates**
+
+See the **NEWS** section at the bottom of this page
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+================================================================================
+**nmrmlconvr**: Converting vendor NMR data to open access nmrML format
+================================================================================
+
+-----------
+Description
+-----------
+
+Uses nmrMLcreate (see Github <https://github.com/nmrML/nmrML> for nmrML development or visit <http://www.nmrML.org>) a Java tool that allows you to convert NMR data to nmrML open access format. It uses multiple NMR fid files packed in a ZIP archive as input. Each nmr fid file must have its own directory within the ZIP archive along with the acquisition parameters file. The input NMR format is depending on the instrument vendor; currently 'bruker' and 'varian' are supported. 
+
+
+.. class:: infomark
+
+**References**
+
+| Jacob D, Deborde C, Lefebvre M, Maucourt M, Moing A. NMRProcFlow: a graphical and interactive tool dedicated to 1D spectra processing for NMR-based metabolomics. Metabolomics. 2017;13(4):36. doi:10.1007/s11306-017-1178-y.
+
+---------------------------------------------------
+
+-----------------
+Workflow position
+-----------------
+
+Right after the data importer in a workflow or Galaxy NMR RAW data in Vendor format
+
+.. image:: imp2nmrmlcov.png
+    :height: 175
+    :width: 320
+
+-----------
+Input files
+-----------
+
+Galaxy dataset NMR RAW in Zip Vendor files format.
+
+----------
+Parameters
+----------
+Choose the vendor NMR data format, from the list below to convert to nmrML.
+
+Parameters and Settings: Vendor format options [...]:
+
+  | Bruker [default]
+  | Varian
+  | Jeol 
+  | TecMag
+  | NMR Star 
+  | ChemMagnetics 
+  | GE Omega 
+  | Galactic 
+  | JCAMP 
+  | Lybrics 
+  | Nicolet 
+  | netCDF
+  | 
+
+
+------------
+Output files
+------------
+
+Zipped NMR data with the same name as the original NMR RAW data in nmrML format Galaxy dataset.
+
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**License**
+Copyright (C) 2017 Daniel Jacob - INRA
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+----
+NEWS
+----
+
+More updates soon
+
+  ]]></help>
 </tool>
