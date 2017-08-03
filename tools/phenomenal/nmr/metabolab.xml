@@ -4,8 +4,6 @@
        <container type="docker">docker-registry.phenomenal-h2020.eu/phnmnl/metabolab</container>
      </requirements>
      <command><![CDATA[     
-       echo $zipfile;
-       ls -al $zipfile;
        cd /mydata;
        pwd;
        unzip $zipfile;
@@ -27,14 +25,69 @@
          <param name="script" type="data" format="txt" label="metabolab processing script,.ml file"/>
      </inputs>
      <outputs>
-         <data name="batmancsv" format="csv" from_work_dir="myoutput_batman.csv" label="peak intensities for Batman"/>
-         <data name="isatabfileszipped" format="zip" from_work_dir="isatab_files.zip" label="zip of isatab files for Metabolights"/>
+         <data name="batmancsv" format="csv" from_work_dir="myoutput_batman.csv" label="intensities file for Batman"/>
+         <data name="isatabfileszipped" format="zip" from_work_dir="isatab_files.zip" label="zipped isatab files for Metabolights"/>
          <data name="metabolabmatfile" format="data" from_work_dir="metabolabnotgui.mat" label="Mat file for MetaboLab"/>
-         <data name="brukerzip" format="zip" from_work_dir="myoutputBruker.zip" label="zip of Bruker processed data"/>
+         <data name="brukerzip" format="zip" from_work_dir="myoutputBruker.zip" label="zipped Bruker processed data"/>
          <data name="matforplstoolbox" format="data" from_work_dir="myoutput.mat" label="Mat file for use in MATLab's PLS Toolbox"/>
      </outputs>
      <help><![CDATA[
-Demo dataset download link:
+
+
+=============================================================
+**Metabolab**: Software for processing and analyzing NMR data
+=============================================================
+
+-----------
+Description
+-----------
+
+The MetaboLab software is an integrated software package for NMR data processing and analysis, closely linked to the previously developed NMRLab software. It includes tools for batch processing and gives access to a wealth of algorithms available in the MATLAB framework. Algorithms within MetaboLab help to optimize the flow of metabolomics data preparation for statistical analysis. The combination of an intuitive graphical user interface along with advanced data processing algorithms facilitates the use of MetaboLab in a broader metabolomics context. Here, this software has been adapted to function without a graphical user interface in a more automated mode in a Galaxy workflow environment.
+
+Key features
+
+- NMR processing and pre-processing for multi-variate analysis.
+
+Functionality
+
+- Automated phase correction, alignment of spectra, automated baseline correction, exclusion of unwanted spectral regions, segmental alignment, TSA/PQN scaling, bucketing, noise filtering and generalised logarithmic transform.
+
+Instrument Data Types
+
+- The MetaboLab container is designed to process 1D data from Bruker and Agilent Spectrometers.
+
+---------------------------------------------------
+
+.. class:: infomark
+
+
+**Authors**  Christian Ludwig and Ulrich Günther (University of Birmingham)     
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Please cite**
+
+Ludwig C, Günther U. MetaboLab - advanced NMR data processing and analysis for metabolomics. BMC Bioinformatics; 2011; 12:366-371. doi:10.1186/1471-2105-12-366
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**References**
+
+Günther UL, Ludwig C, Rüterjans H. NMRLAB - Advanced NMR Data Processing in Matlab. J Magn Reson. 2000; 145(2): 201-208. doi:10.1006/jmre.2000.2071
+
+Ludwig C, Günther U. MetaboLab - advanced NMR data processing and analysis for metabolomics. BMC Bioinformatics; 2011; 12:366-371. doi:10.1186/1471-2105-12-366
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Working example**
+
+Obtain the demonstration dataset here:
 
 https://github.com/phnmnl/container-metabolab/tree/develop/galaxy/testdata.zip
 
@@ -44,17 +97,47 @@ Matching script:
 
 https://github.com/phnmnl/container-metabolab/tree/develop/galaxy/container_script.ml
 
-I had to follow the link, click on 'Raw' to view the raw file, 'select all' (CTL-A), 'copy' (CTL-C) & then paste this into myscript.ml to get the file content. There may be a better way!!
+Follow the link, click on 'Raw' to view the raw file, 'select all' (CTL-A), 'copy' (CTL-C) and then paste this into myscript.ml to get the file content.
 
+---------------------------------------------------
 
+.. class:: infomark
+
+**How to use Metabolab**
      
-Two mandatory files: 
+Two mandatory input files: 
 
 -a zip file containing the raw data - when uploading this, set type to 'zip' not 'Auto-detect'
 
 -a script to control processing, container_script.ml. 
 
-There are some helpful videos about using MetaboLab in Galaxy or locally and about how the script controls processing on the following YouTube channel with ID: UC0i9FkJylyl6omwuEh2gEDQ
+Output files:
+
+- Intensities file for Batman: a comma-separated-values file containing chemical shifts in column 1 and the corresponding intensities in each spectrum in subsequent columns.
+
+- Zipped isatab files for Metabolights: Initial Isatab files for submitting data to the Metabolights database. Additional metadata can be added using Isacreator.
+
+- Mat file for MetaboLab: A MATLab file containing all raw and processed data for use in MetaboLab, MATLab or related softwares.
+
+- Zipped Bruker processed data: Bruker data directories containing processed data.
+
+- Mat file for use in MATLab's PLS Toolbox: A smaller MATLab file just containing pre-processed data ready for multivariate analysis in MATLab's PLS Toolbox. 
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Further information**
+
+Video tutorials:
+
+Using MetaboLab in Galaxy: https://youtu.be/vYtmNZJIk2A 
+
+The MetaboLab script explained: https://youtu.be/MRHB_yR7RFw 
+
+Website:
+http://beregond.bham.ac.uk/~ludwigc/metabolab_intro/metabolab/
+
 
        ]]>
      </help>
