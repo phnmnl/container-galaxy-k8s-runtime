@@ -1,19 +1,75 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <tool id="isajson_validator" name="isajson_validator" version="1.0">
-  <description>Produce a validation report on an ISA-Tab ZIP archive</description>
+  <description>Produce a validation report on an ISA-JSON file</description>
   <command><![CDATA[
     run_validator.py $isa_file
   ]]>
   </command>
   <inputs>
-      <param name="isa_file" type="data" format="json" label="ISA-JSON file." optional="false"/>
+      <param name="isa_file" type="data" format="json" label="ISA-JSON file." optional="false" help="The input JSON file should be an ISA-JSON format JSON file."/>
   </inputs>
   <outputs>
     <data format="json" name="output" from_work_dir="report.json" label="Validation report in JSON format" />
   </outputs>
 
   <help>
-      This tool produces a validation report (in JSON format) for a given ISA-JSON.
+<!-- @@@BEGIN_RST@@@ -->
+
+==================
+ISA-JSON validator
+==================
+
+This tool validates an ISA-JSON format JSON file. It checks the JSON structure against the ISA-JSON schemas and then parses the content to check for consistency in metadata across the ISA content.
+
+-----
+Input
+-----
+
+ISA content in ISA-JSON format
+==============================
+
+A single JSON file containing the ISA-Tab contents in *ISA-JSON* compliant format.
+
+For details on the ISA-JSON format, please see http://isa-specs.readthedocs.io/en/latest/isajson.html
+
+------
+Output
+------
+
+Validation report in JSON format
+================================
+
+A single JSON file containing the ISA-Tab validation report.
+
+The validation report may contain lists of `errors`, `warnings`, and `fatal` messages. To detect that the validation finished without the validation itself crashing, check that the property `validation_finished` is present and `True`.
+
+A validation report may be structure like:
+
+::
+
+  {
+    "warnings": [
+      {
+        "code": 1019,
+        "message": "Protocol declared but not used",
+        "supplemental": "protocols declared in the file s_study.txt are not used in any assay file: {'sample collection'}"
+      }
+    ],
+    "errors": [],
+    "validation_finished": True
+  }
+
+
+For each warning or error, there will be a validation `code` (Integer), a user-readable `message` string and a `supplemental` section that intends to provide extra contextual information on the error.
+
+The current set of validation rules that have been implemented are listed in this Google sheet: https://goo.gl/FRHKrQ
+
+<!-- @@@END_RST@@@ -->
   </help>
+
+  <citations>
+    <citation type="doi">10.5281/zenodo.163640</citation>
+    <citation type="doi">10.1038/ng.1054</citation>
+  </citations>
 
 </tool>

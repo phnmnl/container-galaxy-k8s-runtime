@@ -6,15 +6,58 @@
   ]]>
   </command>
   <inputs>
-    <param name="mtbls_id" type="text" label="Metabolights Study Identifier"/>
+    <param name="mtbls_id" type="text" label="MetaboLights Study Identifier." help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
     <param name="query" type="text" label="Factor name"/>
   </inputs>
   <outputs>
-    <data format="json" name="output" from_work_dir="out.json" label="List of factor values as JSON" />
+    <data format="json" name="output" from_work_dir="out.json" label="List of factor values as JSON." />
   </outputs>
 
   <help>
-      This tool gets a list of factor values for a given factor used in a given MetaboLights study.
+<!-- @@@BEGIN_RST@@@ -->
+
+==================================================
+Get list of study factors for a MetaboLights study
+==================================================
+
+This tool gets the list of factor values from a MetaboLights study for a given study factor name. It extracts the factor values from the ISA-Tab study and assay tables.
+
+-----
+Input
+-----
+
+MetaboLights Study Identifier
+=============================
+MTBLS ID available at MetaboLights, e.g. MTBLS2.
+
+Factor name
+===========
+A factor name from the list of factors in the study metadata.
+
+------
+Output
+------
+
+List of factor values as JSON
+=============================
+
+A list of factor values for the specified factor name as a JSON list. e.g.
+
+::
+
+  [
+    "Exp2",
+    "Exp1"
+  ]
+
+
+<!-- @@@END_RST@@@ -->
   </help>
+
+  <citations>
+    <citation type="doi">10.1093/nar/gks1004</citation>
+    <citation type="doi">10.5281/zenodo.163640</citation>
+    <citation type="doi">10.1038/ng.1054</citation>
+  </citations>
 
 </tool>
