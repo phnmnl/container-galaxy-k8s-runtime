@@ -31,6 +31,13 @@
     with_dict: "{{ smtp_setup }}"
     when: smtp_setup.smtp_server != "" and smtp_setup.smtp_username != "" and smtp_setup.smtp_password != ""
 
+  - name: allow admin to delete users
+    ini_file:
+      dest: /galaxy/config/galaxy.ini
+      section: "app:main"
+      option: "allow_user_deletion"
+      value: "True"
+
   - name: set database postgres connection properties 
     ini_file:
         dest: /galaxy/config/galaxy.ini
