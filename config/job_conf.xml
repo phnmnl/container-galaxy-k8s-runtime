@@ -23,11 +23,35 @@
     </handlers>
     <destinations default="local">
         <destination id="local" runner="local"/>	
-        <destination id="iso2flux-container" runner="k8s">
+	<destination id="batman-container" runner="k8s">
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">batman</param>
+            <param id="docker_tag_override">v1.2.12.0_cv1.0.65</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+        <destination id="w4m-biosigner-container" runner="k8s">
+	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">biosigner</param>
+            <param id="docker_tag_override">v2.2.7_cv1.1.12</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+	<destination id="camera-container" runner="k8s">
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">camera</param>
+            <param id="docker_tag_override">v1.32.0_cv0.5.45</param>
+            <param id="max_pod_retrials">1</param>
+            <param id="docker_enabled">true</param>
+ 	</destination>
+	<destination id="iso2flux-container" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">iso2flux</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v0.2_cv1.1.36</param>
             <param id="max_pod_retrials">1</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -35,7 +59,7 @@
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">midcor</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v1.0_cv1.0.40</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -43,7 +67,7 @@
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">isodyn</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v1.0_cv0.2.30</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -51,15 +75,7 @@
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">ramid</param>
-            <param id="docker_tag_override">latest</param>
-            <param id="max_pod_retrials">3</param>
-            <param id="docker_enabled">true</param>
-        </destination>
-	<destination id="batman-container" runner="k8s">
-            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">batman</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v1.0_cv1.0.14</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -70,7 +86,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">mtbls-dwnld</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v2.0.5_cv1.2.16</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -78,7 +94,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">univariate</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v2.2.3_cv1.2.28</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -86,15 +102,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">multivariate</param>
-            <param id="docker_tag_override">latest</param>
-            <param id="max_pod_retrials">3</param>
-            <param id="docker_enabled">true</param>
-        </destination>
-        <destination id="w4m-biosigner-container" runner="k8s">
-	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">biosigner</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v2.3.10_cv1.1.18</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -102,7 +110,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">lcmsmatching</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v3.1.6_cv1.3.61</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -118,7 +126,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">nmrmlconv</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v1.1b_cv0.4.46</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -126,7 +134,7 @@
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">rnmr1d</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v1.2.8_cv0.3.22</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -142,7 +150,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">soap-nmr</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v1.0_cv0.4.1016</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -150,7 +158,7 @@
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">metfrag-cli</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v2.4.2_cv0.3.24</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -158,7 +166,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">xcms</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v1.52.0_cv0.5.58</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -166,7 +174,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">mzml2isa</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v0.4.28_cv0.2.23</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -174,7 +182,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">nmrml2isa</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v0.3.0_cv0.1.10</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -182,7 +190,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">scp-aspera</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v3.5.4.102989-linux-64_cv0.2.9</param>
             <param id="max_pod_retrials">1</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -190,7 +198,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">mtbl-labs-uploader</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v0.1.0_cv0.3.11</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -198,7 +206,7 @@
            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
            <param id="docker_owner_override">phnmnl</param>
            <param id="docker_image_override">metaboliteidconverter</param>
-           <param id="docker_tag_override">latest</param>
+           <param id="docker_tag_override">v0.5.1_cv1.1.28</param>
            <param id="max_pod_retrials">3</param>
            <param id="docker_enabled">true</param>
         </destination>
@@ -206,7 +214,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">metabomatching</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v0.1.0_cv0.3.29</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -214,7 +222,7 @@
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">ms-vfetc</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v0.4_cv1.3.10</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -222,23 +230,15 @@
     	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
     	    <param id="docker_owner_override">phnmnl</param>
     	    <param id="docker_image_override">metfrag-cli-batch</param>
-    	    <param id="docker_tag_override">latest</param>
+    	    <param id="docker_tag_override">v2.4.2_cv0.1.12</param>
     	    <param id="max_pod_retrials">3</param>
     	    <param id="docker_enabled">true</param>
 	</destination>
-	<destination id="camera-container" runner="k8s">
-            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">camera</param>
-            <param id="docker_tag_override">latest</param>
-            <param id="max_pod_retrials">1</param>
-            <param id="docker_enabled">true</param>
- 	</destination>
 	<destination id="container-mtblisa" runner="k8s">
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
 	    <param id="docker_owner_override">phnmnl</param>
 	    <param id="docker_image_override">mtblisa</param>
-	    <param id="docker_tag_override">latest</param>
+	    <param id="docker_tag_override">v0.8.0_cv0.5.44</param>
 	    <param id="max_pod_retrials">3</param>
 	    <param id="docker_enabled">true</param>
 	</destination>
@@ -246,7 +246,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
 	    <param id="docker_owner_override">phnmnl</param>
 	    <param id="docker_image_override">isatab-validator</param>
-	    <param id="docker_tag_override">latest</param>
+	    <param id="docker_tag_override">v0.8.0_cv0.2.16</param>
 	    <param id="max_pod_retrials">3</param>
 	    <param id="docker_enabled">true</param>
 	</destination>
@@ -254,7 +254,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
 	    <param id="docker_owner_override">phnmnl</param>
 	    <param id="docker_image_override">isajson-validator</param>
-	    <param id="docker_tag_override">latest</param>
+	    <param id="docker_tag_override">v0.8.0_cv0.2.26</param>
 	    <param id="max_pod_retrials">3</param>
 	    <param id="docker_enabled">true</param>
 	</destination>
@@ -262,7 +262,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
 	    <param id="docker_owner_override">phnmnl</param>
 	    <param id="docker_image_override">metfrag-vis</param>
-	    <param id="docker_tag_override">latest</param>
+	    <param id="docker_tag_override">v0.1_cv0.1.12</param>
 	    <param id="max_pod_retrials">3</param>
 	    <param id="docker_enabled">true</param>
 	</destination>
@@ -270,7 +270,7 @@
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
 	    <param id="docker_owner_override">phnmnl</param>
 	    <param id="docker_image_override">escher-fluxomics</param>
-	    <param id="docker_tag_override">latest</param>
+	    <param id="docker_tag_override">v1.6.0-beta.4_cv1.0.9</param>
 	    <param id="max_pod_retrials">3</param>
 	    <param id="docker_enabled">true</param>
   </destination>
@@ -278,7 +278,7 @@
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">mw2isa</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v0.5.0_cv0.1.20</param>
             <param id="max_pod_retrials">1</param>
             <param id="docker_enabled">true</param>
   </destination>
@@ -286,7 +286,7 @@
             <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">msnbase</param>
-	    <param id="docker_tag_override">latest</param>
+	    <param id="docker_tag_override">v2.0.2_cv0.2.42</param>
 	    <param id="max_pod_retrials">1</param>
 	    <param id="docker_enabled">true</param>
   </destination>
@@ -294,7 +294,7 @@
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">isatab2json</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v0.8.0_cv0.2.39</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -302,7 +302,7 @@
 	          <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">openms</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v2.1.0_cv0.2.15</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -310,7 +310,7 @@
            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
            <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">json2isatab</param>
-           <param id="docker_tag_override">latest</param>
+           <param id="docker_tag_override">v0.8.0_cv0.2.26</param>
            <param id="max_pod_retrials">3</param>
            <param id="docker_enabled">true</param>
          </destination>
@@ -318,7 +318,7 @@
            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
            <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">mtbls-factors-viz</param>
-           <param id="docker_tag_override">latest</param>
+           <param id="docker_tag_override">v0.4_cv0.3.11</param>
            <param id="max_pod_retrials">3</param>
            <param id="docker_enabled">true</param>
         </destination>

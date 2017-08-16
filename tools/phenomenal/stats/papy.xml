@@ -8,11 +8,11 @@ pa.py $testdata_input $exp_cols $sample_size $effect_size $repeats $outcome_type
        ]]>
      </command>
      <inputs>
-         <param name="testdata_input" type="data" label="Test Dataset. Demo data set (TutorialData.csv) can be downloaded from the link below."/>
-         <param name="exp_cols" type="text" value="8" label="Number of columes in the test dataset for power analysis, can be either a single number, e.g., 8 or a range 2-16"/>
-         <param name="sample_size" type="text" value="0:100:501" label="Sample sizes matrix, e.g., 0:100:501, 0 is starting number, 100 is the interval towards 501, so this example provides sample size matrix as [1, 100, 200, 300, 400, 500]"/>
-         <param name="effect_size" type="text" value="0.05:0.05:0.7" label="Effect sizes matrix, e.g., 0.05:0.05:0.7, 0.05 is starting number, 0.05 (middle number) is the interval towards 0.7, so this example provides effect size matrix as [0.05, 0.1, 0.15, ... , 0.65]"/>
-         <param name="repeats" type="text" value="10" label="Number of repeats"/>
+         <param name="testdata_input" type="data" label="Test Dataset" help="Demo data set (TutorialData.csv) can be downloaded from the link below."/>
+         <param name="exp_cols" type="text" value="8" label="Number of columns in the test dataset for power analysis" help="Can be either a single number, e.g., 8 or a range 2-16"/>
+         <param name="sample_size" type="text" value="0:100:501" label="Sample sizes matrix" help="e.g., 0:100:501, 0 is starting number, 100 is the interval towards 501, so this example provides sample size matrix as [1, 100, 200, 300, 400, 500]"/>
+         <param name="effect_size" type="text" value="0.05:0.05:0.7" label="Effect sizes matrix" help="e.g., 0.05:0.05:0.7, 0.05 is starting number, 0.05 (middle number) is the interval towards 0.7, so this example provides effect size matrix as [0.05, 0.1, 0.15, ... , 0.65]"/>
+         <param name="repeats" type="text" value="10" label="Number of repeats" help=""/>
          <param name="outcome_type" type="select" label="Outcome Variables Type" help="">
             <option value="0">Classification (discrete)</option>
             <option value="1">Regression (continuous)</option>
@@ -28,12 +28,106 @@ pa.py $testdata_input $exp_cols $sample_size $effect_size $repeats $outcome_type
          <data name="power_rate_noCorrection_slice" format="html" from_work_dir="results/plot-slice-power-rate-noCorrection-diffgroups.html" label="Proportion of Power >0.8 VS sample size (no correction)"/>
          <data name="power_rate_noCorrection_slice_eff" format="html" from_work_dir="results/plot-slice-power-rate-noCorrection-diffgroups-eff.html" label="Proportion of Power >0.8 VS effect size (no correction)"/>
      </outputs>
-     <help> <![CDATA[
+     <help><![CDATA[
+     
+     **Power Analysis tool in PYthon**
+     This Power Analysis tool estimates the statistical power and sample size by investigating the complex relationship between sample size, power, and effect size for real multivariate data sets. 
+     
+     
      Demo data set and script for plotting single variables are in the .zip file from the link:
      https://github.com/jianlianggao/papy/blob/master/papy/papy_demoData_n_plot.zip?raw=true
      
-     TutorialData.csv is the demo data set.
-     plotSurface.py is for plotting each single variable, which is included in the PAPY output file (zip file downloadable after PAPY runs).
-     ]]>
-     </help>
+     **Input Files**
+     
+     - *TutorialData.csv* is the demo data set.
+     
+     - *plotSurface.py* is for plotting each single variable in the PAPY output file (zip file downloadable after PAPY runs).
+     
+     **Output Files**
+     
+     - *diffgroups-xxy.csv*:
+	   
+       'diffgroups' means corresponding to discrete (classification) outcome.
+       
+       'xx' is one of 'tp', 'tn', 'fp', 'fn' and 'fd', which mean 'True Positive', 'True Negative', 'False Positive', 'False Negative' and 'False Discovery' respectively.
+       
+       'y' is one of the correction methods, 'n', 'b', 'bh' and 'by', which mean, 'no correction', 'Bonferroni correction', 'Benjamini-Hochberg correction' and 'Benjamini-Yekutieli correction'.
+       
+       These files store the mean of 'xx' rate with 'y' correction in the matrix of sample size and effect size for each input variable corresponding to discrete (classification) outcome.
+       
+       **NOTE**: For the files with '-fdb.csv', which are for 'False Discovery', are calculated after Bonferroni correction. This tool calculates False Discovery rate under all mentioned correction methods, not limited to 'Benjamini-Hochberg' and 'Benjamini-Yekutieli' ones.
+       
+       
+     - *diffgroups-sxxy.csv* :
+       
+       'diffgroups' means corresponding to discrete (classification) outcome.
+       
+       's' means standard deviation.
+       
+       'xx' is one of 'tp', 'tn', 'fp', 'fn' and 'fd', which mean 'True Positive', 'True Negative', 'False Positive', 'False Negative' and 'False Discovery' respectively.
+       
+       'y' is one of the correction methods, 'n', 'b', 'bh' and 'by', which mean, 'no correction', 'Bonferroni correction', 'Benjamini-Hochberg correction' and 'Benjamini-Yekutieli correction'.
+       
+       These files store the standard deviation of 'xx' rate with 'y' correction in the matrix of sample size and effect size for each input variable through all repeats in the simulation corresponding to discrete (classification) outcome.
+       
+       
+     - *linearregression-xxy.csv* :
+       
+       'linearregression' means corresponding to continuous (regression) outcome.
+       
+       'xx' is one of 'tp', 'tn', 'fp', 'fn' and 'fd', which mean 'True Positive', 'True Negative', 'False Positive', 'False Negative' and 'False Discovery' respectively.
+       
+       'y' is one of the correction methods, 'n', 'b', 'bh' and 'by', which mean, 'no correction', 'Bonferroni correction', 'Benjamini-Hochberg correction' and 'Benjamini-Yekutieli correction'.
+       
+       These files store the mean of 'xx' rate with 'y' correction in the matrix of sample size and effect size for each input variable corresponding to continuous (regression) outcome.
+       
+       
+     - *linearregression-sxxy.csv* :
+       
+       'linearregression' means corresponding to continuous (regression) outcome.
+       
+       's' means standard deviation.
+       
+       'xx' is one of 'tp', 'tn', 'fp', 'fn' and 'fd', which mean 'True Positive', 'True Negative', 'False Positive', 'False Negative' and 'False Discovery' respectively.
+       
+       'y' is one of the correction methods, 'n', 'b', 'bh' and 'by', which mean, 'no correction', 'Bonferroni correction', 'Benjamini-Hochberg correction' and 'Benjamini-Yekutieli correction'.
+       
+       These files store the standard deviation of 'xx' rate with 'y' correction in the matrix of sample size and effect size for each input variable through all repeats in the simulation corresponding to continuous (regression) outcome.
+       
+       
+     - *mean-diffgroups-xxy.csv*,  *mean-diffgroups-sxxy.csv*, *mean-linearregression-xxy.csv*, *mean-linearregression-sxxy.csv*:
+       
+       The files with leading 'mean-' contain mean of 'xx' rate with 'y' correction in the matrix of sample size and effect size for all input variables.
+       
+       
+     - *plot-mean-diffgroups-xxy.html*, *plot-mean-diffgroups-sxxy.html*, *plot-mean-linearregression-xxy.html*, *plot-mean-linearregression-sxxy.html*:
+       
+       The files with leading 'plot-' are plots of mean of 'xx' rate with 'y' correction in the matrix of sample size and effect size for all input variables.
+       
+       
+     - *plot-power-rate-yyCorrection-diffgroups.html*, *plot-power-rate-yyCorrection-linearregression.html*: 
+       
+       The files are plots of mean value of proportion of variables reach the power of 0.8 in the matrix of sample size and effect size regarding the discrete or continuous outcome.
+       
+       'yy' is one of the correction methods, 'no', 'bonf', 'bh' and 'by', which mean, 'no correction', 'Bonferroni correction', 'Benjamini-Hochberg correction' and 'Benjamini-Yekutieli correction'.
+       
+       
+     - *plot-slice-power-rate-yyCorrection-diffgroups.html*, *plot-slice-power-rate-yyCorrection-ln.html*: 
+       
+       The files are plots of slices of mean value of proportion of variables reach the power of 0.8 against sample size regarding the discrete or continuous ('ln' code in the filename) outcome. Each plot has 3 lines with error bars which are the results based on the 2nd, middle, and the 2nd last values in the effect size matrix.
+       
+       'yy' is one of the correction methods, 'no', 'bonf', 'bh' and 'by', which mean, 'no correction', 'Bonferroni correction', 'Benjamini-Hochberg correction' and 'Benjamini-Yekutieli correction'.
+       
+       
+     - *plot-slice-power-rate-yyCorrection-diffgroups-eff.html*, *plot-slice-power-rate-yyCorrection-ln-eff.html*: 
+       
+       The files are plots of slices of mean value of proportion of variables reach the power of 0.8 against effect size regarding the discrete or continuous ('ln' code in the filename) outcome. Each plot has 3 lines with error bars which are the results based on the 2nd, middle, and the 2nd last values in the sample size matrix.
+       
+       'yy' is one of the correction methods, 'no', 'bonf', 'bh' and 'by', which mean, 'no correction', 'Bonferroni correction', 'Benjamini-Hochberg correction' and 'Benjamini-Yekutieli correction'.
+
+     ]]></help>
+     
+     <citations> 
+         <citation type="doi">10.1021/acs.analchem.6b00188</citation>
+       </citations>
  </tool>

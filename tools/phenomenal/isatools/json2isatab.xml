@@ -6,14 +6,52 @@
   ]]>
   </command>
   <inputs>
-      <param name="isa_file" type="data" format="json" label="ISA-JSON" optional="false"/>
+      <param name="isa_file" type="data" format="json" label="ISA-JSON file." optional="false" help="The input JSON file must be in valid ISA-JSON format."/>
   </inputs>
   <outputs>
-    <data format="zip" name="output" from_work_dir="out.zip" label="ISA-Tab ZIP" />
+    <data format="zip" name="output" from_work_dir="out.zip" label="ISA content in ISA-Tab format (zipped)" />
   </outputs>
 
   <help>
-      This tool converts an ISA-Tab ZIP archive to ISA-JSON.
+<!-- @@@BEGIN_RST@@@ -->
+
+=====================
+json2isatab converter
+=====================
+
+This tool converts an ISA-JSON file to ISA-Tab format.
+
+-----
+Input
+-----
+
+ISA content in ISA-JSON format
+==============================
+
+A single JSON file containing the ISA-Tab contents in *ISA-JSON* compliant format.
+
+For details on the ISA-JSON format, please see http://isa-specs.readthedocs.io/en/latest/isajson.html
+
+.. class:: warningmark
+
+The input ISA-JSON must be valid.
+
+------
+Output
+------
+
+Zip file containing ISA files
+=============================
+The output zip file will contain the i_*.txt, s_*.txt and a_*.txt files expected in an *ISA-Tab* archive.
+
+For details on the ISA-Tab format, please see http://isa-specs.readthedocs.io/en/latest/isatab.html
+
+<!-- @@@END_RST@@@ -->
   </help>
+
+  <citations>
+    <citation type="doi">10.5281/zenodo.163640</citation>
+    <citation type="doi">10.1038/ng.1054</citation>
+  </citations>
 
 </tool>

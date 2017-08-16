@@ -7,15 +7,49 @@ run_mwtab2isa.py "$mw_study_id" dir;
   </command>
   <!-- mv "$mw_study_id".zip "$output_zip"; -->
   <inputs>
-    <param name="mw_study_id" type="text" label="Metabolomics Workbench Study Identifier"/>
+    <param name="mw_study_id" type="text" label="Metabolomics Workbench Study Identifier" help="MW study ID available at Metabolomics Workbench, e.g. ST000110."/>
   </inputs>
   <outputs>
     <!--<data name="ISA_zip" format="zip" label="MW study in ISA" from_work_dir="${mw_study_id}"/>-->
-    <data name="out.zip" format="zip" label="$(mw_study_id) Zip file" from_work_dir="out.zip"/>
+    <data name="out.zip" format="zip" label="$(mw_study_id) ISA-Tab (zip)" from_work_dir="out.zip"/>
   </outputs>
   
   <help>
-    This tool produces an ISA-Tab ZIP archive given an NIH Metabolomics Workbench accession number.
+
+<!-- @@@BEGIN_RST@@@ -->
+
+============================================
+Get ISA metadata from Metabolomics Workbench
+============================================
+
+This tool produces an ISA-Tab archive (zip) given an NIH Metabolomics Workbench accession number.
+
+-----
+Input
+-----
+
+Metabolomics Workbench Study Identifier
+=======================================
+MW study ID available at Metabolomics Workbench, e.g. ST000110.
+
+------
+Output
+------
+
+Zip file containing ISA files
+=============================
+The output zip file will contain the i_*.txt, s_*.txt and a_*.txt files expected in an *ISA-Tab* archive. The output also includes auto-generated Metabolite Assignment Files (MAF).
+
+For details on the ISA-Tab format, please see http://isa-specs.readthedocs.io/en/latest/isatab.html
+
+
+<!-- @@@END_RST@@@ -->
   </help>
+
+  <citations>
+    <citation type="doi">10.1093/nar/gkv1042</citation>
+    <citation type="doi">10.5281/zenodo.163640</citation>
+    <citation type="doi">10.1038/ng.1054</citation>
+  </citations>
  
 </tool>
