@@ -57,7 +57,6 @@ This release version uses the following tools, tagged at these release versions:
  | [rNMR]() | [container-rNMR](https://github.com/phnmnl/container-rNMR/releases/tag/v1.1.9_cv0.2) | [v1.1.9_cv0.2.1024](http://phenomenal-h2020.eu/jenkins/job/container-rNMR/1024/) | Kristian Peters | IPB Halle | |
  | [rNMR-1D]() | [container-rNMR-1D](https://github.com/phnmnl/container-rNMR-1D/releases/tag/v1.2.8_cv0.3) | [v1.2.8_cv0.3.22](http://phenomenal-h2020.eu/jenkins/job/container-rNMR-1D/22/) | Kristian Peters | IPB Halle | |
  | [SOAP-NMR]() | [container-SOAP-NMR](https://github.com/phnmnl/container-SOAP-NMR/releases/tag/v1.0_cv0.4) | [v1.0_cv0.4.1016](http://phenomenal-h2020.eu/jenkins/job/container-SOAP-NMR/1016/) | Kristian Peters | IPB Halle | |
- | [speaq]() | [container-speaq](https://github.com/phnmnl/container-speaq/releases/tag/**) | [](http://phenomenal-h2020.eu/jenkins/job/container-speaq/) | Kristian Peters | IPB Halle | |
  | [Univariate]() | [container-Univariate](https://github.com/phnmnl/container-Univariate/releases/tag/v2.2.3_cv1.2) | [v2.2.3_cv1.2.28](http://phenomenal-h2020.eu/jenkins/job/container-Univariate/28/) | Pierrick Roger | CEA | |
  | [xcms]() | [container-xcms](https://github.com/phnmnl/container-xcms/releases/tag/v1.52.0_cv0.5/58/) | [v1.52.0_cv0.5.58](http://phenomenal-h2020.eu/jenkins/job/container-xcms/) | Kristian Peters | IPB Halle | |
 
