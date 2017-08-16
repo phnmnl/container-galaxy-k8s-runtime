@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <tool id="get_study" name="get_study" version="1.0">
-  <description>Get an ISA-Tab ZIP archive from MetaboLights</description>
+  <description>Get an ISA-Tab archive (zip) from MetaboLights</description>
   <command><![CDATA[
     run_mtblisa.py --command GET --study $mtbls_id
   ]]>
@@ -9,7 +9,7 @@
     <param name="mtbls_id" type="text" label="MetaboLights Study Identifier." help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
   </inputs>
   <outputs>
-    <data format="zip" name="output" from_work_dir="out.zip" label="ISA-Tab archive (zip)." />
+    <data format="zip" name="output" from_work_dir="out.zip" label="$(mtbls_id) ISA-Tab (zip)" />
   </outputs>
 
   <help>

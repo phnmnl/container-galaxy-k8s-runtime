@@ -9,7 +9,7 @@
     <param name="mtbls_id" type="text" label="MetaboLights Study Identifier." help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
   </inputs>
   <outputs>
-    <data format="json" name="output" from_work_dir="out.json" label="List of study factors as JSON." />
+    <data format="json" name="output" from_work_dir="out.json" label="$(mtbls_id) factors list" />
   </outputs>
 
   <help>
@@ -19,7 +19,7 @@
 Get list of study factors for a MetaboLights study
 ==================================================
 
-This tool gets the list of study factors from a MetaboLights study. It extracts the factors from the ISA-Tab metadata.
+This tool gets the list of study factors from a MetaboLights study. It extracts the factors from the ISA-Tab metadata stored in MetaboLights.
 
 -----
 Input
