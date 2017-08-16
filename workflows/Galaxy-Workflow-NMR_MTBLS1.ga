@@ -2,7 +2,7 @@
     "a_galaxy_workflow": "true", 
     "annotation": "", 
     "format-version": "0.1", 
-    "name": "NMR MTBLS1", 
+    "name": "Metabolomics NMR rnmr1d MetaboLights data processing and plot", 
     "steps": {
         "0": {
             "annotation": "", 
