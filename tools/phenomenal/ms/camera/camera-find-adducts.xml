@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="camera-find-adducts" name="camera-find-adducts" version="0.1">
+  <description>Perform precursor adduct annotation using CAMERA.</description>
+  <command><![CDATA[
+	/usr/local/bin/findAdducts.r input=$camera_find_adducts_input_1 output=$camera_find_adducts_output_1 ppm=$ppm polarity=$polarity output.pdf=$camera_find_adducts_output_2 plotpdf=$plotpdf rules=$rules;
+  ]]>
+  </command>
+  <inputs>
+    <param name="camera_find_adducts_input_1" type="data" format="rdata" optional="False" label="xsAnnotate file" help="A rdata file with a xsAnnotate object from one sample" />
+    <param name="ppm" type="text" format="txt" value="10" optional="False" label="PPM" help="The ppm error for the search" />
+    <param name="polarity" type="select" value="positive" label="Polarity" help="Polarity mode used for measuring of the MS sample (positive, negative)" >
+      <option value="positive" selected="True">positive</option>
+      <option value="negative" selected="False">negative</option>
+    </param>
+    <param name="plotpdf" type="select" value="false" label="plotpdf" help="Generate output PDF containing the plotted pseudo spectra" >
+      <option value="true" selected="False">True</option>
+      <option value="false" selected="True">False</option>
+    </param>	
+    <param name="rules" type="select" value="primary" label="Rules" help="Adduct ruleset to be used" >
+      <option value="primary" selected="primary">primary</option>
+      <option value="extended" selected="extended">extended</option>
+    </param>
+  </inputs>
+  <outputs>
+    <data name="camera_find_adducts_output_1" type="data" format="rdata" label="camera-find-adducts data" />
+    <data name="camera_find_adducts_output_2" type="data" format="pdf" label="camera-find-adducts plot" />
+  </outputs>
+  <help>
+
+.. class:: infomark
+
+| **Tool update: See the 'NEWS' section at the bottom of the page**
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+| **Payam Emami (payam.emami@medsci.uu.se)** and **Christoph Ruttkies (christoph.ruttkies@ipb-halle.de)** wrote and maintain this wrapper for CAMERA adduct detection.
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Please cite**
+
+R Core Team (2013). R: A language and Environment for Statistical Computing. http://www.r-project.org
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**References**
+
+| Kuhl C, Tautenhahn R, Boettcher C, Larson TR and Neumann S (2012). "CAMERA: an integrated strategy for compound spectra extraction and annotation of liquid chromatography/mass spectrometry data sets." Analytical Chemistry, 84, pp. 283-289. http://pubs.acs.org/doi/abs/10.1021/ac202450g.
+
+---------------------------------------------------
+
+=====================
+CAMERA Find Adducts
+=====================
+
+-----------
+Description
+-----------
+
+| Annotate adducts (and fragments) for a xsAnnotate object. Returns a xsAnnotate object with annotated pseudospectra. It is recommended to use **camera-find-isotopes** beforehand.
+
+-----------
+Input files
+-----------
+
++------------------------------+------------+
+| File                         |   Format   |
++==============================+============+
+| 1)  xsAnnotate file          |   rdata    |
++------------------------------+------------+
+
+----------
+Parameters
+----------
+
+xsAnnotate file
+        | A rdata file with a xsAnnotate object from one sample
+        |
+
+PPM
+	| The ppm error for the search
+	|
+
+Polarity
+	| Polarity mode used for measuring of the MS sample (positive, negative)
+	|
+
+plotpdf
+	| Generate output PDF containing the plotted pseudo spectra (True, False)
+	|
+
+Rules
+	| Adduct ruleset to be used:
+	| primary - contains most common adduct types ([M-H]-, [M-2H+Na]-, [M-2H+K]-, [M+Cl]-, [M+H]+, [M+Na]+, [M+K]+, [M+NH4]+)
+	| extended - next to primary also additional adduct types 
+	|
+
+------------
+Output files
+------------
+
+camera_find_adducts_output_1.rdata
+        | A rdata file containing one xsAnnotate object
+        |
+
+camera_find_adducts_output_2.pdf
+	| A PDF file containing the plotted pseudo spectra with their adduct annotations
+	|
+
+---------------------------------------------------
+
+----
+NEWS
+----
+
+CHANGES IN VERSION 0.1
+========================
+
+First version
+
+  </help>
+</tool>

@@ -1,10 +1,10 @@
 FROM ubuntu:14.04
 MAINTAINER PhenoMeNal-H2020 Project <phenomenal-h2020-users@googlegroups.com>
 
-LABEL Description="Galaxy 16.07-phenomenal for running inside Kubernetes."
+LABEL Description="Galaxy 17.05-phenomenal for running inside Kubernetes."
 LABEL software="Galaxy"
-LABEL software.version="16.07-pheno"
-LABEL version="0.1"
+LABEL software.version="17.05-pheno"
+LABEL version="1.2"
 
 RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transport-https software-properties-common wget && \
     apt-get update -qq && \
@@ -14,12 +14,13 @@ RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transpo
     pip install --upgrade pip && \
     apt-get purge -y software-properties-common && \
     apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-RUN git clone --depth 1 --single-branch --branch feature/allfeats https://github.com/phnmnl/galaxy.git
+RUN git clone --depth 1 --single-branch --branch release_17.05_plus_k8s_fs_support https://github.com/phnmnl/galaxy.git
 WORKDIR galaxy
-RUN echo "-e git+https://github.com/pcm32/pykube.git@feature/allMergedFeatures#egg=pykube" >> requirements.txt
+RUN echo "pykube==0.15.0" >> requirements.txt
 COPY config/galaxy.ini config/galaxy.ini
 COPY config/job_conf.xml config/job_conf.xml
 COPY config/tool_conf.xml config/tool_conf.xml
+COPY config/sanitize_whitelist.txt config/sanitize_whitelist.txt
 COPY tools/phenomenal tools/phenomenal
 
 RUN virtualenv .venv
@@ -40,6 +41,13 @@ COPY workflows workflows
 COPY container-simple-checks.sh container-simple-checks.sh
 COPY test_cmds.txt test_cmds.txt
 RUN chmod u+x /galaxy/ansible/run_galaxy_config.sh
+
+# Missing XCMS datatypes for w4m
+COPY external-datatypes/rdata_xcms_datatype.py /galaxy/lib/galaxy/datatypes/
+COPY external-datatypes/rdata_camera_datatype.py /galaxy/lib/galaxy/datatypes/
+COPY external-datatypes/no_unzip_datatypes.py /galaxy/lib/galaxy/datatypes/
+COPY external-datatypes/nmrml_datatype.py /galaxy/lib/galaxy/datatypes/
+COPY config/datatypes_conf.xml config/datatypes_conf.xml
 
 EXPOSE 8080
 

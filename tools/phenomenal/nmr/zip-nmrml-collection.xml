@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [File Handling]-->
+<tool id="zip-nmrml-collection" name="ZIP nmrML Collection" version="0.4">
+  <requirements>
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/nmrmlconv</container>
+  </requirements>
+  <description>Create a zip archive of a nmrML collection.</description>
+  <command><![CDATA[
+export infile_names=' 
+#for $infile in $infiles: 
+${infile.name},
+#end for
+';
+    for i in `echo \$infile_names | perl -pe 's/ /_/g' | perl -pe 's/\,_/\n/g'`; do echo \$i | perl -pe 's/\.zip.*//' >> /tmp/infiles.name.txt; done;
+    for infile in `echo $infiles | perl -pe 's/\,/\n/g'`; do echo \$infile >> /tmp/infiles.txt; done;
+    export inlength=`cat /tmp/infiles.txt | wc -l`;
+    if [ \$inlength -ne `cat /tmp/infiles.name.txt | wc -l` ]; then echo "Oopsie. Number of files and files.name are not equal."; exit 1; fi;
+    mkdir -p /tmp/dataset;
+    for c in `seq 1 \$inlength`; do
+        export infile=`cat /tmp/infiles.txt | head -n \$c | tail -n 1`;
+        export cpfile=`cat \$infile | grep 'acquisition1D id=' | sed -e 's/.*id\=\"//' | sed -e 's/\".*/\.nmrML/'`;
+        cp -f \$infile /tmp/dataset/\$cpfile;
+    done;
+    cd /tmp/dataset;
+    zip -q -9 /tmp/dataset.zip *;
+    mv -f /tmp/dataset.zip $outfile;
+  ]]>
+  </command>
+  <inputs>
+    <param name="infiles" type="data" format="txt" optional="False" multiple="True" label="Collection data" />
+  </inputs>
+  <outputs>
+    <data name="outfile" type="data" format="no_unzip.zip" label="Zipped nmrML study" />
+  </outputs>
+ <help><![CDATA[
+    Create a zip archive of a nmrML collection.
+    Create a plot of an aligned NMR data matrix
+
+.. class::infomark
+
+**Author**  
+Kristian Peters (IPB-Halle) wrote this wrapper, Reza Salek (EMBL-EBI) feedback and testing it.
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+**Tool**
+
+A program to Zip NMR data
+
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+**Tool updates**
+
+See the **NEWS** section at the bottom of this page
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+================================================================================
+**zip-nmrml-collection**: To Zip NMR data
+================================================================================
+
+-----------
+Description
+-----------
+
+A simple module to Zip NMR data
+
+.. class:: infomark
+
+---------------------------------------------------
+
+-----------------
+Workflow position
+-----------------
+
+Right after the nmrMLConv in a workflow to Zip files and as input for Rnmr1D
+
+.. image:: zipfile.png
+    :height: 240
+    :width: 320
+
+-----------
+Input files
+-----------
+
+nmrML or Vendor NMR data files
+
+
+----------
+Parameters
+----------
+
+NA
+
+------------
+Output files
+------------
+
+Zipped NMR data Galaxy dataset collection
+
+----
+NEWS
+----
+
+More updates soon
+    ]]></help>
+</tool>
+

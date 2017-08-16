@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="xcmssplit" name="xcmssplit" version="0.1">
+  <description>Split xcmsSet collection into several objects used for further processing.</description>
+<!--     <requirements>
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/xcms</container>
+    </requirements>-->
+  <command><![CDATA[
+ 	mkdir xcmsobjects;
+	/usr/local/bin/xcmssplitter.r input=$xcmssplit_input_1 output=xcmsobjects;
+  ]]>
+  </command>
+  <inputs>
+    <param name="xcmssplit_input_1" type="data" format="rdata" optional="False" label="XCMS-Set file" help="A rdata file with XCMS-Set objects that were grouped by xcms-collect-peaks" />
+  </inputs>
+  <outputs>
+        <collection name="xcmsobj" type="list" label="xcmssplit_output">
+        	<discover_datasets pattern="__designation__" directory="xcmsobjects" visible="true" format="rdata" />
+        </collection>
+  </outputs>
+  <help>
+.. class:: infomark
+
+| **Tool update: See the 'NEWS' section at the bottom of the page**
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+| **Payam Emami (payam.emami@medsci.uu.se)** and **Christoph Ruttkies (christoph.ruttkies@ipb-halle.de)** wrote and maintain this wrapper for XCMS-Set group splitting.
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Please cite**
+
+R Core Team (2013). R: A language and Environment for Statistical Computing. http://www.r-project.org
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**References**
+
+| Smith, C.A., Want, E.J., O'Maille, G., Abagyan,R., Siuzdak and G. (2006). "XCMS: Processing mass spectrometry data for metabolite profiling using nonlinear peak alignment, matching and identification." Analytical Chemistry, 78, pp. 779-787.
+| Tautenhahn R, Boettcher C and Neumann S (2008). "Highly sensitive feature detection for high resolution LC/MS." BMC Bioinformatics, 9, pp. 504.
+| Benton HP, Want EJ and Ebbels TMD (2010). "Correction of mass calibration gaps in liquid chromatography-mass spectrometry metabolomics data." BIOINFORMATICS, 26, pp. 2488.
+
+---------------------------------------------------
+
+=====================
+XMCS Split
+=====================
+
+-----------
+Description
+-----------
+
+| The module splits a collection of several XCMS-Sets from different samples into several XCMS-Set objects. This step is useful to perform further processing steps over multiple XCMS-Sets independently and in parallel.
+
+-----------
+Input files
+-----------
+
++------------------------------+------------+
+| File                         |   Format   |
++==============================+============+
+| 1)  XCMS-Set file            |   rdata    |
++------------------------------+------------+
+
+----------
+Parameters
+----------
+	  
+XCMS-Set file
+	| A rdata file with XCMS-Set objects that were grouped by **xcms-collect-peaks**
+        |
+
+------------
+Output files
+------------
+	
+xcmssplit_input_1.rdata
+	| (Multiple) rdata file(s) containing one XCMS-Set object each
+        |
+
+
+---------------------------------------------------
+
+----
+NEWS
+----
+
+CHANGES IN VERSION 0.1
+========================
+
+First version
+
+
+  </help>
+</tool>

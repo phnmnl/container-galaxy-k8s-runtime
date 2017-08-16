@@ -33,6 +33,11 @@ Parameters
 	| This two-column tab-separated file controls both the way metabomatching is run and the way results are displayed.
 	|
 
+Test Files
+	| The following two files can be downloaded from GitHub, then uploaded via *Get Data* to run metabomatching on test data.
+	| association statistics file: https://raw.githubusercontent.com/rrueedi/metabomatching/master/test/ps.test.multi/test.pseudospectrum.tsv
+	| parameters file: https://raw.githubusercontent.com/rrueedi/metabomatching/master/test/parameters.gxy.1.tsv
+	
 ------------
 Output Files
 ------------

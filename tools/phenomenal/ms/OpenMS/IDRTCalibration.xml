@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/). This file was automatically generated using CTD2Galaxy.-->
+<!--Proposed Tool Section: [ID Processing]-->
+<tool id="IDRTCalibration" name="IDRTCalibration" version="2.1.0">
+  <description>Can be used to calibrate RTs of peptide hits linearly to standards.</description>
+  <macros>
+    
+    <import>macros.xml</import>
+  </macros>
+  <expand macro="stdio"/>
+  <expand macro="requirements"/>
+<!--     <requirements>
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/openms</container>
+    </requirements>-->
+  <command><![CDATA[IDRTCalibration
+
+#if $param_in:
+  -in $param_in
+#end if
+#if $param_out:
+  -out $param_out
+#end if
+#if $param_calibrant_1_reference:
+  -calibrant_1_reference $param_calibrant_1_reference
+#end if
+#if $param_calibrant_2_reference:
+  -calibrant_2_reference $param_calibrant_2_reference
+#end if
+#if $param_calibrant_1_input:
+  -calibrant_1_input $param_calibrant_1_input
+#end if
+#if $param_calibrant_2_input:
+  -calibrant_2_input $param_calibrant_2_input
+#end if
+#if $param_threads:
+  -threads $param_threads
+#end if
+#if $adv_opts.adv_opts_selector=='advanced':
+    #if $adv_opts.param_version:
+  -version     "$adv_opts.param_version"
+#end if
+    #if $adv_opts.param_log:
+  -log     "$adv_opts.param_log"
+#end if
+    #if $adv_opts.param_debug:
+  -debug $adv_opts.param_debug
+#end if
+    #if $adv_opts.param_no_progress:
+  -no_progress
+#end if
+    #if $adv_opts.param_force:
+  -force
+#end if
+    #if $adv_opts.param_test:
+  -test
+#end if
+#end if
+]]></command>
+  <inputs>
+    <param name="param_in" type="data" format="" optional="False" label="input file" help="(-in) "/>
+    <param name="param_calibrant_1_reference" type="float" value="0.1" label="The RT of the first calibrant in the reference file" help="(-calibrant_1_reference) "/>
+    <param name="param_calibrant_2_reference" type="float" value="0.9" label="The RT of the second calibrant in the reference file" help="(-calibrant_2_reference) "/>
+    <param name="param_calibrant_1_input" type="float" value="-1.0" label="The RT of the first calibrant in the input file" help="(-calibrant_1_input) Please note that this value needs to be set. The default value -1.0 is not allowed"/>
+    <param name="param_calibrant_2_input" type="float" value="-1.0" label="The RT of the second calibrant in the input file" help="(-calibrant_2_input) Please note that this value needs to be set. The default value -1.0 is not allowed"/>
+    <param name="param_threads" type="integer" value="1" label="Sets the number of threads allowed to be used by the TOPP tool" help="(-threads) "/>
+    <expand macro="advanced_options">
+      <param name="param_version" type="text" size="30" value="2.1.0" label="Version of the tool that generated this parameters file" help="(-version) ">
+        <sanitizer>
+          <valid initial="string.printable">
+            <remove value="'"/>
+            <remove value="&quot;"/>
+          </valid>
+        </sanitizer>
+      </param>
+      <param name="param_log" type="text" size="30" label="Name of log file (created only when specified)" help="(-log) ">
+        <sanitizer>
+          <valid initial="string.printable">
+            <remove value="'"/>
+            <remove value="&quot;"/>
+          </valid>
+        </sanitizer>
+      </param>
+      <param name="param_debug" type="integer" value="0" label="Sets the debug level" help="(-debug) "/>
+      <param name="param_no_progress" display="radio" type="boolean" truevalue="-no_progress" falsevalue="" checked="false" optional="True" label="Disables progress logging to command line" help="(-no_progress) "/>
+      <param name="param_force" display="radio" type="boolean" truevalue="-force" falsevalue="" checked="false" optional="True" label="Overwrite tool specific checks" help="(-force) "/>
+      <param name="param_test" display="radio" type="boolean" truevalue="-test" falsevalue="" checked="false" optional="True" label="Enables the test mode (needed for internal use only)" help="(-test) "/>
+    </expand>
+  </inputs>
+  <outputs>
+    <data name="param_out" format="data"/>
+  </outputs>
+  <help>Can be used to calibrate RTs of peptide hits linearly to standards.
+
+
+For more information, visit http://ftp.mi.fu-berlin.de/OpenMS/release-documentation/html/TOPP_IDRTCalibration.html</help>
+</tool>

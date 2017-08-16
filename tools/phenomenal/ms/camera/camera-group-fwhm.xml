@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="camera-group-fwhm" name="camera-group-fwhm" version="0.1">
+  <description>Group peaks of a xsAnnotate object according to there retention
+     time into pseudospectra-groups. Uses the peak FWHMs as grouping
+     borders.</description>
+  <command><![CDATA[
+	/usr/local/bin/groupFWHM.r input=$camera_group_fwhm_input_1 output=$camera_group_fwhm_output_1 sigma=$sigma perfwhm=$perfwhm intval=$intval;  
+  ]]>
+  </command>
+  <inputs>
+    <param name="camera_group_fwhm_input_1" type="data" format="rdata" optional="False" label="xsAnnotate file" help="A rdata file with a xsAnnotate object from one sample" />
+    <param name="sigma" type="text" value="8"  label="Sigma" help="The multiplier of the standard deviation" />
+    <param name="perfwhm" type="text" value="0.6"  label="perFWHM" help="Percentage of the width of the FWHM" />
+    <param name="intval" type="select" value="maxo" label="intval" help="Intensity values for ordering. Allowed values are into, maxo, intb">
+      <option value="into" selected="False">into</option>
+      <option value="maxo" selected="True">maxo</option>
+      <option value="intb" selected="False">intb</option>
+    </param>
+  </inputs>
+  <outputs>
+    <data name="camera_group_fwhm_output_1" type="data" format="rdata" label="camera-group-fwhm data" />
+  </outputs>
+  <help>
+
+.. class:: infomark
+
+| **Tool update: See the 'NEWS' section at the bottom of the page**
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+| **Payam Emami (payam.emami@medsci.uu.se)** and **Christoph Ruttkies (christoph.ruttkies@ipb-halle.de)** wrote and maintain this wrapper for CAMERA peak grouping.
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Please cite**
+
+R Core Team (2013). R: A language and Environment for Statistical Computing. http://www.r-project.org
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**References**
+
+| Kuhl C, Tautenhahn R, Boettcher C, Larson TR and Neumann S (2012). "CAMERA: an integrated strategy for compound spectra extraction and annotation of liquid chromatography/mass spectrometry data sets." Analytical Chemistry, 84, pp. 283-289. http://pubs.acs.org/doi/abs/10.1021/ac202450g.
+
+---------------------------------------------------
+
+=====================
+CAMERA Group FWHM
+=====================
+
+-----------
+Description
+-----------
+
+| Group peaks of a xsAnnotate object according to there retention time into pseudospectra-groups. Uses the peak FWHMs as grouping borders. Returns xsAnnotate object with pseudospectra informations.
+
+-----------
+Input files
+-----------
+
++------------------------------+------------+
+| File                         |   Format   |
++==============================+============+
+| 1)  xsAnnotate file          |   rdata    |
++------------------------------+------------+
+
+----------
+Parameters
+----------
+
+xsAnnotate file
+        | A rdata file with a xsAnnotate object from one sample
+        |
+
+Sigma
+        | The multiplier of the standard deviation
+        |
+
+perFWHM        
+	| Percentage of the width of the FWHM
+        |
+
+intval
+	| Intensity values for ordering. Allowed values are into, maxo, intb
+	|
+
+------------
+Output files
+------------
+
+camera_group_fwhm_output_1.rdata
+        | A rdata file containing one xsAnnotate object containing grouped peaks in so called pseudospectra
+        |
+
+---------------------------------------------------
+
+----
+NEWS
+----
+
+CHANGES IN VERSION 0.1
+========================
+
+First version
+
+  </help>
+</tool>

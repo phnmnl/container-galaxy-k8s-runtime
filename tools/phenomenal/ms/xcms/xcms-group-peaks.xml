@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="xcms-group-peaks" name="xcms-group-peaks" version="0.1">
+  <description>Group (or align) peaks using the XCMS `group` generic method.</description>
+  <command><![CDATA[
+	/usr/local/bin/group.r input=$xcms_group_peaks_input_1 output=$xcms_group_peaks_output_1 bandwidth=$bandwidth mzwid=$mzwid;
+  ]]>
+  </command>
+  <inputs>
+    <param name="xcms_group_peaks_input_1" type="data" format="rdata" optional="False" label="XCMS-Set file" help="A rdata file containing one XCMS-Set of multiple XCMS-Set objects" />
+    <param name="bandwidth" type="text" value="15"  label="Bandwidth" help="Bandwidth (standard deviation or half width at half maximum) of gaussian smoothing kernel to apply to the peak density chromatogram" />
+    <param name="mzwid" type="text" value="0.005"  label="MzWid" help="Width of overlapping m/z slices to use for creating peak density chromatograms and grouping peaks across samples" />
+  </inputs>
+  <outputs>
+    <data name="xcms_group_peaks_output_1" type="data" format="rdata" label="xcms-group-peaks data" />
+  </outputs>
+  <help>
+.. class:: infomark
+
+| **Tool update: See the 'NEWS' section at the bottom of the page**
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+| **Payam Emami (payam.emami@medsci.uu.se)** and **Christoph Ruttkies (christoph.ruttkies@ipb-halle.de)** wrote and maintain this wrapper for XCMS-Set peak grouping.
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Please cite**
+
+R Core Team (2013). R: A language and Environment for Statistical Computing. http://www.r-project.org
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**References**
+
+| Smith, C.A., Want, E.J., O'Maille, G., Abagyan,R., Siuzdak and G. (2006). "XCMS: Processing mass spectrometry data for metabolite profiling using nonlinear peak alignment, matching and identification." Analytical Chemistry, 78, pp. 779-787.
+| Tautenhahn R, Boettcher C and Neumann S (2008). "Highly sensitive feature detection for high resolution LC/MS." BMC Bioinformatics, 9, pp. 504.
+| Benton HP, Want EJ and Ebbels TMD (2010). "Correction of mass calibration gaps in liquid chromatography-mass spectrometry metabolomics data." BIOINFORMATICS, 26, pp. 2488.
+
+---------------------------------------------------
+
+=====================
+XMCS Group Peaks
+=====================
+
+-----------
+Description
+-----------
+
+| The module groupds peaks from different samples together. As input XCMS-Set objects are provided which were grouped together by **xcms-collect-peaks** and pre-processed by e.g. **xcms-correct-rt**
+
+-----------
+Input files
+-----------
+
++------------------------------+------------+
+| File                         |   Format   |
++==============================+============+
+| 1)  XCMS-Set file            |   rdata    |
++------------------------------+------------+
+
+----------
+Parameters
+----------
+	  
+XCMS-Set file
+	| A rdata file containing one XCMS-Set of multiple XCMS-Set objects 
+        |
+
+Bandwidth
+	| Bandwidth (standard deviation or half width at half maximum) of gaussian smoothing kernel to apply to the peak density chromatogram
+	|
+
+MzWid
+	| Width of overlapping m/z slices to use for creating peak density chromatograms and grouping peaks across samples
+	|
+
+------------
+Output files
+------------
+	
+xcms_group_peaks_output_1.rdata
+	| A rdata file containing one XCMS-Set of multiple XCMS-Set objects
+        |
+
+
+---------------------------------------------------
+
+----
+NEWS
+----
+
+CHANGES IN VERSION 0.1
+========================
+
+First version
+  </help>
+</tool>

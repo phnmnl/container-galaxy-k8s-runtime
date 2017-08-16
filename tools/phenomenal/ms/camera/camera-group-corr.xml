@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="camera-group-corr" name="camera-group-corr" version="0.1">
+  <description>Peak grouping after correlation information into pseudospectrum
+     groups for an xsAnnotate object.</description>
+  <command><![CDATA[
+	/usr/local/bin/groupCorr.r input=$camera_group_corr_input_1 output=$camera_group_corr_output_1 correlation=$correlation pvalue=$pvalue;  
+  ]]>
+  </command>
+  <inputs>
+    <param name="camera_group_corr_input_1" type="data" format="rdata" optional="False" label="xsAnnotate file" help="A rdata file with a xsAnnotate object from one sample" />
+    <param name="correlation" type="text" value="0.8"  label="Correlation" help="The correlation threshold for EIC correlation" />
+    <param name="pvalue" type="text" value="0.05"  label="P-Value" help="The p-value threshold for testing correlation of significance" />
+  </inputs>
+  <outputs>
+    <data name="camera_group_corr_output_1" type="data" format="rdata" label="camera-group-corr data" />
+  </outputs>
+  <help>
+
+.. class:: infomark
+
+| **Tool update: See the 'NEWS' section at the bottom of the page**
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+| **Payam Emami (payam.emami@medsci.uu.se)** and **Christoph Ruttkies (christoph.ruttkies@ipb-halle.de)** wrote and maintain this wrapper for CAMERA peak grouping.
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Please cite**
+
+R Core Team (2013). R: A language and Environment for Statistical Computing. http://www.r-project.org
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**References**
+
+| Kuhl C, Tautenhahn R, Boettcher C, Larson TR and Neumann S (2012). "CAMERA: an integrated strategy for compound spectra extraction and annotation of liquid chromatography/mass spectrometry data sets." Analytical Chemistry, 84, pp. 283-289. http://pubs.acs.org/doi/abs/10.1021/ac202450g.
+
+---------------------------------------------------
+
+=====================
+CAMERA Group Corr
+=====================
+
+-----------
+Description
+-----------
+
+| Peak grouping after correlation information into pseudospectrum groups for an xsAnnotate object. Return an xsAnnotate object with grouping information.
+
+
+-----------
+Input files
+-----------
+
++------------------------------+------------+
+| File                         |   Format   |
++==============================+============+
+| 1)  xsAnnotate file          |   rdata    |
++------------------------------+------------+
+
+----------
+Parameters
+----------
+
+xsAnnotate file
+        | A rdata file with a xsAnnotate object from one sample
+        |
+
+Correlation        
+	| The correlation threshold for EIC correlation 
+        |
+
+P-Value        
+	| The p-value threshold for testing correlation of significance
+        |
+
+------------
+Output files
+------------
+
+camera_group_corr_output_1.rdata
+        | a rdata file containing one xsAnnotate object containing grouped peaks in so called pseudospectra
+        |
+
+---------------------------------------------------
+
+----
+NEWS
+----
+
+CHANGES IN VERSION 0.1
+========================
+
+First version
+
+  </help>
+</tool>

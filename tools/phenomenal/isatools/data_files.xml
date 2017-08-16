@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tool id="data_files" name="data_files" version="1.0">
+  <description>Get a list of MetaboLights study data files filtered on factor values</description>
+  <command><![CDATA[
+    echo "{ \"$factor_name\": \"$factor_value\" }" > query.json;
+    run_mtblisa.py --command GET_DATA_FILES --study $mtbls_id --query query.json
+  ]]>
+  </command>
+  <inputs>
+    <param name="mtbls_id" type="text" label="MetaboLights Study Identifier." help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
+    <param name="factor_name" type="text" label="Factor name to filter on." help="Factor name relevant to the specified MetaboLights study, e.g. genotype. You can get a study's factor names by using the study_factors tool."/>
+    <param name="factor_value" type="text" label="Factor value to filter on." help="Factor value relevant to the specified MetaboLights study, e.g. cyp79. You can get a study's factor values by using the study_factor_values tool."/>
+  </inputs>
+  <outputs>
+    <data format="json" name="output" from_work_dir="out.json" label="$(mtbls_id) sliced data files list" />
+  </outputs>
+
+  <help>
+<!-- @@@BEGIN_RST@@@ -->
+
+========================================
+Get a MetaboLights study data files list
+========================================
+
+This tool returns a list of data files sliced on a filtered factor name and value.
+
+-----
+Input
+-----
+
+MetaboLights Study Identifier
+=============================
+MTBLS ID available at MetaboLights, e.g. MTBLS2.
+
+Factor name to filter on
+========================
+Factor name relevant to the specified MetaboLights study, e.g. replicate. You can get the relevant factor names for a particular study by using the `study_factors` tool.
+
+Factor value to filter on
+=========================
+Factor value relevant to the specified MetaboLights study, e.g. Exp2. You can get the relevant factor values for a particular study and factor by using the `study_factor_values` tool.
+
+------
+Output
+------
+
+List of data files as JSON
+==========================
+
+A list of data files, related sample name, and query used as a JSON list. e.g.
+
+::
+
+  [
+    {
+      "query_used": {
+        "replicate": "Exp2"
+      },
+      "data_files": [
+        "MSpos-Ex2-Col0-48h-Ag-1_1-A,2_01_9827.mzData"
+      ],
+      "sample": "Ex2-Col0-48h-Ag-1"
+    },
+    {
+      "query_used": {
+        "replicate": "Exp2"
+      },
+      "data_files": [
+        "MSpos-Ex2-Col0-48h-Ag-2_1-A,3_01_9829.mzData"
+      ],
+      "sample": "Ex2-Col0-48h-Ag-2"
+    },
+    {
+      "query_used": {
+        "replicate": "Exp2"
+      },
+      "data_files": [
+        "MSpos-Ex2-Col0-48h-Ag-3_1-A,4_01_9831.mzData"
+      ],
+      "sample": "Ex2-Col0-48h-Ag-3"
+    },
+    {
+      "query_used": {
+        "replicate": "Exp2"
+      },
+      "data_files": [
+        "MSpos-Ex2-Col0-48h-Ag-4_1-A,2_01_9833.mzData"
+      ],
+      "sample": "Ex2-Col0-48h-Ag-4"
+    },
+    {
+      "query_used": {
+        "replicate": "Exp2"
+      },
+      "data_files": [
+        "MSpos-Ex2-cyp79-48h-Ag-1_1-B,3_01_9828.mzData"
+      ],
+      "sample": "Ex2-cyp79-48h-Ag-1"
+    },
+    {
+      "query_used": {
+        "replicate": "Exp2"
+      },
+      "data_files": [
+        "MSpos-Ex2-cyp79-48h-Ag-2_1-B,4_01_9830.mzData"
+      ],
+      "sample": "Ex2-cyp79-48h-Ag-2"
+    },
+    {
+      "query_used": {
+        "replicate": "Exp2"
+      },
+      "data_files": [
+        "MSpos-Ex2-cyp79-48h-Ag-3_1-B,3_01_9832.mzData"
+      ],
+      "sample": "Ex2-cyp79-48h-Ag-3"
+    },
+    {
+      "query_used": {
+        "replicate": "Exp2"
+      },
+      "data_files": [
+        "MSpos-Ex2-cyp79-48h-Ag-4_1-B,4_01_9834.mzData"
+      ],
+      "sample": "Ex2-cyp79-48h-Ag-4"
+    }
+  ]
+
+
+<!-- @@@END_RST@@@ -->
+  </help>
+
+  <citations>
+    <citation type="doi">10.1093/nar/gks1004</citation>
+    <citation type="doi">10.5281/zenodo.163640</citation>
+    <citation type="doi">10.1038/ng.1054</citation>
+  </citations>
+
+</tool>

@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="camera-find-isotopes" name="camera-find-isotopes" version="0.1">
+  <description>Perform isotope annotation using CAMERA.</description>
+  <command><![CDATA[
+	/usr/local/bin/findIsotopes.r input=$camera_find_isotopes_input_1 output=$camera_find_isotopes_output_1 maxcharge=$maxcharge;
+  ]]>
+  </command>
+  <inputs>
+    <param name="camera_find_isotopes_input_1" type="data" format="rdata" optional="False" label="xsAnnotate file" help="A rdata file with a xsAnnotate object from one sample" />
+    <param name="maxcharge" type="text" format="txt" value="3" optional="False" label="" help="Max. number of the isotope charge" />
+  </inputs>
+  <outputs>
+    <data name="camera_find_isotopes_output_1" type="data" format="rdata" label="camera-find-isotopes data" />
+  </outputs>
+  <help>
+
+.. class:: infomark
+
+| **Tool update: See the 'NEWS' section at the bottom of the page**
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+| **Payam Emami (payam.emami@medsci.uu.se)** and **Christoph Ruttkies (christoph.ruttkies@ipb-halle.de)** wrote and maintain this wrapper for CAMERA isotope detection.
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Please cite**
+
+R Core Team (2013). R: A language and Environment for Statistical Computing. http://www.r-project.org
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**References**
+
+| Kuhl C, Tautenhahn R, Boettcher C, Larson TR and Neumann S (2012). "CAMERA: an integrated strategy for compound spectra extraction and annotation of liquid chromatography/mass spectrometry data sets." Analytical Chemistry, 84, pp. 283-289. http://pubs.acs.org/doi/abs/10.1021/ac202450g.
+
+---------------------------------------------------
+
+=====================
+CAMERA Find Isotopes
+=====================
+
+-----------
+Description
+-----------
+
+| Annotate isotope peaks for a xsAnnotate object. Returns a xsAnnotate object with annotated isotopes.
+
+-----------
+Input files
+-----------
+
++------------------------------+------------+
+| File                         |   Format   |
++==============================+============+
+| 1)  xsAnnotate file          |   rdata    |
++------------------------------+------------+
+
+----------
+Parameters
+----------
+
+xsAnnotate file
+        | A rdata file with a xsAnnotate object from one sample
+        |
+
+maxcharge
+        | Max. number of the isotope charge
+        |
+
+------------
+Output files
+------------
+
+camera_find_isotopes_output_1.rdata
+        | A rdata file containing one xsAnnotate object with annotated isotopes
+        |
+
+---------------------------------------------------
+
+----
+NEWS
+----
+
+CHANGES IN VERSION 0.1
+========================
+
+First version
+
+  </help>
+</tool>

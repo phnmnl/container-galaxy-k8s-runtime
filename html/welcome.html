@@ -3,51 +3,130 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style/base.css" type="text/css" />
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Oxygen', sans-serif;
+            font-size: 13px;
+            color: #5F5F5F;
+        }
+
+        table.center {
+            margin-left:auto;
+            margin-right:auto;
+        }
+
+        td {
+            min-width: 200px;
+            text-align: left;
+            line-height: 25px;
+            vertical-align: text-top;
+            font-size: 18px;
+        }
+
+        td.nowrap {
+            white-space: nowrap;
+        }
+
+        td.right {
+            text-align: right;
+        }
+
+        div.center {
+            line-height: 17px;
+            width: 768px;
+            margin-left:auto;
+            margin-right:auto;
+            padding: 35px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        hr.thin {
+            border: 0;
+            border-bottom: 1px dashed #ccc;
+            background: #999;
+            margin: 1px 10px;
+        }
+
+        div.buttons {
+            font-size: 14px;
+            text-align: left;
+            margin: 20px 0;
+            width: 100%;
+        }
+
+        a.button-link {
+            border-radius:15px;
+            background: #546392;
+            padding: 10px;
+            width: 200px;
+            height: 150px;
+            text-decoration: none;
+            color: white;
+        }
+
+        a {
+            color: #546392;
+        }
+
+
+    </style>
 </head>
-<body style="margin: 0">
+<body>
 
     <div class="jumbotron" style="padding:0">
         <div class="container">
-	<!-- 	
-            <table><tr><td>
-	 <h2>Welcome to the Public <a target="_blank" class="reference" href="http://phenomenal-h2020.eu/home/">PhenoMeNal H2020</a> Cloud Deployment of Galaxy running at the EBI's EMBASSY Cloud.</h2>
-            <br>
-            </td><td>
-                <div align=center>
-                    
-                </div>
-
-		</td></tr></table> -->
-	<img src="./PhenoMeNal_logo.png" width="40%" height="40%" />	
+            <img src="./PhenoMeNal_logo.png" width="30%" height="30%" />
         </div>
     </div>
 
     <div class="container">
 
-	<p class="lead">
-	The <a target="_blank" class="reference" href="http://phenomenal-h2020.eu/home/">PhenoMeNal</a> Galaxy installation allows users to access all of the PhenoMeNal containerised tools through a workflow environment, on an scalable infrastructure that can be deployed to public and private cloud installations.
-	</p>
-
-	<p class="lead">
-	This <a target="_blank" class="reference" href="http://phenomenal-h2020.eu/home/">PhenoMeNal H2020</a> Galaxy instance, and all of its tools, run as containers on top of <a target="_blank" class="reference" href="http://kubernetes.io/">Kubernetes</a>, an open source container orchestrator system backed by Google. If you wish to deploy the <a target="_blank" class="reference" href="https://github.com/phnmnl/docker-galaxy-k8s-runtime/tree/develop">PhenoMeNal Galaxy installation</a> on top of your own Kubernetes instance, you can find instructions at our <a target="_blank" class="reference" href="http://phenomenal-h2020.eu/home/wiki/#galaxy-with-k8s">wiki</a>.
-	</p>
+        <table class="center" width="768px">
+            <tr><td class="right" colspan="2"><small>PhenoMeNal <a target="_blank" href="https://github.com/phnmnl/phenomenal-h2020/wiki/Release-notes-2017-08">release 17.08</a>, based on Galaxy <a target="_blank" href="https://docs.galaxyproject.org/en/master/releases/17.05_announce.html">version 17.05</a></small></td></tr>
+            <tr>
+                <td>
+                    <h2>Quickstart</h2>
+                    <strong>New to Galaxy, start here!</strong><br />
+                    First time users can watch the example workflow tutorials on <a target="_blank" href="https://www.youtube.com/channel/UCXGAvsVNQk-aUpckjRC8Ang">YouTube</a> and run the example workflows with the instructions given here:<br />
+                    <div class="buttons">
+                        <a class="button-link" target="_blank" href="http://portal.phenomenal-h2020.eu/help/fluxomics-workflow">Fluxomics</a>
+                        <a class="button-link" target="_blank" href="http://portal.phenomenal-h2020.eu/help/MS-MetFrag-XCMS-Workflow">LC-MS</a>
+                        <a class="button-link" target="_blank" href="http://portal.phenomenal-h2020.eu/help/NMR1d-Workflow">NMR</a>
+                        <a class="button-link" target="_blank" href="http://portal.phenomenal-h2020.eu/help/Sacurine-statistical-workflow">Statistics</a>
+                    </div>
+                </td>
+                <td class="nowrap">
+                    <h2>Support</h2>
+                    <ul>
+                        <li><a target="_blank" href="https://galaxyproject.org/learn/">Learn Galaxy</a> (official documentation)</li>
+                        <li><a target="_blank" href="https://www.youtube.com/channel/UCXGAvsVNQk-aUpckjRC8Ang">YouTube</a> tutorials</li>
+                        <!--<ul>
+                            <li><a target="_blank" href="https://www.youtube.com/watch?v=SaXjdFDfIJU&t=223s">Fluxomics</a></li>
+                            <li><a target="_blank" href="https://www.youtube.com/watch?v=V5M-dcE3qz8&t=88s">LC-MS</a></li>
+                            <li><a target="_blank" href="https://www.youtube.com/watch?v=ABW9982s5gY">Statistics</a></li>
+                        </ul>-->
+                        <li><a target="_blank" href="http://phenomenal-h2020.eu/home/help/">Request help</a> (ticket)</li>
+                        <li><a target="_blank" href="https://www.ebi.ac.uk/training/online/course/phenomenal-accessing-metabolomics-workflows-galaxy">Online training</a> offered by EMBL-EBI</li>
+                        <li>More about setting up a <a target="_blank" href="http://portal.phenomenal-h2020.eu/">private instance</a></li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
 
         <footer>
-		The <a target="_blank" class="reference" href="http://phenomenal-h2020.eu/home/">PhenoMeNal consortium</a> is driven by 14 European research groups with strong experience in the development of tools and
-methods for large data acquisition, integration and analysis for metabolic phenotypes, genome and cross-omics data. 
-	    <div align=center>
-                    <img src="./partners.png" width="90%" height="90%" />
+            <hr class="thin">
+            <div class="center">
+		        <a target="_blank" class="reference" href="http://phenomenal-h2020.eu/home/">PhenoMeNal</a> is funded by the European Commission's Horizon2020 programme, grant agreement number 654241. It is driven by a consortium of 14 European research groups with strong experience in tool and methods development for large data acquisition, integration and analysis for metabolic phenotypes, genome and cross-omics data.
+                <br/><br/><img src="./partners.png" width="90%" height="90%" />
+
+                <br>
+
+                The <a target="_blank" class="reference" href="http://galaxyproject.org/">Galaxy Project</a> is supported in part by <a target="_blank" class="reference" href="http://www.genome.gov">NHGRI</a>, <a target="_blank" class="reference" href="http://www.nsf.gov">NSF</a>, <a target="_blank" class="reference" href="http://www.huck.psu.edu">The Huck Institutes of the Life Sciences</a>,<br />
+                <a target="_blank" class="reference" href="http://www.ics.psu.edu">The Institute for CyberScience at Penn State</a>, and <a target="_blank" class="reference" href="http://www.jhu.edu/">Johns Hopkins University</a>.
             </div>
-	    <br>
-	    PhenoMeNal is funded by European Commission's Horizon2020 programme, grant agreement number 654241.
-	    <br>
-	    The <a target="_blank" class="reference" href="http://galaxyproject.org/">Galaxy Project</a>
-            is supported in part by <a target="_blank" class="reference" href="http://www.genome.gov">NHGRI</a>,
-            <a target="_blank" class="reference" href="http://www.nsf.gov">NSF</a>,
-            <a target="_blank" class="reference" href="http://www.huck.psu.edu">The Huck Institutes of the Life Sciences</a>,
-            <a target="_blank" class="reference" href="http://www.ics.psu.edu">The Institute for CyberScience at Penn State</a>,
-            and <a target="_blank" class="reference" href="http://www.jhu.edu/">Johns Hopkins University</a>.
-	</footer>
+	    </footer>
 
     </div>
 

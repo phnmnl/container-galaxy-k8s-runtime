@@ -1,0 +1,428 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "Fluxomics stationary 13C-MS iso2flux with visualization", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "exchange_file"
+                }
+            ], 
+            "label": "exchange_file", 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 200, 
+                "top": 200
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"exchange_file\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "d01a2d19-536d-4866-9ded-13b92ea973ad", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output", 
+                    "uuid": "77cdb3f3-9bd3-41eb-ad8f-047fb4296213"
+                }
+            ]
+        }, 
+        "1": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "zip_netCDF"
+                }
+            ], 
+            "label": "zip_netCDF", 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 205, 
+                "top": 338
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"zip_netCDF\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "a5e1972f-e203-4fa7-be07-addca7674dc0", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output", 
+                    "uuid": "1352f277-4e8e-4768-866e-38891c68f997"
+                }
+            ]
+        }, 
+        "2": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 2, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "tracing model"
+                }
+            ], 
+            "label": "tracing model", 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 458, 
+                "top": 531
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"tracing model\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "57c35812-9167-4ce3-9275-fded930320f5", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output", 
+                    "uuid": "42839090-874f-4328-9284-620858472ca1"
+                }
+            ]
+        }, 
+        "3": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 3, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "SBML input"
+                }
+            ], 
+            "label": "SBML input", 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 456, 
+                "top": 613
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"SBML input\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "51231172-9725-4bd8-a819-095380f77d2b", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output", 
+                    "uuid": "e1abd76b-5964-4671-90e5-4fa74400eb07"
+                }
+            ]
+        }, 
+        "4": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 4, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "constraints"
+                }
+            ], 
+            "label": "constraints", 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 463.140625, 
+                "top": 689.328125
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"constraints\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "afc82514-e911-4b5c-b783-75513637b660", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output", 
+                    "uuid": "5ae6d8e5-94aa-4644-a9fe-51837db086f0"
+                }
+            ]
+        }, 
+        "5": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 5, 
+            "input_connections": {}, 
+            "inputs": [], 
+            "label": "Escher map with layout", 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 896.5, 
+                "top": 308
+            }, 
+            "tool_id": null, 
+            "tool_state": "{}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "155ab99e-43a3-4e1f-932c-10b9b763a8c9", 
+            "workflow_outputs": []
+        }, 
+        "6": {
+            "annotation": "", 
+            "content_id": "ramid", 
+            "errors": null, 
+            "id": 6, 
+            "input_connections": {
+                "inputExchange": {
+                    "id": 0, 
+                    "output_name": "output"
+                }, 
+                "zipped_data": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool ramid", 
+                    "name": "zipped_data"
+                }, 
+                {
+                    "description": "runtime parameter for tool ramid", 
+                    "name": "inputExchange"
+                }
+            ], 
+            "label": null, 
+            "name": "ramid", 
+            "outputs": [
+                {
+                    "name": "outputExchange", 
+                    "type": "csv"
+                }
+            ], 
+            "position": {
+                "left": 394, 
+                "top": 265
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "ramid", 
+            "tool_state": "{\"zipped_data\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"inputExchange\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "64464c51-c8fa-42af-a7f4-f41375e6abf8", 
+            "workflow_outputs": [
+                {
+                    "label": "ramid_output", 
+                    "output_name": "outputExchange", 
+                    "uuid": "f9553e0c-f94b-46b7-8756-2ef8f62eb8a9"
+                }
+            ]
+        }, 
+        "7": {
+            "annotation": "", 
+            "content_id": "midcor", 
+            "errors": null, 
+            "id": 7, 
+            "input_connections": {
+                "input1": {
+                    "id": 6, 
+                    "output_name": "outputExchange"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool midcor", 
+                    "name": "input1"
+                }
+            ], 
+            "label": null, 
+            "name": "midcor", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "csv"
+                }
+            ], 
+            "position": {
+                "left": 600, 
+                "top": 411
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }
+            }, 
+            "tool_id": "midcor", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"input1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "80ac7702-84fe-445b-b5de-f2dddc56e017", 
+            "workflow_outputs": []
+        }, 
+        "8": {
+            "annotation": "", 
+            "content_id": "iso2flux", 
+            "errors": null, 
+            "id": 8, 
+            "input_connections": {
+                "constraints": {
+                    "id": 4, 
+                    "output_name": "output"
+                }, 
+                "sbml_model": {
+                    "id": 3, 
+                    "output_name": "output"
+                }, 
+                "tracing_data": {
+                    "id": 7, 
+                    "output_name": "output1"
+                }, 
+                "tracing_model": {
+                    "id": 2, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool iso2flux", 
+                    "name": "tracing_data"
+                }, 
+                {
+                    "description": "runtime parameter for tool iso2flux", 
+                    "name": "parameters"
+                }, 
+                {
+                    "description": "runtime parameter for tool iso2flux", 
+                    "name": "sbml_model"
+                }, 
+                {
+                    "description": "runtime parameter for tool iso2flux", 
+                    "name": "tracing_model"
+                }, 
+                {
+                    "description": "runtime parameter for tool iso2flux", 
+                    "name": "constraints"
+                }
+            ], 
+            "label": null, 
+            "name": "iso2flux", 
+            "outputs": [
+                {
+                    "name": "best_fit_fluxes", 
+                    "type": "csv"
+                }, 
+                {
+                    "name": "best_fit_label", 
+                    "type": "csv"
+                }, 
+                {
+                    "name": "constrained_sbml_model", 
+                    "type": "xml"
+                }, 
+                {
+                    "name": "fluxes_confidence", 
+                    "type": "csv"
+                }
+            ], 
+            "position": {
+                "left": 805, 
+                "top": 477
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionbest_fit": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "best_fit"
+                }, 
+                "HideDatasetActionconstrained_sbml_model": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "constrained_sbml_model"
+                }, 
+                "HideDatasetActionfluxes_confidence": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "fluxes_confidence"
+                }
+            }, 
+            "tool_id": "iso2flux", 
+            "tool_state": "{\"tracing_data\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"confidence\": \"{\\\"compute\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"parameters\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"sbml_model\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"tracing_model\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"constraints\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "1.0", 
+            "type": "tool", 
+            "uuid": "d87f38a7-d735-498a-8e94-a11026822d40", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "best_fit_fluxes", 
+                    "uuid": "1464b93c-7ed3-47da-85e4-b96be1eaaad4"
+                }, 
+                {
+                    "label": null, 
+                    "output_name": "best_fit_label", 
+                    "uuid": "072f0e8e-8802-496d-afef-9bbf8e77553e"
+                }
+            ]
+        }, 
+        "9": {
+            "annotation": "", 
+            "content_id": "escher-fluxomics", 
+            "errors": null, 
+            "id": 9, 
+            "input_connections": {
+                "best_fit_fluxes": {
+                    "id": 8, 
+                    "output_name": "best_fit_fluxes"
+                }, 
+                "layout_map_file": {
+                    "id": 5, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "escher-fluxomics", 
+            "outputs": [
+                {
+                    "name": "best_fit_fluxes_json", 
+                    "type": "JSON"
+                }, 
+                {
+                    "name": "html_file", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 1214.5, 
+                "top": 357
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "escher-fluxomics", 
+            "tool_state": "{\"layout_map_file\": \"{\\\"values\\\": [{\\\"src\\\": \\\"hda\\\", \\\"id\\\": 2}]}\", \"__rerun_remap_job_id__\": null, \"best_fit_fluxes\": \"{\\\"values\\\": [{\\\"src\\\": \\\"hda\\\", \\\"id\\\": 6}]}\", \"__page__\": null}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "03f5e243-f207-4235-8191-86ea34df7a75", 
+            "workflow_outputs": []
+        }
+    }, 
+    "uuid": "d67b2d2b-f00b-42e5-87ef-b2396234419b"
+}

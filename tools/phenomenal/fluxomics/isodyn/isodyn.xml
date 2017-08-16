@@ -1,20 +1,21 @@
 <tool id="isodyn" name="isodyn" version="0.1.0">
+<description>C++ program simulating the dynamics of metabolites and their isotopic isomers in central metabolic network using kinetic model</description>
 <stdio>
 <exit_code range="1:" />
 </stdio>
 <command><![CDATA[
-isodyn "$parameters_file" "$experimental_input" > "$tracing_distributions"
+isodyn "$tracing_data" "$parameters_file" "$num_iterations";
+isodyn "$tracing_data" "$parameters_file" s
 ]]></command>
 <inputs>
-    <param type="data" name="parameters_file" format="txt" /> <!-- Parameters file -->
-    <param type="data" name="experimental_input" format="txt" /> <!-- Experimental data file -->
-    <!--
-         TODO Vitaly needs to modify Isodyn to take as the experimental input the results from midcor
-         -->
+    <param type="data" name="parameters_file" format="txt" label="Kinetic parameters file" /> <!-- Parameters file -->
+    <param type="data" name="tracing_data" format="csv" label="Midcor output file"/> <!-- Experimental data file -->
+    <param type="text" name="num_iterations" label="Number of iterations to be completed"/>
 </inputs>
 <outputs>
-    <data name="tracing_distributions" format="txt"/> <!-- Flux & tracing distributions -->
-    <data name="numeral_set" format="txt"/>
+    <data name="fluxes_confidence" format="csv" from_work_dir="statfl" label="Confidence intervals for all fluxes"/> <!-- Flux & tracing distributions -->
+    <data name="metabolites_confidence" format="csv" from_work_dir="statpar" label="Confidence intervals for all metabolites"/>
+    <data name="concentration_plot" format="png" from_work_dir="figs/sconc.png" label="Plot of concentration profiles for metabolites"/>
     <!--
          TODO finish this file set recognition.
          Variable number of outputs for fluxes, numbered from the smallest number used as file name in the working
@@ -24,6 +25,10 @@ isodyn "$parameters_file" "$experimental_input" > "$tracing_distributions"
          -->
 </outputs>
 <help><![CDATA[
-TODO: Fill in help.
+The presented here computational support for 13C tracer-based analysis of intracellular metabolic fluxes consists of several subsequent steps. They are the extraction of necessary data from raw mass spectrometer recording for 13C labeled metabolites, provided in a series of files of the NetCDF format; their correction for the natural isotope enrichment and possible overlapping of mass spectra; simulation of the corrected data using a kinetic model of underlying metabolic processes.
+
+*Isodyn* is a C++-program that supports the third, final in this workflow, step of an analysis of 13C tracer data. It simulates the evaluated distribution of 13C isotopes provided by the artificially 13C enriched substrates of cellular metabolism. For such a simulation Isodyn uses a kinetic model that describes redistribution of the 13C label that depends on the activity of some metabolic processes (metabolic fluxes). The simulated data are the dynamics of 13C isotopomers distributions in metabolites of central metabolic pathways extracted by RaMID from netCDF files and corrected by MIDcor. Fit of the data by the model, that satisfies to the criteria for goodness of fit, assesses the metabolic flux profiles in the analyzed living cells under given conditions. Isodyn performs a statistical analysis of the obtained metabolic fluxes.
+
+*Isodyn* takes as input, specified by one of the parameters, an output of MIDcor. Then it determines a list of metabolites whose data the input file contains, determines the mean and standard  deviation for each metabolite available in the file, calculates the corresponding normalized squared deviations of model from the corrected measured data (χ2), and performs a series of simulations minimizing χ2 using Simulated annealing algorithm. The code of Isodyn with some examples of input is freely available from https://github.com/seliv55/isodyn.
 ]]></help>
 </tool>

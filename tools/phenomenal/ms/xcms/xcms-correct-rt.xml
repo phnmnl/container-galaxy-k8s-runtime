@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="xcms-correct-rt" name="xcms-correct-rt" version="0.1">
+  <description>Correct differences between retention times between different samples using the `retcor` generic method.</description>
+  <command><![CDATA[
+	/usr/local/bin/retCor.r input=$xcms_correct_rt_input_1 output=$xcms_correct_rt_output_1 method=$method;
+  ]]>
+  </command>
+  <inputs>
+    <param name="xcms_correct_rt_input_1" type="data" format="rdata" optional="False" label="XCMS-Set file" help="A rdata file with XCMS-Set objects that were grouped by xcms-collect-peaks" />
+    <param name="method" type="select" value="loess" label="Method" help="Method to use for retention time correction">
+      <option value="loess" selected="True">loess</option>
+      <option value="obiwarp" selected="False">obiwarp</option>
+    </param>
+  </inputs>
+  <outputs>
+    <data name="xcms_correct_rt_output_1" type="text" format="rdata" label="xcms-correct-rt data" />
+  </outputs>
+  <help>
+.. class:: infomark
+
+| **Tool update: See the 'NEWS' section at the bottom of the page**
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+| **Payam Emami (payam.emami@medsci.uu.se)** and **Christoph Ruttkies (christoph.ruttkies@ipb-halle.de)** wrote and maintain this wrapper for retention time correction using XCMS.
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Please cite**
+
+R Core Team (2013). R: A language and Environment for Statistical Computing. http://www.r-project.org
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**References**
+
+| Smith, C.A., Want, E.J., O'Maille, G., Abagyan,R., Siuzdak and G. (2006). "XCMS: Processing mass spectrometry data for metabolite profiling using nonlinear peak alignment, matching and identification." Analytical Chemistry, 78, pp. 779-787.
+| Tautenhahn R, Boettcher C and Neumann S (2008). "Highly sensitive feature detection for high resolution LC/MS." BMC Bioinformatics, 9, pp. 504.
+| Benton HP, Want EJ and Ebbels TMD (2010). "Correction of mass calibration gaps in liquid chromatography-mass spectrometry metabolomics data." BIOINFORMATICS, 26, pp. 2488.
+
+---------------------------------------------------
+
+=====================
+XMCS Correct RT
+=====================
+
+-----------
+Description
+-----------
+
+| To correct differences between retention times between different samples, a number of of methods exist in XCMS. retcor is the generic method. The module gets XCMS-Set objects which was grouped together by **xcms-collect-peaks**
+
+-----------
+Input files
+-----------
+
++------------------------------+------------+
+| File                         |   Format   |
++==============================+============+
+| 1)  XCMS-Set file            |   rdata    |
++------------------------------+------------+
+
+----------
+Parameters
+----------
+	  
+XCMS-Set file
+	| A rdata file with XCMS-Set objects that were grouped by **xcms-collect-peaks**
+        |
+
+Method
+	| Method to use for retention time correction. There are 2 methods available:
+
++---------+-------------------------------------------------------------------------------------------------------------------------+
+| Method  | Description                                                                                                             |
++=========+=========================================================================================================================+
+| loess   | Fit a polynomial surface determined by one or more numerical predictors, using local fitting.                           |
++---------+-------------------------------------------------------------------------------------------------------------------------+
+| obiwarp | Calculate retention time deviations for each sample. It is based on the code at http://obi-warp.sourceforge.net/.       |
+|         | However, this function is able to align multiple samples, by a center-star strategy.                                    |
++---------+-------------------------------------------------------------------------------------------------------------------------+
+
+------------
+Output files
+------------
+	
+xcms_correct_rt_output_1.rdata
+	| A rdata file containing one XCMS-Set of multiple XCMS-Set objects with retention time corrected values
+        |
+
+
+---------------------------------------------------
+
+----
+NEWS
+----
+
+CHANGES IN VERSION 0.1
+========================
+
+First version
+  </help>
+</tool>
