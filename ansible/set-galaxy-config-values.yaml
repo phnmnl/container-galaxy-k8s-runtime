@@ -13,8 +13,24 @@
      galaxy_dir: "/galaxy"
      target_dir_tools: "{{ lookup('env','TOOLS_DEST_PVC') }}"
      default_dir_tools: "{{ galaxy_dir }}/tools"
+     smtp_setup:
+        smtp_server: "{{ lookup('env', 'GALAXY_SMTP_SERVER') }}"
+        smtp_username: "{{ lookup('env', 'GALAXY_SMTP_USERNAME') }}"
+        smtp_password: "{{ lookup('env', 'GALAXY_SMTP_PASSWORD') }}"
+        email_from: "{{ lookup('env', 'GALAXY_EMAIL_FROM') }}"
+        instance_resource_url: "{{ lookup('env', 'GALAXY_URL') }}"
+        smtp_ssl: "{{ lookup('env', 'GALAXY_SMTP_SSL') }}"
      
   tasks:
+  - name: set smtp access
+    ini_file:
+        dest: /galaxy/config/galaxy.ini
+        section: "app:main"
+        option: "{{ item.key }}"
+        value: "{{ item.value }}"
+    with_dict: "{{ smtp_setup }}"
+    when: smtp_setup.smtp_server != "" and smtp_setup.smtp_username != "" and smtp_setup.smtp_password != ""
+
   - name: set database postgres connection properties 
     ini_file:
         dest: /galaxy/config/galaxy.ini
