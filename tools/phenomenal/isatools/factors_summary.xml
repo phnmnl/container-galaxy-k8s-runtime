@@ -9,7 +9,7 @@
     <param name="mtbls_id" type="text" label="MetaboLights Study Identifier." help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
   </inputs>
   <outputs>
-    <data format="json" name="output" from_work_dir="out.json" label="Factors summary table in JSON format." />
+    <data format="json" name="output" from_work_dir="out.json" label="$(mtbls_id) factors summary" />
   </outputs>
 
   <help>
