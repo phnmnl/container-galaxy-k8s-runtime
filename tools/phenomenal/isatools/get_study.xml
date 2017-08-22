@@ -1,19 +1,52 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <tool id="get_study" name="get_study" version="1.0">
-  <description>Get an ISA-Tab ZIP archive from MetaboLights</description>
+  <description>Get an ISA-Tab archive (zip) from MetaboLights</description>
   <command><![CDATA[
     run_mtblisa.py --command GET --study $mtbls_id
   ]]>
   </command>
   <inputs>
-    <param name="mtbls_id" type="text" label="Metabolights Study Identifier"/>
+    <param name="mtbls_id" type="text" label="MetaboLights Study Identifier." help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
   </inputs>
   <outputs>
-    <data format="zip" name="output" from_work_dir="out.zip" label="ISA-Tab ZIP archive" />
+    <data format="zip" name="output" from_work_dir="out.zip" label="$(mtbls_id) ISA-Tab (zip)" />
   </outputs>
 
   <help>
-      This tool gets an ISA-Tab ZIP archive from Metabolights.
+<!-- @@@BEGIN_RST@@@ -->
+
+===================================
+Get ISA-Tab files from MetaboLights
+===================================
+
+This tool downloads ISA-Tab metadata files from MetaboLights an ISA-Tab archive (zip).
+
+-----
+Input
+-----
+
+MetaboLights Study Identifier
+=============================
+MTBLS ID available at MetaboLights, e.g. MTBLS2.
+
+------
+Output
+------
+
+Zip file containing ISA files
+=============================
+The output zip file will contain the i_*.txt, s_*.txt and a_*.txt files expected in an *ISA-Tab* archive.
+
+For details on the ISA-Tab format, please see http://isa-specs.readthedocs.io/en/latest/isatab.html
+
+
+<!-- @@@END_RST@@@ -->
   </help>
+
+  <citations>
+    <citation type="doi">10.1093/nar/gks1004</citation>
+    <citation type="doi">10.5281/zenodo.163640</citation>
+    <citation type="doi">10.1038/ng.1054</citation>
+  </citations>
 
 </tool>

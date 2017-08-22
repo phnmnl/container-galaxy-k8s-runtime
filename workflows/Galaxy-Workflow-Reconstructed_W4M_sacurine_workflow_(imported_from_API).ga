@@ -2,11 +2,12 @@
     "a_galaxy_workflow": "true", 
     "annotation": "", 
     "format-version": "0.1", 
-    "name": "Reconstructed W4M sacurine workflow", 
+    "name": "W4M Omics generic biosigner feature selection statistics", 
     "steps": {
         "0": {
             "annotation": "", 
             "content_id": "mtbls-dwnld", 
+            "errors": null, 
             "id": 0, 
             "input_connections": {}, 
             "inputs": [], 
@@ -14,15 +15,27 @@
             "name": "Metabolights downloader", 
             "outputs": [
                 {
+                    "name": "mzML", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "mzData", 
+                    "type": "input"
+                }, 
+                {
                     "name": "html_output", 
                     "type": "html"
                 }, 
                 {
-                    "name": "w4m_sample_metadata", 
+                    "name": "w4m_all_assays", 
                     "type": "tabular"
                 }, 
                 {
                     "name": "w4m_variable_metadata", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "w4m_sample_metadata", 
                     "type": "tabular"
                 }, 
                 {
@@ -35,7 +48,6 @@
                 "top": 704
             }, 
             "post_job_actions": {}, 
-            "tool_errors": null, 
             "tool_id": "mtbls-dwnld", 
             "tool_state": "{\"__page__\": 0, \"sample_na_filtering\": \"\\\"Characteristics.gender.\\\"\", \"study\": \"\\\"MTBLS404\\\"\", \"__workflow_invocation_uuid__\": \"\\\"25106e36e3d211e699da02420ae97005\\\"\", \"token\": \"\\\"\\\"\", \"variable_na_filtering\": \"\\\"mass_to_charge\\\"\", \"chromInfo\": \"\\\"/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null}", 
             "tool_version": "1.2.0", 
@@ -46,6 +58,7 @@
         "1": {
             "annotation": "", 
             "content_id": null, 
+            "errors": null, 
             "id": 1, 
             "input_connections": {}, 
             "inputs": [
@@ -61,7 +74,6 @@
                 "left": 1088, 
                 "top": 204
             }, 
-            "tool_errors": null, 
             "tool_id": null, 
             "tool_state": "{\"name\": \"Input Dataset\"}", 
             "tool_version": null, 
@@ -72,6 +84,7 @@
         "2": {
             "annotation": "", 
             "content_id": "Univariate", 
+            "errors": null, 
             "id": 2, 
             "input_connections": {
                 "dataMatrix_in": {
@@ -122,7 +135,6 @@
                 "top": 311
             }, 
             "post_job_actions": {}, 
-            "tool_errors": null, 
             "tool_id": "Univariate", 
             "tool_state": "{\"thrN\": \"\\\"0.05\\\"\", \"__page__\": 0, \"facC\": \"\\\"Characteristics.gender.\\\"\", \"__rerun_remap_job_id__\": null, \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__workflow_invocation_uuid__\": \"\\\"25106e36e3d211e699da02420ae97005\\\"\", \"tesC\": \"\\\"ttest\\\"\", \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"adjC\": \"\\\"fdr\\\"\", \"chromInfo\": \"\\\"/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
             "tool_version": "2.2.3", 
@@ -133,6 +145,7 @@
         "3": {
             "annotation": "", 
             "content_id": "Multivariate", 
+            "errors": null, 
             "id": 3, 
             "input_connections": {
                 "dataMatrix_in": {
@@ -187,9 +200,8 @@
                 "top": 462
             }, 
             "post_job_actions": {}, 
-            "tool_errors": null, 
             "tool_id": "Multivariate", 
-            "tool_state": "{\"advGph\": \"{\\\"__current_case__\\\": 0, \\\"opgC\\\": \\\"default\\\"}\", \"__page__\": 0, \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"predI\": \"\\\"1\\\"\", \"respC\": \"\\\"Characteristics.gender.\\\"\", \"orthoI\": \"\\\"NA\\\"\", \"__workflow_invocation_uuid__\": \"\\\"25106e36e3d211e699da02420ae97005\\\"\", \"advCpt\": \"{\\\"opcC\\\": \\\"default\\\", \\\"__current_case__\\\": 0}\", \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"chromInfo\": \"\\\"/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"testL\": \"\\\"FALSE\\\"\"}", 
+            "tool_state": "{\"advGph\": \"{\\\"__current_case__\\\": 0, \\\"opgC\\\": \\\"default\\\"}\", \"__page__\": 0, \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"predI\": \"\\\"1\\\"\", \"respC\": \"\\\"Characteristics.gender.\\\"\", \"orthoI\": \"\\\"NA\\\"\", \"__workflow_invocation_uuid__\": \"\\\"25106e36e3d211e699da02420ae97005\\\"\", \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"advCpt\": \"{\\\"opcC\\\": \\\"default\\\", \\\"__current_case__\\\": 0}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"chromInfo\": \"\\\"/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"testL\": \"\\\"FALSE\\\"\"}", 
             "tool_version": "2.3.10", 
             "type": "tool", 
             "uuid": "d028314f-e05d-42ff-ac80-f1d27cb2b858", 
@@ -198,6 +210,7 @@
         "4": {
             "annotation": "", 
             "content_id": "biosigner", 
+            "errors": null, 
             "id": 4, 
             "input_connections": {
                 "dataMatrix_in": {
@@ -252,9 +265,8 @@
                 "top": 754
             }, 
             "post_job_actions": {}, 
-            "tool_errors": null, 
             "tool_id": "biosigner", 
-            "tool_state": "{\"__page__\": 0, \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"respC\": \"\\\"Characteristics.gender.\\\"\", \"__workflow_invocation_uuid__\": \"\\\"25106e36e3d211e699da02420ae97005\\\"\", \"advCpt\": \"{\\\"seedI\\\": \\\"123\\\", \\\"tierC\\\": \\\"S\\\", \\\"pvalN\\\": \\\"0.05\\\", \\\"methodC\\\": \\\"all\\\", \\\"__current_case__\\\": 1, \\\"bootI\\\": \\\"50\\\", \\\"opcC\\\": \\\"full\\\"}\", \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"chromInfo\": \"\\\"/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_state": "{\"__page__\": 0, \"respC\": \"\\\"Characteristics.gender.\\\"\", \"__rerun_remap_job_id__\": null, \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__workflow_invocation_uuid__\": \"\\\"25106e36e3d211e699da02420ae97005\\\"\", \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"advCpt\": \"{\\\"seedI\\\": \\\"123\\\", \\\"tierC\\\": \\\"S\\\", \\\"pvalN\\\": \\\"0.05\\\", \\\"methodC\\\": \\\"all\\\", \\\"__current_case__\\\": 1, \\\"bootI\\\": \\\"50\\\", \\\"opcC\\\": \\\"full\\\"}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"chromInfo\": \"\\\"/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
             "tool_version": "2.2.7", 
             "type": "tool", 
             "uuid": "1718665b-a630-4b3e-8074-c63be009bd15", 
@@ -263,6 +275,7 @@
         "5": {
             "annotation": "", 
             "content_id": "lcmsmatching", 
+            "errors": null, 
             "id": 5, 
             "input_connections": {
                 "db|dburl": {
@@ -305,9 +318,8 @@
                 "top": 226
             }, 
             "post_job_actions": {}, 
-            "tool_errors": null, 
             "tool_id": "lcmsmatching", 
-            "tool_state": "{\"inputfields\": \"\\\"mz=mass_to_charge,rt=retention_time\\\"\", \"chromcols\": \"null\", \"toly\": \"\\\"0.8\\\"\", \"tolx\": \"\\\"5.0\\\"\", \"mzrtinput\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"tolz\": \"\\\"5.0\\\"\", \"mzshift\": \"\\\"0.0\\\"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"db\": \"{\\\"dbtoken\\\": \\\"\\\", \\\"dbmsmodes\\\": \\\"pos=pos,neg=neg\\\", \\\"dburl\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"dbtype\\\": \\\"inhouse\\\", \\\"dbfields\\\": \\\"mztheo=peak.mz,chromcolrt=chromcolrt,compoundid=accession,chromcol=chromcol,msmode=msmode,peakcomp=peak.formula,fullnames=name,compoundmass=mass,compoundcomp=formula,inchi=inchi,inchikey=inchikey,pubchem=pubchemcompid,chebi=chebiid,hmdb=hmdbid,kegg=keggid\\\", \\\"__current_case__\\\": 0}\", \"__workflow_invocation_uuid__\": \"\\\"25106e36e3d211e699da02420ae97005\\\"\", \"prec\": \"{\\\"__current_case__\\\": 0, \\\"match\\\": \\\"false\\\"}\", \"mzprec\": \"\\\"10.0\\\"\", \"mzmode\": \"\\\"neg\\\"\", \"chromInfo\": \"\\\"/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"out\": \"{\\\"enabled\\\": \\\"false\\\", \\\"__current_case__\\\": 0}\"}", 
+            "tool_state": "{\"inputfields\": \"\\\"mz=mass_to_charge,rt=retention_time\\\"\", \"chromcols\": \"null\", \"toly\": \"\\\"0.8\\\"\", \"tolx\": \"\\\"5.0\\\"\", \"mzrtinput\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"tolz\": \"\\\"5.0\\\"\", \"mzshift\": \"\\\"0.0\\\"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"db\": \"{\\\"dbtoken\\\": \\\"\\\", \\\"dbmsmodes\\\": \\\"pos=pos,neg=neg\\\", \\\"dburl\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"dbtype\\\": \\\"inhouse\\\", \\\"dbfields\\\": \\\"mztheo=peak.mz,chromcolrt=chromcolrt,compoundid=accession,chromcol=chromcol,msmode=msmode,peakcomp=peak.formula,fullnames=name,compoundmass=mass,compoundcomp=formula,inchi=inchi,inchikey=inchikey,pubchem=pubchemcompid,chebi=chebiid,hmdb=hmdbid,kegg=keggid\\\", \\\"__current_case__\\\": 0}\", \"__workflow_invocation_uuid__\": \"\\\"25106e36e3d211e699da02420ae97005\\\"\", \"prec\": \"{\\\"__current_case__\\\": 0, \\\"match\\\": \\\"false\\\"}\", \"mzmode\": \"\\\"neg\\\"\", \"out\": \"{\\\"enabled\\\": \\\"false\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"mzprec\": \"\\\"10.0\\\"\"}", 
             "tool_version": "3.1.6", 
             "type": "tool", 
             "uuid": "8e81d77c-9718-4e62-a680-e7675d83cc7a", 

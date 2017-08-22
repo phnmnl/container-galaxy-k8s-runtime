@@ -1,19 +1,136 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <tool id="factors_summary" name="factors_summary" version="1.0">
-  <description>Produce a summary of variable factors of an ISA-Tab from MetaboLights</description>
+  <description>Produce a summary table of variable factors of a MetaboLights study</description>
   <command><![CDATA[
     run_mtblisa.py --command GET_SUMMARY --study $mtbls_id
   ]]>
   </command>
   <inputs>
-    <param name="mtbls_id" type="text" label="Metabolights Study Identifier"/>
+    <param name="mtbls_id" type="text" label="MetaboLights Study Identifier." help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
   </inputs>
   <outputs>
-    <data format="json" name="output" from_work_dir="out.json" label="ISA-Tab factors table in JSON format" />
+    <data format="json" name="output" from_work_dir="out.json" label="$(mtbls_id) factors summary" />
   </outputs>
 
   <help>
-      This tool computes a summary of variable factors for a given ISA-Tab taken from Metabolights.
+<!-- @@@BEGIN_RST@@@ -->
+
+===============================================
+Get summary of factors for a MetaboLights study
+===============================================
+
+This tool returns a table of sample names and related associated factor values. The tool calculates this by inspecting the ISA study and assay tables and computes the study groups and associated sample names.
+
+-----
+Input
+-----
+
+MetaboLights Study Identifier
+=============================
+MTBLS ID available at MetaboLights, e.g. MTBLS2.
+
+------
+Output
+------
+
+Factor summary table
+====================
+
+A list of sample names and factor name-value pairs JSON list. e.g.
+
+::
+
+  [
+    {
+      "replicate": "Exp1",
+      "genotype": "cyp79",
+      "name": "Ex1-cyp79-48h-Ag-3"
+    },
+    {
+      "replicate": "Exp1",
+      "genotype": "cyp79",
+      "name": "Ex1-cyp79-48h-Ag-4"
+    },
+    {
+      "replicate": "Exp1",
+      "genotype": "cyp79",
+      "name": "Ex1-cyp79-48h-Ag-1"
+    },
+    {
+      "replicate": "Exp2",
+      "genotype": "Col-0",
+      "name": "Ex2-Col0-48h-Ag-3"
+    },
+    {
+      "replicate": "Exp1",
+      "genotype": "Col-0",
+      "name": "Ex1-Col0-48h-Ag-4"
+    },
+    {
+      "replicate": "Exp1",
+      "genotype": "cyp79",
+      "name": "Ex1-cyp79-48h-Ag-2"
+    },
+    {
+      "replicate": "Exp2",
+      "genotype": "Col-0",
+      "name": "Ex2-Col0-48h-Ag-1"
+    },
+    {
+      "replicate": "Exp1",
+      "genotype": "Col-0",
+      "name": "Ex1-Col0-48h-Ag-3"
+    },
+    {
+      "replicate": "Exp1",
+      "genotype": "Col-0",
+      "name": "Ex1-Col0-48h-Ag-2"
+    },
+    {
+      "replicate": "Exp1",
+      "genotype": "Col-0",
+      "name": "Ex1-Col0-48h-Ag-1"
+    },
+    {
+      "replicate": "Exp2",
+      "genotype": "cyp79",
+      "name": "Ex2-cyp79-48h-Ag-4"
+    },
+    {
+      "replicate": "Exp2",
+      "genotype": "cyp79",
+      "name": "Ex2-cyp79-48h-Ag-1"
+    },
+    {
+      "replicate": "Exp2",
+      "genotype": "Col-0",
+      "name": "Ex2-Col0-48h-Ag-4"
+    },
+    {
+      "replicate": "Exp2",
+      "genotype": "cyp79",
+      "name": "Ex2-cyp79-48h-Ag-2"
+    },
+    {
+      "replicate": "Exp2",
+      "genotype": "Col-0",
+      "name": "Ex2-Col0-48h-Ag-2"
+    },
+    {
+      "replicate": "Exp2",
+      "genotype": "cyp79",
+      "name": "Ex2-cyp79-48h-Ag-3"
+    }
+  ]
+
+
+<!-- @@@END_RST@@@ -->
   </help>
+
+  <citations>
+    <citation type="doi">10.1093/nar/gks1004</citation>
+    <citation type="doi">10.5281/zenodo.163640</citation>
+    <citation type="doi">10.1038/ng.1054</citation>
+  </citations>
 
 </tool>

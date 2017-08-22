@@ -2,7 +2,7 @@
     "a_galaxy_workflow": "true", 
     "annotation": "", 
     "format-version": "0.1", 
-    "name": "Fluxomics stationary with viz", 
+    "name": "Fluxomics stationary 13C-MS iso2flux with visualization", 
     "steps": {
         "0": {
             "annotation": "", 

@@ -1,17 +1,17 @@
 <tool id="batman-nmr" name="BATMAN">
      <description>BATMAN</description>
      <requirements>
-       <container type="docker">docker-registry.phenomenal-h2020.eu/phnmnl/batman</container>
+       <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/batman</container>
      </requirements>
      <command><![CDATA[     
      runBATMAN.R -i ${nmr_spectra_input} -o \$PWD -p ${options_file} -u ${metabolite_template} -l ${target_metabolites}
        ]]>
      </command>
      <inputs>
-         <param name="nmr_spectra_input" type="data" format="txt" label="NMR Dataset; A tabulated text file including p.p.m and spectra. Please download the demo data set from the link below. "/>
-         <param name="options_file" type="data" format="txt" label="BATMAN options; A text file including BATMAN running options, such as number of spectra which must within the range given by the NMR data set. The file name MUST be batmanOptions.txt"/>
-         <param name="metabolite_template" type="data" label="pre-defined metabolites template, multi_data_user.csv"/>
-         <param name="target_metabolites" type="data" label="target metabolites list"/>
+         <param name="nmr_spectra_input" type="data" format="txt" label="NMR Dataset." help="A tabulated text file including p.p.m and spectra in columns. Typical filename is NMRdata.txt. Please download the demo data set from the link below. "/>
+         <param name="options_file" type="data" format="txt" label="BATMAN options." help="A text file including BATMAN running options, such as number of spectra which must within the range given by the NMR data set. The typical filename is batmanOptions.txt"/>
+         <param name="metabolite_template" type="data" label="pre-defined metabolites template." help="This file includes metabolites identifiers, J_coupling information, chemical shift etc. The typical filename is multi_data_user.csv"/>
+         <param name="target_metabolites" type="data" label="targeted metabolites list." help="This file is a list of targeted metabolites. The typical filename is metabolitesList.csv "/>
      </inputs>
      <outputs>
          <data name="RelCon" format="tabular" from_work_dir="results/RelCon.txt" label="Relative concentrations"/>
@@ -22,18 +22,84 @@
              <discover_datasets pattern="(?P&lt;name&gt;specFit_.+_)\.pdf$" ext="pdf" directory="results" />
          </collection>
      </outputs>
-     <help><![CDATA[
+     <help><![CDATA[     
+     
+     **BATMAN**     
+     
+     BATMAN (Bayesian AuTomated Metabolite Analyzer for NMR) deconvolves resonance peaks from NMR spectra of complex mixtures and obtains concentration estimates for the corresponding metabolites automatically. This is achieved through a database of spectral profiles for known metabolites and a  Bayesian Markov Chain Monte Carlo algorithm.
+     Users have the options to specify the multiplet ppm position, position shift range, peak width range and so on. Parallel processing is available if processing several spectra. The **standalone** installation and testing instructions can be found at:
+     http://batman.r-forge.r-project.org/
+     
+     **Test Data for BATMAN on Galaxy**
+
      Demo data set download link: https://github.com/jianlianggao/batman/blob/develop/test_data/test_data_new.zip?raw=true
      
-Four mandatory files: NMRdata.txt, batmanOptions.txt, multi_data_user.csv, metabolitesList.csv
-NMRdata.txt is the NMR spectra data for BATMAN to process peak fitting. The NMRdata.txt is a tabulated file with the first column of data as p.p.m and the rest of columns as NMR spectra.
-
-batmanOptions.txt is used for controlling BATMAN performance including the number range of spectra to be processed (the max number must NOT be greater than the number of spectra provided in the NMRdata.txt), the number of parallel processes, the number of prior iterations and posterior ones, the global peak width and variation (in log10) etc. The detail can be found in the BATMAN document. Please modify the file accordingly on your local computer before uploading to Galaxy.
-
-multi_data_user.csv provides the characteristics of targeted metabolites NMR resonances. Please modify the file accordingly on your local computer before uploading to Galaxy.
-
-metabolitesList.csv includes the list of targeted metabolites. Please modify the file accordingly on your local computer before uploading to Galaxy.
-
-       ]]>
-     </help>
+     **Input Files**
+          
+     *Four mandatory files*
+     
+     NMRdata.txt, batmanOptions.txt, multi_data_user.csv, metabolitesList.csv
+     
+     - *NMRdata.txt* is the NMR spectra data for BATMAN to process peak fitting. The *NMRdata.txt* is a tabulated file with the first column of data as p.p.m and the rest of columns as NMR spectra.
+     
+     - *batmanOptions.txt* is used for controlling BATMAN performance including the number range of spectra to be processed (the max number must NOT be greater than the number of spectra provided in the NMRdata.txt), the number of parallel processes, the number of prior iterations and posterior ones, the global peak width and variation (in log10) etc. The detail can be found in the BATMAN document. Please modify the file accordingly on your local computer before uploading to Galaxy.
+     
+     - *multi_data_user.csv* provides the characteristics of targeted metabolites NMR resonances. Please modify the file accordingly on your local computer before uploading to Galaxy.
+     
+     - *metabolitesList.csv* includes the list of targeted metabolites. Please modify the file accordingly on your local computer before uploading to Galaxy.
+     
+     **Output Files**
+     
+     - *RelCon.txt* includes the means of relative concentrations for the processed spectra of targeted metabolites.
+     
+     - *RelConCreInt.txt* is the 95% credible intervals (2.5% and 97.5%) of the means of relative concentrations for the processed spectra of targeted metabolites.
+     
+     - *MultipletsPpmShifts.txt* is an {M x n} table containing the posterior means of multiplets ppm shift for M multiplets as its rows. M is the sum of all multiplets in the fitted metabolites and n is the number of spectra analyzed.
+     
+     - *batmanOptions.txt* is a copy of the batman options from input.
+     
+     - *metabolitesList.csv* is a copy of the targeted metabolites from input.
+     
+     - *metabolitesListUsed.txt* is a copy of the targeted metabolite names which have multiplets in/near the ppm region specified in batmanOptions.txt and used in the fitting.
+     
+     - *multi_data.dat* is a copy of input *multi_data_user.csv* with extra information about the position of the listed metabolites, without the title line of *multi_data_user.csv* from the input.    
+     
+     - *spectraTitle.txt* contains the title line of *multi_data_user.csv*.
+     
+     - *beta_i_rr_0.txt* keeps the estimated posterior mean of relative concentrations for the targeted metabolites of spectrum i.     
+     
+     - *beta_sam_i_rr_0.txt* is a matrix {m x s} with each row containing the s posterior samples of the relative concentrations for one fitted metabolite of spectrum i. m is the total number of targeted metabolites.
+     
+     - *delta_draw_mean_i.txt* is the posterior mean of targeted multiplets ppm shift from the pre-set ppm position value in *multi_data_user.csv* of spectrum i.
+     
+     - *delta_sam_i.txt* is a matrix {s x M} containing the posterior samples of M multiplets ppm shift. Every column corresponds the shift posterior samples of one multiplet for spectrum i. M is the sum of all multiplets in the targeted metabolites.
+     
+     - *L_i.txt* is a matrix {t x M} with each column as the template of one targeted metabolite for spectrum i before fitting. t is the number of data points in each spectrum.
+     
+     - *Lambda_sam_i_rr_0.txt* contains s posterior samples of (a scalar global precision parameter) for spectrum i.
+     
+     - *metaFit_sam_i_rr_0.txt* contains a matrix {t x s} with s posterior samples of total metabolites fit during MCMC iterations in its columns for spectrum i, and t is the number of data points in each spectrum.
+     
+     - *metaIndFit_sam_i_rr_0.txt* is a matrix {t x {m x s} } containing s posterior samples of m individual metabolites fit in its columns for spectrum i, t is the number of data points in each spectrum. Every m columns are the m individual metabolite fit samples for one posterior sample.
+     
+     - *metaTemp_i_rr_0.txt* is a matrix {t x m} containing the posterior means of m fitted metabolite templates in its columns (down sampled) after burn in for spectra i. t is the number of data points in each spectrum.
+     
+     - *metaTempHR_i_rr_0.txt* is a matrix {t x m} containing the posterior means of m fitted metabolite templates in its columns (without down sample) after burn in for spectra i. t is the number of data points (without down sample) in each spectrum.
+     
+     - *NMRdata_mod_i_.txt* is a matrix {t x 2} containing the input spectrum i in its original resolution. The first column is ppm value, and the second column is the ith spectrum intensity.
+     
+     - *specFit_i_rr_0.txt* is A matrix {t x 5} of BATMAN fit results with five columns as: [ppm;Originalspectrum;Metabolitesf it;Waveletfit;Overallsum] of spectrum i.
+     
+     - *specFitHR_i_rr_0.txt* is a column vector {t x 1} of metabolite fit result in the original resolution for spectrum i. t is the number of data points (without down sample) in each spectrum.
+     
+     - *theta_sam_i_rr_0.txt* is a matrix {t x s} containing s samples of wavelet fit during MCMC iterations in its columns for spectrum i.
+     
+     - *specFit_i_to_j_.pdf* are the series of PDF files containing the plot of results of fitting. 2 fitting plots are in one file.
+     
+       ]]></help>
+       
+       <citations> 
+         <citation type="doi"> 10.1093/bioinformatics/bts308</citation> 
+         <citation type="doi">10.1080/01621459.2012.695661</citation>  
+       </citations> 
  </tool>

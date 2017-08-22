@@ -7,10 +7,13 @@
   </requirements>-->
   <description>Run MetFrag with a given parameter set.</description>
   <command><![CDATA[
-	java -Xmx2048m -Xms1024m -jar /usr/local/bin/MetFragCLI.jar "`cat $metfrag_cli_batch_input_1` ResultsFile=$metfrag_cli_batch_output_1 NumberThreads=1 $additionalparameters "
-    	#if $metfrag_cli_batch_database_file != "None"
-		LocalDatabasePath=$metfrag_cli_batch_database_file
-    	#end if
+    bash /usr/local/bin/run_metfrag.sh -p $metfrag_cli_batch_input_1 -f $metfrag_cli_batch_output_1 
+    #if $metfrag_cli_batch_database_file != "None"
+        -l "$metfrag_cli_batch_database_file"
+    #end if
+    #if $additionalparameters != "None"
+        -a "$additionalparameters"
+    #end if
   ]]>
   </command>
   <inputs>
@@ -19,7 +22,9 @@
     <param name="metfrag_cli_batch_database_file" type="data" format="csv" optional="True" label="Database File" help="File containing candidates used as database" />
   </inputs>
   <outputs>
-    <data name="metfrag_cli_batch_output_1" type="text" format="csv" label="MetFrag result file" />
+    <collection type="list" label="MetFrag Results" format="csv" name="metfrag_results" >
+        <discover_datasets pattern="__designation_and_ext__" directory="metfrag_cli_batch_output_1" />
+    </collection>
   </outputs>
   <help>
 
@@ -109,7 +114,6 @@ CHANGES IN VERSION 0.1
 ========================
 
 First version
-
 
   </help>
 </tool>
