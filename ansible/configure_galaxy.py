@@ -18,6 +18,7 @@ Log = logging.getLogger('ConfigGalaxy')
 # Steps
 StepWf = 'wf'
 
+
 def parse_args(args):
     parser = argparse.ArgumentParser(
         description="Upload the workflows from a directory into the specified Galaxy server")
@@ -49,17 +50,19 @@ def parse_args(args):
             parser.error("You must specificy a workflow directory (unless you skip the workflow configuration step)")
 
         if not os.path.isdir(options.workflow_dir) or \
-           not os.access(options.workflow_dir, os.R_OK | os.X_OK):
+                not os.access(options.workflow_dir, os.R_OK | os.X_OK):
             parser.error("Specified workflow directory ({}) is either inaccessible or not readable".
                          format(options.workflow_dir))
 
     # This prints a password. Keep disabled unless debugging -> Log.debug("Parsed command line options:  %s", options)
     return options
 
+
 def get_wf_files(wf_dir):
     for root, _, files in os.walk(wf_dir, followlinks=True):
         for f in fnmatch.filter(files, '*.ga'):
             yield os.path.join(root, f)
+
 
 def upload_workflows(galaxy, wf_files):
     # We need to avoid uploading workflows that are already installed.
@@ -71,7 +74,7 @@ def upload_workflows(galaxy, wf_files):
     # Note that `show_workflows` offers to query by name and id, but its implementation
     # actually queries all workflows and then filters on the client side.
 
-    existing_workflows_by_uuid = { w['latest_workflow_uuid']: w for w in galaxy.workflows.get_workflows() }
+    existing_workflows_by_uuid = {w['latest_workflow_uuid']: w for w in galaxy.workflows.get_workflows()}
 
     some_errors = False
     count = 0
@@ -83,13 +86,13 @@ def upload_workflows(galaxy, wf_files):
             if installed_wf:
                 Log.info("Skipping workflow file %s", os.path.basename(filename))
                 Log.info("Workflow called '%s' with same uuid (%s) already installed",
-                        installed_wf['name'], installed_wf['latest_workflow_uuid'])
+                         installed_wf['name'], installed_wf['latest_workflow_uuid'])
             else:
                 result = galaxy.workflows.import_workflow_json(local_wf)
                 Log.info("Imported workflow '%s' with uuid %s.", result['name'], local_wf['uuid'])
-                existing_workflows_by_uuid[local_wf['uuid']] = { # add new wf to our local dict
-                        u'name': local_wf['name'],
-                        u'latest_workflow_uuid': local_wf['uuid']
+                existing_workflows_by_uuid[local_wf['uuid']] = {  # add new wf to our local dict
+                    u'name': local_wf['name'],
+                    u'latest_workflow_uuid': local_wf['uuid']
                 }
                 count += 1
         except (RuntimeError, StandardError) as e:
@@ -124,7 +127,7 @@ def configure_admin_user(options):
             if user['username'] != options.username:
                 raise RuntimeError(
                     "Found user with provided email ({}) but username ({}) doesn't match the one provided ({})".
-                    format(options.user_email, user['username'], options.username))
+                        format(options.user_email, user['username'], options.username))
             # get_users() returns partial records.  We need to get the user details
             user = gi.users.show_user(user['id'])
             if not user['is_admin']:
@@ -144,6 +147,7 @@ def configure_admin_user(options):
     Log.info("Created API key for admin user %s", admin_user['email'])
     return admin_user
 
+
 def main(args):
     options = parse_args(args)
 
@@ -159,6 +163,7 @@ def main(args):
         Log.info("Skipping workflow configuration step by user request")
 
     Log.info("Galaxy configuration completed")
+
 
 if __name__ == '__main__':
     logging.basicConfig(format=LogFormat, level=logging.DEBUG)
