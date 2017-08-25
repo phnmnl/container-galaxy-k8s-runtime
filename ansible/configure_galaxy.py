@@ -88,7 +88,15 @@ def upload_workflows(galaxy, wf_files):
                 Log.info("Workflow called '%s' with same uuid (%s) already installed",
                          installed_wf['name'], installed_wf['latest_workflow_uuid'])
             else:
-                result = galaxy.workflows.import_workflow_json(local_wf)
+                # The following three lines of code implement the proper call to the Galaxy API
+                # in order to upload and publish a workflow at the same time.
+                # We can't directly use the current implementation of the BioBlend API method
+                # for uploading workflows (i.e., galaxy.workflows.import_workflow_json(local_wf))
+                # because it doesn't support the 'publish' functionality at the moment.
+                payload = {'workflow': local_wf, 'publish': True, 'importable': True}
+                url = os.path.join(galaxy.url, "workflows")
+                result = galaxy.make_post_request(url, payload=payload)
+
                 Log.info("Imported workflow '%s' with uuid %s.", result['name'], local_wf['uuid'])
                 existing_workflows_by_uuid[local_wf['uuid']] = {  # add new wf to our local dict
                     u'name': local_wf['name'],
