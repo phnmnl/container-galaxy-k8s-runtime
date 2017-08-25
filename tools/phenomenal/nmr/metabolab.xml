@@ -1,23 +1,21 @@
-<tool id="metabolab" name="Metabolab">
+<tool id="metabolab" name="Metabolab" version=0.1>
      <description>Processing vendor raw data for Multivariate analysis</description>
      <requirements>
-       <container type="docker">docker-registry.phenomenal-h2020.eu/phnmnl/metabolab</container>
+       <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/metabolab</container>
      </requirements>
      <command><![CDATA[     
-       cd /mydata;
-       pwd;
        unzip $zipfile;
        cp $script container_script.ml;
        runMetabolab.sh;
        mkdir isatab_files;
        mv i_Investigation.txt a_* m_* s_* isatab_files;
        zip -r isatab_files.zip isatab_files;
-       cp isatab_files.zip $isatabfileszipped;
+       mv isatab_files.zip $isatabfileszipped;
        zip -r myoutputBruker.zip myoutputBruker;
-       cp myoutputBruker.zip $brukerzip;
-       cp myoutput.mat $matforplstoolbox;
-       cp myoutput_batman.csv $batmancsv;
-       cp metabolabnotgui.mat $metabolabmatfile;
+       mv myoutputBruker.zip $brukerzip;
+       mv myoutput.mat $matforplstoolbox;
+       mv myoutput_batman.csv $batmancsv;
+       mv metabolabnotgui.mat $metabolabmatfile;
        ]]>
      </command>
      <inputs>
