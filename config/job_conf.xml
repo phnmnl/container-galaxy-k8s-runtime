@@ -230,7 +230,7 @@
     	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
     	    <param id="docker_owner_override">phnmnl</param>
     	    <param id="docker_image_override">metfrag-cli-batch</param>
-    	    <param id="docker_tag_override">v2.4.2_cv0.1.12</param>
+    	    <param id="docker_tag_override">latest</param>
     	    <param id="max_pod_retrials">3</param>
     	    <param id="docker_enabled">true</param>
 	</destination>
@@ -381,6 +381,7 @@
         <tool id="featureXMLToCAMERA" destination="camera-container" />
 	<tool id="featureXMLToXcms" destination="camera-container" />
 	<tool id="zip-collection" destination="camera-container"/>
+        <tool id="unzip-collection" destination="camera-container"/>
 	<tool id="camera-annotate-peaks" destination="camera-container" />
         <tool id="camera-group-fwhm" destination="camera-container" />
         <tool id="camera-group-corr" destination="camera-container" />
@@ -483,9 +484,10 @@
 	<tool id="XTandemAdapter" destination="container-openms"/> 
 	<!-- MetFrag -->
 	<tool id="metfrag-cli-batch" destination="metfrag-cli-batch-container" />
-  <tool id="msnbase-read-msms" destination="msnbase-container" />
-  <tool id="map-msms2camera" destination="msnbase-container" />
-  <tool id="msms2metfrag" destination="msnbase-container" />
+	<tool id="metfrag-cli-batch-multiple" destination="metfrag-cli-batch-container" />
+  	<tool id="msnbase-read-msms" destination="msnbase-container" />
+  	<tool id="map-msms2camera" destination="msnbase-container" />
+  	<tool id="msms2metfrag" destination="msnbase-container" />
 	<tool id="metfrag-vis" destination="metfrag-vis-container" />
 	<!-- ISA related tools -->
         <tool id="get_study" destination="container-mtblisa"/>
