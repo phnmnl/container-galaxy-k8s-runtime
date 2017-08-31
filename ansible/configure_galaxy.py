@@ -151,14 +151,8 @@ def configure_admin_user(options):
         admin_user = gi.users.create_local_user(options.username, options.user_email, options.user_password)
         Log.info("Galaxy user %s created!", admin_user['username'])
 
-    # associate an API key to the admin user if he doesn't have one
-    admin_api_key = gi.users.get_user_apikey(admin_user['id'])
-    if admin_api_key == 'Not available.':
-        admin_api_key = gi.users.create_user_apikey(admin_user['id'])
-        Log.info("Created API key for admin user %s", admin_user['email'])
-    # set the api_key to the admin user
-    admin_user['api_key'] = admin_api_key
-
+    admin_user['api_key'] = gi.users.create_user_apikey(admin_user['id'])
+    Log.info("Created API key for admin user %s", admin_user['email'])
     return admin_user
 
 
