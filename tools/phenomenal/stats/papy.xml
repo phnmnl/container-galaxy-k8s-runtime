@@ -1,4 +1,4 @@
-<tool id="power-analysis" name="PAPY">
+<tool id="power-analysis" name="PAPY" version="1.0">
      <description>Power Analysis Tool</description>
      <requirements>
        <container type="docker">docker-registry.phenomenal-h2020.eu/phnmnl/papy</container>
