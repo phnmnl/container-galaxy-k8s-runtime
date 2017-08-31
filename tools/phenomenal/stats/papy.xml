@@ -1,7 +1,7 @@
 <tool id="power-analysis" name="PAPY" version="1.0">
      <description>Power Analysis Tool</description>
      <requirements>
-       <container type="docker">docker-registry.phenomenal-h2020.eu/phnmnl/papy</container>
+       <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/papy</container>
      </requirements>
      <command><![CDATA[          
 pa.py $testdata_input $exp_cols $sample_size $effect_size $repeats $outcome_type 4 \$PWD
