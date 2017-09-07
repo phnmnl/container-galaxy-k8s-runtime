@@ -7,8 +7,8 @@
   </requirements>-->
   <description>Run MetFrag with a multiple parameter set on one node.</description>
   <command><![CDATA[
-    mkdir metfrag_cli_batch_multiple_output_1;
-    bash /usr/local/bin/run_metfrag.sh -p $metfrag_cli_batch_multiple_input_1 -r metfrag_cli_batch_multiple_output_1 -rn true
+    mkdir metfrag_cli_batch_multiple_output_folder_1;
+    bash /usr/local/bin/run_metfrag.sh -p $metfrag_cli_batch_multiple_input_1 -r metfrag_cli_batch_multiple_output_folder_1 -rn true -o $metfrag_cli_batch_multiple_output_1
     #if $metfrag_cli_batch_multiple_database_file != "None"
         -l "$metfrag_cli_batch_multiple_database_file"
     #end if
@@ -23,9 +23,7 @@
     <param name="metfrag_cli_batch_multiple_database_file" type="data" format="csv" optional="True" label="Database File" help="File containing candidates used as database" />
   </inputs>
   <outputs>
-    <collection type="list" label="MetFrag Results" format="csv" name="metfrag_results" >
-        <discover_datasets pattern="__designation_and_ext__" directory="metfrag_cli_batch_multiple_output_1" />
-    </collection>
+    <data name="metfrag_cli_batch_multiple_output_1" type="text" format="csv" label="MetFrag result file" />
   </outputs>
   <help>
 
