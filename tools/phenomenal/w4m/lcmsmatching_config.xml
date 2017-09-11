@@ -55,9 +55,6 @@
 		## Table outputs 
 		-o "$mainoutput" --peak-output-file "$peaksoutput" --same-rows --same-cols
 
-		## HTML output 
-		--html-output-file "$htmloutput" --no-main-table-in-html-output
-
 		## Fields of input file
 		--input-col-names "$inputfields"
 
@@ -213,7 +210,6 @@
 		<!-- Output file -->
 		<data name="mainoutput"  label="lcmsmatch_${mzrtinput.name}" format="tabular"/>
 		<data name="peaksoutput" label="lcmsmatch_${mzrtinput.name}_peaks" format="tabular"/>
-		<data name="htmloutput"  label="lcmsmatch_${mzrtinput.name}.html" format="html"/>
 
 	</outputs>
 
@@ -234,7 +230,6 @@
 			<param name="mzmode" value="pos"/>
 			<output name="mainoutput" file="filedb-small-mz-match-output.tsv"/>
 			<output name="peaksoutput" file="filedb-small-mz-match-peaks-output.tsv"/>
-			<output name="htmloutput" file="filedb-small-mz-match-html-output.html"/>
 		</test>
 
 		<!-- File database test -->
