@@ -79,6 +79,17 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
+	<destination id="metabolab-container" runner="k8s">
+   	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+   	    <param id="docker_owner_override">phnmnl</param>
+   	    <param id="docker_image_override">metabolab</param>
+   	    <param id="docker_tag_override">latest</param>
+   	    <param id="max_pod_retrials">3</param>
+   	    <param id="docker_enabled">true</param>
+	</destination>
+
+
+
         <destination id="papy-container" runner="k8s">
             <param id="docker_enabled">true</param>
         </destination>      
@@ -349,6 +360,7 @@
         <tool id="lcmsmatching" destination="w4m-lcmsmatching-container"/>
         <tool id="msconvert2" destination="msconvert2-container"/>
         <!-- new NMR -->
+        <tool id="metabolab" destination="metabolab-container"/>
         <tool id="mtbls_nmr_raw_dummy_importer" destination="nmrmlconv-container"/>
         <tool id="nmrmlconv" destination="nmrmlconv-container"/>
         <tool id="zip-nmrml-collection" destination="nmrmlconv-container"/>
