@@ -4,7 +4,7 @@ MAINTAINER PhenoMeNal-H2020 Project <phenomenal-h2020-users@googlegroups.com>
 LABEL Description="Galaxy 17.05-phenomenal for running inside Kubernetes."
 LABEL software="Galaxy"
 LABEL software.version="17.05-pheno"
-LABEL version="1.2"
+LABEL version="1.3"
 
 RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transport-https software-properties-common wget && \
     apt-get update -qq && \
