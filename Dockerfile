@@ -23,6 +23,11 @@ COPY config/tool_conf.xml config/tool_conf.xml
 COPY config/sanitize_whitelist.txt config/sanitize_whitelist.txt
 COPY tools/phenomenal tools/phenomenal
 
+RUN virtualenv .config_script_venv
+RUN /bin/bash -c "source .config_script_venv/bin/activate && \
+                  pip install bioblend==0.9.0 && \
+                  deactivate"
+
 RUN virtualenv .venv
 RUN /bin/bash -c "source .venv/bin/activate && \
                   pip install 'pip>=8.1' && \
