@@ -294,7 +294,7 @@
             <param id="docker_enabled">true</param>
   </destination>
 	<destination id="msnbase-container" runner="k8s">
-            <param id="docker_repo_override">docker-registry.phenomenal-h2020.eu</param>
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">msnbase</param>
 	    <param id="docker_tag_override">v2.0.2_cv0.2.42</param>
