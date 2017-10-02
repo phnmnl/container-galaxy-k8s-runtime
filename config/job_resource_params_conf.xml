@@ -1,0 +1,6 @@
+<parameters>    
+  <param label="Processors requested" name="requests_cpu" type="float" size="2" min="1" max="64" value="" help="Number of processing cores required to allocate the job. If no machines in the cluster have at least this amount of processors available, the job won't be run and be delayed until one machine has enough cores available. Should be smaller or equal than Processors limit. Leave blank to use default value. Above 1, should be always a rounded integer, for fractions of a processor below one, use floating number" />
+  <param label="Processors limit" name="limits_cpu" type="float" size="2" min="1" max="64" value="" help="Maximum number of processing cores that can be used for the job. If the tool goes beyond that limit, then it might be stopped. Leave blank to use default value. Above 1, should be always a rounded integer, for fractions of a processor below one, use floating number" />
+  <param label="Memory requested" name="requests_memory" type="float" size="3" min="1" max="256" value="" help="Memory size in gigabytes, 'pmem' value (1-256). Leave blank to use default value." />
+  <param label="Memory limit" name="limits_memory" type="float" size="3" min="1" max="256" value="" help="Memory size in gigabytes, 'pmem' value (1-256). Leave blank to use default value." />
+</parameters>
