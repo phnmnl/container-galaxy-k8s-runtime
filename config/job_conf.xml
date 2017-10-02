@@ -350,8 +350,10 @@
         <tool id="log2transformation" destination="log2transformation-container"/>
 	<!-- Fluxomics -->
 	<tool id="iso2flux" destination="iso2flux-container"/>
-        <tool id="midcor" destination="midcor-container"/>
-        <tool id="ramid" destination="ramid-container"/>
+	<!-- <tool id="midcor" destination="midcor-container"/> -->
+	<tool id="midcor" destination="k8s-resources-managed"/>
+	<!-- <tool id="ramid" destination="ramid-container"/> -->
+        <tool id="ramid" destination="k8s-resources-managed"/>
         <tool id="isodyn" destination="isodyn-container"/>
 	<tool id="escher-fluxomics" destination="container-escher-fluxomics"/>
 	<!-- ICL -->

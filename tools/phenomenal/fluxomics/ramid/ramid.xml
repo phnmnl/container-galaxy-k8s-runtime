@@ -1,4 +1,8 @@
 <tool id="ramid" name="ramid" version="0.1.0">
+<requirements>
+    <!-- Container based dependency handling -->
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/ramid:v1.0_cv1.0.14</container>
+</requirements>    
 <stdio>
 <exit_code range="1:" />
 </stdio>
