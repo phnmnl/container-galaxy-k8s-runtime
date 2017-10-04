@@ -28,6 +28,26 @@
 		<param id="function">k8s_wrapper</param>
 		<param id="docker_enabled">true</param>
 	</destination>
+	<destination id="dynamic-k8s-tiny" runner="dynamic">
+		<param id="type">python</param>
+		<param id="function">k8s_wrapper_tiny</param>
+	</destination>
+	<destination id="dynamic-k8s-small" runner="dynamic">
+		<param id="type">python</param>
+		<param id="function">k8s_wrapper_small</param>
+	</destination>
+	<destination id="dynamic-k8s-medium" runner="dynamic">
+		<param id="type">python</param>
+		<param id="function">k8s_wrapper_medium</param>
+	</destination>
+	<destination id="dynamic-k8s-large" runner="dynamic">
+		<param id="type">python</param>
+		<param id="function">k8s_wrapper_large</param>
+	</destination>
+	<destination id="dynamic-k8s-xlarge" runner="dynamic">
+		<param id="type">python</param>
+		<param id="function">k8s_wrapper_xlarge</param>
+	</destination>
 
 	<destination id="batman-container" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
