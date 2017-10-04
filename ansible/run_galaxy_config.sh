@@ -85,7 +85,7 @@ if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GA
   end_time=$(date +%s)
   log "Galaxy is up and ready for API calls after $((${end_time} - ${start_time})) seconds."
   log "Running admin user creation..."
-  source .venv/bin/activate
+  source .config_script_venv/bin/activate
   log "Workflow directory: ${WorkflowDir}"
   python ansible/configure_galaxy.py --workflow-dir "${WorkflowDir}" \
      $GALAXY_API_KEY $GALAXY_ADMIN_USER $GALAXY_ADMIN_EMAIL $GALAXY_ADMIN_PASSWORD >&2
