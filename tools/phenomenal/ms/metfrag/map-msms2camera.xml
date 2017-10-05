@@ -50,6 +50,12 @@ Description
 
 | This module is used to map MS/MS spectra from retrieved by **msnbase-read-msms** to annotated CAMERA features retrieved from **camera-find-adducts**. The mapping is performed based on retention time and m/z values of the annotated features.
 
++------------------+-----------------+
+| predecessor tool | successor tool  |
++------------------+-----------------+
+| msnbase-read-msms| msms2metfrag    |
++------------------+-----------------+
+
 
 -----------
 Input files

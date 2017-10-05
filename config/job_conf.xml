@@ -43,7 +43,7 @@
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">camera</param>
-            <param id="docker_tag_override">v1.32.0_cv0.5.45</param>
+            <param id="docker_tag_override">latest</param>
             <param id="max_pod_retrials">1</param>
             <param id="docker_enabled">true</param>
  	</destination>
@@ -87,9 +87,6 @@
    	    <param id="max_pod_retrials">3</param>
    	    <param id="docker_enabled">true</param>
 	</destination>
-
-
-
         <destination id="papy-container" runner="k8s">
             <param id="docker_enabled">true</param>
         </destination>      
@@ -177,7 +174,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">xcms</param>
-            <param id="docker_tag_override">v1.52.0_cv0.5.58</param>
+            <param id="docker_tag_override">latest</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -284,23 +281,31 @@
 	    <param id="docker_tag_override">v1.6.0-beta.4_cv1.0.9</param>
 	    <param id="max_pod_retrials">3</param>
 	    <param id="docker_enabled">true</param>
-  </destination>
-  <destination id="container-mw2isa" runner="k8s">
+  	</destination>
+  	<destination id="container-mw2isa" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">mw2isa</param>
             <param id="docker_tag_override">v0.5.0_cv0.1.20</param>
             <param id="max_pod_retrials">1</param>
             <param id="docker_enabled">true</param>
-  </destination>
+  	</destination>
 	<destination id="msnbase-container" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">msnbase</param>
-	    <param id="docker_tag_override">v2.0.2_cv0.2.42</param>
+	    <param id="docker_tag_override">latest</param>
 	    <param id="max_pod_retrials">1</param>
 	    <param id="docker_enabled">true</param>
-  </destination>
+  	</destination>
+	<destination id="container-passatutto" runner="k8s">
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">passatutto</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">1</param>
+            <param id="docker_enabled">true</param>
+        </destination>
         <destination id="container-isatab2json" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
@@ -310,7 +315,7 @@
             <param id="docker_enabled">true</param>
         </destination>
         <destination id="container-openms" runner="k8s">
-	          <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">openms</param>
             <param id="docker_tag_override">v2.1.0_cv0.2.15</param>
@@ -333,6 +338,7 @@
            <param id="max_pod_retrials">3</param>
            <param id="docker_enabled">true</param>
         </destination>
+	
     </destinations>
     <tools>
         <!-- Tools can be configured to use specific destinations or handlers,
@@ -386,7 +392,9 @@
         <tool id="xcms-collect-peaks" destination="xcms-container" />
         <tool id="xcms-group-peaks" destination="xcms-container" />
         <tool id="xcms-correct-rt" destination="xcms-container" />
+	<tool id="xcms-dilutionfilter" destination="xcms-container" />
         <tool id="xcms-fill-peaks" destination="xcms-container" />
+	<tool id="xcms-blankfilter" destination="xcms-container" />
 	<!-- CAMERA -->
 	<tool id="consensusXMLToXcms" destination="camera-container" />
         <tool id="cameraToFeatureXML" destination="camera-container" />
@@ -399,6 +407,7 @@
         <tool id="camera-group-corr" destination="camera-container" />
         <tool id="camera-find-isotopes" destination="camera-container" />
         <tool id="camera-find-adducts" destination="camera-container" />
+	<tool id="camera-prepareoutput" destination="camera-container" />
 	<!-- OpenMS -->
 	<tool id="xcmssplit" destination="xcms-container" />
 	<tool id="AdditiveSeries" destination="container-openms"/> 
@@ -500,7 +509,10 @@
   	<tool id="msnbase-read-msms" destination="msnbase-container" />
   	<tool id="map-msms2camera" destination="msnbase-container" />
   	<tool id="msms2metfrag" destination="msnbase-container" />
+	<tool id="msms2metfrag-multiple" destination="msnbase-container" />
 	<tool id="metfrag-vis" destination="metfrag-vis-container" />
+	<tool id="aggregatemetfrag" destination="msnbase-container" />
+	<tool id="passatutto" destination="container-passatutto" />
 	<!-- ISA related tools -->
         <tool id="get_study" destination="container-mtblisa"/>
         <tool id="get_study_json" destination="container-mtblisa"/>

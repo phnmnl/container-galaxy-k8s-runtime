@@ -58,6 +58,11 @@ Description
 
 | This module is used to run MetFrag on annotated MS/MS spectra for compound annotation. The parameters are set by **msms2metfrag**.
 
++------------------+-----------------+
+| predecessor tool | successor tool  |
++------------------+-----------------+
+| msms2metfrag     | aggregatemetfrag|
++------------------+-----------------+
 
 -----------
 Input files
@@ -92,7 +97,7 @@ Database File
 Output files
 ------------
 
-metfrag_cli_batch_output_1.csv
+metfrag_cli_batch_output_1
         | A csv output file with scored candidates and properties
         |
 

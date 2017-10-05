@@ -1,11 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
 <!--Proposed Tool Section: [PhenoMeNal]-->
-<tool id="xcms-find-peaks" name="xcms-find-peaks" version="0.1">
+<tool id="xcms-find-peaks" name="xcms-find-peaks" version="0.2">
   <description>Find peaks in mzML file and generate a xcmsSet using XCMS centWave algorithm.</description>
   <command><![CDATA[
 	ln -s ${xcms_find_peaks_input_1} ${xcms_find_peaks_input_1}.mzML;
-	/usr/local/bin/findPeaks.r input=${xcms_find_peaks_input_1}.mzML output=$xcms_find_peaks_output_1 ppm=$ppm peakwidthLow=$peakwidthLow peakwidthHigh=$peakwidthHigh noise=$noise polarity=$polarity;
+        /usr/local/bin/findPeaks.r input=${xcms_find_peaks_input_1}.mzML output=$xcms_find_peaks_output_1 ppm=$ppm peakwidthLow=$peakwidthLow peakwidthHigh=$peakwidthHigh noise=$noise polarity=$polarity realFileName=$xcms_find_peaks_input_1.name
+	#if $infilecvs:
+  		phenoFile=$infilecvs 
+	#end if
+	#if $phenocol:
+		phenoDataColumn=$phenocol 
+	#end if
+ 	;
   ]]>
   </command>
   <inputs>
@@ -18,6 +25,8 @@
       <option value="positive" selected="True">positive</option>
       <option value="negative" selected="False">negative</option>
     </param>
+    <param name="infilecvs" type="data" format="csv" optional="True" multiple="False" label="Input CSV file for setting the phenotype (see the help)" />
+    <param name="phenocol" type="text" optional="True" label="Column name showing the class of the raw files (the phenotype file)"/>
   </inputs>
   <outputs>
     <data name="xcms_find_peaks_output_1" type="data" format="rdata" label="xcms-find-peaks data" />
@@ -74,7 +83,10 @@ Input files
 | File                         |   Format   |
 +==============================+============+
 | 1) mzML file   	       |    mzML    |
++==============================+============+
+| 2) CSV file                  |    CSV     |
 +------------------------------+------------+
+
 
 ----------
 Parameters
@@ -104,6 +116,38 @@ Polarity
 	| Filter raw data for positive/negative scans
 	|
 
+CSV file
+        | This file is used to set class of the samples being analyzed. The file should have at least two column: the first column is showing the raw file name and extension (for example sample1.mzML) and the second column should show it's phenotype type. This file is a comma separated file and should container header (see the example).
+	|
+
++----------------+----------+
+| RawFile        | Class    |
++----------------+----------+
+| Sample1.mzML   | Sample   |
++----------------+----------+
+| Sample2.mzML   | Sample   |
++----------------+----------+
+| Sample3.mzML   | Sample   |
++----------------+----------+
+| Sample4.mzML   | Sample   |
++----------------+----------+
+| Blank1.mzML    | Blank    |
++----------------+----------+
+| Blank2.mzML    | Blank    |
++----------------+----------+
+| Blank3.mzML    | Blank    |
++----------------+----------+
+| D1.mzML        | D1       |
++----------------+----------+
+| D2.mzML        | D2       |
++----------------+----------+
+| D3.mzML        | D3       |
++----------------+----------+
+
+Phenotype column
+        | This should show the column name in the CSV file representing the class of the metabolite. In the case of the above table it should be set to "Class" (without quotation).
+        |
+
 ------------
 Output files
 ------------
@@ -117,6 +161,11 @@ xcms_find_peaks_output_1.rdata
 ----
 NEWS
 ----
+
+CHANGES IN VERSION 0.2
+========================
+
+Adding class information using a CSV file
 
 CHANGES IN VERSION 0.1
 ========================

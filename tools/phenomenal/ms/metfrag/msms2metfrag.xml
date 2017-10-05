@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
 <!--Proposed Tool Section: [PhenoMeNal]-->
-<tool id="msms2metfrag" name="msms2metfrag" version="0.2">
+<tool id="msms2metfrag" name="msms2metfrag" version="0.3">
   <description>Generate MetFrag parameters given MS/MS spectral information and CAMERA adduct annotation.</description>
   <command><![CDATA[
 	mkdir outputfolder;
@@ -34,7 +34,7 @@
     </param>
   </inputs>
   <outputs>
-    <collection type="list" label="MetFrag Parameters" format="txt" name="metfrag_parameters" >
+    <collection type="list" label="MetFrag Parameters" name="metfrag_parameters" >
         <discover_datasets pattern="__designation_and_ext__" directory="outputfolder" />
     </collection>
   </outputs>
@@ -130,7 +130,7 @@ Mode
 
 Database
 	| Database used to search candidates
-	| Available databases are: KEGG, PubChem, MetChem (local database which needs to be set up beforehand)
+	| Available databases are: KEGG, PubChem, MetChem (local database which needs to be set up beforehand). In addition, LocalCSV can be used which uses a csv file for searching. Such a csv file can be downloaded from https://msbi.ipb-halle.de/~cruttkie/databases/
 	|
 
 Adduct Rules
@@ -143,7 +143,7 @@ Adduct Rules
 Output files
 ------------
 
-metfrag_parameters.txt
+metfrag_parameters
         | txt file(s) containing MetFrag CLI Batch parameters
         |
 
@@ -152,6 +152,12 @@ metfrag_parameters.txt
 ----
 NEWS
 ----
+
+CHANGES IN VERSION 0.3
+========================
+
+- fixed some bugs for the output
+
 
 CHANGES IN VERSION 0.2
 ========================
