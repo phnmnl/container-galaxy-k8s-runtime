@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="msms2metfrag-multiple" name="msms2metfrag-multiple" version="0.3">
+  <description>Generate MetFrag parameters (merged in one file) given MS/MS spectral information and CAMERA adduct annotation.</description>
+  <command><![CDATA[
+	mkdir outputfolder;
+	/usr/local/bin/MS2ToMetFrag.r inputCAMERA=$msms2metfrag_input_2 inputMS2=$msms2metfrag_input_1 output=outputfolder precursorppm=$precursorppm fragmentppm=$fragmentppm fragmentabs=$fragmentabs database=$database maxSpectra=$maxSpectra minPeaks=$minPeaks maxPrecursorMass=$maxPrecursorMass minPrecursorMass=$minPrecursorMass mode=$mode adductRules=$adductRules  outputname=$metfragparam outputmerge=true;
+  ]]>
+  </command>
+  <inputs>
+    <param name="msms2metfrag_input_1" type="data" format="rdata" optional="False" label="map-msms2camera data" help="A rdata file mapped MS/MS spectra retrieved from map-msms2camera" />
+    <param name="msms2metfrag_input_2" type="data" format="rdata" optional="False" label="camera-find-adducts data" help="A rdata file with a xsAnnotate object from one sample with annotated adduct information" />
+    <param name="precursorppm" type="text" format="txt" value="10" optional="False" label="Precursor PPM" help="The ppm error for the precursor mass to search candidates" />
+    <param name="fragmentppm" type="text" format="txt" value="10" optional="False" label="Fragment PPM (mzppm)" help="The ppm error to assign fragments to fragment peaks" />
+    <param name="fragmentabs" type="text" format="txt" value="0.01" optional="False" label="Fragment Abs (mzabs)" help="Absolute mass error to assign fragments to fragment peaks" />
+    <param name="minPeaks" type="text" format="txt" value="" optional="True" label="Minimum number peaks" help="Filter spectra by a minimum number of fragment peaks" />
+    <param name="maxSpectra" type="text" format="txt" value="" optional="True" label="Maximum number spectra" help="Filter spectra by a maximum number of fragment peaks" />
+    <param name="maxPrecursorMass" type="text" format="txt" value="" optional="True" label="Maximal precursor mass" help="Filter spectra by a maximal precusor mass" />
+    <param name="minPrecursorMass" type="text" format="txt" value="" optional="True" label="Minimal precursor mass" help="Filter spectra by a minimal precusor mass" />
+    <param name="mode" type="select" value="pos" optional="False" label="Mode" help="Ion mode for the data acquisition for this sample" >
+      <option value="pos" selected="True">pos</option>
+      <option value="neg" selected="False">neg</option>
+    </param>
+    <param name="database" type="select" value="KEGG" optional="False" label="Database" help="Database used to search candidates">
+      <option value="KEGG" selected="True">KEGG</option>
+      <option value="PubChem" selected="False">PubChem</option>
+      <option value="MetChem" selected="False">MetChem</option>
+      <option value="LocalCSV" selected="False">CSV</option>
+    </param>
+    <param name="adductRules" type="select" value="primary" optional="False" label="Adduct Rules" help="Adduct ruleset to be used">
+      <option value="primary" selected="True">primary</option>
+      <option value="extended" selected="False">extended</option>
+    </param>
+  </inputs>
+  <outputs>
+    <data name="metfragparam" type="data" format="txt" label="Parameters for metfrag" help="A text file containing parameters for metfrag" />
+  </outputs>
+  <help>
+
+.. class:: infomark
+
+| **Tool update: See the 'NEWS' section at the bottom of the page**
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+| **Payam Emami (payam.emami@medsci.uu.se)** and **Christoph Ruttkies (christoph.ruttkies@ipb-halle.de)** wrote and maintain this wrapper for the generation of MetFrag CLI parameters used for batch mode processing.
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Please cite**
+
+R Core Team (2013). R: A language and Environment for Statistical Computing. http://www.r-project.org
+
+---------------------------------------------------
+
+=====================
+MS/MS to MetFrag
+=====================
+
+-----------
+Description
+-----------
+
+| This module is used to generate MetFrag CLI Batch parameters with mapped MS/MS spectra retrieved from **map-msms2camera** and CAMERA adduct information retrieved from **camera-find-adducts**.
+
+
+-----------
+Input files
+-----------
+
++------------------------------+------------+
+| File                         |   Format   |
++==============================+============+
+| 1)  map-msms2camera data     |   rdata    |   
++------------------------------+------------+
+| 2)  camera-find-adducts data |   rdata    |
++------------------------------+------------+
+
+----------
+Parameters
+----------
+
+map-msms2camera data
+	| A rdata file mapped MS/MS spectra retrieved from **map-msms2camera**
+	|
+
+camera-find-adducts data
+        | A rdata file with a xsAnnotate object from one sample with annotated adduct information
+        |
+
+Precursor PPM
+        | The ppm error for the precursor mass to search candidates
+        |
+
+Fragment PPM (mzppm)
+        | The ppm error to assign fragments to fragment peaks
+        |
+
+Fragment Abs (mzabs)
+	| Absolute mass error to assign fragments to fragment peaks
+	|
+
+Minimum number peaks
+	| Filter spectra by a minimum number of fragment peaks
+	|
+
+Maximum number peaks
+        | Filter spectra by a maximum number of fragment peaks
+        |
+
+Maximal precursor mass
+	| Filter spectra by a maximal precusor mass
+	|
+
+Minimal precursor mass
+	| Filter spectra by a minimal precusor mass
+	|
+
+Mode
+	| Ion mode for the data acquisition for this sample (pos, neg)
+	|
+
+Database
+	| Database used to search candidates
+	| Available databases are: KEGG, PubChem, MetChem (local database which needs to be set up beforehand). In addition, LocalCSV can be used which uses a csv file for searching. Such a csv file can be downloaded from https://msbi.ipb-halle.de/~cruttkie/databases/
+	|
+
+Adduct Rules
+	| Adduct ruleset to be used:
+        | primary - contains most common adduct types ([M-H]-, [M-2H+Na]-, [M-2H+K]-, [M+Cl]-, [M+H]+, [M+Na]+, [M+K]+, [M+NH4]+)
+        | extended - next to primary also additional adduct types
+        |
+
+------------
+Output files
+------------
+
+metfrag_parameters
+        | txt file containing MetFrag CLI Batch parameters
+        |
+
+---------------------------------------------------
+
+----
+NEWS
+----
+
+
+CHANGES IN VERSION 0.1
+========================
+
+First version
+
+
+  </help>
+</tool>
