@@ -31,18 +31,22 @@
 	<destination id="dynamic-k8s-tiny" runner="dynamic">
 		<param id="type">python</param>
 		<param id="function">k8s_wrapper_tiny</param>
+		<resubmit condition="memory_limit_reached" destination="dynamic-k8s-small"/>
 	</destination>
 	<destination id="dynamic-k8s-small" runner="dynamic">
 		<param id="type">python</param>
 		<param id="function">k8s_wrapper_small</param>
+		<resubmit condition="memory_limit_reached" destination="dynamic-k8s-medium"/>
 	</destination>
 	<destination id="dynamic-k8s-medium" runner="dynamic">
 		<param id="type">python</param>
 		<param id="function">k8s_wrapper_medium</param>
+		<resubmit condition="memory_limit_reached" destination="dynamic-k8s-large"/>
 	</destination>
 	<destination id="dynamic-k8s-large" runner="dynamic">
 		<param id="type">python</param>
 		<param id="function">k8s_wrapper_large</param>
+		<resubmit condition="memory_limit_reached" destination="dynamic-k8s-xlarge"/>
 	</destination>
 	<destination id="dynamic-k8s-xlarge" runner="dynamic">
 		<param id="type">python</param>
