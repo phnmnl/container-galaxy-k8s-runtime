@@ -1,0 +1,36 @@
+global:
+  docker_repo:
+  max_pod_retrials: 3
+assignment:
+# Fluxomics
+#- tool_id: escher-fluxomics
+#  docker_repo_override: container-registry.phenomenal-h2020.eu
+#  docker_owner_override: phnmnl
+#  docker_image_override: escher-fluxomics
+#  docker_tag_override: v1.6.0-beta.4_cv1.0.9
+#  max_pod_retrials: 3
+- tool_id: iso2flux
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_owner_override: phnmnl
+  docker_image_override: iso2flux
+  docker_tag_override: v0.2_cv1.1.36
+  max_pod_retrials: 1
+- tool_id: midcor
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_owner_override: phnmnl
+  docker_image_override: midcor
+  docker_tag_override: v1.0_cv1.0.40
+  max_pod_retrials: 1
+- tool_id: ramid
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_owner_override: phnmnl
+  docker_image_override: ramid
+  docker_tag_override: v1.0_cv1.0.14
+  max_pod_retrials: 1
+# MTBLS/ISA
+- tool_id: mtbls-factors-viz
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_owner_override: phnmnl
+  docker_image_override: mtbls-factors-viz
+  docker_tag_override: v0.4_cv0.3.11
+  max_pod_retrials: 3

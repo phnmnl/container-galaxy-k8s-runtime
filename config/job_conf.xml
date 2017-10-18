@@ -374,13 +374,11 @@
         <tool id="upps_blankfilter" destination="blankfilter-container"/>
         <tool id="log2transformation" destination="log2transformation-container"/>
 	<!-- Fluxomics -->
-	<tool id="iso2flux" destination="iso2flux-container"/>
-	<!-- <tool id="midcor" destination="midcor-container"/> -->
-	<tool id="midcor" destination="dynamic-k8s" resources="all"/>
-	<!-- <tool id="ramid" destination="ramid-container"/> -->
-        <tool id="ramid" destination="dynamic-k8s" resources="all"/>
+	<tool id="iso2flux" destination="dynamic-k8s-small" resources="all"/>     
+	<tool id="midcor" destination="dynamic-k8s-small" resources="all"/>
+        <tool id="ramid" destination="dynamic-k8s-tiny" resources="all"/>
         <tool id="isodyn" destination="isodyn-container"/>
-	<tool id="escher-fluxomics" destination="container-escher-fluxomics"/>
+	<tool id="escher-fluxomics" destination="dynamic-k8s-tiny" resources="all"/>
 	<!-- ICL -->
         <tool id="batman-nmr" destination="batman-container"/>
 	<tool id="power-analysis" destination="papy-container"/>
@@ -538,7 +536,7 @@
         <tool id="study_factors" destination="container-mtblisa"/>
         <tool id="data_files" destination="container-mtblisa"/>
 	<tool id="factors_summary" destination="container-mtblisa"/>
-	<tool id="mtbls-factors-viz" destination="container-mtbls-factors-viz"/>
+	<tool id="mtbls-factors-viz" destination="dynamic-k8s-small" resources="all"/>
         <tool id="isajson_validator" destination="container-isajson-validator"/>
         <tool id="isatab_validator" destination="container-isatab-validator"/>
         <tool id="isatab2json" destination="container-isatab2json"/>
