@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [File Handling]-->
+<tool id="rnmr1d-prepare-output" name="rnmr1d-prepare-output" version="0.1">
+  <requirements>
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/rnmr1d</container>
+  </requirements>
+  <description>Prepare output to be used for statistics</description>
+  <command><![CDATA[
+	/usr/local/bin/prepareoutput.r inputmatrix=$infile inputjson=$infilej outputPeakTable=$outputPeakTableOut outputVariables=$outputVariablesOut outputMetaData=$outputMetaDataOut;
+  ]]>
+  </command>
+  <inputs>
+    <param name="infile" type="data" format="txt" optional="False" label="NMR data matrix" />
+<param name="infilej" type="data" format="json" optional="False" label="Factor Json" />
+  </inputs>
+  <outputs>
+        <data name="outputPeakTableOut" type="data" format="tabular" label="peak table" />
+   <data name="outputMetaDataOut" type="data" format="tabular" label="metadata information" />
+    <data name="outputVariablesOut" type="data" format="tabular" label="variable information" />
+  </outputs>
+  <help>
+.. class:: infomark
+
+| **Tool update: See the 'NEWS' section at the bottom of the page**
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+| **Payam Emami (payam.emami@medsci.uu.se)** and **Christoph Ruttkies (christoph.ruttkies@ipb-halle.de)** wrote and maintain this wrapper for nmr output preparation.
+
+
+---------------------------------------------------
+
+=====================
+Prepare the nmr output for statistics
+=====================
+
+-----------
+Description
+-----------
+
+| This module creates peak, meta data and sample matrix which can be inputed into univeriate and multivariate nodes.
+
+
+-----------
+Input files
+-----------
+
++------------------------------+------------+
+| File                         |   Format   |
++==============================+============+
+| 1)  NMR data matrix          |    txt     |
+|                              |            |
++------------------------------+------------+
+| 2)  Factor Json              |    json    |
+|                              |            |
++------------------------------+------------+
+
+
+----------
+Parameters
+----------
+
+Input NMR data matrix
+        | Aligned NMR data matrix (CSV format)
+        |
+
+Factor Json
+        | Json file from get_study_json node
+        |
+
+
+------------
+Output files
+------------
+
+outputPeakTableOut
+        | A tabular peak table containing abundances
+        |
+
+outputMetaDataOut
+        | Sample metadata
+        |
+
+outputVariablesOut
+        | Variable data containing identification.
+        |
+---------------------------------------------------
+
+----
+NEWS
+----
+
+
+CHANGES IN VERSION 0.1
+========================
+
+First version
+
+</help>
+</tool>
+
