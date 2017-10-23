@@ -4,7 +4,7 @@
 <tool id="camera-prepareoutput" name="camera-prepareoutput" version="0.1">
   <description>Prepare output for doing multi/uni variate</description>
   <command><![CDATA[
-	/usr/local/bin/prepareOutput.r inputcamera=$inputcamerain inputscores=$inputscoresin inputpheno=$inputphenoin ppm=$ppmin rt=$rtin higherTheBetter=$higherTheBetterin scoreColumn=$scoretypein impute=$imputein typeColumn=$columntypein selectedType=$selectedTypein rename=$renamein renameCol=$renameColin onlyReportWithID=$onlyReportWithIDin combineReplicate=$combineReplicatein combineReplicateColumn=$combineReplicateColumnin outputPeakTable=$outputPeakTableOut outputVariables=$outputVariablesOut outputMetaData=$outputMetaDataOut log=$login;
+	/usr/local/bin/prepareOutput.r inputcamera=$inputcamerain inputscores=$inputscoresin inputpheno=$inputphenoin ppm=$ppmin rt=$rtin higherTheBetter=$higherTheBetterin scoreColumn=$scoretypein impute=$imputein typeColumn=$columntypein selectedType=$selectedTypein rename=$renamein renameCol=$renameColin onlyReportWithID=$onlyReportWithIDin combineReplicate=$combineReplicatein combineReplicateColumn=$combineReplicateColumnin outputPeakTable=$outputPeakTableOut outputVariables=$outputVariablesOut outputMetaData=$outputMetaDataOut log=$login sampleCoverage=$samcov sampleCoverageMethod=$samcovmethod;
   ]]>
   </command>
   <inputs>
@@ -47,6 +47,8 @@
       <option value="false" selected="True">No</option>
     </param>
     <param name="combineReplicateColumnin" type="text" format="txt" value="rep" optional="False" label="what column represents the technical replicates" />
+<param name="samcov" type="text" format="txt" value="0" optional="true" label="Percentage of non-missing values (only number)" />
+<param name="samcovmethod" type="text" format="txt" value="global" optional="true" label="Do you want to apply coverage globally across all the runs or per group? For applying globally write global otherwise write name of the column showing the grouping." />
 
   </inputs>
   <outputs>
@@ -163,6 +165,10 @@ combineReplicateColumnin
         | Enter the column name indicating technical replicate in the phenotype file. See the example below.
         |
 
+samcov
+        | How much of non-missing value should be present for each feature. 
+        |
+
 Example of phenotype information
         | The first column of this table must show the raw data file name (for example sample1.mzML). The file must have a header. Other information can also be added to this table such as age, gender, time etc. This will be output as they are.
         |
@@ -221,4 +227,3 @@ CHANGES IN VERSION 0.1
 First version
 </help>
 </tool>
-
