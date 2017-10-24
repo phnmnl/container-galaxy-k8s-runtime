@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Utilities]-->
-tool id="passatutto" name="metfrag-passatuttoPEP" version="0.1">
+<tool id="passatutto" name="metfrag-passatuttoPEP" version="0.1">
 <!--
   <requirements>
     <container type="docker">phnmnl/xcms</container>
