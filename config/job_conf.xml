@@ -22,7 +22,37 @@
         <handler id="main"/>
     </handlers>
     <destinations default="local">
-        <destination id="local" runner="local"/>	
+	<destination id="local" runner="local"/>
+        <destination id="dynamic-k8s" runner="dynamic">
+		<param id="type">python</param>
+		<param id="function">k8s_wrapper</param>
+		<param id="docker_enabled">true</param>
+	</destination>
+	<destination id="dynamic-k8s-tiny" runner="dynamic">
+		<param id="type">python</param>
+		<param id="function">k8s_wrapper_tiny</param>
+		<resubmit condition="memory_limit_reached" destination="dynamic-k8s-small"/>
+	</destination>
+	<destination id="dynamic-k8s-small" runner="dynamic">
+		<param id="type">python</param>
+		<param id="function">k8s_wrapper_small</param>
+		<resubmit condition="memory_limit_reached" destination="dynamic-k8s-medium"/>
+	</destination>
+	<destination id="dynamic-k8s-medium" runner="dynamic">
+		<param id="type">python</param>
+		<param id="function">k8s_wrapper_medium</param>
+		<resubmit condition="memory_limit_reached" destination="dynamic-k8s-large"/>
+	</destination>
+	<destination id="dynamic-k8s-large" runner="dynamic">
+		<param id="type">python</param>
+		<param id="function">k8s_wrapper_large</param>
+		<resubmit condition="memory_limit_reached" destination="dynamic-k8s-xlarge"/>
+	</destination>
+	<destination id="dynamic-k8s-xlarge" runner="dynamic">
+		<param id="type">python</param>
+		<param id="function">k8s_wrapper_xlarge</param>
+	</destination>
+
 	<destination id="batman-container" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
@@ -47,35 +77,11 @@
             <param id="max_pod_retrials">1</param>
             <param id="docker_enabled">true</param>
  	</destination>
-	<destination id="iso2flux-container" runner="k8s">
-            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">iso2flux</param>
-            <param id="docker_tag_override">v0.2_cv1.1.36</param>
-            <param id="max_pod_retrials">1</param>
-            <param id="docker_enabled">true</param>
-        </destination>
-        <destination id="midcor-container" runner="k8s">
-            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">midcor</param>
-            <param id="docker_tag_override">v1.0_cv1.0.40</param>
-            <param id="max_pod_retrials">3</param>
-            <param id="docker_enabled">true</param>
-        </destination>
         <destination id="isodyn-container" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">isodyn</param>
             <param id="docker_tag_override">v1.0_cv0.2.30</param>
-            <param id="max_pod_retrials">3</param>
-            <param id="docker_enabled">true</param>
-        </destination>
-        <destination id="ramid-container" runner="k8s">
-            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">ramid</param>
-            <param id="docker_tag_override">v1.0_cv1.0.14</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -325,14 +331,6 @@
            <param id="max_pod_retrials">3</param>
            <param id="docker_enabled">true</param>
          </destination>
-        <destination id="container-mtbls-factors-viz" runner="k8s">
-           <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-           <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">mtbls-factors-viz</param>
-           <param id="docker_tag_override">v0.4_cv0.3.11</param>
-           <param id="max_pod_retrials">3</param>
-           <param id="docker_enabled">true</param>
-        </destination>
     </destinations>
     <tools>
         <!-- Tools can be configured to use specific destinations or handlers,
@@ -344,11 +342,11 @@
         <tool id="upps_blankfilter" destination="blankfilter-container"/>
         <tool id="log2transformation" destination="log2transformation-container"/>
 	<!-- Fluxomics -->
-	<tool id="iso2flux" destination="iso2flux-container"/>
-        <tool id="midcor" destination="midcor-container"/>
-        <tool id="ramid" destination="ramid-container"/>
+	<tool id="iso2flux" destination="dynamic-k8s-small" resources="all"/>     
+	<tool id="midcor" destination="dynamic-k8s-small" resources="all"/>
+        <tool id="ramid" destination="dynamic-k8s-tiny" resources="all"/>
         <tool id="isodyn" destination="isodyn-container"/>
-	<tool id="escher-fluxomics" destination="container-escher-fluxomics"/>
+	<tool id="escher-fluxomics" destination="dynamic-k8s-tiny" resources="all"/>
 	<!-- ICL -->
         <tool id="batman-nmr" destination="batman-container"/>
 	<tool id="power-analysis" destination="papy-container"/>
@@ -506,11 +504,20 @@
         <tool id="study_factors" destination="container-mtblisa"/>
         <tool id="data_files" destination="container-mtblisa"/>
 	<tool id="factors_summary" destination="container-mtblisa"/>
-	<tool id="mtbls-factors-viz" destination="container-mtbls-factors-viz"/>
+	<tool id="mtbls-factors-viz" destination="dynamic-k8s-small" resources="all"/>
         <tool id="isajson_validator" destination="container-isajson-validator"/>
         <tool id="isatab_validator" destination="container-isatab-validator"/>
         <tool id="isatab2json" destination="container-isatab2json"/>
         <tool id="json2isatab" destination="container-json2isatab"/>
         <tool id="mw2isa" destination="container-mw2isa"/>
     </tools>
+    <resources default="default">
+      <!-- Group different parameters defined in job_resource_params_conf.xml
+                      together and assign these groups ids. Tool section below can map
+           tools to different groups. This is experimental functionality!
+      -->
+      <group id="cpu">requests_cpu,limits_cpu</group>
+      <group id="memory">requests_memory,limits_memory</group>
+      <group id="all">requests_cpu,limits_cpu,requests_memory,limits_memory</group>
+    </resources>
 </job_conf>

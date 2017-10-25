@@ -1,4 +1,8 @@
 <tool id="escher-fluxomics" name="escher-fluxomics" version="0.1">
+<requirements>
+    <!-- Container based dependency handling -->
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/escher-fluxomics:v1.6.0-beta.4_cv1.0.9</container>
+</requirements> 
 <stdio>
 <exit_code range="1:" />
 </stdio>
