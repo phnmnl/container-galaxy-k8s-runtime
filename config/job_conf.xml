@@ -77,35 +77,11 @@
             <param id="max_pod_retrials">1</param>
             <param id="docker_enabled">true</param>
  	</destination>
-	<destination id="iso2flux-container" runner="k8s">
-            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">iso2flux</param>
-            <param id="docker_tag_override">v0.2_cv1.1.36</param>
-            <param id="max_pod_retrials">1</param>
-            <param id="docker_enabled">true</param>
-        </destination>
-        <destination id="midcor-container" runner="k8s">
-            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">midcor</param>
-            <param id="docker_tag_override">v1.0_cv1.0.40</param>
-            <param id="max_pod_retrials">3</param>
-            <param id="docker_enabled">true</param>
-        </destination>
         <destination id="isodyn-container" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">isodyn</param>
             <param id="docker_tag_override">v1.0_cv0.2.30</param>
-            <param id="max_pod_retrials">3</param>
-            <param id="docker_enabled">true</param>
-        </destination>
-        <destination id="ramid-container" runner="k8s">
-            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">ramid</param>
-            <param id="docker_tag_override">v1.0_cv1.0.14</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -355,14 +331,6 @@
            <param id="max_pod_retrials">3</param>
            <param id="docker_enabled">true</param>
          </destination>
-        <destination id="container-mtbls-factors-viz" runner="k8s">
-           <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-           <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">mtbls-factors-viz</param>
-           <param id="docker_tag_override">v0.4_cv0.3.11</param>
-           <param id="max_pod_retrials">3</param>
-           <param id="docker_enabled">true</param>
-        </destination>
     </destinations>
     <tools>
         <!-- Tools can be configured to use specific destinations or handlers,
