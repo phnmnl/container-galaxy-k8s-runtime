@@ -75,8 +75,9 @@ def __read_assignments(resource_params, tool_id):
     stream = open(__path_tool2container, mode='r')
     mappings = yaml.load(stream)
     for mapping in mappings['assignment']:
-        if mapping['tool_id'] == tool_id:
+        if tool_id in mapping['tools_id']:
             resource_params.update(mapping)
+            break
 
 
 def __setup_resources(resource_params, settings):
