@@ -507,6 +507,7 @@
 	<tool id="metfrag-cli-batch" destination="metfrag-cli-batch-container" />
 	<tool id="metfrag-cli-batch-multiple" destination="metfrag-cli-batch-container" />
   	<tool id="msnbase-read-msms" destination="msnbase-container" />
+        <tool id="msnbase-filter-merge-msms" destination="msnbase-container" />
   	<tool id="map-msms2camera" destination="msnbase-container" />
   	<tool id="msms2metfrag" destination="msnbase-container" />
 	<tool id="msms2metfrag-multiple" destination="msnbase-container" />

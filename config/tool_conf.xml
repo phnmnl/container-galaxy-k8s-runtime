@@ -114,6 +114,7 @@
     <tool file="phenomenal/ms/metfrag/metfrag-vis.xml"/>
     <tool file="phenomenal/ms/metfrag/metfrag-aggregatemetfrag.xml"/>
     <tool file="phenomenal/ms/metfrag/passatutto-pepscore.xml"/>
+    <tool file="phenomenal/ms/metfrag/msnbase-filter-merge-msms.xml"/>
     <tool file="phenomenal/ms/OpenMS/AdditiveSeries.xml"/> 
     <tool file="phenomenal/ms/OpenMS/BaselineFilter.xml"/> 
     <tool file="phenomenal/ms/OpenMS/CompNovo.xml"/> 

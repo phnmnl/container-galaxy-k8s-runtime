@@ -4,24 +4,24 @@
 <tool id="msnbase-filter-merge-msms" name="msnbase-filter-merge-msms" version="0.1">
   <description>Filter and merge MS/MS spectra using retention time and m/z information.</description>
   <command><![CDATA[
-	/usr/local/bin/mergeFilterMS2.r msnbaserdata=$msnbase-filter-merge-msms_input_1 mzppm=$mzppm mzabs=$mzabs rtabs=$rtabs max_rt_range=$max_rt_range max_mz_range=$max_mz_range min_rt=$min_rt max_rt=$max_rt min_mz=$min_mz max_mz=$max_mz msms_intensity_threshold=$msms_intensity_threshold output=$msnbase_read_msms_output_1;
+	/usr/local/bin/mergeFilterMS2.r msnbaserdata=$msnbase_filter_merge_msms_input_1 mzppm=$mzppm mzabs=$mzabs rtabs=$rtabs max_rt_range=$max_rt_range max_mz_range=$max_mz_range min_rt=$min_rt max_rt=$max_rt min_mz=$min_mz max_mz=$max_mz msms_intensity_threshold=$msms_intensity_threshold output=$msnbase_filter_merge_msms_output_1;
   ]]>
   </command>
   <inputs>
-    <param name="msnbase_filter_merge_msms_input_1" type="data" format="rdata" optional="False" label="msnbase-read-msms data" help="A rdata file with MS/MS information retrieved from msnbase-read-msms" />
+    <param name="msnbase_filter_merge_msms_input_1" type="data" format="rdata" optional="False" label="msnbase-filter-merge-msms data" help="A rdata file with MS/MS information retrieved from msnbase-read-msms" />
     <param name="mzppm" type="text" value="10" label="mzppm" help="The ppm error used for merging MS/MS spectra" />
     <param name="mzabs" type="text" value="0.01" label="mzabs" help="The absolute mass error (in seconds) used for merging MS/MS spectra" />
     <param name="rtabs" type="text" value="2" label="rtabs" help="The retention time error (in seconds) used for merging MS/MS spectra" />
     <param name="max_rt_range" type="text" value="20" label="max_rt_range" help="Permitted retention time window (in seconds) of grouped MS1 precursors. Grouped precursors that exceed that window will be discarded." />
     <param name="max_mz_range" type="text" value="0.01" label="max_mz_range" help="Permitted m/z window of grouped MS1 precursors. Grouped precoursors that exceed that window will be discarded." />
     <param name="min_rt" type="text" value="10" label="min_rt" help="Minimum retention time for selected precursors. Precursors with a lower retention time will be discarded." />
-    <param name="max_rt" type="text" value="10" label="max_rt" help="Maximum retention time for selected precursors. Precursors with a higher retention time will be discarded." />
+    <param name="max_rt" type="text" value="1000" label="max_rt" help="Maximum retention time for selected precursors. Precursors with a higher retention time will be discarded." />
     <param name="min_mz" type="text" value="50" label="min_mz" help="Minimum m/z value for selected precursors. Precursors with a lower m/z value will be discarded." />
-    <param name="max_rt" type="text" value="10" label="max_rt" help="Maximum m/z value for selected precursors. Precursors with a higher m/z value will be discarded." />
+    <param name="max_mz" type="text" value="1500" label="max_mz" help="Maximum m/z value for selected precursors. Precursors with a higher m/z value will be discarded." />
     <param name="msms_intensity_threshold" type="text" value="1000" label="msms_intensity_threshold" help="Minimum intensity value for MS/MS peaks. Peaks with lower intensity values will be discarded." />
   </inputs>
   <outputs>
-    <data name="msnbase_read_msms_output_1" type="data" format="rdata" label="msnbase-read-msms data" help="A rdata file containing the MS/MS compound spectra" />
+    <data name="msnbase_filter_merge_msms_output_1" type="data" format="rdata" label="msnbase-filter-merge-msms data" help="A rdata file containing the filtered and merged MS/MS compound spectra" />
   </outputs>
   <help>
 
@@ -55,9 +55,9 @@ R Core Team (2013). R: A language and Environment for Statistical Computing. htt
 
 ---------------------------------------------------
 
-=====================
-MSnBase Read MS/MS
-=====================
+=========================
+MSnBase Filter Merge MSMS
+=========================
 
 -----------
 Description
@@ -75,17 +75,17 @@ Description
 Input files
 -----------
 
-+------------------------------+------------+
-| File                         |   Format   |
-+==============================+============+
-| 1)  msnbase-read-msms data   |    rdata   |
-+------------------------------+------------+
++--------------------------------------+------------+
+| File                                 |   Format   |
++======================================+============+
+| 1)  msnbase-filter-merge-msms data   |    rdata   |
++--------------------------------------+------------+
 
 ----------
 Parameters
 ----------
 
-msnbase-read-msms data
+msnbase-filter-merge-msms data
         | A rdata file with MS/MS information retrieved from msnbase-read-msms
         |
 
@@ -122,19 +122,19 @@ min_mz
 	| Minimum m/z value for selected precursors. Precursors with a lower m/z value will be discarded.
 	|
 
-max_rt
+max_mz
 	| Maximum m/z value for selected precursors. Precursors with a higher m/z value will be discarded.
 	|
 
 msms_intensity_threshold
-	| msnbase_read_msms_output_1
+	| Minimum intensity value for MS/MS peaks. Peaks with lower intensity values will be discarded.
 	|
 
 ------------
 Output files
 ------------
 
-msnbase_filter_merge_msms_output_1
+msnbase-filter-merge-msms data
         | A rdata file containing the filtered and merged MS/MS compound spectra
         |
 

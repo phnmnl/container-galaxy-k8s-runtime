@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Utilities]-->
-tool id="passatutto" name="metfrag-passatuttoPEP" version="0.1">
+<tool id="passatutto" name="metfrag-passatuttoPEP" version="0.1">
 <!--
   <requirements>
     <container type="docker">phnmnl/xcms</container>
@@ -9,7 +9,6 @@ tool id="passatutto" name="metfrag-passatuttoPEP" version="0.1">
   <description>Convert Metfrag scores to PEP</description>
   <command><![CDATA[
 /usr/local/bin/metfragPEP.r input=$infile score=$scorein output=$outfile;
-
   ]]></command>
   <inputs>
     <param name="infile" type="data" format="txt" value="" optional="False" label="Input MetFrag results." />
@@ -34,9 +33,9 @@ tool id="passatutto" name="metfrag-passatuttoPEP" version="0.1">
 
 ---------------------------------------------------
 
-=====================
-Aggregate metfrag results
-=====================
+=================================
+Convert MetFrag raw to pep scores
+=================================
 
 -----------
 Description
