@@ -8,7 +8,7 @@
   <command><![CDATA[
     mkdir -p /data/input;
     mkdir -p /data/output;
-    /opt/rnmr1d/exec/Rnmr1D --zip $infile --proccmd $macrofile --outnorm PQN --cpu 8 --outdir /data/output 2>&1;
+    /opt/rnmr1d/exec/Rnmr1D --input $infile --proccmd $macrofile --outnorm PQN --cpu 8 --outdir /data/output 2>&1;
     cat /data/output/data_matrix.txt > $outfile;
   ]]>
   </command>
