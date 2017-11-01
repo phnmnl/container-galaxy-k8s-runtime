@@ -380,7 +380,7 @@
         <tool id="metabomatching" destination="metabomatching-container"/>
         <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
 	<!-- new XCMS -->
-	<tool id="xcms-find-peaks" destination="xcms-container" />
+	<tool id="xcms-find-peaks" destination="dynamic-k8s-medium" resources="all"/>
         <tool id="xcms-collect-peaks" destination="xcms-container" />
         <tool id="xcms-group-peaks" destination="xcms-container" />
         <tool id="xcms-correct-rt" destination="xcms-container" />
@@ -391,11 +391,11 @@
         <tool id="featureXMLToCAMERA" destination="camera-container" />
 	<tool id="featureXMLToXcms" destination="camera-container" />
 	<tool id="zip-collection" destination="camera-container"/>
-	<tool id="camera-annotate-peaks" destination="camera-container" />
-        <tool id="camera-group-fwhm" destination="camera-container" />
+	<tool id="camera-annotate-peaks" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="camera-group-fwhm" destination="dynamic-k8s-medium" resources="all"/>
         <tool id="camera-group-corr" destination="camera-container" />
         <tool id="camera-find-isotopes" destination="camera-container" />
-        <tool id="camera-find-adducts" destination="camera-container" />
+        <tool id="camera-find-adducts" destination="dynamic-k8s-medium" resources="all"/>
 	<!-- OpenMS -->
 	<tool id="xcmssplit" destination="xcms-container" />
 	<tool id="AdditiveSeries" destination="container-openms"/> 
@@ -492,10 +492,10 @@
 	<tool id="TOFCalibration" destination="container-openms"/> 
 	<tool id="XTandemAdapter" destination="container-openms"/> 
 	<!-- MetFrag -->
-	<tool id="metfrag-cli-batch" destination="metfrag-cli-batch-container" />
-  <tool id="msnbase-read-msms" destination="msnbase-container" />
-  <tool id="map-msms2camera" destination="msnbase-container" />
-  <tool id="msms2metfrag" destination="msnbase-container" />
+	<tool id="metfrag-cli-batch" destination="dynamic-k8s-large" resources="all"/>
+  <tool id="msnbase-read-msms" destination="dynamic-k8s-medium" resources="all"/>
+  <tool id="map-msms2camera" destination="dynamic-k8s-medium" resources="all"/>
+  <tool id="msms2metfrag" destination="dynamic-k8s-medium" resources="all"/>
 	<tool id="metfrag-vis" destination="metfrag-vis-container" />
 	<!-- ISA related tools -->
         <tool id="get_study" destination="container-mtblisa"/>
