@@ -381,10 +381,10 @@
         <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
 	<!-- new XCMS -->
 	<tool id="xcms-find-peaks" destination="dynamic-k8s-medium" resources="all"/>
-        <tool id="xcms-collect-peaks" destination="xcms-container" />
-        <tool id="xcms-group-peaks" destination="xcms-container" />
-        <tool id="xcms-correct-rt" destination="xcms-container" />
-        <tool id="xcms-fill-peaks" destination="xcms-container" />
+        <tool id="xcms-collect-peaks" destination="dynamic-k8s-medium" />
+        <tool id="xcms-group-peaks" destination="dynamic-k8s-large" />
+        <tool id="xcms-correct-rt" destination="dynamic-k8s-large" />
+        <tool id="xcms-fill-peaks" destination="dynamic-k8s-large" />
 	<!-- CAMERA -->
 	<tool id="consensusXMLToXcms" destination="camera-container" />
         <tool id="cameraToFeatureXML" destination="camera-container" />
@@ -393,8 +393,8 @@
 	<tool id="zip-collection" destination="camera-container"/>
 	<tool id="camera-annotate-peaks" destination="dynamic-k8s-medium" resources="all"/>
         <tool id="camera-group-fwhm" destination="dynamic-k8s-medium" resources="all"/>
-        <tool id="camera-group-corr" destination="camera-container" />
-        <tool id="camera-find-isotopes" destination="camera-container" />
+        <tool id="camera-group-corr" destination="dynamic-k8s-medium" />
+        <tool id="camera-find-isotopes" destination="dynamic-k8s-medium" />
         <tool id="camera-find-adducts" destination="dynamic-k8s-medium" resources="all"/>
 	<!-- OpenMS -->
 	<tool id="xcmssplit" destination="xcms-container" />
@@ -412,10 +412,10 @@
 	<tool id="FeatureFinderCentroided" destination="container-openms"/> 
 	<tool id="FeatureFinderIdentification" destination="container-openms"/> 
 	<tool id="FeatureFinderIsotopeWavelet" destination="container-openms"/> 
-	<tool id="FeatureFinderMetabo" destination="container-openms"/> 
+	<tool id="FeatureFinderMetabo" destination="dynamic-k8s-medium"/> 
 	<tool id="FeatureFinderMRM" destination="container-openms"/> 
 	<tool id="FeatureFinderMultiplex" destination="container-openms"/> 
-	<tool id="FeatureLinkerLabeled" destination="container-openms"/> 
+	<tool id="FeatureLinkerLabeled" destination="dynamic-k8s-medium"/> 
 	<tool id="FeatureLinkerUnlabeled" destination="container-openms"/> 
 	<tool id="FeatureLinkerUnlabeledQT" destination="container-openms"/> 
 	<tool id="FidoAdapter" destination="container-openms"/> 
@@ -493,10 +493,10 @@
 	<tool id="XTandemAdapter" destination="container-openms"/> 
 	<!-- MetFrag -->
 	<tool id="metfrag-cli-batch" destination="dynamic-k8s-large" resources="all"/>
-  <tool id="msnbase-read-msms" destination="dynamic-k8s-medium" resources="all"/>
-  <tool id="map-msms2camera" destination="dynamic-k8s-medium" resources="all"/>
-  <tool id="msms2metfrag" destination="dynamic-k8s-medium" resources="all"/>
-	<tool id="metfrag-vis" destination="metfrag-vis-container" />
+        <tool id="msnbase-read-msms" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="map-msms2camera" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="msms2metfrag" destination="dynamic-k8s-medium" resources="all"/>
+	<tool id="metfrag-vis" destination="dynamic-k8s-small" />
 	<!-- ISA related tools -->
         <tool id="get_study" destination="container-mtblisa"/>
         <tool id="get_study_json" destination="container-mtblisa"/>
