@@ -392,8 +392,8 @@
   <tool id="xcms-group-peaks" destination="dynamic-k8s-large" resources="all"/>
   <tool id="xcms-correct-rt" destination="dynamic-k8s-large" resources="all"/>
   <tool id="xcms-fill-peaks" destination="dynamic-k8s-large" resources="all"/>
-	<tool id="xcms-dilutionfilter" destination="xcms-container" />
-	<tool id="xcms-blankfilter" destination="xcms-container" />
+	<tool id="xcms-dilutionfilter" destination="dynamic-k8s-medium" />
+	<tool id="xcms-blankfilter" destination="dynamic-k8s-medium" />
 	<!-- CAMERA -->
 	<tool id="consensusXMLToXcms" destination="camera-container" />
   <tool id="cameraToFeatureXML" destination="camera-container" />
@@ -406,7 +406,7 @@
   <tool id="camera-find-isotopes" destination="dynamic-k8s-medium" resources="all"/>
   <tool id="camera-find-adducts" destination="dynamic-k8s-medium" resources="all"/>
   <tool id="unzip-collection" destination="camera-container"/>
-	<tool id="camera-prepareoutput" destination="camera-container" />
+	<tool id="camera-prepareoutput" destination="dynamic-k8s-medium" />
 	<!-- OpenMS -->
 	<tool id="xcmssplit" destination="xcms-container" />
 	<tool id="AdditiveSeries" destination="container-openms"/> 
@@ -508,11 +508,11 @@
   <tool id="map-msms2camera" destination="dynamic-k8s-medium" resources="all"/>
   <tool id="msms2metfrag" destination="dynamic-k8s-medium" resources="all"/>
 	<tool id="metfrag-vis" destination="dynamic-k8s-small" resources="all"/>
-	<tool id="metfrag-cli-batch-multiple" destination="metfrag-cli-batch-container" />
-  <tool id="msnbase-filter-merge-msms" destination="msnbase-container" />
-	<tool id="msms2metfrag-multiple" destination="msnbase-container" />
-	<tool id="aggregatemetfrag" destination="msnbase-container" />
-	<tool id="passatutto" destination="container-passatutto" />
+	<tool id="metfrag-cli-batch-multiple" destination="dynamic-k8s-large" />
+  <tool id="msnbase-filter-merge-msms" destination="dynamic-k8s-medium" />
+	<tool id="msms2metfrag-multiple" destination="dynamic-k8s-medium" />
+	<tool id="aggregatemetfrag" destination="dynamic-k8s-medium" />
+	<tool id="passatutto" destination="dynamic-k8s-medium" />
 	<!-- ISA related tools -->
         <tool id="get_study" destination="container-mtblisa"/>
         <tool id="get_study_json" destination="container-mtblisa"/>

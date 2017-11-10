@@ -189,6 +189,13 @@ assignment:
   max_pod_retrials: 3
   tools_id:
   - metfrag-vis
+- docker_image_override: container-passatutto
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v201604_cv0.1
+  max_pod_retrials: 3
+  tools_id:
+  - metfrag-vis
 - docker_image_override: metaboliteidconverter
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
@@ -218,10 +225,11 @@ assignment:
 - docker_image_override: metfrag-cli-batch
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v2.4.2_cv0.1.12
+  docker_tag_override: v2.4.3_cv0.4
   max_pod_retrials: 3
   tools_id:
   - metfrag-cli-batch
+  - metfrag-cli-batch-multiple
 - docker_image_override: ms-vfetc
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
@@ -348,7 +356,7 @@ assignment:
 - docker_image_override: xcms
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v1.52.0_cv0.5.58
+  docker_tag_override: v1.52.0_cv0.8
   max_pod_retrials: 3
   tools_id:
   - save_chromatogram
@@ -359,6 +367,8 @@ assignment:
   - xcms-correct-rt
   - xcms-fill-peaks
   - xcmssplit
+  - xcms-blankfilter
+  - xcms-dilutionfilter
 - docker_image_override: scp-aspera
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
@@ -369,7 +379,7 @@ assignment:
 - docker_image_override: camera
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v1.32.0_cv0.5.45
+  docker_tag_override: v1.33.3_cv0.8
   max_pod_retrials: 3
   tools_id:
   - consensusXMLToXcms
@@ -382,15 +392,19 @@ assignment:
   - camera-group-corr
   - camera-find-isotopes
   - camera-find-adducts
+  - camera-prepareoutput
 - docker_image_override: msnbase
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v2.0.2_cv0.2.42
+  docker_tag_override: v2.0.2_cv0.6
   max_pod_retrials: 3
   tools_id:
   - msnbase-read-msms
   - map-msms2camera
   - msms2metfrag
+  - msms2metfrag-multiple
+  - msnbase-filter-merge-msms
+  - aggregatemetfrag
 - docker_image_override: mtbl-labs-uploader
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
