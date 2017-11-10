@@ -387,7 +387,7 @@
         <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
 	<!-- new XCMS -->
 
-	<tool id="xcms-find-peaks" destination="dynamic-k8s-medium" resources="all"/>
+	<tool id="xcms-find-peaks" destination="dynamic-k8s-large" resources="all"/>
   <tool id="xcms-collect-peaks" destination="dynamic-k8s-medium" resources="all"/>
   <tool id="xcms-group-peaks" destination="dynamic-k8s-large" resources="all"/>
   <tool id="xcms-correct-rt" destination="dynamic-k8s-large" resources="all"/>
