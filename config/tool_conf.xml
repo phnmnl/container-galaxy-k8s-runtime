@@ -32,6 +32,7 @@
     <tool file="filters/compare.xml" />
     <tool file="stats/grouping.xml" />
     <tool file="phenomenal/transfer/zip-collection.xml"/>
+    <tool file="phenomenal/transfer/unzip-collection.xml"/>
   </section>
   <section id="stats" name="Statistics">
     <tool file="stats/gsummary.xml" />
@@ -71,6 +72,7 @@
     <tool file="phenomenal/nmr/zip-nmrml-collection.xml"/>
     <tool file="phenomenal/nmr/rnmr1d.xml"/>
     <tool file="phenomenal/nmr/rnmr1d-stacked-plot.xml"/>
+    <tool file="phenomenal/nmr/rnmr1d-prepareOutput.xml"/>
     <tool file="phenomenal/nmr/batman.xml"/>
     <tool file="phenomenal/nmr/metabomatching.xml"/>
     <tool file="phenomenal/nmr/nmrml2isa/nmrml2isa.xml"/>
@@ -96,16 +98,24 @@
     <tool file="phenomenal/ms/xcms/xcms-group-peaks.xml"/>
     <tool file="phenomenal/ms/xcms/xcms-correct-rt.xml"/>
     <tool file="phenomenal/ms/xcms/xcms-fill-peaks.xml"/>
+    <tool file="phenomenal/ms/xcms/xcms-dilutionfilter.xml"/>
+    <tool file="phenomenal/ms/xcms/xcms-blankfilter.xml"/>
     <tool file="phenomenal/ms/camera/camera-annotate-peaks.xml"/>
     <tool file="phenomenal/ms/camera/camera-group-fwhm.xml"/>
     <tool file="phenomenal/ms/camera/camera-group-corr.xml"/>
     <tool file="phenomenal/ms/camera/camera-find-isotopes.xml"/>
     <tool file="phenomenal/ms/camera/camera-find-adducts.xml"/>
+    <tool file="phenomenal/ms/camera/camera-prepareoutput.xml"/>
     <tool file="phenomenal/ms/metfrag/msnbase-read-msms.xml"/>
     <tool file="phenomenal/ms/metfrag/map-msms2camera.xml"/>
-    <tool file="phenomenal/ms/metfrag/msms2metfrag.xml"/>
+    <tool file="phenomenal/ms/metfrag/msms2metfrag.xml"/>    
+    <tool file="phenomenal/ms/metfrag/msms2metfrag-multiple.xml"/>
     <tool file="phenomenal/ms/metfrag/metfrag-cli-batch.xml"/>
+    <tool file="phenomenal/ms/metfrag/metfrag-cli-batch-multiple.xml"/>
     <tool file="phenomenal/ms/metfrag/metfrag-vis.xml"/>
+    <tool file="phenomenal/ms/metfrag/metfrag-aggregatemetfrag.xml"/>
+    <tool file="phenomenal/ms/metfrag/passatutto-pepscore.xml"/>
+    <tool file="phenomenal/ms/metfrag/msnbase-filter-merge-msms.xml"/>
     <tool file="phenomenal/ms/OpenMS/AdditiveSeries.xml"/> 
     <tool file="phenomenal/ms/OpenMS/BaselineFilter.xml"/> 
     <tool file="phenomenal/ms/OpenMS/CompNovo.xml"/> 
