@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="xcms-dilutionfilter" name="xcms-dilutionfilter" version="0.1">
+  <description>Filters out the peaks that do not correlate with a dilution trend.</description>
+  <command><![CDATA[
+	/usr/local/bin/dilutionfilter.r input=$xcmsset output=$outputin Corto=$cortoin dilution=$dilutionin pvalue=$pvaluein corcut=$corin abs=$absin 
+#if $infilecvs:
+  phenoFile=$infilecvs 
+#end if
+#if $phenocol:
+  phenoDataColumn=$phenocol 
+#end if
+ ;
+
+
+  ]]>
+  </command>
+  <inputs>
+    <param name="xcmsset" type="data" format="rdata" optional="False" label="Input RData file" />
+   <param name="dilutionin" type="text" value="d1,d2,d3,d4,d5,d6,d7" optional="False" label="Class of dilution trends" help="" />
+<param name="cortoin" type="text" value="1,2,3,4,5,6,7" optional="False" label="Correlate dilution to this series" help="" />
+   <param name="pvaluein" type="text" value="0.1" optional="False" label="p-value cutoff for dilution trends" help="" />
+   <param name="corin" type="text" value="0.5" optional="False" label="Correlation cutoff for dilution trends" help="" />
+    <param name="absin" type="select" value="1" label="Absolute correlation" help="">
+      <option value="T" selected="True">Yes</option>
+      <option value="F" selected="False">No</option>
+    </param>
+   <param name="infilecvs" type="data" format="csv" optional="True" multiple="False" label="Input CSV file for setting the phenotype (see the help)" />
+    <param name="phenocol" type="text" optional="True" label="Column name showing the class of the raw files (the phenotype file)"/>
+  </inputs>
+  <outputs>
+    <data name="outputin" type="text" format="rdata" label="xcms-stable peaks" />
+  </outputs>
+  <help>
+.. class:: infomark
+
+| **Tool update: See the 'NEWS' section at the bottom of the page**
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+| **Payam Emami (payam.emami@medsci.uu.se)** and **Christoph Ruttkies (christoph.ruttkies@ipb-halle.de)** wrote and maintain this wrapper for XCMS-Set generation and peak detection.
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Please cite**
+
+R Core Team (2013). R: A language and Environment for Statistical Computing. http://www.r-project.org
+
+---------------------------------------------------
+
+
+=====================
+Dilution Filter
+=====================
+
+-----------
+Description
+-----------
+
+| This module filters out the signals that do not correlate with a specified dilution trend. 
+
+-----------
+Input files
+-----------
+
++------------------------------+------------+
+| File                         |   Format   |
++==============================+============+
+| 1) rdata file   	       |   rdata    |
++------------------------------+------------+
+| 2) CSV file   	       |    CSV     |
++------------------------------+------------+
+
+----------
+Parameters
+----------
+	  
+rdata file
+	| This file should be rdata containing a grouped xcmsSet. This xcmsSet should contain dilution samples as well as real samples. The phenotype (class) of the samples should also be set using for example find-peaks. However, the class can also be set using CSV file (see below). Althought there are many ways of generating the rdata file, the  the most straightforward pipline can for example be like xcms-findpeaks->collect->xcms-group->xcms-retcor->dilutionfilter.
+        |
+
+Class of dilution trends
+        | This must indicate the class of dilution trend samples. IMPORTANT: the samples are correlated to inputed sequence (see next parameter) as set here. 
+        |
+
+Correlate dilution to this series
+	| This series will used for calculation of correlation. For example if this parameter is set like 1,2,3 and the class of dilution trends is set as D1,D2,D3 the following the pairs will be used for calculating the correlation: (D1,1),(D2,2),(D3,3).
+	|
+
+p-value cutoff
+	| Signals with correlation p-value higher than this will be removed.
+	|
+
+Correlation cutoff
+	| Signals with lower correlation than this will be removed.
+	|
+
+Absolute correlation
+	| Should the algorithm use the correlation as it is (negative and positive) or absolute correlation ?
+	|
+
+CSV file
+	| This file is used to set class of the samples being analyzed. The file should have at least two column: the first column is showing the raw file name and extension (for example sample1.mzML) and the second column should show it's phenotype type. This file is a comma separated file and should container header (see the example). IMPORTANT: if this parameter is set, the previous class of the xcmsSet will be overwritten. 
+	| 
+
++----------------+----------+
+| RawFile        | Class    |
++----------------+----------+
+| Sample1.mzML   | Sample   |
++----------------+----------+
+| Sample2.mzML   | Sample   |
++----------------+----------+
+| Sample3.mzML   | Sample   |
++----------------+----------+
+| Sample4.mzML   | Sample   |
++----------------+----------+
+| Blank1.mzML    | Blank    |
++----------------+----------+
+| Blank2.mzML    | Blank    |
++----------------+----------+
+| Blank3.mzML    | Blank    |
++----------------+----------+
+| D1.mzML        | D1       |
++----------------+----------+
+| D2.mzML        | D2       |
++----------------+----------+
+| D3.mzML        | D3       |
++----------------+----------+
+ 
+
+Phenotype column
+	| This should show the column name in the CSV file representing the class of the metabolite. In the case of the above table it should be set to "Class" (without quotation).
+	| 
+
+------------
+Output files
+------------
+	
+rdata
+	| A rdata file containing a XCMS-Set with unstable signals removed.
+        |
+
+---------------------------------------------------
+
+----
+NEWS
+----
+
+
+CHANGES IN VERSION 0.1
+========================
+
+First version
+</help>
+</tool>

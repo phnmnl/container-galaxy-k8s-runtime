@@ -1,0 +1,229 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="camera-prepareoutput" name="camera-prepareoutput" version="0.1">
+  <description>Prepare output for doing multi/uni variate</description>
+  <command><![CDATA[
+	/usr/local/bin/prepareOutput.r inputcamera=$inputcamerain inputscores=$inputscoresin inputpheno=$inputphenoin ppm=$ppmin rt=$rtin higherTheBetter=$higherTheBetterin scoreColumn=$scoretypein impute=$imputein typeColumn=$columntypein selectedType=$selectedTypein rename=$renamein renameCol=$renameColin onlyReportWithID=$onlyReportWithIDin combineReplicate=$combineReplicatein combineReplicateColumn=$combineReplicateColumnin outputPeakTable=$outputPeakTableOut outputVariables=$outputVariablesOut outputMetaData=$outputMetaDataOut log=$login sampleCoverage=$samcov sampleCoverageMethod=$samcovmethod;
+  ]]>
+  </command>
+  <inputs>
+    <param name="inputcamerain" type="data" format="rdata" optional="False" label="Input RData file" />
+	<param name="inputscoresin" type="data" format="txt" optional="False" label="Input Identification results" />
+	<param name="inputphenoin" type="data" format="csv" optional="False" label="Input phenotype and metadata information" />
+    <param name="ppmin" type="text" format="txt" value="10" optional="False" label="PPM tolerance for matching" />
+	<param name="rtin" type="text" format="txt" value="10" optional="False" label="RT tolerance for matching" />
+    <param name="higherTheBetterin" type="select" value="false" label="Higher the score the better ?" help="">
+      <option value="true" selected="False">true</option>
+      <option value="false" selected="True">false</option>
+    </param>
+	  <param name="scoretypein" type="select" value="false" label="which score to use ?" help="">
+      <option value="q.value" selected="True">q-value</option>
+      <option value="Score" selected="False">Normalized score</option>
+	  <option value="FragmenterScore" selected="False">Fragmenter Score</option>
+    </param>
+    <param name="imputein" type="select" value="false" label="Do you want to impute IDs within pc groups ?" help="">
+      <option value="true" selected="False">Yes</option>
+      <option value="false" selected="True">No</option>
+    </param>
+    <param name="login" type="select" value="false" label="Do you want to perform log2 transformation ?" help="">
+      <option value="true" selected="False">Yes</option>
+      <option value="false" selected="True">No</option>
+    </param>
+   	<param name="columntypein" type="text" format="txt" value="type" optional="False" label="enter the name of the column showing the samples you want to keep" />
+    <param name="selectedTypein" type="text" format="txt" value="sample" optional="False" label="enter which type of samples to keep" />
+
+	<param name="renamein" type="select" value="false" label="Do you want rename the sample file names to specific names" help="">
+      <option value="true" selected="False">Yes</option>
+      <option value="false" selected="True">No</option>
+    </param>
+	<param name="renameColin" type="text" format="txt" value="renameto" optional="False" label="enter the name of the column which shows the names you want to rename the samples to" />
+	 <param name="onlyReportWithIDin" type="select" value="false" label="Do you want to use the features without ID?" help="">
+      <option value="true" selected="True">Yes</option>
+      <option value="false" selected="False">No</option>
+    </param>
+	<param name="combineReplicatein" type="select" value="false" label="Do you want to median technial replicates ?" help="">
+      <option value="true" selected="False">Yes</option>
+      <option value="false" selected="True">No</option>
+    </param>
+    <param name="combineReplicateColumnin" type="text" format="txt" value="rep" optional="False" label="what column represents the technical replicates" />
+<param name="samcov" type="text" format="txt" value="0" optional="true" label="Percentage of non-missing values (only number)" />
+<param name="samcovmethod" type="text" format="txt" value="global" optional="true" label="Do you want to apply coverage globally across all the runs or per group? For applying globally write global otherwise write name of the column showing the grouping." />
+
+  </inputs>
+  <outputs>
+    <data name="outputPeakTableOut" type="data" format="tabular" label="peak table" />
+   <data name="outputMetaDataOut" type="data" format="tabular" label="metadata information" />
+    <data name="outputVariablesOut" type="data" format="tabular" label="variable information" />
+  </outputs>
+  <help>
+
+.. class:: infomark
+
+| **Tool update: See the 'NEWS' section at the bottom of the page**
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+| **Payam Emami (payam.emami@medsci.uu.se)** and **Christoph Ruttkies (christoph.ruttkies@ipb-halle.de)** wrote and maintain this wrapper for MetFrag batch mode processing.
+
+
+---------------------------------------------------
+
+=====================================================================================================================
+Converts the quantification and identification results to tabular files for multivariate and univariate data analysis
+=====================================================================================================================
+
+-----------
+Description
+-----------
+
+| This module converts the quantification and identification results to tabular files for multivariate and univariate data analysis
+
+
+-----------
+Input files
+-----------
+
++------------------------------+------------+
+| File                         |   Format   |
++==============================+============+
+| 1)  quantification           |    rdata   |
+|     results                  |            |
++------------------------------+------------+
+| 2)  the identifcation        |    txt     |
+|     results                  |            |
++------------------------------+------------+
+| 3)  the phenotype            |    csv     |
+|     information              |            |
++------------------------------+------------+
+
+----------
+Parameters
+----------
+
+Input RData file
+        | This is the quantification results from CAMERA. 
+        |
+
+Input Identification results
+        | Aggregated identification results either from metfragaggregator or pep score generator
+        |
+
+Input phenotype and metadata information
+        | a CSV file containing class information. See bottom of the help for an example of such table.
+        |
+
+PPM tolerance for matching
+        | m/z tolerance for matching identification results to quantification (ppm).
+        |
+
+RT tolerance for matching
+        | Retention time tolerance for matching identification results to quantification (sec).
+        |
+
+Higher the score the better ?
+        | If the higher score represents a better hit. For example, FragmenterScore will be higher for reliable hits but q-value will be lower. 
+        |
+
+which score to use ?
+        | Depending on the previous tool used to perform the identification, FragmenterScore, Score and q.value can be used. q.value should only be selected if the MetFrag scores have been converted to posterior error probability score.
+        |
+
+Imputation
+        | Metabolites quantification profile often result in a number signals. One some of this signal can be identified. If this parameter is set, the unidentified signals will be imputed by the identification based on CAMERA grouping.
+        |
+
+columntypein
+        | The phenotype file must have a column showing which samples to keep and which to remve. Enter name of that column.
+        |
+
+selectedTypein
+        | Based on information in "columntypein", enter which sample type should be kept.
+        |
+
+renamein
+        | If yes. The samples will be renamed based on information provide in column "renameColin"
+        |
+
+renameColin
+        | Enter name of the column showing the new file name of the samples.
+        |
+
+onlyReportWithIDin
+        | If yes. Only identified metabolites will be reported.
+        |
+
+combineReplicatein
+        | If yes. The technical replicates (dublicate injections) will be medianed. This information should be provide in an additional column in the phenotype information.
+        |
+
+combineReplicateColumnin
+        | Enter the column name indicating technical replicate in the phenotype file. See the example below.
+        |
+
+samcov
+        | How much of non-missing value should be present for each feature. 
+        |
+
+Example of phenotype information
+        | The first column of this table must show the raw data file name (for example sample1.mzML). The file must have a header. Other information can also be added to this table such as age, gender, time etc. This will be output as they are.
+        |
+
++----------------+----------+-----------+----------+------------+------------------+-------+----------+
+| RawFile        | Class    | Groups    | Type     | rename     | Technical repl   | Age   | Gender   |
++----------------+----------+-----------+----------+------------+------------------+-------+----------+
+| Sample1.mzML   | Sample   | Disease   | keep     | Disease1   | 1                | 35    | M        |
++----------------+----------+-----------+----------+------------+------------------+-------+----------+
+| Sample2.mzML   | Sample   | Disease   | keep     | Disease2   | 1                | 35    | M        |
++----------------+----------+-----------+----------+------------+------------------+-------+----------+
+| Sample3.mzML   | Sample   | Control   | keep     | Control1   | 2                | 37    | F        |
++----------------+----------+-----------+----------+------------+------------------+-------+----------+
+| Sample4.mzML   | Sample   | Control   | keep     | Control2   | 2                | 37    | F        |
++----------------+----------+-----------+----------+------------+------------------+-------+----------+
+| Blank1.mzML    | Blank    | NA        | remove   | NA         | NA               | NA    | NA       |
++----------------+----------+-----------+----------+------------+------------------+-------+----------+
+| Blank2.mzML    | Blank    | NA        | remove   | NA         | NA               | NA    | NA       |
++----------------+----------+-----------+----------+------------+------------------+-------+----------+
+| Blank3.mzML    | Blank    | NA        | remove   | NA         | NA               | NA    | NA       |
++----------------+----------+-----------+----------+------------+------------------+-------+----------+
+| D1.mzML        | D1       | NA        | remove   | NA         | NA               | NA    | NA       |
++----------------+----------+-----------+----------+------------+------------------+-------+----------+
+| D2.mzML        | D2       | NA        | remove   | NA         | NA               | NA    | NA       |
++----------------+----------+-----------+----------+------------+------------------+-------+----------+
+| D3.mzML        | D3       | NA        | remove   | NA         | NA               | NA    | NA       |
++----------------+----------+-----------+----------+------------+------------------+-------+----------+
+
+| 
+
+------------
+Output files
+------------
+
+outputPeakTableOut
+        | A tabular peak table containing abundances
+        |
+
+outputMetaDataOut
+        | Sample metadata
+        |
+
+outputVariablesOut
+        | Variable data containing identification.
+        |
+---------------------------------------------------
+
+----
+NEWS
+----
+
+
+CHANGES IN VERSION 0.1
+========================
+
+First version
+</help>
+</tool>

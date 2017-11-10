@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="xcms-blankfilter" name="xcms-blankfilter" version="0.1">
+  <description>Filters out the peaks that have higher intensities in blank samples compare to selected samples.</description>
+  <command><![CDATA[
+	/usr/local/bin/blankfilter.r input=$xcmsset output=$outputin method=$methodin blank=$blankin sample=$samplein rest=$restin 
+#if $infilecvs:
+  phenoFile=$infilecvs 
+#end if
+#if $phenocol:
+  phenoDataColumn=$phenocol 
+#end if
+ ;
+  ]]>
+  </command>
+  <inputs>
+    <param name="xcmsset" type="data" format="rdata" optional="False" label="Input RData file" />
+   <param name="blankin" type="text" value="blank" optional="False" label="Class of the blank samples" help="" />
+    <param name="restin" type="select" value="1" label="Compare to rest of the samples." help="">
+      <option value="T" selected="True">Yes</option>
+      <option value="F" selected="False">No</option>
+ </param>
+   <param name="samplein" type="text" value="sample" optional="False" label="Class of the real biological samples" help="" />
+    <param name="methodin" type="select" value="1" label="Which method to use for comparing blank vs. samples " help="">
+      <option value="max" selected="True">Max</option>
+      <option value="mean" selected="False">Mean</option>
+      <option value="median" selected="False">Median</option>
+    </param>
+   <param name="infilecvs" type="data" format="csv" optional="True" multiple="False" label="Input CSV file for setting the phenotype (see the help)" />
+    <param name="phenocol" type="text" optional="True" label="Column name showing the class of the raw files (the phenotype file)"/>
+  </inputs>
+  <outputs>
+    <data name="outputin" type="text" format="rdata" label="xcms-blank filtered out" />
+  </outputs>
+  <help>
+.. class:: infomark
+
+| **Tool update: See the 'NEWS' section at the bottom of the page**
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+| **Payam Emami (payam.emami@medsci.uu.se)** and **Christoph Ruttkies (christoph.ruttkies@ipb-halle.de)** wrote and maintain this wrapper for XCMS-Set generation and peak detection.
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Please cite**
+
+R Core Team (2013). R: A language and Environment for Statistical Computing. http://www.r-project.org
+
+---------------------------------------------------
+
+
+=====================
+Blank Filter
+=====================
+
+-----------
+Description
+-----------
+
+| This module filters out the signals that have higher abundance in non-biological samples (e.g. blank) compared to biological samples. 
+
+-----------
+Input files
+-----------
+
++------------------------------+------------+
+| File                         |   Format   |
++==============================+============+
+| 1) rdata file   	       |   rdata    |
++------------------------------+------------+
+| 2) CSV file   	       |    CSV     |
++------------------------------+------------+
+
+----------
+Parameters
+----------
+	  
+rdata file
+	| This file should be rdata containing a grouped xcmsSet. This xcmsSet should contain dilution samples as well as real samples. The phenotype (class) of the samples should also be set using for example find-peaks. However, the class can also be set using CSV file (see below). Althought there are many ways of generating the rdata file, the  the most straightforward pipline can for example be like xcms-findpeaks->collect->xcms-group->xcms-retcor->dilutionfilter.
+        |
+
+Class of blank samples
+        | This must indicate the class of blank samples. IMPORTANT: this class should be identifcal for all the blank samples. See example table below.
+        |
+
+Compare to rest of the samples
+	| If ture, the (average,median,max) abundance of blank samples will be compared against all other samples. For false see the next parameter.
+	|
+
+Class of the real biological samples
+	| If the previous parameter is false, a sample class can be specified so that blank abundance will be compared against this sample class.
+	|
+
+Method
+	| Which method to use for summarizing blank and biological sample for comparisons. For example if Max is selected, a signal will be remove if it Maximun abundance in the blank samples is higher than maximum abundance in biological samples.
+	|
+
+
+CSV file
+	| This file is used to set class of the samples being analyzed. The file should have at least two column: the first column is showing the raw file name and extension (for example sample1.mzML) and the second column should show it's phenotype type. This file is a comma separated file and should container header (see the example). IMPORTANT: if this parameter is set, the previous class of the xcmsSet will be overwritten. 
+	| 
+
++----------------+----------+
+| RawFile        | Class    |
++----------------+----------+
+| Sample1.mzML   | Sample   |
++----------------+----------+
+| Sample2.mzML   | Sample   |
++----------------+----------+
+| Sample3.mzML   | Sample   |
++----------------+----------+
+| Sample4.mzML   | Sample   |
++----------------+----------+
+| Blank1.mzML    | Blank    |
++----------------+----------+
+| Blank2.mzML    | Blank    |
++----------------+----------+
+| Blank3.mzML    | Blank    |
++----------------+----------+
+| D1.mzML        | D1       |
++----------------+----------+
+| D2.mzML        | D2       |
++----------------+----------+
+| D3.mzML        | D3       |
++----------------+----------+
+ 
+
+Phenotype column
+	| This should show the column name in the CSV file representing the class of the metabolite. In the case of the above table it should be set to "Class" (without quotation).
+	| 
+
+------------
+Output files
+------------
+	
+rdata
+	| A rdata file containing a XCMS-Set with non-biological signals removed.
+        |
+
+---------------------------------------------------
+
+----
+NEWS
+----
+
+
+CHANGES IN VERSION 0.1
+========================
+
+First version
+</help>
+</tool>
