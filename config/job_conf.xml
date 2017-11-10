@@ -365,10 +365,10 @@
         <!-- new NMR -->
         <tool id="metabolab" destination="metabolab-container"/>
         <tool id="mtbls_nmr_raw_dummy_importer" destination="nmrmlconv-container"/>
-        <tool id="nmrmlconv" destination="nmrmlconv-container"/>
-        <tool id="zip-nmrml-collection" destination="nmrmlconv-container"/>
-        <tool id="rnmr1d" destination="rnmr1d-container"/>
-        <tool id="rnmr1d-stacked-plot" destination="rnmr1d-container"/>
+        <tool id="nmrmlconv" destination="dynamic-k8s-small" resources="all"/>
+        <tool id="zip-nmrml-collection" destination="dynamic-k8s-small" resources="all"/>
+        <tool id="rnmr1d" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="rnmr1d-stacked-plot" destination="dynamic-k8s-tiny" resources="all"/>
 	<tool id="rnmr1d-prepare-output" destination="rnmr1d-container"/>
         <!-- old NMR -->
 	<tool id="mtbls2nmrglue" destination="nmrglue-container"/>
