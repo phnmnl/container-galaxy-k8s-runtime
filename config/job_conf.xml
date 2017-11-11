@@ -367,7 +367,7 @@
         <tool id="mtbls_nmr_raw_dummy_importer" destination="nmrmlconv-container"/>
         <tool id="nmrmlconv" destination="dynamic-k8s-small" resources="all"/>
         <tool id="zip-nmrml-collection" destination="dynamic-k8s-small" resources="all"/>
-        <tool id="rnmr1d" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="rnmr1d" destination="dynamic-k8s-large" resources="all"/>
         <tool id="rnmr1d-stacked-plot" destination="dynamic-k8s-tiny" resources="all"/>
 	<tool id="rnmr1d-prepare-output" destination="rnmr1d-container"/>
         <!-- old NMR -->
