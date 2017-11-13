@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.1' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Statistics]-->
 <tool id="save_chromatogram" name="save_chromatogram" version="1.2">
 <!--
@@ -8,13 +8,14 @@
 -->
   <description>Saves the chromatogram in CSV format of a single mzML file.</description>
   <command><![CDATA[
-if [[ "\$(head -n 2 $infile | tail -n 1 | grep mzML)" != "" ]];
-then filename="\$(head -n 40 $infile | grep "sample id" | sed -e "s/\"\>.*//" | sed -e "s/.*name\=\"//")";
-    xcmsfile="/tmp/\$filename.mzML";
-    cp $infile \$xcmsfile;
-    save_chromatogram.r \$xcmsfile $outfile 2>&1;
-else echo "Error! Input file is not mzML.";
-fi
+if [[ \$(head -n 2 $infile | tail -n 1 | grep mzML) != "" ]] ; then 
+    xcmsfile=input.mzML && 
+    ln -s "$infile" \$xcmsfile && 
+    save_chromatogram.r \$xcmsfile "$outfile" 2>&1;
+else 
+    echo "Error! Input file is not mzML or the header of the file is incomplete." && 
+    exit 1;
+fi;
   ]]></command>
   <inputs>
     <param name="infile" type="data" format="mzml" value="&lt;class 'CTDopts.CTDopts._Null'&gt;" optional="False" label="Input mzML file." />
