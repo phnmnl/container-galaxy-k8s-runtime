@@ -89,7 +89,7 @@
    	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
    	    <param id="docker_owner_override">phnmnl</param>
    	    <param id="docker_image_override">metabolab</param>
-   	    <param id="docker_tag_override">latest</param>
+   	    <param id="docker_tag_override">v0.99.8.8_cv0.6.65</param>
    	    <param id="max_pod_retrials">3</param>
    	    <param id="docker_enabled">true</param>
 	</destination>
@@ -363,7 +363,7 @@
         <tool id="lcmsmatching" destination="w4m-lcmsmatching-container"/>
         <tool id="msconvert2" destination="msconvert2-container"/>
         <!-- new NMR -->
-        <tool id="metabolab" destination="metabolab-container"/>
+	<tool id="metabolab" destination="dynamic-k8s-large" resources="all"/>
         <tool id="mtbls_nmr_raw_dummy_importer" destination="nmrmlconv-container"/>
         <tool id="nmrmlconv" destination="dynamic-k8s-small" resources="all"/>
         <tool id="zip-nmrml-collection" destination="dynamic-k8s-small" resources="all"/>
