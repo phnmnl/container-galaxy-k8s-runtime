@@ -313,7 +313,7 @@ assignment:
 - docker_image_override: metabolab
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: latest
+  docker_tag_override: v0.99.8.8_cv0.6.65
   max_pod_retrials: 3
   tools_id:
   - metabolab
