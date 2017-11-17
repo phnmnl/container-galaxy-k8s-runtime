@@ -55,13 +55,15 @@ assignment:
   max_pod_retrials: 3
   tools_id:
   - mtbls2nmrglue
-- docker_image_override: mtbls-dwnld
+
+- tools_id:
+  - mtbls-dwnld
+  docker_image_override: mtbls-dwnld
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v2.0.5_cv1.2.16
+  docker_tag_override: latest
   max_pod_retrials: 3
-  tools_id:
-  - mtbls-dwnld
+
 - docker_image_override: json2isatab
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
