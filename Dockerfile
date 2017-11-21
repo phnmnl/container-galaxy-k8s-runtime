@@ -23,6 +23,10 @@ COPY config/tool_conf.xml config/tool_conf.xml
 COPY config/sanitize_whitelist.txt config/sanitize_whitelist.txt
 COPY config/job_resource_params_conf.xml config/job_resource_params_conf.xml
 COPY config/phenomenal_tools2container.yaml config/phenomenal_tools2container.yaml
+
+# Galaxy tours which guide users through the subsequent steps in an analysis
+COPY config/plugins/tours/metfrag+xcms-tour.yaml config/plugins/tours/metfrag+xcms-tour.yaml
+
 COPY rules/k8s_destinations.py lib/galaxy/jobs/rules/k8s_destination.py
 COPY tools/phenomenal tools/phenomenal
 
