@@ -5,7 +5,7 @@ class: CommandLineTool
 hints:
   SoftwareRequirement:
     packages:
-      xcms-blankfilter:
+      xcms:
         specs: [ https://identifiers.org/rrid/RRID:SCR_015538 ]
   # DockerRequirement:
   #  dockerPull: 
@@ -45,7 +45,6 @@ arguments:
  - method=median
  - blank=$(inputs.blank)
  - rest=T
-
 
 $namespaces: 
   iana: "https://www.iana.org/assignments/media-types/"

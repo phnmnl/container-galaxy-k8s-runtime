@@ -9,22 +9,18 @@ hints:
         specs: [ https://identifiers.org/rrid/RRID:SCR_015538 ]
 
 label: Correct differences between retention times between different samples using the `retcor` generic method.
-baseCommand: retCor.r
 
 inputs:
   peaks:
     type:
       type: array
       items: File
+      format: iana:application/x-r-data
       inputBinding:
         prefix: input=
         separate: false
     label: XCMS-Set file
     doc: A rdata file with XCMS-Set objects that were grouped by xcms-collect-peaks
-
-arguments:
-  - method=obiwarp  # or loess
-  - output=output.Rdata
 
 outputs:
   corrected_peaks:
@@ -33,6 +29,12 @@ outputs:
     format: iana:application/x-r-data
     outputBinding:
       glob: output.Rdata
+
+baseCommand: retCor.r
+
+arguments:
+  - method=obiwarp  # or loess
+  - output=output.Rdata
 
 doc: |
   To correct differences between retention times between different samples, a
@@ -65,3 +67,5 @@ doc: |
 # |         | However, this function is able to align multiple samples, by a center-star strategy.                                    |
 # +---------+-------------------------------------------------------------------------------------------------------------------------+
 
+$namespaces: 
+  iana: "https://www.iana.org/assignments/media-types/"
