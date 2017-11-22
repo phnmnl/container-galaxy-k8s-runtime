@@ -15,7 +15,7 @@ label: Filters out the peaks that have higher intensities in blank samples compa
 inputs:
   xcmsset:
     type: File
-    format: iana:application/x-r-data
+    format: iana:application/x-r-data  # FIXME should be a data type specific to xcms?
     label: Input RData file
     doc: |
       rdata containing a grouped xcmsSet. This xcmsSet should contain dilution

@@ -8,6 +8,7 @@ hints:
       xcms:
         specs: [ https://identifiers.org/rrid/RRID:SCR_015538 ]
 
+label: XCMS Fill Peaks
 doc: |
   For each sample, identify peak groups where that sample is not represented.
   For each of those peak groups, integrate the signal in the region of that
@@ -23,7 +24,9 @@ inputs:
   xcms:
     type: File
     label: XCMS-Set file
-    doc: A rdata file with XCMS-Set objects that were grouped and pre-processed by e.g. xcms-collect-peak and xcms-correct-rt
+    doc: |
+      A rdata file with XCMS-Set objects that were grouped and pre-processed by
+      e.g. xcms-collect-peak and xcms-correct-rt
 
 outputs:
   filled_peaks:
