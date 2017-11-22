@@ -176,14 +176,6 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
-	<destination id="xcms-container" runner="k8s">
-	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">xcms</param>
-            <param id="docker_tag_override">v3.0.0_cv0.1.72</param>
-            <param id="max_pod_retrials">1</param>
-            <param id="docker_enabled">true</param>
-        </destination>
         <destination id="mzml2isa-container" runner="k8s">
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
@@ -407,7 +399,7 @@
   <tool id="unzip-collection" destination="camera-container"/>
 	<tool id="camera-prepareoutput" destination="dynamic-k8s-medium" />
 	<!-- OpenMS -->
-	<tool id="xcmssplit" destination="xcms-container" />
+	<tool id="xcmssplit" destination="dynamic-k8s-large" />
 	<tool id="AdditiveSeries" destination="container-openms"/> 
 	<tool id="BaselineFilter" destination="container-openms"/> 
 	<tool id="CompNovo" destination="container-openms"/> 
