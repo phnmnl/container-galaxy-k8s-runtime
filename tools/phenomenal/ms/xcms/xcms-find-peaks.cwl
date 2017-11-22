@@ -14,11 +14,13 @@ hints:
 
 inputs:
   spectra:
-    type: File[]
+    type:
+      type: array
+      items: File
+      inputBinding:
+        prefix: input=
+        separate: false
     format: edam:format_3244 # mzML
-    inputBinding:
-      prefix: input=
-      separate: false
 
   ppm: float
   peakwidthLow: float
