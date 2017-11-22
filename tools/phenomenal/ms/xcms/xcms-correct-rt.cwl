@@ -15,17 +15,19 @@ inputs:
     type:
       type: array
       items: File
-      format: iana:application/x-r-data
       inputBinding:
         prefix: input=
         separate: false
+    format: iana:application/x-r-data
     label: XCMS-Set file
     doc: A rdata file with XCMS-Set objects that were grouped by xcms-collect-peaks
 
 outputs:
   corrected_peaks:
     type: File
-    label: A rdata file containing one XCMS-Set of multiple XCMS-Set objects with retention time corrected values
+    doc: |
+      A rdata file containing one XCMS-Set of multiple XCMS-Set objects with
+      retention time corrected values
     format: iana:application/x-r-data
     outputBinding:
       glob: output.Rdata
