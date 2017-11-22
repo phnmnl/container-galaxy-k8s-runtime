@@ -1,20 +1,21 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Statistics]-->
-<tool id="show_chromatogram" name="show_chromatogram" version="1.1">
+<tool id="show_chromatogram" name="show_chromatogram" version="1.3">
 <!--
   <requirements>
-    <container type="docker">phnmnl/xcms</container>
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/xcms</container>
   </requirements>
 -->
-  <description>Shows the chromatogram of a single mzML file.</description>
+  <description>Show the base peak chromatogram of a raw mzML, mzXML, mzData or netCDF file.</description>
   <command><![CDATA[
-    show_chromatogram.r $infile $outfile 2>&1
+    echo ${infile.name};
+    show_chromatogram.r $infile $outfile 2>&1;
   ]]></command>
   <inputs>
-    <param name="infile" type="data" format="mzml" value="&lt;class 'CTDopts.CTDopts._Null'&gt;" optional="False" label="Input mzML file." />
+    <param name="infile" type="data" optional="False" label="Input mzML, mzXML, mzData or netCDF file." />
   </inputs>
   <outputs>
-    <data name="outfile" format="png"/>
+    <data name="outfile" type="data" format="png"/>
   </outputs>
-  <help>Produces a PNG image file out of an mzML file as input.</help>
+  <help>Show the base peak chromatogram (TIC vs. RT) of an mzML, mzXML, mzData or netCDF file.</help>
 </tool>

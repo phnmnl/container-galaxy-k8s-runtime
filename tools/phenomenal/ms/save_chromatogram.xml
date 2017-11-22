@@ -1,20 +1,21 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Statistics]-->
-<tool id="save_chromatogram" name="save_chromatogram" version="1.1">
+<tool id="save_chromatogram" name="save_chromatogram" version="1.3">
 <!--
   <requirements>
-    <container type="docker">phnmnl/xcms</container>
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/xcms</container>
   </requirements>
 -->
-  <description>Saves the chromatogram of a single mzML file.</description>
+  <description>Saves the chromatogram in CSV format of an mzML, mzXML, mzData or netCDF file.</description>
   <command><![CDATA[
-    save_chromatogram.r $infile $outfile 2>&1
+    echo ${infile.name};
+    save_chromatogram.r $infile $outfile 2>&1;
   ]]></command>
   <inputs>
-    <param name="infile" type="data" format="mzml" value="&lt;class 'CTDopts.CTDopts._Null'&gt;" optional="False" label="Input mzML file." />
+    <param name="infile" type="data" optional="False" label="Input mzML, mzXML or mzData file." />
   </inputs>
   <outputs>
-    <data name="outfile" format="csv"/>
+    <data name="outfile" type="data" format="csv"/>
   </outputs>
-  <help>Saves the chromatogram RT/TIC out of an mzML file in CSV format.</help>
+  <help>Saves the chromatogram (TIC vs. RT) of an mzML, mzXML, mzData or netCDF file in CSV format.</help>
 </tool>
