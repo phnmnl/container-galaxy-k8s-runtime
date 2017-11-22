@@ -359,8 +359,6 @@ assignment:
   docker_tag_override: dev_v1.52.0_cv0.8.70 
   max_pod_retrials: 3
   tools_id:
-  - save_chromatogram
-  - show_chromatogram
   - xcms-find-peaks
   - xcms-collect-peaks
   - xcms-group-peaks
@@ -369,6 +367,14 @@ assignment:
   - xcmssplit
   - xcms-blankfilter
   - xcms-dilutionfilter
+- docker_image_override: xcms
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_owner_override: phnmnl
+  docker_tag_override: v3.0.0_cv0.1.72
+  max_pod_retrials: 1
+  tools_id:
+  - save_chromatogram
+  - show_chromatogram
 - docker_image_override: scp-aspera
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu

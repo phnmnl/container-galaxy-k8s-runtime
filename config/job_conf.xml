@@ -180,8 +180,8 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">xcms</param>
-            <param id="docker_tag_override">latest</param>
-            <param id="max_pod_retrials">3</param>
+            <param id="docker_tag_override">v3.0.0_cv0.1.72</param>
+            <param id="max_pod_retrials">1</param>
             <param id="docker_enabled">true</param>
         </destination>
         <destination id="mzml2isa-container" runner="k8s">
@@ -375,8 +375,6 @@
 	<tool id="soap_process" destination="soap-nmr-container"/>
 	<tool id="soap_opls" destination="soap-nmr-container"/>
     	<!-- other NMR -->
-	<tool id="save_chromatogram" destination="xcms-container"/>
-        <tool id="show_chromatogram" destination="xcms-container"/>
         <tool id="mzml2isa" destination="mzml2isa-container"/>
         <tool id="nmrml2isa" destination="nmrml2isa-container"/>
         <tool id="mtbls-downloader" destination="mtbls-downloader-container"/>
@@ -386,7 +384,6 @@
         <tool id="metabomatching" destination="metabomatching-container"/>
         <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
 	<!-- new XCMS -->
-
 	<tool id="xcms-find-peaks" destination="dynamic-k8s-large" resources="all"/>
   <tool id="xcms-collect-peaks" destination="dynamic-k8s-medium" resources="all"/>
   <tool id="xcms-group-peaks" destination="dynamic-k8s-large" resources="all"/>
@@ -394,6 +391,8 @@
   <tool id="xcms-fill-peaks" destination="dynamic-k8s-large" resources="all"/>
 	<tool id="xcms-dilutionfilter" destination="dynamic-k8s-medium" />
 	<tool id="xcms-blankfilter" destination="dynamic-k8s-medium" />
+        <tool id="save_chromatogram" destination="dynamic-k8s-small" resources="all" />
+        <tool id="show_chromatogram" destination="dynamic-k8s-small" resources="all" />
 	<!-- CAMERA -->
 	<tool id="consensusXMLToXcms" destination="camera-container" />
   <tool id="cameraToFeatureXML" destination="camera-container" />
