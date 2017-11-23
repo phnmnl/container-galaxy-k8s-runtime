@@ -6,9 +6,11 @@ hints:
   SoftwareRequirement:
     packages:
       xcms:
-        specs: [ https://identifiers.org/rrid/RRID:SCR_015538 ]
-  # DockerRequirement:
-  #  dockerPull: 
+        specs:
+          - https://identifiers.org/rrid/RRID:SCR_015538
+          - https://bio.tools/xcms
+  DockerRequirement:
+    dockerPull: biocontainers/xcms
 
 label: Filters out the peaks that have higher intensities in blank samples compared to selected samples.
 

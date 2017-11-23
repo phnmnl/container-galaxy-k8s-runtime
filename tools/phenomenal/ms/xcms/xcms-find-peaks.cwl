@@ -8,7 +8,9 @@ hints:
   SoftwareRequirement:
     packages:
       xcms:
-        specs: [ https://identifiers.org/rrid/RRID:SCR_015538 ]
+        specs:
+          - https://identifiers.org/rrid/RRID:SCR_015538
+          - https://bio.tools/xcms
   DockerRequirement:
     dockerPull: biocontainers/xcms
 

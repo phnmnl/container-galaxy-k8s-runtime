@@ -6,7 +6,11 @@ hints:
   SoftwareRequirement:
     packages:
       xcms:
-        specs: [ https://identifiers.org/rrid/RRID:SCR_015538 ]
+        specs:
+          - https://identifiers.org/rrid/RRID:SCR_015538
+          - https://bio.tools/xcms
+  DockerRequirement:
+    dockerPull: biocontainers/xcms
 
 label: XCMS Fill Peaks
 doc: |
@@ -24,6 +28,7 @@ inputs:
   xcms:
     type: File
     label: XCMS-Set file
+    format: iana:application/x-r-data 
     doc: |
       A rdata file with XCMS-Set objects that were grouped and pre-processed by
       e.g. xcms-collect-peak and xcms-correct-rt
