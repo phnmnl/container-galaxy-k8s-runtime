@@ -40,10 +40,11 @@ assignment:
   max_pod_retrials: 3
 # XCMS
 - tools_id:
-   - save_chromatogram, show_chromatogram
+   - save_chromatogram
+   - show_chromatogram
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: xcms
-  docker_tag_override: v3.0.0_cv0.1.72
+  docker_tag_override: dev_v3.0.0_cv0.1.75
   max_pod_retrials: 1
 
