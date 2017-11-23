@@ -6,7 +6,7 @@ label: CAMERA Find Adducts
 
 hints:
   DockerRequirement:
-    dockerPull: quay.io/biocontainers/bioconductor-camera
+    dockerPull: container-registry.phenomenal-h2020.eu/phnmnl/camera
   SoftwareRequirement:
     packages:
       camera:

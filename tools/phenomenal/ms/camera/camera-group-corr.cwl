@@ -2,7 +2,7 @@
 cwlVersion: v1.0
 class: CommandLineTool
 
-label: CAMERA Find Isotopes
+label: CAMERA Group Corr
 
 hints:
   DockerRequirement:
@@ -20,29 +20,35 @@ inputs:
     format: iana:application/x-r-data
     label: xsAnnotate file
     doc: A rdata file with a xsAnnotate object from one sample
-  max_charge:
-    type: int
-    label: Max. number of the isotope charge
+  correlation:
+    type: float
+    label: The correlation threshold for EIC correlation
+  p_value:
+    type: float
+    label: The p-value threshold for testing correlation of significance
 
 outputs:
-  annotated_isotopes:
+  grouped_peaks:
     type: File
     format: iana:application/x-r-data
-    doc: A rdata file containing one xsAnnotate object 
+    doc: |
+      a rData file containing one xsAnnotate object containing grouped peaks in
+      so called pseudospectra
     outputBinding:
       glob: ouput.Rdata
 
-baseCommand: findIsotopes.r
+baseCommand: groupCorr.r
 
 arguments:
  - input=$(inputs.xs_annotate.path)
  - output=output.Rdata
- - maxcharge=$(inputs.max_charge)
+ - correlations=$(inputs.correlation)
+ - pvalue=$(inputs.pvalue)
 
 doc: |
-  Annotate isotope peaks for a xsAnnotate object. Returns a xsAnnotate object
-  with annotated isotopes.
-  
+  Peak grouping after correlation information into pseudospectrum
+  groups for an xsAnnotate object.  
+
   **Please cite**: 
   R Core Team (2013). R: A language and Environment for Statistical Computing. http://www.r-project.org
 

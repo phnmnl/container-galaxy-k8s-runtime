@@ -6,7 +6,7 @@ label: CAMERA Annotate Peaks
 
 hints:
   DockerRequirement:
-    dockerPull: quay.io/biocontainers/bioconductor-camera
+    dockerPull: container-registry.phenomenal-h2020.eu/phnmnl/camera
   SoftwareRequirement:
     packages:
       camera:
@@ -32,7 +32,7 @@ outputs:
 baseCommand: xsAnnotate.r
 
 arguments:
- - input=$(inputs.camera_annotate_peaks.path
+ - input=$(inputs.camera_annotate_peaks.path)
  - output=output.Rdata
 
 doc: |

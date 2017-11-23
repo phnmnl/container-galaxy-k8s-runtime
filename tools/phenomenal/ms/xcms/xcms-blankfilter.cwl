@@ -10,7 +10,7 @@ hints:
           - https://identifiers.org/rrid/RRID:SCR_015538
           - https://bio.tools/xcms
   DockerRequirement:
-    dockerPull: biocontainers/xcms
+    dockerPull: payamemami/xcms-container
 
 label: Filters out the peaks that have higher intensities in blank samples compared to selected samples.
 

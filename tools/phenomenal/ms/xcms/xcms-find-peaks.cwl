@@ -2,8 +2,6 @@
 cwlVersion: v1.0
 class: CommandLineTool
 
-baseCommand: findPeaks.r
-
 hints:
   SoftwareRequirement:
     packages:
@@ -12,7 +10,7 @@ hints:
           - https://identifiers.org/rrid/RRID:SCR_015538
           - https://bio.tools/xcms
   DockerRequirement:
-    dockerPull: biocontainers/xcms
+    dockerPull: payamemami/xcms-container
 
 inputs:
   spectra:
@@ -56,6 +54,8 @@ outputs:
       glob: output.Rdata
     doc: A rdata file containing a XCMS-Set generated from the input mzML file
 
+baseCommand: findPeaks.r
+
 arguments:
  - output=output.Rdata
  - ppm=$(inputs.ppm)
@@ -66,7 +66,6 @@ arguments:
  - realFileName=$(inputs.realFileName)
 
 label: XMCS Find Peaks
-
 
 $namespaces: 
   iana: "https://www.iana.org/assignments/media-types/"

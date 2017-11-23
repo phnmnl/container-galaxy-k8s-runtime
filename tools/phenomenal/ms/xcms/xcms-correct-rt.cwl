@@ -10,7 +10,7 @@ hints:
           - https://identifiers.org/rrid/RRID:SCR_015538
           - https://bio.tools/xcms
   DockerRequirement:
-    dockerPull: biocontainers/xcms
+    dockerPull: payamemami/xcms-container
 
 label: Correct differences between retention times between different samples using the `retcor` generic method.
 
