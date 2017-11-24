@@ -1,4 +1,4 @@
-<tool id="pathway_enrichment" name="Pathway_Enrichment" version="1.0.2">
+<tool id="pathway_enrichment" name="Pathway_Enrichment" version="1.0">
 
   <description>predicts enrichment among a (human) metabolic network (Recon 2v3)</description>
 
@@ -97,6 +97,8 @@
 
   <help>
 
+---------------------------------------------------
+
 .. class:: infomark
 
 **Author**  MetExplore team (INRA Toulouse, Toxalim, MeX)
@@ -115,7 +117,7 @@
 
 ---------------------------------------------------
 
-Metabolites extracted from the input file are mapped on a Recon network (Thiele et al., 2013) by providing either INCHI or CHEBI (or both) information. Pathway enrichment is calculated with an exact Fisher one-tailed test corrected by Bonferroni and Benjamini Hochberg methods. This tool is part of M
+Metabolites extracted from the input file are mapped on a Recon network (Thiele et al., 2013) by providing either INCHI or CHEBI (or both) information. Pathway enrichment is calculated with an exact Fisher one-tailed test corrected by Bonferroni and Benjamini Hochberg methods. This tool is part of the MetExplore's project consisting in a web server based on graph theory and vizualisation tools to allow users performing various analysis (Cottret et al., 2010).
 
 **Input files**
     | - a dataset (tsv or tabular format): a list of detected metabolites containing at least their names (first column), their InChI or their CHEBI, and eventually a discriminant information about some significant metabolites.
@@ -126,14 +128,12 @@ Metabolites extracted from the input file are mapped on a Recon network (Thiele 
     | - "mapping.tsv": each line corresponds to metabolites from the dataset file: the success or the failure of the mapping, their names in the dataset, those of one or several elements of the network in case of matching.
     | - "pathwayEnrichment.tsv" contains for each pathway associated with the mapped metabolites: their names, the Fisher's p value of enrichment, the Bonferroni (or other test correction) q-value, the list of mapped metabolites, the number of mapped metabolites and the coverage of mapped metabolites on the total of metabolites contained by the studied pathway.
     | - "info.txt" contains general information about mapping and pathway enrichment results. These informations correspond to the total number of mapped metabolites, the total number of metabolites from the dataset, the total number of pathway after mapping and the total number of pathway in the SBML.
-    | 
 
 **References**
 
-    | Thiele I, Swainston N, Fleming RMT, et al. A community-driven global reconstruction of human metabolism (2013). *Nature biotechnology* 31(5):10.1038/nbt.2488. doi:10.1038/nbt.2488.
-    | L. Cottret, D. Wildridge, F. Vinson, M. P. Barrett, H. Charles, M-F Sagot and F. Jourdan. MetExplore: a web server to link metabolomic experiments and genome-scale metabolic networks. (2010) *Nucleic Acids Research* 1;38 Suppl:W132-7. doi:10.1093/nar/gkq312.
-    | 
-    
+    | Thiele I, Swainston N, Fleming RMT, et al. A community-driven global reconstruction of human metabolism (2013). *Nature biotechnology* **31(5)**:10.1038/nbt.2488. doi:10.1038/nbt.2488.
+    | L. Cottret, D. Wildridge, F. Vinson, M. P. Barrett, H. Charles, M-F Sagot and F. Jourdan. MetExplore: a web server to link metabolomic experiments and genome-scale metabolic networks. (2010) *Nucleic Acids Research* **1**:38 Suppl:W132-7. doi:10.1093/nar/gkq312.
+
   </help>
 
   <citations>
