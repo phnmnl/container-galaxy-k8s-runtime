@@ -1,4 +1,4 @@
-<tool id="Pathway_Enrichment" name="Pathway_Enrichment2" version="1.0.2">
+<tool id="pathway_enrichment" name="Pathway_Enrichment" version="1.0.2">
 
   <description>Predicts pathway enrichment in human metabolic bionetwork (Recon 2v3) from a dataset of pre-selected metabolites</description>
 
