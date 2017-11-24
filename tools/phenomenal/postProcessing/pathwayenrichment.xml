@@ -1,0 +1,124 @@
+<tool id="Pathway_Enrichment" name="Pathway_Enrichment2" version="1.0.2">
+
+  <description>Predicts pathway enrichment in human metabolic bionetwork (Recon 2v3) from a dataset of pre-selected metabolites</description>
+
+  <command> 
+  	<![CDATA[
+     java -jar  $__tool_directory__/pathwayEnrichment.jar
+      -i $input
+      -o1 $output_file_1
+      -o2 $output_file_2
+      -o3 $output_file_3
+      -l$inchi_layers
+      #if $chooseSbml.opt == "yes":
+       -s $chooseSbml.sbml
+      #else
+       -s $__tool_directory__/data/recon2.v03_ext_noCompartment_noTransport_v2.xml
+      #end if
+      #if $noFilter.opt == "yes":
+        -f -1
+      #else:
+        -f $noFilter.filtered_column
+      #end if
+      #if $noCHEBI.opt == "yes":
+        -chebi -1
+      #else:
+        -chebi $noCHEBI.chebi_column
+      #end if
+      #if $noInChI.opt == "yes":
+        -inchi -1
+      #else:
+        -inchi $noInChI.inchi_column
+      #end if        
+    ]]>
+  </command>
+
+  <inputs>
+    <param format="tsv,tabular" name="input" type="data" label="Dataset"/>      
+    <conditional name="chooseSbml">
+      <param name="opt" type="select" label="Choose another Sbml (default: Recon 2v3 flat)">
+        <option value="yes">Yes</option>
+        <option value="no" selected="true">No</option>
+      </param>
+      <when value="yes">
+        <param format="xml" name="sbml" type="data" label="Sbml file"/>
+      </when>
+      <when value="no"/>
+    </conditional>
+    <param name="inchi_layers" type="select" label="Mapped InChI layers" help="Layers used for mapping between input file and bionetwork database (Recon 2v3) among: connections, hydrogens atoms, charge, protons, double-bond stereo, tetrahedral sp3 stereo, isotopic atoms, fixed hydrogens and reconnected layers.">
+      <option value="">formula</option>
+      <option value=" c">(formula,)c</option>
+      <option value=" c,h" selected="true">(formula,)c,h</option>
+      <option value=" c,h,q">(formula,)c,h,q</option>
+      <option value=" c,h,q,p">(formula,)c,h,q,p</option>
+      <option value=" c,h,q,p,b">(formula,)c,h,q,p,b</option>
+      <option value=" c,h,q,p,b,t">(formula,)c,h,q,p,b,t</option>
+      <option value=" c,h,q,p,b,t,i">(formula,)c,h,q,p,b,t,i</option>
+      <option value=" c,h,q,p,b,t,i,f">(formula,)c,h,q,p,b,t,i,f</option>
+      <option value=" c,h,q,p,b,t,i,f,r">(formula,)c,h,q,p,b,t,i,f,r</option>
+    </param>
+    <conditional name="noInChI">
+      <param name="opt" type="select" label="Disable InChI column">
+        <option value="yes">Yes</option>
+        <option value="no" selected="true">No</option>
+      </param>
+      <when value="yes"/>
+      <when value="no">
+        <param name="inchi_column" value="5" type="data_column" data_ref="input" label="InChI column" help="Could be optional only if CHEBI column is activated" />
+      </when>
+    </conditional>
+    <conditional name="noCHEBI">
+      <param name="opt" type="select" label="Disable CHEBI column">
+        <option value="yes">Yes</option>
+        <option value="no" selected="true">No</option>
+      </param>
+      <when value="yes"/>
+      <when value="no">
+        <param name="chebi_column" value="2" type="data_column" data_ref="input" label="CHEBI column" help="Could be optional only if InChI column is activated" />
+      </when>
+    </conditional>
+    <conditional name="noFilter">
+      <param name="opt" type="select" label="Disable filtered column">
+        <option value="yes">Yes</option>
+        <option value="no" selected="true">No</option>
+      </param>
+      <when value="yes"/>
+      <when value="no">
+        <param name="filtered_column" value="30" type="data_column" data_ref="input" label="Filtered_column" help="Lines containing empty values among the selected column are discarded  (for example, after a statistical pre-selection)." />
+      </when>
+    </conditional>
+  </inputs>
+
+  <outputs>
+    <data name="output_file_1" label="mapping.tsv" format="tabular" />
+    <data name="output_file_2" label="pathwayEnrichment.tsv" format="tabular" />
+    <data name="output_file_3" label="info.txt" format="txt" />
+  </outputs>
+
+  <help>
+
+.. class:: infomark
+
+**Website** https://metexplore.toulouse.inra.fr
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Contact** contact-metexplore@inra.fr
+
+---------------------------------------------------
+
+Metabolites extracted from the input file are mapped on a Recon network (Thiele et al., 2013) by providing either INCHI or CHEBI (or both) information. Pathway enrichment is calculated with an exact Fisher one-tailed test corrected by Bonferroni and Benjamini Hochberg methods.
+
+**Output files**
+    | - "mapping.tsv": each line corresponds to metabolites from the input file: the success or the failure of the mapping, their names, those of one or several elements of the network in mapping case.
+    | - "pathwayEnrichment.tsv" contains for each pathway associated with the mapped metabolites: their names, the Fisher's P value, the Bonferroni (or other test correction) value, the list of mapped metabolites, the number of mapped metabolites and the coverage of mapped metabolites on the total of metabolites contained by the studied pathway.
+    | - "info.txt" contains general information about mapping and pathway enrichment results
+
+**References**
+
+Thiele I, Swainston N, Fleming RMT, et al. A community-driven global reconstruction of human metabolism. Nature biotechnology. 2013;31(5):10.1038/nbt.2488. doi:10.1038/nbt.2488.
+  </help>
+
+</tool>
