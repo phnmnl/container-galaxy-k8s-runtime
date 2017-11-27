@@ -125,22 +125,14 @@ Metabolites extracted from the input file are mapped on a Recon network (Thiele 
 
 **References**
 
-    | Thiele I, Swainston N, Fleming RMT, et al. A community-driven global reconstruction of human metabolism (2013). *Nature biotechnology* **31(5)**:10.1038/nbt.2488. doi:10.1038/nbt.2488.
+    | Thiele I, Swainston N, Fleming RMT, et al. A community-driven global reconstruction of human metabolism (2013). *Nature biotechnology* **31(5)**:10. doi:10.1038/nbt.2488.
     | L. Cottret, D. Wildridge, F. Vinson, M. P. Barrett, H. Charles, M-F Sagot and F. Jourdan. MetExplore: a web server to link metabolomic experiments and genome-scale metabolic networks. (2010) *Nucleic Acids Research* **1**:38 Suppl:W132-7. doi:10.1093/nar/gkq312.
 
   </help>
 
   <citations>
-    <citation type="bibtex">@Article{Cottret2010,
-    Title                    = {MetExplore: a web server to link metabolomic experiments and genome-scale metabolic networks},
-    Author                   = {Cottret, Ludovic and Wildridge, David and Vinson, Florence and Barrett, Michael P and Charles, Hubert and Sagot, Marie-France and Jourdan, Fabien},
-    Journal                  = {Nucleic Acids Research},
-    Year                     = {2010},
-    Pages                    = {W132--W137},
-    Volume                   = {38},
-    Doi                      = {10.1093/nar/gkq312}
-    }</citation>
-  <citation type="doi">10.1093/bioinformatics/btu813</citation>
+  <citation type="doi">doi:10.1093/nar/gkq312</citation>
+  <citation type="doi">doi:10.1038/nbt.2488</citation>
 </citations>
 
 </tool>
