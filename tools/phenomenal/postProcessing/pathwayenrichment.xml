@@ -4,7 +4,7 @@
 
   <command> 
   	<![CDATA[
-     java -jar $__tool_directory__/pathwayEnrichment.jar
+     java -jar /pathwayEnrichment.jar
       -i $input
       -o1 $output_file_1
       -o2 $output_file_2
@@ -13,7 +13,7 @@
       #if $chooseSbml.opt == "yes":
        -s $chooseSbml.sbml
       #else
-       -s $__tool_directory__/data/recon2.v03_ext_noCompartment_noTransport_v2.xml
+       -s /data/recon2.v03_ext_noCompartment_noTransport_v2.xml
       #end if
       #if $noFilter.opt == "yes":
         -f -1
