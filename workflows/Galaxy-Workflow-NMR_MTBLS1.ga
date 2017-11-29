@@ -2,7 +2,7 @@
     "a_galaxy_workflow": "true", 
     "annotation": "", 
     "format-version": "0.1", 
-    "name": "Metabolomics NMR rnmr1d MetaboLights data processing and plot", 
+    "name": "Metabolomics NMR rnmr1d MetaboLights data processing and plot (imported from API)", 
     "steps": {
         "0": {
             "annotation": "", 
@@ -20,15 +20,15 @@
                 }
             ], 
             "position": {
-                "left": 200, 
-                "top": 124.46875
+                "left": 254.5, 
+                "top": 148
             }, 
             "post_job_actions": {}, 
             "tool_id": "mtbls_nmr_raw_dummy_importer", 
-            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"mtbls_id\": \"\\\"MTBLS1\\\"\"}", 
-            "tool_version": "0.4", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"mtbls_id\": \"\\\"\\\"\"}", 
+            "tool_version": "0.5", 
             "type": "tool", 
-            "uuid": "eedd08b8-ac4e-40e9-a56f-9ccd2ef08c95", 
+            "uuid": "75eea659-2280-4f39-a712-df3c1d2c6b08", 
             "workflow_outputs": []
         }, 
         "1": {
@@ -42,14 +42,14 @@
             "name": "Input dataset", 
             "outputs": [], 
             "position": {
-                "left": 610.234375, 
-                "top": 598.40625
+                "left": 498.5, 
+                "top": 465
             }, 
             "tool_id": null, 
             "tool_state": "{}", 
             "tool_version": null, 
             "type": "data_input", 
-            "uuid": "1d74d9b9-9d7b-4b6a-af73-082d7a2cf76c", 
+            "uuid": "554a42f3-d0a1-485f-85a4-17feac61f09c", 
             "workflow_outputs": []
         }, 
         "2": {
@@ -63,12 +63,7 @@
                     "output_name": "nmr_raw"
                 }
             }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool nmrmlconv", 
-                    "name": "infile"
-                }
-            ], 
+            "inputs": [], 
             "label": null, 
             "name": "nmrmlconv", 
             "outputs": [
@@ -78,15 +73,15 @@
                 }
             ], 
             "position": {
-                "left": 465, 
-                "top": 209.46875
+                "left": 505.5, 
+                "top": 211
             }, 
             "post_job_actions": {}, 
             "tool_id": "nmrmlconv", 
-            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"venformat\": \"\\\"bruker\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_state": "{\"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"venformat\": \"\\\"bruker\\\"\", \"infile\": \"null\"}", 
             "tool_version": "0.4", 
             "type": "tool", 
-            "uuid": "35c476cd-9a42-4107-8194-e1bfb2e33fdd", 
+            "uuid": "2923d8d9-5e9b-42ab-a671-5024229e02d9", 
             "workflow_outputs": []
         }, 
         "3": {
@@ -100,12 +95,7 @@
                     "output_name": "outfile"
                 }
             }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool ZIP nmrML Collection", 
-                    "name": "infiles"
-                }
-            ], 
+            "inputs": [], 
             "label": null, 
             "name": "ZIP nmrML Collection", 
             "outputs": [
@@ -115,15 +105,15 @@
                 }
             ], 
             "position": {
-                "left": 650, 
-                "top": 430.46875
+                "left": 663, 
+                "top": 343
             }, 
             "post_job_actions": {}, 
             "tool_id": "zip-nmrml-collection", 
-            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infiles\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_state": "{\"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"infiles\": \"null\"}", 
             "tool_version": "0.4", 
             "type": "tool", 
-            "uuid": "282f7a90-15c7-479d-9e61-11129e47c7c7", 
+            "uuid": "b35d74eb-4818-43dc-9e71-4cf75c067fd6", 
             "workflow_outputs": []
         }, 
         "4": {
@@ -141,16 +131,7 @@
                     "output_name": "output"
                 }
             }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool rnmr1d", 
-                    "name": "infile"
-                }, 
-                {
-                    "description": "runtime parameter for tool rnmr1d", 
-                    "name": "macrofile"
-                }
-            ], 
+            "inputs": [], 
             "label": null, 
             "name": "rnmr1d", 
             "outputs": [
@@ -160,15 +141,15 @@
                 }
             ], 
             "position": {
-                "left": 859, 
-                "top": 541.46875
+                "left": 875.5, 
+                "top": 449
             }, 
             "post_job_actions": {}, 
             "tool_id": "rnmr1d", 
-            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"macrofile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_state": "{\"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile\": \"null\", \"macrofile\": \"null\"}", 
             "tool_version": "0.4", 
             "type": "tool", 
-            "uuid": "f2ff1a72-cde8-4b2f-bc67-3a229719fca6", 
+            "uuid": "c596832c-fd5e-492e-9e07-9e7cd9c2d224", 
             "workflow_outputs": []
         }, 
         "5": {
@@ -182,12 +163,7 @@
                     "output_name": "outfile"
                 }
             }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool rnmr1d-stacked-plot", 
-                    "name": "infile"
-                }
-            ], 
+            "inputs": [], 
             "label": null, 
             "name": "rnmr1d-stacked-plot", 
             "outputs": [
@@ -197,17 +173,17 @@
                 }
             ], 
             "position": {
-                "left": 1085, 
-                "top": 673.5
+                "left": 1004, 
+                "top": 610
             }, 
             "post_job_actions": {}, 
             "tool_id": "rnmr1d-stacked-plot", 
-            "tool_state": "{\"__page__\": null, \"max_ppm_shift\": \"\\\"1\\\"\", \"plot_type\": \"\\\"perspective\\\"\", \"__rerun_remap_job_id__\": null, \"stack_height\": \"\\\"0.67\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_state": "{\"plot_type\": \"\\\"perspective\\\"\", \"max_ppm_shift\": \"\\\"1\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"stack_height\": \"\\\"0.67\\\"\", \"infile\": \"null\"}", 
             "tool_version": "0.4", 
             "type": "tool", 
-            "uuid": "b1930b4a-af1b-440f-9dba-d6cd458d07df", 
+            "uuid": "780d6e0f-188c-4f93-bf71-5917d21d4a49", 
             "workflow_outputs": []
         }
     }, 
-    "uuid": "c9495450-fb9e-4256-9277-ec0dd2c2b880"
+    "uuid": "6fdf0a15-5f70-45ff-90bf-e73223e4c254"
 }
