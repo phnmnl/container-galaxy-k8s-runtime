@@ -1,5 +1,5 @@
 <!-- vi: se fdm=marker : -->
-<tool id="mtbls-dwnld" name="Metabolights downloader" version="3.0">
+<tool id="mtbls-dwnld" name="Metabolights downloader" version="3.0.1">
 
 	<description>Import public and private MetaboLights studies</description>
 
@@ -132,6 +132,24 @@ Output
 
 The output is an ISA dataset that can be used in subsequent tools like isa2w4m.
 The ISA dataset stores all files contain in the downloaded Metabolights study.
+
+---------------------
+Developer information
+---------------------
+
+The Metabolights downloader downloads a compressed archive from Metabolights database and extract it inside Galaxy dataset folder. It creates an HTML file (used as primary file) and extract all files from archive inside the subfolder ``&lt;name_of_the_HTML_file&gt;_files``.
+
+Note that neither the uploader nor the ISA Galaxy data type are involved during this process. This is the reason why the downloader has to create itself an HTML file that will serve as primary file and to extract files inside ``*_files`` subfolder.
+
+A subsequent tool that would use the output of the Metabolights downloader has to declare the input as ISA type::
+
+  &lt;param name="isa" label="ISA" type="data" format="isa"/&gt;
+
+Then to use it inside the command tag, one must use the variable ``$isa.extra_files_path`` to get the path of the folder where all ISA archive files have been extracted::
+
+  &lt;command&gt;&lt;![CDATA[some-program-to-run --the-isa-folder "$isa.extra_files_path" ]]&gt;&lt;/command&gt;
+
+The easiest way to use the ISA archive inside the run program is then to use the Python3 library isatools to load it. See https://github.com/ISA-tools/isa-api for information.
 
 <!-- @@@END_RST@@@ -->
     </help>
