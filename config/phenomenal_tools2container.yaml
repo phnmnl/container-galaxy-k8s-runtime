@@ -41,43 +41,6 @@ assignment:
   docker_tag_override: v0.4_cv0.3.11
   max_pod_retrials: 3
   
-# W4M
-- tools_id:
-   - mtbls-dwnld
-  docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_owner_override: phnmnl
-  docker_image_override: mtbls-dwnld
-  docker_tag_override: v2.0.5_cv1.2.16
-  max_pod_retrials: 3
-- tools_id:
-   - univariate
-  docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_owner_override: phnmnl
-  docker_image_override: univariate
-  docker_tag_override: v2.2.3_cv1.2.28
-  max_pod_retrials: 3
-- tools_id:
-   - multivariate
-  docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_owner_override: phnmnl
-  docker_image_override: multivariate
-  docker_tag_override: v2.3.10_cv1.1.18
-  max_pod_retrials: 3
-- tools_id:
-   - biosigner
-  docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_owner_override: phnmnl
-  docker_image_override: biosigner
-  docker_tag_override: v2.2.7_cv1.1.12
-  max_pod_retrials: 3
-- tools_id:
-   - lcmsmatching
-  docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_owner_override: phnmnl
-  docker_image_override: lcmsmatching
-  docker_tag_override: v3.1.6_cv1.3.61
-  max_pod_retrials: 3
-  
 - tools_id:
    - power-analysis
   docker_repo_override: container-registry.phenomenal-h2020.eu
