@@ -1,0 +1,138 @@
+<tool id="pathway_enrichment" name="Pathway_Enrichment" version="1.0">
+
+  <description>predicts enrichment among a (human) metabolic network (Recon 2v3)</description>
+
+  <command> 
+  	<![CDATA[
+     java -jar /pathwayEnrichment.jar
+      -i $input
+      -o1 $output_file_1
+      -o2 $output_file_2
+      -o3 $output_file_3
+      -l$inchi_layers
+      #if $chooseSbml.opt == "yes":
+       -s $chooseSbml.sbml
+      #else
+       -s /data/recon2.v03_ext_noCompartment_noTransport_v2.xml
+      #end if
+      #if $noFilter.opt == "yes":
+        -f -1
+      #else:
+        -f $noFilter.filtered_column
+      #end if
+      #if $noCHEBI.opt == "yes":
+        -chebi -1
+      #else:
+        -chebi $noCHEBI.chebi_column
+      #end if
+      #if $noInChI.opt == "yes":
+        -inchi -1
+      #else:
+        -inchi $noInChI.inchi_column
+      #end if        
+    ]]>
+  </command>
+
+  <inputs>
+    <param format="tsv,tabular" name="input" type="data" label="Dataset"/>      
+    <conditional name="chooseSbml">
+      <param name="opt" type="select" label="Choose another Sbml (default: Recon 2v3 flat)">
+        <option value="yes">Yes</option>
+        <option value="no" selected="true">No</option>
+      </param>
+      <when value="yes">
+        <param format="xml" name="sbml" type="data" label="Sbml file"/>
+      </when>
+      <when value="no"/>
+    </conditional>
+    <param name="inchi_layers" type="select" label="Mapped InChI layers" help="InChI layers choosed for a mapping between the input and the network files (e.g., Recon 2v3) among: connections (c), hydrogens atoms (h), charge (q), protons (p), double-bond stereo (b), tetrahedral sp3 stereo (t), isotopic atoms (i), fixed hydrogens (f) and reconnected layers (r).">
+      <option value="">formula</option>
+      <option value=" c">(formula,)c</option>
+      <option value=" c,h" selected="true">(formula,)c,h</option>
+      <option value=" c,h,q">(formula,)c,h,q</option>
+      <option value=" c,h,q,p">(formula,)c,h,q,p</option>
+      <option value=" c,h,q,p,b">(formula,)c,h,q,p,b</option>
+      <option value=" c,h,q,p,b,t">(formula,)c,h,q,p,b,t</option>
+      <option value=" c,h,q,p,b,t,i">(formula,)c,h,q,p,b,t,i</option>
+      <option value=" c,h,q,p,b,t,i,f">(formula,)c,h,q,p,b,t,i,f</option>
+      <option value=" c,h,q,p,b,t,i,f,r">(formula,)c,h,q,p,b,t,i,f,r</option>
+    </param>
+    <conditional name="noInChI">
+      <param name="opt" type="select" label="Disable InChI column" help="Could be optional only if CHEBI column is activated" >
+        <option value="yes">Yes</option>
+        <option value="no" selected="true">No</option>
+      </param>
+      <when value="yes"/>
+      <when value="no">
+        <param name="inchi_column" value="5" type="data_column" data_ref="input" label="InChI column" />
+      </when>
+    </conditional>
+    <conditional name="noCHEBI">
+      <param name="opt" type="select" label="Disable CHEBI column" help="Could be optional only if InChI column is activated" >
+        <option value="yes">Yes</option>
+        <option value="no" selected="true">No</option>
+      </param>
+      <when value="yes"/>
+      <when value="no">
+        <param name="chebi_column" value="2" type="data_column" data_ref="input" label="CHEBI column" />
+      </when>
+    </conditional>
+    <conditional name="noFilter">
+      <param name="opt" type="select" label="Disable filtered column" help="Lines containing empty values among the selected column are discarded from the analysis (for example, after a statistical pre-selection).">
+        <option value="yes">Yes</option>
+        <option value="no" selected="true">No</option>
+      </param>
+      <when value="yes"/>
+      <when value="no">
+        <param name="filtered_column" value="30" type="data_column" data_ref="input" label="Filtered_column" />
+      </when>
+    </conditional>
+  </inputs>
+
+  <outputs>
+    <data name="output_file_1" label="mapping.tsv" format="tabular" />
+    <data name="output_file_2" label="pathwayEnrichment.tsv" format="tabular" />
+    <data name="output_file_3" label="info.txt" format="txt" />
+  </outputs>
+
+  <help>
+
+
+
+.. class:: infomark
+
+**Author**  MetExplore team (INRA Toulouse, Toxalim, MeX, contact-metexplore@inra.fr)
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Website** https://metexplore.toulouse.inra.fr
+
+---------------------------------------------------
+
+Metabolites extracted from the input file are mapped on a Recon network (Thiele et al., 2013) by providing either INCHI or CHEBI (or both) information. Pathway enrichment is calculated with an exact Fisher one-tailed test corrected by Bonferroni and Benjamini Hochberg methods. This tool is part of the MetExplore's project consisting in a web server based on graph theory and vizualisation tools to allow users performing various analysis (Cottret et al., 2010).
+
+**Input files**
+    | - a dataset (tsv or tabular format): a list of detected metabolites containing at least their names (first column), their InChI or their CHEBI, and eventually a discriminant information about some significant metabolites.
+    | - a bionetwork : eventually, a sbml file a containing metabolites network (Recon 2v3 is included by default).
+    | 
+
+**Output files**
+    | - "mapping.tsv": each line corresponds to metabolites from the dataset file: the success or the failure of the mapping, their names in the dataset, those of one or several elements of the network in case of matching.
+    | - "pathwayEnrichment.tsv" contains for each pathway associated with the mapped metabolites: their names, the Fisher's p value of enrichment, the Bonferroni (or other test correction) q-value, the list of mapped metabolites, the number of mapped metabolites and the coverage of mapped metabolites on the total of metabolites contained by the studied pathway.
+    | - "info.txt" contains general information about mapping and pathway enrichment results. These informations correspond to the total number of mapped metabolites, the total number of metabolites from the dataset, the total number of pathway after mapping and the total number of pathway in the SBML.
+
+**References**
+
+    | Thiele I, Swainston N, Fleming RMT, et al. A community-driven global reconstruction of human metabolism (2013). *Nature biotechnology* **31(5)**:10. doi:10.1038/nbt.2488.
+    | L. Cottret, D. Wildridge, F. Vinson, M. P. Barrett, H. Charles, M-F Sagot and F. Jourdan. MetExplore: a web server to link metabolomic experiments and genome-scale metabolic networks. (2010) *Nucleic Acids Research* **1**:38 Suppl:W132-7. doi:10.1093/nar/gkq312.
+
+  </help>
+
+  <citations>
+  <citation type="doi">doi:10.1093/nar/gkq312</citation>
+  <citation type="doi">doi:10.1038/nbt.2488</citation>
+</citations>
+
+</tool>

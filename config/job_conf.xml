@@ -327,7 +327,7 @@
            <param id="docker_tag_override">v0.8.0_cv0.2.26</param>
            <param id="max_pod_retrials">3</param>
            <param id="docker_enabled">true</param>
-         </destination>
+        </destination>
     </destinations>
     <tools>
         <!-- Tools can be configured to use specific destinations or handlers,
@@ -335,6 +335,8 @@
              a tag, a handler or destination that matches that tag will be
              chosen at random.
          -->
+
+        <tool id="pathway_enrichment" destination="dynamic-k8s-large" resources="all"/>
         <tool id="BatchFeatureRemoval" destination="batchfeature-container"/>
         <tool id="upps_blankfilter" destination="blankfilter-container"/>
         <tool id="log2transformation" destination="log2transformation-container"/>
