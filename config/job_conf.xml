@@ -61,14 +61,6 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
-        <destination id="w4m-biosigner-container" runner="k8s">
-	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">biosigner</param>
-            <param id="docker_tag_override">v2.2.7_cv1.1.12</param>
-            <param id="max_pod_retrials">3</param>
-            <param id="docker_enabled">true</param>
-        </destination>
 	<destination id="camera-container" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
@@ -96,38 +88,6 @@
         <destination id="papy-container" runner="k8s">
             <param id="docker_enabled">true</param>
         </destination>      
-	<destination id="w4m-mtbls-dwnld-container" runner="k8s">
-	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">mtbls-dwnld</param>
-            <param id="docker_tag_override">v2.0.5_cv1.2.16</param>
-            <param id="max_pod_retrials">3</param>
-            <param id="docker_enabled">true</param>
-        </destination>
-	<destination id="w4m-univariate-container" runner="k8s">
-	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">univariate</param>
-            <param id="docker_tag_override">v2.2.3_cv1.2.28</param>
-            <param id="max_pod_retrials">3</param>
-            <param id="docker_enabled">true</param>
-        </destination>
-	<destination id="w4m-multivariate-container" runner="k8s">
-	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">multivariate</param>
-            <param id="docker_tag_override">v2.3.10_cv1.1.18</param>
-            <param id="max_pod_retrials">3</param>
-            <param id="docker_enabled">true</param>
-        </destination>
-	<destination id="w4m-lcmsmatching-container" runner="k8s">
-	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">lcmsmatching</param>
-            <param id="docker_tag_override">v3.1.6_cv1.3.61</param>
-            <param id="max_pod_retrials">3</param>
-            <param id="docker_enabled">true</param>
-        </destination>
 	<destination id="msconvert2-container" runner="k8s">
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
@@ -348,11 +308,11 @@
         <tool id="batman-nmr" destination="batman-container"/>
 	<tool id="power-analysis" destination="papy-container"/>
 	<!-- W4M Sacurine -->
-        <tool id="mtbls-dwnld" destination="w4m-mtbls-dwnld-container"/>
-        <tool id="Univariate" destination="w4m-univariate-container"/>
-        <tool id="Multivariate" destination="w4m-multivariate-container"/>
-        <tool id="Biosigner" destination="w4m-biosigner-container"/>
-        <tool id="lcmsmatching" destination="w4m-lcmsmatching-container"/>
+        <tool id="mtbls-dwnld" destination="dynamic-k8s-tiny" resources="all"/>
+        <tool id="Univariate" destination="dynamic-k8s-small" resources="all"/>
+        <tool id="Multivariate" destination="dynamic-k8s-small" resources="all"/>
+        <tool id="Biosigner" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="lcmsmatching" destination="dynamic-k8s-small" resources="all"/>
         <tool id="msconvert2" destination="msconvert2-container"/>
         <!-- new NMR -->
 	<tool id="metabolab" destination="dynamic-k8s-large" resources="all"/>
