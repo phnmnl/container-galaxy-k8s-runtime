@@ -68,6 +68,14 @@
       <param id="max_pod_retrials">1</param>
       <param id="docker_enabled">true</param>
     </destination>
+		<destination id="isa2w4m-container" runner="k8s">
+			<param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+			<param id="docker_owner_override">phnmnl</param>
+			<param id="docker_image_override">isa2w4m</param>
+			<param id="docker_tag_override">latest</param>
+			<param id="max_pod_retrials">3</param>
+			<param id="docker_enabled">true</param>
+		</destination>
     <destination id="isodyn-container" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -308,6 +316,7 @@
     <tool id="power-analysis" destination="papy-container"/>
     <!-- W4M Sacurine -->
     <tool id="mtbls-dwnld" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa2w4m" destination="dynamic-k8s-tiny"/>
     <tool id="Univariate" destination="dynamic-k8s-small" resources="all"/>
     <tool id="Multivariate" destination="dynamic-k8s-small" resources="all"/>
     <tool id="Biosigner" destination="dynamic-k8s-medium" resources="all"/>
