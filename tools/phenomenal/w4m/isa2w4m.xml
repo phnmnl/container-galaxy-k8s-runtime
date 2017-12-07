@@ -8,7 +8,7 @@
 	<command><![CDATA[
 		## @@@BEGIN_CHEETAH@@@
 
-		$__tool_directory__/isa2w4m.py
+		isa2w4m.py
 		-i "$isa.extra_files_path"
 		-s "$w4m_sample_metadata"
 		-v "$w4m_variable_metadata"
