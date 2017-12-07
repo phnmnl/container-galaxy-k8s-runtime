@@ -100,7 +100,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">isa2w4m</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v1.0.4_cv1.2</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -108,7 +108,7 @@
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">mtbls-dwnld</param>
-            <param id="docker_tag_override">latest</param>
+            <param id="docker_tag_override">v3.0.1_cv1.3</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
