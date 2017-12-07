@@ -1,0 +1,1328 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "MTBLS 520 Workflow", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "content_id": "mtbls520_01_mtbls_download_maf", 
+            "errors": null, 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [], 
+            "label": null, 
+            "name": "mtbls520_01_mtbls_download", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "no_unzip.zip"
+                }
+            ], 
+            "position": {
+                "left": 200, 
+                "top": 195
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_01_mtbls_download_maf", 
+            "tool_state": "{\"__page__\": null, \"token\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null, \"id\": \"\\\"520\\\"\"}", 
+            "tool_version": "0.2", 
+            "type": "tool", 
+            "uuid": "3f117a74-fb50-4911-833f-9c121c749be7", 
+            "workflow_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "content_id": "mtbls520_02_extract", 
+            "errors": null, 
+            "id": 1, 
+            "input_connections": {
+                "infile": {
+                    "id": 0, 
+                    "output_name": "outfile1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_02_extract", 
+                    "name": "infile"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_02_extract", 
+            "outputs": [
+                {
+                    "name": "studyfiles", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "qcfiles", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "studymaf", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "qcmaf", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "traitsfile", 
+                    "type": "csv"
+                }, 
+                {
+                    "name": "phylofile", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "afile", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "sfile", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 400, 
+                "top": 282
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_02_extract", 
+            "tool_state": "{\"polarity\": \"\\\"pos\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.3", 
+            "type": "tool", 
+            "uuid": "74ae7d1c-ab98-4dfe-8643-973de21a125d", 
+            "workflow_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "content_id": "mtbls520_04_preparations", 
+            "errors": null, 
+            "id": 2, 
+            "input_connections": {
+                "afile": {
+                    "id": 1, 
+                    "output_name": "afile"
+                }, 
+                "sfile": {
+                    "id": 1, 
+                    "output_name": "sfile"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_04_preparations", 
+                    "name": "sfile"
+                }, 
+                {
+                    "description": "runtime parameter for tool mtbls520_04_preparations", 
+                    "name": "afile"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_04_preparations", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "rdata"
+                }
+            ], 
+            "position": {
+                "left": 664.5, 
+                "top": 284
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_04_preparations", 
+            "tool_state": "{\"polarity\": \"\\\"pos\\\"\", \"sfile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"afile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "54e90241-4f2b-46f4-9b59-93de244564f3", 
+            "workflow_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "content_id": "mtbls520_03_quality_control", 
+            "errors": null, 
+            "id": 3, 
+            "input_connections": {
+                "afile": {
+                    "id": 1, 
+                    "output_name": "afile"
+                }, 
+                "sfile": {
+                    "id": 1, 
+                    "output_name": "sfile"
+                }, 
+                "studyfolder": {
+                    "id": 1, 
+                    "output_name": "qcfiles"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_03_quality_control", 
+                    "name": "sfile"
+                }, 
+                {
+                    "description": "runtime parameter for tool mtbls520_03_quality_control", 
+                    "name": "afile"
+                }, 
+                {
+                    "description": "runtime parameter for tool mtbls520_03_quality_control", 
+                    "name": "studyfolder"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_03_quality_control", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "outfile2", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile3", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile4", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile5", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile6", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile7", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile8", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile9", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile10", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile11", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile12", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile13", 
+                    "type": "rdata"
+                }
+            ], 
+            "position": {
+                "left": 482, 
+                "top": 592
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_03_quality_control", 
+            "tool_state": "{\"polarity\": \"\\\"pos\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"studyfolder\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"sfile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"afile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "006a3fe7-2a60-4671-84ae-041dfb832ce7", 
+            "workflow_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "content_id": "mtbls520_05a_import_maf", 
+            "errors": null, 
+            "id": 4, 
+            "input_connections": {
+                "infile1": {
+                    "id": 2, 
+                    "output_name": "outfile1"
+                }, 
+                "infile2": {
+                    "id": 1, 
+                    "output_name": "studymaf"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_05a_import_maf", 
+                    "name": "infile2"
+                }, 
+                {
+                    "description": "runtime parameter for tool mtbls520_05a_import_maf", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_05a_import_maf", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "rdata"
+                }
+            ], 
+            "position": {
+                "left": 949.5, 
+                "top": 289
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_05a_import_maf", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "f6000cda-bbed-4688-bd58-1643a1d8367e", 
+            "workflow_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "content_id": "mtbls520_06_import_traits", 
+            "errors": null, 
+            "id": 5, 
+            "input_connections": {
+                "infile1": {
+                    "id": 4, 
+                    "output_name": "outfile1"
+                }, 
+                "infile2": {
+                    "id": 1, 
+                    "output_name": "traitsfile"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_06_import_traits", 
+                    "name": "infile2"
+                }, 
+                {
+                    "description": "runtime parameter for tool mtbls520_06_import_traits", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_06_import_traits", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "rdata"
+                }
+            ], 
+            "position": {
+                "left": 1232, 
+                "top": 291
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_06_import_traits", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "d22e2ada-402f-461f-9e30-3524132cab68", 
+            "workflow_outputs": []
+        }, 
+        "6": {
+            "annotation": "", 
+            "content_id": "mtbls520_07_species_diversity", 
+            "errors": null, 
+            "id": 6, 
+            "input_connections": {
+                "afile": {
+                    "id": 1, 
+                    "output_name": "afile"
+                }, 
+                "infile1": {
+                    "id": 5, 
+                    "output_name": "outfile1"
+                }, 
+                "sfile": {
+                    "id": 1, 
+                    "output_name": "sfile"
+                }, 
+                "studyfolder": {
+                    "id": 1, 
+                    "output_name": "studyfiles"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_07_species_diversity", 
+                    "name": "sfile"
+                }, 
+                {
+                    "description": "runtime parameter for tool mtbls520_07_species_diversity", 
+                    "name": "afile"
+                }, 
+                {
+                    "description": "runtime parameter for tool mtbls520_07_species_diversity", 
+                    "name": "studyfolder"
+                }, 
+                {
+                    "description": "runtime parameter for tool mtbls520_07_species_diversity", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_07_species_diversity", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "csv"
+                }, 
+                {
+                    "name": "outfile2", 
+                    "type": "rdata"
+                }
+            ], 
+            "position": {
+                "left": 1507.5, 
+                "top": 290
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_07_species_diversity", 
+            "tool_state": "{\"polarity\": \"\\\"pos\\\"\", \"__page__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"studyfolder\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"sfile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"afile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "654f9473-dc95-4064-a24d-f1b81fd4977b", 
+            "workflow_outputs": []
+        }, 
+        "7": {
+            "annotation": "", 
+            "content_id": "mtbls520_08a_species_shannon", 
+            "errors": null, 
+            "id": 7, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_08a_species_shannon", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_08a_species_shannon", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 851, 
+                "top": 513
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_08a_species_shannon", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "e2408fdb-3ca0-4e2c-a2fe-50237fff8e13", 
+            "workflow_outputs": []
+        }, 
+        "8": {
+            "annotation": "", 
+            "content_id": "mtbls520_08b_species_unique", 
+            "errors": null, 
+            "id": 8, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_08b_species_unique", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_08b_species_unique", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 851, 
+                "top": 621
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_08b_species_unique", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "89d16bac-6001-4389-8c2e-6c8c161f42cc", 
+            "workflow_outputs": []
+        }, 
+        "9": {
+            "annotation": "", 
+            "content_id": "mtbls520_08c_species_variability", 
+            "errors": null, 
+            "id": 9, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_08c_species_variability", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_08c_species_variability", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile2", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 853.5, 
+                "top": 729
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_08c_species_variability", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "7ddbe4c8-3411-4e0c-a50d-fa2afcf0f938", 
+            "workflow_outputs": []
+        }, 
+        "10": {
+            "annotation": "", 
+            "content_id": "mtbls520_08d_concentration", 
+            "errors": null, 
+            "id": 10, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_08d_concentration", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_08d_concentration", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 854.5, 
+                "top": 870
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_08d_concentration", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "520827ad-3976-486d-a5f7-93561c4f1c3e", 
+            "workflow_outputs": []
+        }, 
+        "11": {
+            "annotation": "", 
+            "content_id": "mtbls520_09_species_venn", 
+            "errors": null, 
+            "id": 11, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_09_species_venn", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_09_species_venn", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile2", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile3", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile4", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile5", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile6", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile7", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile8", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile9", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile10", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile11", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 1176, 
+                "top": 514
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_09_species_venn", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "bd610b85-d29f-4460-b8ea-ed13c7534fba", 
+            "workflow_outputs": []
+        }, 
+        "12": {
+            "annotation": "", 
+            "content_id": "mtbls520_08e_species_features", 
+            "errors": null, 
+            "id": 12, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_08e_species_features", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_08e_species_features", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 854, 
+                "top": 984
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_08e_species_features", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "34a8b751-f76f-47a0-950d-9ee11542bb53", 
+            "workflow_outputs": []
+        }, 
+        "13": {
+            "annotation": "", 
+            "content_id": "mtbls520_10_species_varpart", 
+            "errors": null, 
+            "id": 13, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_10_species_varpart", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_10_species_varpart", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 854.5, 
+                "top": 1097
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_10_species_varpart", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "3df5fa21-9a86-4244-957e-140c29948013", 
+            "workflow_outputs": []
+        }, 
+        "14": {
+            "annotation": "", 
+            "content_id": "mtbls520_12_species_marchantia", 
+            "errors": null, 
+            "id": 14, 
+            "input_connections": {
+                "afile": {
+                    "id": 1, 
+                    "output_name": "afile"
+                }, 
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }, 
+                "sfile": {
+                    "id": 1, 
+                    "output_name": "sfile"
+                }, 
+                "studyfolder": {
+                    "id": 1, 
+                    "output_name": "studyfiles"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_12_species_marchantia", 
+                    "name": "sfile"
+                }, 
+                {
+                    "description": "runtime parameter for tool mtbls520_12_species_marchantia", 
+                    "name": "afile"
+                }, 
+                {
+                    "description": "runtime parameter for tool mtbls520_12_species_marchantia", 
+                    "name": "studyfolder"
+                }, 
+                {
+                    "description": "runtime parameter for tool mtbls520_12_species_marchantia", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_12_species_marchantia", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 1177.5, 
+                "top": 895
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_12_species_marchantia", 
+            "tool_state": "{\"polarity\": \"\\\"pos\\\"\", \"__page__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"studyfolder\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"sfile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"afile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "24d85f50-c864-40b8-9cd5-a5ec3dc0d3ed", 
+            "workflow_outputs": []
+        }, 
+        "15": {
+            "annotation": "", 
+            "content_id": "mtbls520_11_species_nmds", 
+            "errors": null, 
+            "id": 15, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_11_species_nmds", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_11_species_nmds", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile2", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile3", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 1177, 
+                "top": 1097
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_11_species_nmds", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "07306e24-9398-43d4-b848-25c19438425b", 
+            "workflow_outputs": []
+        }, 
+        "16": {
+            "annotation": "", 
+            "content_id": "mtbls520_14_ecology_varpart", 
+            "errors": null, 
+            "id": 16, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_14_ecology_varpart", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_14_ecology_varpart", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 1569.5, 
+                "top": 562
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_14_ecology_varpart", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "ef02aad7-98b4-448b-adfa-7ae36cd1d71c", 
+            "workflow_outputs": []
+        }, 
+        "17": {
+            "annotation": "", 
+            "content_id": "mtbls520_15_ecology_pca", 
+            "errors": null, 
+            "id": 17, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_15_ecology_pca", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_15_ecology_pca", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 1570, 
+                "top": 670
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_15_ecology_pca", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "e0b32ced-4d27-4e70-937b-93befb857d50", 
+            "workflow_outputs": []
+        }, 
+        "18": {
+            "annotation": "", 
+            "content_id": "mtbls520_16_ecology_rda", 
+            "errors": null, 
+            "id": 18, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_16_ecology_rda", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_16_ecology_rda", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "outfile2", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 1570.5, 
+                "top": 782
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_16_ecology_rda", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "8896766f-30dc-4aea-89f2-1104118d989f", 
+            "workflow_outputs": []
+        }, 
+        "19": {
+            "annotation": "", 
+            "content_id": "mtbls520_17_ecology_splsda", 
+            "errors": null, 
+            "id": 19, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_17_ecology_splsda", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_17_ecology_splsda", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "outfile2", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile3", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 1571.5, 
+                "top": 916
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_17_ecology_splsda", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "fd20f2fd-7b1d-4242-b44d-38577da101b1", 
+            "workflow_outputs": []
+        }, 
+        "20": {
+            "annotation": "", 
+            "content_id": "mtbls520_19a_seasons_shannon", 
+            "errors": null, 
+            "id": 20, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_19a_seasons_shannon", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_19a_seasons_shannon", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 1897, 
+                "top": 369
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_19a_seasons_shannon", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "dc46d788-f388-4ea6-ac90-4a532f0c1f16", 
+            "workflow_outputs": []
+        }, 
+        "21": {
+            "annotation": "", 
+            "content_id": "mtbls520_18_phylogeny", 
+            "errors": null, 
+            "id": 21, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }, 
+                "infile2": {
+                    "id": 1, 
+                    "output_name": "phylofile"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_18_phylogeny", 
+                    "name": "infile2"
+                }, 
+                {
+                    "description": "runtime parameter for tool mtbls520_18_phylogeny", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_18_phylogeny", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile2", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 1525.5, 
+                "top": 1189
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_18_phylogeny", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "aa4086dc-98ff-4a4a-a445-4531fd1cb99a", 
+            "workflow_outputs": []
+        }, 
+        "22": {
+            "annotation": "", 
+            "content_id": "mtbls520_19b_seasons_unique", 
+            "errors": null, 
+            "id": 22, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_19b_seasons_unique", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_19b_seasons_unique", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 1899.5, 
+                "top": 479
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_19b_seasons_unique", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "30941d5d-04a5-4daa-abe4-9eb80c151fc2", 
+            "workflow_outputs": []
+        }, 
+        "23": {
+            "annotation": "", 
+            "content_id": "mtbls520_19c_seasons_variability", 
+            "errors": null, 
+            "id": 23, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_19c_seasons_variability", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_19c_seasons_variability", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile2", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 1900, 
+                "top": 585
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_19c_seasons_variability", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "3cad695c-5cd2-4722-a675-76ca97d5fe87", 
+            "workflow_outputs": []
+        }, 
+        "24": {
+            "annotation": "", 
+            "content_id": "mtbls520_19d_seasons_concentration", 
+            "errors": null, 
+            "id": 24, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_19d_seasons_concentration", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_19d_seasons_concentration", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 1900.5, 
+                "top": 737
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_19d_seasons_concentration", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "c4cbe674-a0a7-428d-bba0-0275d679d113", 
+            "workflow_outputs": []
+        }, 
+        "25": {
+            "annotation": "", 
+            "content_id": "mtbls520_19e_seasons_features", 
+            "errors": null, 
+            "id": 25, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_19e_seasons_features", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_19e_seasons_features", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 1899, 
+                "top": 866
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_19e_seasons_features", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "7c7accc3-6bb1-4621-b992-6bf6b242a5ef", 
+            "workflow_outputs": []
+        }, 
+        "26": {
+            "annotation": "", 
+            "content_id": "mtbls520_22_seasons_pca", 
+            "errors": null, 
+            "id": 26, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_22_seasons_pca", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_22_seasons_pca", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 1901, 
+                "top": 975
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_22_seasons_pca", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "100f46ca-bbfc-4f79-a175-695f297721ad", 
+            "workflow_outputs": []
+        }, 
+        "27": {
+            "annotation": "", 
+            "content_id": "mtbls520_23_seasons_rda", 
+            "errors": null, 
+            "id": 27, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_23_seasons_rda", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_23_seasons_rda", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 1901.5, 
+                "top": 1085
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_23_seasons_rda", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "68bcb79d-c3e6-4638-965d-5e9742c64659", 
+            "workflow_outputs": []
+        }, 
+        "28": {
+            "annotation": "", 
+            "content_id": "mtbls520_24_seasons_nmds", 
+            "errors": null, 
+            "id": 28, 
+            "input_connections": {
+                "infile1": {
+                    "id": 6, 
+                    "output_name": "outfile2"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool mtbls520_24_seasons_nmds", 
+                    "name": "infile1"
+                }
+            ], 
+            "label": null, 
+            "name": "mtbls520_24_seasons_nmds", 
+            "outputs": [
+                {
+                    "name": "outfile1", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile2", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "outfile3", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 1904, 
+                "top": 1202
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "mtbls520_24_seasons_nmds", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.5", 
+            "type": "tool", 
+            "uuid": "743acf64-046e-4d08-a0f7-817a68262003", 
+            "workflow_outputs": []
+        }
+    }, 
+    "uuid": "04a45ff4-a158-4f82-8758-ef8c9b892331"
+}
