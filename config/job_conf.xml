@@ -96,11 +96,19 @@
         <destination id="papy-container" runner="k8s">
             <param id="docker_enabled">true</param>
         </destination>      
+	<destination id="isa2w4m-container" runner="k8s">
+	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">isa2w4m</param>
+            <param id="docker_tag_override">v1.0.4_cv1.2.6</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
 	<destination id="w4m-mtbls-dwnld-container" runner="k8s">
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
             <param id="docker_image_override">mtbls-dwnld</param>
-            <param id="docker_tag_override">v2.0.5_cv1.2.16</param>
+            <param id="docker_tag_override">v3.0.1_cv1.3.22</param>
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
@@ -357,6 +365,7 @@
 	<tool id="power-analysis" destination="papy-container"/>
 	<!-- W4M Sacurine -->
         <tool id="mtbls-dwnld" destination="w4m-mtbls-dwnld-container"/>
+        <tool id="isa2w4m" destination="isa2w4m-container"/>
         <tool id="Univariate" destination="w4m-univariate-container"/>
         <tool id="Multivariate" destination="w4m-multivariate-container"/>
         <tool id="Biosigner" destination="w4m-biosigner-container"/>

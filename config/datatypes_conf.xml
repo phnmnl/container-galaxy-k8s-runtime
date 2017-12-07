@@ -612,6 +612,8 @@
     <datatype extension="pttree" type="galaxy.datatypes.text:PlantTribesPhylogeneticTree" />
     <datatype extension="smat" type="galaxy.datatypes.text:Smat" display_in_upload="true" />
 
+   	<datatype extension="isa" type="galaxy.datatypes.isa:Isa" mimetype="application/isa-tools" display_in_upload="true" description="ISA {Tab,JSON} data type." description_url="https://isa-tools.org"/>
+
     <datatype extension="rdata" type="galaxy.datatypes.binary:Binary" mimetype="application/x-gzip" subclass="true" display_in_upload="true" />
     <datatype extension="rdata.xcms.raw" type="galaxy.datatypes.rdata_xcms_datatype:RdataXcmsRaw" mimetype="application/x-gzip" subclass="true" display_in_upload="true" />
     <datatype extension="rdata.xcms.group" type="galaxy.datatypes.rdata_xcms_datatype:RdataXcmsGroup" mimetype="application/x-gzip" subclass="true" display_in_upload="true" />
