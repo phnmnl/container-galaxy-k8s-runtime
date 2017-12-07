@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Eco-Metabolomics]-->
+<tool id="mtbls520_01_mtbls_download" name="mtbls520_01_mtbls_download" version="0.5">
+  <requirements>
+    <container type="docker">korseby/mtbls520</container>
+  </requirements>
+  <description>Download private MTBLS study via https.</description>
+  <command><![CDATA[
+mtbls520_01_mtbls_download.sh $id $token $outfile1 2>&1;
+  ]]>
+  </command>
+  <inputs>
+    <param name="id" type="text" value="520" label="MetaboLights ID" help="Enter the MetaboLights ID here, e.g. 520." />
+    <param name="token" type="text" label="MetaboLights Token" help="Enter the Secret MetaboLights Token here, e.g. aabbccdd-1122-4455-66ff-f0e0d0c0b0a0." />
+  </inputs>
+  <outputs>
+    <data name="outfile1" type="data" format="no_unzip.zip" label="MTBLS520 ZIP" />
+  </outputs>
+  <help><![CDATA[
+This is the MTBLS520 study.
+The study will be published soon. This code is work-in-progress. Do not redistribute unless study published.
+Copyright (C) 2017 Kristian Peters - IPB Halle
+----
+More updates soon
+  ]]></help>
+</tool>
+

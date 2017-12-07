@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Eco-Metabolomics]-->
+<tool id="mtbls520_03_quality_control" name="mtbls520_03_quality_control" version="0.5">
+  <requirements>
+    <container type="docker">korseby/mtbls520</container>
+  </requirements>
+  <description>Quality Control of MTBLS 520 study.</description>
+  <stdio>
+    <regex match="" source="stderr" level="warning" description="R messages" />
+    <exit_code range="1:" level="fatal" description="Tool error" />
+  </stdio>
+  <command><![CDATA[
+export studyfile_names=' 
+#for $studyfile in $studyfolder: 
+${studyfile.name},
+#end for
+';
+export studyfile_files='
+#for $studyfile in $studyfolder:
+${studyfile},
+#end for
+';
+echo \$studyfile_names | perl -pe 's/mzML\, /mzML\n/g' > /tmp/studyfile_names.txt;
+echo \$studyfile_files | perl -pe 's/dat\, /dat\n/g' > /tmp/studyfile_files.txt;
+mtbls520_03_qc_preparations.sh $polarity $afile $sfile;
+mtbls520_03_qc_perform.r $outfile1 $outfile2 $outfile3 $outfile4 $outfile5 $outfile6 $outfile7 $outfile8 $outfile9 $outfile10 $outfile11 $outfile12 $outfile13;
+  ]]>
+  </command>
+  <inputs>
+    <param name="polarity" type="text" value="pos" label="Polarity" help="Enter the polarity here, e.g. pos" />
+    <param name="studyfolder" type="data" format="mzml" multiple="True" label="MTBLS520: QC mzML files" />
+    <param name="afile" type="data" format="tabular" label="MTBLS520: Analytical metadata" />
+    <param name="sfile" type="data" format="tabular" label="MTBLS520: Sample metadata" />
+  </inputs>
+  <outputs>
+    <data name="outfile1" type="data" format="tabular" optional="False" label="MTBLS520: QC MAF file" />
+    <data name="outfile2" type="data" format="pdf" label="QC RT Correction" />
+    <data name="outfile3" type="data" format="pdf" label="QC MZ Deviation vs. RT" />
+    <data name="outfile4" type="data" format="pdf" label="QC MZ Deviation for samples" />
+    <data name="outfile5" type="data" format="pdf" label="QC RT Deviation for samples" />
+    <data name="outfile6" type="data" format="pdf" label="QC Chromatograms" />
+    <data name="outfile7" type="data" format="pdf" label="QC Profiles" />
+    <data name="outfile8" type="data" format="pdf" label="QC Profiles stacked" />
+    <data name="outfile9" type="data" format="pdf" label="QC Histogram" />
+    <data name="outfile10" type="data" format="pdf" label="QC Variation" />
+    <data name="outfile11" type="data" format="pdf" label="QC Compounds" />
+    <data name="outfile12" type="data" format="pdf" label="QC PCA" />
+    <data name="outfile13" type="data" format="rdata" optional="False" label="MTBLS520: QC Rdata file" />
+  </outputs>
+  <help><![CDATA[
+This is the MTBLS520 study.
+The study will be published soon. This code is work-in-progress. Do not redistribute unless study published.
+Copyright (C) 2017 Kristian Peters - IPB Halle
+----
+More updates soon
+  ]]></help>
+</tool>
+

@@ -53,6 +53,15 @@
 		<param id="function">k8s_wrapper_xlarge</param>
 	</destination>
 
+	<destination id="ecomet" runner="k8s">
+            <param id="docker_repo_override">docker.io</param>
+            <param id="docker_owner_override">korseby</param>
+            <param id="docker_image_override">mtbls520</param>
+            <param id="docker_tag_override">latest</param>
+            <param id="max_pod_retrials">1</param>
+            <param id="docker_enabled">true</param>
+        </destination>
+
 	<destination id="batman-container" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
@@ -343,6 +352,37 @@
              a tag, a handler or destination that matches that tag will be
              chosen at random.
          -->
+        <tool id="mtbls520_01_mtbls_download" destination="ecomet"/>
+        <tool id="mtbls520_02_extract" destination="ecomet"/>
+        <tool id="mtbls520_03_quality_control" destination="ecomet"/>
+        <tool id="mtbls520_04_preparations" destination="ecomet"/>
+        <tool id="mtbls520_05a_import_maf" destination="ecomet"/>
+        <tool id="mtbls520_05b_peak_picking" destination="ecomet"/>
+        <tool id="mtbls520_06_import_traits" destination="ecomet"/>
+        <tool id="mtbls520_07_species_diversity" destination="ecomet"/>
+        <tool id="mtbls520_08a_species_shannon" destination="ecomet"/>
+        <tool id="mtbls520_08b_species_unique" destination="ecomet"/>
+        <tool id="mtbls520_08c_species_variability" destination="ecomet"/>
+        <tool id="mtbls520_08d_concentration" destination="ecomet"/>
+        <tool id="mtbls520_08e_species_features" destination="ecomet"/>
+        <tool id="mtbls520_09_species_venn" destination="ecomet"/>
+        <tool id="mtbls520_10_species_varpart" destination="ecomet"/>
+        <tool id="mtbls520_11_species_nmds" destination="ecomet"/>
+        <tool id="mtbls520_12_species_marchantia" destination="ecomet"/>
+        <tool id="mtbls520_14_ecology_varpart" destination="ecomet"/>
+        <tool id="mtbls520_15_ecology_pca" destination="ecomet"/>
+        <tool id="mtbls520_16_ecology_rda" destination="ecomet"/>
+        <tool id="mtbls520_17_ecology_splsda" destination="ecomet"/>
+        <tool id="mtbls520_18_phylogeny" destination="ecomet"/>
+        <tool id="mtbls520_19a_seasons_shannon" destination="ecomet"/>
+        <tool id="mtbls520_19b_seasons_unique" destination="ecomet"/>
+        <tool id="mtbls520_19c_seasons_variability" destination="ecomet"/>
+        <tool id="mtbls520_19d_seasons_concentration" destination="ecomet"/>
+        <tool id="mtbls520_19e_seasons_features" destination="ecomet"/>
+        <tool id="mtbls520_22_seasons_pca" destination="ecomet"/>
+        <tool id="mtbls520_23_seasons_rda" destination="ecomet"/>
+        <tool id="mtbls520_24_seasons_nmds" destination="ecomet"/>
+
         <tool id="BatchFeatureRemoval" destination="batchfeature-container"/>
         <tool id="upps_blankfilter" destination="blankfilter-container"/>
         <tool id="log2transformation" destination="log2transformation-container"/>

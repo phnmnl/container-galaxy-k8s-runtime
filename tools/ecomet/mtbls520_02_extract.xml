@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Eco-Metabolomics]-->
+<tool id="mtbls520_02_extract" name="mtbls520_02_extract" version="0.3">
+  <requirements>
+    <container type="docker">korseby/mtbls520</container>
+  </requirements>
+  <description>Extract files from MTBLS 520 study.</description>
+  <command><![CDATA[
+mtbls520_02_extract.sh $infile $polarity studyfolder $studymaf qcfolder $qcmaf $traitsfile $phylofile $afile $sfile;
+  ]]>
+  </command>
+  <inputs>
+    <param name="infile" type="data" format="no_unzip.zip" label="Zipped MetaboLights study" />
+    <param name="polarity" type="text" value="pos" label="Polarity" help="Enter the polarity here, e.g. pos" />
+  </inputs>
+  <outputs>
+    <collection name="studyfiles" type="list" format="mzml" label="MTBLS520: RAW mzML files" >
+      <discover_datasets pattern="__name__" directory="studyfolder" type="data" format="mzml" visible="false" />
+    </collection>
+    <data name="studymaf" type="data" format="tabular" label="MTBLS520: Peak table" />
+    <collection name="qcfiles" type="list" format="mzml" label="MTBLS520: QC mzML files" >
+      <discover_datasets pattern="__name__" directory="qcfolder" type="data" format="mzml" visible="false" />
+    </collection>
+    <data name="qcmaf" type="data" format="tabular" label="MTBLS520: QC peak table" />
+    <data name="traitsfile" type="data" format="csv" label="MTBLS520: Ecological characteristics" />
+    <data name="phylofile" type="data" format="txt" label="MTBLS520: Phylogeny tree" />
+    <data name="afile" type="data" format="tabular" label="MTBLS520: Analytical metadata" />
+    <data name="sfile" type="data" format="tabular" label="MTBLS520: Sample metadata" />
+  </outputs>
+  <help><![CDATA[
+This is the MTBLS520 study.
+The study will be published soon. This code is work-in-progress. Do not redistribute unless study published.
+Copyright (C) 2017 Kristian Peters - IPB Halle
+----
+More updates soon
+  ]]></help>
+</tool>
+
