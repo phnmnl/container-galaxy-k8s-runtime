@@ -62,6 +62,13 @@ assignment:
   max_pod_retrials: 3
   tools_id:
   - mtbls-dwnld
+- docker_image_override: isa2w4m
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v1.0.4_cv1.2
+  max_pod_retrials: 3
+  tools_id:
+  - isa2w4m
 - docker_image_override: json2isatab
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
