@@ -2,7 +2,8 @@
 <toolbox>
   <section name="MTBLS 520" id="ecomet">
     <tool file="phenomenal/ecomet/mtbls520_01_mtbls_download.xml"/>
-    <tool file="phenomenal/ecomet/mtbls520_02_extract.xml"/>
+    <tool file="phenomenal/ecomet/mtbls520_02a_raw_extract.xml"/>
+    <tool file="phenomenal/ecomet/mtbls520_02b_qc_extract.xml"/>
     <tool file="phenomenal/ecomet/mtbls520_03_quality_control.xml"/>
     <tool file="phenomenal/ecomet/mtbls520_04_preparations.xml"/>
     <tool file="phenomenal/ecomet/mtbls520_05a_import_maf.xml"/>

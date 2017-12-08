@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="mtbls520_01_mtbls_download" name="mtbls520_01_mtbls_download" version="0.5">
+<tool id="mtbls520_01_mtbls_download" name="mtbls520_01_mtbls_download" version="1.0">
   <requirements>
     <container type="docker">korseby/mtbls520</container>
   </requirements>
   <description>Download private MTBLS study via https.</description>
   <command><![CDATA[
-mtbls520_01_mtbls_download.sh $id $token $outfile1 2>&1;
+mtbls520_01_mtbls_download.sh $id $token $mtbls520 2>&1;
   ]]>
   </command>
   <inputs>
@@ -14,7 +14,7 @@ mtbls520_01_mtbls_download.sh $id $token $outfile1 2>&1;
     <param name="token" type="text" label="MetaboLights Token" help="Enter the Secret MetaboLights Token here, e.g. aabbccdd-1122-4455-66ff-f0e0d0c0b0a0." />
   </inputs>
   <outputs>
-    <data name="outfile1" type="data" format="no_unzip.zip" label="MTBLS520 ZIP" />
+    <data name="mtbls520" type="data" format="zip" label="MTBLS520 ZIP" />
   </outputs>
   <help><![CDATA[
 This is the MTBLS520 study.

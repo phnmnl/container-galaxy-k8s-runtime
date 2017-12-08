@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="mtbls520_08a_species_shannon" name="mtbls520_08a_species_shannon" version="0.5">
+<tool id="mtbls520_08a_species_shannon" name="mtbls520_08a_species_shannon" version="1.0">
   <requirements>
     <container type="docker">korseby/mtbls520</container>
   </requirements>
@@ -14,10 +14,10 @@ mtbls520_08a_species_shannon.r $infile1 $outfile1;
   ]]>
   </command>
   <inputs>
-    <param name="infile1" type="data" format="rdata" optional="False" label="Input Rdata file." />
+    <param name="infile1" type="data" format="rdata" optional="False" label="Input Rdata file" />
   </inputs>
   <outputs>
-    <data name="outfile1" type="data" format="pdf" label="Species Shannon diversity index PDF plot" />
+    <data name="outfile1" type="data" format="pdf" label="Species Shannon diversity index" />
   </outputs>
   <help><![CDATA[
 This is the MTBLS520 study.

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="mtbls520_09_species_venn" name="mtbls520_09_species_venn" version="0.5">
+<tool id="mtbls520_09_species_venn" name="mtbls520_09_species_venn" version="1.0">
   <requirements>
     <container type="docker">korseby/mtbls520</container>
   </requirements>
@@ -14,7 +14,7 @@ mtbls520_09_species_venn.r $infile1 $outfile1 $outfile2 $outfile3 $outfile4 $out
   ]]>
   </command>
   <inputs>
-    <param name="infile1" type="data" format="rdata" optional="False" label="Input Rdata file." />
+    <param name="infile1" type="data" format="rdata" optional="False" label="Input Rdata file" />
   </inputs>
   <outputs>
     <data name="outfile1" type="data" format="pdf" label="Venn Diagram for Brachythecium rutabulum" />

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="mtbls520_07_species_diversity" name="mtbls520_07_species_diversity" version="0.5">
+<tool id="mtbls520_07_species_diversity" name="mtbls520_07_species_diversity" version="1.0">
   <requirements>
     <container type="docker">korseby/mtbls520</container>
   </requirements>
@@ -10,32 +10,15 @@
     <exit_code range="1:" level="fatal" description="Tool error" />
   </stdio>
   <command><![CDATA[
-export studyfile_names='
-#for $studyfile in $studyfolder:
-${studyfile.name},
-#end for
-';
-export studyfile_files='
-#for $studyfile in $studyfolder:
-${studyfile},
-#end for
-';
-echo \$studyfile_names | perl -pe 's/mzML\, /mzML\n/g' > /tmp/studyfile_names.txt;
-echo \$studyfile_files | perl -pe 's/dat\, /dat\n/g' > /tmp/studyfile_files.txt;
-mtbls520_04b_preparations_for_peak_picking.sh $polarity /tmp/studyfile_names.txt /tmp/studyfile_files.txt $afile $sfile;
-mtbls520_07_species_diversity.r $infile1 $outfile1 $outfile2;
+mtbls520_07_species_diversity.r $infile1 $divcsv $rdata;
   ]]>
   </command>
   <inputs>
-    <param name="polarity" type="text" value="pos" label="Polarity" help="Enter the polarity here, e.g. pos" />
-    <param name="studyfolder" type="data" format="mzml" multiple="True" label="MTBLS520: RAW mzML files" />
-    <param name="afile" type="data" format="tabular" label="MTBLS520: analytical metadata" />
-    <param name="sfile" type="data" format="tabular" label="MTBLS520: sample metadata" />
-    <param name="infile1" type="data" format="rdata" optional="False" label="Input Rdata file." />
+    <param name="infile1" type="data" format="rdata" optional="False" label="Input Preprocess Rdata file" />
   </inputs>
   <outputs>
-    <data name="outfile1" type="data" format="csv" label="Species diversity indices" />
-    <data name="outfile2" type="data" format="rdata" label="Rdata file" />
+    <data name="divcsv" type="data" format="csv" label="Species diversity indices" />
+    <data name="rdata" type="data" format="rdata" label="Final Rdata file" />
   </outputs>
   <help><![CDATA[
 This is the MTBLS520 study.

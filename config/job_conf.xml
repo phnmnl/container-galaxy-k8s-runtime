@@ -353,7 +353,8 @@
              chosen at random.
          -->
         <tool id="mtbls520_01_mtbls_download" destination="ecomet-container"/>
-        <tool id="mtbls520_02_extract" destination="ecomet-container"/>
+        <tool id="mtbls520_02a_raw_extract" destination="ecomet-container"/>
+        <tool id="mtbls520_02b_qc_extract" destination="ecomet-container"/>
         <tool id="mtbls520_03_quality_control" destination="ecomet-container"/>
         <tool id="mtbls520_04_preparations" destination="ecomet-container"/>
         <tool id="mtbls520_05a_import_maf" destination="ecomet-container"/>

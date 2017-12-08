@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="mtbls520_18_phylogeny" name="mtbls520_18_phylogeny" version="0.5">
+<tool id="mtbls520_18_phylogeny" name="mtbls520_18_phylogeny" version="1.0">
   <requirements>
     <container type="docker">korseby/mtbls520</container>
   </requirements>
@@ -14,8 +14,8 @@ mtbls520_18_phylogeny.r $infile1 $infile2 $outfile1 $outfile2;
   ]]>
   </command>
   <inputs>
-    <param name="infile1" type="data" format="rdata" optional="False" label="Input Rdata file." />
-    <param name="infile2" type="data" format="txt" optional="False" label="Input phylogeny file in tree format." />
+    <param name="infile1" type="data" format="rdata" optional="False" label="Input Rdata file" />
+    <param name="infile2" type="data" format="txt" optional="False" label="Input phylogeny file" />
   </inputs>
   <outputs>
     <data name="outfile1" type="data" format="pdf" label="Phylogeny Procrustes analysis" />
