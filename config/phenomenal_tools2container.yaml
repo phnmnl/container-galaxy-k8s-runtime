@@ -47,4 +47,42 @@ assignment:
   docker_image_override: xcms
   docker_tag_override: dev_v3.0.0_cv0.1.75
   max_pod_retrials: 1
+# ecomet
+- tools_id:
+   - mtbls520_01_mtbls_download
+   - mtbls520_02a_raw_extract
+   - mtbls520_02b_qc_extract
+   - mtbls520_03_quality_control
+   - mtbls520_04_preparations
+   - mtbls520_05a_import_maf
+   - mtbls520_05b_peak_picking
+   - mtbls520_06_import_traits
+   - mtbls520_07_species_diversity
+   - mtbls520_08a_species_shannon
+   - mtbls520_08b_species_unique
+   - mtbls520_08c_species_variability
+   - mtbls520_08d_concentration
+   - mtbls520_08e_species_features
+   - mtbls520_09_species_venn
+   - mtbls520_10_species_varpart
+   - mtbls520_11_species_nmds
+   - mtbls520_12_species_marchantia
+   - mtbls520_14_ecology_varpart
+   - mtbls520_15_ecology_pca
+   - mtbls520_16_ecology_rda
+   - mtbls520_17_ecology_splsda
+   - mtbls520_18_phylogeny
+   - mtbls520_19a_seasons_shannon
+   - mtbls520_19b_seasons_unique
+   - mtbls520_19c_seasons_variability
+   - mtbls520_19d_seasons_concentration
+   - mtbls520_19e_seasons_features
+   - mtbls520_22_seasons_pca
+   - mtbls520_23_seasons_rda
+   - mtbls520_24_seasons_nmds
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_owner_override: phnmnl
+  docker_image_override: ecomet
+  docker_tag_override: dev_v1.0_cv0.5.19
+  max_pod_retrials: 3
 
