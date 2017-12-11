@@ -2,7 +2,7 @@
     "a_galaxy_workflow": "true", 
     "annotation": "", 
     "format-version": "0.1", 
-    "name": "MTBLS 520 Complete", 
+    "name": "MTBLS 520 study", 
     "steps": {
         "0": {
             "annotation": "", 
@@ -90,53 +90,9 @@
         }, 
         "2": {
             "annotation": "", 
-            "content_id": "mtbls520_02b_qc_extract", 
-            "errors": null, 
-            "id": 2, 
-            "input_connections": {
-                "mtbls520": {
-                    "id": 0, 
-                    "output_name": "mtbls520"
-                }
-            }, 
-            "inputs": [], 
-            "label": null, 
-            "name": "mtbls520_02b_qc_extract", 
-            "outputs": [
-                {
-                    "name": "qcfiles", 
-                    "type": "input"
-                }, 
-                {
-                    "name": "qcmaf", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "afile", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "sfile", 
-                    "type": "tabular"
-                }
-            ], 
-            "position": {
-                "left": 327, 
-                "top": 580.5
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "mtbls520_02b_qc_extract", 
-            "tool_state": "{\"polarity\": \"\\\"pos\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"mtbls520\": \"{\\\"values\\\": [{\\\"src\\\": \\\"hda\\\", \\\"id\\\": 11}]}\"}", 
-            "tool_version": "1.0", 
-            "type": "tool", 
-            "uuid": "cb0dd0a1-faa7-40a1-8408-2cdc74d69581", 
-            "workflow_outputs": []
-        }, 
-        "3": {
-            "annotation": "", 
             "content_id": "mtbls520_04_preparations", 
             "errors": null, 
-            "id": 3, 
+            "id": 2, 
             "input_connections": {
                 "afile": {
                     "id": 1, 
@@ -185,102 +141,14 @@
             "uuid": "ee77c113-f9ed-457c-87d4-862e00619b9a", 
             "workflow_outputs": []
         }, 
-        "4": {
-            "annotation": "", 
-            "content_id": "mtbls520_03_quality_control", 
-            "errors": null, 
-            "id": 4, 
-            "input_connections": {
-                "afile": {
-                    "id": 2, 
-                    "output_name": "afile"
-                }, 
-                "sfile": {
-                    "id": 2, 
-                    "output_name": "sfile"
-                }, 
-                "studyfolder": {
-                    "id": 2, 
-                    "output_name": "qcfiles"
-                }
-            }, 
-            "inputs": [], 
-            "label": null, 
-            "name": "mtbls520_03_quality_control", 
-            "outputs": [
-                {
-                    "name": "qcmaf", 
-                    "type": "tabular"
-                }, 
-                {
-                    "name": "qcrtcorr", 
-                    "type": "pdf"
-                }, 
-                {
-                    "name": "qcmzrtdev", 
-                    "type": "pdf"
-                }, 
-                {
-                    "name": "qcmzdev", 
-                    "type": "pdf"
-                }, 
-                {
-                    "name": "qcrtdev", 
-                    "type": "pdf"
-                }, 
-                {
-                    "name": "qcchroma", 
-                    "type": "pdf"
-                }, 
-                {
-                    "name": "qcprofiles", 
-                    "type": "pdf"
-                }, 
-                {
-                    "name": "qcstacked", 
-                    "type": "pdf"
-                }, 
-                {
-                    "name": "qchist", 
-                    "type": "pdf"
-                }, 
-                {
-                    "name": "qcvar", 
-                    "type": "pdf"
-                }, 
-                {
-                    "name": "qccompounds", 
-                    "type": "pdf"
-                }, 
-                {
-                    "name": "qcpca", 
-                    "type": "pdf"
-                }, 
-                {
-                    "name": "qcrdata", 
-                    "type": "rdata"
-                }
-            ], 
-            "position": {
-                "left": 416.5, 
-                "top": 781.5
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "mtbls520_03_quality_control", 
-            "tool_state": "{\"polarity\": \"\\\"pos\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"studyfolder\": \"{\\\"values\\\": [{\\\"src\\\": \\\"hdca\\\", \\\"id\\\": 18}]}\", \"sfile\": \"{\\\"values\\\": [{\\\"src\\\": \\\"hda\\\", \\\"id\\\": 1170}]}\", \"afile\": \"{\\\"values\\\": [{\\\"src\\\": \\\"hda\\\", \\\"id\\\": 1170}]}\"}", 
-            "tool_version": "1.0", 
-            "type": "tool", 
-            "uuid": "75934556-e152-4d7f-a602-d25b2aaa890a", 
-            "workflow_outputs": []
-        }, 
-        "5": {
+        "3": {
             "annotation": "", 
             "content_id": "mtbls520_05a_import_maf", 
             "errors": null, 
-            "id": 5, 
+            "id": 3, 
             "input_connections": {
                 "infile1": {
-                    "id": 3, 
+                    "id": 2, 
                     "output_name": "rdata"
                 }, 
                 "infile2": {
@@ -318,14 +186,14 @@
             "uuid": "8c73e627-615f-4827-be8f-d6e47c981768", 
             "workflow_outputs": []
         }, 
-        "6": {
+        "4": {
             "annotation": "", 
             "content_id": "mtbls520_06_import_traits", 
             "errors": null, 
-            "id": 6, 
+            "id": 4, 
             "input_connections": {
                 "infile1": {
-                    "id": 5, 
+                    "id": 3, 
                     "output_name": "rdata"
                 }, 
                 "infile2": {
@@ -363,14 +231,14 @@
             "uuid": "f51ebebe-a309-40d7-a94e-e3261e657bba", 
             "workflow_outputs": []
         }, 
-        "7": {
+        "5": {
             "annotation": "", 
             "content_id": "mtbls520_07_species_diversity", 
             "errors": null, 
-            "id": 7, 
+            "id": 5, 
             "input_connections": {
                 "infile1": {
-                    "id": 6, 
+                    "id": 4, 
                     "output_name": "rdata"
                 }
             }, 
@@ -404,14 +272,14 @@
             "uuid": "3e7ee2f6-69b0-431b-b23e-21432210e13f", 
             "workflow_outputs": []
         }, 
-        "8": {
+        "6": {
             "annotation": "", 
             "content_id": "mtbls520_08a_species_shannon", 
             "errors": null, 
-            "id": 8, 
+            "id": 6, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -441,14 +309,14 @@
             "uuid": "c6fb14a5-8cec-4e31-94ee-0d0525461d1d", 
             "workflow_outputs": []
         }, 
-        "9": {
+        "7": {
             "annotation": "", 
             "content_id": "mtbls520_08b_species_unique", 
             "errors": null, 
-            "id": 9, 
+            "id": 7, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -478,14 +346,14 @@
             "uuid": "7ee3b05f-fc96-43f8-b22e-a78b4cca76e3", 
             "workflow_outputs": []
         }, 
-        "10": {
+        "8": {
             "annotation": "", 
             "content_id": "mtbls520_08c_species_variability", 
             "errors": null, 
-            "id": 10, 
+            "id": 8, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -519,14 +387,14 @@
             "uuid": "a93a71e7-6a20-44d9-ad97-092e444c85ec", 
             "workflow_outputs": []
         }, 
-        "11": {
+        "9": {
             "annotation": "", 
             "content_id": "mtbls520_08d_concentration", 
             "errors": null, 
-            "id": 11, 
+            "id": 9, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -556,14 +424,14 @@
             "uuid": "323d6b05-2276-4f4d-b3db-e1777800b2b5", 
             "workflow_outputs": []
         }, 
-        "12": {
+        "10": {
             "annotation": "", 
             "content_id": "mtbls520_09_species_venn", 
             "errors": null, 
-            "id": 12, 
+            "id": 10, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -633,14 +501,14 @@
             "uuid": "84d92208-64ff-44bf-b71c-84dd15c10e91", 
             "workflow_outputs": []
         }, 
-        "13": {
+        "11": {
             "annotation": "", 
             "content_id": "mtbls520_08e_species_features", 
             "errors": null, 
-            "id": 13, 
+            "id": 11, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -670,14 +538,14 @@
             "uuid": "7b465e59-40fe-4b04-9fcb-7f781a8c3210", 
             "workflow_outputs": []
         }, 
-        "14": {
+        "12": {
             "annotation": "", 
             "content_id": "mtbls520_10_species_varpart", 
             "errors": null, 
-            "id": 14, 
+            "id": 12, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -707,14 +575,14 @@
             "uuid": "fbe6120e-1744-480e-b87f-6690db2f0dcf", 
             "workflow_outputs": []
         }, 
-        "15": {
+        "13": {
             "annotation": "", 
             "content_id": "mtbls520_11_species_nmds", 
             "errors": null, 
-            "id": 15, 
+            "id": 13, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -752,14 +620,14 @@
             "uuid": "07a1982c-1ef0-4306-91a2-48f1c5364e1c", 
             "workflow_outputs": []
         }, 
-        "16": {
+        "14": {
             "annotation": "", 
             "content_id": "mtbls520_12_species_marchantia", 
             "errors": null, 
-            "id": 16, 
+            "id": 14, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -789,14 +657,14 @@
             "uuid": "73e11f63-88a5-461c-84a0-7f86d90452f1", 
             "workflow_outputs": []
         }, 
-        "17": {
+        "15": {
             "annotation": "", 
             "content_id": "mtbls520_14_ecology_varpart", 
             "errors": null, 
-            "id": 17, 
+            "id": 15, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -826,14 +694,14 @@
             "uuid": "cc25fb31-0046-4c8c-a868-1b8b8deae2ea", 
             "workflow_outputs": []
         }, 
-        "18": {
+        "16": {
             "annotation": "", 
             "content_id": "mtbls520_15_ecology_pca", 
             "errors": null, 
-            "id": 18, 
+            "id": 16, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -863,14 +731,14 @@
             "uuid": "07eefc0b-d910-44c8-a9b9-aaddfd3a3c0e", 
             "workflow_outputs": []
         }, 
-        "19": {
+        "17": {
             "annotation": "", 
             "content_id": "mtbls520_16_ecology_rda", 
             "errors": null, 
-            "id": 19, 
+            "id": 17, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -904,14 +772,14 @@
             "uuid": "f19030d5-e453-4c74-9046-a317806dd970", 
             "workflow_outputs": []
         }, 
-        "20": {
+        "18": {
             "annotation": "", 
             "content_id": "mtbls520_17_ecology_splsda", 
             "errors": null, 
-            "id": 20, 
+            "id": 18, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -949,14 +817,14 @@
             "uuid": "fe7ac58f-bf4e-4d88-aaa3-adf0793fab35", 
             "workflow_outputs": []
         }, 
-        "21": {
+        "19": {
             "annotation": "", 
             "content_id": "mtbls520_18_phylogeny", 
             "errors": null, 
-            "id": 21, 
+            "id": 19, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }, 
                 "infile2": {
@@ -998,14 +866,14 @@
             "uuid": "7801cfdb-fe2b-4dee-ad55-39616c3185a1", 
             "workflow_outputs": []
         }, 
-        "22": {
+        "20": {
             "annotation": "", 
             "content_id": "mtbls520_19a_seasons_shannon", 
             "errors": null, 
-            "id": 22, 
+            "id": 20, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -1035,14 +903,14 @@
             "uuid": "640f4aad-d8d6-49ed-a37e-74ee417011c4", 
             "workflow_outputs": []
         }, 
-        "23": {
+        "21": {
             "annotation": "", 
             "content_id": "mtbls520_19b_seasons_unique", 
             "errors": null, 
-            "id": 23, 
+            "id": 21, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -1072,14 +940,14 @@
             "uuid": "d122f8fc-f643-46b3-9ac4-34a1a1ab319a", 
             "workflow_outputs": []
         }, 
-        "24": {
+        "22": {
             "annotation": "", 
             "content_id": "mtbls520_19c_seasons_variability", 
             "errors": null, 
-            "id": 24, 
+            "id": 22, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -1113,14 +981,14 @@
             "uuid": "6ec48b7d-852a-4cec-bc90-278c3be4e4b0", 
             "workflow_outputs": []
         }, 
-        "25": {
+        "23": {
             "annotation": "", 
             "content_id": "mtbls520_19d_seasons_concentration", 
             "errors": null, 
-            "id": 25, 
+            "id": 23, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -1150,14 +1018,14 @@
             "uuid": "af42f315-0bfa-4f80-ab1d-bd2653c6dd18", 
             "workflow_outputs": []
         }, 
-        "26": {
+        "24": {
             "annotation": "", 
             "content_id": "mtbls520_19e_seasons_features", 
             "errors": null, 
-            "id": 26, 
+            "id": 24, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -1187,14 +1055,14 @@
             "uuid": "00b91fee-3155-4040-8169-0ad8cc66fb1d", 
             "workflow_outputs": []
         }, 
-        "27": {
+        "25": {
             "annotation": "", 
             "content_id": "mtbls520_22_seasons_pca", 
             "errors": null, 
-            "id": 27, 
+            "id": 25, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -1224,14 +1092,14 @@
             "uuid": "bf44edc1-3ec0-4473-a6d5-c7b273af86b1", 
             "workflow_outputs": []
         }, 
-        "28": {
+        "26": {
             "annotation": "", 
             "content_id": "mtbls520_23_seasons_rda", 
             "errors": null, 
-            "id": 28, 
+            "id": 26, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -1261,14 +1129,14 @@
             "uuid": "74a17535-d570-4965-a246-39342d134df9", 
             "workflow_outputs": []
         }, 
-        "29": {
+        "27": {
             "annotation": "", 
             "content_id": "mtbls520_24_seasons_nmds", 
             "errors": null, 
-            "id": 29, 
+            "id": 27, 
             "input_connections": {
                 "infile1": {
-                    "id": 7, 
+                    "id": 5, 
                     "output_name": "rdata"
                 }
             }, 
@@ -1307,5 +1175,5 @@
             "workflow_outputs": []
         }
     }, 
-    "uuid": "60a247ad-d3aa-4bc7-b674-6658b85a8b7f"
+    "uuid": "5f0394ec-8747-4897-bd8b-5247d3ee7a2a"
 }
