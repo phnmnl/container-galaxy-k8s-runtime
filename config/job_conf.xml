@@ -355,6 +355,7 @@
         <tool id="mtbls520_01_mtbls_download" destination="dynamic-k8s-small" resources="all"/>
         <tool id="mtbls520_02a_raw_extract" destination="dynamic-k8s-medium" resources="all"/>
         <tool id="mtbls520_02b_qc_extract" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="mtbls520_02_extract" destination="dynamic-k8s-medium" resources="all"/>
         <tool id="mtbls520_03_quality_control" destination="dynamic-k8s-xlarge" resources="all"/>
         <tool id="mtbls520_04_preparations" destination="dynamic-k8s-large" resources="all"/>
         <tool id="mtbls520_05a_import_maf" destination="dynamic-k8s-karge" resources="all"/>

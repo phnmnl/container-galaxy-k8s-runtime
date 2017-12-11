@@ -52,6 +52,7 @@ assignment:
    - mtbls520_01_mtbls_download
    - mtbls520_02a_raw_extract
    - mtbls520_02b_qc_extract
+   - mtbls520_02_extract
    - mtbls520_03_quality_control
    - mtbls520_04_preparations
    - mtbls520_05a_import_maf
@@ -83,6 +84,6 @@ assignment:
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: ecomet
-  docker_tag_override: dev_v1.0_cv0.5.19
+  docker_tag_override: dev_v1.0_cv0.5.21
   max_pod_retrials: 3
 
