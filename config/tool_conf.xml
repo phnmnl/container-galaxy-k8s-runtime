@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <toolbox>
-  <section name="MTBLS 520" id="ecomet">
+  <section name="Eco-Metabolomics" id="ecomet">
     <tool file="phenomenal/ecomet/mtbls520_01_mtbls_download.xml"/>
     <tool file="phenomenal/ecomet/mtbls520_02a_raw_extract.xml"/>
     <tool file="phenomenal/ecomet/mtbls520_02b_qc_extract.xml"/>
