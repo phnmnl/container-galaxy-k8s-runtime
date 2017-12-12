@@ -411,7 +411,7 @@ assignment:
 - docker_image_override: msnbase
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: dev_v2.0.2_cv0.6.50 
+  docker_tag_override: dev_v2.2_cv0.7.53
   max_pod_retrials: 3
   tools_id:
   - msnbase-read-msms
