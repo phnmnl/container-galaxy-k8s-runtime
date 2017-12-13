@@ -84,6 +84,6 @@ assignment:
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: ecomet
-  docker_tag_override: dev_v1.0_cv0.5.23
+  docker_tag_override: dev_v1.0_cv0.5.24
   max_pod_retrials: 3
 
