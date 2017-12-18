@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Eco-Metabolomics]-->
+<tool id="ecomet_02b_qc_extract" name="ecomet_02b_qc_extract" version="1.0">
+  <requirements>
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/ecomet</container>
+  </requirements>
+  <description>Extract QC files from MTBLS 520 study.</description>
+  <command><![CDATA[
+mtbls520_02_extract.sh $mtbls520 $polarity rawfolder rawmaf qcfolder $qcmaf traitsfile phylofile $afile $sfile;
+  ]]>
+  </command>
+  <inputs>
+    <param name="mtbls520" type="data" format="zip" label="Zipped MTBLS520 study" />
+    <param name="polarity" type="text" value="pos" label="Polarity" help="Enter the polarity here, e.g. pos" />
+  </inputs>
+  <outputs>
+    <collection name="qcfiles" type="list" format="mzml" label="MTBLS520: QC mzML files" >
+      <discover_datasets pattern="__name__" directory="qcfolder" type="data" format="mzml" visible="false" />
+    </collection>
+    <data name="qcmaf" type="data" format="tabular" label="MTBLS520: QC MAF peak table" />
+    <data name="afile" type="data" format="tabular" label="MTBLS520: Analytical metadata" />
+    <data name="sfile" type="data" format="tabular" label="MTBLS520: Sample metadata" />
+  </outputs>
+  <help><![CDATA[
+This is the MTBLS520 study.
+The study will be published soon. This code is work-in-progress. Do not redistribute unless study published.
+Copyright (C) 2017 Kristian Peters - IPB Halle
+----
+More updates soon
+  ]]></help>
+</tool>
+
