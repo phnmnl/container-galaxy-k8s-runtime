@@ -375,6 +375,44 @@ assignment:
   docker_tag_override: dev_v3.0.0_cv0.1.75
   max_pod_retrials: 1
   tools_id:
+   - ecomet_01_mtbls_download
+   - ecomet_02a_raw_extract
+   - ecomet_02b_qc_extract
+   - ecomet_02_extract
+   - ecomet_03_quality_control
+   - ecomet_04_preparations
+   - ecomet_05a_import_maf
+   - ecomet_05b_peak_picking
+   - ecomet_06_import_traits
+   - ecomet_07_species_diversity
+   - ecomet_08a_species_shannon
+   - ecomet_08b_species_unique
+   - ecomet_08c_species_variability
+   - ecomet_08d_concentration
+   - ecomet_08e_species_features
+   - ecomet_09_species_venn
+   - ecomet_10_species_varpart
+   - ecomet_11_species_nmds
+   - ecomet_12_species_marchantia
+   - ecomet_14_ecology_varpart
+   - ecomet_15_ecology_pca
+   - ecomet_16_ecology_rda
+   - ecomet_17_ecology_splsda
+   - ecomet_18_phylogeny
+   - ecomet_19a_seasons_shannon
+   - ecomet_19b_seasons_unique
+   - ecomet_19c_seasons_variability
+   - ecomet_19d_seasons_concentration
+   - ecomet_19e_seasons_features
+   - ecomet_22_seasons_pca
+   - ecomet_23_seasons_rda
+   - ecomet_24_seasons_nmds
+- docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_owner_override: phnmnl
+  docker_image_override: ecomet
+  docker_tag_override: dev_v1.0_cv0.5.24
+  max_pod_retrials: 3
+  tools_id:
   - save_chromatogram
   - show_chromatogram
 - docker_repo_override: container-registry.phenomenal-h2020.eu

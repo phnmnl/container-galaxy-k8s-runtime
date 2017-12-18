@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <toolbox>
-
   <section id="getext" name="Get Data">
     <tool file="data_source/upload.xml" />
   </section>
@@ -213,6 +212,40 @@
     <tool file="phenomenal/ms/convertCAMERAToOpenMS/consensusXMLToXcms.xml"/> 
     <tool file="phenomenal/ms/convertCAMERAToOpenMS/featureXMLToCAMERA.xml"/> 
     <tool file="phenomenal/ms/convertCAMERAToOpenMS/featureXMLToXcms.xml"/>
+  </section>
+  <section name="Eco-Metabolomics" id="ecomet">
+    <tool file="phenomenal/ecomet/ecomet_01_mtbls_download.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_02a_raw_extract.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_02b_qc_extract.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_02_extract.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_03_quality_control.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_04_preparations.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_05a_import_maf.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_05b_peak_picking.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_06_import_traits.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_07_species_diversity.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_08a_species_shannon.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_08b_species_unique.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_08c_species_variability.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_08d_concentration.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_08e_species_features.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_09_species_venn.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_10_species_varpart.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_11_species_nmds.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_12_species_marchantia.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_14_ecology_varpart.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_15_ecology_pca.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_16_ecology_rda.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_17_ecology_splsda.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_18_phylogeny.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_19a_seasons_shannon.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_19b_seasons_unique.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_19c_seasons_variability.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_19d_seasons_concentration.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_19e_seasons_features.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_22_seasons_pca.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_23_seasons_rda.xml"/>
+    <tool file="phenomenal/ecomet/ecomet_24_seasons_nmds.xml"/>
   </section>
   <section name="W4M" id="pheno-w4m">
     <tool file="phenomenal/w4m/mtbls-dwnld_config.xml"/>

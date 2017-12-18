@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Eco-Metabolomics]-->
+<tool id="ecomet_03_quality_control" name="ecomet_03_quality_control" version="1.0">
+  <requirements>
+    <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/ecomet</container>
+  </requirements>
+  <description>Quality Control of MTBLS 520 study.</description>
+  <stdio>
+    <regex match="" source="stderr" level="warning" description="R messages" />
+    <exit_code range="1:" level="fatal" description="Tool error" />
+  </stdio>
+  <command><![CDATA[
+export studyfile_names=' 
+#for $studyfile in $studyfolder: 
+${studyfile.name},
+#end for
+';
+export studyfile_files='
+#for $studyfile in $studyfolder:
+${studyfile},
+#end for
+';
+echo \$studyfile_names | perl -pe 's/mzML\, /mzML\n/g' > /tmp/studyfile_names.txt;
+echo \$studyfile_files | perl -pe 's/dat\, /dat\n/g' > /tmp/studyfile_files.txt;
+mtbls520_03_qc_preparations.sh $polarity $afile $sfile;
+mtbls520_03_qc_perform.r $qcmaf $qcrtcorr $qcmzrtdev $qcmzdev $qcrtdev $qcchroma $qcprofiles $qcstacked $qchist $qcvar $qccompounds $qcpca $qcrdata;
+  ]]>
+  </command>
+  <inputs>
+    <param name="polarity" type="text" value="pos" label="Polarity" help="Enter the polarity here, e.g. pos" />
+    <param name="studyfolder" type="data_collection" collection_type="list" format="mzml" multiple="true" label="MTBLS520: QC mzML files" />
+    <param name="afile" type="data" format="tabular" label="MTBLS520: Analytical metadata" />
+    <param name="sfile" type="data" format="tabular" label="MTBLS520: Sample metadata" />
+  </inputs>
+  <outputs>
+    <data name="qcmaf" type="data" format="tabular" optional="False" label="QC MAF file" />
+    <data name="qcrtcorr" type="data" format="pdf" label="QC RT Correction" />
+    <data name="qcmzrtdev" type="data" format="pdf" label="QC MZ Deviation vs. RT" />
+    <data name="qcmzdev" type="data" format="pdf" label="QC MZ Deviation for samples" />
+    <data name="qcrtdev" type="data" format="pdf" label="QC RT Deviation for samples" />
+    <data name="qcchroma" type="data" format="pdf" label="QC Chromatograms" />
+    <data name="qcprofiles" type="data" format="pdf" label="QC Profiles" />
+    <data name="qcstacked" type="data" format="pdf" label="QC Profiles stacked" />
+    <data name="qchist" type="data" format="pdf" label="QC Histogram" />
+    <data name="qcvar" type="data" format="pdf" label="QC Variation" />
+    <data name="qccompounds" type="data" format="pdf" label="QC Compounds" />
+    <data name="qcpca" type="data" format="pdf" label="QC PCA" />
+    <data name="qcrdata" type="data" format="rdata" optional="False" label="QC Rdata file" />
+  </outputs>
+  <help><![CDATA[
+This is the MTBLS520 study.
+The study will be published soon. This code is work-in-progress. Do not redistribute unless study published.
+Copyright (C) 2017 Kristian Peters - IPB Halle
+----
+More updates soon
+  ]]></help>
+</tool>
+

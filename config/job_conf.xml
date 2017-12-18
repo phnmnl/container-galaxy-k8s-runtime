@@ -52,7 +52,14 @@
 		<param id="type">python</param>
 		<param id="function">k8s_wrapper_xlarge</param>
 	</destination>
-
+	<destination id="ecomet-container" runner="k8s">
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">ecomet</param>
+            <param id="docker_tag_override">dev_v1.0_cv0.5.24</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination>
 	<destination id="batman-container" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
@@ -295,7 +302,7 @@
              a tag, a handler or destination that matches that tag will be
              chosen at random.
          -->
-
+        <!-- Generic -->
         <tool id="pathway_enrichment" destination="dynamic-k8s-large" resources="all"/>
         <tool id="BatchFeatureRemoval" destination="batchfeature-container"/>
         <tool id="upps_blankfilter" destination="blankfilter-container"/>
@@ -479,6 +486,39 @@
         <tool id="isatab2json" destination="container-isatab2json"/>
         <tool id="json2isatab" destination="container-json2isatab"/>
         <tool id="mw2isa" destination="container-mw2isa"/>
+        <!-- Eco-Metabolomics -->
+        <tool id="ecomet_01_mtbls_download" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="ecomet_02a_raw_extract" destination="dynamic-k8s-large" resources="all"/>
+        <tool id="ecomet_02b_qc_extract" destination="dynamic-k8s-large" resources="all"/>
+        <tool id="ecomet_02_extract" destination="dynamic-k8s-large" resources="all"/>
+        <tool id="ecomet_03_quality_control" destination="dynamic-k8s-large" resources="all"/>
+        <tool id="ecomet_04_preparations" destination="dynamic-k8s-large" resources="all"/>
+        <tool id="ecomet_05a_import_maf" destination="dynamic-k8s-large" resources="all"/>
+        <tool id="ecomet_05b_peak_picking" destination="dynamic-k8s-xlarge" resources="all"/>
+        <tool id="ecomet_06_import_traits" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="ecomet_07_species_diversity" destination="dynamic-k8s-large" resources="all"/>
+        <tool id="ecomet_08a_species_shannon" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="ecomet_08b_species_unique" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="ecomet_08c_species_variability" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="ecomet_08d_concentration" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="ecomet_08e_species_features" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="ecomet_09_species_venn" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="ecomet_10_species_varpart" destination="dynamic-k8s-large" resources="all"/>
+        <tool id="ecomet_11_species_nmds" destination="dynamic-k8s-large" resources="all"/>
+        <tool id="ecomet_12_species_marchantia" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="ecomet_14_ecology_varpart" destination="dynamic-k8s-large" resources="all"/>
+        <tool id="ecomet_15_ecology_pca" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="ecomet_16_ecology_rda" destination="dynamic-k8s-large" resources="all"/>
+        <tool id="ecomet_17_ecology_splsda" destination="dynamic-k8s-large" resources="all"/>
+        <tool id="ecomet_18_phylogeny" destination="dynamic-k8s-large" resources="all"/>
+        <tool id="ecomet_19a_seasons_shannon" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="ecomet_19b_seasons_unique" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="ecomet_19c_seasons_variability" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="ecomet_19d_seasons_concentration" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="ecomet_19e_seasons_features" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="ecomet_22_seasons_pca" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="ecomet_23_seasons_rda" destination="dynamic-k8s-large" resources="all"/>
+        <tool id="ecomet_24_seasons_nmds" destination="dynamic-k8s-large" resources="all"/>
     </tools>
     <resources default="default">
       <!-- Group different parameters defined in job_resource_params_conf.xml
