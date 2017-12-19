@@ -31,13 +31,13 @@ WORKDIR /galaxy
 
 RUN echo "pykube==0.15.0" >> requirements.txt
 
-COPY config/galaxy.ini \
+COPY config/datatypes_conf.xml \
+     config/galaxy.ini \
      config/job_conf.xml \
-     config/tool_conf.xml \
-     config/sanitize_whitelist.txt \
      config/job_resource_params_conf.xml \
      config/phenomenal_tools2container.yaml\
-     config/datatypes_conf.xml \
+     config/sanitize_whitelist.txt \
+     config/tool_conf.xml \
   config/
 
 COPY rules/k8s_destinations.py lib/galaxy/jobs/rules/k8s_destination.py
