@@ -310,6 +310,7 @@
     <tool id="escher-fluxomics" destination="dynamic-k8s-tiny" resources="all"/>
     <!-- ICL -->
     <tool id="batman-nmr" destination="batman-container"/>
+    <tool id="nmrml2batman" destination="dynamic-k8s-small"/>
     <tool id="power-analysis" destination="papy-container"/>
     <!-- W4M Sacurine -->
     <tool id="mtbls-dwnld" destination="dynamic-k8s-tiny" resources="all"/>
