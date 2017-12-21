@@ -61,6 +61,14 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
+ <destination id="nmrml2batman-container" runner="k8s">
+            <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+            <param id="docker_owner_override">phnmnl</param>
+            <param id="docker_image_override">nmrml2batman</param>
+            <param id="docker_tag_override">v1.0_cv1.0.4</param>
+            <param id="max_pod_retrials">3</param>
+            <param id="docker_enabled">true</param>
+        </destination> 
         <destination id="w4m-biosigner-container" runner="k8s">
 	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
@@ -354,6 +362,7 @@
 	<tool id="escher-fluxomics" destination="dynamic-k8s-tiny" resources="all"/>
 	<!-- ICL -->
         <tool id="batman-nmr" destination="batman-container"/>
+        <tool id="nmrml2batman" destination="nmrml2batman-container"/>
 	<tool id="power-analysis" destination="papy-container"/>
 	<!-- W4M Sacurine -->
         <tool id="mtbls-dwnld" destination="w4m-mtbls-dwnld-container"/>
