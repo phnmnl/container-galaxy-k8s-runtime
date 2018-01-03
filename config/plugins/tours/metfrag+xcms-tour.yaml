@@ -160,11 +160,11 @@ steps:
     placement: right
     postclick:
       - 'a[href$="/tool_runner?tool_id=map-msms2camera"]'
-  - title: MSnbase-read-msms
+  - title: map-msms2camera
     element: '#center-panel'
     intro: Before execution, make sure to select the "camera-find-adducts data" as first input parameter. The second parameter is probably already set to "masnbase-read-msms data"
     position: right
-  - title: MSnbase-read-msms
+  - title: map-msms2camera
     element: '#execute'
     intro: Click on 'Execute' to run your tool and send it to the compute cluster.
     position: right
@@ -179,7 +179,7 @@ steps:
     placement: right
     postclick:
       - 'a[href$="/tool_runner?tool_id=msms2metfrag"]'
-  - title: MSnbase-read-msms
+  - title: msms2metfrag
     element: '#center-panel'
     intro: Before execution, make sure to select the "camera-find-adducts data" as second input parameter. The first parameter is probably already set to "map-msms2camera data"
     position: right
@@ -203,6 +203,25 @@ steps:
     intro: Before execution, make sure to switch the input to "Dataset collection", which will then give you the "MetFrag parameters" input collection.
     position: right
   - title: metfrag-cli-batch
+    element: '#execute'
+    intro: Click on 'Execute' to run your tool and send it to the compute cluster.
+    position: right
+    postclick:
+      - '#execute'
+
+  - title: Visualise the MetFrag results
+    element: '#tool-search'
+    content: >-
+      Locate the metfrag-vis tool, either by locating it in the MS section, or
+      using the search box
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=metfrag-vis"]'
+  - title: metfrag-vis
+    element: '#center-panel'
+    intro: Before execution, make sure to switch the both input boxes to "Dataset collection", and select the "MetFrag result file" and "MetFrag parameters" input collections.
+    position: right
+  - title: metfrag-vis
     element: '#execute'
     intro: Click on 'Execute' to run your tool and send it to the compute cluster.
     position: right
