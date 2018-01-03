@@ -29,7 +29,7 @@ RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transpo
     apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Clone galaxy into /galaxy directory
-RUN git clone --depth 1 --single-branch --branch release_17.09_plus_isa_k8s_resource_limts-isa-update https://github.com/phnmnl/galaxy.git
+RUN git clone --depth 1 --single-branch --branch release_17.09_plus_isa_k8s_resource_limts https://github.com/phnmnl/galaxy.git
 WORKDIR /galaxy
 
 RUN echo "pykube==0.15.0" >> requirements.txt
@@ -50,6 +50,8 @@ RUN virtualenv .config_script_venv
 RUN /bin/bash -c "source .config_script_venv/bin/activate && \
                   pip install bioblend>=0.9.0 && \
                   deactivate"
+
+RUN ln -s /usr/bin/x86_64-linux-gnu-gcc-4.6 /usr/bin/x86_64-linux-gnu-gcc
 
 # Clone isatools-lite (Python 2 version)
 RUN git clone --depth 1 --single-branch --branch py2_isatools-lite https://github.com/ISA-tools/isa-api.git /isatools
