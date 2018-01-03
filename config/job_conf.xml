@@ -61,14 +61,6 @@
             <param id="max_pod_retrials">3</param>
             <param id="docker_enabled">true</param>
         </destination>
-        <destination id="w4m-biosigner-container" runner="k8s">
-	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">biosigner</param>
-            <param id="docker_tag_override">v2.2.7_cv1.1.12</param>
-            <param id="max_pod_retrials">3</param>
-            <param id="docker_enabled">true</param>
-        </destination>
 	<destination id="camera-container" runner="k8s">
             <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
             <param id="docker_owner_override">phnmnl</param>
@@ -89,7 +81,7 @@
    	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
    	    <param id="docker_owner_override">phnmnl</param>
    	    <param id="docker_image_override">metabolab</param>
-   	    <param id="docker_tag_override">latest</param>
+   	    <param id="docker_tag_override">v0.99.8.8_cv0.6.65</param>
    	    <param id="max_pod_retrials">3</param>
    	    <param id="docker_enabled">true</param>
 	</destination>
@@ -182,14 +174,6 @@
             <param id="docker_image_override">metfrag-cli</param>
             <param id="docker_tag_override">v2.4.2_cv0.3.24</param>
             <param id="max_pod_retrials">3</param>
-            <param id="docker_enabled">true</param>
-        </destination>
-	<destination id="xcms-container" runner="k8s">
-	    <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-            <param id="docker_owner_override">phnmnl</param>
-            <param id="docker_image_override">xcms</param>
-            <param id="docker_tag_override">v3.0.0_cv0.1.72</param>
-            <param id="max_pod_retrials">1</param>
             <param id="docker_enabled">true</param>
         </destination>
         <destination id="mzml2isa-container" runner="k8s">
@@ -343,7 +327,7 @@
            <param id="docker_tag_override">v0.8.0_cv0.2.26</param>
            <param id="max_pod_retrials">3</param>
            <param id="docker_enabled">true</param>
-         </destination>
+        </destination>
     </destinations>
     <tools>
         <!-- Tools can be configured to use specific destinations or handlers,
@@ -351,6 +335,8 @@
              a tag, a handler or destination that matches that tag will be
              chosen at random.
          -->
+
+        <tool id="pathway_enrichment" destination="dynamic-k8s-large" resources="all"/>
         <tool id="BatchFeatureRemoval" destination="batchfeature-container"/>
         <tool id="upps_blankfilter" destination="blankfilter-container"/>
         <tool id="log2transformation" destination="log2transformation-container"/>
@@ -364,20 +350,20 @@
         <tool id="batman-nmr" destination="batman-container"/>
 	<tool id="power-analysis" destination="papy-container"/>
 	<!-- W4M Sacurine -->
-        <tool id="mtbls-dwnld" destination="w4m-mtbls-dwnld-container"/>
-        <tool id="isa2w4m" destination="isa2w4m-container"/>
-        <tool id="Univariate" destination="w4m-univariate-container"/>
-        <tool id="Multivariate" destination="w4m-multivariate-container"/>
-        <tool id="Biosigner" destination="w4m-biosigner-container"/>
-        <tool id="lcmsmatching" destination="w4m-lcmsmatching-container"/>
+        <tool id="mtbls-dwnld" destination="dynamic-k8s-tiny" resources="all"/>
+        <tool id="isa2w4m" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="Univariate" destination="dynamic-k8s-small" resources="all"/>
+        <tool id="Multivariate" destination="dynamic-k8s-small" resources="all"/>
+        <tool id="Biosigner" destination="dynamic-k8s-medium" resources="all"/>
+        <tool id="lcmsmatching" destination="dynamic-k8s-small" resources="all"/>
         <tool id="msconvert2" destination="msconvert2-container"/>
         <!-- new NMR -->
-        <tool id="metabolab" destination="metabolab-container"/>
+	<tool id="metabolab" destination="dynamic-k8s-large" resources="all"/>
         <tool id="mtbls_nmr_raw_dummy_importer" destination="nmrmlconv-container"/>
-        <tool id="nmrmlconv" destination="nmrmlconv-container"/>
-        <tool id="zip-nmrml-collection" destination="nmrmlconv-container"/>
-        <tool id="rnmr1d" destination="rnmr1d-container"/>
-        <tool id="rnmr1d-stacked-plot" destination="rnmr1d-container"/>
+        <tool id="nmrmlconv" destination="dynamic-k8s-small" resources="all"/>
+        <tool id="zip-nmrml-collection" destination="dynamic-k8s-small" resources="all"/>
+        <tool id="rnmr1d" destination="dynamic-k8s-xlarge" resources="all"/>
+        <tool id="rnmr1d-stacked-plot" destination="dynamic-k8s-tiny" resources="all"/>
 	<tool id="rnmr1d-prepare-output" destination="rnmr1d-container"/>
         <!-- old NMR -->
 	<tool id="mtbls2nmrglue" destination="nmrglue-container"/>
@@ -393,30 +379,30 @@
         <tool id="metabomatching" destination="metabomatching-container"/>
         <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
 	<!-- new XCMS -->
+	<tool id="xcms-find-peaks" destination="dynamic-k8s-large" resources="all"/>
+  <tool id="xcms-collect-peaks" destination="dynamic-k8s-medium" resources="all"/>
+  <tool id="xcms-group-peaks" destination="dynamic-k8s-large" resources="all"/>
+  <tool id="xcms-correct-rt" destination="dynamic-k8s-large" resources="all"/>
+  <tool id="xcms-fill-peaks" destination="dynamic-k8s-large" resources="all"/>
+	<tool id="xcms-dilutionfilter" destination="dynamic-k8s-medium" />
+	<tool id="xcms-blankfilter" destination="dynamic-k8s-medium" />
         <tool id="save_chromatogram" destination="dynamic-k8s-small" resources="all" />
         <tool id="show_chromatogram" destination="dynamic-k8s-small" resources="all" />
-	<tool id="xcms-find-peaks" destination="xcms-container" />
-        <tool id="xcms-collect-peaks" destination="xcms-container" />
-        <tool id="xcms-group-peaks" destination="xcms-container" />
-        <tool id="xcms-correct-rt" destination="xcms-container" />
-	<tool id="xcms-dilutionfilter" destination="xcms-container" />
-        <tool id="xcms-fill-peaks" destination="xcms-container" />
-	<tool id="xcms-blankfilter" destination="xcms-container" />
 	<!-- CAMERA -->
 	<tool id="consensusXMLToXcms" destination="camera-container" />
-        <tool id="cameraToFeatureXML" destination="camera-container" />
-        <tool id="featureXMLToCAMERA" destination="camera-container" />
+  <tool id="cameraToFeatureXML" destination="camera-container" />
+  <tool id="featureXMLToCAMERA" destination="camera-container" />
 	<tool id="featureXMLToXcms" destination="camera-container" />
 	<tool id="zip-collection" destination="camera-container"/>
-        <tool id="unzip-collection" destination="camera-container"/>
-	<tool id="camera-annotate-peaks" destination="camera-container" />
-        <tool id="camera-group-fwhm" destination="camera-container" />
-        <tool id="camera-group-corr" destination="camera-container" />
-        <tool id="camera-find-isotopes" destination="camera-container" />
-        <tool id="camera-find-adducts" destination="camera-container" />
-	<tool id="camera-prepareoutput" destination="camera-container" />
+	<tool id="camera-annotate-peaks" destination="dynamic-k8s-medium" resources="all"/>
+  <tool id="camera-group-fwhm" destination="dynamic-k8s-medium" resources="all"/>
+  <tool id="camera-group-corr" destination="dynamic-k8s-medium" resources="all"/>
+  <tool id="camera-find-isotopes" destination="dynamic-k8s-medium" resources="all"/>
+  <tool id="camera-find-adducts" destination="dynamic-k8s-medium" resources="all"/>
+  <tool id="unzip-collection" destination="camera-container"/>
+	<tool id="camera-prepareoutput" destination="dynamic-k8s-medium" />
 	<!-- OpenMS -->
-	<tool id="xcmssplit" destination="xcms-container" />
+	<tool id="xcmssplit" destination="dynamic-k8s-large" />
 	<tool id="AdditiveSeries" destination="container-openms"/> 
 	<tool id="BaselineFilter" destination="container-openms"/> 
 	<tool id="CompNovo" destination="container-openms"/> 
@@ -431,10 +417,10 @@
 	<tool id="FeatureFinderCentroided" destination="container-openms"/> 
 	<tool id="FeatureFinderIdentification" destination="container-openms"/> 
 	<tool id="FeatureFinderIsotopeWavelet" destination="container-openms"/> 
-	<tool id="FeatureFinderMetabo" destination="container-openms"/> 
+	<tool id="FeatureFinderMetabo" destination="dynamic-k8s-medium" resources="all"/> 
 	<tool id="FeatureFinderMRM" destination="container-openms"/> 
 	<tool id="FeatureFinderMultiplex" destination="container-openms"/> 
-	<tool id="FeatureLinkerLabeled" destination="container-openms"/> 
+	<tool id="FeatureLinkerLabeled" destination="dynamic-k8s-medium" resources="all"/> 
 	<tool id="FeatureLinkerUnlabeled" destination="container-openms"/> 
 	<tool id="FeatureLinkerUnlabeledQT" destination="container-openms"/> 
 	<tool id="FidoAdapter" destination="container-openms"/> 
@@ -511,16 +497,16 @@
 	<tool id="TOFCalibration" destination="container-openms"/> 
 	<tool id="XTandemAdapter" destination="container-openms"/> 
 	<!-- MetFrag -->
-	<tool id="metfrag-cli-batch" destination="metfrag-cli-batch-container" />
-	<tool id="metfrag-cli-batch-multiple" destination="metfrag-cli-batch-container" />
-  	<tool id="msnbase-read-msms" destination="msnbase-container" />
-        <tool id="msnbase-filter-merge-msms" destination="msnbase-container" />
-  	<tool id="map-msms2camera" destination="msnbase-container" />
-  	<tool id="msms2metfrag" destination="msnbase-container" />
-	<tool id="msms2metfrag-multiple" destination="msnbase-container" />
-	<tool id="metfrag-vis" destination="metfrag-vis-container" />
-	<tool id="aggregatemetfrag" destination="msnbase-container" />
-	<tool id="passatutto" destination="container-passatutto" />
+	<tool id="metfrag-cli-batch" destination="dynamic-k8s-large" resources="all"/>
+  <tool id="msnbase-read-msms" destination="dynamic-k8s-medium" resources="all"/>
+  <tool id="map-msms2camera" destination="dynamic-k8s-medium" resources="all"/>
+  <tool id="msms2metfrag" destination="dynamic-k8s-medium" resources="all"/>
+	<tool id="metfrag-vis" destination="dynamic-k8s-small" resources="all"/>
+	<tool id="metfrag-cli-batch-multiple" destination="dynamic-k8s-large" />
+  <tool id="msnbase-filter-merge-msms" destination="dynamic-k8s-medium" />
+	<tool id="msms2metfrag-multiple" destination="dynamic-k8s-medium" />
+	<tool id="aggregatemetfrag" destination="dynamic-k8s-medium" />
+	<tool id="passatutto" destination="dynamic-k8s-medium" />
 	<!-- ISA related tools -->
         <tool id="get_study" destination="container-mtblisa"/>
         <tool id="get_study_json" destination="container-mtblisa"/>
