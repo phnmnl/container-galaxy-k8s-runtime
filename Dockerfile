@@ -6,6 +6,7 @@ LABEL software="Galaxy"
 LABEL software.version="17.09-pheno-lr"
 LABEL version="1.5"
 
+
 RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transport-https software-properties-common wget && \
     apt-get update -qq && \
     apt-get install --no-install-recommends -y \
@@ -56,6 +57,7 @@ RUN git clone --depth 1 --single-branch --branch py2_isatools-lite https://githu
 RUN virtualenv .venv
 # We provide --extra-index-url https://pypi.python.org/simple only until the Galaxy people
 # update their wheel server to include docutils==0.14, which Galaxy 17.09 requires.
+
 RUN /bin/bash -c "apt-get update -qq && \
                   apt-get install --no-install-recommends -y gcc-4.6 python-dev && \
                   ln -s /usr/bin/x86_64-linux-gnu-gcc-4.6 /usr/bin/x86_64-linux-gnu-gcc && \
