@@ -31,15 +31,6 @@ assignment:
   docker_image_override: ramid
   docker_tag_override: v1.0_cv1.0.14
   max_pod_retrials: 3
-  
-# MTBLS/ISA
-- tools_id:
-   - isa2w4m
-  docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_owner_override: phnmnl
-  docker_image_override: isa2w4m
-  docker_tag_override: latest
-  max_pod_retrials: 3
 
 - tools_id:
    - mtbls-factors-viz
