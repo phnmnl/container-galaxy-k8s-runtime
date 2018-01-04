@@ -20,8 +20,6 @@ RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transpo
               python-psutil \
               python-psycopg2 \
               python-virtualenv \
-              gcc-4.6 \
-              python-dev \
               sudo \
     && \
     pip install --upgrade pip && \
@@ -51,7 +49,6 @@ RUN /bin/bash -c "source .config_script_venv/bin/activate && \
                   pip install bioblend>=0.9.0 && \
                   deactivate"
 
-RUN ln -s /usr/bin/x86_64-linux-gnu-gcc-4.6 /usr/bin/x86_64-linux-gnu-gcc
 
 # Clone isatools-lite (Python 2 version)
 RUN git clone --depth 1 --single-branch --branch py2_isatools-lite https://github.com/ISA-tools/isa-api.git /isatools
@@ -59,16 +56,19 @@ RUN git clone --depth 1 --single-branch --branch py2_isatools-lite https://githu
 RUN virtualenv .venv
 # We provide --extra-index-url https://pypi.python.org/simple only until the Galaxy people
 # update their wheel server to include docutils==0.14, which Galaxy 17.09 requires.
-RUN /bin/bash -c "source .venv/bin/activate && \
+RUN /bin/bash -c "apt-get update -qq && \
+                  apt-get install --no-install-recommends -y gcc-4.6 python-dev && \
+                  ln -s /usr/bin/x86_64-linux-gnu-gcc-4.6 /usr/bin/x86_64-linux-gnu-gcc && \
+                  source .venv/bin/activate && \
                   pip install 'pip>=8.1' && \
                   pip install -r requirements.txt \
                       --index-url https://wheels.galaxyproject.org/simple \
                       --extra-index-url https://pypi.python.org/simple && \
                   pip install -e /isatools && \
-                  deactivate"
+                  deactivate && \
+                  apt-get purge -y python-dev gcc-4.6 && \
+                  apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*"
 
-# Uninstall packages used for installing isa-tools
-RUN apt-get -y remove python-dev gcc-4.6
 
 # Galaxy runs on python < 3.5, so https://github.com/kelproject/pykube/issues/29 recommends
 ENV PYKUBE_KUBERNETES_SERVICE_HOST kubernetes
