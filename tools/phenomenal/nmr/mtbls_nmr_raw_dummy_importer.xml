@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [File Handling]-->
-<tool id="mtbls_nmr_raw_dummy_importer" name="mtbls_nmr_raw_importer" version="0.4">
+<tool id="mtbls_nmr_raw_dummy_importer" name="mtbls_nmr_raw_importer" version="0.5">
   <description>Import NMR data from MetaboLights</description>
   <requirements>
     <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/nmrmlconv</container>
@@ -19,8 +19,7 @@
   </inputs>
   <outputs>
     <collection type="list" label="NMR RAW" format="no_unzip.zip" name="nmr_raw" >
-      <!-- <discover_datasets pattern="__designation_and_ext__" directory="outfolder" /> -->
-      <discover_datasets pattern="__name__" directory="outfolder" format="no_unzip.zip" visible="True" />
+      <discover_datasets pattern="__name__" directory="outfolder" type="data" format="no_unzip.zip" visible="False" />
     </collection>
   </outputs>
   <help><![CDATA[
