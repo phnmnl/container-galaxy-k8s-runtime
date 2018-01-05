@@ -1,4 +1,4 @@
-<tool id="metabolab" name="Metabolab" version=0.1>
+<tool id="metabolab" name="Metabolab" version="0.1">
      <description>Processing vendor raw data for Multivariate analysis</description>
      <requirements>
        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/metabolab</container>

@@ -3,33 +3,35 @@ global:
   max_pod_retrials: 3
 assignment:
 # Fluxomics
-#- tool_id: escher-fluxomics
-#  docker_repo_override: container-registry.phenomenal-h2020.eu
-#  docker_owner_override: phnmnl
-#  docker_image_override: escher-fluxomics
-#  docker_tag_override: v1.6.0-beta.4_cv1.0.9
-#  max_pod_retrials: 3
+- tools_id: 
+   - escher-fluxomics
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_owner_override: phnmnl
+  docker_image_override: escher-fluxomics
+  docker_tag_override: v1.6.0-beta.4_cv1.0.9
+  max_pod_retrials: 3
 - tools_id:
    - iso2flux
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: iso2flux
   docker_tag_override: v0.2_cv1.1.36
-  max_pod_retrials: 1
+  max_pod_retrials: 3
 - tools_id:
    - midcor
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: midcor
   docker_tag_override: v1.0_cv1.0.40
-  max_pod_retrials: 1
+  max_pod_retrials: 3
 - tools_id:
    - ramid
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: ramid
   docker_tag_override: v1.0_cv1.0.14
-  max_pod_retrials: 1
+  max_pod_retrials: 3
+  
 # MTBLS/ISA
 - tools_id:
    - mtbls-factors-viz
@@ -38,13 +40,390 @@ assignment:
   docker_image_override: mtbls-factors-viz
   docker_tag_override: v0.4_cv0.3.11
   max_pod_retrials: 3
-# XCMS
+  
 - tools_id:
-   - save_chromatogram
-   - show_chromatogram
+   - power-analysis
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
-  docker_image_override: xcms
+  docker_image_override: papy
+  docker_tag_override: v2.0_cv1.0.25
+  max_pod_retrials: 3
+- docker_image_override: nmrglue
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: latest
+  max_pod_retrials: 3
+  tools_id:
+  - mtbls2nmrglue
+- docker_image_override: mtbls-dwnld
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v2.0.5_cv1.2.16
+  max_pod_retrials: 3
+  tools_id:
+  - mtbls-dwnld
+- docker_image_override: json2isatab
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v0.8.0_cv0.2.26
+  max_pod_retrials: 3
+  tools_id:
+  - json2isatab
+- docker_image_override: biosigner
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v2.2.7_cv1.1.12
+  max_pod_retrials: 3
+  tools_id:
+  - Biosigner
+- docker_image_override: openms
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v2.1.0_cv0.2.15
+  max_pod_retrials: 3
+  tools_id:
+  - AdditiveSeries
+  - BaselineFilter
+  - CompNovo
+  - CompNovoCID
+  - ConsensusID
+  - ConsensusMapNormalizer
+  - Decharger
+  - DTAExtractor
+  - EICExtractor
+  - ExternalCalibration
+  - FalseDiscoveryRate
+  - FeatureFinderCentroided
+  - FeatureFinderIdentification
+  - FeatureFinderIsotopeWavelet
+  - FeatureFinderMetabo
+  - FeatureFinderMRM
+  - FeatureFinderMultiplex
+  - FeatureLinkerLabeled
+  - FeatureLinkerUnlabeled
+  - FeatureLinkerUnlabeledQT
+  - FidoAdapter
+  - FileConverter
+  - FileFilter
+  - FileInfo
+  - FileMerger
+  - HighResPrecursorMassCorrector
+  - IDConflictResolver
+  - IDFileConverter
+  - IDFilter
+  - IDMapper
+  - IDMerger
+  - IDPosteriorErrorProbability
+  - IDRipper
+  - IDRTCalibration
+  - InclusionExclusionListCreator
+  - InspectAdapter
+  - InternalCalibration
+  - IsobaricAnalyzer
+  - ITRAQAnalyzer
+  - LuciphorAdapter
+  - MapAlignerIdentification
+  - MapAlignerPoseClustering
+  - MapAlignerSpectrum
+  - MapNormalizer
+  - MapRTTransformer
+  - MapStatistics
+  - MascotAdapter
+  - MascotAdapterOnline
+  - MassTraceExtractor
+  - MRMMapper
+  - MSGFPlusAdapter
+  - MyriMatchAdapter
+  - MzTabExporter
+  - NoiseFilterGaussian
+  - NoiseFilterSGolay
+  - OMSSAAdapter
+  - OpenSwathAnalyzer
+  - OpenSwathAssayGenerator
+  - OpenSwathChromatogramExtractor
+  - OpenSwathConfidenceScoring
+  - OpenSwathDecoyGenerator
+  - OpenSwathFeatureXMLToTSV
+  - OpenSwathRTNormalizer
+  - PeakPickerHiRes
+  - PeakPickerWavelet
+  - PepNovoAdapter
+  - PeptideIndexer
+  - PhosphoScoring
+  - PrecursorIonSelector
+  - PrecursorMassCorrector
+  - ProteinInference
+  - ProteinQuantifier
+  - ProteinResolver
+  - PTModel
+  - PTPredict
+  - RTModel
+  - RTPredict
+  - SeedListGenerator
+  - SpecLibSearcher
+  - SpectraFilterBernNorm
+  - SpectraFilterMarkerMower
+  - SpectraFilterNLargest
+  - SpectraFilterNormalizer
+  - SpectraFilterParentPeakMower
+  - SpectraFilterScaler
+  - SpectraFilterSqrtMower
+  - SpectraFilterThresholdMower
+  - SpectraFilterWindowMower
+  - SpectraMerger
+  - TextExporter
+  - TMTAnalyzer
+  - TOFCalibration
+  - XTandemAdapter
+- docker_image_override: nmrmlconv
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v1.1b_cv0.4.46
+  max_pod_retrials: 3
+  tools_id:
+  - mtbls_nmr_raw_dummy_importer
+  - nmrmlconv
+  - zip-nmrml-collection
+- docker_image_override: metfrag-vis
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v0.1_cv0.1.12
+  max_pod_retrials: 3
+  tools_id:
+  - metfrag-vis
+- docker_image_override: container-passatutto
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: dev_v201604_cv0.1.7
+  max_pod_retrials: 3
+  tools_id:
+  - metfrag-vis
+- docker_image_override: metaboliteidconverter
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v0.5.1_cv1.1.28
+  max_pod_retrials: 3
+  tools_id:
+  - Metabolite_ID_Converter
+- docker_image_override: multivariate
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v2.3.10_cv1.1.18
+  max_pod_retrials: 3
+  tools_id:
+  - Multivariate
+- docker_image_override: mtblisa
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v0.8.0_cv0.5.44
+  max_pod_retrials: 3
+  tools_id:
+  - get_study
+  - get_study_json
+  - study_factor_values
+  - study_factors
+  - data_files
+  - factors_summary
+- docker_image_override: metfrag-cli-batch
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: dev_v2.4.3_cv0.4.46 
+  max_pod_retrials: 3
+  tools_id:
+  - metfrag-cli-batch
+  - metfrag-cli-batch-multiple
+- docker_image_override: ms-vfetc
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v0.4_cv1.3.10
+  max_pod_retrials: 3
+  tools_id:
+  - ms-vfetc
+- docker_image_override: rnmr1d
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: dev_v1.2.8_cv0.4.34 
+  max_pod_retrials: 3
+  tools_id:
+  - rnmr1d
+  - rnmr1d-stacked-plot
+- docker_image_override: metabomatching
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v0.1.0_cv0.3.29
+  max_pod_retrials: 3
+  tools_id:
+  - metabomatching
+- docker_image_override: isatab2json
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v0.8.0_cv0.2.39
+  max_pod_retrials: 3
+  tools_id:
+  - isatab2json
+- docker_image_override: batman
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v1.2.12.0_cv1.0.65
+  max_pod_retrials: 3
+  tools_id:
+  - batman-nmr
+- docker_image_override: isodyn
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v1.0_cv0.2.30
+  max_pod_retrials: 3
+  tools_id:
+  - isodyn
+- docker_image_override: metfrag-cli
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v2.4.2_cv0.3.24
+  max_pod_retrials: 3
+  tools_id:
+  - metfragcli
+- docker_image_override: mw2isa
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v0.5.0_cv0.1.20
+  max_pod_retrials: 3
+  tools_id:
+  - mw2isa
+- tools_id:
+  - log2transformation
+- docker_image_override: nmrml2isa
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v0.3.0_cv0.1.10
+  max_pod_retrials: 3
+  tools_id:
+  - nmrml2isa
+- docker_image_override: pwiz
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: latest
+  max_pod_retrials: 3
+  tools_id:
+  - msconvert2
+- docker_image_override: isatab-validator
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v0.8.0_cv0.2.16
+  max_pod_retrials: 3
+  tools_id:
+  - isatab_validator
+- docker_image_override: metabolab
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v0.99.8.8_cv0.6.65
+  max_pod_retrials: 3
+  tools_id:
+  - metabolab
+- docker_image_override: lcmsmatching
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v3.1.6_cv1.3.61
+  max_pod_retrials: 3
+  tools_id:
+  - lcmsmatching
+- docker_image_override: univariate
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v2.2.3_cv1.2.28
+  max_pod_retrials: 3
+  tools_id:
+  - Univariate
+- docker_image_override: mzml2isa
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v0.4.28_cv0.2.23
+  max_pod_retrials: 3
+  tools_id:
+  - mzml2isa
+- docker_image_override: isajson-validator
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v0.8.0_cv0.2.26
+  max_pod_retrials: 3
+  tools_id:
+  - isajson_validator
+- docker_image_override: soap-nmr
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v1.0_cv0.4.1016
+  max_pod_retrials: 3
+  tools_id:
+  - soap_process
+  - soap_opls
+- docker_image_override: xcms
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: dev_v1.52.0_cv0.8.70 
+  max_pod_retrials: 3
+  tools_id:
+  - xcms-find-peaks
+  - xcms-collect-peaks
+  - xcms-group-peaks
+  - xcms-correct-rt
+  - xcms-fill-peaks
+  - xcmssplit
+  - xcms-blankfilter
+  - xcms-dilutionfilter
+- docker_image_override: xcms
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_tag_override: dev_v3.0.0_cv0.1.75
   max_pod_retrials: 1
-
+  tools_id:
+  - save_chromatogram
+  - show_chromatogram
+- docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_owner_override: phnmnl
+  docker_image_override: pathwayenrichment
+  docker_tag_override: latest
+  max_pod_retrials: 1
+  tools_id:
+   - pathway_enrichment
+- docker_image_override: scp-aspera
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v3.5.4.102989-linux-64_cv0.2.9
+  max_pod_retrials: 3
+  tools_id:
+  - mtbls-downloader
+- docker_image_override: camera
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: dev_v1.33.3_cv0.8.56 
+  max_pod_retrials: 3
+  tools_id:
+  - consensusXMLToXcms
+  - cameraToFeatureXML
+  - featureXMLToCAMERA
+  - featureXMLToXcms
+  - zip-collection
+  - camera-annotate-peaks
+  - camera-group-fwhm
+  - camera-group-corr
+  - camera-find-isotopes
+  - camera-find-adducts
+  - camera-prepareoutput
+- docker_image_override: msnbase
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: dev_v2.2_cv0.7.53
+  max_pod_retrials: 3
+  tools_id:
+  - msnbase-read-msms
+  - map-msms2camera
+  - msms2metfrag
+  - msms2metfrag-multiple
+  - msnbase-filter-merge-msms
+  - aggregatemetfrag
+- docker_image_override: mtbl-labs-uploader
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v0.1.0_cv0.3.11
+  max_pod_retrials: 3
+  tools_id:
+  - mtbls-labs-uploader
