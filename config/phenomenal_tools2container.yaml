@@ -31,8 +31,7 @@ assignment:
   docker_image_override: ramid
   docker_tag_override: v1.0_cv1.0.14
   max_pod_retrials: 3
-  
-# MTBLS/ISA
+
 - tools_id:
    - mtbls-factors-viz
   docker_repo_override: container-registry.phenomenal-h2020.eu
@@ -55,13 +54,22 @@ assignment:
   max_pod_retrials: 3
   tools_id:
   - mtbls2nmrglue
+
 - docker_image_override: mtbls-dwnld
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v2.0.5_cv1.2.16
+  docker_tag_override: v3.0.1_cv1.3.22
   max_pod_retrials: 3
   tools_id:
   - mtbls-dwnld
+- docker_image_override: isa2w4m
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v1.0.4_cv1.2.6
+  max_pod_retrials: 3
+  tools_id:
+  - isa2w4m
+
 - docker_image_override: json2isatab
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu

@@ -308,6 +308,7 @@
     <tool id="power-analysis" destination="papy-container"/>
     <!-- W4M Sacurine -->
     <tool id="mtbls-dwnld" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa2w4m" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="Univariate" destination="dynamic-k8s-small" resources="all"/>
     <tool id="Multivariate" destination="dynamic-k8s-small" resources="all"/>
     <tool id="Biosigner" destination="dynamic-k8s-medium" resources="all"/>
