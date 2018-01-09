@@ -62,6 +62,8 @@ if [ -z $GALAXY_PVC_MOUNT_POINT ]; then
   GALAXY_PVC_MOUNT_POINT=/opt/galaxy_data
 fi
 
+# remove old failed start log, if it exists
+rm -f "${GALAXY_PVC_MOUNT_POINT}/failed_start.log"
 
 # if admin email, api and password env variables are set, then start galaxy, run user creation and stop galaxy
 if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GALAXY_API_KEY ]; then
@@ -80,7 +82,7 @@ if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GA
     if ! current_pid_in_file=$(cat paster.pid); then
         log "Galaxy process died, interrupting"
         log "Writing failure log to $GALAXY_PVC_MOUNT_POINT/failed_start.log accessible on the shared file system being used."
-        cp paster.log $GALAXY_PVC_MOUNT_POINT/failed_start.log
+        cp --force paster.log $GALAXY_PVC_MOUNT_POINT/failed_start.log || { log "Failed to copy log file."; }
         exit 1
     fi
     # Search for all pids in the logs and tail for the last one
@@ -89,9 +91,6 @@ if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GA
     # and we've succesfully started
     [ -n "$latest_pid" ] && [ "$latest_pid" -eq "$current_pid_in_file" ] && break
   done
-  if [ -e $GALAXY_PVC_MOUNT_POINT/failed_start.log ]; then
-     rm $GALAXY_PVC_MOUNT_POINT/failed_start.log
-  fi
   end_time=$(date +%s)
   log "Galaxy is up and ready for API calls after $((${end_time} - ${start_time})) seconds."
   log "Running admin user creation..."
