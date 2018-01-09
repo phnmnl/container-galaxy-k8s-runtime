@@ -57,6 +57,11 @@ if [ ! -z $GALAXY_TOOLS_PULL_POLICY ]; then
   log "Set k8s pull policy to use with Galaxy to $GALAXY_TOOLS_PULL_POLICY on job_conf.xml"
 fi
 
+if [ -z $GALAXY_PVC_MOUNT_POINT ]; then
+  # for backward compatibility with Helm charts that didn't define this env var
+  GALAXY_PVC_MOUNT_POINT=/opt/galaxy_data
+fi
+
 
 # if admin email, api and password env variables are set, then start galaxy, run user creation and stop galaxy
 if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GALAXY_API_KEY ]; then
@@ -74,6 +79,8 @@ if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GA
     # Grab the current pid from the pid file
     if ! current_pid_in_file=$(cat paster.pid); then
         log "Galaxy process died, interrupting"
+        log "Writing failure log to $GALAXY_PVC_MOUNT_POINT/failed_start.log accessible on the shared file system being used."
+        cp paster.log $GALAXY_PVC_MOUNT_POINT/failed_start.log
         exit 1
     fi
     # Search for all pids in the logs and tail for the last one
@@ -82,6 +89,9 @@ if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GA
     # and we've succesfully started
     [ -n "$latest_pid" ] && [ "$latest_pid" -eq "$current_pid_in_file" ] && break
   done
+  if [ -e $GALAXY_PVC_MOUNT_POINT/failed_start.log ]; then
+     rm $GALAXY_PVC_MOUNT_POINT/failed_start.log
+  fi
   end_time=$(date +%s)
   log "Galaxy is up and ready for API calls after $((${end_time} - ${start_time})) seconds."
   log "Running admin user creation..."
