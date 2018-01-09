@@ -89,7 +89,9 @@ if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GA
     # and we've succesfully started
     [ -n "$latest_pid" ] && [ "$latest_pid" -eq "$current_pid_in_file" ] && break
   done
-  rm $GALAXY_PVC_MOUNT_POINT/failed_start.log
+  if [ -e $GALAXY_PVC_MOUNT_POINT/failed_start.log ]; then
+     rm $GALAXY_PVC_MOUNT_POINT/failed_start.log
+  fi
   end_time=$(date +%s)
   log "Galaxy is up and ready for API calls after $((${end_time} - ${start_time})) seconds."
   log "Running admin user creation..."
