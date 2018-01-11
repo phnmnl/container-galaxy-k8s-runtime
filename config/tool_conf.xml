@@ -74,6 +74,7 @@
     <tool file="phenomenal/nmr/rnmr1d-stacked-plot.xml"/>
     <tool file="phenomenal/nmr/rnmr1d-prepareOutput.xml"/>
     <tool file="phenomenal/nmr/batman.xml"/>
+	<tool file="phenomenal/nmr/bruker2batman.xml"/>
     <tool file="phenomenal/nmr/metabomatching.xml"/>
     <tool file="phenomenal/nmr/nmrml2isa/nmrml2isa.xml"/>
     <tool file="phenomenal/nmr/mtbls2nmrglue.xml"/>

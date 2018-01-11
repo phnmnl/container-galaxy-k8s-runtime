@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [File Handling]-->
+<tool id="bruker2batman" name="bruker2batman Converter">
+     <description>Bruker NMR files to BATMAN converter</description>
+     <requirements>
+       <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/bruker2batman</container>
+     </requirements>
+     <command><![CDATA[   
+     export indir=`dirname $BrukerNMRzip`;
+     mkdir -p \$indir/tmp/;
+     unzip -q -d \$indir/tmp/ $BrukerNMRzip;
+     bruker2batman.R -i \$indir/tmp/
+       ]]>
+     </command>
+     <inputs>
+         <param name="BrukerNMRzip" type="data" label="Zipped Bruker NMR file." help="A zipped Bruker NMR file containing one or more NMR spectra, converted from nmrmlconv tool. "/>
+     </inputs>
+     <outputs>
+         <data name="NMRdata" format="tabular" from_work_dir="NMRdata_from_Bruker.txt" label="Tabulated TXT file containing NMR ppm and spectra."/>
+     </outputs>
+     <help><![CDATA[     
+     
+     Convert Bruker NMR files (in a single zipped file) to a txt file for input of BATMAN.
+
+.. class::infomark
+
+**Author**  
+Jianliang Gao (ICL). 
+Evangelos Handakas (ICL)
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+**Tool**
+
+A R program to convert Bruker type NMR files to TXT format.
+
+
+----------------------------------------------------------------------------------
+
+
+
+.. class:: infomark
+
+================================================================================
+**bruker2batman Converter**: Converting Bruker NMR to open access TXT format
+================================================================================
+
+-----------
+Description
+-----------
+
+This is a R script to convert Bruker NMR files (in a single zipped file) to a txt file for input of BATMAN.
+
+-----------
+Input files
+-----------
+
+Galaxy dataset Bruker NMR files in Zip format.
+
+------------
+Test Dataset
+------------
+Test dataset can be downloaded from the following link:
+
+https://github.com/jianlianggao/container-bruker2batman/blob/master/test_data/mesa_bruker.zip?raw=true
+
+
+------------
+Output files
+------------
+
+TXT format NMR data for BATMAN.
+
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**License**
+Copyright (C) 2017 Jianliang Gao (ICL), Evangelos Chandakas (ICL)
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+----
+NEWS
+----
+
+More updates .... We are afraid that the answer is NO!
+
+  ]]></help>
+       
+       
+ </tool>
