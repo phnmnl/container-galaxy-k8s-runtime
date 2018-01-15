@@ -316,6 +316,7 @@
     <tool id="transformation" destination="dynamic-k8s-small" resources="all"/>
     <tool id="batchcorrection" destination="dynamic-k8s-small" resources="all"/>
     <tool id="generic-filter" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="quality_metrics" destination="dynamic-k8s-small" resources="all"/>
     <tool id="msconvert2" destination="msconvert2-container"/>
     <!-- new NMR -->
     <tool id="metabolab" destination="dynamic-k8s-large" resources="all"/>
