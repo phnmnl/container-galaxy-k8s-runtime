@@ -313,6 +313,7 @@
     <tool id="Multivariate" destination="dynamic-k8s-small" resources="all"/>
     <tool id="Biosigner" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="lcmsmatching" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="transformation" destination="dynamic-k8s-small" resources="all"/>
     <tool id="msconvert2" destination="msconvert2-container"/>
     <!-- new NMR -->
     <tool id="metabolab" destination="dynamic-k8s-large" resources="all"/>

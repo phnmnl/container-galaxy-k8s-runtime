@@ -77,6 +77,15 @@ assignment:
   max_pod_retrials: 3
   tools_id:
   - json2isatab
+
+- docker_image_override: transformation
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v2.2.2_cv1.1
+  max_pod_retrials: 3
+  tools_id:
+  - transformation
+
 - docker_image_override: biosigner
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu

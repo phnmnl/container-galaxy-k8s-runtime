@@ -221,6 +221,7 @@
     <tool file="phenomenal/w4m/multivariate_config.xml"/>
     <tool file="phenomenal/w4m/biosigner_config.xml"/>
     <tool file="phenomenal/w4m/lcmsmatching_config.xml"/>
+    <tool file="phenomenal/w4m/transformation_config.xml"/>
   </section>
   <section name="Post-Processing" id="pheno-postprocessing">
     <tool file="phenomenal/postProcessing/metaboliteidconverter.xml"/>
