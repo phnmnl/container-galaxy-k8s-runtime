@@ -81,10 +81,10 @@ assignment:
 - docker_image_override: transformation
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v2.2.2_cv1.1
+  docker_tag_override: v2.2.2_cv1.0.3
   max_pod_retrials: 3
   tools_id:
-  - transformation
+  - Transformation
 
 - docker_image_override: batchcorrection
   docker_owner_override: phnmnl
@@ -102,7 +102,7 @@ assignment:
   tools_id:
   - generic_filter
 
- - docker_image_override: qualitymetrics
+- docker_image_override: qualitymetrics
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_tag_override: dev_vphenomenal_2017.12.12_cv0.2.2

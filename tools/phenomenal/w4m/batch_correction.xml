@@ -14,7 +14,8 @@
   
   <command><![CDATA[
     #if str($span_condition.method) == 'all_loess_pool':
-        Rscript $__tool_directory__/batch_correction_docker_wrapper.R --loess
+        batch_correction_all_loess_wrapper.R
+        
         dataMatrix "$dataMatrix"
         sampleMetadata "$sampleMetadata"
         variableMetadata "$variableMetadata"
@@ -22,14 +23,16 @@
         span "${span_condition.span}"
     
     #elif str($span_condition.method) == 'all_loess_sample':
-        Rscript $__tool_directory__/batch_correction_docker_wrapper.R --loess
+        batch_correction_all_loess_wrapper.R
+        
         dataMatrix "$dataMatrix"
         sampleMetadata "$sampleMetadata"
         variableMetadata "$variableMetadata"
         method "all_loess_sample"
         span "${span_condition.span}"
     #else:
-        Rscript $__tool_directory__/batch_correction_docker_wrapper.R
+        batch_correction_wrapper.R
+        
         analyse "batch_correction"
         dataMatrix "$dataMatrix"
         sampleMetadata "$sampleMetadata"

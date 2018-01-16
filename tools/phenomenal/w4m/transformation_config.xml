@@ -10,7 +10,8 @@
   </stdio>
   
   <command><![CDATA[
-  Rscript $__tool_directory__/transformation_wrapper.R
+  transformation_wrapper.R
+  
   dataMatrix_in "$dataMatrix_in"
   method "$method"
   
