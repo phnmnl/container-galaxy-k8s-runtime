@@ -60,6 +60,7 @@
 
   <section name="Fluxomics" id="pheno-fluxomics">
     <tool file="phenomenal/fluxomics/ramid/ramid.xml"/>
+    <tool file="phenomenal/fluxomics/cdf2mid.xml"/>
     <tool file="phenomenal/fluxomics/midcor/midcor.xml"/>
     <tool file="phenomenal/fluxomics/iso2flux/iso2flux.xml"/>
     <tool file="phenomenal/fluxomics/isodyn/isodyn.xml"/>
