@@ -297,8 +297,6 @@ assignment:
   max_pod_retrials: 3
   tools_id:
   - mw2isa
-- tools_id:
-  - log2transformation
 - docker_image_override: nmrml2isa
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
