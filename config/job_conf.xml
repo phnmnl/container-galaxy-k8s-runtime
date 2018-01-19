@@ -304,6 +304,7 @@
     <tool id="iso2flux" destination="dynamic-k8s-small" resources="all"/>     
     <tool id="midcor" destination="dynamic-k8s-small" resources="all"/>
     <tool id="ramid" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="cdf2mid" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isodyn" destination="isodyn-container"/>
     <tool id="escher-fluxomics" destination="dynamic-k8s-tiny" resources="all"/>
     <!-- ICL -->
