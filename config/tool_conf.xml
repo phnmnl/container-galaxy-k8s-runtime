@@ -224,6 +224,7 @@
     <tool file="phenomenal/w4m/transformation_config.xml"/>
     <tool file="phenomenal/w4m/generic_filter.xml"/>
     <tool file="phenomenal/w4m/batch_correction.xml"/>
+    <tool file="phenomenal/w4m/NmrNormalization_xml.xml"/>
     <tool file="phenomenal/w4m/qualitymetrics_config.xml"/>
   </section>
   <section name="Post-Processing" id="pheno-postprocessing">
