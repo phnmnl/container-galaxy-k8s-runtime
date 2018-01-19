@@ -1,0 +1,78 @@
+id: batman-tour
+name: batman-tour
+description: Hello, this is a tour for BATMAN!
+title_default: "batman-tour"
+
+steps:
+  - title: BATMAN 
+    content: >-
+      BATMAN tour. This annotation is based on the mapping of in
+      silico generated fragments to the experimental spectra  and scoring of
+      your arrow keys and leave the tour at any time point with 'Escape' or the
+      'End tour' button.
+    backdrop: true
+  - title: Upload your NMR data
+    element: .upload-button
+    intro: Use this button to get your data into Galaxy
+    position: right
+    postclick:
+      - .upload-button
+  - title: Upload your data
+    element: '#btn-local'
+    intro: ' Galaxy supports many ways to get in your data. You can upload data from your computer.'
+    position: top
+    postclick:
+      - '#btn-new'
+  - title: Start the upload
+    element: '#btn-start'
+    intro: Upload the data into your Galaxy history.
+    position: top
+    postclick:
+      - '#btn-start'
+  - title: Close upload/download manager
+    element: '#btn-close'
+    intro: >-
+      Close the upload manager with this button or with a click outside of the
+      manager window.
+    position: top
+    postclick:
+      - '#btn-close'
+  - title: Tools
+    element: '#left'
+    intro: >-
+      NMR tools.
+    position: right
+
+  - title: Select BATMAN tool
+    element: '#tool-search'
+    content: >-
+      Select BATMAN tool, either by locating it in the NMR section, or
+      using the search box
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=batman-nmr"]'
+  - title: select data
+    element: '#center-panel'
+    intro: Your tool is loaded into the main Galaxy page and ready for use. The parameters are OK for this data set.
+    position: right
+  - title: select BATMAN options
+    element: '#center-panel'
+    intro: Your tool is loaded into the main Galaxy page and ready for use. The parameters are OK for this data set.
+    position: right
+  - title: select metabolite template
+    element: '#center-panel'
+    intro: Your tool is loaded into the main Galaxy page and ready for use. The parameters are OK for this data set.
+    position: right
+  - title: select target list
+    element: '#center-panel'
+    intro: Your tool is loaded into the main Galaxy page and ready for use. The parameters are OK for this data set.
+    position: right
+  - title: run BATMAN
+    element: '#execute'
+    intro: Click on 'Execute' to run your tool and send it to the compute cluster.
+    position: right
+    postclick:
+      - '#execute'
+      
+  - title: Enjoy Galaxy
+    intro: Thanks for taking this tour! Happy metabolomics research with PhenoMeNal !
