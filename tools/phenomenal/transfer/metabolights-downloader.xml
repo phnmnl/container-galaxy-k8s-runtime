@@ -13,7 +13,7 @@
     #set $path_elements = str($file_path).split('/')
     #set $study = $path_elements[-1]
 
-    ascp -QT -l 1g fasp-ml@fasp.ebi.ac.uk:$file_path . ;
+    ascp -QT -l 1g -P 33001 fasp-ml@fasp.ebi.ac.uk:$file_path . ;
     cd "$study";
     zip isa.zip i_*.txt s_*.txt a_*.txt && mv isa.zip "$ISA_zip";
     zip maf.zip m_*.t* && mv maf.zip "$MAF_zip";
