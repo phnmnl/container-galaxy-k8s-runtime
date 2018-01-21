@@ -314,7 +314,7 @@
     <!-- ICL -->
     <tool id="batman-nmr" destination="batman-container"/>
     <tool id="power-analysis" destination="papy-container"/>
-	<tool id="bruker2batman" destination="bruker2batman-container"/>
+	<tool id="bruker2batman" destination="dynamic-k8s-medium" resources="all"/>
     <!-- W4M Sacurine -->
     <tool id="mtbls-dwnld" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa2w4m" destination="dynamic-k8s-tiny" resources="all"/>
