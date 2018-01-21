@@ -6,10 +6,8 @@
        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/bruker2batman</container>
      </requirements>
      <command><![CDATA[   
-     export indir=`dirname $BrukerNMRzip`;
-     mkdir -p \$indir/tmp/;
-     unzip -q -d \$indir/tmp/ $BrukerNMRzip;
-     bruker2batman.R -i \$indir/tmp/
+     unzip -q -d \$PWD $BrukerNMRzip;
+     bruker2batman.R -i \$PWD
        ]]>
      </command>
      <inputs>
