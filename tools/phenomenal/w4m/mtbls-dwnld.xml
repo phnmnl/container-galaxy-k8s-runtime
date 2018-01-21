@@ -1,5 +1,5 @@
 <!-- vi: se fdm=marker : -->
-<tool id="mtbls-dwnld" name="Metabolights downloader" version="3.0.1">
+<tool id="mtbls-dwnld" name="Metabolights downloader" version="3.1.0">
 
 	<description>Import public and private MetaboLights studies</description>
 
@@ -65,7 +65,7 @@
 	<!-- Outputs {{{1 -->
 
     <outputs>
-        <data name="isastudy" label="ISA of ${study}" format="isa"/>
+        <data name="isastudy" label="${study}" format="isa-tab"/>
     </outputs>
 
 	<!-- Tests {{{1 -->
@@ -130,8 +130,8 @@ You need to provide a token when downloading with *aspera* (both for private and
 Output
 ------
 
-The output is an ISA dataset that can be used in subsequent tools like isa2w4m.
-The ISA dataset stores all files contain in the downloaded Metabolights study.
+The output is an ISA-Tab dataset that can be used in subsequent tools like isa2w4m.
+The ISA-Tab dataset stores all files contain in the downloaded Metabolights study.
 
 ---------------------
 Developer information
