@@ -54,7 +54,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="" optional="False" label="input file" help="(-in) "/>
+    <param name="param_in" type="data" format="idxml" optional="False" label="input file" help="(-in) "/>
     <param name="param_min_peptides_per_protein" type="integer" min="1" optional="True" value="2" label="Minimal number of peptides needed for a protein identification" help="(-min_peptides_per_protein) "/>
     <param name="param_treat_charge_variants_separately" display="radio" type="boolean" truevalue="-treat_charge_variants_separately" falsevalue="" checked="false" optional="True" label="If this flag is set, different charge variants of the same peptide sequence count as inidividual evidences" help="(-treat_charge_variants_separately) "/>
     <param name="param_treat_modification_variants_separately" display="radio" type="boolean" truevalue="-treat_modification_variants_separately" falsevalue="" checked="false" optional="True" label="If this flag is set, different modification variants of the same peptide sequence count as individual evidences" help="(-treat_modification_variants_separately) "/>

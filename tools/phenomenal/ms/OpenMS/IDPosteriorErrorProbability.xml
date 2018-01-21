@@ -72,7 +72,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="" optional="False" label="input file" help="(-in) "/>
+    <param name="param_in" type="data" format="idxml" optional="False" label="input file" help="(-in) "/>
     <param name="param_split_charge" display="radio" type="boolean" truevalue="-split_charge" falsevalue="" checked="false" optional="True" label="The search engine scores are split by charge if this flag is set" help="(-split_charge) Thus, for each charge state a new model will be computed"/>
     <param name="param_top_hits_only" display="radio" type="boolean" truevalue="-top_hits_only" falsevalue="" checked="false" optional="True" label="If set only the top hits of every PeptideIdentification will be used" help="(-top_hits_only) "/>
     <param name="param_ignore_bad_data" display="radio" type="boolean" truevalue="-ignore_bad_data" falsevalue="" checked="false" optional="True" label="If set errors will be written but ignored" help="(-ignore_bad_data) Useful for pipelines with many datasets where only a few are bad, but the pipeline should run through"/>

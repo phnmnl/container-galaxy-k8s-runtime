@@ -92,7 +92,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="" optional="False" label="Input: identification results" help="(-in) "/>
+    <param name="param_in" type="data" format="idxml" optional="False" label="Input: identification results" help="(-in) "/>
     <param name="param_fido_executable" type="data" format="text" value="Fido" label="Path to the Fido executable to use; may be empty if the executable is globally available" help="(-fido_executable) "/>
     <param name="param_fidocp_executable" type="data" format="text" value="FidoChooseParameters" label="Path to the FidoChooseParameters executable to use; may be empty if the executable is globally available" help="(-fidocp_executable) "/>
     <param name="param_separate_runs" display="radio" type="boolean" truevalue="-separate_runs" falsevalue="" checked="false" optional="True" label="Process multiple protein identification runs in the input separately, don't merge them" help="(-separate_runs) Merging results in loss of descriptive information of the single protein identification runs"/>

@@ -227,7 +227,7 @@
 ]]></command>
   <inputs>
     <param name="param_in" type="data" format="mzml" optional="False" label="input file containing the chromatograms" help="(-in) "/>
-    <param name="param_tr" type="data" format="" optional="False" label="transition file" help="(-tr) "/>
+    <param name="param_tr" type="data" format="traml" optional="False" label="transition file" help="(-tr) "/>
     <param name="param_rt_norm" type="data" format="trafoxml" optional="True" label="RT normalization file (how to map the RTs of this run to the ones stored in the library)" help="(-rt_norm) "/>
     <param name="param_no_strict" display="radio" type="boolean" truevalue="-no-strict" falsevalue="" checked="false" optional="True" label="run in non-strict mode and allow some chromatograms to not be mapped" help="(-no-strict) "/>
     <param name="param_swath_files" type="data" format="mzml" multiple="true" optional="True" size="30" label="[applies only if you have full MS2 spectra maps] Swath files that were used to extract the transitions" help="(-swath_files) If present, SWATH specific scoring will be used">
