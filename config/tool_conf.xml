@@ -60,6 +60,7 @@
 
   <section name="Fluxomics" id="pheno-fluxomics">
     <tool file="phenomenal/fluxomics/ramid/ramid.xml"/>
+    <tool file="phenomenal/fluxomics/cdf2mid.xml"/>
     <tool file="phenomenal/fluxomics/midcor/midcor.xml"/>
     <tool file="phenomenal/fluxomics/iso2flux/iso2flux.xml"/>
     <tool file="phenomenal/fluxomics/isodyn/isodyn.xml"/>
@@ -215,14 +216,21 @@
     <tool file="phenomenal/ms/convertCAMERAToOpenMS/featureXMLToXcms.xml"/>
   </section>
   <section name="W4M" id="pheno-w4m">
-    <tool file="phenomenal/w4m/mtbls-dwnld_config.xml"/>
+    <tool file="phenomenal/w4m/mtbls-dwnld.xml"/>
+    <tool file="phenomenal/w4m/isa2w4m.xml"/>
     <tool file="phenomenal/w4m/univariate_config.xml"/>
     <tool file="phenomenal/w4m/multivariate_config.xml"/>
     <tool file="phenomenal/w4m/biosigner_config.xml"/>
     <tool file="phenomenal/w4m/lcmsmatching_config.xml"/>
+    <tool file="phenomenal/w4m/transformation_config.xml"/>
+    <tool file="phenomenal/w4m/generic_filter.xml"/>
+    <tool file="phenomenal/w4m/batch_correction.xml"/>
+    <tool file="phenomenal/w4m/NmrNormalization_xml.xml"/>
+    <tool file="phenomenal/w4m/qualitymetrics_config.xml"/>
   </section>
   <section name="Post-Processing" id="pheno-postprocessing">
     <tool file="phenomenal/postProcessing/metaboliteidconverter.xml"/>
+    <tool file="phenomenal/postProcessing/pathwayenrichment.xml"/>
   </section>
 
   <section name="ISA tools" id="isa-tools">
