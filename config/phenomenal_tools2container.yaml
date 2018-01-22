@@ -253,7 +253,7 @@ assignment:
   docker_tag_override: v201604_cv0.1.8
   max_pod_retrials: 3
   tools_id:
-  - metfrag-vis
+  - passatutto
 - docker_image_override: metaboliteidconverter
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
