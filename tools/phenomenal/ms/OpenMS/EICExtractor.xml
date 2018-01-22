@@ -93,7 +93,7 @@
         </valid>
       </sanitizer>
     </param>
-    <param name="param_pos" type="data" format="edta" optional="False" label="Input config file stating where to find signal" help="(-pos) "/>
+    <param name="param_pos" type="data" format="tsv" optional="False" label="Input config file stating where to find signal" help="(-pos) "/>
     <param name="param_rt_tol" type="float" value="3.0" label="RT tolerance in [s] for finding max peak (whole RT range around RT middle)" help="(-rt_tol) "/>
     <param name="param_mz_tol" type="float" value="10.0" label="m/z tolerance in [ppm] for finding a peak" help="(-mz_tol) "/>
     <param name="param_rt_collect" type="integer" value="1" label="# of scans up &amp; down in RT from highest point for ppm estimation in result" help="(-rt_collect) "/>
