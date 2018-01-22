@@ -250,7 +250,7 @@ assignment:
 - docker_image_override: container-passatutto
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: dev_v201604_cv0.1.7
+  docker_tag_override: v201604_cv0.1.8
   max_pod_retrials: 3
   tools_id:
   - metfrag-vis
@@ -283,7 +283,7 @@ assignment:
 - docker_image_override: metfrag-cli-batch
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: dev_v2.4.3_cv0.4.46 
+  docker_tag_override: v2.4.3_cv0.5.49
   max_pod_retrials: 3
   tools_id:
   - metfrag-cli-batch
@@ -427,7 +427,7 @@ assignment:
 - docker_image_override: xcms
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: dev_v3.0.0_cv0.1.75
+  docker_tag_override: v3.0.0_cv0.1.76
   max_pod_retrials: 1
   tools_id:
   - save_chromatogram
@@ -449,7 +449,7 @@ assignment:
 - docker_image_override: camera
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: dev_v1.33.3_cv0.8.56 
+  docker_tag_override: v1.33.3_cv0.10.59
   max_pod_retrials: 3
   tools_id:
   - consensusXMLToXcms
@@ -466,7 +466,7 @@ assignment:
 - docker_image_override: msnbase
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: dev_v2.2_cv0.7.53 
+  docker_tag_override: v2.2_cv0.7.54
   max_pod_retrials: 3
   tools_id:
   - msnbase-read-msms
