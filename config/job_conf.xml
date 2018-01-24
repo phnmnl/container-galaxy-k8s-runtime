@@ -184,14 +184,6 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
-    <destination id="metabomatching-container" runner="k8s">
-      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-      <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">metabomatching</param>
-      <param id="docker_tag_override">v0.1.0_cv0.3.29</param>
-      <param id="max_pod_retrials">3</param>
-      <param id="docker_enabled">true</param>
-    </destination>
     <destination id="leidenuniv-ms-vfetc-container" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -351,7 +343,7 @@
     <tool id="mtbls-labs-uploader" destination="mtbls-labs-uploader-container"/>
     <tool id="metfragcli" destination="metfrag-cli-container"/>
     <tool id="Metabolite_ID_Converter" destination="container-metaboliteidconverter" />
-    <tool id="metabomatching" destination="metabomatching-container"/>
+    <tool id="metabomatching" destination="dynamic-k8s-small" resources="all"/>
     <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
     <!-- new XCMS -->
     <tool id="xcms-find-peaks" destination="dynamic-k8s-large" resources="all"/>
