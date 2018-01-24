@@ -72,7 +72,7 @@ assignment:
 - docker_image_override: isa2w4m
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v1.1.0_cv1.3.9
+  docker_tag_override: v1.1.0_cv1.4.11
   max_pod_retrials: 3
   tools_id:
   - isa2w4m
@@ -96,7 +96,7 @@ assignment:
 - docker_image_override: transformation
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v2.2.2_cv1.0.3
+  docker_tag_override: v2.2.2_cv1.2.7
   max_pod_retrials: 3
   tools_id:
   - Transformation
@@ -112,7 +112,7 @@ assignment:
 - docker_image_override: tool-generic_filter
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: vphenomenal_2017.12.12_cv0.2.1
+  docker_tag_override: vphenomenal_2017.12.12_cv0.2.2
   max_pod_retrials: 3
   tools_id:
   - generic_filter
@@ -120,7 +120,7 @@ assignment:
 - docker_image_override: qualitymetrics
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: dev_vphenomenal_2017.12.12_cv0.2.2
+  docker_tag_override: vphenomenal_2017.12.12_cv0.2.4
   max_pod_retrials: 3
   tools_id:
   - quality_metrics
@@ -128,7 +128,7 @@ assignment:
 - docker_image_override: biosigner
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v2.2.7_cv1.1.12
+  docker_tag_override: v2.2.7_cv1.3.15
   max_pod_retrials: 3
   tools_id:
   - Biosigner
@@ -264,7 +264,7 @@ assignment:
 - docker_image_override: multivariate
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v2.3.10_cv1.1.18
+  docker_tag_override: v2.3.10_cv1.2.20
   max_pod_retrials: 3
   tools_id:
   - Multivariate
@@ -376,14 +376,14 @@ assignment:
 - docker_image_override: lcmsmatching
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v3.1.6_cv1.3.61
+  docker_tag_override: v3.4.3_cv1.5.69
   max_pod_retrials: 3
   tools_id:
   - lcmsmatching
 - docker_image_override: univariate
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v2.2.3_cv1.2.28
+  docker_tag_override: v2.2.3_cv1.3.29
   max_pod_retrials: 3
   tools_id:
   - Univariate
