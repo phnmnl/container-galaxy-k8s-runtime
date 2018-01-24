@@ -4,11 +4,12 @@
        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/metabomatching</container>
      </requirements>
      <command>
-       <![CDATA[metabomatching.sh -i "$association_statistics_input" -p "$parameters_in" -s "$scores" -S "$figure"]]>
+       <![CDATA[metabomatching.sh -i "$pseudospectra" -c "$correlation" -p "$parameters" -s "$scores" -S "$figure"]]>
      </command>
      <inputs>
-         <param name="association_statistics_input" type="data" format="tsv" label="Association Statistics Dataset"/>
-         <param name="parameters_in" type="data" format="tsv" label="Parameters"/>
+         <param name="pseudospectra" type="data" format="tsv" label="Pseudospectra (Association Statistics)" help="A table containing the association statistics that define pseudospectra."/>
+         <param name="parameters" type="data" format="tsv" label="Parameters" help="Parameters that control both the algorithm and the visualisation of the results."/>
+         <param name="correlation" type="data" optional="true" format="csv" label="Feature-Feature Correlation Matrix" help="The correlation matrix needs to be provided only if metabomatching is set to use decorrelation."/>
      </inputs>
      <outputs>
          <data name="scores" format="tsv" from_work_dir="scores.tsv" label="metabomatching.scores"/>
@@ -19,35 +20,46 @@
 Description
 -----------
 
-Metabomatching identifies metabolites using genetic spiking. A basic description is provided below, full documentation here https://github.com/rrueedi/metabomatching/blob/master/documentation/howto.pdf
+Metabomatching identifies metabolites using genetic spiking. 
+
+A basic description is provided below, full documentation here https://github.com/rrueedi/metabomatching/blob/master/documentation/howto.pdf
 
 -----------
 Input Files 
 -----------
 	
-Association Statistics Dataset (Pseudospectra)
-	| This (1+3K)-column tab-separated file contains the association statistics (effect size, standard error, and p-value) for the K variables on which metabomatching is to be run
-	| 
+**Pseudospectra (Association Statistics)**
+	| This (1+3K)-column tab-separated file contains the association statistics (effect size, standard error, and *p*-value) for the K variables on which metabomatching is to be run
+	|
 
-Parameters
+**Parameters**	
 	| This two-column tab-separated file controls both the way metabomatching is run and the way results are displayed.
 	|
 
-Test Files
+**Feature-Feature Correlation Matrix**
+	| This comma-separated file contains the feature-feature correlation matrix. This file is necessary only when metabomatching is to be run with decorrelation (in Parameters, decorr_lambda strictly smaller than 1).
+	|
+
+**Test Files**
 	| The following two files can be downloaded from GitHub, then uploaded via *Get Data* to run metabomatching on test data.
-	| association statistics file: https://raw.githubusercontent.com/rrueedi/metabomatching/master/test/ps.test.multi/test.pseudospectrum.tsv
+	| pseudospectra file: https://raw.githubusercontent.com/rrueedi/metabomatching/master/test/ps.test.multi/test.pseudospectrum.tsv
 	| parameters file: https://raw.githubusercontent.com/rrueedi/metabomatching/master/test/parameters.gxy.1.tsv
-	
+	|
+
 ------------
 Output Files
 ------------
 	
-Scores
+**Scores**
 	| This (3+K)-column tab-separated file contains the metabomatching scores for the K provided pseudospectra,  with one row for each reference metabolite.
 	|
 
-Figure (PDF)
+**Figure (PDF)**
 	| The results, presented as a K page PDF file.
 	|
+
 	</help>
+	<citations>
+	 <citation type="doi">10.1371/journal.pcbi.1005839</citation> 
+	</citations>
  </tool>
