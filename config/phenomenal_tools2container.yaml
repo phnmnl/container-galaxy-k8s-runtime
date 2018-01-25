@@ -104,7 +104,7 @@ assignment:
 - docker_image_override: batch_correction
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: vphenomenal_2017.12.14_cv0.3.4
+  docker_tag_override: v2.2.0_cv0.3.6
   max_pod_retrials: 3
   tools_id:
   - Batch_correction
