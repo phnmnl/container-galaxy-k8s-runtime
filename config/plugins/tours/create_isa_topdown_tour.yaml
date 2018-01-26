@@ -1,0 +1,230 @@
+id: Isa_create
+name: Create Study Metadata
+description: a Galaxy tool to bootstrap creation of experimental metadata in ISA format based on key study design information 
+title_default: "Describe your metabolomics study with ISA"
+steps:
+    - content: "This short tour will guide you through <b>Generating a standard compliant study report leveraging study design information</b>. This short tour will guide you creating an <b>ISA format compliant</b> document describing your experiment, making it ready for preregistration or deposition with EMBL-EBI Metabolights. You can navigate with your arrow keys and leave the tour at any time point with 'Escape' or the 'End tour' button."
+
+    - title: "Create Study Description"
+      element: 'a[href$="/tool_runner?tool_id=isa-create-metabo"]'
+      intro: |
+             We start by invoking the <i><b>Create ISA in Galaxy</b></i> tool from the tools list
+      position: "right"
+      postclick:
+          - 'a[href$="/tool_runner?tool_id=isa-create-metabo"]'
+    
+    - title: "Provide General Study Information"
+      element: "#uid-7 > div.portlet-header > div.portlet-title > span"
+      intro: "The <b>Study Description</b> section is here to allow you to report basic metadata about the study."
+      position: "right" 
+      postclick:
+        - "#uid-7 > div.portlet-header > div.portlet-title > span"
+
+    - title: "Provide General Study Information"
+      element: "#field-uid-10"
+      intro: "The <b>Study Title</b> field to provide a snappy summary of the study"
+      position: "right" 
+      postclick:
+        - "#field-uid-10"
+
+    - title: "Provide General Study Information"
+      element: "#field-uid-11"
+      intro: "The <b>Study Description</b> field allows the supply of key information about study authors as well as a textual overview of the study, its goals, its techniques, its key variables in <u>free text form</u>."
+      position: "right" 
+      postclick:
+        - "#field-uid-11"
+
+    - title: "Define the plan of treatments"
+      element: "#uid-16 > div.portlet-header > div.portlet-title > span"
+      intro: "The <b>Treatment Plan</b> section is meant to explicitly declare the study independent variables (predictors variables) and their range of values."
+      placement: "right"
+      postclick:
+        - "#uid-16 > div.portlet-header > div.portlet-title > span"
+
+    - title: "Define the plan of treatments"
+      element: "#field-uid-19 > div.icon-dropdown.fa.fa-caret-down"
+      intro: "This field is there for you to tell whether you are running an observational study or an intervention study where the operator introduced a perturbation in the biological system under study."
+      placement: "right"
+      postclick:
+        - "#field-uid-19 > div.icon-dropdown.fa.fa-caret-down"
+
+    - title: "Define the plan of treatments"
+      element: "#field-uid-21 > div.icon-dropdown.fa.fa-caret-down"
+      intro: " If more than one intervention is applied to study subjects (repeated treatments, where treatments are applied in sequence), a number of different perturbations or interventions can be reported. The tool allows to describe those in a consistent, structured way."
+      placement: "right"
+      postclick:
+        - "#field-uid-21 > div.icon-dropdown.fa.fa-caret-down"
+
+    - title: "Define the plan of treatments"
+      intro: " Select the type of intervention/perturbation from the list ."
+      placement: "right"
+      postclick:
+        - "#field-uid-23 > div.icon-dropdown.fa.fa-caret-down"
+
+    - title: "Define the plan of treatments"
+      element: "#field-uid-25"
+      intro: "Once the intervention type has been selected, supply the range of values for each of independent variables defining an intervention treatment. These should be supplied as discretized elements and separated by commas (as in <b>'aspirin,ibuprofen'</b> for a chemical agent)"
+      placement: "right"
+      postclick:
+        - "#field-uid-25"
+
+    - title: "Define the plan of treatments"
+      element: "#field-uid-41 > div.icon-dropdown.fa.fa-caret-down"
+      intro: "Indicate if all study groups have the same number of experimental units or not."
+      placement: "right"
+      postclick:
+        - "#field-uid-41 > div.icon-dropdown.fa.fa-caret-down"          
+
+    - title: "Define the plan of treatments"
+      element: "#field-uid-43 > input"
+      intro: "This field should be used to set the number of biological replicates per treatment conditions. If the study design is <i>balanced</i>, it will be the same for all treatment groups computed based on the variable declarations. Otherwise (unbalanced), each group size will have to be set"
+      placement: "right"
+      postclick:
+        - "#field-uid-43 > input"
+
+    - title: "Define the sample collection and assay plans"
+      element: "#uid-45 > div.portlet-header > div.portlet-title > span"
+      intro: "This section is meant for you to declare the <u>response variables</u> and identify which <u>biological materials</u> collected over the course of the study will be used as <u>input</u> to the data acquisition process."
+      placement: "right"
+      postclick:
+        - "#uid-45 > div.portlet-header > div.portlet-title > span"
+
+    - title: "Define the sample collection and assay plans"
+      element: "#uid-49 > div > span"
+      intro: "Press the <i>insert Sampling plan</i> button to reveal the required fields, select the values and specify the parameters matching your experimental set up. Repeat for each of the biological specimen types collected over the course of the study"
+      placement: "right"
+      postclick:
+        - "#uid-49 > div > span"
+
+    - title: "Define the sample collection and assay plans"
+      element: "#field-uid-57 > div.icon-dropdown.fa.fa-caret-down"
+      intro: "Select from relevant entry from the list of controlled terms provided to describe the type of biological specimen. These are values most frequently used but one may provide user defined values when the core terms provide insufficient coverage "
+      placement: "right"
+      postclick:
+        - "#field-uid-57 > div.icon-dropdown.fa.fa-caret-down"
+
+
+    - title: "Define the sample collection and assay plans"
+      element: "#field-uid-60 > input"
+      intro: "This field has default value of 1, indicating that one sample of the type defined above would be collected over the course of the study for each of the study subjects. In case of longitudinal studies, repeated sampling is performed therefore modify the value to match the total number collected for that sample type."
+      placement: "right"
+      postclick:
+        - "#field-uid-60 > input"
+
+
+    - title: "Define the sample collection and assay plans"
+      element: "#uid-63 > div > span"
+      intro: "Press the <i>insert Assay Plan</i> button to reveal the required fields, select the values and specify the parameters matching your experimental set up. Repeat for each of the data acquisition types defined by the study."
+      placement: "right"
+      postclick:
+        - "#uid-63 > div > span"          
+
+    - title: "Define the sample collection and assay plans"
+      element: "#field-uid-68 > div.icon-dropdown.fa.fa-caret-down" 
+      intro: "Select either 'mass spectrometry' or 'nmr spectroscopy' from the dropdown list thus setting the technology type for the data acquisition. IMPORTANT: Repeat as many times as necessary in order to define which techniques will be used to characterise any of the sample/specimens collected over the course of the study"
+      placement: "right"
+      postclick:
+        - "#field-uid-68 > div.icon-dropdown.fa.fa-caret-down"  
+
+
+    - title: "Define the sample collection and assay plans"
+      element: "#uid-71 > div > span"
+      intro: "Press the <i>insert sample fractions</i> button to reveal the required fields, and select the suitable <i>elements</i> available from the dropdown list. This is specific to Mass spectrometry and allows to report on the type of fraction being considered."
+      placement: "right"
+      postclick:
+        - "#uid-71 > div > span"
+
+    - title: "Define the sample collection and assay plans"
+      element: "#field-uid-115 > div.icon-dropdown.fa.fa-caret-down"
+      intro: "choose between polar or non-polar fraction"
+      placement: "right"
+      postclick:
+        - "#field-uid-115 > div.icon-dropdown.fa.fa-caret-down"
+
+    - title: "Define the sample collection and assay plans"
+      element: "#uid-73 > div > span"
+      intro: "Press the <i>insert injection series</i> button to reveal the required fields, and select to relevant settings describing the data acquisition conditions. The values varies depending on the techniques used. The controlled terms are curated values vetted by EMBL-EBI Metabolights"
+      placement: "right"
+      postclick:
+        - "#uid-73 > div > span"    
+
+    - title: "Define the sample collection and assay plans"
+      element: "#field-uid-121 > div.icon-dropdown.fa.fa-caret-down"
+      intro: "Use this field to select the type of sample introduction used in the mass spectrometer. Depending on the values selected, the requirements will be adjusted according. For instance selecting LC or GC will require supplying information about chromatography components"
+      placement: "right"
+      postclick:
+        - "#field-uid-121 > div.icon-dropdown.fa.fa-caret-down" 
+
+    - title: "Define the sample collection and assay plans"
+      element: "#field-uid-127 > div.icon-dropdown.fa.fa-caret-down"
+      intro: "Use this field to select the type of MS instrument used in this data acquisition. The default value is set to </i>'not reported'. All the values in the dropdown list are curated values obtained from EMBL-EBI Metabolights</i>"
+      placement: "right"
+      postclick:
+        - "#field-uid-127 > div.icon-dropdown.fa.fa-caret-down" 
+
+    - title: "Define the sample collection and assay plans"
+      element: "#uid-130 > div > span"
+      intro: "Once all the hardware descriptions have been reported, it is time to specify how many actual acquisitions were run and in which acquisition modes. Press the <i>insert acquisition series</i> button to reveal the required fields"
+      placement: "right"
+      postclick:
+        - "#uid-130 > div > span" 
+
+    - title: "Define the sample collection and assay plans"
+      element: "#field-uid-151 > div.icon-dropdown.fa.fa-caret-down"
+      intro: "Use to dropdown list to indicate a positive or negative acquisition type"
+      placement: "right"
+      preclick:
+        - "#field-uid-151 > div.icon-dropdown.fa.fa-caret-down"
+
+    - title: "Define the sample collection and assay plans"
+      element: "#field-uid-153 > input"
+      intro: "Specify how many technical repeats for this acquisition conditions were performed"
+      placement: "right"
+      postclick:
+        - "#field-uid-153 > input"                      
+
+    - title: "Define the quality control plans"
+      element: "#uid-50 > div.portlet-header > div.portlet-title > span"
+      intro: "This section is meant to allow reporting the type and frequency of measurements made on known material for quality assurance and quality control purpose. The controlled terms are vetted by the Metabolomics Standardization Initiative (MSI) and available from the MSI Application Ontology."
+      placement: "right"
+      postclick:
+        - "#uid-50 > div.portlet-header > div.portlet-title > span"
+
+    - title: "Define the quality control plans"
+      element: "#uid-54 > div > span"
+      intro: "Press the <i>Insert  Quality Control / Quality Assurance Plan</i> button to reveal the required fields to report quality control elements."
+      placement: "right"
+      postclick:
+        - "#uid-54 > div > span"
+
+    - title: "Define the quality control plans"
+      element: "#field-uid-159 > div.icon-dropdown.fa.fa-caret-down"
+      intro: "This section is meant to allow reporting the type and frequency of measurements made on known material for quality assurance and quality control purpose."
+      placement: "right"
+      postclick:
+        - "#field-uid-159 > div.icon-dropdown.fa.fa-caret-down"
+
+    - title: "Define the quality control plans"
+      element: "#field-uid-165 > input"
+      intro: "Following the selection of the QC type, indicate the number of consecutive injections of that type according to the QC plan."
+      placement: "right"
+      postclick:
+        - "#field-uid-165 > input"
+
+    - title: "Define the quality control plans"
+      element: "#field-uid-167 > input"
+      intro: "Following the selection of the QC type, indicate the frequency of injections of that type according to the QC plan, as in '1 qc run every 10 sample runs'."
+      placement: "right"
+      postclick:
+        - "#field-uid-167 > input"          
+
+    - title: "running the metadata creator"
+      element: "#execute"
+      intro: "hit the button to launch the job"
+      position: "right"
+      postclick:
+        - "#execute"
+
+
+    - title: "Enjoy Galaxy in PhenoMenal"
+      intro: "Thanks for taking this tour! Happy research with Galaxy and PhenoMenal!"
