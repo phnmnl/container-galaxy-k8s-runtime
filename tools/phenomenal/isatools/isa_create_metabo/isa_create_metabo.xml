@@ -16,10 +16,12 @@
 
     <command>
         <![CDATA[
+        mkdir ${output.extra_files_path};
+
         cli.py
 
         --galaxy_parameters_file="$inputs"
-        --target_dir="./"
+        --target_dir="${output.extra_files_path}"
         ]]>
     </command>
 
@@ -35,12 +37,12 @@
     </inputs>
 
     <outputs>
-        <collection type="list" label="A files" name="a_files">
-            <discover_datasets pattern="(?P&lt;designation&gt;a_.+)\.txt" format="tsv" />
-        </collection>
-        <data name="s_study" label="S file" format="tsv" from_work_dir="s_study.txt" />
-        <data name="i_investigation" label="I file" format="tsv" from_work_dir="i_investigation.txt" />
-        <!--<data format="isa-tab" name="output" label="New ISA-Tab"/>-->
+        <!--<collection type="list" label="A files" name="a_files">-->
+            <!--<discover_datasets pattern="(?P&lt;designation&gt;a_.+)\.txt" format="tsv" />-->
+        <!--</collection>-->
+        <!--<data name="s_study" label="S file" format="tsv" from_work_dir="s_study.txt" />-->
+        <!--<data name="i_investigation" label="I file" format="tsv" from_work_dir="i_investigation.txt" />-->
+        <data format="isa-tab" name="output" label="New ISA-Tab"/>
     </outputs>
 
     <tests>
