@@ -19,7 +19,7 @@
          <exit_code range="1:" level="fatal"/>
      </stdio>
      <inputs>
-         <param name="nmrMLzip" type="data" label="Zipped nmrML file." help="A zipped nmrML file containing one or more NMR spectra, converted from nmrmlconv tool. "/>
+         <param name="nmrMLzip" type="data" format="zip" label="Zipped nmrML file." help="A zipped nmrML file containing one or more NMR spectra, converted from nmrmlconv tool. "/>
      </inputs>
      <outputs>
          <data name="NMRdata" format="tabular" from_work_dir="NMRdata_from_nmrML.txt" label="Tabulated TXT file containing NMR ppm and spectra."/>
