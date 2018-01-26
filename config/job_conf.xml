@@ -52,6 +52,14 @@
       <param id="function">k8s_wrapper_xlarge</param>
     </destination>
     
+    <destination id="biosigner-container" runner="k8s">
+      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+      <param id="docker_owner_override">phnmnl</param>
+      <param id="docker_image_override">biosigner</param>
+      <param id="docker_tag_override">v2.2.7_cv1.3.15</param>
+      <param id="max_pod_retrials">3</param>
+      <param id="docker_enabled">true</param>
+    </destination>
     <destination id="batman-container" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -172,14 +180,6 @@
       <param id="docker_owner_override">phnmnl</param>
       <param id="docker_image_override">metaboliteidconverter</param>
       <param id="docker_tag_override">v0.5.1_cv1.1.28</param>
-      <param id="max_pod_retrials">3</param>
-      <param id="docker_enabled">true</param>
-    </destination>
-    <destination id="metabomatching-container" runner="k8s">
-      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-      <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">metabomatching</param>
-      <param id="docker_tag_override">v0.1.0_cv0.3.29</param>
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
@@ -315,7 +315,7 @@
     <tool id="isa2w4m" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="Univariate" destination="dynamic-k8s-small" resources="all"/>
     <tool id="Multivariate" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="Biosigner" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="Biosigner" destination="biosigner-container" resources="all"/>
     <tool id="lcmsmatching" destination="dynamic-k8s-small" resources="all"/>
     <tool id="Transformation" destination="dynamic-k8s-small" resources="all"/>
     <tool id="quality_metrics" destination="dynamic-k8s-small" resources="all"/>
@@ -342,7 +342,7 @@
     <tool id="mtbls-labs-uploader" destination="mtbls-labs-uploader-container"/>
     <tool id="metfragcli" destination="metfrag-cli-container"/>
     <tool id="Metabolite_ID_Converter" destination="container-metaboliteidconverter" />
-    <tool id="metabomatching" destination="metabomatching-container"/>
+    <tool id="metabomatching" destination="dynamic-k8s-small" resources="all"/>
     <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
     <!-- new XCMS -->
     <tool id="xcms-find-peaks" destination="dynamic-k8s-large" resources="all"/>
