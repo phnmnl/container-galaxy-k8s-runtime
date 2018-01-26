@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<tool id="study_factor_values" name="study_factor_values" version="1.0">
+<tool id="isa_get_study_factor_values" name="study_factor_values" version="1.0">
   <description>Get list of factor values for given factor used in a MetaboLights study</description>
   <command><![CDATA[
     run_mtblisa.py --command GET_FVS --study $mtbls_id --query $query

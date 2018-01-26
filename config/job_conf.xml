@@ -483,19 +483,18 @@
     <tool id="aggregatemetfrag" destination="dynamic-k8s-medium" />
     <tool id="passatutto" destination="dynamic-k8s-medium" />
     <!-- ISA related tools -->
-    <tool id="get_study" destination="dynamic-k8s-tiny" resources="all"/>
-    <tool id="get_study_json" destination="dynamic-k8s-tiny" resources="all"/>
-    <tool id="study_factor_values" destination="dynamic-k8s-tiny" resources="all"/>
-    <tool id="study_factors" destination="dynamic-k8s-tiny" resources="all"/>
-    <tool id="data_files" destination="dynamic-k8s-tiny" resources="all"/>
-    <tool id="factors_summary" destination="dynamic-k8s-tiny" resources="all"/>
-    <tool id="mtbls-factors-viz" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="isajson_validator" destination="dynamic-k8s-tiny" resources="all"/>
-    <tool id="isatab_validator" destination="dynamic-k8s-tiny" resources="all"/>
-    <tool id="isatab2json" destination="dynamic-k8s-tiny" resources="all"/>
-    <tool id="json2isatab" destination="dynamic-k8s-tiny" resources="all"/>
-    <tool id="mw2isa" destination="dynamic-k8s-small" resources="all"/>
     <tool id="isa_create_metabo" destination="container-isatab-create" resources="all"/>
+    <tool id="isa_get_data_files" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa_get_factors_summary" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa_get_study_factor_values" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa_get_study_factors" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isajson_validator" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isatab2json" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isatab_validator" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="json2isatab" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="mtbls-factors-viz" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="mw2isa" destination="dynamic-k8s-small" resources="all"/>
+
   </tools>
   <resources default="default">
     <!-- Group different parameters defined in job_resource_params_conf.xml

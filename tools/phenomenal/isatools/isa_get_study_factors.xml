@@ -1,25 +1,25 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<tool id="get_study" name="get_study" version="1.0">
-  <description>Get an ISA-Tab archive (zip) from MetaboLights</description>
+<tool id="isa_get_study_factors" name="study_factors" version="1.0">
+  <description>Get list of study factors for a MetaboLights study</description>
   <command><![CDATA[
-    run_mtblisa.py --command GET --study $mtbls_id
+    run_mtblisa.py --command GET_FACTORS --study $mtbls_id
   ]]>
   </command>
   <inputs>
     <param name="mtbls_id" type="text" label="MetaboLights Study Identifier." help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
   </inputs>
   <outputs>
-    <data format="zip" name="output" from_work_dir="out.zip" label="$(mtbls_id) ISA-Tab (zip)" />
+    <data format="json" name="output" from_work_dir="out.json" label="$(mtbls_id) factors list" />
   </outputs>
 
   <help>
 <!-- @@@BEGIN_RST@@@ -->
 
-===================================
-Get ISA-Tab files from MetaboLights
-===================================
+==================================================
+Get list of study factors for a MetaboLights study
+==================================================
 
-This tool downloads ISA-Tab metadata files from MetaboLights an ISA-Tab archive (zip).
+This tool gets the list of study factors from a MetaboLights study. It extracts the factors from the ISA-Tab metadata stored in MetaboLights.
 
 -----
 Input
@@ -33,11 +33,17 @@ MTBLS ID available at MetaboLights, e.g. MTBLS2.
 Output
 ------
 
-Zip file containing ISA files
+List of study factors as JSON
 =============================
-The output zip file will contain the i_*.txt, s_*.txt and a_*.txt files expected in an *ISA-Tab* archive.
 
-For details on the ISA-Tab format, please see http://isa-specs.readthedocs.io/en/latest/isatab.html
+A list of factor names as a JSON list. e.g.
+
+::
+
+  [
+    "replicate",
+    "genotype"
+  ]
 
 
 <!-- @@@END_RST@@@ -->

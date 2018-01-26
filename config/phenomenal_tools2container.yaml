@@ -274,12 +274,10 @@ assignment:
   docker_tag_override: v0.8.0_cv0.5.44
   max_pod_retrials: 3
   tools_id:
-  - get_study
-  - get_study_json
-  - study_factor_values
-  - study_factors
-  - data_files
-  - factors_summary
+  - isa_get_data_files
+  - isa_get_factors_summary
+  - isa_get_study_factor_values
+  - isa_get_study_factors
 - docker_image_override: metfrag-cli-batch
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
