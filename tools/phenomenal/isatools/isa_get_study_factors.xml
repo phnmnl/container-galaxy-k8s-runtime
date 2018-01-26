@@ -1,16 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<tool id="isa_get_study_factors" name="study_factors" version="1.0">
+<tool id="isa_get_study_factors" name="Get study factors" version="1.0">
   <description>Get list of study factors for a MetaboLights study</description>
   <command><![CDATA[
-    run_mtblisa.py --command GET_FACTORS --study $mtbls_id
+      run_mtblisa.py get-factors "${mtbls_id}" "${output}"
   ]]>
   </command>
   <inputs>
     <param name="mtbls_id" type="text" label="MetaboLights Study Identifier." help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
   </inputs>
   <outputs>
-    <data format="json" name="output" from_work_dir="out.json" label="$(mtbls_id) factors list" />
+    <data format="json" name="output" label="$(mtbls_id) factors list" />
   </outputs>
+  <stdio>
+    <exit_code range="1:" level="fatal"/>
+  </stdio>
 
   <help>
 <!-- @@@BEGIN_RST@@@ -->

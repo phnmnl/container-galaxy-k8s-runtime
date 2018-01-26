@@ -16,12 +16,12 @@
 
     <command>
         <![CDATA[
-        mkdir ${output.extra_files_path};
+        mkdir ${output.files_path};
 
         cli.py
 
         --galaxy_parameters_file="$inputs"
-        --target_dir="${output.extra_files_path}"
+        --target_dir="${output.files_path}"
         ]]>
     </command>
 
