@@ -76,15 +76,6 @@ assignment:
   max_pod_retrials: 3
   tools_id:
   - isa2w4m
-
-- docker_image_override: json2isatab
-  docker_owner_override: phnmnl
-  docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v0.8.0_cv0.2.26
-  max_pod_retrials: 3
-  tools_id:
-  - json2isatab
-
 - docker_image_override: normalization
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
@@ -392,13 +383,6 @@ assignment:
   max_pod_retrials: 3
   tools_id:
   - mzml2isa
-- docker_image_override: isajson-validator
-  docker_owner_override: phnmnl
-  docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v0.8.0_cv0.2.26
-  max_pod_retrials: 3
-  tools_id:
-  - isajson_validator
 - docker_image_override: soap-nmr
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu

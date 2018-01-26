@@ -240,10 +240,8 @@
     <tool file="phenomenal/isatools/isa_get_data_files.xml"/>
     <tool file="phenomenal/isatools/mtbls-factors-viz.xml"/>
     <tool file="phenomenal/isatools/isatab_validator.xml"/>
-    <tool file="phenomenal/isatools/isajson_validator.xml"/>
     <tool file="phenomenal/isatools/mw2isa.xml"/>
     <tool file="phenomenal/isatools/isatab2json.xml"/>
-    <tool file="phenomenal/isatools/json2isatab.xml"/>
     <tool file="phenomenal/isatools/isa_create_metabo/isa_create_metabo.xml"/>
   </section>
 

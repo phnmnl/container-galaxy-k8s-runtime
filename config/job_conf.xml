@@ -488,10 +488,8 @@
     <tool id="isa_get_factors_summary" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_get_study_factor_values" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_get_study_factors" destination="dynamic-k8s-tiny" resources="all"/>
-    <tool id="isajson_validator" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isatab2json" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isatab_validator" destination="dynamic-k8s-tiny" resources="all"/>
-    <tool id="json2isatab" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="mtbls-factors-viz" destination="dynamic-k8s-small" resources="all"/>
     <tool id="mw2isa" destination="dynamic-k8s-small" resources="all"/>
 
