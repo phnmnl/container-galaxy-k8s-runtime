@@ -80,6 +80,7 @@ ENV PYKUBE_KUBERNETES_SERVICE_HOST kubernetes
 
 # Galaxy tours which guide users through the subsequent steps in an analysis
 COPY config/plugins/tours/metfrag+xcms-tour.yaml config/plugins/tours/
+COPY config/plugins/tours/create_isa_topdown_tour.yaml config/plugins/tours/
 
 COPY html/partners.png \
      html/PhenoMeNal_logo.png \

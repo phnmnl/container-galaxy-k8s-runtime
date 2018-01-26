@@ -487,4 +487,4 @@ assignment:
   docker_tag_override: dev_v0.9.3_cv0.1.6
   max_pod_retrials: 3
   tools_id:
-  - isa_create_metabolomics
+  - isa-create-metabolo
