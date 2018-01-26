@@ -1,0 +1,1734 @@
+<macros>
+    <xml name="study_info_macro">
+        <section name="study_overview" title="Study Description">
+            <param name="study_title" type="text" label="Study title"
+                   value="e.g. Metabolomics study of the effect of ... on ..."/>
+            <param name="study_description" area="True" size="5x25" type="text"
+                   label="provide a textual description for the study"
+                   value="e.g. The study of... by means of metabolite profiling using ..."/>
+            <param name="study_pi_first_name" type="text" label="PI first name"
+                   value="e.g. Marie"/>
+            <param name="study_pi_last_name" type="text" label="PI last name"
+                   value="e.g. Sklodowska Curie"/>
+            <param name="study_pi_email" type="text" label="PI email address"
+                   value="e.g. marie.sklodowska-curie@gmail.com"/>
+            <param name="study_pi_affiliation" type="text"
+                   label="PI affiliation"
+                   value="e.g  Radium Institute, Paris"/>
+            <!-- <repeat name="protocol_record_series" title="Study Protocols">
+                 <param name="protocol_name" type="text" label="Protocol name"></param>
+                 <param name="protocol_type" type="select" label="Protocol type">
+                     <option value="none selected" selected="True">none selected</option>
+                     <option value="specimen_collection">sample collection</option>
+                     <option value="sample_preparation">sample preparation</option>
+                     <option value="metabolite extraction">metabolite extraction</option>
+                     <option value="derivatization">derivatization</option>
+                     <option value="chromatography" >chromatography</option>
+                     <option value="data_acquisition">data acquisition</option>
+                     <option value="data normalization">data normalization</option>
+                     <option value="data transformation">data transformation</option>
+                     <option value="differential expression analysis">differential expression analysis</option>
+                     <option value="enrichment analysis">enrichment analysis</option>
+                     <option value="enrichment analysis">enrichment analysis</option>
+                     <option>other</option>
+                 </param>
+                 <param name="protocol_desc" area="True" size="5x25" type="text" label="Protocol Description"></param>
+                 <param name="protocol_uri" type="text" label="Protocol URI"></param>
+             </repeat>
+             <param name="study_consent" type="select" label="Consent Information">
+                 <option value="none">no restriction</option>
+                 <option value="no-general">no-general methods research</option>
+                 <option value="research">research use only</option>
+                 <option value="restricted">research-specific restriction</option>
+                 <option value="general">general research and clinical care</option>
+                 <option value="disease">disease-specific research and clinical care</option>
+                 <option value="health">health/medical/biomedical research and clinical care</option>
+                 <option value="population">population origins or ancestry research</option>
+             </param>
+             <param name="study_use_condition" type="select" label="Data Use Requirement">
+                 <option value="collaboration_required">collaboration required</option>
+                 <option value="ethics">ethics approval required</option>
+                 <option value="geo">geographical restriction</option>
+                 <option value="no_profit">not-for-profit use only</option>
+                 <option value="institution-re">institution-specific restriction</option>
+                 <option value="project_re">project-specific restriction</option>
+                 <option value="user_re">user-specific restriction</option>
+                 <option value="pub_mora">publication moratorium</option>
+                 <option value="pub_req">publication required</option>
+                 <option value="return">return-to-database/resource</option>
+                 <option value="time">time limit on use</option>
+             </param> -->
+        </section>
+    </xml>
+    <xml name="treatment_plan_macro">
+        <section name="treatment_plan" title="Treatment Plan">
+            <conditional name="study_type_cond">
+                <param name="study_type" type="select"
+                       label="which type of study" help="see example below">
+                    <option value="intervention">intervention</option>
+                    <option value="observation">observation</option>
+                </param>
+                <when value="intervention">
+                    <conditional name="one_or_more">
+                        <param name="single_or_multiple" type="select"
+                               label="single or repeated treatments">
+                            <option value="single" selected="True">single
+                            </option>
+                            <option value="multiple">multiple</option>
+                        </param>
+                        <when value="single">
+                            <conditional name="intervention_type">
+                                <param name="select_intervention_type"
+                                       type="select"
+                                       label="Select an intervention type">
+                                    <option value="chemical intervention"
+                                            selected="True">chemical
+                                        intervention
+                                    </option>
+                                    <option value="dietary intervention">dietary
+                                        intervention
+                                    </option>
+                                    <option value="behavioural intervention">
+                                        behavioral intervention
+                                    </option>
+                                    <option value="biological intervention">
+                                        biological intervention
+                                    </option>
+                                    <option value="surgical intervention">
+                                        surgical intervention
+                                    </option>
+                                </param>
+                                <when value="chemical intervention">
+                                    <param name="agent" type="text"
+                                           value="aspirin,ibuprofen,morphine"/>
+                                    <param name="intensity" type="text"
+                                           value="low dose,moderate dose,high dose"/>
+                                    <param name="duration" type="text"
+                                           value="t0,t1,t2"/>
+                                </when>
+                                <when value="behavioural intervention">
+                                    <param name="agent" type="text"
+                                           value="physical activity,speech therapy"/>
+                                    <param name="intensity" type="text"
+                                           value="low intensity,moderate intensity,high intensity"/>
+                                    <param name="duration" type="text"
+                                           value="t0,t1,t2"/>
+                                </when>
+                                <when value="biological intervention">
+                                    <param name="agent" type="text"
+                                           value="viral strain a, viral strain b"/>
+                                    <param name="intensity" type="text"
+                                           value="low dose,moderate dose,high dose"/>
+                                    <param name="duration" type="text"
+                                           value="t0,t1,t2"/>
+                                </when>
+                                <when value="surgical intervention">
+                                    <param name="agent" type="text"
+                                           value="procedure 1,procedure 2"/>
+                                    <!--<param name="intensity" type="text" value="low dose,moderate dose,high dose"/>-->
+                                    <param name="duration" type="text"
+                                           value="t0,t1,t2"/>
+                                </when>
+                                <when value="dietary intervention">
+                                    <param name="agent" type="text"
+                                           value="vitamin supplementation,caloric restriction,food composition variation"/>
+                                    <param name="intensity" type="text"
+                                           value="low,moderate,high"/>
+                                    <param name="duration" type="text"
+                                           value="t0,t1,t2"/>
+                                </when>
+                            </conditional>
+                        </when>
+                        <when value="multiple">
+                            <repeat name="multiple_intervention"
+                                    title="Repeated Intervention">
+                                <conditional name="intervention_type">
+                                    <param name="select_intervention_type"
+                                           type="select"
+                                           label="Select an intervention type">
+                                        <option value="chemical intervention"
+                                                selected="True">chemical
+                                            intervention
+                                        </option>
+                                        <option value="dietary intervention">
+                                            dietary
+                                            intervention
+                                        </option>
+                                        <option value="behavioural intervention">
+                                            behavioral intervention
+                                        </option>
+                                        <option value="biological intervention">
+                                            biological intervention
+                                        </option>
+                                        <option value="surgical intervention">
+                                            surgical intervention
+                                        </option>
+                                    </param>
+                                    <when value="chemical intervention">
+                                        <param name="agent" type="text"
+                                               value="aspirin,ibuprofen,morphine"/>
+                                        <param name="intensity" type="text"
+                                               value="low dose,moderate dose,high dose"/>
+                                        <param name="duration" type="text"
+                                               value="t0,t1,t2"/>
+                                    </when>
+                                    <when value="behavioural intervention">
+                                        <param name="agent" type="text"
+                                               value="physical activity,speech therapy"/>
+                                        <param name="intensity" type="text"
+                                               value="low intensity,moderate intensity,high intensity"/>
+                                        <param name="duration" type="text"
+                                               value="t0,t1,t2"/>
+                                    </when>
+                                    <when value="biological intervention">
+                                        <param name="agent" type="text"
+                                               value="viral strain a, viral strain b"/>
+                                        <param name="intensity" type="text"
+                                               value="low dose,moderate dose,high dose"/>
+                                        <param name="duration" type="text"
+                                               value="t0,t1,t2"/>
+                                    </when>
+                                    <when value="surgical intervention">
+                                        <param name="agent" type="text"
+                                               value="procedure 1,procedure 2"/>
+                                        <!--<param name="intensity" type="text" value="low dose,moderate dose,high dose"/>-->
+                                        <param name="duration" type="text"
+                                               value="t0,t1,t2"/>
+                                    </when>
+                                    <when value="dietary intervention">
+                                        <param name="agent" type="text"
+                                               value="vitamin supplementation,caloric restriction,food composition variation"/>
+                                        <param name="intensity" type="text"
+                                               value="low,moderate,high"/>
+                                        <param name="duration" type="text"
+                                               value="t0,t1,t2"/>
+                                    </when>
+                                </conditional>
+                            </repeat>
+                        </when>
+                    </conditional>
+
+                </when>
+                <when value="observation"/>
+            </conditional>
+            <!-- INPUT FOR SETTING CHARACTERISTICS OF STUDY GROUPS -->
+            <param name="group_balanced" type="select"
+                   label="study design balance">
+                <option value="balanced" selected="True">balanced</option>
+                <option value="unbalanced">unbalanced</option>
+            </param>
+            <param name="study_group_size" type="integer"
+                   label="study group size" value="3"/>
+        </section>
+    </xml>
+    <xml name="sample_assay_plan_macro">
+        <section name="sampling_and_assay_plans"
+                 title="Sampling and Assay Plans">
+            <!-- INPUT FOR SAMPLING PLAN -->
+            <repeat name="sample_record_series" title="Sampling plan">
+                <conditional name="sample_type">
+                    <param name="sample_type" type="select" min="1"
+                           label="study sample types">
+                        <option value="csf">cerebrospinal fluid</option>
+                        <option value="plasma" selected="True">plasma</option>
+                        <option value="saliva">saliva</option>
+                        <option value="sweat">sweat</option>
+                        <option value="tears">tears</option>
+                        <option value="urine">urine</option>
+                        <option value="user_defined">user defined</option>
+                    </param>
+                    <when value="csf"/>
+                    <when value="plasma"/>
+                    <when value="saliva"/>
+                    <when value="sweat"/>
+                    <when value="tears"/>
+                    <when value="urine"/>
+                    <when value="user_defined">
+                        <param name="sample_type_ud" type="text"
+                               label="user defined sample type">
+                            <option>root</option>
+                            <option>leave</option>
+                            <option>seed</option>
+                            <option>cones</option>
+                            <option>stem</option>
+                            <option>propolis</option>
+                            <option>other</option>
+                        </param>
+                    </when>
+                </conditional>
+                <param name="sample_size" type="integer"
+                       label="number of sample collections" value="1"/>
+                <!-- INPUT FOR ASSAY PLAN -->
+                <repeat name="assay_record_series" title="Assay Plan">
+                    <conditional name="assay_type">
+                        <param name="assay_type" type="select"
+                               label="study assay types">
+                            <option value="mass spectrometry">
+                                mass spectrometry
+                            </option>
+                            <option value="nmr spectroscopy" selected="True">
+                                nmr spectroscopy
+                            </option>
+                            <!--
+                               <option value="DNA microarray">DNA microarray</option>
+                               <option value="DNA sequencing">DNA sequencing</option>
+                            -->
+                        </param>
+                        <when value="mass spectrometry">
+                            <repeat name="samp_frac_series"
+                                    title="sample fractions">
+                                <param name="fraction" type="select" min="1"
+                                       label="sample fraction of interest">
+                                    <option value="polar"/>
+                                    <option value="non-polar" selected="True"/>
+                                </param>
+                            </repeat>
+                            <repeat name="inj_mod_series"
+                                    title="injection series">
+                                <conditional name="inj_mod_cond">
+                                    <param name="inj_mod" type="select" min="1"
+                                           label="sample introduction method">
+                                        <option value="DI">direct infusion
+                                        </option>
+                                        <option value="FIA" selected="True">flow
+                                            infusion assay
+                                        </option>
+                                        <option value="LC" selected="True">
+                                            liquid chromatography
+                                        </option>
+                                        <option value="GC">gas chromatography
+                                        </option>
+                                    </param>
+                                    <when value="DI">
+                                        <param name="instrument" type="select"
+                                               min="1" label="MS instrument">
+                                            <option value="none reported">none
+                                                reported
+                                            </option>
+                                            <option value="AB SCIEX API 4000"/>
+                                            <option value="AB SCIEX QTRAP 4000"/>
+                                            <option value="AB SCIEX 4800 Plus MALDI TOF/TOF"/>
+                                            <option value="AB SCIEX QTRAP 5500"/>
+                                            <option value="AB SCIEX QTRAP 6500"/>
+                                            <option value="AB SCIEX TripleTOF 5600"/>
+                                            <option value="AB SCIEX TripleTOF 5600+"/>
+                                            <option value="AB SCIEX TOF/TOF 5800"/>
+                                            <option value="AB SCIEX TripleTOF 6600+"/>
+                                            <option value="Agilent 6210 TOF"/>
+                                            <option value="Agilent 6230 Accurate-Mass TOF"/>
+                                            <option value="Agilent 6460 Triple Quadrupole"/>
+                                            <option value="Agilent 6490 Triple Quadrupole"/>
+                                            <option value="Agilent 6520 Q-TOF"/>
+                                            <option value="Agilent 6530 Accurate-Mass Q-TOF"/>
+                                            <option value="Agilent 6540 Q-TOF"/>
+                                            <option value="Agilent 6545 Q-TOF"/>
+                                            <option value="Agilent 6550 iFunnel Q-TOF"/>
+                                            <option value="Agilent 6560 Ion Mobility Q-TOF"/>
+                                            <option value="Bruker APEX-Qe 9.4T"/>
+                                            <option value="Bruker CaptiveSpray nanoBooster and amaZon speed"/>
+                                            <option value="Bruker compact"/>
+                                            <option value="Bruker Esquire 3000"/>
+                                            <option value="Bruker Esquire 6000"/>
+                                            <option value="Bruker maXis impact UHR-QTOF"/>
+                                            <option value="Bruker maXis UHR-ToF"/>
+                                            <option value="Bruker maXis 4G UHR-ToF"/>
+                                            <option value="Bruker micrOTOF"/>
+                                            <option value="Bruker micrOTOF-Q I"/>
+                                            <option value="Bruker micrOTOF-Q II"/>
+                                            <option value="Bruker micrOTOF-Q III"/>
+                                            <option value="Bruker solariX FTMS"/>
+                                            <option value="Bruker ultrafleXtreme"/>
+                                            <option value="Shimadzu LCMS-IT-TOF"/>
+                                            <option value="Thermo Fisher LTQ"/>
+                                            <option value="Thermo Scientific Exactive"/>
+                                            <option value="Thermo Scientific LTQ FT Ultra"/>
+                                            <option value="Thermo Scientific LTQ FT Ultra"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap Classic"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap Classic"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap XL"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap Discovery"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap Velos"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap Velos ETD"/>
+                                            <option value="Thermo Scientific LTQ XL linear ion trap"/>
+                                            <option value="Thermo Scientific Orbitrap Elite"/>
+                                            <option value="Thermo Scientific Orbitrap Velos Pro"/>
+                                            <option value="Thermo Scientific Q Exactive"/>
+                                            <option value="Thermo Scientific Q Exactive Plus"/>
+                                            <option value="Thermo Scientific Q Exactive HF"/>
+                                            <option value="Thermo Scientific TSQ Quantum Access MAX"/>
+                                            <option value="Thermo Scientific TSQ Quantum Ultra"/>
+                                            <option value="Thermo Scientific TSQ Vantage"/>
+                                            <option value="Waters ACQUITY TQD"/>
+                                            <option value="Waters LCT"/>
+                                            <option value="Waters Micromass Q-Tof micro"/>
+                                            <option value="Waters Micromass Quattro micro API"/>
+                                            <option value="Waters Q-Tof Premier"/>
+                                            <option value="Waters Quattro Premier XE"/>
+                                            <option value="Waters SYNAPT G1 HDMS System"/>
+                                            <option value="Waters SYNAPT G2 HDMS System"/>
+                                            <option value="Waters SYNAPT G2-S HDMS"/>
+                                            <option value="Waters SYNAPT HDMS System"/>
+                                            <option value="Waters Xevo G2 QTof"/>
+                                            <option value="Waters Xevo G2-XS QTof"/>
+                                            <option value="Waters Xevo TQ"/>
+                                            <option value="Waters Xevo TQ-S"/>
+                                            <option value="other">other</option>
+                                        </param>
+                                        <repeat name="acq_mod_series"
+                                                title="acquisition series">
+                                            <param name="acq_mod" type="select"
+                                                   min="1"
+                                                   label="acquisition method">
+                                                <option value="negative"
+                                                        selected="True"/>
+                                                <option value="positive"/>
+                                                <option value="positive/negative"/>
+                                            </param>
+                                            <param name="technical_replicates"
+                                                   type="integer"
+                                                   label="number of technical repeats"
+                                                   value="1"/>
+                                        </repeat>
+                                    </when>
+                                    <when value="FIA">
+                                        <param name="instrument" type="select"
+                                               min="1" label="MS instrument">
+                                            <option value="none reported">none
+                                                reported
+                                            </option>
+                                            <option value="AB SCIEX API 4000"/>
+                                            <option value="AB SCIEX QTRAP 4000"/>
+                                            <option value="AB SCIEX 4800 Plus MALDI TOF/TOF"/>
+                                            <option value="AB SCIEX QTRAP 5500"/>
+                                            <option value="AB SCIEX QTRAP 6500"/>
+                                            <option value="AB SCIEX TripleTOF 5600"/>
+                                            <option value="AB SCIEX TripleTOF 5600+"/>
+                                            <option value="AB SCIEX TOF/TOF 5800"/>
+                                            <option value="AB SCIEX TripleTOF 6600+"/>
+                                            <option value="Agilent 6210 TOF"/>
+                                            <option value="Agilent 6230 Accurate-Mass TOF"/>
+                                            <option value="Agilent 6460 Triple Quadrupole"/>
+                                            <option value="Agilent 6490 Triple Quadrupole"/>
+                                            <option value="Agilent 6520 Q-TOF"/>
+                                            <option value="Agilent 6530 Accurate-Mass Q-TOF"/>
+                                            <option value="Agilent 6540 Q-TOF"/>
+                                            <option value="Agilent 6545 Q-TOF"/>
+                                            <option value="Agilent 6550 iFunnel Q-TOF"/>
+                                            <option value="Agilent 6560 Ion Mobility Q-TOF"/>
+                                            <option value="Bruker APEX-Qe 9.4T"/>
+                                            <option value="Bruker CaptiveSpray nanoBooster and amaZon speed"/>
+                                            <option value="Bruker compact"/>
+                                            <option value="Bruker Esquire 3000"/>
+                                            <option value="Bruker Esquire 6000"/>
+                                            <option value="Bruker maXis impact UHR-QTOF"/>
+                                            <option value="Bruker maXis UHR-ToF"/>
+                                            <option value="Bruker maXis 4G UHR-ToF"/>
+                                            <option value="Bruker micrOTOF"/>
+                                            <option value="Bruker micrOTOF-Q I"/>
+                                            <option value="Bruker micrOTOF-Q II"/>
+                                            <option value="Bruker micrOTOF-Q III"/>
+                                            <option value="Bruker solariX FTMS"/>
+                                            <option value="Bruker ultrafleXtreme"/>
+                                            <option value="Shimadzu LCMS-IT-TOF"/>
+                                            <option value="Thermo Fisher LTQ"/>
+                                            <option value="Thermo Scientific Exactive"/>
+                                            <option value="Thermo Scientific LTQ FT Ultra"/>
+                                            <option value="Thermo Scientific LTQ FT Ultra"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap Classic"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap Classic"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap XL"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap Discovery"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap Velos"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap Velos ETD"/>
+                                            <option value="Thermo Scientific LTQ XL linear ion trap"/>
+                                            <option value="Thermo Scientific Orbitrap Elite"/>
+                                            <option value="Thermo Scientific Orbitrap Velos Pro"/>
+                                            <option value="Thermo Scientific Q Exactive"/>
+                                            <option value="Thermo Scientific Q Exactive Plus"/>
+                                            <option value="Thermo Scientific Q Exactive HF"/>
+                                            <option value="Thermo Scientific TSQ Quantum Access MAX"/>
+                                            <option value="Thermo Scientific TSQ Quantum Ultra"/>
+                                            <option value="Thermo Scientific TSQ Vantage"/>
+                                            <option value="Waters ACQUITY TQD"/>
+                                            <option value="Waters LCT"/>
+                                            <option value="Waters Micromass Q-Tof micro"/>
+                                            <option value="Waters Micromass Quattro micro API"/>
+                                            <option value="Waters Q-Tof Premier"/>
+                                            <option value="Waters Quattro Premier XE"/>
+                                            <option value="Waters SYNAPT G1 HDMS System"/>
+                                            <option value="Waters SYNAPT G2 HDMS System"/>
+                                            <option value="Waters SYNAPT G2-S HDMS"/>
+                                            <option value="Waters SYNAPT HDMS System"/>
+                                            <option value="Waters Xevo G2 QTof"/>
+                                            <option value="Waters Xevo G2-XS QTof"/>
+                                            <option value="Waters Xevo TQ"/>
+                                            <option value="Waters Xevo TQ-S"/>
+                                            <option value="other">other</option>
+                                        </param>
+                                        <repeat name="acq_mod_series"
+                                                title="acquisition series">
+                                            <param name="acq_mod" type="select"
+                                                   min="1"
+                                                   label="acquisition method">
+                                                <option value="negative"
+                                                        selected="True"/>
+                                                <option value="positive"/>
+                                                <option value="positive/negative"/>
+                                            </param>
+                                            <param name="technical_replicates"
+                                                   type="integer"
+                                                   label="number of technical repeats"
+                                                   value="1"/>
+                                        </repeat>
+                                    </when>
+                                    <when value="LC">
+                                        <param name="chromato_col" type="select"
+                                               min="1"
+                                               label="chromatography column">
+                                            <option value="none reported">none
+                                                reported
+                                            </option>
+                                            <option value="HILIC"/>
+                                            <option value="reverse phase"/>
+                                            <option value="other"/>
+                                        </param>
+                                        <param name="chromato" type="select"
+                                               min="1"
+                                               label="chromatography instrument">
+                                            <option value="none reported">none
+                                                reported
+                                            </option>
+                                            <option value="Agilent 1100 Series HPLC System"/>
+                                            <option value="Agilent 1100 Series LC"/>
+                                            <option value="Agilent 1200 Series HPLC System"/>
+                                            <option value="Agilent 1200 Series Rapid Resolution LC System"/>
+                                            <option value="Agilent 1260 Infinity LC"/>
+                                            <option value="Agilent 1260 Infinity II LC System"/>
+                                            <option value=" Agilent 1290 Infinity HPLC"/>
+                                            <option value="Agilent 1290 Infinity LC"/>
+                                            <option value="Aglient 1290 Infinity II LC"/>
+                                            <option value="Agilent 1290 Infinity UHPLC"/>
+                                            <option value="Beckman Coulter System Gold HPLC 127 pump"/>
+                                            <option value="Eksigent NanoLC-Ultra 2D system"/>
+                                            <option value="Flux Rheos Allegro UHPLC pump"/>
+                                            <option value="Hitachi L-7100 HPLC pump"/>
+                                            <option value="Hitachi LaChrome Ultra"/>
+                                            <option value="Michrom BioResources Paradigm MS4 HPLC system"/>
+                                            <option value="Shimadzu LC-10AD pump and SCL-10A controller"/>
+                                            <option value="Shimadzu LC-30AD pump and CBM-20A controller"/>
+                                            <option value="Shimadzu Nexera UHPLC system"/>
+                                            <option value="Shimadzu Nexera UHPLC system (LC-30AD pump and CBM-20A controller)"/>
+                                            <option value="Shimadzu Prominence HPLC system"/>
+                                            <option value="Shimadzu Prominence LC-20AD system"/>
+                                            <option value="Shimadzu Prominence UFLC system"/>
+                                            <option value="Shimadzu SIL20-A LC system"/>
+                                            <option value="Thermo Scientific Accela 600 Pump"/>
+                                            <option value="Thermo Scientific Accela 1250 Pump"/>
+                                            <option value="Thermo Scientific Accela II HPLC system"/>
+                                            <option value="Thermo Scientific Accela UHPLC System"/>
+                                            <option value="Thermo Scientific Dionex Ultimate 3000 HPLC system"/>
+                                            <option value="Thermo Scientific Dionex UltiMate 3000 System"/>
+                                            <option value="Thermo Scientific Dionex UltiMate 3000 RSLC System"/>
+                                            <option value="Thermo Scientific Dionex UltiMate 3000 RSLCnano System"/>
+                                            <option value="Thermo Scientific Dionex Ultimate 3000 UHPLC system"/>
+                                            <option value="Thermo Scientific Dionex UltiMate 3000 XRS System"/>
+                                            <option value="Thermo Scientific Dionex UltiMate HPLC system"/>
+                                            <option value="Thermo Scientific Dionex UltiMate LC system"/>
+                                            <option value="Thermo Scientific Surveyor HPLC system"/>
+                                            <option value="Thermo Scientific Surveyor MS Pump Plus"/>
+                                            <option value="Waters 1525 Micro Binary HPLC Pump"/>
+                                            <option value="Waters nanoACQUITY UPLC system"/>
+                                            <option value="Waters ACQUITY UPLC H-Class System"/>
+                                            <option value="Waters ACQUITY UPLC I-Class System"/>
+                                            <option value="Waters ACQUITY UPLC system"/>
+                                            <option value="Waters ACQUITY UPLC system and PDA detector"/>
+                                            <option value="Waters Alliance 2695 Separations Module (modified)"/>
+                                            <option value="other">other</option>
+                                        </param>
+                                        <param name="instrument" type="select"
+                                               label="MS instrument">
+                                            <option value="none reported">none
+                                                reported
+                                            </option>
+                                            <option value="AB SCIEX API 4000"/>
+                                            <option value="AB SCIEX QTRAP 4000"/>
+                                            <option value="AB SCIEX 4800 Plus MALDI TOF/TOF"/>
+                                            <option value="AB SCIEX QTRAP 5500"/>
+                                            <option value="AB SCIEX QTRAP 6500"/>
+                                            <option value="AB SCIEX TripleTOF 5600"/>
+                                            <option value="AB SCIEX TripleTOF 5600+"/>
+                                            <option value="AB SCIEX TOF/TOF 5800"/>
+                                            <option value="AB SCIEX TripleTOF 6600+"/>
+                                            <option value="Agilent 6210 TOF"/>
+                                            <option value="Agilent 6230 Accurate-Mass TOF"/>
+                                            <option value="Agilent 6460 Triple Quadrupole"/>
+                                            <option value="Agilent 6490 Triple Quadrupole"/>
+                                            <option value="Agilent 6520 Q-TOF"/>
+                                            <option value="Agilent 6530 Accurate-Mass Q-TOF"/>
+                                            <option value="Agilent 6540 Q-TOF"/>
+                                            <option value="Agilent 6545 Q-TOF"/>
+                                            <option value="Agilent 6550 iFunnel Q-TOF"/>
+                                            <option value="Agilent 6560 Ion Mobility Q-TOF"/>
+                                            <option value="Bruker APEX-Qe 9.4T"/>
+                                            <option value="Bruker CaptiveSpray nanoBooster and amaZon speed"/>
+                                            <option value="Bruker compact"/>
+                                            <option value="Bruker Esquire 3000"/>
+                                            <option value="Bruker Esquire 6000"/>
+                                            <option value="Bruker maXis impact UHR-QTOF"/>
+                                            <option value="Bruker maXis UHR-ToF"/>
+                                            <option value="Bruker maXis 4G UHR-ToF"/>
+                                            <option value="Bruker micrOTOF"/>
+                                            <option value="Bruker micrOTOF-Q I"/>
+                                            <option value="Bruker micrOTOF-Q II"/>
+                                            <option value="Bruker micrOTOF-Q III"/>
+                                            <option value="Bruker solariX FTMS"/>
+                                            <option value="Bruker ultrafleXtreme"/>
+                                            <option value="Shimadzu LCMS-IT-TOF"/>
+                                            <option value="Thermo Fisher LTQ"/>
+                                            <option value="Thermo Scientific Exactive"/>
+                                            <option value="Thermo Scientific LTQ FT Ultra"/>
+                                            <option value="Thermo Scientific LTQ FT Ultra"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap Classic"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap Classic"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap XL"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap Discovery"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap Velos"/>
+                                            <option value="Thermo Scientific LTQ Orbitrap Velos ETD"/>
+                                            <option value="Thermo Scientific LTQ XL linear ion trap"/>
+                                            <option value="Thermo Scientific Orbitrap Elite"/>
+                                            <option value="Thermo Scientific Orbitrap Velos Pro"/>
+                                            <option value="Thermo Scientific Q Exactive"/>
+                                            <option value="Thermo Scientific Q Exactive Plus"/>
+                                            <option value="Thermo Scientific Q Exactive HF"/>
+                                            <option value="Thermo Scientific TSQ Quantum Access MAX"/>
+                                            <option value="Thermo Scientific TSQ Quantum Ultra"/>
+                                            <option value="Thermo Scientific TSQ Vantage"/>
+                                            <option value="Waters ACQUITY TQD"/>
+                                            <option value="Waters LCT"/>
+                                            <option value="Waters Micromass Q-Tof micro"/>
+                                            <option value="Waters Micromass Quattro micro API"/>
+                                            <option value="Waters Q-Tof Premier"/>
+                                            <option value="Waters Quattro Premier XE"/>
+                                            <option value="Waters SYNAPT G1 HDMS System"/>
+                                            <option value="Waters SYNAPT G2 HDMS System"/>
+                                            <option value="Waters SYNAPT G2-S HDMS"/>
+                                            <option value="Waters SYNAPT HDMS System"/>
+                                            <option value="Waters Xevo G2 QTof"/>
+                                            <option value="Waters Xevo G2-XS QTof"/>
+                                            <option value="Waters Xevo TQ"/>
+                                            <option value="Waters Xevo TQ-S"/>
+                                            <option value="other">other</option>
+                                        </param>
+                                        <repeat name="acq_mod_series"
+                                                title="acquisition series">
+                                            <param name="acq_mod" type="select"
+                                                   min="1"
+                                                   label="acquisition method">
+                                                <option value="negative"
+                                                        selected="True"/>
+                                                <option value="positive"/>
+                                                <option value="positive/negative"/>
+                                            </param>
+                                            <param name="technical_replicates"
+                                                   type="integer"
+                                                   label="number of technical repeats"
+                                                   value="1"/>
+                                        </repeat>
+                                    </when>
+                                    <when value="GC">
+                                        <param name="chromato" type="select"
+                                               min="1"
+                                               label="chromatography instrument">
+                                            <option value="none reported">none
+                                                reported
+                                            </option>
+                                            <option value="Agilent 6890 GC"/>
+                                            <option value="Agilent 6890N GC"/>
+                                            <option value="Agilent 7890A GC"/>
+                                            <option value="Agilent 7890B GC"/>
+                                            <option value="Shimadzu GCMS-QP2010 Ultra"/>
+                                            <option value="Thermo Electron FOCUS GC"/>
+                                            <option value="Thermo Electron TRACE GC"/>
+                                            <option value="Thermo Electron TRACE GC Ultra"/>
+                                            <option value="Thermo Scientific TRACE GC Ultra"/>
+                                            <option value="Thermo Scientific TRACE 1310 GC"/>
+                                            <option value="ThermoQuest GC 8000"/>
+                                            <option value="other"/>
+                                        </param>
+                                        <param name="instrument" type="select"
+                                               min="1" label="MS instrument">
+                                            <option value="none reported">none
+                                                reported
+                                            </option>
+                                            <option value="Agilent 5973N MSD"/>
+                                            <option value="Agilent 5975C inert XL MSD"/>
+                                            <option value="Agilent 5975C MSD"/>
+                                            <option value="Agilent 5977A MSD"/>
+                                            <option value="Agilent 5977B MSD"/>
+                                            <option value="Agilent 7000C Triple Quadrupole"/>
+                                            <option value="Agilent 7200 Q-TOF"/>
+                                            <option value=" JEOL AccuTOF GCv"/>
+                                            <option value="LECO Pegasus"/>
+                                            <option value="LECO Pegasus 4D"/>
+                                            <option value="LECO Pegasus III"/>
+                                            <option value=" LECO Pegasus IV"/>
+                                            <option value="LECO Pegasus HT TOFMS"/>
+                                            <option value="Shimadzu GCMS-QP2010 Ultra"/>
+                                            <option value="Thermo Electron PolarisQ"/>
+                                            <option value="Thermo Electron TRACE DSQ"/>
+                                            <option value="Thermo Finnigan TRACE DSQ"/>
+                                            <option value="Thermo Scientific ISQ"/>
+                                            <option value="Thermo Scientific ITQ 900"/>
+                                            <option value="Thermo Scientific TRACE DSQ"/>
+                                            <option value="Thermo Scientific TSQ 8000"/>
+                                            <option value="Thermo Scientific TSQ Quantum XLS"/>
+                                            <option value="ThermoQuest Voyager"/>
+                                            <option value="Waters GCT Premier"/>
+                                            <option value="other">other</option>
+                                        </param>
+                                        <repeat name="acq_mod_series"
+                                                title="acquisition series">
+                                            <param name="acq_mod" type="select"
+                                                   label="acquisition method">
+                                                <option value="negative"
+                                                        selected="True"/>
+                                                <option value="positive"/>
+                                                <option value="positive/negative"/>
+                                            </param>
+                                            <param name="technical_replicates"
+                                                   type="integer"
+                                                   label="number of technical repeats"
+                                                   value="1"/>
+                                        </repeat>
+                                        <repeat name="derivatization_series"
+                                                title="derivations">
+                                            <param name="derivatization"
+                                                   type="select"
+                                                   label="derivatization">
+                                                <option value="none reported">
+                                                    none reported
+                                                </option>
+                                                <option value="acetylation"/>
+                                                <option value="trifluoroacetylation"/>
+                                                <option value="alkylation"/>
+                                                <option value="methylation"/>
+                                                <option value="oxymation"/>
+                                                <option value="silylation"/>
+                                                <option value="other">other
+                                                </option>
+                                            </param>
+                                        </repeat>
+                                    </when>
+                                </conditional>
+                            </repeat>
+                        </when>
+
+                        <when value="nmr spectroscopy">
+                            <conditional name="acq_mod_cond">
+                                <param name="acq_mod" type="select" min="1"
+                                       label="acquisition method">
+                                    <option value="1D 1H NMR"/>
+                                    <option value="1D 13C NMR"/>
+                                    <option value="2D 1H-1H NMR"/>
+                                    <option value="2D 13C-13C NMR"/>
+                                    <option value="2D 1H-13C NMR"/>
+                                </param>
+                                <when value="1D 1H NMR">
+                                    <param name="nmr_instrument" type="select"
+                                           min="1" label="nmr instrument">
+                                        <option value="none reported">none
+                                            reported
+                                        </option>
+                                        <option value="Bruker 400 Mhz">Bruker
+                                            400 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker 500 Mhz">Bruker
+                                            500 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker 600 Mhz">Bruker
+                                            600 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker 600 Mhz US">Bruker
+                                            600 MHz Ultrashield spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 500 Mhz">
+                                            Bruker AVANCE 500 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 600 Mhz">
+                                            Bruker AVANCE 600 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 700 Mhz">
+                                            Bruker AVANCE 700 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 900 Mhz">
+                                            Bruker AVANCE 900 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance AV 500 Mhz">
+                                            Bruker AVANCE AV 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance AV 600 Mhz">
+                                            Bruker AVANCE AV 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance DRX 500 MHz">
+                                            Bruker AVANCE DRX 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance DRX 600 MHz">
+                                            Bruker AVANCE DRX 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance DRX 700 MHz">
+                                            Bruker AVANCE DRX 700 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 500 MHz">
+                                            Bruker AVANCE II 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 500 MHz US">
+                                            Bruker AVANCE II 500 MHz Ultrashield
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II+ 500 MHz">
+                                            Bruker AVANCE II+ 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 600 MHz">
+                                            Bruker AVANCE II 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 700 MHz">
+                                            Bruker AVANCE II 700 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 800 MHz US2">
+                                            Bruker AVANCE II 800 MHz US2
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 400 MHz">
+                                            Bruker AVANCE III 400 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 500 MHz">
+                                            Bruker AVANCE III 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 600 MHz">
+                                            Bruker AVANCE III 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 800 MHz">
+                                            Bruker AVANCE III 800 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III HD 600 MHz">
+                                            Bruker AVANCE III HD 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III HD 700 MHz">
+                                            Bruker AVANCE III HD 700 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III HD 800 MHz">
+                                            Bruker AVANCE III HD 800 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance IV Dr">
+                                            Bruker AVANCE IV Dr
+                                        </option>
+                                        <option value="Bruker DNP-NMR">Bruker
+                                            DNP-NMR
+                                        </option>
+                                        <option value="Bruker Fourier-300HD">
+                                            Bruker Fourier-300HD
+                                        </option>
+                                        <option value="Varian Mercury AS400 MHz">
+                                            Varian Mercury AS400 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian Unity Inova 400 MHz">
+                                            Varian Unity Inova 400 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian Unity Inova 500 MHz">
+                                            Varian Unity Inova 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian Unity Inova 600 MHz">
+                                            Varian Unity Inova 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian VNMRS 600 MHz">
+                                            Varian VNMRS 600 MHz spectrometer
+                                        </option>
+                                        <option value="other">other</option>
+                                    </param>
+                                    <param name="pulse_seq" type="select"
+                                           min="1" label="pulse sequence">
+                                        <option value="none reported">none
+                                            reported
+                                        </option>
+                                        <option value="zg30">Conventional 1H
+                                            spectrum (zg30)
+                                        </option>
+                                        <option value="presat">1D 1H with
+                                            presaturation (presat)
+                                        </option>
+                                        <option value="wet">1D 1H with
+                                            presaturation (wet)
+                                        </option>
+                                        <option value="zgpr">1D 1H with
+                                            presaturation (zgpr)
+                                        </option>
+                                        <option value="zgesgp">1D with water
+                                            suppression using excitation
+                                            sculpting with gradients (zgesgp)
+                                        </option>
+                                        <option value="CPMG">1D CPMG with
+                                            presaturation (cpmgpr1d)
+                                        </option>
+                                        <option value="water suppression">water
+                                            suppression
+                                        </option>
+                                        <option value="watergate">watergate
+                                        </option>
+                                        <option value="flip-flop">flip-flop
+                                        </option>
+                                        <option value="noesypr1d">1D NOESY with
+                                            presaturation (noesypr1d)
+                                        </option>
+                                        <option value="tnnoesy">1D NOESY with
+                                            presaturation (tnnoesy)
+                                        </option>
+                                        <option value="noesygppr1d">1D NOESY
+                                            with presaturation and spoil
+                                            gradients (noesygppr1d)
+                                        </option>
+                                        <option value="other">other</option>
+                                    </param>
+                                    <param name="magnet" type="text"
+                                           label="nmr magnet power"
+                                           value="600 Mhz"/>
+                                    <param name="technical_replicates"
+                                           type="integer"
+                                           label="number of technical repeats"
+                                           value="1"/>
+                                </when>
+                                <when value="1D 13C NMR">
+                                    <param name="nmr_instrument" type="select"
+                                           min="1" label="nmr instrument">
+                                        <option value="none reported">none
+                                            reported
+                                        </option>
+                                        <option value="Bruker 400 Mhz">Bruker
+                                            400 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker 500 Mhz">Bruker
+                                            500 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker 600 Mhz">Bruker
+                                            600 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker 600 Mhz US">Bruker
+                                            600 MHz Ultrashield spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 500 Mhz">
+                                            Bruker AVANCE 500 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 600 Mhz">
+                                            Bruker AVANCE 600 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 700 Mhz">
+                                            Bruker AVANCE 700 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 900 Mhz">
+                                            Bruker AVANCE 900 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance AV 500 Mhz">
+                                            Bruker AVANCE AV 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance AV 600 Mhz">
+                                            Bruker AVANCE AV 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance DRX 500 MHz">
+                                            Bruker AVANCE DRX 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance DRX 600 MHz">
+                                            Bruker AVANCE DRX 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance DRX 700 MHz">
+                                            Bruker AVANCE DRX 700 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 500 MHz">
+                                            Bruker AVANCE II 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 500 MHz US">
+                                            Bruker AVANCE II 500 MHz Ultrashield
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II+ 500 MHz">
+                                            Bruker AVANCE II+ 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 600 MHz">
+                                            Bruker AVANCE II 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 700 MHz">
+                                            Bruker AVANCE II 700 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 800 MHz US2">
+                                            Bruker AVANCE II 800 MHz US2
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 400 MHz">
+                                            Bruker AVANCE III 400 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 500 MHz">
+                                            Bruker AVANCE III 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 600 MHz">
+                                            Bruker AVANCE III 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 800 MHz">
+                                            Bruker AVANCE III 800 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III HD 600 MHz">
+                                            Bruker AVANCE III HD 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III HD 700 MHz">
+                                            Bruker AVANCE III HD 700 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III HD 800 MHz">
+                                            Bruker AVANCE III HD 800 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance IV Dr">
+                                            Bruker Avance IV Dr
+                                        </option>
+                                        <option value="Bruker DNP-NMR">Bruker
+                                            DNP-NMR
+                                        </option>
+                                        <option value="Bruker Fourier-300HD">
+                                            Bruker Fourier-300HD
+                                        </option>
+                                        <option value="Varian Mercury AS400 MHz">
+                                            Varian Mercury AS400 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian Unity Inova 400 MHz">
+                                            Varian Unity Inova 400 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian Unity Inova 500 MHz">
+                                            Varian Unity Inova 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian Unity Inova 600 MHz">
+                                            Varian Unity Inova 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian VNMRS 600 MHz">
+                                            Varian VNMRS 600 MHz spectrometer
+                                        </option>
+                                        <option value="other">other</option>
+                                    </param>
+                                    <param name="pulse_seq" type="select"
+                                           min="1" label="pulse sequence">
+                                        <option value="none reported">none
+                                            reported
+                                        </option>
+                                        <option value="CPMG">1D CPMG with
+                                            presaturation (cpmgpr1d)
+                                        </option>
+                                        <option value="noesypr1d">1D NOESY with
+                                            presaturation (noesypr1d)
+                                        </option>
+                                        <option value="tnnoesy">1D NOESY with
+                                            presaturation (tnnoesy)
+                                        </option>
+                                        <option value="noesygppr1d">1D NOESY
+                                            with presaturation and spoil
+                                            gradients (noesygppr1d)
+                                        </option>
+                                        <option value="water suppression">water
+                                            suppression
+                                        </option>
+                                        <option value="watergate">watergate
+                                        </option>
+                                        <option value="flip-flop">flip-flop
+                                        </option>
+                                        <option value="other">other</option>
+                                    </param>
+                                    <param name="magnet" type="text"
+                                           label="nmr magnet power"
+                                           value="600 Mhz"/>
+                                    <param name="technical_replicates"
+                                           type="integer"
+                                           label="number of technical repeats"
+                                           value="1"/>
+                                </when>
+                                <when value="2D 1H-1H NMR">
+                                    <param name="nmr_instrument" type="select"
+                                           min="1" label="nmr instrument">
+                                        <option value="none reported">none
+                                            reported
+                                        </option>
+                                        <option value="Bruker 400 Mhz">Bruker
+                                            400 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker 500 Mhz">Bruker
+                                            500 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker 600 Mhz">Bruker
+                                            600 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker 600 Mhz US">Bruker
+                                            600 MHz Ultrashield spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 500 Mhz">
+                                            Bruker AVANCE 500 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 600 Mhz">
+                                            Bruker AVANCE 600 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 700 Mhz">
+                                            Bruker AVANCE 700 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 900 Mhz">
+                                            Bruker AVANCE 900 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance AV 500 Mhz">
+                                            Bruker AVANCE AV 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance AV 600 Mhz">
+                                            Bruker AVANCE AV 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance DRX 500 MHz">
+                                            Bruker AVANCE DRX 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance DRX 600 MHz">
+                                            Bruker AVANCE DRX 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance DRX 700 MHz">
+                                            Bruker AVANCE DRX 700 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 500 MHz">
+                                            Bruker AVANCE II 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 500 MHz US">
+                                            Bruker AVANCE II 500 MHz Ultrashield
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II+ 500 MHz">
+                                            Bruker AVANCE II+ 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 600 MHz">
+                                            Bruker AVANCE II 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 700 MHz">
+                                            Bruker AVANCE II 700 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 800 MHz US2">
+                                            Bruker AVANCE II 800 MHz US2
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 400 MHz">
+                                            Bruker AVANCE III 400 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 500 MHz">
+                                            Bruker AVANCE III 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 600 MHz">
+                                            Bruker AVANCE III 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 800 MHz">
+                                            Bruker AVANCE III 800 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III HD 600 MHz">
+                                            Bruker AVANCE III HD 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III HD 700 MHz">
+                                            Bruker AVANCE III HD 700 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III HD 800 MHz">
+                                            Bruker AVANCE III HD 800 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance IV Dr">
+                                            Bruker Avance IV Dr
+                                        </option>
+                                        <option value="Bruker DNP-NMR">Bruker
+                                            DNP-NMR
+                                        </option>
+                                        <option value="Bruker Fourier-300HD">
+                                            Bruker Fourier-300HD
+                                        </option>
+                                        <option value="Varian Mercury AS400 MHz">
+                                            Varian Mercury AS400 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian Unity Inova 400 MHz">
+                                            Varian Unity Inova 400 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian Unity Inova 500 MHz">
+                                            Varian Unity Inova 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian Unity Inova 600 MHz">
+                                            Varian Unity Inova 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian VNMRS 600 MHz">
+                                            Varian VNMRS 600 MHz spectrometer
+                                        </option>
+                                        <option value="other">other</option>
+                                    </param>
+                                    <param name="pulse_seq" type="select"
+                                           min="1" label="pulse sequence">
+                                        <option value="none reported">none
+                                            reported
+                                        </option>
+                                        <option value="NOESY"/>
+                                        <option value="TOCSY"/>
+                                        <option value="watergate"/>
+                                        <option value="flip-flop"/>
+                                        <option value="noesyesgpph">2D
+                                            homonuclear correlation via dipolar
+                                            coupling (noesyesgpph)
+                                        </option>
+                                        <option value="hsqcphpr">2D HSQC with
+                                            presaturation (hsqcphpr)
+                                        </option>
+                                        <option value="hsqcetgpsp.2">2D HSQC
+                                            using echo-antiecho and adiabatic
+                                            pulses for inversion and refocusing
+                                            (hsqcetgpsp.2)
+                                        </option>
+                                        <option value="hsqcetgpsp.2.cl">2D HSQC
+                                            using echo-antiecho and adiabatic
+                                            pulses for inversion and refocusing
+                                            with additional water suppression
+                                            (hsqcetgpsp.2.cl)
+                                        </option>
+                                        <option value="hsqcetgpsisp2.2">2D HSQC
+                                            using PEP and adiabatic pulses for
+                                            inversion and refocusing with
+                                            gradients in back-inept
+                                            (hsqcetgpsisp2.2)
+                                        </option>
+                                        <option value="hsqcetgpsisp2.3">2D HSQC
+                                            using PEP and adiabatic pulses for
+                                            inversion and refocusing with
+                                            gradients in back-inept and
+                                            suppression of COSY type artefacts
+                                            (hsqcetgpsisp2.3)
+                                        </option>
+                                        <option value="jresesgp2">2D JRES with
+                                            excitation sculpting and additional
+                                            water suppression (jresesgp2)
+                                        </option>
+                                        <option value="jresesgp">2D JRES with
+                                            homonuclear J-resolved 2D
+                                            correlation (jresesgp)
+                                        </option>
+                                        <option value="mlevphpr">2D TOCSY with
+                                            presaturation using MLEV (mlevphpr)
+                                        </option>
+                                        <option value="COSY">M3S COSY</option>
+                                        <option value="other">other</option>
+                                    </param>
+                                    <param name="magnet" type="text"
+                                           label="nmr magnet power"
+                                           value="600 Mhz"/>
+                                    <param name="technical_replicates"
+                                           type="integer"
+                                           label="number of technical repeats"
+                                           value="1"/>
+                                </when>
+                                <when value="2D 13C-13C NMR">
+                                    <param name="nmr_instrument" type="select"
+                                           min="1" label="nmr instrument">
+                                        <option value="none reported">none
+                                            reported
+                                        </option>
+                                        <option value="Bruker 400 Mhz">Bruker
+                                            400 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker 500 Mhz">Bruker
+                                            500 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker 600 Mhz">Bruker
+                                            600 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker 600 Mhz US">Bruker
+                                            600 MHz Ultrashield spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 500 Mhz">
+                                            Bruker AVANCE 500 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 600 Mhz">
+                                            Bruker AVANCE 600 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 700 Mhz">
+                                            Bruker AVANCE 700 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 900 Mhz">
+                                            Bruker AVANCE 900 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance AV 500 Mhz">
+                                            Bruker AVANCE AV 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance AV 600 Mhz">
+                                            Bruker AVANCE AV 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance DRX 500 MHz">
+                                            Bruker AVANCE DRX 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance DRX 600 MHz">
+                                            Bruker AVANCE DRX 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance DRX 700 MHz">
+                                            Bruker AVANCE DRX 700 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 500 MHz">
+                                            Bruker AVANCE II 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 500 MHz US">
+                                            Bruker AVANCE II 500 MHz Ultrashield
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II+ 500 MHz">
+                                            Bruker AVANCE II+ 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 600 MHz">
+                                            Bruker AVANCE II 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 700 MHz">
+                                            Bruker AVANCE II 700 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 800 MHz US2">
+                                            Bruker AVANCE II 800 MHz US2
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 400 MHz">
+                                            Bruker AVANCE III 400 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 500 MHz">
+                                            Bruker AVANCE III 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 600 MHz">
+                                            Bruker AVANCE III 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 800 MHz">
+                                            Bruker AVANCE III 800 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III HD 600 MHz">
+                                            Bruker AVANCE III HD 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III HD 700 MHz">
+                                            Bruker AVANCE III HD 700 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III HD 800 MHz">
+                                            Bruker AVANCE III HD 800 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance IV Dr">
+                                            Bruker Avance IV Dr
+                                        </option>
+                                        <option value="Bruker DNP-NMR">Bruker
+                                            DNP-NMR
+                                        </option>
+                                        <option value="Bruker Fourier-300HD">
+                                            Bruker Fourier-300HD
+                                        </option>
+                                        <option value="Varian Mercury AS400 MHz">
+                                            Varian Mercury AS400 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian Unity Inova 400 MHz">
+                                            Varian Unity Inova 400 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian Unity Inova 500 MHz">
+                                            Varian Unity Inova 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian Unity Inova 600 MHz">
+                                            Varian Unity Inova 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian VNMRS 600 MHz">
+                                            Varian VNMRS 600 MHz spectrometer
+                                        </option>
+                                        <option value="other">other</option>
+                                    </param>
+                                    <param name="pulse_seq" type="select"
+                                           min="1" label="pulse sequence">
+                                        <option value="none reported">none
+                                            reported
+                                        </option>
+                                        <option value="HOESY"/>
+                                        <option value="INADEQUATE"/>
+                                        <option value="watergate"/>
+                                        <option value="flip-flop"/>
+                                        <option value="noesyesgpph">2D
+                                            homonuclear correlation via dipolar
+                                            coupling (noesyesgpph)
+                                        </option>
+                                        <option value="hsqcphpr">2D HSQC with
+                                            presaturation (hsqcphpr)
+                                        </option>
+                                        <option value="hsqcetgpsp.2">2D HSQC
+                                            using echo-antiecho and adiabatic
+                                            pulses for inversion and refocusing
+                                            (hsqcetgpsp.2)
+                                        </option>
+                                        <option value="hsqcetgpsp.2.cl">2D HSQC
+                                            using echo-antiecho and adiabatic
+                                            pulses for inversion and refocusing
+                                            with additional water suppression
+                                            (hsqcetgpsp.2.cl)
+                                        </option>
+                                        <option value="hsqcetgpsisp2.2">2D HSQC
+                                            using PEP and adiabatic pulses for
+                                            inversion and refocusing with
+                                            gradients in back-inept
+                                            (hsqcetgpsisp2.2)
+                                        </option>
+                                        <option value="hsqcetgpsisp2.3">2D HSQC
+                                            using PEP and adiabatic pulses for
+                                            inversion and refocusing with
+                                            gradients in back-inept and
+                                            suppression of COSY type artefacts
+                                            (hsqcetgpsisp2.3)
+                                        </option>
+                                        <option value="jresesgp2">2D JRES with
+                                            excitation sculpting and additional
+                                            water suppression (jresesgp2)
+                                        </option>
+                                        <option value="jresesgp">2D JRES with
+                                            homonuclear J-resolved 2D
+                                            correlation (jresesgp)
+                                        </option>
+                                        <option value="mlevphpr">2D TOCSY with
+                                            presaturation using MLEV (mlevphpr)
+                                        </option>
+                                        <option value="COSY">M3S COSY</option>
+                                        <option value="other">other</option>
+                                    </param>
+                                    <param name="magnet" type="text"
+                                           label="nmr magnet power"
+                                           value="600 Mhz"/>
+                                    <param name="technical_replicates"
+                                           type="integer"
+                                           label="number of technical repeats"
+                                           value="1"/>
+                                </when>
+                                <when value="2D 1H-13C NMR">
+                                    <param name="nmr_instrument" type="select"
+                                           min="1" label="nmr instrument">
+                                        <option value="none reported">none
+                                            reported
+                                        </option>
+                                        <option value="Bruker 400 Mhz">Bruker
+                                            400 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker 500 Mhz">Bruker
+                                            500 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker 600 Mhz">Bruker
+                                            600 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker 600 Mhz US">Bruker
+                                            600 MHz Ultrashield spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 500 Mhz">
+                                            Bruker AVANCE 500 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 600 Mhz">
+                                            Bruker AVANCE 600 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 700 Mhz">
+                                            Bruker AVANCE 700 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance 900 Mhz">
+                                            Bruker AVANCE 900 MHz spectrometer
+                                        </option>
+                                        <option value="Bruker Avance AV 500 Mhz">
+                                            Bruker AVANCE AV 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance AV 600 Mhz">
+                                            Bruker AVANCE AV 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance DRX 500 MHz">
+                                            Bruker AVANCE DRX 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance DRX 600 MHz">
+                                            Bruker AVANCE DRX 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance DRX 700 MHz">
+                                            Bruker AVANCE DRX 700 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 500 MHz">
+                                            Bruker AVANCE II 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 500 MHz US">
+                                            Bruker AVANCE II 500 MHz Ultrashield
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II+ 500 MHz">
+                                            Bruker AVANCE II+ 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 600 MHz">
+                                            Bruker AVANCE II 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 700 MHz">
+                                            Bruker AVANCE II 700 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance II 800 MHz US2">
+                                            Bruker AVANCE II 800 MHz US2
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 400 MHz">
+                                            Bruker AVANCE III 400 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 500 MHz">
+                                            Bruker AVANCE III 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 600 MHz">
+                                            Bruker AVANCE III 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III 800 MHz">
+                                            Bruker AVANCE III 800 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III HD 600 MHz">
+                                            Bruker AVANCE III HD 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III HD 700 MHz">
+                                            Bruker AVANCE III HD 700 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance III HD 800 MHz">
+                                            Bruker AVANCE III HD 800 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Bruker Avance IV Dr">
+                                            Bruker Avance IV Dr
+                                        </option>
+                                        <option value="Bruker DNP-NMR">Bruker
+                                            DNP-NMR
+                                        </option>
+                                        <option value="Bruker Fourier-300HD">
+                                            Bruker Fourier-300HD
+                                        </option>
+                                        <option value="Varian Mercury AS400 MHz">
+                                            Varian Mercury AS400 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian Unity Inova 400 MHz">
+                                            Varian Unity Inova 400 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian Unity Inova 500 MHz">
+                                            Varian Unity Inova 500 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian Unity Inova 600 MHz">
+                                            Varian Unity Inova 600 MHz
+                                            spectrometer
+                                        </option>
+                                        <option value="Varian VNMRS 600 MHz">
+                                            Varian VNMRS 600 MHz spectrometer
+                                        </option>
+                                        <option value="other">other</option>
+                                    </param>
+                                    <param name="pulse_seq" type="select"
+                                           min="1" label="pulse sequence">
+                                        <option value="none reported">none
+                                            reported
+                                        </option>
+                                        <option value="HSQC">2D 1H-13C HSQC
+                                            (hsqcetgppr)
+                                        </option>
+                                        <option value="HOESY"/>
+                                        <option value="HSQC"/>
+                                        <option value="HMBC"/>
+                                        <option value="HMQC"/>
+                                        <option value="HETCOR"/>
+                                        <option value="other">other</option>
+                                    </param>
+                                    <param name="magnet" type="text"
+                                           label="nmr magnet power"
+                                           value="600 Mhz"/>
+                                    <param name="technical_replicates"
+                                           type="integer"
+                                           label="number of technical repeats"
+                                           value="1"/>
+                                </when>
+                            </conditional>
+                        </when>
+
+                        <!--
+                            <when value="DNA sequencing">
+                                <param name="seq_instrument" type="text"></param>
+                                <param name="single_or_paired" type="select" label="select library type" argument="library">
+                                    <option value="single end"/>
+                                    <option value="paired end"/>
+                                </param>
+                                <param name="technical_replicates" type="integer" label="number of technical repeats" argument="tech_rep" value="1"></param>
+                            </when>
+
+                            <when value="DNA microarray">
+                                <param name="array_design" type="select" label="select array design name" argument="arraydes">
+                                    <option value="Affymetrix 1"/>
+                                    <option value="Affymetrix 2"/>
+                                    <option value="Illumina A"/>
+                                    <option value="Illumina B"/>
+                                </param>
+                                <param name="technical_replicates" type="integer" label="number of technical repeats" argument="tech_rep" value="1"></param>
+                            </when>
+                        -->
+                    </conditional>
+                </repeat>
+            </repeat>
+        </section>
+    </xml>
+    <xml name="qc_plan_macro">
+        <section name="qc_plan"
+                 title="Quality Control / Quality Assurance Plan">
+            <repeat name="qc_record_series"
+                    title="Quality Control / Quality Assurance Plan">
+                <conditional name="qc_type_conditional">
+                    <param name="qc_type" type="select" label="study qc types">
+                        <option value="long term reference">long term
+                            reference
+                        </option>
+                        <option value="study reference" selected="True">study
+                            reference
+                        </option>
+                        <option value="reference compound">reference compound
+                        </option>
+                        <option value="reference compound mix">reference
+                            compound mix
+                        </option>
+                        <option value="sample preparation blank">sample
+                            preparation blank
+                        </option>
+                        <option value="solvent blank">solvent blank</option>
+                        <option value="dilution series reference">dilution
+                            series reference
+                        </option>
+                    </param>
+                    <when value="long term reference">
+                        <param name="nb_injection" type="integer"
+                               label="number of injections" value="0"/>
+                        <param name="injection_freq" type="integer"
+                               label="injection frequency" value="0"/>
+                    </when>
+                    <when value="study reference">
+                        <param name="nb_injection" type="integer"
+                               label="number of injections" value="0"/>
+                        <param name="injection_freq" type="integer"
+                               label="injection frequency" value="0"/>
+                    </when>
+                    <when value="reference compound">
+                        <param name="nb_injection" type="integer"
+                               label="number of injections" value="0"/>
+                        <param name="injection_freq" type="integer"
+                               label="injection frequency" value="0"/>
+                    </when>
+                    <when value="reference compound mix">
+                        <param name="nb_injection" type="integer"
+                               label="number of injections" value="0"/>
+                        <param name="injection_freq" type="integer"
+                               label="injection frequency" value="0"/>
+                    </when>
+                    <when value="sample preparation blank">
+                        <param name="nb_injection" type="integer"
+                               label="number of injections" value="0"/>
+                        <param name="injection_freq" type="integer"
+                               label="injection frequency" value="0"/>
+                    </when>
+                    <when value="solvent blank">
+                        <param name="nb_injection" type="integer"
+                               label="number of injections" value="0"/>
+                        <param name="injection_freq" type="integer"
+                               label="injection frequency" value="0"/>
+                    </when>
+                    <when value="dilution series reference">
+                        <param name="nb_injection" type="integer"
+                               label="number of injections" value="0"/>
+                        <param name="injection_freq" type="integer"
+                               label="injection frequency" value="0"/>
+                        <param name="nb_dil_step" type="integer"
+                               label="number of dilution steps" value="0"/>
+                    </when>
+                </conditional>
+            </repeat>
+        </section>
+    </xml>
+</macros>
