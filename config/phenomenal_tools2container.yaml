@@ -481,3 +481,10 @@ assignment:
   max_pod_retrials: 3
   tools_id:
   - mtbls-labs-uploader
+- docker_image_override: isatab-create
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: dev_v0.9.3_cv0.1.6
+  max_pod_retrials: 3
+  tools_id:
+  - isa-create-metabolo

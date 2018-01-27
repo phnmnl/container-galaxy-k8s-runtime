@@ -1,0 +1,162 @@
+<tool id="isa_create_metabo" name="Create ISA in Galaxy" version="1.1.0">
+    <description>Interactive tool to create ISA archives based on study design information</description>
+
+    <macros>
+        <import>isa_create_macros.xml</import>
+    </macros>
+
+    <requirements>
+        <requirement type="package" version="6.7">click</requirement>
+        <requirement type="package" version="0.9.3">isatools</requirement>
+    </requirements>
+
+    <stdio>
+        <exit_code range="1:" />
+    </stdio>
+
+    <command>
+        <![CDATA[
+        $__tool_directory__/glxy2isa_params.py "$inputs" "$__tool_directory__/";
+
+        mkdir study_dir;
+
+        $__tool_directory__/cli.py
+        --sample_assay_plans_file="$__tool_directory__/sample_assay_plans.json"
+        --study_info_file="$__tool_directory__/study_info.json"
+        --treatment_plans_file="$__tool_directory__/treatment_plan.json"
+        --target_dir=study_dir/
+        ]]>
+    </command>
+
+    <configfiles>
+        <inputs name="inputs" />
+    </configfiles>
+
+    <inputs>
+        <expand macro="study_info_macro" />
+        <expand macro="treatment_plan_macro" />
+        <expand macro="sample_assay_plan_macro" />
+        <expand macro="qc_plan_macro" />
+    </inputs>
+
+    <outputs>
+        <collection type="list" label="A files" name="a_files">
+            <discover_datasets pattern="(?P&lt;designation&gt;a_.+)\.txt" format="tsv" directory="study_dir/" />
+        </collection>
+        <data name="s_study" label="S file" format="tsv" from_work_dir="study_dir/s_study.txt" />
+        <data name="i_investigation" label="I file" format="tsv" from_work_dir="study_dir/i_investigation.txt" />
+        <!--<data format="isa-tab" name="output" />-->
+    </outputs>
+
+    <tests>
+        <test>
+
+            <!-- FIXME: Is supposed to produce same as in test-data/galaxy_inputs.json, but it doesn't
+                Do nested <repeat> tags in tests work?? -->
+
+            <!-- in sample_record_series -->
+            <repeat name="sample_record_series">
+                <param name="sample_type" value="plasma" />
+                <param name="sample_size" value="1" />
+
+                <repeat name="assay_record_series">
+                    <param name="assay_type" value="nmr spectroscopy" />
+                    <param name="magnet" value="strong" />
+                    <param name="pulse_seq" value="wet" />
+                    <param name="nmr_instrument" value="Bruker 500 Mhz" />
+                    <param name="technical_replicates" value="10" />
+                    <param name="acq_mod" value="1D 1H NMR" />
+                </repeat>
+            </repeat>
+
+            <!-- in study overview -->
+            <param name="study_pi_affiliation" value="affiliation" />
+            <param name="study_description" value="description" />
+            <param name="study_pi_last_name" value="last name" />
+            <param name="study_pi_email" value="email address" />
+            <param name="study_pi_first_name" value="first name" />
+
+            <!-- in treatment_plan -->
+            <param name="study_group_size" value="3" />
+            <param name="study_type" value="intervention" />
+            <param name="single_or_multiple" value="single" />
+            <param name="select_intervention_type" value="chemical intervention" />
+            <param name="duration" value="long, short" />
+            <param name="intensity" value="intensity1, intensity2" />
+            <param name="agent" value="agent1, agent2" />
+
+            <!-- in qc_plan -->
+            <repeat name="qc_record_series">
+                <param name="qc_type" value="study reference" />
+                <param name="nb_injection" value="10" />
+                <param name="injection_freq" value="5" />
+            </repeat>
+            <repeat name="qc_record_series">
+                <param name="qc_type" value="dilution series reference" />
+                <param name="nb_dil_step" value="10" />
+                <param name="nb_injection" value="10" />
+                <param name="injection_freq" value="1" />
+            </repeat>
+
+
+            <output name="i_investigation" value="i_investigation.txt" />
+            <output name="s_study" value="s_study.txt" />
+            <output_collection name="a_files" type="list" count="2">
+                <element name="a_blood_ms_LC_positive_assay">
+                    <assert_contents>
+                        <has_n_columns n="77" />
+                    </assert_contents>
+                </element>
+                <element name="a_blood_ms_LC_negative_assay">
+                    <assert_contents>
+                        <has_n_columns n="77" />
+                    </assert_contents>
+                </element>
+            </output_collection>
+        </test>
+</tests>
+
+    <help>
+        **What it does**
+
+        This tool helps create ISA documents using study design information. Suppose you have a study like this one::
+
+         A Study looking at the effect of Drugs A and B administered at high and low dose with plasma samples collected at 3 times points, and done in n=5 subjects per treatment groups.
+         The response variables are metabolite profiles measured by LC-MS in positive and negative mode on one instance of thermofisher instrument.
+
+         Formalization:
+            i. intervention study
+            ii. single intervention
+                a. chemical intervention
+                    independent variable: chemical agent
+                                range of values: [a,b]
+                    independent variable: dose
+                                range of values: [high,low]
+                    independent variable: time
+                                range of values: [t1,t2,t3]
+
+                    Important: specific variable values as discrete elments of a comma (,) separated list, as shown in the examples provided.
+            iii. study design: 2x2x3 factorial
+            iv. study design: balanced + full factorial
+            v. number of biological replicates: n=5 per study groups
+            vi. specimen collection:
+                specimen type: [plasma]
+                number of collection: 3
+            vii. assay plan:
+                a. technology type: MS
+                b. topology modifiers:
+                    injection method: [LC]
+                    fractions: [polar,non-polar]
+                    data acquisition modes: [negative,positive]
+                    instrument type: ThermoFisher XYZ
+                    instrument instance: 1
+                    technical replicates: 2
+                    number of batches: 1
+
+
+    </help>
+
+    <citations>
+        <citation type="doi">10.1007/s11306-015-0879-3</citation>
+    </citations>
+</tool>
