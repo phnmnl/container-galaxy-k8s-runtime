@@ -282,14 +282,14 @@ assignment:
   docker_tag_override: v1.0_cv0.2.30
   max_pod_retrials: 3
   tools_id:
- - bruker2batman
+  - isodyn
 - docker_image_override: bruker2bat
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_tag_override: dev_v1.0_cv1.0.3
   max_pod_retrials: 3
   tools_id:
-  - isodyn
+  - bruker2batman
 - docker_image_override: metfrag-cli
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
