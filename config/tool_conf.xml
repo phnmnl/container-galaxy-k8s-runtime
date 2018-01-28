@@ -53,20 +53,81 @@
     <tool file="uppsala/FeatureSelection/FeatureSelection.xml"/>
   </section>
   -->
-  <section name="Transfer" id="metabolomics_transfer">
-    <tool file="phenomenal/transfer/metabolights-downloader.xml"/>
-    <tool file="phenomenal/transfer/metabolights-labs-uploader.xml"/>
+
+
+ <!--  <section name="ISA tools" id="isa-tools">
+    <tool file="phenomenal/isatools/get_study.xml"/>
+    <tool file="phenomenal/isatools/get_study_json.xml"/>
+    <tool file="phenomenal/isatools/study_factors.xml"/>
+    <tool file="phenomenal/isatools/study_factor_values.xml"/>
+    <tool file="phenomenal/isatools/data_files.xml"/>
+    <tool file="phenomenal/isatools/factors_summary.xml"/>
+    <tool file="phenomenal/isatools/mtbls-factors-viz.xml"/>
+    <tool file="phenomenal/isatools/isatab_validator.xml"/>
+    <tool file="phenomenal/isatools/isajson_validator.xml"/>
+    <tool file="phenomenal/isatools/mw2isa.xml"/>
+    <tool file="phenomenal/ms/mzml2isa/mzml2isa.xml" labels="MS"/>
+    <tool file="phenomenal/nmr/nmrml2isa/nmrml2isa.xml" labels="NMR"/>
+    <tool file="phenomenal/isatools/isatab2json.xml"/>
+    <tool file="phenomenal/isatools/json2isatab.xml"/>
+   </section>-->
+
+
+  <label id="phenomenal-data" text="Getting Data" /> 
+  <section name="Data Transfer" id="MetaboLights_transfer">
+    <tool file="phenomenal/transfer/metabolights-downloader.xml" labels="MTBLS"/>
+    <tool file="phenomenal/transfer/metabolights-labs-uploader.xml" labels="MTBLS"/>
+    <tool file="phenomenal/isatools/get_study.xml" labels="ISA"/>
+    <tool file="phenomenal/isatools/get_study_json.xml" labels="ISA"/>
+    <tool file="phenomenal/isatools/data_files.xml" labels="ISA"/>
+    <tool file="phenomenal/w4m/mtbls-dwnld.xml" labels="W4M"/>
+    <tool file="phenomenal/isatools/mw2isa.xml" labels="ISA"/>
+   </section>
+    
+   <section name="Study Metadata Exploration" id="explore_metadata">
+     <tool file="phenomenal/isatools/study_factors.xml" labels="ISA"/>
+     <tool file="phenomenal/isatools/study_factor_values.xml" labels="ISA"/>
+     <tool file="phenomenal/isatools/factors_summary.xml" labels="ISA"/>
+     <tool file="phenomenal/isatools/mtbls-factors-viz.xml" labels="ISA"/>
+   </section> 
+ 
+  <label id="phenomenal-metadata" text="Creating MetaData" /> 
+ 
+  <section name="Study Metadata Creation" id="pheno_data_manage">
+    <tool file="phenomenal/isatools/isa_creator_metabolomics.xml" labels="ISA"/>
+    <tool file="phenomenal/ms/mzml2isa/mzml2isa.xml" labels="ISA"/>
+    <tool file="phenomenal/nmr/nmrml2isa/nmrml2isa.xml" labels="ISA"/>
+  </section>
+    
+  <section name="Study Metadata Format Conversion" id="pheno_convert_metadata">
+    <tool file="phenomenal/isatools/isatab2json.xml"  labels="ISA"/>
+    <tool file="phenomenal/isatools/json2isatab.xml" labels="ISA"/>
+    <tool file="phenomenal/w4m/isa2w4m.xml" labels="W4M"/>
+  </section>  
+    
+  <section name="Study Metadata Validation" id="pheno_validate_metadata">
+    <tool file="phenomenal/isatools/isatab_validator.xml" labels="ISA"/>
+    <tool file="phenomenal/isatools/isajson_validator.xml" labels="ISA"/>
   </section>
 
-  <section name="Fluxomics" id="pheno-fluxomics">
-    <tool file="phenomenal/fluxomics/ramid/ramid.xml"/>
-    <tool file="phenomenal/fluxomics/cdf2mid.xml"/>
-    <tool file="phenomenal/fluxomics/midcor/midcor.xml"/>
-    <tool file="phenomenal/fluxomics/iso2flux/iso2flux.xml"/>
-    <tool file="phenomenal/fluxomics/isodyn/isodyn.xml"/>
-    <tool file="phenomenal/fluxomics/fluxomics-viz.xml"/>
-  </section>
+  
+  <label id="phenomenal-nmr" text="NMR Data Analysis Tools" />
   <section name="NMR" id="pheno-nmr">
+      <tool file="phenomenal/nmr/metabolab.xml"/>
+      <tool file="phenomenal/nmr/mtbls_nmr_raw_dummy_importer.xml"/>
+      <tool file="phenomenal/nmr/nmrmlconv.xml"/>
+      <tool file="phenomenal/nmr/zip-nmrml-collection.xml"/>
+      <tool file="phenomenal/nmr/rnmr1d.xml"/>
+      <tool file="phenomenal/nmr/rnmr1d-stacked-plot.xml"/>
+      <tool file="phenomenal/nmr/rnmr1d-prepareOutput.xml"/>
+      <tool file="phenomenal/nmr/batman.xml"/>
+      <tool file="phenomenal/nmr/metabomatching.xml"/>
+      <tool file="phenomenal/nmr/mtbls2nmrglue.xml"/>
+      <tool file="phenomenal/nmr/soap_process.xml"/>
+      <tool file="phenomenal/nmr/soap_opls.xml"/>
+   </section>
+  <!--   
+  <section name="nmrProcflow" id="pheno-nmrProcflow">
     <tool file="phenomenal/nmr/metabolab.xml"/>
     <tool file="phenomenal/nmr/mtbls_nmr_raw_dummy_importer.xml"/>
     <tool file="phenomenal/nmr/nmrmlconv.xml"/>
@@ -74,60 +135,48 @@
     <tool file="phenomenal/nmr/rnmr1d.xml"/>
     <tool file="phenomenal/nmr/rnmr1d-stacked-plot.xml"/>
     <tool file="phenomenal/nmr/rnmr1d-prepareOutput.xml"/>
+  </section>
+  <section name="Batman" id="Batman">
     <tool file="phenomenal/nmr/batman.xml"/>
+  </section>  
+  <section name="NMR processing" id="NMR processing">  
     <tool file="phenomenal/nmr/metabomatching.xml"/>
-    <tool file="phenomenal/nmr/nmrml2isa/nmrml2isa.xml"/>
     <tool file="phenomenal/nmr/mtbls2nmrglue.xml"/>
     <tool file="phenomenal/nmr/soap_process.xml"/>
     <tool file="phenomenal/nmr/soap_opls.xml"/>
-  </section>
-  <section name="STATS" id="pheno-stats">
-    <tool file="phenomenal/stats/papy.xml"/>
-  </section>
-  <section name="MS" id="pheno-ms">
+  </section> 
+-->
+
+  <label id="phenomenal-ms" text="MS Data Analysis Tools" /> 
+  <section name="XCMS" id="pheno-XCMS">
     <!-- 
     <tool file="phenomenal/ms/msconvert2.xml"/>
     -->
-    <tool file="phenomenal/ms/save_chromatogram.xml"/>
-    <tool file="phenomenal/ms/show_chromatogram.xml"/>
-    <tool file="phenomenal/ms/mzml2isa/mzml2isa.xml"/>
-    <tool file="phenomenal/ms/metfrag.xml"/>
-    <tool file="phenomenal/ms/ms-vfetc.xml"/>     
-    <tool file="phenomenal/ms/xcms/xcms-find-peaks.xml"/>
-    <tool file="phenomenal/ms/xcms/xcms-split-peaks.xml"/>
-    <tool file="phenomenal/ms/xcms/xcms-collect-peaks.xml"/>
-    <tool file="phenomenal/ms/xcms/xcms-group-peaks.xml"/>
-    <tool file="phenomenal/ms/xcms/xcms-correct-rt.xml"/>
-    <tool file="phenomenal/ms/xcms/xcms-fill-peaks.xml"/>
-    <tool file="phenomenal/ms/xcms/xcms-dilutionfilter.xml"/>
-    <tool file="phenomenal/ms/xcms/xcms-blankfilter.xml"/>
-    <tool file="phenomenal/ms/camera/camera-annotate-peaks.xml"/>
-    <tool file="phenomenal/ms/camera/camera-group-fwhm.xml"/>
-    <tool file="phenomenal/ms/camera/camera-group-corr.xml"/>
-    <tool file="phenomenal/ms/camera/camera-find-isotopes.xml"/>
-    <tool file="phenomenal/ms/camera/camera-find-adducts.xml"/>
-    <tool file="phenomenal/ms/camera/camera-prepareoutput.xml"/>
-    <tool file="phenomenal/ms/metfrag/msnbase-read-msms.xml"/>
-    <tool file="phenomenal/ms/metfrag/map-msms2camera.xml"/>
-    <tool file="phenomenal/ms/metfrag/msms2metfrag.xml"/>    
-    <tool file="phenomenal/ms/metfrag/msms2metfrag-multiple.xml"/>
-    <tool file="phenomenal/ms/metfrag/metfrag-cli-batch.xml"/>
-    <tool file="phenomenal/ms/metfrag/metfrag-cli-batch-multiple.xml"/>
-    <tool file="phenomenal/ms/metfrag/metfrag-vis.xml"/>
-    <tool file="phenomenal/ms/metfrag/metfrag-aggregatemetfrag.xml"/>
-    <tool file="phenomenal/ms/metfrag/passatutto-pepscore.xml"/>
-    <tool file="phenomenal/ms/metfrag/msnbase-filter-merge-msms.xml"/>
-    <tool file="phenomenal/ms/OpenMS/AdditiveSeries.xml"/> 
+    <tool file="phenomenal/ms/xcms/xcms-find-peaks.xml" labels="XCMS"/>
+    <tool file="phenomenal/ms/xcms/xcms-split-peaks.xml" labels="XCMS"/>
+    <tool file="phenomenal/ms/xcms/xcms-collect-peaks.xml" labels="XCMS"/>
+    <tool file="phenomenal/ms/xcms/xcms-group-peaks.xml" labels="XCMS"/>
+    <tool file="phenomenal/ms/xcms/xcms-correct-rt.xml" labels="XCMS"/>
+    <tool file="phenomenal/ms/xcms/xcms-fill-peaks.xml" labels="XCMS"/>
+    <tool file="phenomenal/ms/xcms/xcms-dilutionfilter.xml" labels="XCMS"/>
+    <tool file="phenomenal/ms/xcms/xcms-blankfilter.xml" labels="XCMS"/>
+  </section>
+  
+  <section name="OpenMS" id="pheno-OpenMS">
+    <!-- 
+    OpenMS tools 
+    -->
+    <tool file="phenomenal/ms/OpenMS/AdditiveSeries.xml" labels="P"/> 
     <tool file="phenomenal/ms/OpenMS/BaselineFilter.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/CompNovo.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/CompNovoCID.xml"/> 
+    <tool file="phenomenal/ms/OpenMS/CompNovo.xml" labels="P"/> 
+    <tool file="phenomenal/ms/OpenMS/CompNovoCID.xml" labels="P"/> 
     <tool file="phenomenal/ms/OpenMS/ConsensusID.xml"/> 
     <tool file="phenomenal/ms/OpenMS/ConsensusMapNormalizer.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/Decharger.xml"/> 
+    <tool file="phenomenal/ms/OpenMS/Decharger.xml" labels="P"/> 
     <tool file="phenomenal/ms/OpenMS/DTAExtractor.xml"/> 
     <tool file="phenomenal/ms/OpenMS/EICExtractor.xml"/> 
     <tool file="phenomenal/ms/OpenMS/ExternalCalibration.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/FalseDiscoveryRate.xml"/> 
+    <tool file="phenomenal/ms/OpenMS/FalseDiscoveryRate.xml" labels="P"/> 
     <tool file="phenomenal/ms/OpenMS/FeatureFinderCentroided.xml"/> 
     <tool file="phenomenal/ms/OpenMS/FeatureFinderIdentification.xml"/> 
     <tool file="phenomenal/ms/OpenMS/FeatureFinderIsotopeWavelet.xml"/> 
@@ -137,7 +186,7 @@
     <tool file="phenomenal/ms/OpenMS/FeatureLinkerLabeled.xml"/> 
     <tool file="phenomenal/ms/OpenMS/FeatureLinkerUnlabeled.xml"/> 
     <tool file="phenomenal/ms/OpenMS/FeatureLinkerUnlabeledQT.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/FidoAdapter.xml"/> 
+    <tool file="phenomenal/ms/OpenMS/FidoAdapter.xml" labels="P"/> 
     <tool file="phenomenal/ms/OpenMS/FileConverter.xml"/> 
     <tool file="phenomenal/ms/OpenMS/FileFilter.xml"/> 
     <tool file="phenomenal/ms/OpenMS/FileInfo.xml"/> 
@@ -148,31 +197,31 @@
     <tool file="phenomenal/ms/OpenMS/IDFilter.xml"/> 
     <tool file="phenomenal/ms/OpenMS/IDMapper.xml"/> 
     <tool file="phenomenal/ms/OpenMS/IDMerger.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/IDPosteriorErrorProbability.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/IDRipper.xml"/> 
+    <tool file="phenomenal/ms/OpenMS/IDPosteriorErrorProbability.xml" labels="P"/> 
+    <tool file="phenomenal/ms/OpenMS/IDRipper.xml" labels="P"/> 
     <tool file="phenomenal/ms/OpenMS/IDRTCalibration.xml"/> 
     <tool file="phenomenal/ms/OpenMS/InclusionExclusionListCreator.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/InspectAdapter.xml"/> 
+    <tool file="phenomenal/ms/OpenMS/InspectAdapter.xml" labels="P"/> 
     <tool file="phenomenal/ms/OpenMS/InternalCalibration.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/IsobaricAnalyzer.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/ITRAQAnalyzer.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/LuciphorAdapter.xml"/> 
+    <tool file="phenomenal/ms/OpenMS/IsobaricAnalyzer.xml" labels="P"/> 
+    <tool file="phenomenal/ms/OpenMS/ITRAQAnalyzer.xml"  labels="P"/> 
+    <tool file="phenomenal/ms/OpenMS/LuciphorAdapter.xml" labels="P"/> 
     <tool file="phenomenal/ms/OpenMS/MapAlignerIdentification.xml"/> 
     <tool file="phenomenal/ms/OpenMS/MapAlignerPoseClustering.xml"/> 
     <tool file="phenomenal/ms/OpenMS/MapAlignerSpectrum.xml"/> 
     <tool file="phenomenal/ms/OpenMS/MapNormalizer.xml"/> 
     <tool file="phenomenal/ms/OpenMS/MapRTTransformer.xml"/> 
     <tool file="phenomenal/ms/OpenMS/MapStatistics.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/MascotAdapter.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/MascotAdapterOnline.xml"/> 
+    <tool file="phenomenal/ms/OpenMS/MascotAdapter.xml" labels="P"/> 
+    <tool file="phenomenal/ms/OpenMS/MascotAdapterOnline.xml" labels="P"/> 
     <tool file="phenomenal/ms/OpenMS/MassTraceExtractor.xml"/> 
     <tool file="phenomenal/ms/OpenMS/MRMMapper.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/MSGFPlusAdapter.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/MyriMatchAdapter.xml"/> 
+    <tool file="phenomenal/ms/OpenMS/MSGFPlusAdapter.xml" labels="P"/> 
+    <tool file="phenomenal/ms/OpenMS/MyriMatchAdapter.xml" labels="P"/> 
     <tool file="phenomenal/ms/OpenMS/MzTabExporter.xml"/> 
     <tool file="phenomenal/ms/OpenMS/NoiseFilterGaussian.xml"/> 
     <tool file="phenomenal/ms/OpenMS/NoiseFilterSGolay.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/OMSSAAdapter.xml"/> 
+    <tool file="phenomenal/ms/OpenMS/OMSSAAdapter.xml" labels="P"/> 
     <tool file="phenomenal/ms/OpenMS/OpenSwathAnalyzer.xml"/> 
     <tool file="phenomenal/ms/OpenMS/OpenSwathAssayGenerator.xml"/> 
     <tool file="phenomenal/ms/OpenMS/OpenSwathChromatogramExtractor.xml"/> 
@@ -182,16 +231,16 @@
     <tool file="phenomenal/ms/OpenMS/OpenSwathRTNormalizer.xml"/> 
     <tool file="phenomenal/ms/OpenMS/PeakPickerHiRes.xml"/> 
     <tool file="phenomenal/ms/OpenMS/PeakPickerWavelet.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/PepNovoAdapter.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/PeptideIndexer.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/PhosphoScoring.xml"/> 
+    <tool file="phenomenal/ms/OpenMS/PepNovoAdapter.xml" labels="P"/> 
+    <tool file="phenomenal/ms/OpenMS/PeptideIndexer.xml" labels="P"/> 
+    <tool file="phenomenal/ms/OpenMS/PhosphoScoring.xml" labels="P"/> 
     <tool file="phenomenal/ms/OpenMS/PrecursorIonSelector.xml"/> 
     <tool file="phenomenal/ms/OpenMS/PrecursorMassCorrector.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/ProteinInference.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/ProteinQuantifier.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/ProteinResolver.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/PTModel.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/PTPredict.xml"/> 
+    <tool file="phenomenal/ms/OpenMS/ProteinInference.xml" labels="P"/> 
+    <tool file="phenomenal/ms/OpenMS/ProteinQuantifier.xml" labels="P"/> 
+    <tool file="phenomenal/ms/OpenMS/ProteinResolver.xml" labels="P"/> 
+    <tool file="phenomenal/ms/OpenMS/PTModel.xml" labels="P"/> 
+    <tool file="phenomenal/ms/OpenMS/PTPredict.xml" labels="P"/> 
     <tool file="phenomenal/ms/OpenMS/RTModel.xml"/> 
     <tool file="phenomenal/ms/OpenMS/RTPredict.xml"/> 
     <tool file="phenomenal/ms/OpenMS/SeedListGenerator.xml"/> 
@@ -207,45 +256,78 @@
     <tool file="phenomenal/ms/OpenMS/SpectraFilterWindowMower.xml"/> 
     <tool file="phenomenal/ms/OpenMS/SpectraMerger.xml"/> 
     <tool file="phenomenal/ms/OpenMS/TextExporter.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/TMTAnalyzer.xml"/> 
+    <tool file="phenomenal/ms/OpenMS/TMTAnalyzer.xml" labels="P"/> 
     <tool file="phenomenal/ms/OpenMS/TOFCalibration.xml"/> 
-    <tool file="phenomenal/ms/OpenMS/XTandemAdapter.xml"/> 
-    <tool file="phenomenal/ms/convertCAMERAToOpenMS/cameraToFeatureXML.xml"/> 
-    <tool file="phenomenal/ms/convertCAMERAToOpenMS/consensusXMLToXcms.xml"/> 
-    <tool file="phenomenal/ms/convertCAMERAToOpenMS/featureXMLToCAMERA.xml"/> 
-    <tool file="phenomenal/ms/convertCAMERAToOpenMS/featureXMLToXcms.xml"/>
+    <tool file="phenomenal/ms/OpenMS/XTandemAdapter.xml"/>    
   </section>
-  <section name="W4M" id="pheno-w4m">
-    <tool file="phenomenal/w4m/mtbls-dwnld.xml"/>
-    <tool file="phenomenal/w4m/isa2w4m.xml"/>
-    <tool file="phenomenal/w4m/univariate_config.xml"/>
-    <tool file="phenomenal/w4m/multivariate_config.xml"/>
-    <tool file="phenomenal/w4m/biosigner_config.xml"/>
-    <tool file="phenomenal/w4m/lcmsmatching.xml"/>
-    <tool file="phenomenal/w4m/transformation_config.xml"/>
-    <tool file="phenomenal/w4m/generic_filter.xml"/>
-    <tool file="phenomenal/w4m/batch_correction.xml"/>
-    <tool file="phenomenal/w4m/NmrNormalization_xml.xml"/>
-    <tool file="phenomenal/w4m/qualitymetrics_config.xml"/>
+  
+  <label id="phenomenal-annot" text="Annotation" /> 
+  <section name="Camera" id="pheno-camera">
+    <tool file="phenomenal/ms/camera/camera-annotate-peaks.xml" labels="Camera"/>
+    <tool file="phenomenal/ms/camera/camera-group-fwhm.xml" labels="Camera"/>
+    <tool file="phenomenal/ms/camera/camera-group-corr.xml" labels="Camera"/>
+    <tool file="phenomenal/ms/camera/camera-find-isotopes.xml" labels="Camera"/>
+    <tool file="phenomenal/ms/camera/camera-find-adducts.xml" labels="Camera"/>
+    <tool file="phenomenal/ms/camera/camera-prepareoutput.xml" labels="Camera"/>
+    <tool file="phenomenal/w4m/lcmsmatching.xml" labels="W4M"/>
+  </section> 
+  <section name="Metfrag" id="pheno-metfrag">  
+    <tool file="phenomenal/ms/metfrag/msnbase-read-msms.xml" labels="Metfrag"/>
+    <tool file="phenomenal/ms/metfrag/map-msms2camera.xml" labels="Metfrag"/>
+    <tool file="phenomenal/ms/metfrag/msms2metfrag.xml" labels="Metfrag"/>    
+    <tool file="phenomenal/ms/metfrag/msms2metfrag-multiple.xml" labels="Metfrag"/>
+    <tool file="phenomenal/ms/metfrag/metfrag-cli-batch.xml" labels="Metfrag"/>
+    <tool file="phenomenal/ms/metfrag/metfrag-cli-batch-multiple.xml" labels="Metfrag"/>
+    <tool file="phenomenal/ms/metfrag/metfrag-vis.xml" labels="Metfrag"/>
+    <tool file="phenomenal/ms/metfrag/metfrag-aggregatemetfrag.xml" labels="Metfrag"/>
+    <tool file="phenomenal/ms/metfrag/passatutto-pepscore.xml" labels="Metfrag"/>
+    <tool file="phenomenal/ms/metfrag/msnbase-filter-merge-msms.xml" labels="Metfrag"/>
+    <tool file="phenomenal/ms/metfrag.xml"  labels="Metfrag"/>
   </section>
-  <section name="Post-Processing" id="pheno-postprocessing">
-    <tool file="phenomenal/postProcessing/metaboliteidconverter.xml"/>
-    <tool file="phenomenal/postProcessing/pathwayenrichment.xml"/>
-  </section>
-
-  <section name="ISA tools" id="isa-tools">
-    <tool file="phenomenal/isatools/get_study.xml"/>
-    <tool file="phenomenal/isatools/get_study_json.xml"/>
-    <tool file="phenomenal/isatools/study_factors.xml"/>
-    <tool file="phenomenal/isatools/study_factor_values.xml"/>
-    <tool file="phenomenal/isatools/data_files.xml"/>
-    <tool file="phenomenal/isatools/factors_summary.xml"/>
-    <tool file="phenomenal/isatools/mtbls-factors-viz.xml"/>
-    <tool file="phenomenal/isatools/isatab_validator.xml"/>
-    <tool file="phenomenal/isatools/isajson_validator.xml"/>
-    <tool file="phenomenal/isatools/mw2isa.xml"/>
-    <tool file="phenomenal/isatools/isatab2json.xml"/>
-    <tool file="phenomenal/isatools/json2isatab.xml"/>
+  <section name="miscellaneous" id="pheno-misc">
+    <tool file="phenomenal/ms/convertCAMERAToOpenMS/cameraToFeatureXML.xml" labels="OpenMS"/> 
+    <tool file="phenomenal/ms/convertCAMERAToOpenMS/consensusXMLToXcms.xml" labels="OpenMS"/> 
+    <tool file="phenomenal/ms/convertCAMERAToOpenMS/featureXMLToCAMERA.xml" labels="OpenMS"/> 
+    <tool file="phenomenal/ms/convertCAMERAToOpenMS/featureXMLToXcms.xml" labels="OpenMS"/>  
+    <tool file="phenomenal/ms/save_chromatogram.xml"/>
+    <tool file="phenomenal/ms/show_chromatogram.xml"/>
+    <tool file="phenomenal/ms/ms-vfetc.xml"/>
+    <tool file="phenomenal/postProcessing/metaboliteidconverter.xml" labels="INRA"/>
   </section>
 
+
+  <label id="phenomenal-flux" text="Fluxomics Tools" />    
+  <section name="Fluxomics" id="pheno-fluxomics">
+    <tool file="phenomenal/fluxomics/ramid/ramid.xml" labels="UBarcelona"/>
+    <tool file="phenomenal/fluxomics/midcor/midcor.xml" labels="UBarcelona"/>
+    <tool file="phenomenal/fluxomics/iso2flux/iso2flux.xml" labels="UBarcelona"/>
+    <tool file="phenomenal/fluxomics/isodyn/isodyn.xml" labels="UBarcelona"/>
+    <tool file="phenomenal/fluxomics/fluxomics-viz.xml" labels="UBarcelona"/>
+    <tool file="phenomenal/fluxomics/cdf2mid.xml" labels="UBarcelona"/>
+  </section>
+
+  <label id="phenomenal-stats" text="Statistical Analysis Tools" /> 
+    <section name="Statistical Analysis" id="pheno-stats">
+      <tool file="phenomenal/stats/papy.xml"/>
+      <tool file="phenomenal/w4m/generic_filter.xml" labels="W4M"/>
+      <tool file="phenomenal/w4m/qualitymetrics_config.xml" labels="W4M"/> 
+      <tool file="phenomenal/w4m/univariate_config.xml" labels="W4M"/>
+      <tool file="phenomenal/w4m/multivariate_config.xml" labels="W4M"/>
+      <tool file="phenomenal/w4m/biosigner_config.xml" labels="W4M"/>
+      <tool file="phenomenal/w4m/transformation_config.xml" labels="W4M"/>
+      <tool file="phenomenal/w4m/batch_correction.xml" labels="W4M"/> 
+      <tool file="phenomenal/w4m/NmrNormalization_xml.xml" labels="W4M"/>
+    </section>
+ 
+    <section name="Post-Processing" id="pheno-postprocessing">
+      <tool file="phenomenal/postProcessing/metaboliteidconverter.xml"/>
+      <tool file="phenomenal/postProcessing/pathwayenrichment.xml"/>
+    </section>
+    
+    
+  <label id="phenomenal-publish" text="Data Publication" />  
+    <section name="Study Data Publication" id="pheno-deposition">
+      <tool file="phenomenal/transfer/metabolights-labs-uploader.xml" labels="MTBLS"/>
+    </section>
+     
 </toolbox>
