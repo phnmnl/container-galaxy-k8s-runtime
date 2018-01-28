@@ -81,7 +81,6 @@
     <tool file="phenomenal/isatools/get_study_json.xml" labels="ISA"/>
     <tool file="phenomenal/isatools/data_files.xml" labels="ISA"/>
     <tool file="phenomenal/w4m/mtbls-dwnld.xml" labels="W4M"/>
-    <tool file="phenomenal/w4m/isa2w4m.xml" labels="W4M"/>
     <tool file="phenomenal/isatools/mw2isa.xml" labels="ISA"/>
    </section>
     
@@ -103,6 +102,7 @@
   <section name="Study Metadata Format Conversion" id="pheno_convert_metadata">
     <tool file="phenomenal/isatools/isatab2json.xml"  labels="ISA"/>
     <tool file="phenomenal/isatools/json2isatab.xml" labels="ISA"/>
+    <tool file="phenomenal/w4m/isa2w4m.xml" labels="W4M"/>
   </section>  
     
   <section name="Study Metadata Validation" id="pheno_validate_metadata">
@@ -125,7 +125,6 @@
       <tool file="phenomenal/nmr/mtbls2nmrglue.xml"/>
       <tool file="phenomenal/nmr/soap_process.xml"/>
       <tool file="phenomenal/nmr/soap_opls.xml"/>
-      <tool file="phenomenal/w4m/NmrNormalization_xml.xml" labels="W4M"/>
    </section>
   <!--   
   <section name="nmrProcflow" id="pheno-nmrProcflow">
@@ -270,6 +269,7 @@
     <tool file="phenomenal/ms/camera/camera-find-isotopes.xml" labels="Camera"/>
     <tool file="phenomenal/ms/camera/camera-find-adducts.xml" labels="Camera"/>
     <tool file="phenomenal/ms/camera/camera-prepareoutput.xml" labels="Camera"/>
+    <tool file="phenomenal/w4m/lcmsmatching.xml" labels="W4M"/>
   </section> 
   <section name="Metfrag" id="pheno-metfrag">  
     <tool file="phenomenal/ms/metfrag/msnbase-read-msms.xml" labels="Metfrag"/>
@@ -291,11 +291,8 @@
     <tool file="phenomenal/ms/convertCAMERAToOpenMS/featureXMLToXcms.xml" labels="OpenMS"/>  
     <tool file="phenomenal/ms/save_chromatogram.xml"/>
     <tool file="phenomenal/ms/show_chromatogram.xml"/>
-    <tool file="phenomenal/w4m/lcmsmatching.xml" labels="W4M"/>
     <tool file="phenomenal/ms/ms-vfetc.xml"/>
     <tool file="phenomenal/postProcessing/metaboliteidconverter.xml" labels="INRA"/>
-    <tool file="phenomenal/w4m/generic_filter.xml" labels="W4M"/>
-    <tool file="phenomenal/w4m/qualitymetrics_config.xml" labels="W4M"/> 
   </section>
 
 
@@ -312,11 +309,14 @@
   <label id="phenomenal-stats" text="Statistical Analysis Tools" /> 
     <section name="Statistical Analysis" id="pheno-stats">
       <tool file="phenomenal/stats/papy.xml"/>
+      <tool file="phenomenal/w4m/generic_filter.xml" labels="W4M"/>
+      <tool file="phenomenal/w4m/qualitymetrics_config.xml" labels="W4M"/> 
       <tool file="phenomenal/w4m/univariate_config.xml" labels="W4M"/>
       <tool file="phenomenal/w4m/multivariate_config.xml" labels="W4M"/>
       <tool file="phenomenal/w4m/biosigner_config.xml" labels="W4M"/>
       <tool file="phenomenal/w4m/transformation_config.xml" labels="W4M"/>
       <tool file="phenomenal/w4m/batch_correction.xml" labels="W4M"/> 
+      <tool file="phenomenal/w4m/NmrNormalization_xml.xml" labels="W4M"/>
     </section>
  
     <section name="Post-Processing" id="pheno-postprocessing">
