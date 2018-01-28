@@ -1,38 +1,35 @@
-<tool id="iso2flux" name="iso2flux" version="1.1">
+<tool id="iso2flux" name="iso2flux" version="2.0">
 <stdio>
 <exit_code range="1:" />
 </stdio>
 <description>13C Metabolic Flux Analysis on a sub-network of a large scale model.</description>
 <command><![CDATA[
-echo 'Working directory is '\$PWD;
-run_iso2flux.py -e "$tracing_data"
-#if str( $tracing_model ) != None:
+ln -s "$sbml_model" model.sbml;
+
+create_and_solve_iso2flux_model.py -e "$tracing_data"
+#if $tracing_model
   -l "$tracing_model"
 #end if
 
--s "$sbml_model"
+-c model.sbml
 
-#if str( $parameters ) != None:
--p "$parameters"
-#end if
-#if str( $constraints ) != None:
--c "$constraints"
+#if $constraints
+-f "$constraints"
 #end if
 
 
-#if str( $confidence.compute ) == "no":
--q
+#if str( $confidence.compute ) == "yes":
+-i
 #end if
 ]]></command>
 <!-- -p, -l -s are optional; tracing data, time and experimental factor are required
  Missing -q quick mode.
  -->
 <inputs>
-    <param type="data" name="tracing_data" format="csv" />
-    <param type="data" name="tracing_model" format="csv"/>
-    <param type="data" name="sbml_model" format="xml"/>
-    <param type="data" name="parameters" format="csv" optional="True"/>
-    <param type="data" name="constraints" format="csv" optional="True"/>
+    <param type="data" name="tracing_data" label="Tracing data" help="Processed Metabolights file containing isotopologues distribution, output of midcor." format="csv" />
+    <param type="data" name="tracing_model" label="Tracing model" help="CSV file describing the label propagation rules." format="csv"/>
+    <param type="data" name="sbml_model" label="SBML Model" help="Describes the constraint based model that will be used" format="xml"/>
+    <param type="data" name="constraints" label="Constraints file" help="CSV file containing additional constraints for the optimization model (Optional)" format="csv" optional="True"/>
     <conditional name="confidence">
         <param name="compute" label="Compute confidence intervals" type="select">
             <option value="yes">Yes</option>
@@ -41,28 +38,16 @@ run_iso2flux.py -e "$tracing_data"
     </conditional>
 </inputs>
 <outputs>
-    <data name="best_fit_fluxes" format="csv" from_work_dir="best_fluxes.csv" label="Best fit fluxes"/>
-    <data name="best_fit_label" format="csv" from_work_dir="best_label.csv" label="Best fit label"/>
-    <data name="constrained_sbml_model" format="xml" from_work_dir="constrained_model.xml" label="SBML model constrained with the results of 13C analysis"/>
-    <data name="fluxes_confidence" format="csv" frow_work_dir="confidence_results.csv" label="Confidence intervals for all fluxes">
-        <filter>confidence['compute'] == "yes"</filter>
+    <data name="best_fit_fluxes" format="csv" from_work_dir="Iso2Flux_fluxes.csv" help="Simulated fluxes that are most consistent with experimental measurements" label="Best fit fluxes"/>
+    <data name="best_fit_label" format="csv" from_work_dir="Iso2Flux_label.csv" help="The simulated label with the best fluxes experimental measurements" label="Best fit label"/>
+    <data name="constrained_sbml_model" format="xml" from_work_dir="Iso2Flux_constrained_model.xml" help="SBML model constraiend with the results of the 13C analysis." label="SBML model constrained with the results of 13C analysis"/>
+    <data name="fluxes_confidence" format="csv" frow_work_dir="Iso2Flux_flux_interval.csv" help="Lower and upper limits of the confidence intervals for fluxes" label="Confidence intervals for all fluxes">
+        <filter>( confidence['compute'] == "yes")</filter>
     </data>
 
 </outputs>
 <help><![CDATA[
-A script that performs 13C Metabolic Flux Analysis with the software Iso2flux. It will find the flux distribution most consistent with experimental tracer data and (if not disabled) also estimate confidence interval for fluxes.  
-Options:
-experimental_data_file= Name of the processed Metabolights file containing isotopologues distribution.
-tracing_model= Name of the CSV file describing the label propagation rules
-sbml_model= Name of the SBML file describing the constraint based model that will be used
-parameters= Name of the CSV file defining additional parameters for Iso2flux (Optional)
-constraints= Name of the file containing additional constraints for the constraint model (Optional)
-quick_analysis Disables the confidence interval analysis (Optional)
-
-Output:
-best_fit.csv:The simulated fluxes and label distribution that are most consistent with experimental measurements
-constrained_sbml_model.xml: A SBML model constraiend with the results of the 13C analysis.
-confidence.csv:The lower and upper limits of the confidence intervals for fluxes
+A script that performs 13C Metabolic Flux Analysis with the software Iso2flux. It will find the flux distribution most consistent with experimental tracer data and, if not disabled, also estimate confidence interval for fluxes.  
 
 ]]></help>
 </tool>
