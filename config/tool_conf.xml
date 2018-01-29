@@ -77,37 +77,38 @@
   <section name="Data Transfer" id="MetaboLights_transfer">
     <tool file="phenomenal/transfer/metabolights-downloader.xml" labels="MTBLS"/>
     <tool file="phenomenal/transfer/metabolights-labs-uploader.xml" labels="MTBLS"/>
-    <tool file="phenomenal/isatools/get_study.xml" labels="ISA"/>
-    <tool file="phenomenal/isatools/get_study_json.xml" labels="ISA"/>
-    <tool file="phenomenal/isatools/data_files.xml" labels="ISA"/>
+    <!-- <tool file="phenomenal/isatools/get_study.xml" labels="ISA"/> -->
+    <!-- <tool file="phenomenal/isatools/get_study_json.xml" labels="ISA"/> -->
+    <tool file="phenomenal/isatools/isa_get_data_files.xml" labels="ISA"/>
     <tool file="phenomenal/w4m/mtbls-dwnld.xml" labels="W4M"/>
     <tool file="phenomenal/isatools/mw2isa.xml" labels="ISA"/>
    </section>
     
    <section name="Study Metadata Exploration" id="explore_metadata">
-     <tool file="phenomenal/isatools/study_factors.xml" labels="ISA"/>
-     <tool file="phenomenal/isatools/study_factor_values.xml" labels="ISA"/>
-     <tool file="phenomenal/isatools/factors_summary.xml" labels="ISA"/>
+     <tool file="phenomenal/isatools/isa_get_study_factors.xml" labels="ISA"/>
+     <tool file="phenomenal/isatools/isa_get_study_factor_values.xml" labels="ISA"/>
+     <tool file="phenomenal/isatools/isa_get_factors_summary.xml" labels="ISA"/>
      <tool file="phenomenal/isatools/mtbls-factors-viz.xml" labels="ISA"/>
    </section> 
  
   <label id="phenomenal-metadata" text="Creating MetaData" /> 
  
   <section name="Study Metadata Creation" id="pheno_data_manage">
-    <tool file="phenomenal/isatools/isa_creator_metabolomics.xml" labels="ISA"/>
+    <tool file="phenomenal/isatools/isa_create_metabo/isa_create_metabo.xml" labels="ISA"/>
+    <!-- <tool file="phenomenal/isatools/isa_creator_metabolomics.xml"/> -->
     <tool file="phenomenal/ms/mzml2isa/mzml2isa.xml" labels="ISA"/>
     <tool file="phenomenal/nmr/nmrml2isa/nmrml2isa.xml" labels="ISA"/>
   </section>
     
   <section name="Study Metadata Format Conversion" id="pheno_convert_metadata">
     <tool file="phenomenal/isatools/isatab2json.xml"  labels="ISA"/>
-    <tool file="phenomenal/isatools/json2isatab.xml" labels="ISA"/>
+    <!-- <tool file="phenomenal/isatools/json2isatab.xml" labels="ISA"/> -->
     <tool file="phenomenal/w4m/isa2w4m.xml" labels="W4M"/>
   </section>  
     
   <section name="Study Metadata Validation" id="pheno_validate_metadata">
     <tool file="phenomenal/isatools/isatab_validator.xml" labels="ISA"/>
-    <tool file="phenomenal/isatools/isajson_validator.xml" labels="ISA"/>
+    <!-- <tool file="phenomenal/isatools/isajson_validator.xml" labels="ISA"/> -->
   </section>
 
   

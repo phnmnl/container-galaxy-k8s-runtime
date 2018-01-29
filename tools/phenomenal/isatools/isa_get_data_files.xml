@@ -1,9 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<tool id="data_files" name="data_files" version="1.0">
+<tool id="isa_get_data_files" name="Get data files" version="1.0">
   <description>Get a list of MetaboLights study data files filtered on factor values</description>
   <command><![CDATA[
-    echo "{ \"$factor_name\": \"$factor_value\" }" > query.json;
-    run_mtblisa.py --command GET_DATA_FILES --study $mtbls_id --query query.json
+    run_mtblisa.py get-data "${mtbls_id}" "${output}" --json-query "{ \"$factor_name\": \"$factor_value\" }"
   ]]>
   </command>
   <inputs>
@@ -12,8 +11,11 @@
     <param name="factor_value" type="text" label="Factor value to filter on." help="Factor value relevant to the specified MetaboLights study, e.g. cyp79. You can get a study's factor values by using the study_factor_values tool."/>
   </inputs>
   <outputs>
-    <data format="json" name="output" from_work_dir="out.json" label="$(mtbls_id) sliced data files list" />
+    <data format="json" name="output" label="$(mtbls_id) sliced data files list" />
   </outputs>
+  <stdio>
+    <exit_code range="1:" level="fatal"/>
+  </stdio>
 
   <help>
 <!-- @@@BEGIN_RST@@@ -->
