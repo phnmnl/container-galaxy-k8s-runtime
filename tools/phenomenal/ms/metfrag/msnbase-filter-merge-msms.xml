@@ -10,7 +10,7 @@
   <inputs>
     <param name="msnbase_filter_merge_msms_input_1" type="data" format="rdata" optional="False" label="msnbase-filter-merge-msms data" help="A rdata file with MS/MS information retrieved from msnbase-read-msms" />
     <param name="mzppm" type="text" value="10" label="mzppm" help="The ppm error used for merging MS/MS spectra" />
-    <param name="mzabs" type="text" value="0.01" label="mzabs" help="The absolute mass error (in seconds) used for merging MS/MS spectra" />
+    <param name="mzabs" type="text" value="0.01" label="mzabs" help="The absolute mass error (in Dalton) used for merging MS/MS spectra" />
     <param name="rtabs" type="text" value="2" label="rtabs" help="The retention time error (in seconds) used for merging MS/MS spectra" />
     <param name="max_rt_range" type="text" value="20" label="max_rt_range" help="Permitted retention time window (in seconds) of grouped MS1 precursors. Grouped precursors that exceed that window will be discarded." />
     <param name="max_mz_range" type="text" value="0.01" label="max_mz_range" help="Permitted m/z window of grouped MS1 precursors. Grouped precoursors that exceed that window will be discarded." />
