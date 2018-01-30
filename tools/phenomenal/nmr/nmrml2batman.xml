@@ -6,12 +6,8 @@
        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/nmrml2batman</container>
      </requirements>
      <command><![CDATA[   
-         archive_name="\$(basename "${nmrMLzip}")";
-         unzipped_path="\${PWD}/\${archive_name}_unzipped";
-         mkdir -p "\${unzipped_path}" && unzip -q -d "\${unzipped_path}" "${nmrMLzip}" && nmrML2batman.R -i "\${unzipped_path}";
-         exit_code=\$?;
-         rm -rf "\${unzipped_path}";
-         exit \${exit_code}
+         unzipped_path="\${PWD}/unzipped";
+         mkdir -p "\${unzipped_path}" && unzip -q -d "\${unzipped_path}" "${nmrMLzip}" && nmrML2batman.R -i "\${unzipped_path}"
        ]]>
      </command>
      <stdio>
