@@ -48,7 +48,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="" optional="False" label="Input file, in which the protein/peptide identifications must be tagged with 'file_origin'" help="(-in) "/>
+    <param name="param_in" type="data" format="idxml" optional="False" label="Input file, in which the protein/peptide identifications must be tagged with 'file_origin'" help="(-in) "/>
     <param name="param_out_path" type="text" size="30" label="Directory for the output files after ripping according to 'file_origin'" help="(-out_path) If 'out_path' is set, 'out' is ignored">
       <sanitizer>
         <valid initial="string.printable">

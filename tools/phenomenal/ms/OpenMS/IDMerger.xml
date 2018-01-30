@@ -55,7 +55,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="" multiple="true" optional="False" size="30" label="Input files separated by blanks" help="(-in) ">
+    <param name="param_in" type="data" format="idxml" multiple="true" optional="False" size="30" label="Input files separated by blanks" help="(-in) ">
       <sanitizer>
         <valid initial="string.printable">
           <remove value="'"/>
@@ -63,7 +63,7 @@
         </valid>
       </sanitizer>
     </param>
-    <param name="param_add_to" type="data" format="" optional="True" label="Optional input file" help="(-add_to) IDs from 'in' are added to this file, but only if the (modified) peptide sequences are not present yet (considering only best hits per spectrum)"/>
+    <param name="param_add_to" type="data" format="idxml" optional="True" label="Optional input file" help="(-add_to) IDs from 'in' are added to this file, but only if the (modified) peptide sequences are not present yet (considering only best hits per spectrum)"/>
     <param name="param_annotate_file_origin" display="radio" type="boolean" truevalue="-annotate_file_origin" falsevalue="" checked="false" optional="True" label="Store the original filename in each protein/peptide identification (meta value: file_origin)" help="(-annotate_file_origin) "/>
     <param name="param_pepxml_protxml" display="radio" type="boolean" truevalue="-pepxml_protxml" falsevalue="" checked="false" optional="True" label="Merge idXML files derived from a pepXML and corresponding protXML file" help="(-pepxml_protxml) &lt;br&gt;Exactly two input files are expected in this case. Not compatible with 'add_to'"/>
     <param name="param_threads" type="integer" value="1" label="Sets the number of threads allowed to be used by the TOPP tool" help="(-threads) "/>

@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <tool id="isatab2json" name="isatab2json" version="1.0">
-  <description>Converts an ISA-Tab ZIP archive to ISA-JSON</description>
+  <description>Converts an ISA-Tab to ISA-JSON</description>
   <command><![CDATA[
-    run_tab2json.py $isa_file
+    run_tab2json.py $isatab.extra_files_path
   ]]>
   </command>
   <inputs>
-      <param name="isa_file" type="data" format="zip" label="Zip file containing ISA-Tab files." optional="false" help="The input zip file must contain the i_*.txt, s_*.txt and a_*.txt files expected in an ISA-Tab archive."/>
+      <param name="isatab" label="ISA" type="data" format="isa-tab"/>
   </inputs>
   <outputs>
     <data format="json" name="output" from_work_dir="out.json" label="ISA content in ISA-JSON format" />

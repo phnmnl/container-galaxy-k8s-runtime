@@ -127,7 +127,7 @@
 ]]></command>
   <inputs>
     <param name="param_in" type="data" format="mzml" optional="False" label="Input spectrum file" help="(-in) "/>
-    <param name="param_id" type="data" format="" optional="False" label="Protein/peptide identifications file" help="(-id) "/>
+    <param name="param_id" type="data" format="idxml" optional="False" label="Protein/peptide identifications file" help="(-id) "/>
     <param name="param_executable" type="data" format="text" value="luciphor2.jar" label="LuciPHOr2 .jar file," help="(-executable) e.g. 'c:\program files\luciphor2.jar'"/>
     <param name="param_fragment_method" display="radio" type="select" optional="False" value="CID" label="Fragmentation method" help="(-fragment_method) ">
       <option value="CID" selected="true">CID</option>

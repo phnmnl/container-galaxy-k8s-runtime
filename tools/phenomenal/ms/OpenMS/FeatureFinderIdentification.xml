@@ -97,7 +97,7 @@
 ]]></command>
   <inputs>
     <param name="param_in" type="data" format="mzml" optional="False" label="Input file (LC-MS raw data)" help="(-in) "/>
-    <param name="param_id" type="data" format="" optional="False" label="Input file (peptide identifications)" help="(-id) "/>
+    <param name="param_id" type="data" format="idxml" optional="False" label="Input file (peptide identifications)" help="(-id) "/>
     <param name="param_threads" type="integer" value="1" label="Sets the number of threads allowed to be used by the TOPP tool" help="(-threads) "/>
     <param name="param_extract_reference_rt" type="select" optional="False" value="adapt" label="Method for selecting the reference RT, if there are multiple IDs for a peptide and charge" help="(-reference_rt) 'adapt': adapt (extend) RT windows based on IDs; 'score': RT of the best-scoring ID; 'intensity': RT of the ID with the most intense precursor; 'median': median RT of all IDs; 'all': no single reference, use RTs of all IDs (requires further processing of results)">
       <option value="adapt" selected="true">adapt</option>

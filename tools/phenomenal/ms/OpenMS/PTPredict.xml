@@ -51,7 +51,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="" optional="False" label="input file" help="(-in) "/>
+    <param name="param_in" type="data" format="idxml" optional="False" label="input file" help="(-in) "/>
     <param name="param_svm_model" type="data" format="txt" optional="False" label="svm model in libsvm format (can be produced by PTModel)" help="(-svm_model) "/>
     <param name="param_max_number_of_peptides" type="integer" value="100000" label="the maximum number of peptides considered at once (bigger number will lead to faster results but needs more memory)" help="(-max_number_of_peptides) &lt;br&gt;"/>
     <param name="param_threads" type="integer" value="1" label="Sets the number of threads allowed to be used by the TOPP tool" help="(-threads) "/>
