@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [File Handling]-->
+<tool id="nmrml2batman" name="nmrML2BATMAN Converter">
+     <description>nmrML files to BATMAN converter</description>
+     <requirements>
+       <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/nmrml2batman</container>
+     </requirements>
+     <command><![CDATA[   
+         unzipped_path="\${PWD}/unzipped";
+         mkdir -p "\${unzipped_path}" && unzip -q -d "\${unzipped_path}" "${nmrMLzip}" && nmrML2batman.R -i "\${unzipped_path}"
+       ]]>
+     </command>
+     <stdio>
+         <exit_code range="1:" level="fatal"/>
+     </stdio>
+     <inputs>
+         <param name="nmrMLzip" type="data" format="zip" label="Zipped nmrML file." help="A zipped nmrML file containing one or more NMR spectra, converted from nmrmlconv tool. "/>
+     </inputs>
+     <outputs>
+         <data name="NMRdata" format="tabular" from_work_dir="NMRdata_from_nmrML.txt" label="Tabulated TXT file containing NMR ppm and spectra."/>
+     </outputs>
+     <help><![CDATA[     
+     
+     Convert nmrML files (in a single zipped file) to a txt file for input of BATMAN.
+
+.. class::infomark
+
+**Author**  
+Jianliang Gao (ICL). The nmrML converter was written by Daniel Jacob. Visit <http://www.nmrML.org> for more information.
+
+----------------------------------------------------------------------------------
+
+.. class:: infomark
+
+**Tool**
+
+A R program to convert Bruker type nmrML files to TXT format.
+
+
+----------------------------------------------------------------------------------
+
+
+
+.. class:: infomark
+
+================================================================================
+**nmrML2BATMAN Converter**: Converting Bruker NMR nmrML to open access TXT format
+================================================================================
+
+-----------
+Description
+-----------
+
+
+
+
+.. class:: infomark
+
+**References**
+
+| Jacob D, Deborde C, Lefebvre M, Maucourt M, Moing A. NMRProcFlow: a graphical and interactive tool dedicated to 1D spectra processing for NMR-based metabolomics. Metabolomics. 2017;13(4):36. doi:10.1007/s11306-017-1178-y.
+
+-----------
+Input files
+-----------
+
+Galaxy dataset nmrML files in Zip format.
+
+----------
+Parameters
+----------
+
+
+
+------------
+Output files
+------------
+
+TXT format NMR data for BATMAN.
+
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**License**
+Copyright (C) 2017 Daniel Jacob - INRA
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+----
+NEWS
+----
+
+More updates soon
+
+  ]]></help>
+       
+       <citations> 
+         <citation type="doi">10.1007/s11306-017-1178-y</citation> 
+       </citations> 
+ </tool>
