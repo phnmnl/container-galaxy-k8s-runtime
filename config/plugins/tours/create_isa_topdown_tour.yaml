@@ -6,12 +6,12 @@ steps:
     - content: "This short tour will guide you through <b>Generating a standard compliant study report leveraging study design information</b>. This short tour will guide you creating an <b>ISA format compliant</b> document describing your experiment, making it ready for preregistration or deposition with EMBL-EBI Metabolights. You can navigate with your arrow keys and leave the tour at any time point with 'Escape' or the 'End tour' button."
 
     - title: "Create Study Description"
-      element: 'a[href$="/tool_runner?tool_id=isa-create-metabo"]'
+      element: 'a[href$="/tool_runner?tool_id=isa_create_metabo"]'
       intro: |
              We start by invoking the <i><b>Create ISA in Galaxy</b></i> tool from the tools list
       position: "right"
       postclick:
-          - 'a[href$="/tool_runner?tool_id=isa-create-metabolo"]'
+          - 'a[href$="/tool_runner?tool_id=isa_create_metabo"]'
     
     - title: "Provide General Study Information"
       element: "#uid-7 > div.portlet-header > div.portlet-title > span"
