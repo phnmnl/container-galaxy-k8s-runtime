@@ -434,7 +434,7 @@ assignment:
 - docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: pathwayenrichment
-  docker_tag_override: v1.0.6_cv1.0.5
+  docker_tag_override: v1.0.6_cv1.1
   max_pod_retrials: 1
   tools_id:
    - pathway_enrichment
