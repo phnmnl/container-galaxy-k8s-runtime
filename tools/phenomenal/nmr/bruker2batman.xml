@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [File Handling]-->
-<tool id="bruker2batman" name="bruker2batman Converter">
+<tool id="bruker2batman" name="bruker2batman Converter" version="0.1">
      <description>Bruker NMR files to BATMAN converter</description>
      <requirements>
        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/bruker2batman</container>
