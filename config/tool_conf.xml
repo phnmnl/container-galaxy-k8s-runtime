@@ -79,7 +79,6 @@
     <tool file="phenomenal/transfer/metabolights-labs-uploader.xml" labels="MTBLS"/>
     <!-- <tool file="phenomenal/isatools/get_study.xml" labels="ISA"/> -->
     <!-- <tool file="phenomenal/isatools/get_study_json.xml" labels="ISA"/> -->
-    <tool file="phenomenal/isatools/isa_get_data_files.xml" labels="ISA"/>
     <tool file="phenomenal/w4m/mtbls-dwnld.xml" labels="W4M"/>
     <tool file="phenomenal/isatools/mw2isa.xml" labels="ISA"/>
    </section>
@@ -87,6 +86,7 @@
    <section name="Study Metadata Exploration" id="explore_metadata">
      <tool file="phenomenal/isatools/isa_get_study_factors.xml" labels="ISA"/>
      <tool file="phenomenal/isatools/isa_get_study_factor_values.xml" labels="ISA"/>
+     <tool file="phenomenal/isatools/isa_get_data_files.xml" labels="ISA"/>
      <tool file="phenomenal/isatools/isa_get_factors_summary.xml" labels="ISA"/>
      <tool file="phenomenal/isatools/mtbls-factors-viz.xml" labels="ISA"/>
    </section> 
