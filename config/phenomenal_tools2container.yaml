@@ -15,7 +15,7 @@ assignment:
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: iso2flux
-  docker_tag_override: v0.6.1_cv2.0.42 
+  docker_tag_override: dev_v0.6.1_cv2.1.44          
   max_pod_retrials: 3
 - tools_id:
    - midcor
