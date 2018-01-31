@@ -7,7 +7,7 @@
 
     <requirements>
         <requirement type="package" version="6.7">click</requirement>
-        <requirement type="package" version="0.9.3">isatools</requirement>
+        <requirement type="package" version="0.9.4">isatools</requirement>
     </requirements>
 
     <stdio>
@@ -16,12 +16,12 @@
 
     <command>
         <![CDATA[
-        mkdir ${output.files_path};
-
         cli.py
 
-        --galaxy_parameters_file="$inputs"
-        --target_dir="${output.files_path}"
+        --galaxy_parameters_file='$inputs'
+        --target_dir='./' &&
+        mkdir '${output.files_path}' &&
+        cp ./*.txt '${output.files_path}'
         ]]>
     </command>
 
@@ -37,11 +37,12 @@
     </inputs>
 
     <outputs>
-        <!--<collection type="list" label="A files" name="a_files">-->
-            <!--<discover_datasets pattern="(?P&lt;designation&gt;a_.+)\.txt" format="tsv" />-->
-        <!--</collection>-->
-        <!--<data name="s_study" label="S file" format="tsv" from_work_dir="s_study.txt" />-->
-        <!--<data name="i_investigation" label="I file" format="tsv" from_work_dir="i_investigation.txt" />-->
+        <collection type="list" label="Data files" name="raw_files">
+            <discover_datasets pattern="(?P&lt;designation&gt;.+)\.(zip|mzml.gz)"/>
+        </collection>
+        <collection type="list" label="ISA files" name="isa_files">
+            <discover_datasets pattern="(?P&lt;designation&gt;(i|s|a)_.+)\.txt" format="tabular"/>
+        </collection>
         <data format="isa-tab" name="output" label="New ISA-Tab"/>
     </outputs>
 
@@ -95,22 +96,7 @@
                 <param name="injection_freq" value="1" />
             </repeat>
 
-
-            <output name="i_investigation" value="i_investigation.txt" />
-            <output name="s_study" value="s_study.txt" compare="sim_size" />
-            <!-- Not checking A files because of nested repeat problem above -->
-            <!--<output_collection name="a_files" type="list" count="2">-->
-                <!--<element name="a_blood_ms_LC_positive_assay">-->
-                    <!--<assert_contents>-->
-                        <!--<has_n_columns n="77" />-->
-                    <!--</assert_contents>-->
-                <!--</element>-->
-                <!--<element name="a_blood_ms_LC_negative_assay">-->
-                    <!--<assert_contents>-->
-                        <!--<has_n_columns n="77" />-->
-                    <!--</assert_contents>-->
-                <!--</element>-->
-            <!--</output_collection>-->
+            <output_collection name="isa_files" type="list" count="2"/>
         </test>
 </tests>
 
