@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [File Handling]-->
-<tool id="nmrml2batman" name="nmrML2BATMAN Converter">
+<tool id="nmrml2batman" name="nmrML2BATMAN Converter" version="0.1">
      <description>nmrML files to BATMAN converter</description>
      <requirements>
        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/nmrml2batman</container>
