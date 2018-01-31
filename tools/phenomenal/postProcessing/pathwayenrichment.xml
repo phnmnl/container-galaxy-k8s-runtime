@@ -1,98 +1,127 @@
-<tool id="pathway_enrichment" name="Pathway_Enrichment" version="1.0">
+<tool id="pathway_enrichment" name="Pathway_Enrichment" version="1.1">
 
-  <description>predicts enrichment among a (human) metabolic network (Recon 2v3)</description>
+  <description>predicts enrichment among a (human) metabolic network (Recon 2v02 flat)</description>
 
   <command> 
-  	<![CDATA[
+    <![CDATA[
      java -jar /pathwayEnrichment.jar
       -i $input
-      -o1 $output_file_1
-      -o2 $output_file_2
-      -o3 $output_file_3
-      -l$inchi_layers
+      -o1 $mapping_out
+      -o2 $pathwayEnrichment_out
+      -o3 $information_out
       #if $chooseSbml.opt == "yes":
        -s $chooseSbml.sbml
       #else
        -s /data/recon2.v03_ext_noCompartment_noTransport_v2.xml
       #end if
-      #if $noFilter.opt == "yes":
-        -f -1
-      #else:
-        -f $noFilter.filtered_column
+      #if $filtering.opt == "yes":
+        -f $filtering.filteredColumn
       #end if
-      #if $noCHEBI.opt == "yes":
-        -chebi -1
-      #else:
-        -chebi $noCHEBI.chebi_column
+      #if $mapping.opt == "yes":
+        #if $mapping.chebi.opt == "yes":
+          -inchi -1
+          -chebi $mapping.chebi.chebiColumn
+	#end if
+        #if $mapping.id.opt == "yes":
+	  -inchi -1
+          -id $mapping.id.idColumn       
+	#end if
+        #if $mapping.inchi.opt == "yes":
+          -inchi $mapping.inchi.inchiColumn
+          -l$mapping.inchi.inchiLayers
+        #end if
       #end if
-      #if $noInChI.opt == "yes":
-        -inchi -1
-      #else:
-        -inchi $noInChI.inchi_column
-      #end if        
     ]]>
   </command>
 
   <inputs>
-    <param format="tsv,tabular" name="input" type="data" label="Dataset"/>      
+    <param format="tsv,tabular,txt" name="input" type="data" label="Fingerprint dataset (2 columns at least)" help="This file should be composed by at least a column with the name of the metabolites and another one with InChI, CHEBI or metabolites' ID values to perform mapping. Optionaly, this program could use a column with empty values to filter non-significant metabolites (after a statistical pre-selection)."/>
+
     <conditional name="chooseSbml">
-      <param name="opt" type="select" label="Choose another Sbml (default: Recon 2v3 flat)">
-        <option value="yes">Yes</option>
+      <param name="opt" type="select" label="Specify another SBML (by default: Recon 2v02 flat)" help="XML in Systems Biology Markup Language (SBML) format. SBML is usually composed of lists of units, compartment and chemical species. The 2nd version of the human metabolism bionetwork is used by default (Thiele et al., 2013).">
         <option value="no" selected="true">No</option>
+        <option value="yes">Yes</option>
+        
       </param>
       <when value="yes">
         <param format="xml" name="sbml" type="data" label="Sbml file"/>
       </when>
       <when value="no"/>
     </conditional>
-    <param name="inchi_layers" type="select" label="Mapped InChI layers" help="InChI layers choosed for a mapping between the input and the network files (e.g., Recon 2v3) among: connections (c), hydrogens atoms (h), charge (q), protons (p), double-bond stereo (b), tetrahedral sp3 stereo (t), isotopic atoms (i), fixed hydrogens (f) and reconnected layers (r).">
-      <option value="">formula</option>
-      <option value=" c">(formula,)c</option>
-      <option value=" c,h" selected="true">(formula,)c,h</option>
-      <option value=" c,h,q">(formula,)c,h,q</option>
-      <option value=" c,h,q,p">(formula,)c,h,q,p</option>
-      <option value=" c,h,q,p,b">(formula,)c,h,q,p,b</option>
-      <option value=" c,h,q,p,b,t">(formula,)c,h,q,p,b,t</option>
-      <option value=" c,h,q,p,b,t,i">(formula,)c,h,q,p,b,t,i</option>
-      <option value=" c,h,q,p,b,t,i,f">(formula,)c,h,q,p,b,t,i,f</option>
-      <option value=" c,h,q,p,b,t,i,f,r">(formula,)c,h,q,p,b,t,i,f,r</option>
-    </param>
-    <conditional name="noInChI">
-      <param name="opt" type="select" label="Disable InChI column" help="Could be optional only if CHEBI column is activated" >
-        <option value="yes">Yes</option>
+
+    <conditional name="filtering">
+      <param name="opt" type="select" label="Filter a column" help="Lines containing empty values among the selected column are discarded from the analysis (for example, after a statistical pre-selection).">  
         <option value="no" selected="true">No</option>
+        <option value="yes">Yes</option>
       </param>
-      <when value="yes"/>
-      <when value="no">
-        <param name="inchi_column" value="5" type="data_column" data_ref="input" label="InChI column" />
+      <when value="no"/>
+      <when value="yes">
+        <param name="filteredColumn" value="30" type="data_column" data_ref="input" label="N° of column" />
       </when>
     </conditional>
-    <conditional name="noCHEBI">
-      <param name="opt" type="select" label="Disable CHEBI column" help="Could be optional only if InChI column is activated" >
-        <option value="yes">Yes</option>
+
+    <conditional name="mapping">
+      <param name="opt" type="select" label="Change mapping type (by default: InChI on connections and hydrogens layers)" help="Three different kind of mapping are possible: on InChI, on CHEBI or on metabolites' ID values." >
         <option value="no" selected="true">No</option>
-      </param>
-      <when value="yes"/>
-      <when value="no">
-        <param name="chebi_column" value="2" type="data_column" data_ref="input" label="CHEBI column" />
-      </when>
-    </conditional>
-    <conditional name="noFilter">
-      <param name="opt" type="select" label="Disable filtered column" help="Lines containing empty values among the selected column are discarded from the analysis (for example, after a statistical pre-selection).">
         <option value="yes">Yes</option>
-        <option value="no" selected="true">No</option>
       </param>
-      <when value="yes"/>
-      <when value="no">
-        <param name="filtered_column" value="30" type="data_column" data_ref="input" label="Filtered_column" />
+      <when value="no"/>
+      <when value="yes">
+
+        <conditional name="inchi">
+      <param name="opt" type="select" label="Mapping on InChI" >
+        <option value="no" >No</option>
+        <option value="yes" selected="true">Yes</option>
+      </param>
+      <when value="no"/>
+      <when value="yes">
+            <param name="inchiColumn" type="data_column" value="5" data_ref="input" label="N° of column" help="Select the 5th column for Sacurine workflow input" />
+
+            <param name="inchiLayers" type="select" label="InChI layers used for mapping" help="InChI layers choosen for a mapping between the input and the network (e.g., Recon 2v02) among: connections (c), hydrogens atoms (h), charge (q), protons (p), double-bond stereo (b), tetrahedral sp3 stereo (t), isotopic atoms (i), fixed hydrogens (f) and reconnected layers (r).">
+              <option value="">formula</option>
+              <option value=" c">(formula,)c</option>
+              <option value=" c,h" selected="true">(formula,)c,h</option>
+              <option value=" c,h,q">(formula,)c,h,q</option>
+              <option value=" c,h,q,p">(formula,)c,h,q,p</option>
+              <option value=" c,h,q,p,b">(formula,)c,h,q,p,b</option>
+              <option value=" c,h,q,p,b,t">(formula,)c,h,q,p,b,t</option>
+              <option value=" c,h,q,p,b,t,i">(formula,)c,h,q,p,b,t,i</option>
+              <option value=" c,h,q,p,b,t,i,f">(formula,)c,h,q,p,b,t,i,f</option>
+              <option value=" c,h,q,p,b,t,i,f,r">(formula,)c,h,q,p,b,t,i,f,r</option>
+            </param>
+          </when>
+	</conditional>
+
+<conditional name="chebi">
+      <param name="opt" type="select" label="Mapping on CHEBI" >
+        <option value="no"  selected="true">No</option>
+        <option value="yes">Yes</option>
+      </param>
+      <when value="no"/>
+      <when value="yes">
+            <param name="chebiColumn" type="data_column" value="2" data_ref="input" label="N° of column" help="Select the 2nd column for Sacurine workflow"/>
+          </when>
+	</conditional>
+
+<conditional name="id">
+      <param name="opt" type="select" label="Mapping on ID" >
+        <option value="no" selected="true">No</option>
+        <option value="yes">Yes</option>
+      </param>
+      <when value="no"/>
+      <when value="yes">
+            <param name="idColumn" type="data_column" value="2" data_ref="input" label="N° of column" help="Select the 2nd column if the metabolites'names are in the first one"/>
+          </when>
+	</conditional>
+
       </when>
-    </conditional>
+      </conditional>
   </inputs>
 
   <outputs>
-    <data name="output_file_1" label="mapping.tsv" format="tabular" />
-    <data name="output_file_2" label="pathwayEnrichment.tsv" format="tabular" />
-    <data name="output_file_3" label="info.txt" format="txt" />
+    <data name="mapping_out" label="mapping.tsv" format="tabular" />
+    <data name="pathwayEnrichment_out" label="pathway_enrichment.tsv" format="tabular" />
+    <data name="information_out" label="information.txt" format="txt" />
   </outputs>
 
   <help>
@@ -107,26 +136,113 @@
 
 .. class:: infomark
 
-**Website** https://metexplore.toulouse.inra.fr
+**Website** https://www.metexplore.fr
 
 ---------------------------------------------------
 
-Metabolites extracted from the input file are mapped on a Recon network (Thiele et al., 2013) by providing either INCHI or CHEBI (or both) information. Pathway enrichment is calculated with an exact Fisher one-tailed test corrected by Bonferroni and Benjamini Hochberg methods. This tool is part of the MetExplore's project consisting in a web server based on graph theory and vizualisation tools to allow users performing various analysis (Cottret et al., 2010).
+==================================
+Pathway analysis (from MetExplore)
+==================================
 
-**Input files**
-    | - a dataset (tsv or tabular format): a list of detected metabolites containing at least their names (first column), their InChI or their CHEBI, and eventually a discriminant information about some significant metabolites.
-    | - a bionetwork : eventually, a sbml file a containing metabolites network (Recon 2v3 is included by default).
-    | 
+Metabolites belonging to the fingerprint (input file) are mapped on Recon2 network (Thiele et al., 2013) using either INCHI or CHEBI (or both) information. Pathway enrichment is calculated with an exact Fisher one-tailed test corrected by Bonferroni and Benjamini Hochberg methods. This tool is part of the MetExplore's project consisting in a web server dedicated to the analysis of omics data in the context of genome scale metabolic networks (Cottret et al., 2010).
 
-**Output files**
-    | - "mapping.tsv": each line corresponds to metabolites from the dataset file: the success or the failure of the mapping, their names in the dataset, those of one or several elements of the network in case of matching.
-    | - "pathwayEnrichment.tsv" contains for each pathway associated with the mapped metabolites: their names, the Fisher's p value of enrichment, the Bonferroni (or other test correction) q-value, the list of mapped metabolites, the number of mapped metabolites and the coverage of mapped metabolites on the total of metabolites contained by the studied pathway.
-    | - "info.txt" contains general information about mapping and pathway enrichment results. These informations correspond to the total number of mapped metabolites, the total number of metabolites from the dataset, the total number of pathway after mapping and the total number of pathway in the SBML.
+-----------
+Input files
+-----------
+    | - a **fingerprint** (tsv or tabular format): composed by at least a column with the name of the metabolites and another one with InChI, CHEBI or metabolites' ID values to perform mapping. Optionaly, this program could use a column with empty values to filter non-significant metabolites (after a statistical pre-selection).
+    | - a **metabolic network** (SBML) : optional, by default Recon2 SBML file is used.
 
-**References**
+------------
+Output files
+------------
+    | - **mapping.tsv**: each line corresponds to metabolites from the dataset file: the success or the failure of the mapping, their names in the dataset, those of one or several elements of the network in case of matching.
+    | - **pathwayEnrichment.tsv** contains for each pathway associated with the mapped metabolites: their names, the Fisher's p value of enrichment, the Bonferroni (or other test correction) q-value, the list of mapped metabolites, the number of mapped metabolites and the coverage of mapped metabolites on the total of metabolites contained in the studied pathway.
+    | - **info.txt** contains general information about mapping and pathway enrichment results. This file contains the total number of mapped metabolites, the total number of metabolites from the dataset, the total number of pathways after mapping and the total number of pathways in the original SBML files. Eventually, warnings alert about doublets in mapping wich are discarded from the pathway analysis. In this case, the user must choose the corresponded metabolite's ID in the network in order to add them to their fingerprint dataset and relaunch the analysis by using the ID mapping only.
 
-    | Thiele I, Swainston N, Fleming RMT, et al. A community-driven global reconstruction of human metabolism (2013). *Nature biotechnology* **31(5)**:10. doi:10.1038/nbt.2488.
-    | L. Cottret, D. Wildridge, F. Vinson, M. P. Barrett, H. Charles, M-F Sagot and F. Jourdan. MetExplore: a web server to link metabolomic experiments and genome-scale metabolic networks. (2010) *Nucleic Acids Research* **1**:38 Suppl:W132-7. doi:10.1093/nar/gkq312.
+--------
+Exemples
+--------
+
+**Fingerprint dataset**
+
+*Example 1: an only column with ID*
+
++---------------------------+---------------------------+
+| Name                      | SBML ID                   |
++===========================+===========================+
+| Testosterone glucuronide  | M_tststeroneglc           |
++---------------------------+---------------------------+
+| Malic acid                | M_mal_L                   |
++---------------------------+---------------------------+
+| Cinnamoylglycine          | M_Cin                     |
++---------------------------+---------------------------+
+
+|
+
+*Example 2: dataset from Sacurine workflow*
+
++--------------------------+---------------------+-----+---------------------------------+-----+----------------+
+| variableMetadata         | database_identifier | ... | inchi                           | ... | gender_tier_S  |
++==========================+=====================+=====+=================================+=====+================+
+| Testosterone glucuronide | CHEBI:28835         | ... | InChI=1S/C25H36O8/c1-24-9-7-... | ... | plsda          |
++--------------------------+---------------------+-----+---------------------------------+-----+----------------+
+| Malic acid               | CHEBI:6650          | ... | InChI=1S/C4H6O5/c5-2(4(8)9)1... | ... |                |
++--------------------------+---------------------+-----+---------------------------------+-----+----------------+
+| Cinnamoylglycine         | CHEBI:68616         | ... | InChI=1S/C4H6O5/c5-2(4(8)9)1... | ... |                |
++--------------------------+---------------------+-----+---------------------------------+-----+----------------+
+| ...                      | ...                 | ... |                             ... | ... |        ...     |
++--------------------------+---------------------+-----+---------------------------------+-----+----------------+
+    
+|
+
+**Output**
+
+*Mapping*
+
+
++--------+--------------------------+------------------------------------+-----------------+-----------------------------+----------------------------+
+| Mapped | Name (fingerprint)       | Name (network)                     | Network ID      | Matched value (fingerprint) | Matched value (network)    |
++========+==========================+====================================+=================+=============================+============================+
+| true   | Malic acid               | (S)-malate(2-)                     | M_mal_L         | InChI=1S/C4H6O5/c5-2...     | InChI=1S/C4H6O5/c5-2...    |
++--------+--------------------------+------------------------------------+-----------------+-----------------------------+----------------------------+
+| true   | Testosterone glucuronide | testosterone 3-glucosiduronic acid | M_tststeroneglc | InChI=1S/C25H36O8/c1-24...  | InChI=1S/C25H36O8/c1-24... |
++--------+--------------------------+------------------------------------+-----------------+-----------------------------+----------------------------+
+| false  | Cinnamoylglycine         |                                    |                 |                             |                            |
++--------+--------------------------+------------------------------------+-----------------+-----------------------------+----------------------------+
+| ...    | ...                      |             ...                    |        ...      |             ...             |            ...             |
++--------+--------------------------+------------------------------------+-----------------+-----------------------------+----------------------------+
+
+
+|
+
+*Pathway enrichment*
+
++----------------------------------+------------------+-----------------------+-------------------------------+--------------------------------------+--------------+--------------+
+| Pathway_Enrichment               | Fisher's p-value | Bonferroni correction | Benjamini-Hochberg correction | Mapped metabolites                   | Nb of mapped | Coverage (%) |
++==================================+==================+=======================+===============================+======================================+==============+==============+
+| Citric acid cycle                | 1.37E-12         | 5.19E-11              | 2.60E-11                      | (S)-malate(2-)2-oxoglutarate(2-);... | 4            | 13.33        |
++----------------------------------+------------------+-----------------------+-------------------------------+--------------------------------------+--------------+--------------+
+| Alanine and aspartate metabolism | 9.38E-06         | 3.56E-04              | 5.94E-05                      | 2-oxoglutarate(2-);Fumarate;...      | 4            | 12.5         |
++----------------------------------+------------------+-----------------------+-------------------------------+--------------------------------------+--------------+--------------+
+| ...                              | ...              | ...                   | ...                           | ...                                  | ...          | ...          |
++----------------------------------+------------------+-----------------------+-------------------------------+--------------------------------------+--------------+--------------+
+  
+|
+
+
+*General information*
+
+33 metabolites have been mapped (on 110).
+
+Warning: There are 4 possible matches for Aspartic acid.
+
+Warning: There are 2 possible matches for Citric acid.
+
+Warning: There are 2 possible matches for Glyceric acid.
+
+Warning: Please, check the corresponding lines in the mapping output file. These duplicates will be discarded from the pathway analysis.
+
+38 pathways are concerned among the network (on 97).
 
   </help>
 
