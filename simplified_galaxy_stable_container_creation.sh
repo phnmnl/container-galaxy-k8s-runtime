@@ -2,9 +2,9 @@
 #set -x -e
 
 ANSIBLE_REPO=pcm32/ansible-galaxy-extras
-ANSIBLE_RELEASE=837193d5d0490261dc3c5bd5cd5627ce311dcef8
+ANSIBLE_RELEASE=ee6203507a5bdcf8301d1d09845f204fd4b4e185
 
-TAG=wf_test
+TAG=isa_test
 
 if [ -n $ANSIBLE_REPO ]
     then
@@ -27,7 +27,7 @@ if [ -n $GALAXY_REPO ]
 	      echo "Using FROM $FROM for galaxy init"
 	      DOCKERFILE_INIT_1=Dockerfile_init
        fi
-       docker build --build-arg GALAXY_REPO=$GALAXY_REPO --build-arg GALAXY_RELEASE=$GALAXY_RELEASE -t pcm32/galaxy-init-pheno:$TAG -f ../docker-galaxy-stable/compose/galaxy-init/$DOCKERFILE_INIT_1 ../docker-galaxy-stable/compose/galaxy-init/
+       docker build --build-arg GALAXY_REPO=$GALAXY_REPO --build-arg GALAXY_RELEASE=$GALAXY_RELEASE --build-arg ISATOOLS_LITE_INSTALL=True -t pcm32/galaxy-init-pheno:$TAG -f ../docker-galaxy-stable/compose/galaxy-init/$DOCKERFILE_INIT_1 ../docker-galaxy-stable/compose/galaxy-init/
        docker push pcm32/galaxy-init-pheno:$TAG
 fi
 
