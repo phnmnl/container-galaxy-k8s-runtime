@@ -2,14 +2,15 @@
 #set -x -e
 
 ANSIBLE_REPO=pcm32/ansible-galaxy-extras
-ANSIBLE_RELEASE=ee6203507a5bdcf8301d1d09845f204fd4b4e185
+ANSIBLE_RELEASE=3f934a1e9c39c7d03278538bb9ea0ca196976f45
 
 TAG=isa_test
+#NO_CACHE="--no-cache"
 
 if [ -n $ANSIBLE_REPO ]
     then
        echo "Making custom galaxy-base-pheno:$TAG from $ANSIBLE_REPO at $ANSIBLE_RELEASE"
-       docker build --build-arg ANSIBLE_REPO=$ANSIBLE_REPO --build-arg ANSIBLE_RELEASE=$ANSIBLE_RELEASE -t pcm32/galaxy-base-pheno:$TAG ../docker-galaxy-stable/compose/galaxy-base/
+       docker build $NO_CACHE --build-arg ANSIBLE_REPO=$ANSIBLE_REPO --build-arg ANSIBLE_RELEASE=$ANSIBLE_RELEASE -t pcm32/galaxy-base-pheno:$TAG ../docker-galaxy-stable/compose/galaxy-base/
        docker push pcm32/galaxy-base-pheno:$TAG
 fi
 
@@ -27,7 +28,7 @@ if [ -n $GALAXY_REPO ]
 	      echo "Using FROM $FROM for galaxy init"
 	      DOCKERFILE_INIT_1=Dockerfile_init
        fi
-       docker build --build-arg GALAXY_REPO=$GALAXY_REPO --build-arg GALAXY_RELEASE=$GALAXY_RELEASE --build-arg ISATOOLS_LITE_INSTALL=True -t pcm32/galaxy-init-pheno:$TAG -f ../docker-galaxy-stable/compose/galaxy-init/$DOCKERFILE_INIT_1 ../docker-galaxy-stable/compose/galaxy-init/
+       docker build $NO_CACHE --build-arg GALAXY_REPO=$GALAXY_REPO --build-arg GALAXY_RELEASE=$GALAXY_RELEASE --build-arg ISATOOLS_LITE_INSTALL=True -t pcm32/galaxy-init-pheno:$TAG -f ../docker-galaxy-stable/compose/galaxy-init/$DOCKERFILE_INIT_1 ../docker-galaxy-stable/compose/galaxy-init/
        docker push pcm32/galaxy-init-pheno:$TAG
 fi
 
@@ -38,7 +39,7 @@ then
 	sed s+pcm32/galaxy-init-pheno$+pcm32/galaxy-init-pheno:$TAG+ Dockerfile_init > Dockerfile_init_tagged
 	DOCKERFILE_INIT_FLAVOUR=Dockerfile_init_tagged
 fi
-docker build -t pcm32/galaxy-init-pheno-flavoured:$TAG -f $DOCKERFILE_INIT_FLAVOUR .
+docker build $NO_CACHE -t pcm32/galaxy-init-pheno-flavoured:$TAG -f $DOCKERFILE_INIT_FLAVOUR .
 docker push pcm32/galaxy-init-pheno-flavoured:$TAG
 
 
