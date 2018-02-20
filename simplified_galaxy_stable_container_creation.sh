@@ -14,7 +14,7 @@ fi
     
 
 ANSIBLE_REPO=pcm32/ansible-galaxy-extras
-ANSIBLE_RELEASE=3f934a1e9c39c7d03278538bb9ea0ca196976f45
+ANSIBLE_RELEASE=032a82fb733698609a03e4be438d6aa016a1284a
 
 TAG=v17.09_cerebellin
 #NO_CACHE="--no-cache"
