@@ -1,8 +1,17 @@
 #!/bin/bash
 set -e
 
-DOCKER_REPO=${CONTAINER_REGISTRY/:-}
+DOCKER_REPO=${CONTAINER_REGISTRY:-}
 DOCKER_USER=${CONTAINER_USER:-pcm32}
+
+if [[ ${#DOCKER_REPO} > 0 ]];
+then
+    if [[ ! "$DOCKER_REPO" == */ ]];
+    then
+        DOCKER_REPO=$DOCKER_REPO"/"
+    fi
+fi
+    
 
 ANSIBLE_REPO=pcm32/ansible-galaxy-extras
 ANSIBLE_RELEASE=3f934a1e9c39c7d03278538bb9ea0ca196976f45
