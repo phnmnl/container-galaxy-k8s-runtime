@@ -498,7 +498,15 @@
     <tool id="isatab_validator" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="mtbls-factors-viz" destination="dynamic-k8s-small" resources="all"/>
     <tool id="mw2isa" destination="dynamic-k8s-small" resources="all"/>
-
+    <!-- DIMSpy tools -->
+    <tool file="dimspy_process_scans" destination="dynamic-k8s-medium" resources="all"/>
+    <tool file="dimspy_replicate_filter" destination="dynamic-k8s-medium" resources="all"/>
+    <tool file="dimspy_align_samples" destination="dynamic-k8s-large" resources="all"/>
+    <tool file="dimspy_blank_filter" destination="dynamic-k8s-medium" resources="all"/>
+    <tool file="dimspy_sample_filter" destination="dynamic-k8s-medium" resources="all"/>
+    <tool file="dimspy_hdf5_to_txt" destination="dynamic-k8s-medium" resources="all"/>
+    <tool file="dimspy_merge_peaklists" destination="dynamic-k8s-medium" resources="all"/>
+    <tool file="dimspy_get_peaklists" destination="dynamic-k8s-medium" resources="all"/>
   </tools>
   <resources default="default">
     <!-- Group different parameters defined in job_resource_params_conf.xml
