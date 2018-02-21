@@ -79,12 +79,11 @@ ENV PYKUBE_KUBERNETES_SERVICE_HOST kubernetes
 ##### Galaxy Customizations ######
 
 # Galaxy tours which guide users through the subsequent steps in an analysis
-COPY config/plugins/tours/metfrag+xcms-tour.yaml config/plugins/tours/
+COPY config/plugins/tours/*.yaml config/plugins/tours/
 
-COPY html/partners.png \
-     html/PhenoMeNal_logo.png \
-     html/welcome.html \
-  static/
+COPY html/partners.png static/welcome_partners.png
+COPY html/PhenoMeNal_logo.png static/welcome_PhenoMeNal_logo.png
+COPY html/welcome.html static/
 
 COPY ansible ansible
 COPY workflows workflows

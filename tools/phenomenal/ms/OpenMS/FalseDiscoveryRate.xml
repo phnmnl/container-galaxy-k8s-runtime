@@ -72,9 +72,9 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="" optional="True" label="Identification input file containing a search against a concatenated sequence database" help="(-in) Either specify '-in' alone or 'in_target' together with 'in_decoy' as input"/>
-    <param name="param_in_target" type="data" format="" optional="True" label="Identification input file containing a search against a target-only database" help="(-in_target) "/>
-    <param name="param_in_decoy" type="data" format="" optional="True" label="Identification input file containing a search against a decoy-only database" help="(-in_decoy) "/>
+    <param name="param_in" type="data" format="idxml" optional="True" label="Identification input file containing a search against a concatenated sequence database" help="(-in) Either specify '-in' alone or 'in_target' together with 'in_decoy' as input"/>
+    <param name="param_in_target" type="data" format="idxml" optional="True" label="Identification input file containing a search against a target-only database" help="(-in_target) "/>
+    <param name="param_in_decoy" type="data" format="idxml" optional="True" label="Identification input file containing a search against a decoy-only database" help="(-in_decoy) "/>
     <param name="param_proteins_only" display="radio" type="boolean" truevalue="-proteins_only" falsevalue="" checked="false" optional="True" label="If set only the FDR on protein level is calculated" help="(-proteins_only) "/>
     <param name="param_peptides_only" display="radio" type="boolean" truevalue="-peptides_only" falsevalue="" checked="false" optional="True" label="If set only the FDR on peptide (PSM) level is calculated" help="(-peptides_only) "/>
     <param name="param_threads" type="integer" value="1" label="Sets the number of threads allowed to be used by the TOPP tool" help="(-threads) "/>

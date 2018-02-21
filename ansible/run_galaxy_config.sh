@@ -57,6 +57,13 @@ if [ ! -z $GALAXY_TOOLS_PULL_POLICY ]; then
   log "Set k8s pull policy to use with Galaxy to $GALAXY_TOOLS_PULL_POLICY on job_conf.xml"
 fi
 
+if [ -z $GALAXY_PVC_MOUNT_POINT ]; then
+  # for backward compatibility with Helm charts that didn't define this env var
+  GALAXY_PVC_MOUNT_POINT=/opt/galaxy_data
+fi
+
+# remove old failed start log, if it exists
+rm -f "${GALAXY_PVC_MOUNT_POINT}/failed_start.log"
 
 # if admin email, api and password env variables are set, then start galaxy, run user creation and stop galaxy
 if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GALAXY_API_KEY ]; then
@@ -74,6 +81,8 @@ if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GA
     # Grab the current pid from the pid file
     if ! current_pid_in_file=$(cat paster.pid); then
         log "Galaxy process died, interrupting"
+        log "Writing failure log to $GALAXY_PVC_MOUNT_POINT/failed_start.log accessible on the shared file system being used."
+        cp --force paster.log $GALAXY_PVC_MOUNT_POINT/failed_start.log || { log "Failed to copy log file."; }
         exit 1
     fi
     # Search for all pids in the logs and tail for the last one

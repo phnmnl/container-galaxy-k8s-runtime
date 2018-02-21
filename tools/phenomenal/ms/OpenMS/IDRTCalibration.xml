@@ -57,7 +57,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="" optional="False" label="input file" help="(-in) "/>
+    <param name="param_in" type="data" format="idxml" optional="False" label="input file" help="(-in) "/>
     <param name="param_calibrant_1_reference" type="float" value="0.1" label="The RT of the first calibrant in the reference file" help="(-calibrant_1_reference) "/>
     <param name="param_calibrant_2_reference" type="float" value="0.9" label="The RT of the second calibrant in the reference file" help="(-calibrant_2_reference) "/>
     <param name="param_calibrant_1_input" type="float" value="-1.0" label="The RT of the first calibrant in the input file" help="(-calibrant_1_input) Please note that this value needs to be set. The default value -1.0 is not allowed"/>

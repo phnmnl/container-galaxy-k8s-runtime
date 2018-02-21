@@ -85,7 +85,7 @@
 ]]></command>
   <inputs>
     <param name="param_in" type="data" format="featurexml,consensusxml" optional="False" label="Input file" help="(-in) "/>
-    <param name="param_protein_groups" type="data" format="" optional="True" label="Protein inference results for the identification runs that were used to annotate the input (" help="(-protein_groups) e.g. from ProteinProphet via IDFileConverter or Fido via FidoAdapter). &lt;br&gt;Information about indistinguishable proteins will be used for protein quantification"/>
+    <param name="param_protein_groups" type="data" format="idxml" optional="True" label="Protein inference results for the identification runs that were used to annotate the input (" help="(-protein_groups) e.g. from ProteinProphet via IDFileConverter or Fido via FidoAdapter). &lt;br&gt;Information about indistinguishable proteins will be used for protein quantification"/>
     <param name="param_top" type="integer" min="0" optional="True" value="3" label="Calculate protein abundance from this number of proteotypic peptides (most abundant first; '0' for all)" help="(-top) "/>
     <param name="param_average" display="radio" type="select" optional="False" value="median" label="Averaging method used to compute protein abundances from peptide abundances" help="(-average) ">
       <option value="median" selected="true">median</option>

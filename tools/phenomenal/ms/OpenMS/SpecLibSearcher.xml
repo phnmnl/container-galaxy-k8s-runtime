@@ -111,7 +111,7 @@
         </valid>
       </sanitizer>
     </param>
-    <param name="param_lib" type="data" format="" optional="False" label="searchable spectral library (MSP format)" help="(-lib) "/>
+    <param name="param_lib" type="data" format="msp" optional="False" label="searchable spectral library (MSP format)" help="(-lib) "/>
     <param name="param_precursor_mass_tolerance" type="float" value="3.0" label="Precursor mass tolerance, (Th)" help="(-precursor_mass_tolerance) "/>
     <param name="param_compare_function" type="select" optional="False" value="ZhangSimilarityScore" label="function for similarity comparisson" help="(-compare_function) ">
       <option value="PeakAlignment">PeakAlignment</option>
