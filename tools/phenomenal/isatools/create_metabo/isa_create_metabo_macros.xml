@@ -225,7 +225,7 @@
         <section name="sampling_and_assay_plans"
                  title="Sampling and Assay Plans">
             <!-- INPUT FOR SAMPLING PLAN -->
-            <repeat name="sample_record_series" title="Sampling plan">
+            <repeat name="sample_record_series" title="Sampling plan" default="1">
                 <conditional name="sample_type">
                     <param name="sample_type" type="select" min="1"
                            label="study sample types">
@@ -259,14 +259,14 @@
                 <param name="sample_size" type="integer"
                        label="number of sample collections" value="1"/>
                 <!-- INPUT FOR ASSAY PLAN -->
-                <repeat name="assay_record_series" title="Assay Plan">
+                <repeat name="assay_record_series" title="Assay Plan" default="1">
                     <conditional name="assay_type">
                         <param name="assay_type" type="select"
                                label="study assay types">
-                            <option value="mass spectrometry">
+                            <option value="mass spectrometry" selected="True">
                                 mass spectrometry
                             </option>
-                            <option value="nmr spectroscopy" selected="True">
+                            <option value="nmr spectroscopy">
                                 nmr spectroscopy
                             </option>
                             <!--

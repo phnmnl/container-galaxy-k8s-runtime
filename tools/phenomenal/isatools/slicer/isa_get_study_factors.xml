@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tool id="isa_get_study_factors" name="Get study factors" version="1.0">
+    <description>Get list of study factors for a MetaboLights study
+    </description>
+
+    <stdio>
+        <exit_code range="1:" level="fatal"/>
+    </stdio>
+    <command><![CDATA[
+      run_mtblisa.py get-factors "${mtbls_id}" "${output}"
+]]>
+    </command>
+    <inputs>
+        <param name="name_of_study" type="text" label="Name study" help="This should not contain any spaces as the name will be used a prefix for ISA-tab file names" />
+	    <conditional name="input_type">
+            <param name="input" type="select" label="Choose your inputs method" >
+                <option value="mtbls_id" selected="true">MTBLS study ID</option>
+                <option value="isatab_datatype">ISA-Tab from your history containing your study metadata files</option>
+            </param>
+            <when value="mtbls_id">
+		    <param name="mtbls_id" type="text" label="MetaboLights Study Identifier." help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
+	    </when>
+            <when value="isatab_datatype">
+		<param format="isa-tab" name="isatab" type="data" label="ISA-Tab"  help="A ISA-Tab"/>
+	    </when>
+        </conditional>
+    </inputs>
+    <outputs>
+        <data format="json" name="output" label="$(mtbls_id) factors list"/>
+    </outputs>
+    <tests>
+        <test>
+            <param name="mtbls_id" value="MTBLS1"/>
+            <output name="output" file="mtbls1_factors_out.json" compare="sim_size"/>
+        </test>
+    </tests>
+
+    <help>
+<!-- @@@BEGIN_RST@@@ -->
+
+==================================================
+Get list of study factors for a MetaboLights study
+==================================================
+
+This tool gets the list of study factors from a MetaboLights study. It
+extracts the factors from the ISA-Tab metadata stored in MetaboLights.
+
+-----
+Input
+-----
+
+MetaboLights Study Identifier
+=============================
+MTBLS ID available at MetaboLights, e.g. MTBLS2.
+
+------
+Output
+------
+
+List of study factors as JSON
+=============================
+
+A list of factor names as a JSON list. e.g.
+
+::
+
+    [
+        "replicate",
+        "genotype"
+    ]
+
+
+<!-- @@@END_RST@@@ -->
+    </help>
+
+    <citations>
+        <citation type="doi">10.1093/nar/gks1004</citation>
+        <citation type="doi">10.5281/zenodo.163640</citation>
+        <citation type="doi">10.1038/ng.1054</citation>
+    </citations>
+
+</tool>
