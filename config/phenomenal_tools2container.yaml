@@ -310,7 +310,7 @@ assignment:
 - docker_image_override: batman
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: dev_v1.2.12.0_cv1.0.69
+  docker_tag_override: v1.2.12.0_cv1.1.72 
   max_pod_retrials: 3
   tools_id:
   - batman-nmr
