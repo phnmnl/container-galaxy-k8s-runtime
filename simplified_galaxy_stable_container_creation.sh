@@ -14,9 +14,9 @@ fi
     
 
 ANSIBLE_REPO=pcm32/ansible-galaxy-extras
-ANSIBLE_RELEASE=032a82fb733698609a03e4be438d6aa016a1284a
+ANSIBLE_RELEASE=9947401f95285623ce74d8e32ef3a47898c80329
 
-TAG=v17.09_cerebellin
+TAG=v17.09_cerebellin-isafix
 #NO_CACHE="--no-cache"
 
 if [[ ! -z ${CONTAINER_TAG_PREFIX+x} ]];
@@ -35,7 +35,7 @@ if [ -n $ANSIBLE_REPO ]
        docker push $DOCKER_REPO$DOCKER_USER/galaxy-base-pheno:$TAG
 fi
 
-GALAXY_RELEASE=9a445ed999c1b168690e953d62038e79316f59d2
+GALAXY_RELEASE=release_17.09_plus_isa_k8s_resource_limts
 GALAXY_REPO=phnmnl/galaxy
 
 if [ -n $GALAXY_REPO ]
