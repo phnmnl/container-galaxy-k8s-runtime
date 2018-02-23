@@ -2,15 +2,18 @@
 <tool id="isa_get_factors_summary" name="Get factors summary" version="1.0">
   <description>Produce a summary table of variable factors of a MetaboLights study</description>
   <command><![CDATA[
-    run_mtblisa.py --command GET_SUMMARY --study $mtbls_id
+    run_mtblisa.py get-summary $mtbls_id $output
   ]]>
   </command>
   <inputs>
     <param name="mtbls_id" type="text" label="MetaboLights Study Identifier." help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
   </inputs>
   <outputs>
-    <data format="json" name="output" from_work_dir="out.json" label="$(mtbls_id) factors summary" />
+    <data format="json" name="output" label="$(mtbls_id) factors summary" />
   </outputs>
+  <stdio>
+    <exit_code range="1:" level="fatal"/>
+  </stdio>
 
   <help>
 <!-- @@@BEGIN_RST@@@ -->
