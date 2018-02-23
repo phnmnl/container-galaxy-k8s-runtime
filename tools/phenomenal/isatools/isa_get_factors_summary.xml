@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<tool id="isa_get_study_factors" name="Get study factors" version="1.0">
-  <description>Get list of study factors for a MetaboLights study</description>
+<tool id="isa_get_factors_summary" name="Get factors summary" version="1.0">
+  <description>Produce a summary table of variable factors of a MetaboLights study</description>
   <command><![CDATA[
-      run_mtblisa.py get-factors "${mtbls_id}" "${output}"
+    run_mtblisa.py get-summary "${mtbls_id}" "${output}"
   ]]>
   </command>
   <inputs>
     <param name="mtbls_id" type="text" label="MetaboLights Study Identifier." help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
   </inputs>
   <outputs>
-    <data format="json" name="output" label="$(mtbls_id) factors list" />
+    <data format="json" name="output" label="$(mtbls_id) factors summary" />
   </outputs>
   <stdio>
     <exit_code range="1:" level="fatal"/>
@@ -18,11 +18,11 @@
   <help>
 <!-- @@@BEGIN_RST@@@ -->
 
-==================================================
-Get list of study factors for a MetaboLights study
-==================================================
+===============================================
+Get summary of factors for a MetaboLights study
+===============================================
 
-This tool gets the list of study factors from a MetaboLights study. It extracts the factors from the ISA-Tab metadata stored in MetaboLights.
+This tool returns a table of sample names and related associated factor values. The tool calculates this by inspecting the ISA study and assay tables and computes the study groups and associated sample names.
 
 -----
 Input
@@ -36,16 +36,94 @@ MTBLS ID available at MetaboLights, e.g. MTBLS2.
 Output
 ------
 
-List of study factors as JSON
-=============================
+Factor summary table
+====================
 
-A list of factor names as a JSON list. e.g.
+A list of sample names and factor name-value pairs JSON list. e.g.
 
 ::
 
   [
-    "replicate",
-    "genotype"
+    {
+      "replicate": "Exp1",
+      "genotype": "cyp79",
+      "name": "Ex1-cyp79-48h-Ag-3"
+    },
+    {
+      "replicate": "Exp1",
+      "genotype": "cyp79",
+      "name": "Ex1-cyp79-48h-Ag-4"
+    },
+    {
+      "replicate": "Exp1",
+      "genotype": "cyp79",
+      "name": "Ex1-cyp79-48h-Ag-1"
+    },
+    {
+      "replicate": "Exp2",
+      "genotype": "Col-0",
+      "name": "Ex2-Col0-48h-Ag-3"
+    },
+    {
+      "replicate": "Exp1",
+      "genotype": "Col-0",
+      "name": "Ex1-Col0-48h-Ag-4"
+    },
+    {
+      "replicate": "Exp1",
+      "genotype": "cyp79",
+      "name": "Ex1-cyp79-48h-Ag-2"
+    },
+    {
+      "replicate": "Exp2",
+      "genotype": "Col-0",
+      "name": "Ex2-Col0-48h-Ag-1"
+    },
+    {
+      "replicate": "Exp1",
+      "genotype": "Col-0",
+      "name": "Ex1-Col0-48h-Ag-3"
+    },
+    {
+      "replicate": "Exp1",
+      "genotype": "Col-0",
+      "name": "Ex1-Col0-48h-Ag-2"
+    },
+    {
+      "replicate": "Exp1",
+      "genotype": "Col-0",
+      "name": "Ex1-Col0-48h-Ag-1"
+    },
+    {
+      "replicate": "Exp2",
+      "genotype": "cyp79",
+      "name": "Ex2-cyp79-48h-Ag-4"
+    },
+    {
+      "replicate": "Exp2",
+      "genotype": "cyp79",
+      "name": "Ex2-cyp79-48h-Ag-1"
+    },
+    {
+      "replicate": "Exp2",
+      "genotype": "Col-0",
+      "name": "Ex2-Col0-48h-Ag-4"
+    },
+    {
+      "replicate": "Exp2",
+      "genotype": "cyp79",
+      "name": "Ex2-cyp79-48h-Ag-2"
+    },
+    {
+      "replicate": "Exp2",
+      "genotype": "Col-0",
+      "name": "Ex2-Col0-48h-Ag-2"
+    },
+    {
+      "replicate": "Exp2",
+      "genotype": "cyp79",
+      "name": "Ex2-cyp79-48h-Ag-3"
+    }
   ]
 
 
