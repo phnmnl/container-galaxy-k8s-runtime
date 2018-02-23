@@ -4,6 +4,8 @@ set -e
 DOCKER_REPO=${CONTAINER_REGISTRY:-}
 DOCKER_USER=${CONTAINER_USER:-pcm32}
 
+#PUSH_INTERMEDIATE_IMAGES=yes
+
 if [[ ${#DOCKER_REPO} > 0 ]];
 then
     if [[ ! "$DOCKER_REPO" == */ ]];
@@ -14,9 +16,9 @@ fi
     
 
 ANSIBLE_REPO=pcm32/ansible-galaxy-extras
-ANSIBLE_RELEASE=9947401f95285623ce74d8e32ef3a47898c80329
+ANSIBLE_RELEASE=17.09-pheno-cerebellin
 
-TAG=v17.09_cerebellin-isafix
+TAG=v17.09_cerebellin
 #NO_CACHE="--no-cache"
 
 if [[ ! -z ${CONTAINER_TAG_PREFIX+x} ]];
@@ -32,7 +34,11 @@ if [ -n $ANSIBLE_REPO ]
     then
        echo "Making custom galaxy-base-pheno:$TAG from $ANSIBLE_REPO at $ANSIBLE_RELEASE"
        docker build $NO_CACHE --build-arg ANSIBLE_REPO=$ANSIBLE_REPO --build-arg ANSIBLE_RELEASE=$ANSIBLE_RELEASE -t $DOCKER_REPO$DOCKER_USER/galaxy-base-pheno:$TAG docker-galaxy-stable/compose/galaxy-base/
-       docker push $DOCKER_REPO$DOCKER_USER/galaxy-base-pheno:$TAG
+       if [[ ! -z ${PUSH_INTERMEDIATE_IMAGES+x} ]];
+       then
+	   echo "Pushing intermediate image $DOCKER_REPO$DOCKER_USER/galaxy-base-pheno:$TAG"
+           docker push $DOCKER_REPO$DOCKER_USER/galaxy-base-pheno:$TAG
+       fi
 fi
 
 GALAXY_RELEASE=release_17.09_plus_isa_k8s_resource_limts
@@ -50,7 +56,11 @@ if [ -n $GALAXY_REPO ]
 	      DOCKERFILE_INIT_1=Dockerfile_init
        fi
        docker build $NO_CACHE --build-arg GALAXY_REPO=$GALAXY_REPO --build-arg GALAXY_RELEASE=$GALAXY_RELEASE --build-arg ISATOOLS_LITE_INSTALL=True -t $DOCKER_REPO$DOCKER_USER/galaxy-init-pheno:$TAG -f docker-galaxy-stable/compose/galaxy-init/$DOCKERFILE_INIT_1 docker-galaxy-stable/compose/galaxy-init/
-       docker push $DOCKER_REPO$DOCKER_USER/galaxy-init-pheno:$TAG
+       if [[ ! -z ${PUSH_INTERMEDIATE_IMAGES+x} ]];
+       then
+	   echo "Pushing intermediate image $DOCKER_REPO$DOCKER_USER/galaxy-init-pheno:$TAG"
+           docker push $DOCKER_REPO$DOCKER_USER/galaxy-init-pheno:$TAG
+       fi
 fi
 
 DOCKERFILE_INIT_FLAVOUR=Dockerfile_init
