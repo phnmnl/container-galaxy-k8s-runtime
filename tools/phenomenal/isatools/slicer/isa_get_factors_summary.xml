@@ -12,9 +12,18 @@
 ]]>
     </command>
     <inputs>
-        <param name="mtbls_id" type="text"
-               label="MetaboLights Study Identifier."
-               help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
+	    <conditional name="data_file">
+            <param name="input" type="select" label="Choose your ISA-Tab input source">
+                <option value="mtbls_id" selected="true">Metabolights study ID</option>
+                <option value="isatab_input">ISA-Tab datatype history item</option>
+            </param>
+            <when value="mtbls_id">
+                <param name="mtbls_id" type="text" label="MetaboLights Study Identifier" help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
+            </when>
+            <when value="isatab_input">
+                <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab"  help="An ISA-Tab datatype history item"/>
+            </when>
+        </conditional>
     </inputs>
     <outputs>
         <data format="json" name="output" label="$(mtbls_id) factors summary"/>
@@ -40,9 +49,21 @@ tables and computes the study groups and associated sample names.
 Input
 -----
 
+ISA-Tab input source
+====================
+Choose an input source, either direct from Metabolights or from an ISA-Tab
+history item that has already been downloaded or created in Galaxy.
+
 MetaboLights Study Identifier
 =============================
-MTBLS ID available at MetaboLights, e.g. MTBLS2.
+If the input source is Metabolights, then provide the MTBLS identifier
+available at MetaboLights, e.g. MTBLS2.
+
+ISA-Tab datatype history item
+=============================
+If the input source is an ISA-Tab history item, select from existing data
+history items. ISA-Tab items can be created by using the Metabolights
+downloader or the ISA-Tab metadata creation tools.
 
 ------
 Output

@@ -9,15 +9,24 @@
         <exit_code range="1:" level="fatal"/>
     </stdio>
     <command><![CDATA[
-        run_mtblisa.py get-factor-values "${mtbls_id}" "${factor}" "${output}"
+        run_mtblisa.py get-factor-values "${mtbls_id}" "${factor_name}" "${output}"
 ]]>
     </command>
     <inputs>
-        <param name="mtbls_id" type="text"
-               label="MetaboLights Study Identifier."
-               help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
-        <param name="factor" type="text" label="Factor name."
-               help="Factor value relevant to the specified MetaboLights study, e.g. cyp79. You can get a study's factor values by using the study_factor_values tool."/>
+	    <conditional name="data_file">
+            <param name="input" type="select" label="Choose your ISA-Tab input source">
+                <option value="mtbls_id" selected="true">Metabolights study ID</option>
+                <option value="isatab_input">ISA-Tab datatype history item</option>
+            </param>
+            <when value="mtbls_id">
+                <param name="mtbls_id" type="text" label="MetaboLights Study Identifier" help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
+            </when>
+            <when value="isatab_input">
+                <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab"  help="An ISA-Tab datatype history item"/>
+            </when>
+        </conditional>
+        <param name="factor_name" type="text" label="Factor name to filter on."
+               help="Factor name relevant to the specified MetaboLights study, e.g. genotype. You can get a study's factor names by using the study_factors tool."/>
     </inputs>
     <outputs>
         <data format="json" name="output"
@@ -46,9 +55,21 @@ study and assay tables for the MetaboLights study.
 Input
 -----
 
+ISA-Tab input source
+====================
+Choose an input source, either direct from Metabolights or from an ISA-Tab
+history item that has already been downloaded or created in Galaxy.
+
 MetaboLights Study Identifier
 =============================
-MTBLS ID available at MetaboLights, e.g. MTBLS2.
+If the input source is Metabolights, then provide the MTBLS identifier
+available at MetaboLights, e.g. MTBLS2.
+
+ISA-Tab datatype history item
+=============================
+If the input source is an ISA-Tab history item, select from existing data
+history items. ISA-Tab items can be created by using the Metabolights
+downloader or the ISA-Tab metadata creation tools.
 
 Factor name
 ===========
