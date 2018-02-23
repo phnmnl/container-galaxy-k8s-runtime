@@ -2,7 +2,7 @@
 <tool id="isa_get_factors_summary" name="Get factors summary" version="1.0">
   <description>Produce a summary table of variable factors of a MetaboLights study</description>
   <command><![CDATA[
-    run_mtblisa.py get-summary $mtbls_id $output
+    run_mtblisa.py get-summary "${mtbls_id}" "${output}"
   ]]>
   </command>
   <inputs>
