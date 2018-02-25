@@ -7,7 +7,13 @@
         <exit_code range="1:" level="fatal"/>
     </stdio>
     <command><![CDATA[
-      run_mtblisa.py get-factors "${mtbls_id}" "${output}"
+        #set ${mtbls_id} = ""
+        #if ${data_file.input} == "mtbls_id"
+            run_mtblisa.py get-factors "${data_file.mtbls_id}" "${output}"
+        #endif
+        #if ${data_file.input} == "isatab_input"
+            run_mtblisa.py datatype-get-factors "${data_file.isatab_input.files_path}" "${output}"
+        #endif
 ]]>
     </command>
     <inputs>
