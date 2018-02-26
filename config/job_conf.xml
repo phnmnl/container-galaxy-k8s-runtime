@@ -125,14 +125,6 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
-    <destination id="rnmr1d-container" runner="k8s">
-      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-      <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">rnmr1d</param>
-      <param id="docker_tag_override">latest</param>
-      <param id="max_pod_retrials">3</param>
-      <param id="docker_enabled">true</param>
-    </destination>
     <destination id="nmrglue-container" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -354,7 +346,7 @@
     <tool id="zip-nmrml-collection" destination="dynamic-k8s-small" resources="all"/>
     <tool id="rnmr1d" destination="dynamic-k8s-xlarge" resources="all"/>
     <tool id="rnmr1d-stacked-plot" destination="dynamic-k8s-tiny" resources="all"/>
-    <tool id="rnmr1d-prepare-output" destination="rnmr1d-container"/>
+    <tool id="rnmr1d-prepare-output" destination="dynamic-k8s-small" resources="all"/>
     <!-- old NMR -->
     <tool id="mtbls2nmrglue" destination="nmrglue-container"/>
     <tool id="soap_process" destination="soap-nmr-container"/>
