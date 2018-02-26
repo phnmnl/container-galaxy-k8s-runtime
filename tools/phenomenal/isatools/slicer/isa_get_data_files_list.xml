@@ -8,8 +8,13 @@
         <exit_code range="1:" level="fatal"/>
     </stdio>
     <command><![CDATA[
-        run_mtblisa.py get-data "${mtbls_id}" "${output}"
-        --json-query "{ \"$factor_name\": \"$factor_value\" }"
+        #if $data_file.input == "mtbls_id"
+            run_mtblisa.py get-data "${data_file.mtbls_id}" "${output}" --json-query "{ \"$factor_name\": \"$factor_value\" }"
+        #end if
+
+        #if $data_file.input == "isatab_input"
+            run_mtblisa.py datatype-get-data "${data_file.isatab_input.extra_files_path}" "${output}" --json-query "{ \"$factor_name\": \"$factor_value\" }"
+        #end if
 ]]>
     </command>
     <inputs>
@@ -33,7 +38,7 @@
     </inputs>
     <outputs>
         <data format="json" name="output"
-              label="$(mtbls_id) sliced data files list"/>
+              label="Sliced data files list"/>
     </outputs>
 
     <tests>
