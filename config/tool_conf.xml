@@ -85,6 +85,7 @@
      <tool file="phenomenal/isatools/slicer/isa_get_study_factors.xml" labels="ISA"/>
      <tool file="phenomenal/isatools/slicer/isa_get_study_factor_values.xml" labels="ISA"/>
      <tool file="phenomenal/isatools/slicer/isa_get_data_files_list.xml" labels="ISA"/>
+     <tool file="phenomenal/isatools/slicer/isa_get_data_files_collection.xml" labels="ISA"/>
      <tool file="phenomenal/isatools/slicer/isa_get_factors_summary.xml" labels="ISA"/>
      <tool file="phenomenal/isatools/mtbls-factors-viz.xml" labels="ISA"/>
    </section> 
