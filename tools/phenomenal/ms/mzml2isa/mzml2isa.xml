@@ -189,7 +189,7 @@
 	       mv output-dir/'$name_of_study'/* '$isastudy.files_path'/;
    #if $include_raw_data_in_output:
 	 #if $data_file.input == "zip_file":
-               unzip "$data_file.zip_input" -d "$isastudy.files_path";
+               unzip -j "$data_file.zip_input" -d "$isastudy.files_path";
 	 #else
                tar -xf "$data_file.tar_input" -C "$isastudy.files_path";
 	 #end if       
@@ -237,7 +237,7 @@ Notes:
 		<discover_datasets pattern="(?P&lt;designation&gt;s_.+)\.txt" directory="study_dir" format="tabular"/>
 	</collection>
 	<data name="i_file" format="tabular" label="I File" from_work_dir="study_dir/i_Investigation.txt" visible="true"/>
-        <data name="isastudy" label="${name_of_study}" format="isa-tab"/>
+        <data name="isastudy" label="${name_of_study} ISA Archive" format="isa-tab"/>
     </outputs>
     <tests>
         <test>
