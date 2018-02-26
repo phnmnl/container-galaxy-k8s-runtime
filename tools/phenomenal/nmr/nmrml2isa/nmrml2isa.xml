@@ -126,8 +126,8 @@
 
     wrapper.py -inputzip "$inputzip"
                -jsontxt "$jsontxt"
-               -html_file "$html_file"
-               -out_dir .
+               -html_file file.html
+               -out_dir output-dir
                -study_title "$name_of_study"
                --s_submission_date "$s_submission_date"
                --s_release_date "$s_release_date"
@@ -173,17 +173,31 @@
                --organism_part_ref "$organism_part_ref"
                --organism_part_iri "$organism_part_iri";
 
-               ln -s ./"$name_of_study" study_dir;
+               mkdir -p study_dir;
+	       cd output-dir/'$name_of_study';
+	       zip isa.zip i_* a_* s_* && mv isa.zip "$ISA_zip";
+	       cp i_* ../../study_dir/;
+	       cp a_* ../../study_dir/;
+	       cp s_* ../../study_dir/;
+	       cd ../../;
+               mkdir -p '$isastudy.files_path';
+	       mv output-dir/'$name_of_study'/* '$isastudy.files_path'/;
+   #if $include_raw_data_in_output:
+	 #if $data_file.input == "zip_file":
+               unzip -j "$data_file.zip_input" -d "$isastudy.files_path";
+	 #else
+               tar -xf "$data_file.tar_input" -C "$isastudy.files_path";
+	 #end if       
+   #end if
 
-               cd study_dir;
-               zip isa.zip i_* a_* s_* && mv isa.zip "$ISA_zip";
                ]]>
     </command>
 
     <inputs>
         <param name="name_of_study" type="text" label="Name study" help="This should not contain any spaces as the name will be used a prefix for ISA-tab file names" />
         <param format="zip" name="inputzip" type="data" label="nmrML zip file"  help="A zipped folder of nmrML files"/>
-        <param optional="true" format="txt" name="jsontxt" type="data" label="Additional user Metadata in json"  help="A user can add additional metadata directory through a json see link for example format"/>
+	<param optional="true" format="txt" name="jsontxt" type="data" label="Additional user Metadata in json"  help="A user can add additional metadata directory through a json see link for example format"/>
+	<param optiona="false" type="boolean" name="include_raw_data_in_output" checked="false" label="Include provided raw data in the ISA Archive" help="Set to 'Yes' to include the raw data. Including the original data in the ISA archive created will mean that the data will be copied, duplicating it in the server. If your quota is low, the dataset is really massive or you don't plan to process this ISA archive directly by another tool, you might want to avoid this."/>
         <expand macro="studymacro"/>
         <expand macro="investmacro"/>
         <expand macro="expmacro"/>
@@ -203,7 +217,7 @@ this would require changing the out_dir for wrapper.py back to $html_file.extra_
 'wrapper.py -out_dir $html_file.extra_files_path'
 
 -->
-    <data format="html" name="html_file" label="" hidden="true" />
+    <!-- <data format="html" name="html_file" label="" hidden="true" /> -->
     <data name="ISA_zip" format="zip" label="ISA Zip file"/>
         <collection type="list" label="A Files" name="a_files">
             <discover_datasets pattern="(?P&lt;designation&gt;a_.+)\.txt" directory="study_dir" format="tabular"/>
@@ -211,7 +225,8 @@ this would require changing the out_dir for wrapper.py back to $html_file.extra_
         <collection type="list" label="S Files" name="s_files">
             <discover_datasets pattern="(?P&lt;designation&gt;s_.+)\.txt" directory="study_dir" format="tabular"/>
         </collection>
-        <data name="i_file" format="tabular" label="I File" from_work_dir="study_dir/i_Investigation.txt" visible="true"/>
+	<data name="i_file" format="tabular" label="I File" from_work_dir="study_dir/i_Investigation.txt" visible="true"/>
+	<data name="isastudy" label="${name_of_study} ISA Archive" format="isa-tab"/>
     </outputs>
     <tests>
         <test>
