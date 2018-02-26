@@ -1,4 +1,4 @@
-<tool id="mzml2isa" name="mzml2isa" version="1.0.0">
+<tool id="mzml2isa" name="mzml2isa" version="2.0.0">
     <description>Parser to get meta information from mzML files and create an ISA-Tab structure</description>
     
     <macros>

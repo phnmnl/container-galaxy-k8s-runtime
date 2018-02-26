@@ -1,4 +1,4 @@
-<tool id="nmrml2isa" name="nmrml2isa" version="0.1.0">
+<tool id="nmrml2isa" name="nmrml2isa" version="1.0.0">
     <description>Parser to get meta information from nmrML files and create an ISA-Tab structure</description>
     
     <macros>
