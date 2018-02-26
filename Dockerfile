@@ -5,6 +5,11 @@ LABEL Description="Galaxy 17.09-phenomenal for running inside Kubernetes."
 LABEL software="Galaxy"
 LABEL software.version="17.09-pheno-lr"
 LABEL version="1.6"
+LABEL description="PhenoMeNal Galaxy installation to be used inside k8s with shared file system"
+LABEL website="https://github.com/phnmnl/container-galaxy-k8s-runtime"
+LABEL documentation="https://github.com/phnmnl/phenomenal-h2020/wiki/QuickStart-Installation-for-Local-PhenoMeNal-Workflow"
+LABEL license="https://github.com/phnmnl/container-galaxy-k8s-runtime/blob/master/LICENSE"
+LABEL tags="Metabolomics"
 
 
 RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transport-https software-properties-common wget && \
