@@ -1,0 +1,176 @@
+<tool id="dimspy_hdf5_to_txt" name="Convert DIMSpy-based HDF5 to tsv" version="1.0.0">
+    <description></description>
+    <macros>
+        <import>macros.xml</import>
+    </macros>
+    <expand macro="requirements" />
+    <expand macro="stdio" />
+    <command><![CDATA[
+        #if $input.object_type == "peak_lists"
+            dimspy hdf5-pls-to-txt
+            --input "$input.hdf5_file_in"
+            --output .
+            --delimiter $delimiter
+        #elif $input.object_type == "peak_matrix"
+            #if $input.matrix_format == "standard" or $input.matrix_format == "standard_comprehensive"
+                dimspy hdf5-pm-to-txt
+                --input "$input.hdf5_file_in"
+                --output "$matrix_file_out"
+                --delimiter $delimiter
+                --attribute_name $input.matrix_attr
+                --representation-samples $input.representation_samples
+            #end if
+            #if $input.matrix_format == "standard_comprehensive"
+                &&
+            #end if
+            #if $input.matrix_format == "comprehensive" or $input.matrix_format == "standard_comprehensive"
+                dimspy hdf5-pm-to-txt
+                --input "$input.hdf5_file_in"
+                --output "$matrix_comprehensive_file_out"
+                --delimiter $delimiter
+                --comprehensive
+                --attribute_name $input.matrix_attr
+                --representation-samples $input.representation_samples
+            #end if
+        #end if
+    ]]></command>
+    <inputs>
+        <param name="delimiter" type="hidden" value="tab" argument="--delimiter"/>
+        <conditional name="input">
+            <param name="object_type" type="select" label="Content HDF5 file" help="" argument="">
+                <option value="peak_matrix" selected="true">Peak Intensity Matrix</option>
+                <option value="peak_lists">Peak list(s)</option>
+            </param>
+            <when value="peak_lists">
+                <param name="hdf5_file_in" type="data" format="h5" label="Peaklist(s) (HDF5 file)" help="" argument="--input"/>
+            </when>
+            <when value="peak_matrix">
+                <param name="hdf5_file_in" type="data" format="h5" label="Peak intensity matrix (HDF5 file)" help="" argument="--input"/>
+                <param name="matrix_format" type="select" label="Select format(s) tsv formatted peak instensity matrix" >
+                    <option value="standard" selected="true">Standard Peak Matrix (i.e. m/z and intensity).</option>
+                    <option value="comprehensive">Comprehensive Peak Matrix (e.g. m/z and intensity, rsd, missing values).</option>
+                    <option value="standard_comprehensive">Standard and comprehensive</option>
+                </param>
+                <param name="representation_samples" type="select" label="Should the rows or columns represent the samples?">
+                    <option value="rows" selected="true">Rows</option>
+                    <option value="columns">Columns</option>
+                </param>
+                <param name="matrix_attr" type="select" label="The Peak Matrix should contain ... values">
+                    <option value="intensity" selected="true">Intensity</option>
+                    <option value="mz">m/z</option>
+                    <option value="snr">Signal-to-noise ratio (SNR)</option>
+                </param>
+            </when>
+        </conditional>
+    </inputs>
+    <outputs>
+        <collection name="peaklists_txt" type="list" label="${tool.name} on ${on_string}: Peaklists">
+            <filter>input["object_type"] == "peak_lists"</filter>
+            <discover_datasets pattern="(?P&lt;designation&gt;.+)\.txt" format="tsv" directory="." visible="false" />
+        </collection>
+        <data name="matrix_file_out" format="tsv" label="${tool.name} on ${on_string}: Peak Matrix">
+            <filter>input["object_type"] == "peak_matrix" and (input["matrix_format"] == "standard" or input["matrix_format"] == "standard_comprehensive")</filter>
+        </data>
+        <data name="matrix_comprehensive_file_out" format="tsv" label="${tool.name} on ${on_string}: Peak Matrix (comprehensive)" >
+            <filter>input["object_type"] == "peak_matrix" and (input["matrix_format"] == "comprehensive" or input["matrix_format"] == "standard_comprehensive")</filter>
+        </data>
+    </outputs>
+    <tests>
+        <test>
+            <param name="input|object_type" value="peak_lists"/>
+            <param name="input|hdf5_file_in" value="pls.h5" ftype="h5"/>
+            <output_collection name="peaklists_txt" type="list">
+                <element name="batch04_QC17_rep01_262" file="batch04_QC17_rep01_262.txt" ftype="tsv"/>
+                <element name="batch04_QC17_rep02_263" file="batch04_QC17_rep02_263.txt" ftype="tsv"/>
+                <element name="batch04_QC17_rep03_264" file="batch04_QC17_rep03_264.txt" ftype="tsv"/>
+            </output_collection>
+        </test>
+        <test>
+            <param name="input|object_type" value="peak_matrix"/>
+            <param name="input|hdf5_file_in" value="pm_as_bf_sf.h5" ftype="h5"/>
+            <param name="input|matrix_format" value="comprehensive"/>
+            <param name="input|representation_samples" value="columns"/>
+            <param name="input|matrix_attr" value="intensity"/>
+            <output name="matrix_comprehensive_file_out" file="peak_matrix_hdf5_to_txt_intensity.txt" ftype="tsv"/>
+        </test>
+        <test>
+            <param name="input|object_type" value="peak_matrix"/>
+            <param name="input|hdf5_file_in" value="pm_as_bf_sf.h5" ftype="h5"/>
+            <param name="input|matrix_format" value="standard"/>
+            <param name="input|representation_samples" value="rows"/>
+            <param name="input|matrix_attr" value="mz"/>
+            <output name="matrix_file_out" file="peak_matrix_hdf5_to_txt_mz.txt" ftype="tsv"/>
+        </test>
+        <test>
+            <param name="input|object_type" value="peak_matrix"/>
+            <param name="input|hdf5_file_in" value="pm_as_bf_sf.h5" ftype="h5"/>
+            <param name="input|matrix_format" value="standard_comprehensive"/>
+            <param name="input|representation_samples" value="rows"/>
+            <param name="input|matrix_attr" value="snr"/>
+            <output name="matrix_file_out" file="peak_matrix_hdf5_to_txt_snr.txt" ftype="tsv"/>
+            <output name="matrix_comprehensive_file_out" file="peak_matrix_hdf5_to_txt_comprehensive_snr.txt" ftype="tsv"/>
+        </test>
+    </tests>
+    <help>
+--------------------------------
+Convert DIMSpy-based HDF5 to tsv
+--------------------------------
+
+Description
+-----------
+
+| Use this tool to convert Peak Intensity Matrix or Peaklist(s) to user-friendly .tsv file(s).
+
+Parameters
+----------
+
+**\1. Select the content of the specified hdf5 file** (default = 'Peak Intensity Matrix')
+
+**\2. Peak Intensity Matrix or Peak Lists (HDF5 file)** (REQUIRED)
+
+Selection menu in which user can select the Peak Intensity Matrix or Peaklists requiring conversion to .tsv format.
+
+**\3. output type** (default = &quot;Standard&quot; - Peak Intensity Matrix specific)
+
+ - **Comprehensive output** - a Peak Intensity Matrix containing the m/z, intensity, missing values and other metrics associated with the aligned peaks. 
+ - **Standard ouptut** - a .txt formatted Peak Intensity Matrix (i.e. m/z and intensity).    
+ - **Standard and Comprehensive**
+
+
+**\4) Should rows or columns represent the samples?** (default = &quot;rows&quot;  - Peak Intensity Matrix specific)
+
+Binary toggle (default = &quot;rows&quot;) where selection of:
+
+ - &quot;rows&quot; puts sample information in to the rows and m/z values (for aligned mass spectral peaks) in to columns of any output Peak Matrix.           
+ - &quot;columns&quot; puts sample information in the columns and m/z values (for aligned mass spectral peaks) in to the rows of any output Peak Matrix.
+
+**\5) **The Peak Intensity Matrix should contain ... values** (Peak Intensity Matrix specific)
+
+Use this option to define which metric is inserted in to the cells of the output Peak Matrix.
+
+ - &quot;Intensity&quot; writes the absolute peak intensity to the Peak Matrix.
+ - &quot;m/z&quot; writes the m/z value to the Peak Matrix.
+ - &quot;Signal-to-noise ratio (SNR)&quot; writes the signal-to-noise ratio to the Peak Matrix.
+
+Output file(s)
+--------------
+
+A (standard and/or comprehenstive) peak matrix comprising samples on one axis and m/z values on the perpendicular axis
+   
+- Tab-delimited text file containing a numeric data matrix, with . as decimal, and NA for missing values.
+- File only created if user toggles &quot;Standard output&quot; and/or &quot;Comprehensive output&quot; to &quot;Yes&quot;
+- By default, samples are in rows and peaks are in columns. Altering the &quot;Should rows or columns represent samples&quot; toggle will transpose this matrix.
+
+| **OPTIONAL**
+| A Data Collection containing Peaklists, in .tsv format
+| 
+
+- Tab-delimited text file containing a numeric data matrix, with . as decimal, and NA for missing values.
+- Includes additional information, such as the signal-to-noise ratio, relative-standard deviation (rsd) and 'purity' for each peak.
+
+@github_developers_contributors@
+    
+    </help>
+    <expand macro="citations" />
+</tool>
+

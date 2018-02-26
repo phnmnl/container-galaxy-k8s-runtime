@@ -1,0 +1,154 @@
+<tool id="dimspy_blank_filter" name="Blank Filter" version="1.0.0">
+    <description> - Remove 'blank' peaks from the biological mass spectra</description>
+    <macros>
+        <import>macros.xml</import>
+    </macros>
+    <expand macro="requirements" />
+    <expand macro="stdio" />
+    <command><![CDATA[
+        dimspy blank-filter
+        --input "$hdf5_file_in"
+        --output "$hdf5_file_out"
+        --blank-label $blank_label
+        --min-fraction $min_fraction
+        --function $function
+        --min-fold-change $min_fold_change
+        #if $remove_blank_samples == "--remove-blank-samples"
+            $remove_blank_samples
+            &&
+            dimspy create-sample-list
+            --input "$hdf5_file_out"
+            --output "$samplelist"
+            --delimiter tab
+        #end if
+        #if $hdf5_to_txt.standard
+            &&
+            @HDF5_PM_TO_TXT@
+        #end if
+        #if $hdf5_to_txt.comprehensive
+            &&
+            @HDF5_PM_TO_TXT_COMPREHENSIVE@
+        #end if
+    ]]></command>
+    <inputs>
+        <param name="hdf5_file_in" type="data" format="h5" label="Peak Intensity Matrix (HDF5 file)" help="" argument="--input"/>
+        <param name="blank_label" type="text" value="blank" label="Label for the blank samples" argument="--blank-label">
+            <validator type="empty_field"/>
+        </param>
+        <param name="min_fraction" type="float" min="0.0" max="1.0" value="1.0" label="Minimum fraction (percentage)" help="The percentage of samples (with a intensity value) that must beat the blank samples (peak by peak basis)" argument="--min-fraction"/>
+        <param name="function" type="select" label="Function" help="Select the function that should be used to calculate the peak intensity threshold (blanks only)" argument="--function">
+            <option value="mean" selected="true">mean</option>
+            <option value="median">median</option>
+            <option value="max">max</option>
+        </param>
+        <param name="min_fold_change" type="float" value="10.0" help="" argument="--min-fold-change"/>
+        <param name="remove_blank_samples" type="boolean" checked="true" truevalue="--remove-blank-samples" falsevalue="" label="Remove blank samples (rows)"  help="" argument="--remove-blank-samples"/>
+        <param name="delimiter" type="hidden" value="tab" argument="--delimiter"/>
+        <expand macro="hdf5_pm_to_txt" />
+    </inputs>
+    <outputs>
+        <expand macro="outputs_peak_intensity_matrix" />
+        <data name="samplelist" format="tsv" label="${tool.name} on ${on_string}: Sample Metadata (updated)"  >
+            <filter>str($remove_blank_samples) == "--remove-blank-samples"</filter>
+        </data>
+    </outputs>
+    <tests>
+        <test>
+            <param name="hdf5_file_in" value="pm_as.h5" ftype="h5"/>
+            <param name="blank_label" value="blank"/>
+            <param name="min_fraction" value="1.0"/>
+            <param name="function" value="mean"/>
+            <param name="min_fold_change" value="10.0"/>
+            <param name="remove_blank_samples" value="--remove-blank-samples"/>
+            <param name="delimiter" value="tab"/>
+            <param name="hdf5_to_txt|standard" value="True"/>
+            <param name="hdf5_to_txt|comprehensive" value="False"/>
+            <param name="hdf5_to_txt|representation_samples" value="rows"/>
+            <param name="hdf5_to_txt|matrix_attr" value="intensity"/>
+            <output name="hdf5_file_out" file="pm_as_bf_rmbs.h5" ftype="h5" compare="sim_size"/>
+            <output name="matrix_file_out" file="peak_matrix_as_bf_rmbs.txt" ftype="tsv"/>
+            <output name="samplelist" file="sample_list_after_bf.txt" ftype="tsv"/>
+        </test>
+        <test>
+            <param name="hdf5_file_in" value="pm_as.h5" ftype="h5"/>
+            <param name="blank_label" value="blank"/>
+            <param name="min_fraction" value="1.0"/>
+            <param name="function" value="mean"/>
+            <param name="min_fold_change" value="10.0"/>
+            <param name="remove_blank_samples" value=""/>
+            <param name="delimiter" value="tab"/>
+            <param name="hdf5_to_txt|standard" value="True"/>
+            <param name="hdf5_to_txt|comprehensive" value="True"/>
+            <param name="hdf5_to_txt|representation_samples" value="rows"/>
+            <param name="hdf5_to_txt|matrix_attr" value="intensity"/>
+            <output name="hdf5_file_out" file="pm_as_bf.h5" ftype="h5" compare="sim_size"/>
+            <output name="matrix_file_out" file="peak_matrix_as_bf.txt" ftype="tsv"/>
+            <output name="matrix_comprehensive_file_out" file="peak_matrix_as_bf_compr.txt" ftype="tsv"/>
+        </test>
+    </tests>
+    <help>
+------------
+Blank Filter
+------------
+
+Description
+-----------
+
+| Use this tool to remove from the user-specified peak matrix, those peaks that are present in the user-specified 'blank' class.
+| A peak is subtracted from the matrix when fewer-than the 'minimum fraction' of non-blank samples have an intensity ratio (relative to the blank class) of less-than the user-specified 'min_fold_change'.
+| 
+| In the DIMS analysis workflow, this tool is typically applied following: 
+| 'Process Scans' -> 'Replicate Filter' -> 'Align Samples'.
+| 
+| The reference class defined by the user need not necessarily be a blank class and as such may be any class against which all other classes in the peak matrix are to be compared. 
+| For example, peaks present in a mock class 'time-point-20hr' might be subtracted from classes 'time-point-0hr' and 'time-point-4hr' if the number of samples in the 'time-point-4hr' and 'time-point-0hr' classes that have intensity ratios relative to the 'time-point-20hr' class, is fewer than the user-defined minimum fraction)
+
+Parameters
+----------
+
+**\1. Peak Intensity Matrix (HDF5 file)** (REQUIRED)
+
+A Peak Intensity Matrix (.h5), typically returned from the 'Align Samples' tool.
+	
+**\2. Label for the blank samples** (REQUIRED)
+
+String indicating the name assigned to 'blank' samples in the Filelist (e.g. blank)
+	
+**\3. Minimum fraction (percentage)** (REQUIRED; default = 1)
+
+| Numerical value ranging from 0 to 1
+| Set to 0 to skip this filtering step.
+
+**\4. ppm** (REQUIRED; default = 2.0)
+
+| A numeric value from 0 upwards.
+| Peaks with m/z differences (measured in parts-per-million) below this value are clustered together as a single feature. For clustered peaks, their intensity ratio is compared to the user-specified 'mean/median/max' intensity of any correspondingly clustered peaks from the user-specified 'blank' class.
+
+**\5. Function** (REQUIRED; default = 'mean')
+
+Toggle, where selection of:
+	
+- 'mean' corresponds to the use of the non-weighted average of 'blank' sample peak intensities (NA values are ignored) when calculating the 'blank' to 'non-blank' peak intensity ratio.
+- 'median' corresponds to the use of the median of the 'blank' sample peak intensities (NA values are ignored) when calculating the 'blank' to 'non-blank' peak intensity ratio.
+- 'max' corresponds to the use of the maximum intensity among 'blank' sample peak intensities (NA values are ignored) when calculating the 'blank' to 'non-blank' peak intensity ratio.
+
+**\6. min_fold_change** (REQUIRED; default = 10)
+
+Numeric value from 0 upwards. This value defines the ratio between 'non-blank' and 'blank' peak intensities, above which a peak is regarded as having been reliably detected in a sample.
+
+
+**\7. Remove blank samples (rows)** (REQUIRED; default = 'YES')
+
+Toggle, where selection of:
+  
+- 'Yes' removes samples from the output peak matrix that belong to the user-specified 'blank' class.
+- 'No' retains samples from the user-specified 'blank' class in the output peak matrix.
+
+@help_options_addtional_output@
+
+@github_developers_contributors@  
+    
+    </help>
+    <expand macro="citations" />
+</tool>
+

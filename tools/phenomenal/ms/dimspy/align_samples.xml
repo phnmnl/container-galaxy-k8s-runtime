@@ -1,0 +1,125 @@
+<tool id="dimspy_align_samples" name="Align Samples" version="1.0.0">
+    <description> - Align peaks across Peaklists</description>
+    <macros>
+        <import>macros.xml</import>
+    </macros>
+    <expand macro="requirements" />
+    <expand macro="stdio" />
+    <command><![CDATA[
+        dimspy align-samples
+        --input "$hdf5_file_in"
+        --output "$hdf5_file_out"
+        #if $filelist
+            --filelist "$filelist"
+        #end if
+        --ppm $ppm
+        #if $hdf5_to_txt.standard
+            &&
+            @HDF5_PM_TO_TXT@
+        #end if
+        #if $hdf5_to_txt.comprehensive
+            &&
+            @HDF5_PM_TO_TXT_COMPREHENSIVE@
+        #end if
+    ]]></command>
+    <inputs>
+        <param name="hdf5_file_in" type="data" format="h5" label="Peaklists (HDF5 file)" help="" argument="--input"/>
+        <param name="filelist" type="data" optional="true" format="tsv,tabular" label="Filelist / Samplelist" argument="--filelist"/>
+        <param name="ppm" type="float" value="2.0" label="ppm" help="Maximum tolerated m/z deviation across samples in parts per million (ppm)." argument="--ppm"/>
+        <param name="delimiter" type="hidden" value="tab" argument="--delimiter"/>
+        <expand macro="hdf5_pm_to_txt" />
+    </inputs>
+    <outputs>
+        <expand macro="outputs_peak_intensity_matrix" />
+    </outputs>
+    <tests>
+        <test>
+            <param name="hdf5_file_in" value="pls_rf.h5" ftype="h5"/>
+            <param name="ppm" value="2.0"/>
+            <param name="delimiter" value="tab"/>
+            <param name="hdf5_to_txt|standard" value="True"/>
+            <param name="hdf5_to_txt|comprehensive" value="False"/>
+            <param name="hdf5_to_txt|samples_representations" value="rows"/>
+            <param name="hdf5_to_txt|matrix_attr" value="intensity"/>
+            <output name="hdf5_file_out" file="pm_as.h5" ftype="h5" compare="sim_size"/>
+            <output name="matrix_file_out" file="peak_matrix_as.txt" ftype="tsv"/>
+        </test>
+        <test>
+            <param name="hdf5_file_in" value="pls_rf.h5" ftype="h5"/>
+            <param name="ppm" value="2.0"/>
+            <param name="delimiter" value="tab"/>
+            <param name="hdf5_to_txt|standard" value="True"/>
+            <param name="hdf5_to_txt|comprehensive" value="False"/>
+            <param name="hdf5_to_txt|representation_samples" value="columns"/>
+            <param name="hdf5_to_txt|matrix_attr" value="intensity"/>
+            <output name="hdf5_file_out" file="pm_as.h5" ftype="h5" compare="sim_size"/>
+            <output name="matrix_file_out" file="peak_matrix_as_t.txt" ftype="tsv"/>
+        </test>
+        <test>
+            <param name="hdf5_file_in" value="pls_rf.h5" ftype="h5"/>
+            <param name="ppm" value="2.0"/>
+            <param name="delimiter" value="tab"/>
+            <param name="hdf5_to_txt|standard" value="True"/>
+            <param name="hdf5_to_txt|comprehensive" value="True"/>
+            <param name="hdf5_to_txt|samples_representations" value="rows"/>
+            <param name="hdf5_to_txt|matrix_attr" value="mz"/>
+            <output name="hdf5_file_out" file="pm_as.h5" ftype="h5" compare="sim_size"/>
+            <output name="matrix_file_out" file="peak_matrix_as_mz.txt" ftype="tsv"/>
+            <output name="matrix_comprehensive_file_out" file="peak_matrix_as_mz_compr.txt" ftype="tsv"/>
+        </test>
+    </tests>
+    <help>
+-------------
+Align Samples
+-------------
+
+Description
+-----------
+
+| Use this tool to align Peaklists according to their constituent mass spectral peaks. 
+| In the DIMS analysis workflow, align samples typically follows 'Replicate Filter'.
+| This tool may, however, be used to align any Peaklists (e.g. aligning individual Peaklists for each replicate of a sample).
+
+Parameters
+----------
+
+**\1. Set of Peaklists (HDF5 file)** (REQUIRED)
+
+For the default DIMS analysis workflow, this comprises a set of Peaklists output from the sequential application of the  'process_scans' tools, followed by the 'replicate_filter' tool.
+
+	
+**\2. Filelist / Samplelist** (OPTIONAL)
+   
+| A tabular-formatted .txt file with columns: filename, batch, classLabel, injectionOrder.
+| Additional collumns are allowed but are not used during processing.
+| This file must be uploaded in to (or available from) the current history in order to allow for it to be selected from the drop-down menu.
+| **NOTE:** Only provide a filelist if you like to exclude Peaklist or if you have not provided a filelist for 'Process Scans' or Replicate Filter'.
+| 
+	
+<![CDATA[
+	
+		+-------------------------------+-------+------------+----------------+
+		| filename                      | batch | classLabel | injectionOrder |
+		+-------------------------------+-------+------------+----------------+
+		| sample_rep1_rep3_rep4         | 1     | sample     | 1              |
+		+-------------------------------+-------+------------+----------------+
+		| blank_rep1_rep2_rep3          | 1     | sample     | 2              |
+		+-------------------------------+-------+------------+----------------+
+		| ...                           | ...   | ...        | ...            |
+		+-------------------------------+-------+------------+----------------+
+
+]]>
+
+**\3. ppm** (REQUIRED; default = 2.0)
+   
+| A numeric value from 0 upwards.
+| Peaks with m/z differences (measured in parts-per-million) below this value are clustered together as a single feature. 
+|
+
+@help_options_addtional_output@
+
+@github_developers_contributors@
+
+    </help>
+    <expand macro="citations" />
+</tool>

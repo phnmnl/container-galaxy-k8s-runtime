@@ -471,3 +471,17 @@ assignment:
   max_pod_retrials: 3
   tools_id:
   - mtbls-labs-uploader
+- docker_image_override: dimspy
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v1.1.0_cv1.1.13
+  max_pod_retrials: 3
+  tools_id:
+  - dimspy_process_scans
+  - dimspy_replicate_filter
+  - dimspy_align_samples
+  - dimspy_blank_filter
+  - dimspy_sample_filter
+  - dimspy_hdf5_to_txt
+  - dimspy_merge_peaklists
+  - dimspy_get_peaklists
