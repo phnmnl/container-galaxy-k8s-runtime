@@ -4,10 +4,12 @@
        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/batman</container>
      </requirements>
      <command><![CDATA[     
+	 sed "s/paraProc - .*/paraProc - : ${number_of_cores}/" ${options_file};
      runBATMAN.R -i ${nmr_spectra_input} -o \$PWD -p ${options_file} -u ${metabolite_template} -l ${target_metabolites}
        ]]>
      </command>
      <inputs>
+		 <param name="number_of_cores" type="integer" value="1" label="BATMAN Core Number" help="Setup the number of core that BATMAN uses"/>         
          <param name="nmr_spectra_input" type="data" format="txt" label="NMR Dataset." help="A tabulated text file including p.p.m and spectra in columns. Typical filename is NMRdata.txt. Please download the demo data set from the link below. "/>
          <param name="options_file" type="data" format="txt" label="BATMAN options." help="A text file including BATMAN running options, such as number of spectra which must within the range given by the NMR data set. The typical filename is batmanOptions.txt"/>
          <param name="metabolite_template" type="data" label="pre-defined metabolites template." help="This file includes metabolites identifiers, J_coupling information, chemical shift etc. The typical filename is multi_data_user.csv"/>
