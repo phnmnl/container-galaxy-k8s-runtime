@@ -323,7 +323,7 @@
     <tool id="escher-fluxomics" destination="dynamic-k8s-tiny" resources="all"/>
     <!-- ICL -->
     <tool id="batman-nmr" destination="batman-container"/>
-    <tool id="nmrml2batman" destination="dynamic-k8s-small"/>
+    <tool id="nmrml2batman" destination="dynamic-k8s-small" resources="all"/>
     <tool id="power-analysis" destination="papy-container"/>
     <tool id="bruker2batman" destination="dynamic-k8s-medium" resources="all"/>
     <!-- W4M Sacurine -->
@@ -366,8 +366,8 @@
     <tool id="xcms-group-peaks" destination="dynamic-k8s-large" resources="all"/>
     <tool id="xcms-correct-rt" destination="dynamic-k8s-large" resources="all"/>
     <tool id="xcms-fill-peaks" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="xcms-dilutionfilter" destination="dynamic-k8s-medium" />
-    <tool id="xcms-blankfilter" destination="dynamic-k8s-medium" />
+    <tool id="xcms-dilutionfilter" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="xcms-blankfilter" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="save_chromatogram" destination="dynamic-k8s-small" resources="all" />
     <tool id="show_chromatogram" destination="dynamic-k8s-small" resources="all" />
     <!-- CAMERA -->
@@ -382,9 +382,9 @@
     <tool id="camera-find-isotopes" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="camera-find-adducts" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="unzip-collection" destination="camera-container"/>
-    <tool id="camera-prepareoutput" destination="dynamic-k8s-medium" />
+    <tool id="camera-prepareoutput" destination="dynamic-k8s-medium" resources="all"/>
     <!-- OpenMS -->
-    <tool id="xcmssplit" destination="dynamic-k8s-large" />
+    <tool id="xcmssplit" destination="dynamic-k8s-large" resources="all"/>
     <tool id="AdditiveSeries" destination="container-openms"/> 
     <tool id="BaselineFilter" destination="container-openms"/> 
     <tool id="CompNovo" destination="container-openms"/> 
@@ -484,11 +484,11 @@
     <tool id="map-msms2camera" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="msms2metfrag" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="metfrag-vis" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="metfrag-cli-batch-multiple" destination="dynamic-k8s-large" />
-    <tool id="msnbase-filter-merge-msms" destination="dynamic-k8s-medium" />
-    <tool id="msms2metfrag-multiple" destination="dynamic-k8s-medium" />
-    <tool id="aggregatemetfrag" destination="dynamic-k8s-medium" />
-    <tool id="passatutto" destination="dynamic-k8s-medium" />
+    <tool id="metfrag-cli-batch-multiple" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="msnbase-filter-merge-msms" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="msms2metfrag-multiple" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="aggregatemetfrag" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="passatutto" destination="dynamic-k8s-medium" resources="all"/>
     <!-- ISA related tools -->
     <tool id="isa_create_metabo" destination="container-isatab-create" resources="all"/>
     <tool id="isa_get_data_files" destination="dynamic-k8s-tiny" resources="all"/>
