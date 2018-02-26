@@ -260,7 +260,16 @@
     <tool file="phenomenal/ms/OpenMS/TOFCalibration.xml"/> 
     <tool file="phenomenal/ms/OpenMS/XTandemAdapter.xml"/>    
   </section>
-  
+  <section id="pheno-dimspy" name="DIMSpy">
+    <tool file="phenomenal/ms/dimspy/process_scans.xml" />
+    <tool file="phenomenal/ms/dimspy/replicate_filter.xml" />
+    <tool file="phenomenal/ms/dimspy/align_samples.xml" />
+    <tool file="phenomenal/ms/dimspy/blank_filter.xml" />
+    <tool file="phenomenal/ms/dimspy/sample_filter.xml" />
+    <tool file="phenomenal/ms/dimspy/hdf5_to_txt.xml" />
+    <tool file="phenomenal/ms/dimspy/merge_peaklists.xml" />
+    <tool file="phenomenal/ms/dimspy/get_peaklists.xml" /> 
+  </section>  
   <label id="phenomenal-annot" text="Annotation" /> 
   <section name="Camera" id="pheno-camera">
     <tool file="phenomenal/ms/camera/camera-annotate-peaks.xml" labels="Camera"/>

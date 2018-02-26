@@ -1,0 +1,77 @@
+<tool id="dimspy_missing_values_sample_filter" name="Missing Values Sample Filter" version="1.0.0">
+    <description> - Remove samples with a high percentage of missing values</description>
+    <macros>
+        <import>macros.xml</import>
+    </macros>
+    <expand macro="requirements" />
+    <expand macro="stdio" />
+    <command><![CDATA[
+        dimspy mv-sample-filter
+        --input "$hdf5_file_in"
+        --output "$hdf5_file_out"
+        --max-fraction $max_fraction
+        #if $hdf5_to_txt.standard
+            &&
+            @HDF5_PM_TO_TXT@
+        #end if
+        #if $hdf5_to_txt.comprehensive
+            &&
+            @HDF5_PM_TO_TXT_COMPREHENSIVE@
+        #end if
+    ]]></command>
+    <inputs>
+        <param name="hdf5_file_in" type="data" format="h5" label="Peak Intensity Matrix (HDF5 file)" help="" argument="--input"/>
+        <param name="max_fraction" min="0" max="1.0" type="float" value="0.8" label="Maximum percentage of missing values." help="" argument="--max-fraction"/>
+        <param name="delimiter" type="hidden" value="tab" argument="--delimiter"/>
+        <expand macro="hdf5_pm_to_txt" />
+    </inputs>
+    <outputs>
+        <expand macro="outputs_peak_intensity_matrix" />
+    </outputs>
+    <tests>
+        <test>
+            <param name="hdf5_file_in" value="pm_as_bf_sf.h5" ftype="h5"/>
+            <param name="max_fraction" value="0.8"/>
+            <param name="delimiter" value="tab"/>
+            <param name="delimiter" value="tab"/>
+            <param name="hdf5_to_txt|standard" value="True"/>
+            <param name="hdf5_to_txt|comprehensive" value="False"/>
+            <param name="hdf5_to_txt|representation_samples" value="rows"/>
+            <param name="hdf5_to_txt|matrix_attr" value="intensity"/>
+            <output name="hdf5_file_out" file="pm_as_bf_sf_mv.h5" ftype="h5" compare="sim_size"/>
+            <output name="matrix_file_out" file="peak_matrix_as_bf_sf_mv.txt" ftype="tsv"/>
+        </test>
+    </tests>
+    <help>
+----------------------------
+Missing Values Sample Filter
+----------------------------
+
+Description
+-----------
+
+| Use this tool to remove samples with greater-than a user-specified percentage of missing values.
+| In the DIMS analysis workflow, filtering of samples with large numbers of missing values typically occurs following: 'Process Scans' -> 'Replicate filter' -> 'Sample filter'.
+| Samples with large numbers of missing values are often observed where a failed mass spectral acquisition has occurred, the reasons for which are many and diverse.
+
+Parameters
+----------
+
+**\1. Peak Intensity Matrix (HDF5 file)** (REQUIRED)
+
+For routine usage, the input matrix should be that generated from the 'Align samples' tool.
+	
+**\2. Maximum percentage of missing values** (REQUIRED; default = 0.8)
+
+- A numeric value ranging from 0 to 1.
+- A value of 0 corresponds to a very harsh filtering procedure, in which only those samples with zero missing values are retained in the output Peak Intensity Matrix.
+- A value of 1 corresponds to a very liberal filtering procedure, in which samples with as many as 100% missing values will be retained in the output Peak Intensity Matrix.
+
+@help_options_addtional_output@
+
+@github_developers_contributors@
+        
+    </help>
+    <expand macro="citations" />
+</tool>
+
