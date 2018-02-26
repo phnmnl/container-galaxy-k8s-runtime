@@ -183,11 +183,7 @@
                mkdir -p '$isastudy.files_path';
 	       mv output-dir/'$name_of_study'/* '$isastudy.files_path'/;
    #if $include_raw_data_in_output:
-	 #if $data_file.input == "zip_file":
-               unzip -j "$data_file.zip_input" -d "$isastudy.files_path";
-	 #else
-               tar -xf "$data_file.tar_input" -C "$isastudy.files_path";
-	 #end if       
+               unzip -j "$inputzip" -d "$isastudy.files_path";
    #end if
 
                ]]>

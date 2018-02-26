@@ -149,14 +149,6 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
-    <destination id="nmrml2isa-container" runner="k8s">
-      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-      <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">nmrml2isa</param>
-      <param id="docker_tag_override">v0.3.0_cv0.1.10</param>
-      <param id="max_pod_retrials">3</param>
-      <param id="docker_enabled">true</param>
-    </destination>
     <destination id="mtbls-downloader-container" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -344,7 +336,7 @@
     <tool id="soap_opls" destination="soap-nmr-container"/>
     <!-- other NMR -->
     <tool id="mzml2isa" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="nmrml2isa" destination="nmrml2isa-container"/>
+    <tool id="nmrml2isa" destination="dynamic-k8s-small" resources="all"/>
     <tool id="mtbls-downloader" destination="mtbls-downloader-container"/>
     <tool id="mtbls-labs-uploader" destination="mtbls-labs-uploader-container"/>
     <tool id="metfragcli" destination="metfrag-cli-container"/>
