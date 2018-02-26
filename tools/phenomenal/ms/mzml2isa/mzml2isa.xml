@@ -187,11 +187,14 @@
 	       cd ../../;
                mkdir -p '$isastudy.files_path';
 	       mv output-dir/'$name_of_study'/* '$isastudy.files_path'/;
+   #if $include_raw_data_in_output:
 	 #if $data_file.input == "zip_file":
-               # unzip "$data_file.zip_input" -d "$isastudy.files_path";
+               unzip "$data_file.zip_input" -d "$isastudy.files_path";
 	 #else
-               # tar -xf "$data_file.tar_input" -C "$isastudy.files_path";
-         #end if       
+               tar -xf "$data_file.tar_input" -C "$isastudy.files_path";
+	 #end if       
+   #end if
+
 	       ]]>
     </command>
 
@@ -209,7 +212,8 @@
 		<param format="tar" name="tar_input" type="data" label="mzML TAR file"  help="A tarred folder of mzML files"/>
 	    </when>
         </conditional>
-        <param optional="true" format="txt" name="jsontxt" type="data" label="Additional user Metadata in json"  help="A user can add additional metadata directory through a json file"/>
+	<param optional="true" format="txt" name="jsontxt" type="data" label="Additional user Metadata in json"  help="A user can add additional metadata directory through a json file"/>
+	<param optiona="false" type="boolean" name="include_raw_data_in_output" checked="false" label="Include provided raw data in the ISA Archive" help="Set to 'Yes' to include the raw data. Including the original data in the ISA archive created will mean that the data will be copied, duplicating it in the server. If your quota is low, the dataset is really massive or you don't plan to process this ISA archive directly by another tool, you might want to avoid this."/>
         <expand macro="studymacro"/>
         <expand macro="investmacro"/>
         <expand macro="expmacro"/>
