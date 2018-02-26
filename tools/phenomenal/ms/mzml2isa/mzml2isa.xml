@@ -206,7 +206,7 @@
                 <option value="tar_file">TAR file from your history containing your mzML files</option>
             </param>
             <when value="zip_file">
-		<param format="zip" name="zip_input" type="data" label="mzML zip file"  help="A zipped folder of mzML files"/>
+		<param format="zip" name="zip_input" type="data" label="mzML zip file"  help="A zipped folder of mzML files. Any directory structure will be ignored and mzML files simply considered to be at the base of the ISA archive."/>
 	    </when>
             <when value="tar_file">
 		<param format="tar" name="tar_input" type="data" label="mzML TAR file"  help="A tarred folder of mzML files"/>

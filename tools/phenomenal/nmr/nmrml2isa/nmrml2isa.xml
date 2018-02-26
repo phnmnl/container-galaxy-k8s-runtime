@@ -191,7 +191,7 @@
 
     <inputs>
         <param name="name_of_study" type="text" label="Name study" help="This should not contain any spaces as the name will be used a prefix for ISA-tab file names" />
-        <param format="zip" name="inputzip" type="data" label="nmrML zip file"  help="A zipped folder of nmrML files"/>
+        <param format="zip" name="inputzip" type="data" label="nmrML zip file"  help="A zipped folder of nmrML files. Any directory structure will be ignored and nmrML files simply considered to be at the base of the ISA archive."/>
 	<param optional="true" format="txt" name="jsontxt" type="data" label="Additional user Metadata in json"  help="A user can add additional metadata directory through a json see link for example format"/>
 	<param optiona="false" type="boolean" name="include_raw_data_in_output" checked="false" label="Include provided raw data in the ISA Archive" help="Set to 'Yes' to include the raw data. Including the original data in the ISA archive created will mean that the data will be copied, duplicating it in the server. If your quota is low, the dataset is really massive or you don't plan to process this ISA archive directly by another tool, you might want to avoid this."/>
         <expand macro="studymacro"/>
