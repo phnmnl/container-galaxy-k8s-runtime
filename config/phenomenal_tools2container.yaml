@@ -65,7 +65,7 @@ assignment:
 - docker_image_override: mtbls-dwnld
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v3.1.0_cv1.3.23
+  docker_tag_override: v3.1.1_cv1.3.25
   max_pod_retrials: 3
   tools_id:
   - mtbls-dwnld
@@ -311,7 +311,7 @@ assignment:
 - docker_image_override: batman
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v1.2.12.0_cv1.0.65
+  docker_tag_override: v1.2.12.0_cv1.1.72 
   max_pod_retrials: 3
   tools_id:
   - batman-nmr
@@ -329,6 +329,13 @@ assignment:
   max_pod_retrials: 3
   tools_id:
   - isodyn
+- docker_image_override: bruker2batman
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v1.0_cv1.0.14
+  max_pod_retrials: 3
+  tools_id:
+  - bruker2batman
 - docker_image_override: metfrag-cli
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
@@ -447,6 +454,7 @@ assignment:
   - featureXMLToCAMERA
   - featureXMLToXcms
   - zip-collection
+  - unzip-collection
   - camera-annotate-peaks
   - camera-group-fwhm
   - camera-group-corr
