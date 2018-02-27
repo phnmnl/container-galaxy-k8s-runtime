@@ -237,14 +237,6 @@
       <param id="max_pod_retrials">1</param>
       <param id="docker_enabled">true</param>
     </destination>
-    <destination id="container-passatutto" runner="k8s">
-      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-      <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">passatutto</param>
-      <param id="docker_tag_override">latest</param>
-      <param id="max_pod_retrials">1</param>
-      <param id="docker_enabled">true</param>
-    </destination>
     <destination id="container-isatab2json" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
