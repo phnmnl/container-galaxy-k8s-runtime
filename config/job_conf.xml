@@ -292,11 +292,6 @@
          a tag, a handler or destination that matches that tag will be
          chosen at random.  -->
     <tool id="pathway_enrichment" destination="dynamic-k8s-large" resources="all"/>
-
-    <!-- Uppsala demo tools
-    <tool id="BatchFeatureRemoval" destination="batchfeature-container"/>
-    <tool id="upps_blankfilter" destination="blankfilter-container"/>
-    <tool id="log2transformation" destination="log2transformation-container"/> -->
     
     <!-- Fluxomics -->
     <tool id="iso2flux" destination="dynamic-k8s-small" resources="all"/>     
