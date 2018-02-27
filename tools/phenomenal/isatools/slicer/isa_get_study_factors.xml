@@ -1,18 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <tool id="isa_get_study_factors" name="Get study factors" version="1.0">
-    <description>Get list of study factors for a MetaboLights study
+    <description>
+        Get list of study factors for a MetaboLights study
     </description>
+
+    <requirements>
+        <requirement type="package" version="6.7">click</requirement>
+        <requirement type="package" version="0.9.4">isatools</requirement>
+    </requirements>
 
     <stdio>
         <exit_code range="1:" level="fatal"/>
     </stdio>
+
     <command><![CDATA[
         #if $data_file.input == "mtbls_id"
-            run_mtblisa.py get-factors "${data_file.mtbls_id}" "${output}"
+            run_mtblisa.py mtbls-get-factors
+            "${mtbls_id}" "${output}"
         #end if
 
         #if $data_file.input == "isatab_input"
-            run_mtblisa.py datatype-get-factors "${data_file.isatab_input.extra_files_path}" "${output}"
+            run_mtblisa.py isa-tab-get-factors
+            "${data_file.isatab_input.extra_files_path}" "${output}"
         #end if
 ]]>
     </command>
@@ -26,7 +35,7 @@
                 <param name="mtbls_id" type="text" label="MetaboLights Study Identifier" help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
             </when>
             <when value="isatab_input">
-                <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab"  help="An ISA-Tab datatype history item"/>
+                <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab"  help="An ISA-Tab zip"/>
             </when>
         </conditional>
     </inputs>

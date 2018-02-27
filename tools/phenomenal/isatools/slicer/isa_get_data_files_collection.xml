@@ -1,26 +1,40 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<tool id="isa_get_data_files_collection" name="Get data files collection" version="1.0">
+<tool id="isa_get_data_files_collection" name="Get data files collection"
+      version="1.0">
     <description>Get a collection of MetaboLights study data files filtered on
         factor values</description>
+
+    <requirements>
+        <requirement type="package" version="6.7">click</requirement>
+        <requirement type="package" version="0.9.4">isatools</requirement>
+    </requirements>
 
     <stdio>
         <exit_code range="1:" level="fatal"/>
     </stdio>
+
     <command><![CDATA[
-        run_mtblisa.py datatype-get-data-collection "${isatab_input.extra_files_path}" "${output}" --json-query "{ \"$factor_name\": \"$factor_value\" }"
+        run_mtblisa.py isa-tab-get-data-collection
+        "${isatab_input.extra_files_path}" "./"
+        --json-query "{ \"$factor_name\": \"$factor_value\" }"
 ]]>
     </command>
     <inputs>
-	    <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab"  help="An ISA-Tab datatype history item"/>
+	    <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab"
+               help="An ISA-Tab datatype history item"/>
         <param name="factor_name" type="text" label="Factor name to filter on."
-               help="Factor name relevant to the specified MetaboLights study, e.g. genotype. You can get a study's factor names by using the study_factors tool."/>
+               help="Factor name relevant to the specified MetaboLights study,
+               e.g. genotype. You can get a study's factor names by using the
+               study_factors tool."/>
         <param name="factor_value" type="text"
                label="Factor value to filter on."
-               help="Factor value relevant to the specified MetaboLights study, e.g. cyp79. You can get a study's factor values by using the study_factor_values tool."/>
+               help="Factor value relevant to the specified MetaboLights study,
+               e.g. cyp79. You can get a study's factor values by using the
+               study_factor_values tool."/>
     </inputs>
     <outputs>
-        <collection type="list" label="Sliced data files collection" name="output">
-            <discover_datasets/>
+        <collection type="list" label="Factor-sliced data file collection" name="raw_files">
+            <discover_datasets pattern="(?P&lt;designation&gt;.+)\.[sff|mzml|gz|zip|nmrml]"/>
         </collection>
     </outputs>
 
@@ -29,7 +43,7 @@
             <param name="mtbls_id" value="MTBLS1"/>
             <param name="factor_name" value="Gender"/>
             <param name="factor_value" value="Female"/>
-            <output name="output" file="mtbls1_sliced_data_files_out.json" compare="sim_size"/>
+            <output name="output"/>
         </test>
     </tests>
 
@@ -78,11 +92,88 @@ by using the `study_factor_values` tool.
 Output
 ------
 
-Collection of data files
-========================
+List of data files as JSON
+==========================
 
-A collection of data files.
+A list of data files, related sample name, and query used as a JSON
+list. e.g.
 
+::
+
+    [
+        {
+            "query_used": {
+                "replicate": "Exp2"
+            },
+            "data_files": [
+                "MSpos-Ex2-Col0-48h-Ag-1_1-A,2_01_9827.mzData"
+            ],
+            "sample": "Ex2-Col0-48h-Ag-1"
+        },
+        {
+            "query_used": {
+                "replicate": "Exp2"
+            },
+            "data_files": [
+                "MSpos-Ex2-Col0-48h-Ag-2_1-A,3_01_9829.mzData"
+            ],
+            "sample": "Ex2-Col0-48h-Ag-2"
+        },
+        {
+            "query_used": {
+                "replicate": "Exp2"
+            },
+            "data_files": [
+                "MSpos-Ex2-Col0-48h-Ag-3_1-A,4_01_9831.mzData"
+            ],
+            "sample": "Ex2-Col0-48h-Ag-3"
+        },
+        {
+            "query_used": {
+                "replicate": "Exp2"
+            },
+            "data_files": [
+                "MSpos-Ex2-Col0-48h-Ag-4_1-A,2_01_9833.mzData"
+            ],
+            "sample": "Ex2-Col0-48h-Ag-4"
+        },
+        {
+            "query_used": {
+                "replicate": "Exp2"
+            },
+            "data_files": [
+                "MSpos-Ex2-cyp79-48h-Ag-1_1-B,3_01_9828.mzData"
+            ],
+            "sample": "Ex2-cyp79-48h-Ag-1"
+        },
+        {
+            "query_used": {
+                "replicate": "Exp2"
+            },
+            "data_files": [
+                "MSpos-Ex2-cyp79-48h-Ag-2_1-B,4_01_9830.mzData"
+            ],
+            "sample": "Ex2-cyp79-48h-Ag-2"
+        },
+        {
+            "query_used": {
+                "replicate": "Exp2"
+            },
+            "data_files": [
+                "MSpos-Ex2-cyp79-48h-Ag-3_1-B,3_01_9832.mzData"
+            ],
+            "sample": "Ex2-cyp79-48h-Ag-3"
+        },
+        {
+            "query_used": {
+                "replicate": "Exp2"
+            },
+            "data_files": [
+                "MSpos-Ex2-cyp79-48h-Ag-4_1-B,4_01_9834.mzData"
+            ],
+            "sample": "Ex2-cyp79-48h-Ag-4"
+        }
+    ]
 <!-- @@@END_RST@@@ -->
     </help>
 
