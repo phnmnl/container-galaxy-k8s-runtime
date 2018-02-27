@@ -442,7 +442,8 @@
     <tool id="passatutto" destination="dynamic-k8s-medium" />
     <!-- ISA related tools -->
     <tool id="isa_create_metabo" destination="container-isatab-create" resources="all"/>
-    <tool id="isa_get_data_files" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa_get_data_files_list" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa_get_data_files_collection" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_get_factors_summary" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_get_study_factor_values" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_get_study_factors" destination="dynamic-k8s-tiny" resources="all"/>
