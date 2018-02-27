@@ -1,4 +1,4 @@
-<tool id="batman-nmr" name="BATMAN">
+<tool id="batman-nmr" name="BATMAN" version="1.1">
      <description>Deconvolves resonance peaks from NMR spectra of complex mixtures and obtains concentration estimates for the corresponding metabolites automatically.</description>
      <requirements>
        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/batman</container>
