@@ -13,7 +13,6 @@
     <stdio>
         <exit_code range="1:" />
     </stdio>
-
     <command>
         <![CDATA[
 
