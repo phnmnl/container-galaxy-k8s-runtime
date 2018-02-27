@@ -241,14 +241,6 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
-    <destination id="container-openms" runner="k8s">
-      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-      <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">openms</param>
-      <param id="docker_tag_override">v2.1.0_cv0.2.15</param>
-      <param id="max_pod_retrials">3</param>
-      <param id="docker_enabled">true</param>
-    </destination>
     <destination id="container-json2isatab" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -343,99 +335,99 @@
     <tool id="camera-prepareoutput" destination="dynamic-k8s-medium" resources="all"/>
     <!-- OpenMS -->
     <tool id="xcmssplit" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="AdditiveSeries" destination="container-openms"/> 
-    <tool id="BaselineFilter" destination="container-openms"/> 
-    <tool id="CompNovo" destination="container-openms"/> 
-    <tool id="CompNovoCID" destination="container-openms"/> 
-    <tool id="ConsensusID" destination="container-openms"/> 
-    <tool id="ConsensusMapNormalizer" destination="container-openms"/> 
-    <tool id="Decharger" destination="container-openms"/> 
-    <tool id="DTAExtractor" destination="container-openms"/> 
-    <tool id="EICExtractor" destination="container-openms"/> 
-    <tool id="ExternalCalibration" destination="container-openms"/> 
-    <tool id="FalseDiscoveryRate" destination="container-openms"/> 
-    <tool id="FeatureFinderCentroided" destination="container-openms"/> 
-    <tool id="FeatureFinderIdentification" destination="container-openms"/> 
-    <tool id="FeatureFinderIsotopeWavelet" destination="container-openms"/> 
-    <tool id="FeatureFinderMetabo" destination="dynamic-k8s-medium" resources="all"/> 
-    <tool id="FeatureFinderMRM" destination="container-openms"/> 
-    <tool id="FeatureFinderMultiplex" destination="container-openms"/> 
-    <tool id="FeatureLinkerLabeled" destination="dynamic-k8s-medium" resources="all"/> 
-    <tool id="FeatureLinkerUnlabeled" destination="container-openms"/> 
-    <tool id="FeatureLinkerUnlabeledQT" destination="container-openms"/> 
-    <tool id="FidoAdapter" destination="container-openms"/> 
-    <tool id="FileConverter" destination="container-openms"/> 
-    <tool id="FileFilter" destination="container-openms"/> 
-    <tool id="FileInfo" destination="container-openms"/> 
-    <tool id="FileMerger" destination="container-openms"/> 
-    <tool id="HighResPrecursorMassCorrector" destination="container-openms"/> 
-    <tool id="IDConflictResolver" destination="container-openms"/> 
-    <tool id="IDFileConverter" destination="container-openms"/> 
-    <tool id="IDFilter" destination="container-openms"/> 
-    <tool id="IDMapper" destination="container-openms"/> 
-    <tool id="IDMerger" destination="container-openms"/> 
-    <tool id="IDPosteriorErrorProbability" destination="container-openms"/> 
-    <tool id="IDRipper" destination="container-openms"/> 
-    <tool id="IDRTCalibration" destination="container-openms"/> 
-    <tool id="InclusionExclusionListCreator" destination="container-openms"/> 
-    <tool id="InspectAdapter" destination="container-openms"/> 
-    <tool id="InternalCalibration" destination="container-openms"/> 
-    <tool id="IsobaricAnalyzer" destination="container-openms"/> 
-    <tool id="ITRAQAnalyzer" destination="container-openms"/> 
-    <tool id="LuciphorAdapter" destination="container-openms"/> 
-    <tool id="MapAlignerIdentification" destination="container-openms"/> 
-    <tool id="MapAlignerPoseClustering" destination="container-openms"/> 
-    <tool id="MapAlignerSpectrum" destination="container-openms"/> 
-    <tool id="MapNormalizer" destination="container-openms"/> 
-    <tool id="MapRTTransformer" destination="container-openms"/> 
-    <tool id="MapStatistics" destination="container-openms"/> 
-    <tool id="MascotAdapter" destination="container-openms"/> 
-    <tool id="MascotAdapterOnline" destination="container-openms"/> 
-    <tool id="MassTraceExtractor" destination="container-openms"/> 
-    <tool id="MRMMapper" destination="container-openms"/> 
-    <tool id="MSGFPlusAdapter" destination="container-openms"/> 
-    <tool id="MyriMatchAdapter" destination="container-openms"/> 
-    <tool id="MzTabExporter" destination="container-openms"/> 
-    <tool id="NoiseFilterGaussian" destination="container-openms"/> 
-    <tool id="NoiseFilterSGolay" destination="container-openms"/> 
-    <tool id="OMSSAAdapter" destination="container-openms"/> 
-    <tool id="OpenSwathAnalyzer" destination="container-openms"/> 
-    <tool id="OpenSwathAssayGenerator" destination="container-openms"/> 
-    <tool id="OpenSwathChromatogramExtractor" destination="container-openms"/> 
-    <tool id="OpenSwathConfidenceScoring" destination="container-openms"/> 
-    <tool id="OpenSwathDecoyGenerator" destination="container-openms"/> 
-    <tool id="OpenSwathFeatureXMLToTSV" destination="container-openms"/> 
-    <tool id="OpenSwathRTNormalizer" destination="container-openms"/> 
-    <tool id="PeakPickerHiRes" destination="container-openms"/> 
-    <tool id="PeakPickerWavelet" destination="container-openms"/> 
-    <tool id="PepNovoAdapter" destination="container-openms"/> 
-    <tool id="PeptideIndexer" destination="container-openms"/> 
-    <tool id="PhosphoScoring" destination="container-openms"/> 
-    <tool id="PrecursorIonSelector" destination="container-openms"/> 
-    <tool id="PrecursorMassCorrector" destination="container-openms"/> 
-    <tool id="ProteinInference" destination="container-openms"/> 
-    <tool id="ProteinQuantifier" destination="container-openms"/> 
-    <tool id="ProteinResolver" destination="container-openms"/> 
-    <tool id="PTModel" destination="container-openms"/> 
-    <tool id="PTPredict" destination="container-openms"/> 
-    <tool id="RTModel" destination="container-openms"/> 
-    <tool id="RTPredict" destination="container-openms"/> 
-    <tool id="SeedListGenerator" destination="container-openms"/> 
-    <tool id="SpecLibSearcher" destination="container-openms"/> 
-    <tool id="SpectraFilterBernNorm" destination="container-openms"/> 
-    <tool id="SpectraFilterMarkerMower" destination="container-openms"/> 
-    <tool id="SpectraFilterNLargest" destination="container-openms"/> 
-    <tool id="SpectraFilterNormalizer" destination="container-openms"/> 
-    <tool id="SpectraFilterParentPeakMower" destination="container-openms"/> 
-    <tool id="SpectraFilterScaler" destination="container-openms"/> 
-    <tool id="SpectraFilterSqrtMower" destination="container-openms"/> 
-    <tool id="SpectraFilterThresholdMower" destination="container-openms"/> 
-    <tool id="SpectraFilterWindowMower" destination="container-openms"/> 
-    <tool id="SpectraMerger" destination="container-openms"/> 
-    <tool id="TextExporter" destination="container-openms"/> 
-    <tool id="TMTAnalyzer" destination="container-openms"/> 
-    <tool id="TOFCalibration" destination="container-openms"/> 
-    <tool id="XTandemAdapter" destination="container-openms"/> 
+    <tool id="AdditiveSeries" destination="dynamic-k8s-small" resources="all"/> 
+    <tool id="BaselineFilter" destination="dynamic-k8s-large" resources="all"/> 
+    <tool id="CompNovo" destination="dynamic-k8s-large" resources="all"/> 
+    <tool id="CompNovoCID" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="ConsensusID" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="ConsensusMapNormalizer" destination="dynamic-k8s-xlarge" resources="all"/> 
+    <tool id="Decharger" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="DTAExtractor" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="EICExtractor" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="ExternalCalibration" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="FalseDiscoveryRate" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="FeatureFinderCentroided" destination="dynamic-k8s-xlarge" resources="all"/> 
+    <tool id="FeatureFinderIdentification" destination="dynamic-k8s-large" resources="all"/> 
+    <tool id="FeatureFinderIsotopeWavelet" destination="dynamic-k8s-xlarge" resources="all"/> 
+    <tool id="FeatureFinderMetabo" destination="dynamic-k8s-large" resources="all"/> 
+    <tool id="FeatureFinderMRM" destination="dynamic-k8s-large" resources="all"/> 
+    <tool id="FeatureFinderMultiplex" destination="dynamic-k8s-xlarge" resources="all"/> 
+    <tool id="FeatureLinkerLabeled" destination="dynamic-k8s-large" resources="all"/> 
+    <tool id="FeatureLinkerUnlabeled" destination="dynamic-k8s-large" resources="all"/> 
+    <tool id="FeatureLinkerUnlabeledQT" destination="dynamic-k8s-large" resources="all"/> 
+    <tool id="FidoAdapter" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="FileConverter" destination="dynamic-k8s-large" resources="all"/> 
+    <tool id="FileFilter" destination="dynamic-k8s-large" resources="all"/> 
+    <tool id="FileInfo" destination="dynamic-k8s-small" resources="all"/> 
+    <tool id="FileMerger" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="HighResPrecursorMassCorrector" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="IDConflictResolver" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="IDFileConverter" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="IDFilter" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="IDMapper" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="IDMerger" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="IDPosteriorErrorProbability" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="IDRipper" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="IDRTCalibration" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="InclusionExclusionListCreator" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="InspectAdapter" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="InternalCalibration" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="IsobaricAnalyzer" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="ITRAQAnalyzer" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="LuciphorAdapter" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="MapAlignerIdentification" destination="dynamic-k8s-xlarge" resources="all"/> 
+    <tool id="MapAlignerPoseClustering" destination="dynamic-k8s-xlarge" resources="all"/> 
+    <tool id="MapAlignerSpectrum" destination="dynamic-k8s-xlarge" resources="all"/> 
+    <tool id="MapNormalizer" destination="dynamic-k8s-large" resources="all"/> 
+    <tool id="MapRTTransformer" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="MapStatistics" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="MascotAdapter" destination="dynamic-k8s-small" resources="all"/> 
+    <tool id="MascotAdapterOnline" destination="dynamic-k8s-small" resources="all"/> 
+    <tool id="MassTraceExtractor" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="MRMMapper" destination="dynamic-k8s-small" resources="all"/> 
+    <tool id="MSGFPlusAdapter" destination="dynamic-k8s-large" resources="all"/> 
+    <tool id="MyriMatchAdapter" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="MzTabExporter" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="NoiseFilterGaussian" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="NoiseFilterSGolay" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="OMSSAAdapter" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="OpenSwathAnalyzer" destination="dynamic-k8s-large" resources="all"/> 
+    <tool id="OpenSwathAssayGenerator" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="OpenSwathChromatogramExtractor" destination="dynamic-k8s-large" resources="all"/> 
+    <tool id="OpenSwathConfidenceScoring" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="OpenSwathDecoyGenerator" destination="dynamic-k8s-large" resources="all"/> 
+    <tool id="OpenSwathFeatureXMLToTSV" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="OpenSwathRTNormalizer" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="PeakPickerHiRes" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="PeakPickerWavelet" destination="dynamic-k8s-xlarge" resources="all"/> 
+    <tool id="PepNovoAdapter" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="PeptideIndexer" destination="dynamic-k8s-small" resources="all"/> 
+    <tool id="PhosphoScoring" destination="dynamic-k8s-small" resources="all"/> 
+    <tool id="PrecursorIonSelector" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="PrecursorMassCorrector" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="ProteinInference" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="ProteinQuantifier" destination="dynamic-k8s-small" resources="all"/> 
+    <tool id="ProteinResolver" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="PTModel" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="PTPredict" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="RTModel" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="RTPredict" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="SeedListGenerator" destination="dynamic-k8s-small" resources="all"/> 
+    <tool id="SpecLibSearcher" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="SpectraFilterBernNorm" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="SpectraFilterMarkerMower" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="SpectraFilterNLargest" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="SpectraFilterNormalizer" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="SpectraFilterParentPeakMower" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="SpectraFilterScaler" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="SpectraFilterSqrtMower" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="SpectraFilterThresholdMower" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="SpectraFilterWindowMower" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="SpectraMerger" destination="dynamic-k8s-small" resources="all"/> 
+    <tool id="TextExporter" destination="dynamic-k8s-small" resources="all"/> 
+    <tool id="TMTAnalyzer" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="TOFCalibration" destination="dynamic-k8s-medium" resources="all"/> 
+    <tool id="XTandemAdapter" destination="dynamic-k8s-medium" resources="all"/> 
     <!-- MetFrag -->
     <tool id="metfrag-cli-batch" destination="dynamic-k8s-large" resources="all"/>
     <tool id="msnbase-read-msms" destination="dynamic-k8s-medium" resources="all"/>
