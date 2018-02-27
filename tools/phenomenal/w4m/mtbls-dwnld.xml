@@ -50,13 +50,13 @@
 		</param>
 
 		<!-- Downloader -->
-		<param name="downloader" label="Downloader" type="select" help="If downloading only the metadata prefer wget, otherwise you can choose aspera for which you will need a token both in case of public and private data.">
+		<param name="downloader" label="Downloader" type="select" help="If downloading only the metadata prefer wget, otherwise you can choose aspera.">
 			<option value="wget">wget</option>
 			<option value="aspera">Aspera</option>
 		</param>
 
 		<!-- Metadata -->
-		<param name="metadata" label="Download only the metadata" type="boolean" help="If set to 'No', found mzData and mzML files will be extracted and output as collections." checked="true" truevalue="yes" falsevalue=""/>
+		<param name="metadata" label="Download only the metadata" type="boolean" help="If set to 'No', the whole study will be downloaded (i.e.: metadata and raw data)." checked="true" truevalue="yes" falsevalue=""/>
 
 		<!-- Token -->
 		<param name="token" type="text" optional="true" format="txt" label="Token"  help="Token is required for private study or for downloading with Aspera client."/>
