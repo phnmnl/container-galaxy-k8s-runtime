@@ -70,7 +70,15 @@
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
       <param id="docker_image_override">batman</param>
-      <param id="docker_tag_override">v1.2.12.0_cv1.0.65</param>
+      <param id="docker_tag_override">v1.2.12.0_cv1.1.72</param>
+      <param id="max_pod_retrials">3</param>
+      <param id="docker_enabled">true</param>
+    </destination>
+	<destination id="bruker2batman-container" runner="k8s">
+      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+      <param id="docker_owner_override">phnmnl</param>
+      <param id="docker_image_override">bruker2batman</param>
+      <param id="docker_tag_override">v1.0_cv1.0.14</param>
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
@@ -325,6 +333,7 @@
     <tool id="batman-nmr" destination="batman-container"/>
     <tool id="nmrml2batman" destination="dynamic-k8s-small"/>
     <tool id="power-analysis" destination="papy-container"/>
+    <tool id="bruker2batman" destination="dynamic-k8s-medium" resources="all"/>
     <!-- W4M Sacurine -->
     <tool id="mtbls-dwnld" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa2w4m" destination="dynamic-k8s-tiny" resources="all"/>

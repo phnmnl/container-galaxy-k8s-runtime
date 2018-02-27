@@ -123,31 +123,12 @@
       <tool file="phenomenal/nmr/rnmr1d-prepareOutput.xml"/>
       <tool file="phenomenal/nmr/batman.xml"/>
       <tool file="phenomenal/nmr/nmrml2batman.xml"/>
+      <tool file="phenomenal/nmr/bruker2batman.xml"/>
       <tool file="phenomenal/nmr/metabomatching.xml"/>
       <tool file="phenomenal/nmr/mtbls2nmrglue.xml"/>
       <tool file="phenomenal/nmr/soap_process.xml"/>
       <tool file="phenomenal/nmr/soap_opls.xml"/>
    </section>
-  <!--   
-  <section name="nmrProcflow" id="pheno-nmrProcflow">
-    <tool file="phenomenal/nmr/metabolab.xml"/>
-    <tool file="phenomenal/nmr/mtbls_nmr_raw_dummy_importer.xml"/>
-    <tool file="phenomenal/nmr/nmrmlconv.xml"/>
-    <tool file="phenomenal/nmr/zip-nmrml-collection.xml"/>
-    <tool file="phenomenal/nmr/rnmr1d.xml"/>
-    <tool file="phenomenal/nmr/rnmr1d-stacked-plot.xml"/>
-    <tool file="phenomenal/nmr/rnmr1d-prepareOutput.xml"/>
-  </section>
-  <section name="Batman" id="Batman">
-    <tool file="phenomenal/nmr/batman.xml"/>
-  </section>  
-  <section name="NMR processing" id="NMR processing">  
-    <tool file="phenomenal/nmr/metabomatching.xml"/>
-    <tool file="phenomenal/nmr/mtbls2nmrglue.xml"/>
-    <tool file="phenomenal/nmr/soap_process.xml"/>
-    <tool file="phenomenal/nmr/soap_opls.xml"/>
-  </section> 
--->
 
   <label id="phenomenal-ms" text="MS Data Analysis Tools" /> 
   <section name="XCMS" id="pheno-XCMS">
