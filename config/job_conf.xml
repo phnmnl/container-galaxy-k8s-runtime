@@ -82,14 +82,6 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
-    <destination id="camera-container" runner="k8s">
-      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-      <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">camera</param>
-      <param id="docker_tag_override">v1.33.3_cv0.10.59</param>
-      <param id="max_pod_retrials">1</param>
-      <param id="docker_enabled">true</param>
-    </destination>
     <destination id="isodyn-container" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -346,17 +338,17 @@
     <tool id="save_chromatogram" destination="dynamic-k8s-small" resources="all" />
     <tool id="show_chromatogram" destination="dynamic-k8s-small" resources="all" />
     <!-- CAMERA -->
-    <tool id="consensusXMLToXcms" destination="camera-container" />
-    <tool id="cameraToFeatureXML" destination="camera-container" />
-    <tool id="featureXMLToCAMERA" destination="camera-container" />
-    <tool id="featureXMLToXcms" destination="camera-container" />
-    <tool id="zip-collection" destination="camera-container"/>
+    <tool id="consensusXMLToXcms" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="cameraToFeatureXML" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="featureXMLToCAMERA" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="featureXMLToXcms" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="zip-collection" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="camera-annotate-peaks" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="camera-group-fwhm" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="camera-group-corr" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="camera-find-isotopes" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="camera-find-adducts" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="unzip-collection" destination="camera-container"/>
+    <tool id="unzip-collection" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="camera-prepareoutput" destination="dynamic-k8s-medium" resources="all"/>
     <!-- OpenMS -->
     <tool id="xcmssplit" destination="dynamic-k8s-large" resources="all"/>

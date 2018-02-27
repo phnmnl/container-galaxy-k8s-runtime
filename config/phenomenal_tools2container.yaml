@@ -453,6 +453,7 @@ assignment:
   - featureXMLToCAMERA
   - featureXMLToXcms
   - zip-collection
+  - unzip-collection
   - camera-annotate-peaks
   - camera-group-fwhm
   - camera-group-corr
