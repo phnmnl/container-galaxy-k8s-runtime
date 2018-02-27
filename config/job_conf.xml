@@ -100,7 +100,8 @@
     </destination>
     <destination id="papy-container" runner="k8s">
       <param id="docker_enabled">true</param>
-    </destination>      
+    </destination>     
+    <!-- 
     <destination id="msconvert2-container" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -109,6 +110,7 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
+   -->
     <destination id="nmrmlconv-container" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -117,6 +119,7 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
+    <!-- 
     <destination id="nmrglue-container" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -125,6 +128,7 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
+   -->
     <destination id="soap-nmr-container" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -300,7 +304,7 @@
     <tool id="generic_filter" destination="dynamic-k8s-small" resources="all"/>
     <tool id="Batch_correction" destination="dynamic-k8s-small" resources="all"/>
     <tool id="normalization" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="msconvert2" destination="msconvert2-container"/>
+    <!-- <tool id="msconvert2" destination="msconvert2-container"/> -->
     <!-- new NMR -->
     <tool id="metabolab" destination="dynamic-k8s-large" resources="all"/>
     <tool id="mtbls_nmr_raw_dummy_importer" destination="nmrmlconv-container"/>
@@ -310,7 +314,7 @@
     <tool id="rnmr1d-stacked-plot" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="rnmr1d-prepare-output" destination="dynamic-k8s-small" resources="all"/>
     <!-- old NMR -->
-    <tool id="mtbls2nmrglue" destination="nmrglue-container"/>
+    <!-- <tool id="mtbls2nmrglue" destination="nmrglue-container"/> -->
     <tool id="soap_process" destination="soap-nmr-container"/>
     <tool id="soap_opls" destination="soap-nmr-container"/>
     <!-- other NMR -->
