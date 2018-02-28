@@ -273,7 +273,7 @@ assignment:
 - docker_image_override: metfrag-cli-batch
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v2.4.3_cv0.5.49
+  docker_tag_override: v2.4.3_cv0.6.52
   max_pod_retrials: 3
   tools_id:
   - metfrag-cli-batch
