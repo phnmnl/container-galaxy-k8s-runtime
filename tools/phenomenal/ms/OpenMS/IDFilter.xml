@@ -173,7 +173,7 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in" type="data" format="" optional="False" label="input file" help="(-in) "/>
+    <param name="param_in" type="data" format="idxml" optional="False" label="input file" help="(-in) "/>
     <param name="param_length" type="text" size="30" value=":" label="Keep only peptide hits with a sequence length in this range" help="(-length) ">
       <sanitizer>
         <valid initial="string.printable">
@@ -228,7 +228,7 @@
         </sanitizer>
       </param>
     </repeat>
-    <param name="param_whitelist_peptides" type="data" format="" optional="True" label="Only peptides with the same sequence and modification assignment as any peptide in this file are kept" help="(-peptides) Use with 'whitelist:ignore_modifications' to only compare by sequence. &lt;br&gt;"/>
+    <param name="param_whitelist_peptides" type="data" format="idxml" optional="True" label="Only peptides with the same sequence and modification assignment as any peptide in this file are kept" help="(-peptides) Use with 'whitelist:ignore_modifications' to only compare by sequence. &lt;br&gt;"/>
     <param name="param_whitelist_ignore_modifications" display="radio" type="boolean" truevalue="-whitelist:ignore_modifications" falsevalue="" checked="false" optional="True" label="Compare whitelisted peptides by sequence only" help="(-ignore_modifications) "/>
     <repeat name="rep_param_whitelist_modifications" min="0" max="1" title="param_whitelist_modifications">
       <param name="param_whitelist_modifications" type="select" optional="True" label="Keep only peptides with sequences that contain (any of) the selected modification(s)" help="(-modifications) ">
@@ -1841,7 +1841,7 @@
         </sanitizer>
       </param>
     </repeat>
-    <param name="param_blacklist_peptides" type="data" format="" optional="True" label="Peptides with the same sequence and modification assignment as any peptide in this file are filtered out" help="(-peptides) Use with 'blacklist:ignore_modifications' to only compare by sequence. &lt;br&gt;"/>
+    <param name="param_blacklist_peptides" type="data" format="idxml" optional="True" label="Peptides with the same sequence and modification assignment as any peptide in this file are filtered out" help="(-peptides) Use with 'blacklist:ignore_modifications' to only compare by sequence. &lt;br&gt;"/>
     <param name="param_blacklist_ignore_modifications" display="radio" type="boolean" truevalue="-blacklist:ignore_modifications" falsevalue="" checked="false" optional="True" label="Compare blacklisted peptides by sequence only" help="(-ignore_modifications) "/>
     <repeat name="rep_param_blacklist_modifications" min="0" max="1" title="param_blacklist_modifications">
       <param name="param_blacklist_modifications" type="select" optional="True" label="Remove all peptides with sequences that contain (any of) the selected modification(s)" help="(-modifications) ">

@@ -2,9 +2,11 @@
 <!--Proposed Tool Section: [File Handling]-->
 <tool id="mtbls_nmr_raw_dummy_importer" name="mtbls_nmr_raw_importer" version="0.5">
   <description>Import NMR data from MetaboLights</description>
+<!--
   <requirements>
     <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/nmrmlconv</container>
   </requirements>
+-->
    <command><![CDATA[
     mkdir -p /data/"$mtbls_id";
     wget -O /data/"$mtbls_id".zip https://www.ebi.ac.uk/metabolights/"$mtbls_id"/files/"$mtbls_id";

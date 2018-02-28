@@ -1,0 +1,100 @@
+<tool id="isa_create_metabo" name="Create ISA in Galaxy" version="1.1.0">
+    <description>Interactive tool to create ISA archives based on study design information</description>
+
+    <macros>
+        <import>isa_create_metabo_macros.xml</import>
+    </macros>
+
+    <requirements>
+        <requirement type="package" version="6.7">click</requirement>
+        <!--<requirement type="package" version="0.9.4">isatools</requirement>-->
+    </requirements>
+
+    <stdio>
+        <exit_code range="1:" />
+    </stdio>
+
+    <command>
+        <![CDATA[
+
+        mkdir study_dir &&
+        mkdir -p '${output.files_path}' &&
+        cli.py
+        --galaxy_parameters_file='$inputs'
+        --target_dir='study_dir/' &&
+        cp study_dir/* '${output.files_path}'
+
+        ]]>
+    </command>
+
+    <configfiles>
+        <inputs name="inputs" />
+    </configfiles>
+
+    <inputs>
+        <expand macro="study_info_macro" />
+        <expand macro="treatment_plan_macro" />
+        <expand macro="sample_assay_plan_macro" />
+        <expand macro="qc_plan_macro" />
+    </inputs>
+
+    <outputs>
+        <collection type="list" label="ISA files" name="isa_files">
+            <discover_datasets pattern="(?P&lt;designation&gt;(i|s|a)_.+)\.txt" directory="study_dir"  format="tsv"/>
+        </collection>
+        <collection type="list" label="All files" name="all_files">
+            <discover_datasets pattern="(?P&lt;designation&gt;.+)\.[a-zA-Z0-9]+" directory="study_dir" />
+        </collection>
+        <data format="isa-tab" name="output" label="New ISA-Tab"/>
+    </outputs>
+
+    <tests>
+        <test>
+            <output_collection name="isa_files" type="list" count="1"/>
+        </test>
+    </tests>
+
+    <help>
+        **What it does**
+
+        This tool helps create ISA documents using study design information. Suppose you have a study like this one::
+
+         A Study looking at the effect of Drugs A and B administered at high and low dose with plasma samples collected at 3 times points, and done in n=5 subjects per treatment groups.
+         The response variables are metabolite profiles measured by LC-MS in positive and negative mode on one instance of thermofisher instrument.
+
+         Formalization:
+            i. intervention study
+            ii. single intervention
+                a. chemical intervention
+                    independent variable: chemical agent
+                                range of values: [a,b]
+                    independent variable: dose
+                                range of values: [high,low]
+                    independent variable: time
+                                range of values: [t1,t2,t3]
+
+                    Important: specific variable values as discrete elments of a comma (,) separated list, as shown in the examples provided.
+            iii. study design: 2x2x3 factorial
+            iv. study design: balanced + full factorial
+            v. number of biological replicates: n=5 per study groups
+            vi. specimen collection:
+                specimen type: [plasma]
+                number of collection: 3
+            vii. assay plan:
+                a. technology type: MS
+                b. topology modifiers:
+                    injection method: [LC]
+                    fractions: [polar,non-polar]
+                    data acquisition modes: [negative,positive]
+                    instrument type: ThermoFisher XYZ
+                    instrument instance: 1
+                    technical replicates: 2
+                    number of batches: 1
+
+
+    </help>
+
+    <citations>
+        <citation type="doi">10.1007/s11306-015-0879-3</citation>
+    </citations>
+</tool>

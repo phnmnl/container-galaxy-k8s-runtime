@@ -1,17 +1,27 @@
-<tool id="batman-nmr" name="BATMAN">
-     <description>BATMAN</description>
+<tool id="batman-nmr" name="BATMAN" version="1.1">
+     <description>Deconvolves resonance peaks from NMR spectra of complex mixtures and obtains concentration estimates for the corresponding metabolites automatically.</description>
      <requirements>
        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/batman</container>
      </requirements>
      <command><![CDATA[     
-     runBATMAN.R -i ${nmr_spectra_input} -o \$PWD -p ${options_file} -u ${metabolite_template} -l ${target_metabolites}
+	#if int( $number_of_cores ) > 0: 
+	    sed "s/paraProc - .*/paraProc - : ${number_of_cores}/" ${options_file} > new_options_file;
+        #end if
+	runBATMAN.R -i ${nmr_spectra_input} -o \$PWD 
+	#if int( $number_of_cores ) > 0:
+	    -p new_options_file
+	#else
+	    -p ${options_file} 
+	#end if
+	-u ${metabolite_template} -l ${target_metabolites}
        ]]>
      </command>
-     <inputs>
+     <inputs>         
          <param name="nmr_spectra_input" type="data" format="txt" label="NMR Dataset." help="A tabulated text file including p.p.m and spectra in columns. Typical filename is NMRdata.txt. Please download the demo data set from the link below. "/>
          <param name="options_file" type="data" format="txt" label="BATMAN options." help="A text file including BATMAN running options, such as number of spectra which must within the range given by the NMR data set. The typical filename is batmanOptions.txt"/>
          <param name="metabolite_template" type="data" label="pre-defined metabolites template." help="This file includes metabolites identifiers, J_coupling information, chemical shift etc. The typical filename is multi_data_user.csv"/>
-         <param name="target_metabolites" type="data" label="targeted metabolites list." help="This file is a list of targeted metabolites. The typical filename is metabolitesList.csv "/>
+	 <param name="target_metabolites" type="data" label="targeted metabolites list." help="This file is a list of targeted metabolites. The typical filename is metabolitesList.csv "/>
+	 <param name="number_of_cores" optional="true" type="integer" value="0" label="Number of CPUs to run BATMAN with." help="Setup the number of CPUs/Cores that BATMAN uses. Higher number of CPUs might increase the memory requirements of the tool. A value of zero means that the number of processors (paraProc) set in the BATMAN options file is used. Integers above zero override the setting in the options file."/>
      </inputs>
      <outputs>
          <data name="RelCon" format="tabular" from_work_dir="results/RelCon.txt" label="Relative concentrations"/>
