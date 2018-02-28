@@ -87,6 +87,8 @@ COPY workflows workflows
 COPY container-simple-checks.sh test_cmds.txt ./
 RUN chmod u+x /galaxy/ansible/run_galaxy_config.sh
 
+ENV GALAXY_CONFIG_BRAND PhenoMeNal
+
 # Missing XCMS datatypes for w4m
 COPY external-datatypes/rdata_xcms_datatype.py \
      external-datatypes/rdata_camera_datatype.py \
