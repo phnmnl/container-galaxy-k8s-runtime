@@ -13,7 +13,7 @@ Increased reliance on computational approaches in the life sciences has revealed
 
 This PhenoMeNal version of Galaxy is a container capable of running inside the Kubernetes container orchestrator, and able to schedule Kubernetes jobs from the inside of the cluster. It is a lighweight container as no toolshed dependencies are needed. The current version includes on top of Galaxy 17.09 PhenoMeNal additions to the Galaxy code base:
 
-- Ability to limit resources per tools (CPU and RAM).
+- Ability to limit resources per tools (CPU and RAM) inside Kubernetes.
 - ISA-tab and ISA-json native Composite datatype support in Galaxy.
 
 The Galaxy - Kubernetes integration and Galaxy helm charts are contributions made entirely by the PhenoMeNal Project to the Galaxy Project.
@@ -63,7 +63,7 @@ Note: maintainers are for containers, not necessarily tool authors. Follow links
 
 ## Installation 
 
-This Galaxy deployment will be available at all PhenoMeNal CRE deployments (cloud, bare-metal, development, etc).
+This Galaxy deployment will be available at all **PhenoMeNal CRE deployments** (cloud, bare-metal, development, etc), which can be created through the [PhenoMeNal Portal](https://portal.phenomenal-h2020.eu/) or by using more advanced methods.
 
 If you want to install it locally as a docker container:
 
@@ -82,22 +82,18 @@ helm repo add galaxy-helm-repo https://pcm32.github.io/galaxy-helm-charts
 helm install galaxy-helm-repo/galaxy
 ```
 
-This helm chart accepts plenty of options, and there is also another helm chart for production deployment with more options. For more details see [this link](https://github.com/phnmnl/phenomenal-h2020/wiki/QuickStart-Installation-for-Local-PhenoMeNal-Workflow).
+This helm chart accepts plenty of options, and there is also another helm chart for production deployment with more options. For more details see [this link](https://github.com/phnmnl/phenomenal-h2020/wiki/QuickStart-Installation-for-Local-PhenoMeNal-Workflow) or the [helm repo for Galaxy](https://github.com/galaxyproject/galaxy-kubernetes/blob/master/README.md).
 
 
 ## Usage Instructions
 
-On PhenoMeNal CRE deployments, you will be given a link if deployed through the PhenoMeNal App Portal. The instance will be secured for the email and password that you provided during setup.
+On PhenoMeNal CRE deployments, you will be given a link if deployed through the [PhenoMeNal Portal](https://portal.phenomenal-h2020.eu/). The instance will be secured for the email and password that you provided during setup. 
+
+To use it at the [PhenoMeNal Public instance](https://public.phenomenal-h2020.eu/) you will need to register through the [PhenoMeNal Portal](https://portal.phenomenal-h2020.eu/home), by clicking on "Create your cloud research environment", sign-in through the Elixir Single-sign-on with your Google or institutional account, and then choose "PhenoMeNal Cloud", where you will be able to create an account for the public instance.
 
 If deployed locally on Minikube using Helm, most likely you access URL will be http://192.168.99.100:30700. This could vary if the internal Minikube IP is different (although port should be the same).
 
-For direct docker usage:
-
-```bash
-docker run -p 8080:8080 container-registry.phenomenal-h2020.eu/phnmnl/galaxy-k8s-runtime
-```
-
-and in this case it should become accessible at localhost:8080 on your browser.
+For direct docker usage: this image is not meant to be used directly with docker only.
 
 ## Publications
 
