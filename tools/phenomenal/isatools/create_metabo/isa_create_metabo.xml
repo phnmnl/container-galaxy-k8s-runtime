@@ -17,8 +17,7 @@
         <![CDATA[
 
         mkdir study_dir &&
-        mkdir '${output.files_path}' &&
-        $__tool_directory__/cli.py
+        cli.py
         --galaxy_parameters_file='$inputs'
         --target_dir='study_dir/' &&
         cp study_dir/* '${output.files_path}'

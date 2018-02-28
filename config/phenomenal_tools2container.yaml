@@ -483,7 +483,7 @@ assignment:
 - docker_image_override: isatab-create
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: latest
+  docker_tag_override: v0.9.5_cv0.3.10.54
   max_pod_retrials: 3
   tools_id:
   - isatab-create
