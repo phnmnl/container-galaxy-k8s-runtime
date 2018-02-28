@@ -17,6 +17,7 @@
         <![CDATA[
 
         mkdir study_dir &&
+        mkdir -p '${output.files_path}' &&
         cli.py
         --galaxy_parameters_file='$inputs'
         --target_dir='study_dir/' &&
