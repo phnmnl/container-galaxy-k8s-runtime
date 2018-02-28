@@ -1,8 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <tool id="isa_get_data_files_list" name="Get data files list" version="1.0">
-    <description>Get a list of MetaboLights study data files filtered on factor
-        values
-    </description>
+    <description>Get a list of study data files filtered on factor values</description>
 
     <requirements>
         <requirement type="package" version="6.7">click</requirement>
@@ -62,12 +60,13 @@
 
     <help>
 <!-- @@@BEGIN_RST@@@ -->
-========================================
-Get a MetaboLights study data files list
-========================================
+==============================================================
+Get a list of study data files from MetaboLights or an ISA-Tab
+==============================================================
 
 This tool returns a list of data files sliced on a filtered factor name
-and value.
+and value. Queries can be made directly to MetaboLights or on existing ISA-Tab
+Galaxy history items.
 
 -----
 Input
@@ -98,6 +97,7 @@ by using the `study_factors` tool.
 Factor value to filter on
 =========================
 Factor value relevant to the specified MetaboLights study, e.g. Exp2.
+
 You can get the relevant factor values for a particular study and factor
 by using the `study_factor_values` tool.
 

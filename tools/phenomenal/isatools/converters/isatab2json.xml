@@ -19,17 +19,19 @@
 isatab2json converter
 =====================
 
-This tool converts an ISA-Tab ZIP archive to ISA-JSON.
+This tool converts an ISA-Tab Galaxy history item to ISA-JSON.
 
 -----
 Input
 -----
 
-Zip file containing ISA files
-=============================
-The input zip file must contain the i_*.txt, s_*.txt and a_*.txt files expected in an *ISA-Tab* archive.
-
-For details on the ISA-Tab format, please see http://isa-specs.readthedocs.io/en/latest/isatab.html
+ISA-Tab history item
+====================
+The input must contain the i_*.txt, s_*.txt and a_*.txt files expected in an
+*ISA-Tab* collection of files, present in Galaxy as a `isa-tab` datatype
+history item. Try using the `Metabolights downloader (W4M)` to download existing
+studies from MetaboLights, or the `Create ISA in Galaxy` tool to create your
+own study template.
 
 .. class:: warningmark
 
@@ -42,9 +44,11 @@ Output
 ISA content in ISA-JSON format
 ==============================
 
-A single JSON file containing the ISA-Tab contents in *ISA-JSON* compliant format.
+A single JSON file containing the ISA-Tab contents in *ISA-JSON* compliant
+format.
 
-For details on the ISA-JSON format, please see http://isa-specs.readthedocs.io/en/latest/isajson.html
+For details on the ISA-JSON format, please see
+http://isa-specs.readthedocs.io/en/latest/isajson.html
 
 <!-- @@@END_RST@@@ -->
   </help>

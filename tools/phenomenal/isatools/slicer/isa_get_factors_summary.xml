@@ -1,8 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <tool id="isa_get_factors_summary" name="Get summary of factors" version="1.0">
-    <description>Produce a summary table of variable factors of a MetaboLights
-        study
-    </description>
+    <description>Produce a summary table of variable factors of a study</description>
 
     <requirements>
         <requirement type="package" version="6.7">click</requirement>
@@ -57,6 +55,8 @@ Get summary of factors for a MetaboLights study
 This tool returns a table of sample names and related associated factor
 values. The tool calculates this by inspecting the ISA study and assay
 tables and computes the study groups and associated sample names.
+Summaries can be made generated directly on MetaboLights studies or on
+existing ISA-Tab Galaxy history items.
 
 -----
 Input
