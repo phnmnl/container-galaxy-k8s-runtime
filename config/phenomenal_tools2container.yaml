@@ -262,7 +262,7 @@ assignment:
 - docker_image_override: mtblisa
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v0.9.5_cv0.6.7.79
+  docker_tag_override: v0.9.5_cv0.6.7.81
   max_pod_retrials: 3
   tools_id:
   - isa_get_data_files_list
@@ -304,7 +304,7 @@ assignment:
 - docker_image_override: isatab2json
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v0.9.5_cv0.6.62
+  docker_tag_override: v0.9.5_cv0.6.64
   max_pod_retrials: 3
   tools_id:
   - isatab2json
@@ -367,7 +367,7 @@ assignment:
 - docker_image_override: isatab-validator
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v0.9.5_cv0.6.36
+  docker_tag_override: v0.9.5_cv0.6.37
   max_pod_retrials: 3
   tools_id:
   - isatab_validator
@@ -483,7 +483,7 @@ assignment:
 - docker_image_override: isatab-create
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v0.9.5_cv0.3.10.54
+  docker_tag_override: v0.9.5_cv0.3.11.55
   max_pod_retrials: 3
   tools_id:
   - isatab-create
