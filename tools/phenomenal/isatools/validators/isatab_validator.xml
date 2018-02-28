@@ -19,17 +19,23 @@
 ISA-Tab validator
 =================
 
-This tool validates an ISA-Tab set of files, contained in an ISA-Tab archive (zip).
+This tool validates an ISA-Tab set of files, contained in an ISA-Tab Galaxy
+history item (`isa-tab` datatype).
 
 -----
 Input
 -----
 
-Zip file containing ISA files
-=============================
-The input zip file must contain the i_*.txt, s_*.txt and a_*.txt files expected in an *ISA-Tab* archive.
+ISA-Tab history item
+====================
+The input must contain the i_*.txt, s_*.txt and a_*.txt files expected in an
+*ISA-Tab* collection of files, present in Galaxy as a `isa-tab` datatype
+history item. Try using the `Metabolights downloader (W4M)` to download existing
+studies from MetaboLights, or the `Create ISA in Galaxy` tool to create your
+own study template.
 
-For details on the ISA-Tab format, please see http://isa-specs.readthedocs.io/en/latest/isatab.html
+For details on the ISA-Tab format, please see
+http://isa-specs.readthedocs.io/en/latest/isatab.html
 
 ------
 Output
@@ -40,7 +46,9 @@ Validation report in JSON format
 
 A single JSON file containing the ISA-Tab validation report.
 
-The validation report may contain lists of `errors`, `warnings`, and `fatal` messages. To detect that the validation finished without the validation itself crashing, check that the property `validation_finished` is present and `True`.
+The validation report may contain lists of `errors`, `warnings`, and `fatal`
+messages. To detect that the validation finished without the validation itself
+crashing, check that the property `validation_finished` is present and `True`.
 
 A validation report may be structure like:
 
@@ -59,9 +67,12 @@ A validation report may be structure like:
   }
 
 
-For each warning or error, there will be a validation `code` (Integer), a user-readable `message` string and a `supplemental` section that intends to provide extra contextual information on the error.
+For each warning or error, there will be a validation `code` (Integer), a
+user-readable `message` string and a `supplemental` section that intends to
+provide extra contextual information on the error.
 
-The current set of validation rules that have been implemented are listed in this Google sheet: https://goo.gl/FRHKrQ
+The current set of validation rules that have been implemented are listed in
+this Google sheet: https://goo.gl/FRHKrQ
 
 <!-- @@@END_RST@@@ -->
   </help>

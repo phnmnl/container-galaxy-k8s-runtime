@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tool id="isa_get_study_factors" name="Get study factors" version="1.0">
+    <description>
+        Get list of study factors for a study
+    </description>
+
+    <requirements>
+        <requirement type="package" version="6.7">click</requirement>
+        <requirement type="package" version="0.9.4">isatools</requirement>
+    </requirements>
+
+    <stdio>
+        <exit_code range="1:" level="fatal"/>
+    </stdio>
+
+    <command><![CDATA[
+        #if $data_file.input == "mtbls_id"
+            run_mtblisa.py mtbls-get-factors
+            "${mtbls_id}" "${output}"
+        #end if
+
+        #if $data_file.input == "isatab_input"
+            run_mtblisa.py isa-tab-get-factors
+            "${data_file.isatab_input.extra_files_path}" "${output}"
+        #end if
+]]>
+    </command>
+    <inputs>
+	    <conditional name="data_file">
+            <param name="input" type="select" label="Choose your ISA-Tab input source">
+                <option value="mtbls_id" selected="true">Metabolights study ID</option>
+                <option value="isatab_input">ISA-Tab datatype history item</option>
+            </param>
+            <when value="mtbls_id">
+                <param name="mtbls_id" type="text" label="MetaboLights Study Identifier" help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
+            </when>
+            <when value="isatab_input">
+                <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab"  help="An ISA-Tab zip"/>
+            </when>
+        </conditional>
+    </inputs>
+    <outputs>
+        <data format="json" name="output" label="Study factors list"/>
+    </outputs>
+    <tests>
+        <test>
+            <param name="mtbls_id" value="MTBLS1"/>
+            <output name="output" file="mtbls1_factors_out.json" compare="sim_size"/>
+        </test>
+    </tests>
+
+    <help>
+<!-- @@@BEGIN_RST@@@ -->
+
+=============================================================
+Get list of study factors for a ISA-Tab or MetaboLights study
+=============================================================
+
+This tool gets the list of study factors from a MetaboLights study. It
+extracts the factors from the ISA-Tab metadata. Queries can be made directly to
+MetaboLights or on existing ISA-Tab Galaxy history items.
+
+-----
+Input
+-----
+
+ISA-Tab input source
+====================
+Choose an input source, either direct from Metabolights or from an ISA-Tab
+history item that has already been downloaded or created in Galaxy.
+
+MetaboLights Study Identifier
+=============================
+If the input source is Metabolights, then provide the MTBLS identifier
+available at MetaboLights, e.g. MTBLS2.
+
+ISA-Tab datatype history item
+=============================
+If the input source is an ISA-Tab history item, select from existing data
+history items. ISA-Tab items can be created by using the Metabolights
+downloader or the ISA-Tab metadata creation tools.
+
+------
+Output
+------
+
+List of study factors as JSON
+=============================
+
+A list of factor names as a JSON list. e.g.
+
+::
+
+    [
+        "replicate",
+        "genotype"
+    ]
+
+
+<!-- @@@END_RST@@@ -->
+    </help>
+
+    <citations>
+        <citation type="doi">10.1093/nar/gks1004</citation>
+        <citation type="doi">10.5281/zenodo.163640</citation>
+        <citation type="doi">10.1038/ng.1054</citation>
+    </citations>
+
+</tool>
