@@ -352,7 +352,7 @@ assignment:
 - docker_image_override: nmrml2isa
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v0.3.0_cv0.1.10
+  docker_tag_override: v0.3.0_cv0.2.12 
   max_pod_retrials: 3
   tools_id:
   - nmrml2isa
@@ -394,7 +394,7 @@ assignment:
 - docker_image_override: mzml2isa
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v0.4.28_cv0.2.23
+  docker_tag_override: v0.4.28_cv0.3.26 
   max_pod_retrials: 3
   tools_id:
   - mzml2isa
