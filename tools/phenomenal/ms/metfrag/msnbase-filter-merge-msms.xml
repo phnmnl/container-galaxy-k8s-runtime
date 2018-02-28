@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
+<!--Proposed Tool Section: [PhenoMeNal]-->
+<tool id="msnbase-filter-merge-msms" name="msnbase-filter-merge-msms" version="0.1">
+  <description>Filter and merge MS/MS spectra using retention time and m/z information.</description>
+  <command><![CDATA[
+	/usr/local/bin/mergeFilterMS2.r msnbaserdata=$msnbase_filter_merge_msms_input_1 mzppm=$mzppm mzabs=$mzabs rtabs=$rtabs max_rt_range=$max_rt_range max_mz_range=$max_mz_range min_rt=$min_rt max_rt=$max_rt min_mz=$min_mz max_mz=$max_mz msms_intensity_threshold=$msms_intensity_threshold output=$msnbase_filter_merge_msms_output_1;
+  ]]>
+  </command>
+  <inputs>
+    <param name="msnbase_filter_merge_msms_input_1" type="data" format="rdata" optional="False" label="msnbase-filter-merge-msms data" help="A rdata file with MS/MS information retrieved from msnbase-read-msms" />
+    <param name="mzppm" type="text" value="10" label="mzppm" help="The ppm error used for merging MS/MS spectra" />
+    <param name="mzabs" type="text" value="0.01" label="mzabs" help="The absolute mass error (in Dalton) used for merging MS/MS spectra" />
+    <param name="rtabs" type="text" value="2" label="rtabs" help="The retention time error (in seconds) used for merging MS/MS spectra" />
+    <param name="max_rt_range" type="text" value="20" label="max_rt_range" help="Permitted retention time window (in seconds) of grouped MS1 precursors. Grouped precursors that exceed that window will be discarded." />
+    <param name="max_mz_range" type="text" value="0.01" label="max_mz_range" help="Permitted m/z window of grouped MS1 precursors. Grouped precoursors that exceed that window will be discarded." />
+    <param name="min_rt" type="text" value="10" label="min_rt" help="Minimum retention time for selected precursors. Precursors with a lower retention time will be discarded." />
+    <param name="max_rt" type="text" value="1000" label="max_rt" help="Maximum retention time for selected precursors. Precursors with a higher retention time will be discarded." />
+    <param name="min_mz" type="text" value="50" label="min_mz" help="Minimum m/z value for selected precursors. Precursors with a lower m/z value will be discarded." />
+    <param name="max_mz" type="text" value="1500" label="max_mz" help="Maximum m/z value for selected precursors. Precursors with a higher m/z value will be discarded." />
+    <param name="msms_intensity_threshold" type="text" value="1000" label="msms_intensity_threshold" help="Minimum intensity value for MS/MS peaks. Peaks with lower intensity values will be discarded." />
+  </inputs>
+  <outputs>
+    <data name="msnbase_filter_merge_msms_output_1" type="data" format="rdata" label="msnbase-filter-merge-msms data" help="A rdata file containing the filtered and merged MS/MS compound spectra" />
+  </outputs>
+  <help>
+
+.. class:: infomark
+
+| **Tool update: See the 'NEWS' section at the bottom of the page**
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+| **Payam Emami (payam.emami@medsci.uu.se)** and **Christoph Ruttkies (christoph.ruttkies@ipb-halle.de)** wrote and maintain this wrapper for reading MS/MS spectra inforamtion from mzML files.
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Please cite**
+
+R Core Team (2013). R: A language and Environment for Statistical Computing. http://www.r-project.org
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**References**
+
+| Gatto L and Lilley K (2012). "MSnbase - an R/Bioconductor package for isobaric tagged mass spectrometry data visualization, processing and quantitation." Bioinformatics, 28, pp. 288-289. 
+
+---------------------------------------------------
+
+=========================
+MSnBase Filter Merge MSMS
+=========================
+
+-----------
+Description
+-----------
+
+| This module is used to filter and merge MS/MS spectra by retention time and m/z values. In a first step, MS/MS spectra are grouped by their precursor m/z and retention time. Second, grouped spectra can be filtered by their precursors' m/z deviation (max_mz_range) or retention time deviation (max_rt_range). Furthermore, MS/MS spectra can be filtered by the minimum and maximum m/z and retention time values of their precursors. In a third step, grouped MS/MS spectra are merged into one single MS/MS spectrum. This step also includes the filtering of m/z peaks by their intensity (msms.intensity.threshold).
+
++------------------+-----------------+
+| predecessor tool | successor tool  |
++------------------+-----------------+
+| msnbase-read-msms| msms2metfrag    |
++------------------+-----------------+
+
+-----------
+Input files
+-----------
+
++--------------------------------------+------------+
+| File                                 |   Format   |
++======================================+============+
+| 1)  msnbase-filter-merge-msms data   |    rdata   |
++--------------------------------------+------------+
+
+----------
+Parameters
+----------
+
+msnbase-filter-merge-msms data
+        | A rdata file with MS/MS information retrieved from msnbase-read-msms
+        |
+
+mzppm
+        | The ppm error used for merging MS/MS spectra
+        |
+
+mzabs
+        | The absolute mass error (in seconds) used for merging MS/MS spectra
+        |
+
+rtabs
+	| The retention time error (in seconds) used for merging MS/MS spectra
+	|
+
+max_rt_range
+	| Permitted retention time window (in seconds) of grouped MS1 precursors. Grouped precursors that exceed that window will be discarded.
+	|
+
+max_mz_range
+	| Permitted m/z window of grouped MS1 precursors. Grouped precoursors that exceed that window will be discarded.
+	|
+
+min_rt
+	| Minimum retention time for selected precursors. Precursors with a lower retention time will be discarded.
+	|
+
+
+max_rt
+	| Maximum retention time for selected precursors. Precursors with a higher retention time will be discarded.
+	|
+
+min_mz
+	| Minimum m/z value for selected precursors. Precursors with a lower m/z value will be discarded.
+	|
+
+max_mz
+	| Maximum m/z value for selected precursors. Precursors with a higher m/z value will be discarded.
+	|
+
+msms_intensity_threshold
+	| Minimum intensity value for MS/MS peaks. Peaks with lower intensity values will be discarded.
+	|
+
+------------
+Output files
+------------
+
+msnbase-filter-merge-msms data
+        | A rdata file containing the filtered and merged MS/MS compound spectra
+        |
+
+---------------------------------------------------
+
+----
+NEWS
+----
+
+CHANGES IN VERSION 0.1
+========================
+
+First version
+
+  </help>
+</tool>

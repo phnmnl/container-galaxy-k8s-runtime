@@ -1,0 +1,298 @@
+<tool id="dimspy_process_scans" name="Process Scans (and SIM-Stitch)" version="1.0.0">
+    <description> - Read, filter and average MS scans</description>
+    <macros>
+        <import>macros.xml</import>
+    </macros>
+    <expand macro="requirements" />
+    <expand macro="stdio" />
+    <command><![CDATA[
+        #if $input.format == "data_collection"
+            #for $fn in $input.source
+                #if str( $fn ).endswith(".dat")
+                    ln -s "$fn" "$fn.name"
+            	    &&
+                #end if
+            #end for
+        #elif $input.format == "single_file"
+            #if str( $input.source ).endswith(".dat")
+                ln -s "$input.source" "$input.source.name"
+                &&
+            #end if
+        #end if
+        dimspy process-scans
+        #if $input.format == "data_collection"
+            #for $fn in $input.source
+                --input "$fn.name"
+            #end for
+        #elif $input.format == "single_file"
+            --input "$input.source.name"
+        #elif $input.format == "library"
+            --input $__app__.config.user_library_import_dir/$__user_email__/$input.source
+        #else
+            --input "$input.source"
+        #end if
+        --output "$hdf5_file_out"
+        #if $filelist
+            --filelist "$filelist"
+        #end if
+        --function-noise $function_noise
+        --snr-threshold $snr_threshold
+        --ppm $mults.ppm
+        --min_scans $mults.min_scans
+        #if float($mults.min_fraction) > 0.0
+            --min-fraction $mults.min_fraction
+        #else
+            --min-fraction 0.0
+        #end if
+        #if float($mults.rsd_threshold) > 0.0
+            --rsd-threshold $mults.rsd_threshold
+        #end if
+        #if $adv.skip_stitching
+            --skip-stitching
+        #end if
+        #if float($adv.ringing_threshold) > 0.0
+            --ringing_threshold $adv.ringing_threshold
+        #end if
+        #for $mzr in $adv.remove_mz_range
+            --remove-mz-range $mzr.start $mzr.end
+        #end for
+        #if $scan_events.filter == "true"
+            #for $se in $scan_events.descriptions
+                #if $scan_events.incl_excl == "include"
+                    --include-scan-events $se.start $se.end $se.scan_type
+                #elif $scan_events.incl_excl == "exclude"
+                    --exclude-scan-events $se.start $se.end $se.scan_type
+                #end if
+            #end for
+        #end if
+        --report "$report"
+        &&
+        dimspy hdf5-pls-to-txt
+        --input "$hdf5_file_out"
+        --output .
+        --delimiter $delimiter
+    ]]></command>
+    <inputs>
+        <conditional name="input">
+            <param name="format" type="select" label="Choose the source for the dataset" >
+                <option value="zip_file" selected="true">Zip file from your History containing *.mzML files</option>
+                <option value="library">Library directory name</option>
+                <option value="data_collection">Data collection (*.mzML or *.raw files)</option>
+                <option value="single_file">Single *.mzML or *.raw file</option>
+            </param>
+            <when value="zip_file">
+                <param name="source" type="data" format="zip" label="Zip file containing *.mzml or *.raw files" argument="--source">
+                    <validator type="empty_field" />
+                </param>
+            </when>
+            <when value="library">
+                <param name="source" type="text" size="40" label="Library directory containing *.mzml or *.raw files" argument="--source">
+                    <validator type="empty_field" />
+                </param>
+            </when>
+            <when value="data_collection">
+                <param name="source" type="data_collection" format="mzml,thermo.raw,raw" label="Data collection of *.mzml or *.raw files" argument="--source" >
+                    <validator type="empty_field" />
+                </param>
+            </when>
+            <when value="single_file">
+                <param name="source" type="data" format="mzml,thermo.raw,raw" label="Single *.mzml or *.raw" argument="--source" >
+                    <validator type="empty_field" />
+                </param>
+            </when>
+        </conditional>
+        <param name="filelist" type="data" optional="true" format="tsv,tabular" label="Filelist / Samplelist" argument="--filelist" />
+        <param name="function_noise" type="select" label="Function to calculate the noise from each scan" help="" argument="--function-noise">
+            <option value="median" selected="true">median intensity</option>
+            <option value="mean">mean intensity</option>
+            <option value="mad">mad (mean absolute deviation) intensity</option>
+            <option value="noise_packets">As shown in Xcalibur Qual Browser (Available for *.RAW files only)</option>
+        </param>
+        <param name="snr_threshold" type="float" value="3.0" label="Signal-to-noise ratio threshold" help="" argument="--snr-threshold" />
+        <conditional name="scan_events">
+            <param name="filter" type="boolean" label="Filter specific windows or scan events?" help="(--include-scan-events / --exclude-scan-events)"/>
+	    <when value="true">
+                <param name="incl_excl" type="select" label="Include / Exclude scan event(s)" >
+                    <option value="exclude" selected="true">Exclude</option>
+                    <option value="include">Include</option>
+                </param>
+                <repeat name="descriptions" title="Description">
+                    <param name="start" type="float" value="0" label="Start m/z for scan event"/>
+                    <param name="end" type="float" value="0" label="End m/z for scan event">
+                        <validator type="expression" message="M/z value must be larger than 0.0">float(value) > 0.0</validator>
+                    </param>
+                    <param name="scan_type" type="select" label="Scan type">
+                        <option value="full" selected="true">Full scan</option>
+                        <option value="sim">SIM scan</option>
+                    </param>
+                </repeat>
+            </when>
+            <when value="false">
+            </when>
+        </conditional>
+        <section name="mults" title="Show options for multiple scans" expanded="True">
+            <param name="min_scans" type="integer" value="1" min="1" label="Minimum number of scans required for each m/z window or event" help="" argument="--min_scans" />
+            <param name="ppm" type="float" value="2.0" label="Ppm error tolerance" help="Maximum tolerated m/z deviation in consecutive scans in parts per million." argument="--ppm" />
+            <param name="min_fraction" min="0.0" max="1.0" type="float" value="0.0" label="Minimum fraction (i.e. percentage) of scans a peak has to be present in." help="Select '0' to skip this step." argument="--min-fraction" />
+            <param name="rsd_threshold" type="float" value="0.0" min="0.0" label="Relative standard deviation threshold" help="Select '0' to skip this step. Maximum tolerated relative standard deviation (RSD) of the peak intensities across scans." argument="--rsd-threshold" />
+        </section>
+        <section name="adv" title="Show advanced options" expanded="True">
+            <param name="skip_stitching" type="boolean" value="false" label="Skip SIM-Stitching?" help="When set to 'yes' it will skip the processing step where (SIM) windows are 'stitched' or 'joined' together. Set this option to 'yes' if you like to proces individual scan/SIM windows (events/ranges) without 'stitching' them."/>
+            <repeat name="remove_mz_range" title="Remove m/z range(s)?">
+                <param name="start" type="float" value="0.0" label="Start m/z of removal range"/>
+                <param name="end" type="float" value="0.0" label="End m/z of removal range">
+                    <validator type="expression" message="M/z value must be larger than 0.0">float(value) > 0.0</validator>
+                </param>
+            </repeat>
+            <param name="ringing_threshold" type="float" value="0.0" min="0.0" max="1.0" label="Relative intensity threshold used to remove ringing artifacts" help="Select '0' to skip this filter." argument="--ringing-threshold" />    
+        </section>
+        <param name="delimiter" type="hidden" value="tab" argument="--delimiter" />
+    </inputs>
+    <outputs>
+        <data name="hdf5_file_out" format="h5" label="${tool.name} on ${on_string}: Peaklists (HDF5 file)" />
+        <data name="report" format="txt" label="${tool.name} on ${on_string}: Report" />
+        <collection name="peaklists_txt" type="list" label="${tool.name} on ${on_string}: Peaklists">
+            <discover_datasets pattern="(?P&lt;designation&gt;.+)\.txt" format="tsv" directory="." visible="false" />
+	</collection>
+        
+    </outputs>
+    <tests>
+        <test>
+            <param name="input|format" value="zip_file" />
+            <param name="input|source" value="MTBLS79_mzml_triplicates.zip" ftype="zip" />
+            <param name="filelist" value="filelist_mzml_triplicates.txt" ftype="tsv" />
+            <param name="function" value="median" />
+            <param name="snr_threshold" value="10.0" />
+            <param name="mults|ppm" value="2.0" />
+            <param name="mults|min_scans" value="1" />
+            <param name="mults|min_fraction" value="0.5" />
+            <param name="mults|rsd_threshold" value="0" />
+            <param name="delimiter" value="tab" />
+            <output name="hdf5_file_out" value="pls.h5" ftype="h5" compare="sim_size" />
+            <output name="report" value="report_pls_01.xt" ftype="txt"/>
+            <output_collection name="peaklists_txt" type="list">
+                <element name="batch04_QC17_rep01_262" file="batch04_QC17_rep01_262.txt" ftype="tsv"/>
+                <element name="batch04_QC17_rep02_263" file="batch04_QC17_rep02_263.txt" ftype="tsv"/>
+                <element name="batch04_QC17_rep03_264" file="batch04_QC17_rep03_264.txt" ftype="tsv"/>
+            </output_collection>
+        </test>
+        <test>
+            <param name="input|format" value="zip_file" />
+            <param name="input|source" value="batch_04_QC18_mzml_triplicate.zip" ftype="zip" />
+            <param name="function" value="median" />
+            <param name="snr_threshold" value="10.0" />
+            <param name="mults|ppm" value="2.0" />
+            <param name="mults|min_scans" value="1" />
+            <param name="mults|min_fraction" value="0.8" />
+            <param name="mults|rsd_threshold" value="20.0" />
+            <param name="delimiter" value="tab" />
+            <output name="hdf5_file_out" value="pls_QC18.h5" ftype="h5" compare="sim_size"/>
+            <output name="report" value="report_pls_02.xt" ftype="txt"/>
+            <output_collection name="peaklists_txt" type="list">
+                <element name="batch04_QC18_rep01_280" file="batch04_QC18_rep01_280.txt" ftype="tsv"/>
+                <element name="batch04_QC18_rep02_281" file="batch04_QC18_rep02_281.txt" ftype="tsv"/>
+                <element name="batch04_QC18_rep03_282" file="batch04_QC18_rep03_282.txt" ftype="tsv"/>
+            </output_collection>
+        </test>
+    </tests>
+    <help>
+-------------
+Process Scans
+-------------
+
+Description
+-----------
+
+| Use this tool to generate a Peaklist for each of the files specified in the filelist. This tool is known to work with Thermo scientific .raw files and with .mzML files.
+| 
+| Peaks are removed from final Peaklist if:
+
+1) they occur in fewer than the user-defined 'Number of technical replicates a peak has to be present in' and/or
+2) the relative standard deviation (measured in % and also termed the coefficient of variation) among intensity values for a peak is greater than the user-defined value.
+
+Parameters
+----------
+
+**\1. Source for the dataset**
+
+- **Zip file from history** - use this option if you have uploaded a .zip directory containing ONLY your .mzML or .raw data files
+
+- **Library directory name** - use this option to select data files stored on a data server (e.g. the Research Data Storage at the University of Birmingham).
+  | In the 'Library directory' box that appears on selecting this option, insert a string specifying the path to your data.	
+  | Ensure to exclude the drive letter and user name, and to separate sub-directories using FORWARD SLASHES e.g. '[Y:\\users\\USERNAME]\\my_study_folder\\my_data_folder' becomes 'my_study_folder/my_data_folder'. 
+
+- **Data collection** - this option will provide a drop-down box in which you may select one of the data collections from your current history. 
+		
+- **Single .mzML or .raw file** - use this option if you have uploaded a single .mzML or .raw file to the current Galaxy history
+
+**\2. Filelist / Samplelist** (HIGHLY RECOMMENDED)
+
+| A tabular-formatted .txt file with columns: filename, replicate, batch, classLabel, injectionOrder.
+| Additional collumns are allowed but are not used during processing.
+| This file must be uploaded in to (or available from) the current history in order to allow for it to be selected from the drop-down menu.
+| **NOTE:** Only provide a filelist if you like to exclude Peaklist.
+| 
+
+@example_filelist@
+
+**\3. Function to calculate the noise from each scan** (REQUIRED)
+
+Select one option from the drop-down menu to indicate you prefer for noise calculation algorithm - median, mean, mean absolute deviation and 'Xcalibur' (i.e. noise values as displayed in Thermo Xcalibur software will be used) are the valid options.
+
+**\4. Signal-to-noise ratio threshold** (REQUIRED)
+
+A numerical value from 0 upwards. Peaks with signal-to-noise ratios less-than or equal to this value will be removed from output Peaklist.
+
+**\5. Filter specific scan windows or scan events?** (OPTIONAL)
+
+| A boolean toggle ('No' = do not perform scan event filtering; 'Yes' = filter specific scan events)
+| When 'Yes' is selected, users must specify whether to 'Exclude' or 'Include' specific scan events.
+   
+Users must then:
+  
+- Click the '+ Description' button and insert the 'Start m/z for scan event' and 'Stop m/z for scan event' for the scan event to be excluded or included.
+- Select the 'scan type' to be filtered from 'Full scan' or 'SIM scan'
+- Click '+ Description' to 'Exclude/Include' an additional scan event
+
+**\6. Show options for multiple scans**
+
+- **Minimum number of scans required for each m/z window or scan event** - A numerical value from 1 upwards to specify the number of instances of a given scan event required in order to peaks in this scan event to be included in the output Peaklist.
+- **ppm error tolerance** - A numerical value from 0 upwards. This option serves to define the maximum allowable difference in m/z values (measured in parts-per-million) for mass spectral peaks to be clustered across replicates of the same scan event.
+- **Minimum fraction (i.e. percentage) of scans a peak has to be present in** - A numerical value specifying the minimum number of scans a given mass spectral peak must be present in for it to be kept in the output Peaklist. The ppm error specified by the user will significantly impact which peaks fulfil this criteria.
+
+**\7. Show advanced options**
+
+- **Skip SIM-stitching** (REQUIRED; default = 'NO')
+
+  | A boolean toggle ('No' = perform SIM stitching; 'Yes' = skip stitching procedure)
+  | When set to 'yes' it will skip the processing step where (SIM) windows are 'stitched' or 'joined' together.
+  | Set this option to 'yes' if you like to proces individual scan/SIM windows (events/ranges) without 'stitching' them. 
+    
+- **Remove m/z range(s)** (OPTIONAL)
+
+  This option allow specific regions of the output peak matrices to be deleted by the user - this option may be useful for removing sections of a spectrum known to correspond to system noise peaks.
+
+  - **Start m/z of removal range** - a numerical value corresponding to the lowest m/z value in the spectral region to be removed 
+  - **End m/z of removal range** - a numerical value corresponding to the highest m/z value in the spectral region to be removed 
+
+- **Relative intensity threshold used to remove ringing artefacts** (OPTIONAL)
+
+  - Fourier transform-based mass spectra often contain many peaks (ringing artefacts) around spectral features corresponding to genuine bio-molecules.
+  - A numerical value indicating the required relative intensity a peak must exceed (with reference to the largest peak in a cluster of peaks) in order to be retained.
+
+Output file(s)
+--------------
+
+| A HDF5 file containing the processed Peaklists
+| 
+| A processed Peaklist, in .tsv format, for each file specified in the filelist (Data Collection)
+
+- Tab-delimited text file containing a numeric data matrix, with . as decimal, and NA for missing values.
+- Includes additional information, such as the signal-to-noise ratio, relative-standard deviation (rsd) and 'purity' for each peak.
+
+@github_developers_contributors@
+
+    </help>
+
+    <expand macro="citations" />
+</tool>

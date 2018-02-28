@@ -4,7 +4,7 @@
 <tool id="msnbase-read-msms" name="msnbase-read-msms" version="0.1">
   <description>Read MS/MS spectra from mzML file(s).</description>
   <command><![CDATA[
-	/usr/local/bin/readMS2MSnBase.r input=$msnbase_read_msms_input_1 output=$msnbase_read_msms_output_1;
+	/usr/local/bin/readMS2MSnBase.r input=$msnbase_read_msms_input_1 output=$msnbase_read_msms_output_1 inputname=$msnbase_read_msms_input_1.name;
   ]]>
   </command>
   <inputs>

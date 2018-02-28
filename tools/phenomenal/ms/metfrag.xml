@@ -7,8 +7,12 @@
   </requirements>
   <description>Run a single MetFrag query given a MS/MS peak list and the precursor m/z or molecular formula.</description>
   <command><![CDATA[
-        java -jar /usr/local/bin/MetFragCLI.jar PeakListPath=$infile MetFragDatabaseType=$MetFragDatabaseType IonizedPrecursorMass=$IonizedPrecursorMass DatabaseSearchRelativeMassDeviation=$DatabaseSearchRelativeMassDeviation FragmentPeakMatchAbsoluteMassDeviation=$FragmentPeakMatchAbsoluteMassDeviation FragmentPeakMatchRelativeMassDeviation=$FragmentPeakMatchRelativeMassDeviation PrecursorIonMode=$PrecursorIonMode IsPositiveIonMode=$IsPositiveIonMode MetFragScoreTypes=FragmenterScore MetFragScoreWeights=$MetFragScoreWeights MetFragCandidateWriter=CSV SampleName=Galaxy ResultsPath=/tmp MaximumTreeDepth=$MaximumTreeDepth MetFragPreProcessingCandidateFilter=UnconnectedCompoundFilter;
-        if [ $? -eq 0 ]; then cat /tmp/Galaxy.csv > $outfile; else exit 1; fi;
+        java -jar /usr/local/bin/MetFragCLI.jar PeakListPath=$infile MetFragDatabaseType=$MetFragDatabaseType IonizedPrecursorMass=$IonizedPrecursorMass DatabaseSearchRelativeMassDeviation=$DatabaseSearchRelativeMassDeviation FragmentPeakMatchAbsoluteMassDeviation=$FragmentPeakMatchAbsoluteMassDeviation FragmentPeakMatchRelativeMassDeviation=$FragmentPeakMatchRelativeMassDeviation PrecursorIonMode=$PrecursorIonMode IsPositiveIonMode=$IsPositiveIonMode MetFragCandidateWriter=CSV SampleName=Galaxy ResultsFile=$outfile MaximumTreeDepth=$MaximumTreeDepth MetFragPreProcessingCandidateFilter=UnconnectedCompoundFilter
+        #if $additional_metfrag_scores != "None":
+            MetFragScoreTypes=FragmenterScore,$additional_metfrag_scores MetFragScoreWeights=1.0,`echo $additional_metfrag_scores | sed "s/[a-zA-Z0-9]\+/1.0/g"`
+	#else:
+	    MetFragScoreTypes=FragmenterScore MetFragScoreWeights=1.0
+        #end if
   ]]>
   </command>
   <inputs>
@@ -28,7 +32,9 @@
       <option value="TRUE" selected="True">Positive mode</option>
       <option value="FALSE">Negative mode</option>
     </param>
-    <param name="MetFragScoreWeights" type="text" value="1.0" optional="False" label="MetFrag Score Weights" help="Weight used for scoring in MetFrag." />
+    <param name="additional_metfrag_scores" type="select" display="checkboxes" multiple="true" label="Add additional MetFrag scores" help="Add additional MetFrag scores">
+      <option value="OfflineMetFusionScore">Spectral Similarity (MoNA)</option>
+    </param>
     <param name="MaximumTreeDepth" type="text" value="1" optional="False" label="Maximum tree depth" help="Maximum depth of fragmentation tree." />
   </inputs>
   <outputs>

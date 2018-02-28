@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tool id="isa_get_study_factor_values" name="Get values of a study factor"
+      version="1.0">
+    <description>
+        Get list of factor values for given factor used in a study
+    </description>
+
+    <requirements>
+        <requirement type="package" version="6.7">click</requirement>
+        <requirement type="package" version="0.9.4">isatools</requirement>
+    </requirements>
+
+    <stdio>
+        <exit_code range="1:" level="fatal"/>
+    </stdio>
+    <command><![CDATA[
+        #if $data_file.input == "mtbls_id"
+            run_mtblisa.py mtbls-get-factor-values
+            "${mtbls_id}" "${factor_name}" "${output}"
+        #end if
+
+        #if $data_file.input == "isatab_input"
+            run_mtblisa.py isa-tab-get-factor-values
+            "${data_file.isatab_input.extra_files_path}" "${factor_name}" "${output}"
+        #end if
+]]>
+    </command>
+    <inputs>
+	    <conditional name="data_file">
+            <param name="input" type="select" label="Choose your ISA-Tab input source">
+                <option value="mtbls_id" selected="true">Metabolights study ID</option>
+                <option value="isatab_input">ISA-Tab datatype history item</option>
+            </param>
+            <when value="mtbls_id">
+                <param name="mtbls_id" type="text" label="MetaboLights Study Identifier" help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
+            </when>
+            <when value="isatab_input">
+                <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab"  help="An ISA-Tab datatype history item"/>
+            </when>
+        </conditional>
+        <param name="factor_name" type="text" label="Factor name to filter on."
+               help="Factor name relevant to the specified MetaboLights study, e.g. genotype. You can get a study's factor names by using the study_factors tool."/>
+    </inputs>
+    <outputs>
+        <data format="json" name="output"
+              label="Study factor values list"/>
+    </outputs>
+
+    <tests>
+        <test>
+            <param name="mtbls_id" value="MTBLS1"/>
+            <param name="factor" value="Gender"/>
+            <output name="output" file="mtbls1_factor_values_out.json" compare="sim_size"/>
+        </test>
+    </tests>
+
+    <help>
+<!-- @@@BEGIN_RST@@@ -->
+==================================================
+Get list of study factors for a MetaboLights study
+==================================================
+
+This tool gets the list of factor values from a study for a
+given study factor name. It extracts the factor values from the ISA-Tab
+study and assay tables. Queries can be made directly to MetaboLights or on
+existing ISA-Tab Galaxy history items.
+
+-----
+Input
+-----
+
+ISA-Tab input source
+====================
+Choose an input source, either direct from Metabolights or from an ISA-Tab
+history item that has already been downloaded or created in Galaxy.
+
+MetaboLights Study Identifier
+=============================
+If the input source is Metabolights, then provide the MTBLS identifier
+available at MetaboLights, e.g. MTBLS2.
+
+ISA-Tab datatype history item
+=============================
+If the input source is an ISA-Tab history item, select from existing data
+history items. ISA-Tab items can be created by using the Metabolights
+downloader or the ISA-Tab metadata creation tools.
+
+Factor name
+===========
+A factor name from the list of factors in the study metadata. You can
+get the relevant factor names for a particular study by using the
+`study_factors` tool.
+
+------
+Output
+------
+
+List of factor values as JSON
+=============================
+
+A list of factor values for the specified factor name as a JSON list.
+e.g.
+
+::
+    ["Exp2", "Exp1"]
+
+<!-- @@@END_RST@@@ -->
+    </help>
+
+    <citations>
+        <citation type="doi">10.1093/nar/gks1004</citation>
+        <citation type="doi">10.5281/zenodo.163640</citation>
+        <citation type="doi">10.1038/ng.1054</citation>
+    </citations>
+
+</tool>

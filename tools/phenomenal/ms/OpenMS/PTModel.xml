@@ -129,8 +129,8 @@
 #end if
 ]]></command>
   <inputs>
-    <param name="param_in_positive" type="data" format="" optional="False" label="input file with positive examples" help="(-in_positive) "/>
-    <param name="param_in_negative" type="data" format="" optional="False" label="input file with negative examples" help="(-in_negative) "/>
+    <param name="param_in_positive" type="data" format="idxml" optional="False" label="input file with positive examples" help="(-in_positive) "/>
+    <param name="param_in_negative" type="data" format="idxml" optional="False" label="input file with negative examples" help="(-in_negative) "/>
     <param name="param_c" type="float" value="1.0" label="the penalty parameter of the svm" help="(-c) "/>
     <param name="param_svm_type" display="radio" type="select" optional="False" value="C_SVC" label="the type of the svm (NU_SVC or C_SVC)" help="(-svm_type) ">
       <option value="NU_SVC">NU_SVC</option>

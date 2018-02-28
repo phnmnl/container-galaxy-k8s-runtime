@@ -61,7 +61,7 @@
 ]]></command>
   <inputs>
     <param name="param_in" type="data" format="mzml" optional="False" label="Input file with MS/MS spectra" help="(-in) "/>
-    <param name="param_id" type="data" format="" optional="False" label="Identification input file which contains a search against a concatenated sequence database" help="(-id) "/>
+    <param name="param_id" type="data" format="idxml" optional="False" label="Identification input file which contains a search against a concatenated sequence database" help="(-id) "/>
     <param name="param_fragment_mass_tolerance" type="float" value="0.05" label="Fragment mass erro" help="(-fragment_mass_tolerance) "/>
     <param name="param_fragment_mass_unit" display="radio" type="select" optional="False" value="Da" label="Unit of fragment mass erro" help="(-fragment_mass_unit) ">
       <option value="Da" selected="true">Da</option>

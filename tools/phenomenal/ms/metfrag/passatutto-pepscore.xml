@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Utilities]-->
+<tool id="passatutto" name="metfrag-passatuttoPEP" version="0.1">
+<!--
+  <requirements>
+    <container type="docker">phnmnl/xcms</container>
+  </requirements>
+-->
+  <description>Convert Metfrag scores to PEP</description>
+  <command><![CDATA[
+/usr/local/bin/metfragPEP.r input=$infile score=$scorein output=$outfile;
+  ]]></command>
+  <inputs>
+    <param name="infile" type="data" format="txt" value="" optional="False" label="Input MetFrag results." />
+	<param name="scorein" type="text" value="FragmenterScore" optional="False" label="Name of score columns to use" help="" />
+  </inputs>
+  <outputs>
+    <data name="outfile" format="txt"/>
+  </outputs>
+  <help>
+.. class:: infomark
+
+| **Tool update: See the 'NEWS' section at the bottom of the page**
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+| **Payam Emami (payam.emami@medsci.uu.se)** and **Christoph Ruttkies (christoph.ruttkies@ipb-halle.de)** wrote and maintain this wrapper for MetFrag batch mode processing.
+
+
+---------------------------------------------------
+
+=================================
+Convert MetFrag raw to pep scores
+=================================
+
+-----------
+Description
+-----------
+
+| This module is used to convert metfrag raw scores to posterior error probability (pep). See here https://bio.informatik.uni-jena.de/passatutto/
+
++--------------------------+---------------------+
+| predecessor tool         | successor tool      |
++--------------------------+---------------------+
+| metfrag-aggregatemetfrag |camera-prepareoutput |
++--------------------------+---------------------+
+
+-----------
+Input files
+-----------
+
++------------------------------+------------+
+| File                         |   Format   |
++==============================+============+
+| 1)  the identifcation        |    csv     |
+|     results                  |            |
++------------------------------+------------+
+
+
+----------
+Parameters
+----------
+
+Input metfrag results
+        | a CSV file containing MetFrag identification and aggregated. 
+        |
+
+Name of score columns to use
+        | Metfrag can output several scores. Use write the exact score type you want to use for pep calculation
+        |
+
+
+------------
+Output files
+------------
+
+outfile
+        | A txt file containing all the identification results and pep scores.
+        |
+
+---------------------------------------------------
+
+----
+NEWS
+----
+
+
+CHANGES IN VERSION 0.1
+========================
+
+First version
+</help>
+</tool>

@@ -1,0 +1,233 @@
+id: MS-MetFrag-XCMS-Workflow
+name: MS-MetFrag-XCMS-Workflow
+description: LC/MS data analysis with XCMS and MetFrag on PhenoMeNal
+title_default: MS-MetFrag-XCMS-Workflow
+steps:
+  - title: MS-MetFrag-XCMS-Workflow
+    content: >-
+      Metabolite identification is a crucial step when trying to understand e.g.
+      the courses of a disease on the metabolomic level.  In this tour we will
+      demonstrate the MetFrag workflow, which goes a first step to annotate
+      molecules from compound (metabolite) databases  to MS/MS (tandem mass
+      spectrometry) spectra. This annotation is based on the mapping of in
+      silico generated fragments to the experimental spectra  and scoring of
+      your arrow keys and leave the tour at any time point with 'Escape' or the
+      'End tour' button.
+    backdrop: true
+  - title: Upload your LC/MS data
+    element: .upload-button
+    intro: Use this button to get your data into Galaxy
+    position: right
+    postclick:
+      - .upload-button
+  - title: Upload your data
+    element: '#btn-new'
+    intro: ' Galaxy supports many ways to get in your data. You can upload data from your computer. Here, we will import the LC/MS demo data from a URL.'
+    position: top
+    postclick:
+      - '#btn-new'
+  - title: Insert URLs
+    element: '.upload-text-content:first'
+    intro: >-
+      URLs separated by a line break are automatically downloaded by Galaxy.
+      Here we use a link to a ZIP file with one mzML file. Galaxy will
+      uncompress the file for us and place the result into the history on the
+      right.
+    position: top
+    textinsert: >
+      https://msbi.ipb-halle.de/~cruttkie/data/PE_PG_AutoMS_2-B_3_03_18583.mzML.zip
+  - title: Start the upload
+    element: '#btn-start'
+    intro: Upload the data into your Galaxy history.
+    position: top
+    postclick:
+      - '#btn-start'
+  - title: Close upload/download manager
+    element: '#btn-close'
+    intro: >-
+      Close the upload manager with this button or with a click outside of the
+      manager window.
+    position: top
+    postclick:
+      - '#btn-close'
+  - title: Tools
+    element: '#left'
+    intro: >-
+      The toolsbox in the PhenoMeNal Galaxy includes (among others) functions
+      from XCMS, MSnbase and MetFrag.
+    position: right
+
+  - title: Select xcms findPeaks tool
+    element: '#tool-search'
+    content: >-
+      Select xcms findPeaks tool, either by locating it in the MS section, or
+      using the search box
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=xcms-find-peaks"]'
+  - title: xcms findPeaks Tool
+    element: '#center-panel'
+    intro: Your tool is loaded into the main Galaxy page and ready for use. The parameters are OK for this data set.
+    position: right
+  - title: Find Peaks
+    element: '#execute'
+    intro: Click on 'Execute' to run your tool and send it to the compute cluster.
+    position: right
+    postclick:
+      - '#execute'
+
+  - title: Select first CAMERA tool
+    element: '#tool-search'
+    content: >-
+      Select the CAMERA-annotate-peaks tool, either by locating it in the MS
+      section, or using the search box
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=camera-annotate-peaks"]'
+  - title: CAMERA-annotate-peaks
+    element: '#center-panel'
+    intro: Your tool is loaded into the main Galaxy page and ready for use.
+    position: right
+  - title: CAMERA annotate peaks
+    element: '#execute'
+    intro: Click on 'Execute' to run your tool and send it to the compute cluster.
+    position: right
+    postclick:
+      - '#execute'
+
+  - title: Select second CAMERA tool
+    element: '#tool-search'
+    content: >-
+      Select the CAMERA-group-fwhm tool, either by locating it in the MS
+      section, or using the search box
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=camera-group-fwhm"]'
+  - title: CAMERA-annotate-peaks
+    element: '#center-panel'
+    intro: Your tool is loaded into the main Galaxy page and ready for use.
+    position: right
+  - title: CAMERA annotate peaks
+    element: '#execute'
+    intro: Click on 'Execute' to run your tool and send it to the compute cluster.
+    position: right
+    postclick:
+      - '#execute'
+
+  - title: Select third CAMERA tool
+    element: '#tool-search'
+    content: >-
+      Select the CAMERA-group-fwhm tool, either by locating it in the MS
+      section, or using the search box
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=camera-find-adducts"]'
+  - title: CAMERA-find-adducts
+    element: '#center-panel'
+    intro: Your tool is loaded into the main Galaxy page and ready for use.
+    position: right
+  - title: CAMERA find adduct mass differences
+    element: '#execute'
+    intro: Click on 'Execute' to run your tool and send it to the compute cluster.
+    position: right
+    postclick:
+      - '#execute'
+
+  - title: Read the MS data file with MS/MS
+    element: '#tool-search'
+    content: >-
+      Select read-msms from MSnbase to extract the MS/MS spectra, either by
+      locating it in the MS section, or using the search box
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=msnbase-read-msms"]'
+  - title: MSnbase-read-msms
+    element: '#center-panel'
+    intro: Your tool is loaded into the main Galaxy page and ready for use.
+    position: right
+  - title: 'Read MS/MS data '
+    element: '#execute'
+    intro: Click on 'Execute' to run your tool and send it to the compute cluster.
+    position: right
+    postclick:
+      - '#execute'
+
+  - title: Map the MS/MS spectra to LC/MS features
+    element: '#tool-search'
+    content: >-
+      Select read-msms from MSnbase to extract the MS/MS spectra, either by
+      locating it in the MS section, or using the search box
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=map-msms2camera"]'
+  - title: map-msms2camera
+    element: '#center-panel'
+    intro: Before execution, make sure to select the "camera-find-adducts data" as first input parameter. The second parameter is probably already set to "masnbase-read-msms data"
+    position: right
+  - title: map-msms2camera
+    element: '#execute'
+    intro: Click on 'Execute' to run your tool and send it to the compute cluster.
+    position: right
+    postclick:
+      - '#execute'
+
+  - title: Create MetFrag query files
+    element: '#tool-search'
+    content: >-
+      Select read-msms from MSnbase to extract the MS/MS spectra, either by
+      locating it in the MS section, or using the search box
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=msms2metfrag"]'
+  - title: msms2metfrag
+    element: '#center-panel'
+    intro: Before execution, make sure to select the "camera-find-adducts data" as second input parameter. The first parameter is probably already set to "map-msms2camera data"
+    position: right
+  - title: msms2metfrag
+    element: '#execute'
+    intro: Click on 'Execute' to run your tool and send it to the compute cluster.
+    position: right
+    postclick:
+      - '#execute'
+
+  - title: Run MetFrag
+    element: '#tool-search'
+    content: >-
+      Batch-process the query files, either by locating it in the MS section, or
+      using the search box
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=metfrag-cli-batch"]'
+  - title: metfrag-cli-batch
+    element: '#center-panel'
+    intro: Before execution, make sure to switch the input to "Dataset collection", which will then give you the "MetFrag parameters" input collection.
+    position: right
+  - title: metfrag-cli-batch
+    element: '#execute'
+    intro: Click on 'Execute' to run your tool and send it to the compute cluster.
+    position: right
+    postclick:
+      - '#execute'
+
+  - title: Visualise the MetFrag results
+    element: '#tool-search'
+    content: >-
+      Locate the metfrag-vis tool, either by locating it in the MS section, or
+      using the search box
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=metfrag-vis"]'
+  - title: metfrag-vis
+    element: '#center-panel'
+    intro: Before execution, make sure to switch the both input boxes to "Dataset collection", and select the "MetFrag result file" and "MetFrag parameters" input collections.
+    position: right
+  - title: metfrag-vis
+    element: '#execute'
+    intro: Click on 'Execute' to run your tool and send it to the compute cluster.
+    position: right
+    postclick:
+      - '#execute'
+
+  - title: Enjoy Galaxy
+    intro: Thanks for taking this tour! Happy metabolomics research with PhenoMeNal !
+

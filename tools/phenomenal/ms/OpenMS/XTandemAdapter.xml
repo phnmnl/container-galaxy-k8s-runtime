@@ -125,7 +125,7 @@
 ]]></command>
   <inputs>
     <param name="param_in" type="data" format="mzml" optional="False" label="Input file" help="(-in) "/>
-    <param name="param_database" type="data" format="" optional="False" label="FASTA file or pro file" help="(-database) Non-existing relative file-names are looked up via'OpenMS.ini:id_db_dir'"/>
+    <param name="param_database" type="data" format="fasta" optional="False" label="FASTA file or pro file" help="(-database) Non-existing relative file-names are looked up via'OpenMS.ini:id_db_dir'"/>
     <param name="param_xtandem_executable" type="data" format="text" value="tandem.exe" label="X! Tandem executable of the installation" help="(-xtandem_executable) e.g. 'tandem.exe'"/>
     <param name="param_default_config_file" type="data" format="mzml" optional="True" value="CHEMISTRY/XTandem_default_input.xml" label="Default parameters input file, defaulting to the ones in the OpenMS/share folder.All parameters of this adapter take precedence over this file! Use it for parameters not available here!" help="(-default_config_file) "/>
     <param name="param_ignore_adapter_param" display="radio" type="boolean" truevalue="-ignore_adapter_param" falsevalue="" checked="false" optional="True" label="The config given in 'default_config_file' is used exclusively! No matter what other parameters (apart from -in,-out,-database,-xtandem_executable) are saying" help="(-ignore_adapter_param) "/>

@@ -1,0 +1,112 @@
+<tool id="dimspy_sample_filter" name="Sample Filter" version="1.0.0">
+    <description> - Remove peaks that fail to appear in x-out-of-n (biological) samples</description>
+    <macros>
+        <import>macros.xml</import>
+    </macros>
+    <expand macro="requirements" />
+    <expand macro="stdio" />
+    <command><![CDATA[
+        dimspy sample-filter
+        --input "$hdf5_file_in"
+        --output "$hdf5_file_out"
+        --min-fraction $min_fraction
+        ${within}
+        #if $rsd_threshold
+            --rsd-threshold $rsd_threshold
+        #end if
+        #if $qc_label
+            --qc-label $qc_label
+        #end if
+        #if $hdf5_to_txt.standard
+            &&
+            @HDF5_PM_TO_TXT@
+        #end if
+        #if $hdf5_to_txt.comprehensive
+            &&
+            @HDF5_PM_TO_TXT_COMPREHENSIVE@
+        #end if
+    ]]></command>
+    <inputs>
+        <param name="hdf5_file_in" type="data" format="h5" label="Peak Intensity Matrix (HDF5 file)" help="" argument="--input"/>
+        <param name="within" type="boolean" checked="false" truevalue="--within" falsevalue="" label="Apply sample filter within each sample class."  help="" argument="--within"/>
+        <param name="min_fraction" min="0" max="1.0" type="float" value="0.5" label="Minimum fraction" help="Minimum fraction (i.e. percentage) of samples a peak has to be present" argument="--min-fraction"/>
+        <param name="rsd_threshold" type="hidden" value="" label="Relative standard deviation threshold" help="Leave empty to skip this step" argument="--rsd-threshold"/>
+        <param name="qc_label" type="hidden" value="" label="Label for the QC sample (RSD filter only)" help="Peaks that have a larger RSD than the QC peaks are removed (Leave empty to skip this step)." argument="--qc-label"/>
+        <param name="delimiter" type="hidden" value="tab" argument="--delimiter"/>
+        <expand macro="hdf5_pm_to_txt" />
+    </inputs>
+    <outputs>
+        <expand macro="outputs_peak_intensity_matrix" />
+    </outputs>
+    <tests>
+        <test>
+            <param name="hdf5_file_in" value="pm_as_bf.h5" ftype="h5"/>
+            <param name="within" value=""/>
+            <param name="min_fraction" value="0.5"/>
+            <param name="rsd_threshold" value=""/>
+            <param name="qc_label" value=""/>
+            <param name="delimiter" value="tab"/>
+            <param name="hdf5_to_txt|standard" value="True"/>
+            <param name="hdf5_to_txt|comprehensive" value="True"/>
+            <param name="hdf5_to_txt|representation_samples" value="rows"/>
+            <param name="hdf5_to_txt|matrix_attr" value="intensity"/>
+            <output name="hdf5_file_out" file="pm_as_bf_sf.h5" ftype="h5" compare="sim_size"/>
+            <output name="matrix_file_out" file="peak_matrix_as_bf_sf.txt" ftype="tsv"/>
+            <output name="matrix_comprehensive_file_out" file="peak_matrix_as_bf_sf_compr.txt" ftype="tsv"/>
+        </test>
+        <test>
+            <param name="hdf5_file_in" value="pm_as_bf.h5" ftype="h5"/>
+            <param name="within" value=""/>
+            <param name="min_fraction" value="0.5"/>
+            <param name="rsd_threshold" value=""/>
+            <param name="qc_label" value=""/>
+            <param name="delimiter" value="tab"/>
+            <param name="hdf5_to_txt|standard" value="True"/>
+            <param name="hdf5_to_txt|comprehensive" value="True"/>
+            <param name="hdf5_to_txt|representation_samples" value="columns"/>
+            <param name="hdf5_to_txt|matrix_attr" value="mz"/>
+            <output name="hdf5_file_out" file="pm_as_bf_sf.h5" ftype="h5" compare="sim_size"/>
+            <output name="matrix_file_out" file="peak_matrix_as_bf_sf_mz.txt" ftype="tsv"/>
+            <output name="matrix_comprehensive_file_out" file="peak_matrix_as_bf_sf_mz_compr.txt" ftype="tsv"/>
+        </test>
+    </tests>
+    <help>
+-------------
+Sample Filter
+-------------
+
+Description
+-----------
+
+| Use this tool to align Peaklists according to their constituent mass spectral peaks.
+| In the DIMS analysis workflow, align samples typically follows 'replicate_filter'. This tool may, however, be used to align any Peaklists (e.g. aligning individual Peaklists for each replicate of a sample).
+
+Parameters
+-----------
+
+**\1. Peak Intensity Matrix (HDF5 file)** (REQUIRED)
+
+A Peak Intensity Matrix (HDF5 format), typically an output from the 'Align samples' tool.
+		
+**\2. Apply sample filter within each class** (REQUIRED; default = 'No')
+
+Boolean toggle where:
+
+- **Yes** corresponds to checking, on a class-by-class basis, whether greater-than the user-defined 'Minimum fraction' of samples within an experimental class contain an intensity value for a specific mass spectral peak. If less than this number, the intensity value in that class is set to zero.
+- **No** corresponds to checking, across ALL classes simultaneously, whether greater-than the user-defined 'Minimum fraction' of samples contain an intensity value for a specific mass spectral peak. If less than this number, the intensity value is ALL classes is set to zero.
+		
+**\3. Minimum fraction** (REQUIRED; default = 0.5)
+
+Numeric value ranging from 0 to 1.
+
+- A value of 0 corresponds to a minimum of 0 samples across or within experimental classes (as defined by the 'Sample filter within each class' toggle) having an intensity value of greater-than 0.
+- A value of 1 correspond to 100% of samples across or within experimental classes (as defined by the 'Sample filter within each class' toggle) having an intensity value of greater-than 0.
+
+@help_options_addtional_output@
+
+@github_developers_contributors@
+   
+    </help>
+    <expand macro="citations" />
+</tool>
+
