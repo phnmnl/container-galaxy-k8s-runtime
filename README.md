@@ -49,7 +49,7 @@ Note: maintainers are for containers, not necessarily tool authors. Follow links
 
 - [Pablo Moreno](https://github.com/pcm32) (EMBL-EBI)
 - [Luca Pireddu](https://github.com/ilveroluca) (CRS4)
-- [Pierrick Roger-Mele](https://github.com/pierrickrogermele) (CEA)
+- [Pierrick Roger](https://github.com/pkrog) (CEA)
 - [David Johnson](https://github.com/djcomlab) (U. of Oxford)
 - PhenoMeNal Tool Contributors.
 
