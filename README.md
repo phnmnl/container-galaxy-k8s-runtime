@@ -20,7 +20,6 @@ The Galaxy - Kubernetes integration and Galaxy helm charts are contributions mad
 
 This release version uses the tools listed in this [table](https://github.com/phnmnl/container-galaxy-k8s-runtime/blob/master/cerebellin-tools.md), tagged at the specified release versions.
 
-
 Note: maintainers are for containers, not necessarily tool authors. Follow links to learn about tool authors.
 
 

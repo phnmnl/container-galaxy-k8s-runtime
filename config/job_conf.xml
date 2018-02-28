@@ -177,30 +177,6 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
-    <destination id="container-mtblisa" runner="k8s">
-      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-      <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">mtblisa</param>
-      <param id="docker_tag_override">v0.8.0_cv0.5.44</param>
-      <param id="max_pod_retrials">3</param>
-      <param id="docker_enabled">true</param>
-    </destination>
-    <destination id="container-isatab-validator" runner="k8s">
-      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-      <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">isatab-validator</param>
-      <param id="docker_tag_override">v0.8.0_cv0.2.16</param>
-      <param id="max_pod_retrials">3</param>
-      <param id="docker_enabled">true</param>
-    </destination>
-    <destination id="container-isajson-validator" runner="k8s">
-      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-      <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">isajson-validator</param>
-      <param id="docker_tag_override">v0.8.0_cv0.2.26</param>
-      <param id="max_pod_retrials">3</param>
-      <param id="docker_enabled">true</param>
-    </destination>
     <destination id="metfrag-vis-container" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -217,35 +193,11 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
-    <destination id="container-mw2isa" runner="k8s">
-      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-      <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">mw2isa</param>
-      <param id="docker_tag_override">v0.5.0_cv0.1.20</param>
-      <param id="max_pod_retrials">1</param>
-      <param id="docker_enabled">true</param>
-    </destination>
-    <destination id="container-isatab2json" runner="k8s">
-      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-      <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">isatab2json</param>
-      <param id="docker_tag_override">v0.8.0_cv0.2.39</param>
-      <param id="max_pod_retrials">3</param>
-      <param id="docker_enabled">true</param>
-    </destination>
-    <destination id="container-json2isatab" runner="k8s">
-      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-      <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">json2isatab</param>
-      <param id="docker_tag_override">v0.8.0_cv0.2.26</param>
-      <param id="max_pod_retrials">3</param>
-      <param id="docker_enabled">true</param>
-    </destination>
     <destination id="container-isatab-create" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
       <param id="docker_image_override">isatab-create</param>
-      <param id="docker_tag_override">v0.9.5_cv0.3.6.37</param>
+      <param id="docker_tag_override">v0.9.5_cv0.3.14.60</param>
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
@@ -434,7 +386,8 @@
     <tool id="passatutto" destination="dynamic-k8s-medium" resources="all"/>
     <!-- ISA related tools -->
     <tool id="isa_create_metabo" destination="container-isatab-create" resources="all"/>
-    <tool id="isa_get_data_files" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa_get_data_files_list" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa_get_data_files_collection" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_get_factors_summary" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_get_study_factor_values" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_get_study_factors" destination="dynamic-k8s-tiny" resources="all"/>

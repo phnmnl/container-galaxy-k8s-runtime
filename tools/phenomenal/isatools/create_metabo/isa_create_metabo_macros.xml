@@ -225,7 +225,7 @@
         <section name="sampling_and_assay_plans"
                  title="Sampling and Assay Plans">
             <!-- INPUT FOR SAMPLING PLAN -->
-            <repeat name="sample_record_series" title="Sampling plan">
+            <repeat name="sample_record_series" title="Sampling plan" default="1">
                 <conditional name="sample_type">
                     <param name="sample_type" type="select" min="1"
                            label="study sample types">
@@ -259,14 +259,14 @@
                 <param name="sample_size" type="integer"
                        label="number of sample collections" value="1"/>
                 <!-- INPUT FOR ASSAY PLAN -->
-                <repeat name="assay_record_series" title="Assay Plan">
+                <repeat name="assay_record_series" title="Assay Plan" default="1">
                     <conditional name="assay_type">
                         <param name="assay_type" type="select"
                                label="study assay types">
-                            <option value="mass spectrometry">
+                            <option value="mass spectrometry" selected="True">
                                 mass spectrometry
                             </option>
-                            <option value="nmr spectroscopy" selected="True">
+                            <option value="nmr spectroscopy">
                                 nmr spectroscopy
                             </option>
                             <!--
@@ -1663,69 +1663,82 @@
             <repeat name="qc_record_series"
                     title="Quality Control / Quality Assurance Plan">
                 <conditional name="qc_type_conditional">
-                    <param name="qc_type" type="select" label="study qc types">
-                        <option value="long term reference">long term
-                            reference
-                        </option>
-                        <option value="study reference" selected="True">study
-                            reference
-                        </option>
-                        <option value="reference compound">reference compound
-                        </option>
-                        <option value="reference compound mix">reference
-                            compound mix
-                        </option>
-                        <option value="sample preparation blank">sample
-                            preparation blank
-                        </option>
-                        <option value="solvent blank">solvent blank</option>
-                        <option value="dilution series reference">dilution
-                            series reference
-                        </option>
+                    <param name="qc_type" type="select" label="QC type">
+                        <option value="interval series" selected="True">interval series</option>
+                        <option value="pre-run dilution series">dilution series (pre-run batch)</option>
+                        <option value="post-run dilution series">dilution series (post-run batch)</option>
                     </param>
-                    <when value="long term reference">
-                        <param name="nb_injection" type="integer"
-                               label="number of injections" value="0"/>
+                    <when value="interval series">
+                        <param name="qc_material_type" type="select" label="Material type">
+                            <option value="long term reference">long term
+                                reference
+                            </option>
+                            <option value="study reference" selected="True">study
+                                reference
+                            </option>
+                            <option value="reference compound">reference compound
+                            </option>
+                            <option value="reference compound mix">reference
+                                compound mix
+                            </option>
+                            <option value="sample preparation blank">sample
+                                preparation blank
+                            </option>
+                            <option value="solvent blank">solvent blank</option>
+                            <option value="dilution series reference">dilution series reference</option>
+                        </param>
                         <param name="injection_freq" type="integer"
-                               label="injection frequency" value="0"/>
+                               label="injection frequency" value="10"/>
                     </when>
-                    <when value="study reference">
-                        <param name="nb_injection" type="integer"
-                               label="number of injections" value="0"/>
-                        <param name="injection_freq" type="integer"
-                               label="injection frequency" value="0"/>
+                    <when value="pre-run dilution series">
+                        <param name="qc_material_type" type="select" label="Material type">
+                            <option value="long term reference">long term
+                                reference
+                            </option>
+                            <option value="study reference" selected="True">study
+                                reference
+                            </option>
+                            <option value="reference compound">reference compound
+                            </option>
+                            <option value="reference compound mix">reference
+                                compound mix
+                            </option>
+                            <option value="sample preparation blank">sample
+                                preparation blank
+                            </option>
+                            <option value="solvent blank">solvent blank</option>
+                        </param>
+                        <param name="start_val" type="integer"
+                               label="Start of interval" value="1"/>
+                        <param name="stop_val" type="integer"
+                               label="End of interval" value="10"/>
+                        <param name="step" type="integer"
+                               label="Spacing between values" value="5"/>
                     </when>
-                    <when value="reference compound">
-                        <param name="nb_injection" type="integer"
-                               label="number of injections" value="0"/>
-                        <param name="injection_freq" type="integer"
-                               label="injection frequency" value="0"/>
-                    </when>
-                    <when value="reference compound mix">
-                        <param name="nb_injection" type="integer"
-                               label="number of injections" value="0"/>
-                        <param name="injection_freq" type="integer"
-                               label="injection frequency" value="0"/>
-                    </when>
-                    <when value="sample preparation blank">
-                        <param name="nb_injection" type="integer"
-                               label="number of injections" value="0"/>
-                        <param name="injection_freq" type="integer"
-                               label="injection frequency" value="0"/>
-                    </when>
-                    <when value="solvent blank">
-                        <param name="nb_injection" type="integer"
-                               label="number of injections" value="0"/>
-                        <param name="injection_freq" type="integer"
-                               label="injection frequency" value="0"/>
-                    </when>
-                    <when value="dilution series reference">
-                        <param name="nb_injection" type="integer"
-                               label="number of injections" value="0"/>
-                        <param name="injection_freq" type="integer"
-                               label="injection frequency" value="0"/>
-                        <param name="nb_dil_step" type="integer"
-                               label="number of dilution steps" value="0"/>
+                    <when value="post-run dilution series">
+                        <param name="qc_material_type" type="select" label="Material type">
+                            <option value="long term reference">long term
+                                reference
+                            </option>
+                            <option value="study reference" selected="True">study
+                                reference
+                            </option>
+                            <option value="reference compound">reference compound
+                            </option>
+                            <option value="reference compound mix">reference
+                                compound mix
+                            </option>
+                            <option value="sample preparation blank">sample
+                                preparation blank
+                            </option>
+                            <option value="solvent blank">solvent blank</option>
+                        </param>
+                        <param name="start_val" type="integer"
+                               label="Start of interval" value="1"/>
+                        <param name="stop_val" type="integer"
+                               label="End of interval" value="10"/>
+                        <param name="step" type="integer"
+                               label="Spacing between values" value="5"/>
                     </when>
                 </conditional>
             </repeat>
