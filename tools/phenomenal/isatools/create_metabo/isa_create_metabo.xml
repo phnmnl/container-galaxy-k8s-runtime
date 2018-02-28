@@ -1,4 +1,4 @@
-<tool id="isa_create_metabo" name="Create ISA in Galaxy" version="1.2.0">
+<tool id="isa_create_metabo" name="Create ISA in Galaxy" version="1.1.0">
     <description>Interactive tool to create ISA archives based on study design information</description>
 
     <macros>
@@ -13,6 +13,7 @@
     <stdio>
         <exit_code range="1:" />
     </stdio>
+
     <command>
         <![CDATA[
 
