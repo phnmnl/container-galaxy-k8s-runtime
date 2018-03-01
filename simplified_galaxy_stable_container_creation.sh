@@ -18,6 +18,8 @@ fi
 
 ANSIBLE_REPO=pcm32/ansible-galaxy-extras
 ANSIBLE_RELEASE=17.09-pheno-cerebellin
+GALAXY_VER_FOR_POSTGRES=17.09
+POSTGRES_VERSION=`grep FROM docker-galaxy-stable/compose/galaxy-postgres/Dockerfile | awk -F":" '{ print $2 }'`
 
 TAG=v17.09_cerebellin
 # Uncomment to avoid using the cache when building docker images.
@@ -90,9 +92,15 @@ then
 	sed s+quay.io/bgruening/galaxy-base:dev+$GALAXY_BASE_PHENO_TAG+ docker-galaxy-stable/compose/galaxy-web/Dockerfile > docker-galaxy-stable/compose/galaxy-web/Dockerfile_web
 	DOCKERFILE_WEB=Dockerfile_web
 fi
-docker build --build-arg GALAXY_ANSIBLE_TAGS=supervisor,startup,scripts,nginx,k8,k8s -t $GALAXY_WEB_K8S_TAG -f docker-galaxy-stable/compose/galaxy-web/$DOCKERFILE_WEB docker-galaxy-stable/compose/galaxy-web/
+docker build $NO_CACHE --build-arg GALAXY_ANSIBLE_TAGS=supervisor,startup,scripts,nginx,k8,k8s -t $GALAXY_WEB_K8S_TAG -f docker-galaxy-stable/compose/galaxy-web/$DOCKERFILE_WEB docker-galaxy-stable/compose/galaxy-web/
 docker push $GALAXY_WEB_K8S_TAG
+
+# Build postgres
+POSTGRES_TAG=$DOCKER_REPO$DOCKER_USER/galaxy-postgres:$POSTGRES_VERSION"_for_"$GALAXY_VER_FOR_POSTGRES
+docker build -t $POSTGRES_TAG -f docker-galaxy-stable/compose/galaxy-postgres/Dockerfile docker-galaxy-stable/compose/galaxy-postgres/
+docker push $POSTGRES_TAG
 
 echo "Relevant containers:"
 echo "Web:          $GALAXY_WEB_K8S_TAG"
 echo "Init Flavour: $GALAXY_INIT_PHENO_FLAVOURED_TAG"
+echo "Postgres:     $POSTGRES_TAG"
