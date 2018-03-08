@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <tool id="isa_get_study_factors" name="Get study factors" version="1.0">
     <description>
-        Get list of study factors for a study
+        Get list of study factors for a MetaboLights study
     </description>
 
     <requirements>
@@ -14,15 +14,19 @@
     </stdio>
 
     <command><![CDATA[
+
         #if $data_file.input == "mtbls_id"
-            run_mtblisa.py mtbls-get-factors
-            "${mtbls_id}" "${output}"
+            #set $command = "mtbls-get-factors"
+            #set $source = $data_file.mtbls_id
         #end if
 
         #if $data_file.input == "isatab_input"
-            run_mtblisa.py isa-tab-get-factors
-            "${data_file.isatab_input.extra_files_path}" "${output}"
+            #set $command = "isa-tab-get-factors"
+            #set $source = $data_file.isatab_input
         #end if
+
+        run_mtblisa.py "$command" "${source}" "${output}"
+
 ]]>
     </command>
     <inputs>
@@ -52,13 +56,12 @@
     <help>
 <!-- @@@BEGIN_RST@@@ -->
 
-=============================================================
-Get list of study factors for a ISA-Tab or MetaboLights study
-=============================================================
+==================================================
+Get list of study factors for a MetaboLights study
+==================================================
 
 This tool gets the list of study factors from a MetaboLights study. It
-extracts the factors from the ISA-Tab metadata. Queries can be made directly to
-MetaboLights or on existing ISA-Tab Galaxy history items.
+extracts the factors from the ISA-Tab metadata stored in MetaboLights.
 
 -----
 Input
