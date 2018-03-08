@@ -226,7 +226,7 @@
     <tool id="isa2w4m" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="Univariate" destination="dynamic-k8s-small" resources="all"/>
     <tool id="Multivariate" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="Biosigner" destination="biosigner-container" resources="all"/>
+    <tool id="biosigner" destination="dynamic-k8s-large" resources="all"/>
     <tool id="lcmsmatching" destination="dynamic-k8s-small" resources="all"/>
     <tool id="Transformation" destination="dynamic-k8s-small" resources="all"/>
     <tool id="quality_metrics" destination="dynamic-k8s-small" resources="all"/>

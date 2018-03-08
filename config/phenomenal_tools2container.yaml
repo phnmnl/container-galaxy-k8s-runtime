@@ -91,7 +91,6 @@ assignment:
   max_pod_retrials: 3
   tools_id:
   - Transformation
-
 - docker_image_override: batch_correction
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
@@ -99,7 +98,6 @@ assignment:
   max_pod_retrials: 3
   tools_id:
   - Batch_correction
-
 - docker_image_override: tool-generic_filter
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
@@ -107,7 +105,6 @@ assignment:
   max_pod_retrials: 3
   tools_id:
   - generic_filter
-
 - docker_image_override: qualitymetrics
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
@@ -115,14 +112,13 @@ assignment:
   max_pod_retrials: 3
   tools_id:
   - quality_metrics
-
 - docker_image_override: biosigner
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_tag_override: v2.2.7_cv1.3.15
   max_pod_retrials: 3
   tools_id:
-  - Biosigner
+  - biosigner
 - docker_image_override: openms
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
