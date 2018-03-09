@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <tool id="isa_get_data_files_list" name="Get data files list" version="1.0">
-    <description>Get a list of MetaboLights study data files filtered on factor
+    <description>Get a list of ISA-Tab study data files filtered on factor
         values
     </description>
 
@@ -58,9 +58,9 @@
 
     <help>
 <!-- @@@BEGIN_RST@@@ -->
-========================================
-Get a MetaboLights study data files list
-========================================
+===================================
+Get a ISA-Tab study data files list
+===================================
 
 This tool returns a list of data files sliced on a filtered factor name
 and value.

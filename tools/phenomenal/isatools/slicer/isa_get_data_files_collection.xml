@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <tool id="isa_get_data_files_collection" name="Get data files collection"
       version="1.0">
-    <description>Get a collection of MetaboLights study data files filtered on
+    <description>Get a collection of ISA-Tab study data files filtered on
         factor values</description>
 
     <stdio>
