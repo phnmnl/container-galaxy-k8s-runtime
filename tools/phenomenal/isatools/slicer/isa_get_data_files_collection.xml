@@ -43,9 +43,9 @@
 
     <help>
 <!-- @@@BEGIN_RST@@@ -->
-========================================
-Get a MetaboLights study data files list
-========================================
+===================================
+Get a ISA-Tab study data files list
+===================================
 
 This tool returns a list of data files sliced on a filtered factor name
 and value.
@@ -58,11 +58,6 @@ ISA-Tab input source
 ====================
 Choose an input source, either direct from Metabolights or from an ISA-Tab
 history item that has already been downloaded or created in Galaxy.
-
-MetaboLights Study Identifier
-=============================
-If the input source is Metabolights, then provide the MTBLS identifier
-available at MetaboLights, e.g. MTBLS2.
 
 ISA-Tab datatype history item
 =============================
