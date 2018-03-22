@@ -1,10 +1,10 @@
 FROM ubuntu:14.04
 MAINTAINER PhenoMeNal-H2020 Project <phenomenal-h2020-users@googlegroups.com>
 
-LABEL Description="Galaxy 17.09-phenomenal for running inside Kubernetes."
+LABEL Description="Galaxy 18.01-phenomenal for running inside Kubernetes."
 LABEL software="Galaxy"
-LABEL software.version="17.09-pheno-lr"
-LABEL version="1.6"
+LABEL software.version="18.01-pheno-isa"
+LABEL version="1.7"
 LABEL description="PhenoMeNal Galaxy installation to be used inside k8s with shared file system"
 LABEL website="https://github.com/phnmnl/container-galaxy-k8s-runtime"
 LABEL documentation="https://github.com/phnmnl/phenomenal-h2020/wiki/QuickStart-Installation-for-Local-PhenoMeNal-Workflow"
@@ -33,11 +33,10 @@ RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transpo
     apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Clone galaxy into /galaxy directory
-RUN git clone --depth 1 --single-branch --branch release_17.09_plus_isa_k8s_resource_limts https://github.com/phnmnl/galaxy.git
+RUN git clone --depth 1 --single-branch --branch release_18.01_plus_isa_runnerRestartJobs https://github.com/phnmnl/galaxy.git
 WORKDIR /galaxy
 
-RUN echo "pykube==0.15.0" >> requirements.txt && \
-    echo "-e git://github.com/ISA-tools/isa-rwval.git@develop#egg=isatools" >> requirements.txt
+RUN echo "pykube==0.15.0" >> requirements.txt 
 
 RUN virtualenv .config_script_venv
 RUN /bin/bash -c "source .config_script_venv/bin/activate && \
