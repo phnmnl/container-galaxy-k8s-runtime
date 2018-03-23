@@ -69,6 +69,7 @@ COPY config/datatypes_conf.xml \
      config/phenomenal_tools2container.yaml\
      config/sanitize_whitelist.txt \
      config/tool_conf.xml \
+     config/dependency_resolvers_conf.xml \
   config/
 
 COPY rules/k8s_destinations.py lib/galaxy/jobs/rules/k8s_destination.py
