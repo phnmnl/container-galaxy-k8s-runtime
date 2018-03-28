@@ -7,9 +7,8 @@
 mkdir cdfdata;
 echo 'Linking file $cdf to cdfdata/$cdf.name';
 ln -s $cdf 'cdfdata/$cdf.name';
-mkdir -p outputdir
-runsimid.R -i "$metadata" -z cdfdata -o outputdir;
-metan(infile=opt$input, cdfdir=opt$cdfdir, outdir=opt$output)
+runsimid.R -i "$metadata" -z cdfdata;
+metan(infile=opt$input, cdfdir=opt$cdfdir)
 rm -rf cdfdata
 ]]></command>
 <inputs>
