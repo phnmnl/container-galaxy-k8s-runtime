@@ -5,8 +5,10 @@
 <description>Supports the initial step of workflow of fluxomic analysis of stable isotope (13C) propagation in cellular metabolites. SIMID evaluates the peaks of mass isotopomer distribution (MID) for metabolites of interest, making them ready for the next step of the workflow: correction for natural isotope occurrence.</description>
 <command><![CDATA[
 mkdir cdfdata;
+#for $cdf in $cdf_files
 echo 'Linking file $cdf to cdfdata/$cdf.name';
 ln -s $cdf 'cdfdata/$cdf.name';
+#end for
 runsimid.R -i "$metadata" -z cdfdata -o "$outputExchange";
 rm -rf cdfdata
 ]]></command>
