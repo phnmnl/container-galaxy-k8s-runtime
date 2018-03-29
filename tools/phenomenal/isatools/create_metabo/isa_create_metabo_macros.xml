@@ -1,6 +1,6 @@
 <macros>
     <xml name="study_info_macro">
-        <section name="study_overview" title="Study Description">
+        <section name="study_overview" title="Study Description"> 
             <param name="study_title" type="text" label="Study title"
                    value="e.g. Metabolomics study of the effect of ... on ..."/>
             <param name="study_description" area="True" size="5x25" type="text"
@@ -34,30 +34,21 @@
                  </param>
                  <param name="protocol_desc" area="True" size="5x25" type="text" label="Protocol Description"></param>
                  <param name="protocol_uri" type="text" label="Protocol URI"></param>
-             </repeat>
-             <param name="study_consent" type="select" label="Consent Information">
-                 <option value="none">no restriction</option>
-                 <option value="no-general">no-general methods research</option>
-                 <option value="research">research use only</option>
-                 <option value="restricted">research-specific restriction</option>
-                 <option value="general">general research and clinical care</option>
-                 <option value="disease">disease-specific research and clinical care</option>
-                 <option value="health">health/medical/biomedical research and clinical care</option>
-                 <option value="population">population origins or ancestry research</option>
-             </param>
-             <param name="study_use_condition" type="select" label="Data Use Requirement">
-                 <option value="collaboration_required">collaboration required</option>
-                 <option value="ethics">ethics approval required</option>
-                 <option value="geo">geographical restriction</option>
-                 <option value="no_profit">not-for-profit use only</option>
-                 <option value="institution-re">institution-specific restriction</option>
-                 <option value="project_re">project-specific restriction</option>
-                 <option value="user_re">user-specific restriction</option>
-                 <option value="pub_mora">publication moratorium</option>
-                 <option value="pub_req">publication required</option>
-                 <option value="return">return-to-database/resource</option>
-                 <option value="time">time limit on use</option>
-             </param> -->
+             </repeat> -->
+            <!--<param name="study_consent" type="select" label="Consent Information (ICO:0000011)">-->
+                 <!--<options from_data_table="isa_cvterms">-->
+                     <!--<column name="value" index="1"/>-->
+                     <!--<filter type="static_value" column="2" value="consent"/>-->
+                     <!--<filter type="add_value" value="isa user defined"/>-->
+                 <!--</options>-->
+             <!--</param>-->
+            <!--<param name="study_use_condition" type="select" label="Data Use Requirement (DUO:0000017)">-->
+                 <!--<options from_data_table="isa_cvterms">-->
+                     <!--<column name="value" index="1"/>-->
+                     <!--<filter type="static_value" column="2" value="data use requirement"/>-->
+                     <!--<filter type="add_value" value="isa user defined"/>-->
+                 <!--</options>-->
+             <!--</param> -->
         </section>
     </xml>
     <xml name="treatment_plan_macro">
@@ -125,7 +116,7 @@
                                 <when value="surgical intervention">
                                     <param name="agent" type="text"
                                            value="procedure 1,procedure 2"/>
-                                    <!--<param name="intensity" type="text" value="low dose,moderate dose,high dose"/>-->
+                                    <param name="intensity" type="text" value="standard"/>
                                     <param name="duration" type="text"
                                            value="t0,t1,t2"/>
                                 </when>
@@ -191,7 +182,7 @@
                                     <when value="surgical intervention">
                                         <param name="agent" type="text"
                                                value="procedure 1,procedure 2"/>
-                                        <!--<param name="intensity" type="text" value="low dose,moderate dose,high dose"/>-->
+                                        <param name="intensity" type="text" value="standard"/>
                                         <param name="duration" type="text"
                                                value="t0,t1,t2"/>
                                     </when>
@@ -212,20 +203,36 @@
                 <when value="observation"/>
             </conditional>
             <!-- INPUT FOR SETTING CHARACTERISTICS OF STUDY GROUPS -->
-            <param name="group_balanced" type="select"
-                   label="study design balance">
-                <option value="balanced" selected="True">balanced</option>
-                <option value="unbalanced">unbalanced</option>
-            </param>
-            <param name="study_group_size" type="integer"
-                   label="study group size" value="3"/>
+            <conditional name="study_groups">
+                <param name="group_balanced" type="select"
+                       label="study design balance">
+                    <option value="balanced" selected="True">balanced</option>
+                    <option value="unbalanced">unbalanced</option>
+                </param>
+                <when value="balanced">
+                    <param name="study_group_size" type="integer"
+                           label="study group size" value="3"/>
+                </when>
+                <when value="unbalanced">
+                    <param name="study_group" type="select">
+                        <options>
+                            <!-- <filter type="add_value" ref="${group_balanced}" /> -->
+                            <!-- <filter type="param_value" separator="," ref="agent"/>-->
+                            <!--<filter type="multiple_splitter" column="4" separator="," key="agent"/>-->
+                        </options>                     
+                    </param>
+                    <repeat name="group_sizes" title="set group sizes">
+                        
+                    </repeat>
+                </when>
+            </conditional>     
         </section>
     </xml>
     <xml name="sample_assay_plan_macro">
         <section name="sampling_and_assay_plans"
                  title="Sampling and Assay Plans">
             <!-- INPUT FOR SAMPLING PLAN -->
-            <repeat name="sample_record_series" title="Sampling plan" default="1">
+            <repeat name="sample_record_series" title="Sampling plan">
                 <conditional name="sample_type">
                     <param name="sample_type" type="select" min="1"
                            label="study sample types">
@@ -259,7 +266,7 @@
                 <param name="sample_size" type="integer"
                        label="number of sample collections" value="1"/>
                 <!-- INPUT FOR ASSAY PLAN -->
-                <repeat name="assay_record_series" title="Assay Plan" default="1">
+                <repeat name="assay_record_series" title="Assay Plan">
                     <conditional name="assay_type">
                         <param name="assay_type" type="select"
                                label="study assay types">
@@ -302,6 +309,11 @@
                                     <when value="DI">
                                         <param name="instrument" type="select"
                                                min="1" label="MS instrument">
+                                            <!--<options from_data_table="isa_cvterms">-->
+                                                <!--<column name="value" index="1"/>-->
+                                                <!--<filter type="static_value" column="2" value="mass spectrometry instrument"/>-->
+                                                <!--<filter type="add_value" value="isa user defined"/>-->
+                                            <!--</options>-->
                                             <option value="none reported">none
                                                 reported
                                             </option>
@@ -394,6 +406,11 @@
                                     <when value="FIA">
                                         <param name="instrument" type="select"
                                                min="1" label="MS instrument">
+                                            <!--<options from_data_table="isa_cvterms">-->
+                                                <!--<column name="value" index="1"/>-->
+                                                <!--<filter type="static_value" column="2" value="mass spectrometry instrument"/>-->
+                                                <!--<filter type="add_value" value="isa user defined"/>-->
+                                            <!--</options>-->
                                             <option value="none reported">none
                                                 reported
                                             </option>
@@ -497,6 +514,12 @@
                                         <param name="chromato" type="select"
                                                min="1"
                                                label="chromatography instrument">
+                                            <!--<options from_data_table="isa_cvterms">-->
+                                                <!--<column name="value" index="1"/>-->
+                                                <!--<filter type="static_value" column="2" value="liquid chromatography instrument"/>-->
+                                                <!--<filter type="add_value" value="isa user defined"/>-->
+                                            <!--</options>-->
+                                            
                                             <option value="none reported">none
                                                 reported
                                             </option>
@@ -549,6 +572,11 @@
                                         </param>
                                         <param name="instrument" type="select"
                                                label="MS instrument">
+                                            <!--<options from_data_table="isa_cvterms">-->
+                                                <!--<column name="value" index="1"/>-->
+                                                <!--<filter type="static_value" column="2" value="mass spectrometry instrument"/>-->
+                                                <!--<filter type="add_value" value="isa user defined"/>-->
+                                            <!--</options>-->
                                             <option value="none reported">none
                                                 reported
                                             </option>
@@ -642,6 +670,11 @@
                                         <param name="chromato" type="select"
                                                min="1"
                                                label="chromatography instrument">
+                                            <!--<options from_data_table="isa_cvterms">-->
+                                                <!--<column name="value" index="1"/>-->
+                                                <!--<filter type="static_value" column="2" value="gas chromatography instrument"/>-->
+                                                <!--<filter type="add_value" value="isa user defined"/>-->
+                                            <!--</options>-->
                                             <option value="none reported">none
                                                 reported
                                             </option>
@@ -660,6 +693,11 @@
                                         </param>
                                         <param name="instrument" type="select"
                                                min="1" label="MS instrument">
+                                            <!--<options from_data_table="isa_cvterms">-->
+                                                <!--<column name="value" index="1"/>-->
+                                                <!--<filter type="static_value" column="2" value="MS instrument for GC"/>-->
+                                                <!--<filter type="add_value" value="isa user defined"/>-->
+                                            <!--</options>-->
                                             <option value="none reported">none
                                                 reported
                                             </option>
@@ -704,10 +742,15 @@
                                                    value="1"/>
                                         </repeat>
                                         <repeat name="derivatization_series"
-                                                title="derivations">
+                                                title="derivatizations">
                                             <param name="derivatization"
                                                    type="select"
                                                    label="derivatization">
+                                                <!--<options from_data_table="isa_cvterms">-->
+                                                    <!--<column name="value" index="1"/>-->
+                                                    <!--<filter type="static_value" column="2" value="derivatization"/>-->
+                                                    <!--<filter type="add_value" value="isa user defined"/>-->
+                                                <!--</options>-->
                                                 <option value="none reported">
                                                     none reported
                                                 </option>
@@ -717,8 +760,8 @@
                                                 <option value="methylation"/>
                                                 <option value="oxymation"/>
                                                 <option value="silylation"/>
-                                                <option value="other">other
-                                                </option>
+                                                <option value="other">other</option>
+                                                
                                             </param>
                                         </repeat>
                                     </when>
@@ -739,7 +782,7 @@
                                 <when value="1D 1H NMR">
                                     <param name="nmr_instrument" type="select"
                                            min="1" label="nmr instrument">
-                                        <option value="none reported">none
+                                        <option value="none reported">none 
                                             reported
                                         </option>
                                         <option value="Bruker 400 Mhz">Bruker
@@ -1414,9 +1457,7 @@
                                     </param>
                                     <param name="pulse_seq" type="select"
                                            min="1" label="pulse sequence">
-                                        <option value="none reported">none
-                                            reported
-                                        </option>
+                                        <option value="none reported">none reported</option>
                                         <option value="HOESY"/>
                                         <option value="INADEQUATE"/>
                                         <option value="watergate"/>
@@ -1477,143 +1518,47 @@
                                 <when value="2D 1H-13C NMR">
                                     <param name="nmr_instrument" type="select"
                                            min="1" label="nmr instrument">
-                                        <option value="none reported">none
-                                            reported
-                                        </option>
-                                        <option value="Bruker 400 Mhz">Bruker
-                                            400 MHz spectrometer
-                                        </option>
-                                        <option value="Bruker 500 Mhz">Bruker
-                                            500 MHz spectrometer
-                                        </option>
-                                        <option value="Bruker 600 Mhz">Bruker
-                                            600 MHz spectrometer
-                                        </option>
-                                        <option value="Bruker 600 Mhz US">Bruker
-                                            600 MHz Ultrashield spectrometer
-                                        </option>
-                                        <option value="Bruker Avance 500 Mhz">
-                                            Bruker AVANCE 500 MHz spectrometer
-                                        </option>
-                                        <option value="Bruker Avance 600 Mhz">
-                                            Bruker AVANCE 600 MHz spectrometer
-                                        </option>
-                                        <option value="Bruker Avance 700 Mhz">
-                                            Bruker AVANCE 700 MHz spectrometer
-                                        </option>
-                                        <option value="Bruker Avance 900 Mhz">
-                                            Bruker AVANCE 900 MHz spectrometer
-                                        </option>
-                                        <option value="Bruker Avance AV 500 Mhz">
-                                            Bruker AVANCE AV 500 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Bruker Avance AV 600 Mhz">
-                                            Bruker AVANCE AV 600 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Bruker Avance DRX 500 MHz">
-                                            Bruker AVANCE DRX 500 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Bruker Avance DRX 600 MHz">
-                                            Bruker AVANCE DRX 600 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Bruker Avance DRX 700 MHz">
-                                            Bruker AVANCE DRX 700 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Bruker Avance II 500 MHz">
-                                            Bruker AVANCE II 500 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Bruker Avance II 500 MHz US">
-                                            Bruker AVANCE II 500 MHz Ultrashield
-                                            spectrometer
-                                        </option>
-                                        <option value="Bruker Avance II+ 500 MHz">
-                                            Bruker AVANCE II+ 500 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Bruker Avance II 600 MHz">
-                                            Bruker AVANCE II 600 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Bruker Avance II 700 MHz">
-                                            Bruker AVANCE II 700 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Bruker Avance II 800 MHz US2">
-                                            Bruker AVANCE II 800 MHz US2
-                                            spectrometer
-                                        </option>
-                                        <option value="Bruker Avance III 400 MHz">
-                                            Bruker AVANCE III 400 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Bruker Avance III 500 MHz">
-                                            Bruker AVANCE III 500 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Bruker Avance III 600 MHz">
-                                            Bruker AVANCE III 600 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Bruker Avance III 800 MHz">
-                                            Bruker AVANCE III 800 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Bruker Avance III HD 600 MHz">
-                                            Bruker AVANCE III HD 600 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Bruker Avance III HD 700 MHz">
-                                            Bruker AVANCE III HD 700 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Bruker Avance III HD 800 MHz">
-                                            Bruker AVANCE III HD 800 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Bruker Avance IV Dr">
-                                            Bruker Avance IV Dr
-                                        </option>
-                                        <option value="Bruker DNP-NMR">Bruker
-                                            DNP-NMR
-                                        </option>
-                                        <option value="Bruker Fourier-300HD">
-                                            Bruker Fourier-300HD
-                                        </option>
-                                        <option value="Varian Mercury AS400 MHz">
-                                            Varian Mercury AS400 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Varian Unity Inova 400 MHz">
-                                            Varian Unity Inova 400 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Varian Unity Inova 500 MHz">
-                                            Varian Unity Inova 500 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Varian Unity Inova 600 MHz">
-                                            Varian Unity Inova 600 MHz
-                                            spectrometer
-                                        </option>
-                                        <option value="Varian VNMRS 600 MHz">
-                                            Varian VNMRS 600 MHz spectrometer
-                                        </option>
+                                        <option value="none reported">none reported</option>
+                                        <option value="Bruker 400 Mhz">Bruker 400 MHz spectrometer</option>
+                                        <option value="Bruker 500 Mhz">Bruker 500 MHz spectrometer</option>
+                                        <option value="Bruker 600 Mhz">Bruker 600 MHz spectrometer</option>
+                                        <option value="Bruker 600 Mhz US">Bruker 600 MHz Ultrashield spectrometer</option>
+                                        <option value="Bruker Avance 500 Mhz">Bruker AVANCE 500 MHz spectrometer</option>
+                                        <option value="Bruker Avance 600 Mhz">Bruker AVANCE 600 MHz spectrometer</option>
+                                        <option value="Bruker Avance 700 Mhz">Bruker AVANCE 700 MHz spectrometer</option>
+                                        <option value="Bruker Avance 900 Mhz">Bruker AVANCE 900 MHz spectrometer</option>
+                                        <option value="Bruker Avance AV 500 Mhz">Bruker AVANCE AV 500 MHz spectrometer</option>
+                                        <option value="Bruker Avance AV 600 Mhz">Bruker AVANCE AV 600 MHz spectrometer</option>
+                                        <option value="Bruker Avance DRX 500 MHz">Bruker AVANCE DRX 500 MHz spectrometer</option>
+                                        <option value="Bruker Avance DRX 600 MHz"> ruker AVANCE DRX 600 MHz spectrometer</option>
+                                        <option value="Bruker Avance DRX 700 MHz">Bruker AVANCE DRX 700 MHz spectrometer</option>
+                                        <option value="Bruker Avance II 500 MHz">Bruker AVANCE II 500 MHz spectrometer</option>
+                                        <option value="Bruker Avance II 500 MHz US">Bruker AVANCE II 500 MHz Ultrashield spectrometer</option>
+                                        <option value="Bruker Avance II+ 500 MHz">Bruker AVANCE II+ 500 MHz spectrometer</option>
+                                        <option value="Bruker Avance II 600 MHz">Bruker AVANCE II 600 MHz spectrometer</option>
+                                        <option value="Bruker Avance II 700 MHz">Bruker AVANCE II 700 MHz spectrometer</option>
+                                        <option value="Bruker Avance II 800 MHz US2">Bruker AVANCE II 800 MHz US2 spectrometer</option>
+                                        <option value="Bruker Avance III 400 MHz">Bruker AVANCE III 400 MHz spectrometer</option>
+                                        <option value="Bruker Avance III 500 MHz">Bruker AVANCE III 500 MHz </option>
+                                        <option value="Bruker Avance III 600 MHz">Bruker AVANCE III 600 MHz</option>
+                                        <option value="Bruker Avance III 800 MHz">Bruker AVANCE III 800 MHz spectrometer</option>
+                                        <option value="Bruker Avance III HD 600 MHz">Bruker AVANCE III HD 600 MHz spectrometer</option>
+                                        <option value="Bruker Avance III HD 700 MHz">Bruker AVANCE III HD 700 MHz spectrometer</option>
+                                        <option value="Bruker Avance III HD 800 MHz">Bruker AVANCE III HD 800 MHz spectrometer</option>
+                                        <option value="Bruker Avance IV Dr">Bruker Avance IV Dr</option>
+                                        <option value="Bruker DNP-NMR">Bruker DNP-NMR</option>
+                                        <option value="Bruker Fourier-300HD">Bruker Fourier-300HD</option>
+                                        <option value="Varian Mercury AS400 MHz">Varian Mercury AS400 MHz spectrometer</option>
+                                        <option value="Varian Unity Inova 400 MHz">Varian Unity Inova 400 MHz spectrometer</option>
+                                        <option value="Varian Unity Inova 500 MHz">Varian Unity Inova 500 MHz spectrometer</option>
+                                        <option value="Varian Unity Inova 600 MHz">Varian Unity Inova 600 MHz spectrometer</option>
+                                        <option value="Varian VNMRS 600 MHz">Varian VNMRS 600 MHz spectrometer</option>
                                         <option value="other">other</option>
                                     </param>
                                     <param name="pulse_seq" type="select"
                                            min="1" label="pulse sequence">
-                                        <option value="none reported">none
-                                            reported
-                                        </option>
-                                        <option value="HSQC">2D 1H-13C HSQC
-                                            (hsqcetgppr)
-                                        </option>
+                                        <option value="none reported">none reported</option>
+                                        <option value="HSQC">2D 1H-13C HSQC (hsqcetgppr)</option>
                                         <option value="HOESY"/>
                                         <option value="HSQC"/>
                                         <option value="HMBC"/>
@@ -1663,82 +1608,62 @@
             <repeat name="qc_record_series"
                     title="Quality Control / Quality Assurance Plan">
                 <conditional name="qc_type_conditional">
-                    <param name="qc_type" type="select" label="QC type">
-                        <option value="interval series" selected="True">interval series</option>
-                        <option value="pre-run dilution series">dilution series (pre-run batch)</option>
-                        <option value="post-run dilution series">dilution series (post-run batch)</option>
+                    <param name="qc_type" type="select" label="study qc types">
+                        <!--<options from_data_table="isa_cvterms">-->
+                            <!--<column name="value" index="1"/>-->
+                            <!--<filter type="static_value" column="2" value="QC terms"/>-->
+                        <!--</options>-->
+                        <option value="long term reference">long term reference</option>
+                        <option value="study reference" selected="True">study reference</option>
+                        <option value="reference compound">reference compound</option>
+                        <option value="reference compound mix">reference compound mix</option>
+                        <option value="sample preparation blank">sample preparation blank</option>
+                        <option value="solvent blank">solvent blank</option>
+                        <option value="dilution series reference">dilution series reference</option>
                     </param>
-                    <when value="interval series">
-                        <param name="qc_material_type" type="select" label="Material type">
-                            <option value="long term reference">long term
-                                reference
-                            </option>
-                            <option value="study reference" selected="True">study
-                                reference
-                            </option>
-                            <option value="reference compound">reference compound
-                            </option>
-                            <option value="reference compound mix">reference
-                                compound mix
-                            </option>
-                            <option value="sample preparation blank">sample
-                                preparation blank
-                            </option>
-                            <option value="solvent blank">solvent blank</option>
-                            <option value="dilution series reference">dilution series reference</option>
-                        </param>
+                    <when value="long term reference">
+                        <param name="nb_injection" type="integer"
+                               label="number of injections" value="0"/>
                         <param name="injection_freq" type="integer"
-                               label="injection frequency" value="10"/>
+                               label="injection frequency" value="0"/>
                     </when>
-                    <when value="pre-run dilution series">
-                        <param name="qc_material_type" type="select" label="Material type">
-                            <option value="long term reference">long term
-                                reference
-                            </option>
-                            <option value="study reference" selected="True">study
-                                reference
-                            </option>
-                            <option value="reference compound">reference compound
-                            </option>
-                            <option value="reference compound mix">reference
-                                compound mix
-                            </option>
-                            <option value="sample preparation blank">sample
-                                preparation blank
-                            </option>
-                            <option value="solvent blank">solvent blank</option>
-                        </param>
-                        <param name="start_val" type="integer"
-                               label="Start of interval" value="1"/>
-                        <param name="stop_val" type="integer"
-                               label="End of interval" value="10"/>
-                        <param name="step" type="integer"
-                               label="Spacing between values" value="5"/>
+                    <when value="study reference">
+                        <param name="nb_injection" type="integer"
+                               label="number of injections" value="0"/>
+                        <param name="injection_freq" type="integer"
+                               label="injection frequency" value="0"/>
                     </when>
-                    <when value="post-run dilution series">
-                        <param name="qc_material_type" type="select" label="Material type">
-                            <option value="long term reference">long term
-                                reference
-                            </option>
-                            <option value="study reference" selected="True">study
-                                reference
-                            </option>
-                            <option value="reference compound">reference compound
-                            </option>
-                            <option value="reference compound mix">reference
-                                compound mix
-                            </option>
-                            <option value="sample preparation blank">sample
-                                preparation blank
-                            </option>
-                            <option value="solvent blank">solvent blank</option>
-                        </param>
-                        <param name="start_val" type="integer"
-                               label="Start of interval" value="1"/>
-                        <param name="stop_val" type="integer"
-                               label="End of interval" value="10"/>
-                        <param name="step" type="integer"
-                               label="Spacing between values" value="5"/>
+                    <when value="reference compound">
+                        <param name="nb_injection" type="integer"
+                               label="number of injections" value="0"/>
+                        <param name="injection_freq" type="integer"
+                               label="injection frequency" value="0"/>
+                    </when>
+                    <when value="reference compound mix">
+                        <param name="nb_injection" type="integer"
+                               label="number of injections" value="0"/>
+                        <param name="injection_freq" type="integer"
+                               label="injection frequency" value="0"/>
+                    </when>
+                    <when value="sample preparation blank">
+                        <param name="nb_injection" type="integer"
+                               label="number of injections" value="0"/>
+                        <param name="injection_freq" type="integer"
+                               label="injection frequency" value="0"/>
+                    </when>
+                    <when value="solvent blank">
+                        <param name="nb_injection" type="integer"
+                               label="number of injections" value="0"/>
+                        <param name="injection_freq" type="integer"
+                               label="injection frequency" value="0"/>
+                    </when>
+                    <when value="dilution series reference">
+                        <param name="nb_injection" type="integer"
+                               label="number of injections" value="0"/>
+                        <param name="injection_freq" type="integer"
+                               label="injection frequency" value="0"/>
+                        <param name="nb_dil_step" type="integer"
+                               label="number of dilution steps" value="0"/>
                     </when>
                 </conditional>
             </repeat>

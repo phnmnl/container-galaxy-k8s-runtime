@@ -5,6 +5,11 @@
         Get list of factor values for given factor used in a ISA-Tab study
     </description>
 
+    <requirements>
+        <requirement type="package" version="6.7">click</requirement>
+        <requirement type="package" version="0.9.4">isatools</requirement>
+    </requirements>
+
     <stdio>
         <exit_code range="1:" level="fatal"/>
     </stdio>

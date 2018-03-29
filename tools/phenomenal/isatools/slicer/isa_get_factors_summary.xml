@@ -4,6 +4,11 @@
         study
     </description>
 
+    <requirements>
+        <requirement type="package" version="6.7">click</requirement>
+        <requirement type="package" version="0.9.4">isatools</requirement>
+    </requirements>
+
     <stdio>
         <exit_code range="1:" level="fatal"/>
     </stdio>
@@ -49,9 +54,9 @@
 
     <help>
 <!-- @@@BEGIN_RST@@@ -->
-===============================================
-Get summary of factors for a MetaboLights study
-===============================================
+==========================================
+Get summary of factors for a ISA-Tab study
+==========================================
 
 This tool returns a table of sample names and related associated factor
 values. The tool calculates this by inspecting the ISA study and assay

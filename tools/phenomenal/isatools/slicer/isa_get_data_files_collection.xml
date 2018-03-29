@@ -1,8 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <tool id="isa_get_data_files_collection" name="Get data files collection"
-      version="1.0">
+      version="1.1">
     <description>Get a collection of ISA-Tab study data files filtered on
         factor values</description>
+
+    <requirements>
+        <requirement type="package" version="6.7">click</requirement>
+        <requirement type="package" version="0.9.5">isatools</requirement>
+    </requirements>
 
     <stdio>
         <exit_code range="1:" level="fatal"/>
@@ -34,7 +39,7 @@
 
     <tests>
         <test>
-            <param name="mtbls_id" value="MTBLS1"/>
+            <param name="isatab_input" value="test-data/BII-S-7.zip"/>
             <param name="factor_name" value="Gender"/>
             <param name="factor_value" value="Female"/>
             <output_collection name="raw_files" type="list" count="1"/>
@@ -43,9 +48,9 @@
 
     <help>
 <!-- @@@BEGIN_RST@@@ -->
-===================================
-Get a ISA-Tab study data files list
-===================================
+=========================================
+Get a ISA-Tab study data files collection
+=========================================
 
 This tool returns a list of data files sliced on a filtered factor name
 and value.
@@ -53,11 +58,6 @@ and value.
 -----
 Input
 -----
-
-ISA-Tab input source
-====================
-Choose an input source, either direct from Metabolights or from an ISA-Tab
-history item that has already been downloaded or created in Galaxy.
 
 ISA-Tab datatype history item
 =============================

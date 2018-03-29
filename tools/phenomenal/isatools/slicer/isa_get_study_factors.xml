@@ -4,6 +4,11 @@
         Get list of study factors for a ISA-Tab study
     </description>
 
+    <requirements>
+        <requirement type="package" version="6.7">click</requirement>
+        <requirement type="package" version="0.9.4">isatools</requirement>
+    </requirements>
+
     <stdio>
         <exit_code range="1:" level="fatal"/>
     </stdio>
@@ -56,7 +61,7 @@ Get list of study factors for a ISA-Tab study
 =============================================
 
 This tool gets the list of study factors from a ISA-Tab study. It
-extracts the factors from the ISA-Tab metadata stored in an ISA-Tab.
+extracts the factors from the ISA-Tab metadata.
 
 -----
 Input
