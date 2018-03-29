@@ -7,13 +7,12 @@
 mkdir cdfdata;
 echo 'Linking file $cdf to cdfdata/$cdf.name';
 ln -s $cdf 'cdfdata/$cdf.name';
-runsimid.R -i "$metadata" -z cdfdata;
-metan(infile=opt$input, cdfdir=opt$cdfdir)
+runsimid.R -i "$metadata" -z cdfdata -o "$outputExchange";
 rm -rf cdfdata
 ]]></command>
 <inputs>
-	<param type="data" name="metadata" format="txt" label="Metadata" />
-	<param type="data" name="cdf_files" multiple="true" format="netcdf" />
+	<param type="data" name="metadata" format="txt" label="Met-data file in R format" help="R formatted lists of metabolites and conditions" />
+	<param type="data" name="cdf_files" multiple="true" format="netcdf" label="netCDF GC-MS files" help="netCDF files referenced in met-data"/>
 </inputs>
 <outputs>
     <data name="outputExchange" format="csv" label="Isotopologues file"/>
