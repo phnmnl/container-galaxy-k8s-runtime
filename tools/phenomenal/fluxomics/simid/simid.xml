@@ -13,7 +13,7 @@ runsimid.R -i "$metadata" -z cdfdata -o "$outputExchange";
 rm -rf cdfdata
 ]]></command>
 <inputs>
-	<param type="data" name="metadata" format="txt" label="Met-data file in R format" help="R formatted lists of metabolites and conditions" />
+	<param type="data" name="metadata" format="txt" label="Met-data" help="R formatted lists of metabolites and conditions" />
 	<param type="data" name="cdf_files" multiple="true" format="netcdf" label="netCDF GC-MS files" help="netCDF files referenced in met-data"/>
 </inputs>
 <outputs>
