@@ -105,7 +105,7 @@
 
         <param name="name_column" type="data_column" value="1" data_ref="input" label="Name of the entities (n° of column)" help="Select the number of the column from the fingerprint dataset. The names of the chemical entities are used in the output files" />
 
-        <param name="IDcolumn" type="data_column" value="4" data_ref="input" label="Database identifier (n° of column)" help="Select the number of the column from the fingerprint dataset. This column must contain identifiers from the chosen database to map with the SBML." />
+        <param name="IDcolumn" type="data_column" value="2" data_ref="input" label="Database identifier (n° of column)" help="Select the number of the column from the fingerprint dataset. This column must contain identifiers from the chosen database to map with the SBML." />
 
         <conditional name="database">
           <param name="value" type="select" label="Database" >
