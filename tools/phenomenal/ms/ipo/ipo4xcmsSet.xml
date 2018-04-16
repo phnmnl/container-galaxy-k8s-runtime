@@ -164,8 +164,8 @@
     </inputs>
 
     <outputs>
-        <data name="best_xcmsSet" from_work_dir="./best_xcmsSet.RData" format="rdata" label="best_xcmsSet.RData" />
         <data name="resultPeakpicking" format="rdata" label="resultPeakpicking.RData" />
+        <data name="best_xcmsSet" from_work_dir="./best_xcmsSet.RData" format="rdata" label="best_xcmsSet.RData" />
         <data name="parametersOutput" format="tabular" label="IPO_parameters4xcmsSet.tsv" />
         <data name="run_instrument_infos" from_work_dir="./run_instrument_infos.tsv" format="tabular" label="run_instrument_infos.tsv" />
         <data name="log" format="txt" label="ipo4xcmsSet.log.txt" />
