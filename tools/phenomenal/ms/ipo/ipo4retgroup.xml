@@ -1,6 +1,6 @@
 <tool id="ipo4retgroup" name="IPO for group and retcor" version="0.0.1">
 
-    <description>IPO optimization process for xcms.group and xcms.retcor</description>
+    <description>IPO optimization process for retention time correction and peak grouping</description>
 
     <macros>
         <import>macros.xml</import>
@@ -233,56 +233,66 @@
 
 @HELP_AUTHORS@
 
-===============
-IPO.ipo4xcmsSet
-===============
+================
+IPO.ipo4retgroup
+================
 
 -----------
 Description
 -----------
 
-A Tool for automated Optimization of XCMS Parameters
+**IPO for retgroup**  This tool optimizes retention time correction and grouping parameters
 
 
 -----------------
 Workflow position
 -----------------
 
+|
+
 **Upstream tools**
 
-========================= ================= ======= =========
-Name                      output file       format  parameter
-========================= ================= ======= =========
-NA                        NA                zip     NA
-========================= ================= ======= =========
++---------------------------+--------------------------------+-----------------+
+| Name                      | Output file                    | Format          |
++===========================+================================+=================+
+|                           | IPO_parameters4retcorGroup.tsv | Tabular         |
+|                           +--------------------------------+-----------------+
+|       ipo4retgroup        | resultPeakpicking.RData        | RData           |
+|                           +--------------------------------+-----------------+
+|                           | best_xcmsSet.RData             | RData           |
+|                           +--------------------------------+-----------------+
+|                           | run_instrument_infos.tsv       | Tabular         |
++---------------------------+--------------------------------+-----------------+
 
+|
 
 **Downstream tools**
 
-+---------------------------+----------------------+-----------------+
-| Name                      | Output file          | Format          |
-+===========================+======================+=================+
-|xcms.xcmsSet               | parametersOutput.tsv | Tabular         |
-+---------------------------+--------------------+-------------------+
-
++---------------------------+---------------------------------+-----------------+
+| Name                      | Output file                     | Format          |
++===========================+=================================+=================+
+| xcms-group-peak           | xcms_group_peaks_output_1.rdata | RData           |
++---------------------------+---------------------------------+-----------------+
+| xcms-correct-rt           | xcms_correct_rt_output_1.rdata  | RData           |
++---------------------------+---------------------------------+-----------------+
 
 
 -----------
 Input files
 -----------
 
-+---------------------------+------------+
-| Parameter : num + label   |   Format   |
-+===========================+============+
-| 1 : Choose your inputs    |   zip      |
-+---------------------------+------------+
+1. Input samples to analyse (mzData, mzML, mzXML, netCDF, zip). If you just ran the previous tool "ipo for xcmsSet" it refers to the same input you used for this tool.
+2. The best xcmsSet R object (RData) with optimized parameters. The file to use from the previous tool is: best_xcmsSet.RData
+
+|
 
 **Choose your inputs**
 
-You have two methods for your inputs:
+You have three methods for your inputs:
 
     | Zip file (recommended): You can put a zip file containing your inputs: myinputs.zip (containing all your conditions as sub-directories).
     | library folder: You must specify the name of your "library" (folder) created within your space project (for example: /projet/externe/institut/login/galaxylibrary/yourlibrary). Your library must contain all your conditions as sub-directories.
+    | MZ file: You can give only one mz file (mzData, mzML, mzXML, netCDF) as input.
 
 Steps for creating the zip file
 -------------------------------
@@ -329,13 +339,18 @@ m/z Encoding: **64**
 
 Intensity Encoding: **64**
 
+|
 
 ----------
 Parameters
 ----------
 
+|
+
 Extraction method for peaks detection
 -------------------------------------
+
+|
 
 **Matched Filter**
 
@@ -343,20 +358,28 @@ Extraction method for peaks detection
     | For a discussion of how model peak width affects the signal to noise ratio, see Danielsson et al. (2002).
 
 
-**cent Wave**
+**Cent Wave**
 
     | This algorithm is most suitable for high resolution LC/{TOF,OrbiTrap,FTICR}-MS data in centroid mode.
     | Due to the fact that peak centroids are used, a binning step is not necessary.
     | The method is capable of detecting close-by-peaks and also overlapping peaks. Some efforts are made to detect the exact peak boundaries to get precise peak integrals.
 
+|
 
 ------------
 Output files
 ------------
 
+|
+
 IPO_parameters4retcorGroup.tsv
 
-    | Optimal parameters for xcmsSet
+    | Optimal parameters for retention time correction and peak grouping
+
+
+.. class:: infomark
+
+You can continue your analysis with xcms-group-peak and xcms-correct-rt using the optimized parameters.
 
 
 
@@ -371,3 +394,4 @@ Changelog/News
 
     <expand macro="citation" />
 </tool>
+

@@ -1,6 +1,6 @@
 <tool id="ipo4xcmsSet" name="IPO for xcmsSet" version="0.0.3">
 
-    <description>IPO optimization process for xcms.xcmsSet</description>
+    <description>IPO optimization process for peak picking</description>
 
     <macros>
         <import>macros.xml</import>
@@ -250,58 +250,72 @@
 IPO.ipo4xcmsSet
 ===============
 
+|
+
 -----------
 Description
 -----------
 
-A Tool for automated Optimization of XCMS Parameters
-
+**IPO for xcmsSet**  This tool optimizes peak picking parameters for XCMS
 
 -----------------
 Workflow position
------------------
+-----------------  
+
+|
 
 **Upstream tools**
 
-========================= ================= ======= =========
-Name                      output file       format  parameter
-========================= ================= ======= =========
-NA                        NA                zip     NA
-========================= ================= ======= =========
+========================= ============== ======== ===========
+ Name                      output file    format   parameter
+========================= ============== ======== ===========
+ NA                        NA             NA       NA
+========================= ============== ======== ===========  
 
+|
 
 **Downstream tools**
 
-+---------------------------+----------------------+-----------------+
-| Name                      | Output file          | Format          |
-+===========================+======================+=================+
-|xcms.xcmsSet               | parametersOutput.tsv | Tabular         |
-+---------------------------+--------------------+-------------------+
++---------------------------+--------------------------------+-----------------+
+| Name                      | Output file                    | Format          |
++===========================+================================+=================+
+| ipo4retgroup              | IPO_parameters4retcorGroup.tsv | Tabular         |
++---------------------------+--------------------------------+-----------------+  
 
-
+|
 
 -----------
 Input files
------------
+-----------  
 
-+---------------------------+------------+
-| Parameter : num + label   |   Format   |
-+===========================+============+
-| 1 : Choose your inputs    |   zip      |
-+---------------------------+------------+
+|
+
++---------------------------+---------------------------------------+
+| Parameter : num + label   |   Format                              |
++===========================+=======================================+
+| 1 : Choose your inputs    |   zip, mzML, mzXML, mzData, netCDF    |
++---------------------------+---------------------------------------+  
+
+|
 
 **Choose your inputs**
 
-You have two methods for your inputs:
+You have three methods for your inputs:
 
     | Zip file (recommended): You can put a zip file containing your inputs: myinputs.zip (containing all your conditions as sub-directories).
     | library folder: You must specify the name of your "library" (folder) created within your space project (for example: /projet/externe/institut/login/galaxylibrary/yourlibrary). Your library must contain all your conditions as sub-directories.
+    | MZ file: You can give only one mz file (mzData, mzML, mzXML, netCDF) as input.
+
+|
 
 Steps for creating the zip file
 -------------------------------
 
+|
+
 **Step1: Creating your directory and hierarchize the subdirectories**
 
+|
 
 VERY IMPORTANT: If you zip your files under Windows, you must use the 7Zip software (http://www.7-zip.org/), otherwise your zip will not be well unzipped on the platform W4M (zip corrupted bug).
 
@@ -342,30 +356,39 @@ m/z Encoding: **64**
 
 Intensity Encoding: **64**
 
+|
 
 ----------
 Parameters
 ----------
 
+|
+
 Extraction method for peaks detection
 -------------------------------------
+
+|
 
 **Matched Filter**
 
     | One parameter to consider is the Gaussian model peak width used for matched filtration,an integral part of the peak detection algorithm.
     | For a discussion of how model peak width affects the signal to noise ratio, see Danielsson et al. (2002).
 
+|
 
-**cent Wave**
+**Cent Wave**
 
     | This algorithm is most suitable for high resolution LC/{TOF,OrbiTrap,FTICR}-MS data in centroid mode.
     | Due to the fact that peak centroids are used, a binning step is not necessary.
     | The method is capable of detecting close-by-peaks and also overlapping peaks. Some efforts are made to detect the exact peak boundaries to get precise peak integrals.
 
+|
 
 ------------
 Output files
 ------------
+
+|
 
 IPO_parameters4xcmsSet.tsv
 
@@ -374,6 +397,19 @@ IPO_parameters4xcmsSet.tsv
 resultPeakpicking.RData
 
     | Peak picking results with R objects
+
+best_xcmsSet.RData
+
+    | Best xcmsSet R object to give as input for the next tool: ipo4retgroup
+
+run_instrument_infos.tsv
+
+    | Informations about the instrument(s), manufacturer(s), experimental run, gathered from the input mz file(s) so that you can see any difference if there is any.
+
+
+.. class:: infomark
+
+You can continue your analysis with *IPO for group and retcor*.
 
 
 ---------------------------------------------------
@@ -387,3 +423,4 @@ Changelog/News
 
     <expand macro="citation" />
 </tool>
+
