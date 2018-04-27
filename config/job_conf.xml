@@ -264,8 +264,8 @@
     <tool id="metabomatching" destination="dynamic-k8s-small" resources="all"/>
     <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
     <!-- new IPO -->
-    <tool id="ipo4xcmsSet" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="ipo4retgroup" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ipo4xcmsSet" destination="dynamic-k8s-xlarge" resources="all"/>
+    <tool id="ipo4retgroup" destination="dynamic-k8s-xlarge" resources="all"/>
     <!-- new XCMS -->
     <tool id="xcms-find-peaks" destination="dynamic-k8s-large" resources="all"/>
     <tool id="xcms-collect-peaks" destination="dynamic-k8s-medium" resources="all"/>
