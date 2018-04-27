@@ -109,6 +109,9 @@
     <!-- <tool file="phenomenal/isatools/isajson_validator.xml" labels="ISA"/> -->
   </section>
 
+  <section name="Study Raw Extraction" id="pheno_extract_rawdata">
+      <tool file="phenomenal/w4m/isa2mzml.xml"  labels="W4M"/>
+  </section>  
   
   <label id="phenomenal-nmr" text="NMR Data Analysis Tools" />
   <section name="NMR" id="pheno-nmr">
