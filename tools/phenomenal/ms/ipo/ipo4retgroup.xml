@@ -22,10 +22,10 @@
 
         image '$image'
         
-        #if $input.is_of_type("mzxml") or $input.is_of_type("mzml") or $input.is_of_type("mzdata") or $input.is_of_type("netcdf"):
-            singlefile_galaxyPath '$input' singlefile_sampleName '$input.name'
+        #if $ipo4retgroup_input.is_of_type("mzxml") or $ipo4retgroup_input.is_of_type("mzml") or $ipo4retgroup_input.is_of_type("mzdata") or $ipo4retgroup_input.is_of_type("netcdf"):
+            singlefile_galaxyPath '$ipo4retgroup_input' singlefile_sampleName '$ipo4retgroup_input.name'
         #else
-            zipfile '$input'
+            zipfile '$ipo4retgroup_input'
         #end if
 
         parametersOutput '$parametersOutput'
@@ -70,7 +70,7 @@
 
     <inputs>
     
-        <param name="input" type="data" format="mzxml,mzml,mzdata,netcdf,no_unzip.zip,zip" label="File(s) from your history containing your chromatograms" help="Single file mode for the format: mzxml, mzml, mzdata and netcdf. Zip file mode for the format: no_unzip.zip, zip. See the help section below." />
+        <param name="ipo4retgroup_input" type="data" format="mzxml,mzml,mzdata,netcdf,no_unzip.zip,zip" label="File(s) from your history containing your chromatograms" help="Single file mode for the format: mzxml, mzml, mzdata and netcdf. Zip file mode for the format: no_unzip.zip, zip. See the help section below." />
 
         <param name="image" type="data" format="rdata.xcms.raw,rdata.xcms.group,rdata.xcms.retcor,rdata" label="xset RData file" help="output file from another function xcms (xcmsSet, retcor etc.)" />
 
@@ -394,4 +394,3 @@ Changelog/News
 
     <expand macro="citation" />
 </tool>
-

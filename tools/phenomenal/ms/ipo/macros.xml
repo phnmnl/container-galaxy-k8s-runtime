@@ -13,10 +13,6 @@
         </stdio>
     </xml>
 
-    <token name="@COMMAND_SCRIPT@">
-        LANG=C Rscript $__tool_directory__/
-    </token>
-
     <token name="@COMMAND_LOG_EXIT@">
         ;
         return=\$?;
@@ -79,7 +75,6 @@
     </xml>
 
     <token name="@HELP_AUTHORS@">
-
 .. class:: infomark
 
 **Authors**  Gunnar Libiseller, Michaela Dvorzak, Ulrike Kleb, Edgar Gander, Tobias Eisenberg, Frank Madeo, Steffen Neumann, Gert Trausinger, Frank Sinner, Thomas Pieber and Christoph Magnes
@@ -91,6 +86,7 @@
 .. class:: infomark
 
 **PhenoMeNal integration**  Gabriel Cretin (gcretin@ipb-halle.de) Adapted the galaxy wrappers from W4M for the integration of the tool into PhenoMeNal
+
 
 ---------------------------------------------------
 

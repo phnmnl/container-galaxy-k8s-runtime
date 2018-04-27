@@ -30,10 +30,10 @@
     <command><![CDATA[
         LANG=C ipo4xcmsSet.r
 
-        #if $input.is_of_type("mzxml") or $input.is_of_type("mzml") or $input.is_of_type("mzdata") or $input.is_of_type("netcdf"):
-            singlefile_galaxyPath '$input' singlefile_sampleName '$input.name'
+        #if $ipo4xcmsSet_input.is_of_type("mzxml") or $ipo4xcmsSet_input.is_of_type("mzml") or $ipo4xcmsSet_input.is_of_type("mzdata") or $ipo4xcmsSet_input.is_of_type("netcdf"):
+            singlefile_galaxyPath '$ipo4xcmsSet_input' singlefile_sampleName '$ipo4xcmsSet_input.name'
         #else
-            zipfile '$input'
+            zipfile '$ipo4xcmsSet_input'
         #end if
 
         parametersOutput $parametersOutput
@@ -71,7 +71,7 @@
 
     <inputs>
 
-        <param name="input" type="data" format="mzxml,mzml,mzdata,netcdf,no_unzip.zip,zip" label="File(s) from your history containing your chromatograms" help="Single file mode for the format: mzxml, mzml, mzdata and netcdf. Zip file mode for the format: no_unzip.zip, zip. See the help section below." />
+        <param name="ipo4xcmsSet_input" type="data" format="mzxml,mzml,mzdata,netcdf,no_unzip.zip,zip" label="File(s) from your history containing your chromatograms" help="Single file mode for the format: mzxml, mzml, mzdata and netcdf. Zip file mode for the format: no_unzip.zip, zip. See the help section below." />
 
         <param name="samplebyclass" type="integer" value="2" label="Number of samples used per class to estimate the best parameters" help="Set to 0 to use the whole dataset. To save time, reduce this number" />
 
@@ -173,7 +173,7 @@
 
     <tests>
         <test>
-            <param name="input" value="MM14.mzML"  ftype="mzxml" />
+            <param name="ipo4xcmsSet_input" value="MM14.mzML"  ftype="mzxml" />
             <param name="samplebyclass" value="0" />
             <conditional name="methods">
                 <param name="method" value="centWave" />
@@ -190,7 +190,7 @@
             <output name="parametersOutput" file="MM14_IPO_parameters4xcmsSet_peakwidth.tsv" />
         </test>
         <test>
-            <param name="input" value="MM14.mzML"  ftype="mzxml" />
+            <param name="ipo4xcmsSet_input" value="MM14.mzML"  ftype="mzxml" />
             <param name="samplebyclass" value="0" />
             <conditional name="methods">
                 <param name="method" value="centWave" />
@@ -208,7 +208,7 @@
         </test>
         <!-- Too long for Travis CI -->
         <!--<test>
-            <param name="inputs|input" value="zip_file" />
+            <param name="inputs|ipo4xcmsSet_input" value="zip_file" />
             <param name="inputs|zip_file" value="sacuri_2files.zip"  ftype="zip" />
             <param name="samplebyclass" value="1" />
             <param name="methods|method" value="centWave" />
@@ -219,7 +219,7 @@
         </test>-->
         <!-- Too long for Travis CI -->
         <!--<test>
-            <param name="inputs|input" value="zip_file" />
+            <param name="inputs|ipo4xcmsSet_input" value="zip_file" />
             <param name="inputs|zip_file" value="sacuri_2files.zip"  ftype="zip" />
             <param name="samplebyclass" value="1" />
             <param name="methods|method" value="matchedFilter" />
@@ -231,7 +231,7 @@
                 Error in resultIncreased(history) :
                         No isotopes have been detected, peak picking not optimizable by IPO!-->
         <!--<test>
-            <param name="inputs|input" value="zip_file" />
+            <param name="inputs|ipo4xcmsSet_input" value="zip_file" />
             <param name="inputs|zip_file" value="faahKO_reduce.zip"  ftype="zip" />
             <param name="methods|method" value="centWave" />
             <param name="methods|ppm" value="25" />
@@ -423,4 +423,3 @@ Changelog/News
 
     <expand macro="citation" />
 </tool>
-
