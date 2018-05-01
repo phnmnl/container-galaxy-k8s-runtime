@@ -47,7 +47,7 @@ if [ -n $ANSIBLE_REPO ]
        fi
 fi
 
-GALAXY_RELEASE=release_17.09_plus_isa_k8s_resource_limts
+GALAXY_RELEASE=origin/release_17.09_isa_k8s_resource_limts_runnerRestartJobs
 GALAXY_REPO=phnmnl/galaxy
 
 GALAXY_INIT_PHENO_TAG=$DOCKER_REPO$DOCKER_USER/galaxy-init-pheno:$TAG
