@@ -92,6 +92,10 @@
 
   <section name="Study Raw Data Extraction" id="pheno_extract_rawdata">
       <tool file="phenomenal/w4m/isa2mzml.xml"  labels="W4M"/>
+      <tool file="phenomenal/w4m/isa2mzxml.xml"  labels="W4M"/>
+      <tool file="phenomenal/w4m/isa2mzdata.xml"  labels="W4M"/>
+      <tool file="phenomenal/w4m/isa2nmrml.xml"  labels="W4M"/>
+      <tool file="phenomenal/w4m/isa2netcdf.xml"  labels="W4M"/>
   </section>  
  
   <label id="phenomenal-metadata" text="Creating MetaData" /> 
