@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <tool id="isa_get_study_factors" name="Get study factors" version="1.0">
     <description>
-        Get list of study factors for a ISA-Tab study
+        Get list of study factors for a MetaboLights study
     </description>
 
     <requirements>
@@ -22,10 +22,10 @@
 
         #if $data_file.input == "isatab_input"
             #set $command = "isa-tab-get-factors"
-            #set $source = $data_file.isatab_input
+            #set $source = $data_file.isatab_input.extra_files_path
         #end if
 
-        run_mtblisa.py "$command" "${source}" "${output}"
+        isaslicer.py "$command" "${source}" "${output}"
 
 ]]>
     </command>
@@ -56,12 +56,12 @@
     <help>
 <!-- @@@BEGIN_RST@@@ -->
 
-=============================================
-Get list of study factors for a ISA-Tab study
-=============================================
+==================================================
+Get list of study factors for a MetaboLights study
+==================================================
 
-This tool gets the list of study factors from a ISA-Tab study. It
-extracts the factors from the ISA-Tab metadata.
+This tool gets the list of study factors from a MetaboLights study. It
+extracts the factors from the ISA-Tab metadata stored in MetaboLights.
 
 -----
 Input

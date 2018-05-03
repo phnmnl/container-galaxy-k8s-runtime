@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <tool id="isa_get_factors_summary" name="Get summary of factors" version="1.0">
-    <description>Produce a summary table of variable factors of a ISA-Tab
+    <description>Produce a summary table of variable factors of a MetaboLights
         study
     </description>
 
@@ -21,10 +21,10 @@
 
         #if $data_file.input == "isatab_input"
             #set $command = "isa-tab-get-factors-summary"
-            #set $source = $data_file.isatab_input
+            #set $source = $data_file.isatab_input.extra_files_path
         #end if
 
-        run_mtblisa.py "$command" "${source}" "${output}"
+        isaslicer.py "$command" "${source}" "${output}"
 
 ]]>
     </command>
@@ -54,9 +54,9 @@
 
     <help>
 <!-- @@@BEGIN_RST@@@ -->
-==========================================
-Get summary of factors for a ISA-Tab study
-==========================================
+===============================================
+Get summary of factors for a MetaboLights study
+===============================================
 
 This tool returns a table of sample names and related associated factor
 values. The tool calculates this by inspecting the ISA study and assay
