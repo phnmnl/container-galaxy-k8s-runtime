@@ -233,6 +233,10 @@
     <tool id="mtbls-dwnld" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa2w4m" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa2mzml" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa2mzxml" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa2mzdata" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa2nmrml" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa2netcdf" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="Univariate" destination="dynamic-k8s-small" resources="all"/>
     <tool id="Multivariate" destination="dynamic-k8s-small" resources="all"/>
     <tool id="biosigner" destination="dynamic-k8s-large" resources="all"/>
