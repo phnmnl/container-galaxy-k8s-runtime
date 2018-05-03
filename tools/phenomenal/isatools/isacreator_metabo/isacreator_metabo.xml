@@ -1,8 +1,8 @@
-<tool id="isa_create_metabo" name="Create ISA in Galaxy" version="1.1.0">
+<tool id="isacreator_metabo" name="Create ISA in Galaxy" version="1.1.0">
     <description>Interactive tool to create ISA archives based on study design information</description>
 
     <macros>
-        <import>isa_create_metabo_macros.xml</import>
+        <import>isacreator_metabo_macros.xml</import>
     </macros>
 
     <requirements>
@@ -16,14 +16,12 @@
 
     <command>
         <![CDATA[
-
         mkdir study_dir &&
         mkdir -p '${output.files_path}' &&
-        cli.py
+        isacreator_metabo.py
         --galaxy_parameters_file='$inputs'
         --target_dir='study_dir/' &&
         cp study_dir/* '${output.files_path}'
-
         ]]>
     </command>
 
@@ -39,16 +37,16 @@
     </inputs>
 
     <outputs>
-        <collection type="list" label="Data files" name="raw_files">
-            <discover_datasets pattern="(?P&lt;designation&gt;.+)\.(zip|mzml.gz)"/>
-        </collection>
         <collection type="list" label="ISA files" name="isa_files">
             <discover_datasets pattern="(?P&lt;designation&gt;(i|s|a)_.+)\.txt" directory="study_dir"  format="tsv"/>
+        </collection>
+        <collection type="list" label="Data files" name="raw_files">
+            <discover_datasets pattern="(?P&lt;designation&gt;.+)\.(zip|gz|mzml|nmrml)"/>
         </collection>
         <collection type="list" label="All files" name="all_files">
             <discover_datasets pattern="(?P&lt;designation&gt;.+)\.[a-zA-Z0-9]+" directory="study_dir" />
         </collection>
-        <data format="zip" name="output" label="New ISA-Tab"/>
+        <data format="isa-tab" name="output" label="New ISA-Tab"/>
     </outputs>
 
     <tests>

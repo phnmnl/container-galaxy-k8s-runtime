@@ -1,20 +1,12 @@
 <macros>
     <xml name="study_info_macro">
-        <section name="study_overview" title="Study Description"> 
-            <param name="study_title" type="text" label="Study title"
-                   value="e.g. Metabolomics study of the effect of ... on ..."/>
-            <param name="study_description" area="True" size="5x25" type="text"
-                   label="provide a textual description for the study"
-                   value="e.g. The study of... by means of metabolite profiling using ..."/>
-            <param name="study_pi_first_name" type="text" label="PI first name"
-                   value="e.g. Marie"/>
-            <param name="study_pi_last_name" type="text" label="PI last name"
-                   value="e.g. Sklodowska Curie"/>
-            <param name="study_pi_email" type="text" label="PI email address"
-                   value="e.g. marie.sklodowska-curie@gmail.com"/>
-            <param name="study_pi_affiliation" type="text"
-                   label="PI affiliation"
-                   value="e.g  Radium Institute, Paris"/>
+        <section name="study_overview" title="Study Description">
+            <param name="study_title" type="text" label="Study title" value="e.g. Metabolomics study of the effect of ... on ..."/>
+            <param name="study_description" area="True" size="5x25" type="text" label="provide a textual description for the study" value="e.g. The study of... by means of metabolite profiling using ..."/>
+            <param name="study_pi_first_name" type="text" label="PI first name" value="e.g. Marie"/>
+            <param name="study_pi_last_name" type="text" label="PI last name" value="e.g. Sklodowska Curie"/>
+            <param name="study_pi_email" type="text" label="PI email address" value="e.g. marie.sklodowska-curie@gmail.com"/>
+            <param name="study_pi_affiliation" type="text" label="PI affiliation" value="e.g  Radium Institute, Paris"/>
             <!-- <repeat name="protocol_record_series" title="Study Protocols">
                  <param name="protocol_name" type="text" label="Protocol name"></param>
                  <param name="protocol_type" type="select" label="Protocol type">
@@ -219,13 +211,13 @@
                             <!-- <filter type="add_value" ref="${group_balanced}" /> -->
                             <!-- <filter type="param_value" separator="," ref="agent"/>-->
                             <!--<filter type="multiple_splitter" column="4" separator="," key="agent"/>-->
-                        </options>                     
+                        </options>
                     </param>
                     <repeat name="group_sizes" title="set group sizes">
-                        
+
                     </repeat>
                 </when>
-            </conditional>     
+            </conditional>
         </section>
     </xml>
     <xml name="sample_assay_plan_macro">
@@ -519,7 +511,7 @@
                                                 <!--<filter type="static_value" column="2" value="liquid chromatography instrument"/>-->
                                                 <!--<filter type="add_value" value="isa user defined"/>-->
                                             <!--</options>-->
-                                            
+
                                             <option value="none reported">none
                                                 reported
                                             </option>
@@ -761,7 +753,7 @@
                                                 <option value="oxymation"/>
                                                 <option value="silylation"/>
                                                 <option value="other">other</option>
-                                                
+
                                             </param>
                                         </repeat>
                                     </when>
@@ -782,7 +774,7 @@
                                 <when value="1D 1H NMR">
                                     <param name="nmr_instrument" type="select"
                                            min="1" label="nmr instrument">
-                                        <option value="none reported">none 
+                                        <option value="none reported">none
                                             reported
                                         </option>
                                         <option value="Bruker 400 Mhz">Bruker

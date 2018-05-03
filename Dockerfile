@@ -28,7 +28,7 @@ RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transpo
               python-virtualenv \
               sudo \
     && \
-    pip install --upgrade pip && \
+    curl https://bootstrap.pypa.io/get-pip.py | python && \
     apt-get purge -y software-properties-common && \
     apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -37,7 +37,7 @@ RUN git clone --depth 1 --single-branch --branch release_17.09_plus_isa_k8s_reso
 WORKDIR /galaxy
 
 RUN echo "pykube==0.15.0" >> requirements.txt && \
-    echo "-e git://github.com/ISA-tools/isa-rwval.git@develop#egg=isatools" >> requirements.txt
+    echo "isa-rwval==0.10.1" >> requirements.txt
 
 RUN virtualenv .config_script_venv
 RUN /bin/bash -c "source .config_script_venv/bin/activate && \
@@ -50,7 +50,7 @@ RUN virtualenv .venv
 # update their wheel server to include docutils==0.14, which Galaxy 17.09 requires.
 
 RUN /bin/bash -c "source .venv/bin/activate && \
-                  pip install 'pip>=8.1' && \
+                  curl https://bootstrap.pypa.io/get-pip.py | python && \
                   pip install -r requirements.txt \
                       --index-url https://wheels.galaxyproject.org/simple \
                       --extra-index-url https://pypi.python.org/simple && \
