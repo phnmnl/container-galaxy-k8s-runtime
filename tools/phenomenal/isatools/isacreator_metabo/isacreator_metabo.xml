@@ -16,10 +16,9 @@
 
     <command>
         <![CDATA[
-        pip install -e /Users/dj/Development/ISA/isa-api/ &&
         mkdir study_dir &&
         mkdir -p '${output.files_path}' &&
-        $__tool_directory__/isacreator_metabo.py
+        isacreator_metabo.py
         --galaxy_parameters_file='$inputs'
         --target_dir='study_dir/' &&
         cp study_dir/* '${output.files_path}'
