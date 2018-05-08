@@ -6,7 +6,7 @@
             <param name="study_pi_first_name" type="text" label="PI first name" value="e.g. Marie"/>
             <param name="study_pi_last_name" type="text" label="PI last name" value="e.g. Sklodowska Curie"/>
             <param name="study_pi_email" type="text" label="PI email address" value="e.g. marie.sklodowska-curie@gmail.com"/>
-            <param name="study_pi_affiliation" type="text" label="PI affiliation" value="e.g  Radium Institute, Paris"/>
+            <param name="study_pi_affiliation" type="text" label="PI affiliation" value="e.g. Radium Institute, Paris"/>
             <!-- <repeat name="protocol_record_series" title="Study Protocols">
                  <param name="protocol_name" type="text" label="Protocol name"></param>
                  <param name="protocol_type" type="select" label="Protocol type">
@@ -28,19 +28,19 @@
                  <param name="protocol_uri" type="text" label="Protocol URI"></param>
              </repeat> -->
             <param name="study_consent" type="select" label="Consent Information (ICO:0000011)">
-                 <options from_data_table="isa_cvterms">
-                     <column name="value" index="1"/>
-                     <filter type="static_value" column="2" value="consent"/>
-                     <filter type="add_value" value="isa user defined"/>
-                 </options>
-             </param>
+                <options from_data_table="isa_cvterms">
+                    <column name="value" index="1"/>
+                    <filter type="static_value" column="2" value="consent"/>
+                    <filter type="add_value" value="user_defined_consent_information"/>
+                </options>
+            </param>
             <param name="study_use_condition" type="select" label="Data Use Requirement (DUO:0000017)">
-                 <options from_data_table="isa_cvterms">
-                     <column name="value" index="1"/>
-                     <filter type="static_value" column="2" value="data use requirement"/>
-                     <filter type="add_value" value="isa user defined"/>
-                 </options>
-             </param>
+                <options from_data_table="isa_cvterms">
+                    <column name="value" index="1"/>
+                    <filter type="static_value" column="2" value="data use requirement"/>
+                    <filter type="add_value" value="user_defined_data_use_requirement"/>
+                </options>
+            </param>
         </section>
     </xml>
     <xml name="treatment_plan_macro">
@@ -169,7 +169,7 @@
                     <options from_data_table="isa_cvterms">
                         <column name="value" index="1"/>
                         <filter type="static_value" column="2" value="animal_mat"/>
-                        <filter type="add_value" value="isa user defined"/>
+                        <filter type="add_value" value="user_defined_sample_type"/>
                     </options>
                 </param>
                 <param name="sample_size" type="integer" label="number of sample collections" value="1"/>
@@ -177,16 +177,8 @@
                 <repeat name="assay_record_series" title="Assay Plan">
                     <conditional name="assay_type">
                         <param name="assay_type" type="select" label="study assay types">
-                            <option value="mass spectrometry" selected="True">
-                                mass spectrometry
-                            </option>
-                            <option value="nmr spectroscopy">
-                                nmr spectroscopy
-                            </option>
-                            <!--
-                               <option value="DNA microarray">DNA microarray</option>
-                               <option value="DNA sequencing">DNA sequencing</option>
-                            -->
+                            <option value="mass spectrometry" selected="True">mass spectrometry</option>
+                            <option value="nmr spectroscopy">nmr spectroscopy</option>
                         </param>
                         <when value="mass spectrometry">
                             <repeat name="samp_frac_series" title="sample fractions">
@@ -209,7 +201,7 @@
                                             <options from_data_table="isa_cvterms">
                                                 <column name="value" index="1"/>
                                                 <filter type="static_value" column="2" value="mass spectrometry instrument"/>
-                                                <filter type="add_value" value="isa user defined"/>
+                                                <filter type="add_value" value="user_defined_ms_instrument"/>
                                             </options>
                                             <option value="none reported">none reported</option>
                                         </param>
@@ -227,7 +219,7 @@
                                             <options from_data_table="isa_cvterms">
                                                 <column name="value" index="1"/>
                                                 <filter type="static_value" column="2" value="mass spectrometry instrument"/>
-                                                <filter type="add_value" value="isa user defined"/>
+                                                <filter type="add_value" value="user_defined_ms_instrument"/>
                                             </options>
                                             <option value="none reported">none reported</option>
                                         </param>
@@ -251,7 +243,7 @@
                                             <options from_data_table="isa_cvterms">
                                                 <column name="value" index="1"/>
                                                 <filter type="static_value" column="2" value="liquid chromatography instrument"/>
-                                                <filter type="add_value" value="isa user defined"/>
+                                                <filter type="add_value" value="user_defined_lc_instrument"/>
                                             </options>
                                             <option value="none reported">none reported</option>
                                         </param>
@@ -259,7 +251,7 @@
                                             <options from_data_table="isa_cvterms">
                                                 <column name="value" index="1"/>
                                                 <filter type="static_value" column="2" value="mass spectrometry instrument"/>
-                                                <filter type="add_value" value="isa user defined"/>
+                                                <filter type="add_value" value="user_defined_ms_instrument"/>
                                             </options>
                                             <option value="none reported">none reported</option>
                                         </param>
@@ -277,7 +269,7 @@
                                             <options from_data_table="isa_cvterms">
                                                 <column name="value" index="1"/>
                                                 <filter type="static_value" column="2" value="gas chromatography instrument"/>
-                                                <filter type="add_value" value="isa user defined"/>
+                                                <filter type="add_value" value="user_defined_gc_instrument"/>
                                             </options>
                                             <option value="none reported">none reported</option>
                                         </param>
@@ -285,7 +277,7 @@
                                             <options from_data_table="isa_cvterms">
                                                 <column name="value" index="1"/>
                                                 <filter type="static_value" column="2" value="MS instrument for GC"/>
-                                                <filter type="add_value" value="isa user defined"/>
+                                                <filter type="add_value" value="user_defined_ms_instrument"/>
                                             </options>
                                             <option value="none reported">none reported</option>
                                         </param>
@@ -302,7 +294,7 @@
                                                 <options from_data_table="isa_cvterms">
                                                     <column name="value" index="1"/>
                                                     <filter type="static_value" column="2" value="derivatization"/>
-                                                    <filter type="add_value" value="isa user defined"/>
+                                                    <filter type="add_value" value="user_defined_derivatization"/>
                                                 </options>
                                                 <option value="none reported">none reported</option>
                                             </param>
@@ -325,7 +317,7 @@
                                         <options from_data_table="isa_cvterms">
                                             <column name="value" index="1"/>
                                             <filter type="static_value" column="2" value="NMR instrument"/>
-                                            <filter type="add_value" value="isa user defined"/>
+                                            <filter type="add_value" value="user_defined_nmr_instrument"/>
                                         </options>
                                         <option value="none reported">none reported</option>
                                     </param>
@@ -333,7 +325,7 @@
                                         <options from_data_table="isa_cvterms">
                                             <column name="value" index="1"/>
                                             <filter type="static_value" column="2" value="1d 1H pulse sequence"/>
-                                            <filter type="add_value" value="isa user defined"/>
+                                            <filter type="add_value" value="user_defined_pulse_sequence"/>
                                         </options>
                                         <option value="none reported">none reported</option>
                                     </param>
@@ -345,7 +337,7 @@
                                         <options from_data_table="isa_cvterms">
                                             <column name="value" index="1"/>
                                             <filter type="static_value" column="2" value="NMR instrument"/>
-                                            <filter type="add_value" value="isa user defined"/>
+                                            <filter type="add_value" value="user_defined_nmr_instrument"/>
                                         </options>
                                         <option value="none reported">none reported</option>
                                     </param>
@@ -353,7 +345,7 @@
                                         <options from_data_table="isa_cvterms">
                                             <column name="value" index="1"/>
                                             <filter type="static_value" column="2" value="1d 13C pulse sequence"/>
-                                            <filter type="add_value" value="isa user defined"/>
+                                            <filter type="add_value" value="user_defined_pulse_sequence"/>
                                         </options>
                                         <option value="none reported">none reported</option>
                                     </param>
@@ -365,7 +357,7 @@
                                         <options from_data_table="isa_cvterms">
                                             <column name="value" index="1"/>
                                             <filter type="static_value" column="2" value="NMR instrument"/>
-                                            <filter type="add_value" value="isa user defined"/>
+                                            <filter type="add_value" value="user_defined_nmr_instrument"/>
                                         </options>
                                         <option value="none reported">none reported</option>
                                     </param>
@@ -373,7 +365,7 @@
                                         <options from_data_table="isa_cvterms">
                                             <column name="value" index="1"/>
                                             <filter type="static_value" column="2" value="2d 1H-1H pulse sequence"/>
-                                            <filter type="add_value" value="isa user defined"/>
+                                            <filter type="add_value" value="user_defined_pulse_sequence"/>
                                         </options>
                                         <option value="none reported">none reported</option>
                                     </param>
@@ -385,7 +377,7 @@
                                         <options from_data_table="isa_cvterms">
                                             <column name="value" index="1"/>
                                             <filter type="static_value" column="2" value="NMR instrument"/>
-                                            <filter type="add_value" value="isa user defined"/>
+                                            <filter type="add_value" value="user_defined_nmr_instrument"/>
                                         </options>
                                         <option value="none reported">none reported</option>
                                     </param>
@@ -393,7 +385,7 @@
                                         <options from_data_table="isa_cvterms">
                                             <column name="value" index="1"/>
                                             <filter type="static_value" column="2" value="2d 13C-13C pulse sequence"/>
-                                            <filter type="add_value" value="isa user defined"/>
+                                            <filter type="add_value" value="user_defined_pulse_sequence"/>
                                         </options>
                                         <option value="none reported">none reported</option>
                                     </param>
@@ -405,7 +397,7 @@
                                         <options from_data_table="isa_cvterms">
                                             <column name="value" index="1"/>
                                             <filter type="static_value" column="2" value="NMR instrument"/>
-                                            <filter type="add_value" value="isa user defined"/>
+                                            <filter type="add_value" value="user_defined_nmr_instrument"/>
                                         </options>
                                         <option value="none reported">none reported</option>
                                     </param>
@@ -413,7 +405,7 @@
                                         <options from_data_table="isa_cvterms">
                                             <column name="value" index="1"/>
                                             <filter type="static_value" column="2" value="2d 1H-13C pulse sequence"/>
-                                            <filter type="add_value" value="isa user defined"/>
+                                            <filter type="add_value" value="user_defined_pulse_sequence"/>
                                         </options>
                                         <option value="none reported">none reported</option>
                                     </param>
