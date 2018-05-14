@@ -39,6 +39,8 @@
         parametersOutput $parametersOutput
 
         optimResultsRdataOutput $resultPeakpicking
+        
+        @COMMAND_NSLAVES@
 
         ## profmethod $profmethod
 

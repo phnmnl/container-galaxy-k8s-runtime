@@ -29,6 +29,8 @@
         #end if
 
         parametersOutput '$parametersOutput'
+        
+        @COMMAND_NSLAVES@
 
         #if $sampleMetadataFile
             sampleMetadataFile $sampleMetadataFile
