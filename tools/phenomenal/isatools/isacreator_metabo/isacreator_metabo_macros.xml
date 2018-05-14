@@ -47,9 +47,32 @@
         <section name="treatment_plan" title="Treatment Plan">
             <conditional name="study_type_cond">
                 <param name="study_type" type="select" label="which type of study" help="see example below">
-                    <option value="intervention">intervention</option>
+                    <option value="intervention">full factorial intervention</option>
+                    <option value="intervention_fractional">fractional factorial intervention</option>
                     <option value="observation">observation</option>
                 </param>
+                <when value="intervention_fractional">
+                    <conditional name="one_or_more">
+                        <param name="single_or_multiple" type="select" label="single or repeated treatments">
+                            <option value="single" selected="True">single</option>
+                            <option value="multiple">multiple</option>
+                        </param>
+                        <when value="single">
+                            <param name="select_intervention_type" type="select" label="Select an intervention type">
+                                <option value="chemical intervention" selected="True">chemical intervention</option>
+                                <option value="dietary intervention">dietary intervention</option>
+                                <option value="behavioural intervention">behavioral intervention</option>
+                                <option value="biological intervention">biological intervention</option>
+                                <option value="surgical intervention">surgical intervention</option>
+                            </param>
+                            <param name="study_factors" type="text" label="Study factors" value="agent, intensity, duration"/>
+                            <repeat name="factor_value_groups" title="Study group">
+                                <param name="factor_values" type="text" label="Factor values" value="aspirin, low dose, t0"/>
+                            </repeat>
+                        </when>
+                        <when value="multiple"/>
+                    </conditional>
+                </when>
                 <when value="intervention">
                     <conditional name="one_or_more">
                         <param name="single_or_multiple" type="select" label="single or repeated treatments">
@@ -445,40 +468,38 @@
             <repeat name="qc_record_series"
                     title="Quality Control / Quality Assurance Plan">
                 <conditional name="qc_type_conditional">
-                    <param name="qc_type" type="select" label="study qc types">
-                        <options from_data_table="isa_cvterms">
-                            <column name="value" index="1"/>
-                            <filter type="static_value" column="2" value="QC terms"/>
-                        </options>
+                    <param name="qc_type" type="select" label="QC type">
+                        <option value="interval series" selected="True">interval series</option>
+                        <option value="pre-run dilution series">dilution series (pre-run batch)</option>
+                        <option value="post-run dilution series">dilution series (post-run batch)</option>
                     </param>
-                    <when value="long term reference (MSIO:0000019)">
-                        <param name="nb_injection" type="integer" label="number of injections" value="0"/>
-                        <param name="injection_freq" type="integer" label="injection frequency" value="0"/>
+                    <when value="interval series">
+                        <param name="qc_material_type" type="select" label="study qc types">
+                            <options from_data_table="isa_cvterms">
+                                <column name="value" index="1"/>
+                                <filter type="static_value" column="2" value="QC terms"/>
+                            </options>
+                        </param>
+                        <param name="injection_freq" type="integer" label="injection frequency" value="10"/>
                     </when>
-                    <when value="study reference (MSIO:0000027)">
-                        <param name="nb_injection" type="integer" label="number of injections" value="0"/>
-                        <param name="injection_freq" type="integer" label="injection frequency" value="0"/>
+                    <when value="pre-run dilution series">
+                        <param name="qc_material_type" type="select" label="Material type">
+                            <options from_data_table="isa_cvterms">
+                                <column name="value" index="1"/>
+                                <filter type="static_value" column="2" value="QC terms"/>
+                            </options>
+                        </param>
+                        <param name="quantity_type" type="text" label="Quantity type" value="Amount in ml"/>
+                        <param name="values" type="text" label="Values (comma-separated)" value="1,3,5,10"/>
                     </when>
-                    <when value="reference compound (MSIO:0000023)">
-                        <param name="nb_injection" type="integer" label="number of injections" value="0"/>
-                        <param name="injection_freq" type="integer" label="injection frequency" value="0"/>
-                    </when>
-                    <when value="reference compound mix (MSIO:0000024)">
-                        <param name="nb_injection" type="integer" label="number of injections" value="0"/>
-                        <param name="injection_freq" type="integer" label="injection frequency" value="0"/>
-                    </when>
-                    <when value="sample preparation blank (MSIO:0000025)">
-                        <param name="nb_injection" type="integer" label="number of injections" value="0"/>
-                        <param name="injection_freq" type="integer" label="injection frequency" value="0"/>
-                    </when>
-                    <when value="solvent blank (MSIO:0000026)">
-                        <param name="nb_injection" type="integer" label="number of injections" value="0"/>
-                        <param name="injection_freq" type="integer" label="injection frequency" value="0"/>
-                    </when>
-                    <when value="dilution series reference (MSIO:0000016)">
-                        <param name="nb_injection" type="integer" label="number of injections" value="0"/>
-                        <param name="injection_freq" type="integer" label="injection frequency" value="0"/>
-                        <param name="nb_dil_step" type="integer" label="number of dilution steps" value="0"/>
+                    <when value="post-run dilution series">
+                        <param name="qc_material_type" type="select" label="Material type">
+                            <options from_data_table="isa_cvterms">
+                                <column name="value" index="1"/>
+                                <filter type="static_value" column="2" value="QC terms"/>
+                            </options>
+                        </param>
+                        <param name="values" type="text" label="Quantity (comma-separated)" value="10,5,3,1"/>
                     </when>
                 </conditional>
             </repeat>
