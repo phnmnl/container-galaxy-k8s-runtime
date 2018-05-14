@@ -21,9 +21,6 @@
         sh -c "exit \$return"
     </token>
 
-    <token name="@COMMAND_NSLAVES@">
-        nSlaves \${GALAXY_SLOTS:-1}
-    </token>
 
     <!-- zipfile load for planemo test -->
 
