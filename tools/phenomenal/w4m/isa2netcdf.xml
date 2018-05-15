@@ -1,0 +1,69 @@
+<!-- vi: se fdm=marker : -->
+<tool id="isa2netcdf" name="ISA to netCDF" version="1.1.0">
+
+	<description>Extract netCDF files from an ISA dataset and output a collection of netCDF dataset.</description>
+
+	<!-- Command {{{1 -->
+
+	<command><![CDATA[
+		## @@@BEGIN_CHEETAH@@@
+
+		extract-from-isa
+		-i "$isa.extra_files_path"
+		-e CDF
+		-o netCDF
+
+		## @@@END_CHEETAH@@@
+	]]></command>
+
+	<!-- Inputs {{{1 -->
+
+	<inputs>
+		<param name="isa" label="ISA" type="data" format="isa-tab"/>
+	</inputs>
+
+	<!-- Outputs {{{1 -->
+
+    <outputs>
+		<collection name="netCDF" type="list" label="netCDF files">
+			<discover_datasets pattern="__name_and_ext__" directory="netCDF" format="netcdf"/>
+		</collection>
+	</outputs>
+
+	<!-- Tests {{{1 -->
+
+	<!-- Help {{{1 -->
+    <help>
+<!-- @@@BEGIN_RST@@@ -->
+
+====================
+ISA to netCDF
+====================
+
+Extract netCDF files contained inside an ISA archive.
+
+-----
+Input
+-----
+
+ISA dataset
+===========
+
+The ISA-Tab dataset from which to extract the files.
+
+------
+Output
+------
+
+The output is a collection of netCDF files.
+
+<!-- @@@END_RST@@@ -->
+    </help>
+
+	<!-- Citations {{{1 -->
+    <citations>
+        <citation type="doi">10.1038/ng.1054</citation> <!-- ISA -->
+        <citation type="doi">10.1093/bioinformatics/btu813</citation> <!-- W4M -->
+    </citations>
+
+</tool>

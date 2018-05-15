@@ -89,6 +89,14 @@
      <tool file="phenomenal/isatools/slicer/isa_get_factors_summary.xml" labels="ISA"/>
      <tool file="phenomenal/isatools/mtbls-factors-viz.xml" labels="ISA"/>
    </section> 
+
+  <section name="Study Raw Data Extraction" id="pheno_extract_rawdata">
+      <tool file="phenomenal/w4m/isa2mzml.xml"  labels="W4M"/>
+      <tool file="phenomenal/w4m/isa2mzxml.xml"  labels="W4M"/>
+      <tool file="phenomenal/w4m/isa2mzdata.xml"  labels="W4M"/>
+      <tool file="phenomenal/w4m/isa2nmrml.xml"  labels="W4M"/>
+      <tool file="phenomenal/w4m/isa2netcdf.xml"  labels="W4M"/>
+  </section>  
  
   <label id="phenomenal-metadata" text="Creating MetaData" /> 
  
@@ -108,7 +116,6 @@
     <tool file="phenomenal/isatools/validators/isatab_validator.xml" labels="ISA"/>
     <!-- <tool file="phenomenal/isatools/isajson_validator.xml" labels="ISA"/> -->
   </section>
-
   
   <label id="phenomenal-nmr" text="NMR Data Analysis Tools" />
   <section name="NMR" id="pheno-nmr">

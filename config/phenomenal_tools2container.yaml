@@ -69,6 +69,17 @@ assignment:
   max_pod_retrials: 3
   tools_id:
   - mtbls-dwnld
+- docker_image_override: isa-extractor
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: dev_v1.1.2_cv1.0.3
+  max_pod_retrials: 3
+  tools_id:
+  - isa2mzml
+  - isa2mzxml
+  - isa2mzdata
+  - isa2nmrml
+  - isa2netcdf
 - docker_image_override: isa2w4m
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
@@ -428,7 +439,7 @@ assignment:
 - docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: pathwayenrichment
-  docker_tag_override: v1.0.6_cv1.0.5.19
+  docker_tag_override: v_cv2.0.20
   max_pod_retrials: 1
   tools_id:
    - pathway_enrichment
