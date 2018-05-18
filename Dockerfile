@@ -37,7 +37,7 @@ RUN git clone --depth 1 --single-branch --branch release_17.09_plus_isa_k8s_reso
 WORKDIR /galaxy
 
 RUN echo "pykube==0.15.0" >> requirements.txt && \
-    echo "isa-rwval==0.10.1" >> requirements.txt
+    echo "isa-rwval==0.10.2" >> requirements.txt
 
 RUN virtualenv .config_script_venv
 RUN /bin/bash -c "source .config_script_venv/bin/activate && \

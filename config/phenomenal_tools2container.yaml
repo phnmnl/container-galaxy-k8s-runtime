@@ -480,7 +480,7 @@ assignment:
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_tag_override: latest
-  max_pod_retrials: 3
+  max_pod_retrials: 1
   tools_id:
   - isacreator_metabo
 - docker_image_override: dimspy
