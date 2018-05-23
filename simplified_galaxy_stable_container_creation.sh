@@ -14,10 +14,10 @@ then
         DOCKER_REPO=$DOCKER_REPO"/"
     fi
 fi
-    
 
-ANSIBLE_REPO=pcm32/ansible-galaxy-extras
-ANSIBLE_RELEASE=18.01-pheno-dev
+
+ANSIBLE_REPO=galaxyproject/ansible-galaxy-extras
+ANSIBLE_RELEASE=18.01-k8s
 GALAXY_VER_FOR_POSTGRES=18.01
 POSTGRES_VERSION=`grep FROM docker-galaxy-stable/compose/galaxy-postgres/Dockerfile | awk -F":" '{ print $2 }'`
 GALAXY_BASE_FROM_TO_REPLACE=quay.io/bgruening/galaxy-base:18.01
