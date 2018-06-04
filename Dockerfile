@@ -36,8 +36,7 @@ RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transpo
 RUN git clone --depth 1 --single-branch --branch release_18.01_plus_isa_runnerRestartJobs https://github.com/phnmnl/galaxy.git
 WORKDIR /galaxy
 
-RUN echo "pykube==0.15.0" >> requirements.txt && \
-    echo "isa-rwval==0.10.2" >> requirements.txt
+RUN echo "pykube==0.15.0" >> requirements.txt
 
 RUN virtualenv .config_script_venv
 RUN /bin/bash -c "source .config_script_venv/bin/activate && \

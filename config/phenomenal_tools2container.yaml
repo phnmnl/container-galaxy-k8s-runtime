@@ -259,7 +259,7 @@ assignment:
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_tag_override: latest
-  max_pod_retrials: 3
+  max_pod_retrials: 1
   tools_id:
   - isa_get_data_files_list
   - isa_get_data_files_collection
@@ -301,7 +301,7 @@ assignment:
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_tag_override: latest
-  max_pod_retrials: 3
+  max_pod_retrials: 1
   tools_id:
   - isatab2json
 - docker_image_override: batman
@@ -364,7 +364,7 @@ assignment:
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_tag_override: latest
-  max_pod_retrials: 3
+  max_pod_retrials: 1
   tools_id:
   - isatab_validator
 - docker_image_override: metabolab
