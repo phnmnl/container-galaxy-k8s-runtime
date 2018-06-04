@@ -72,7 +72,7 @@ assignment:
 - docker_image_override: isa-extractor
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: dev_v1.1.2_cv1.0.3
+  docker_tag_override: latest
   max_pod_retrials: 3
   tools_id:
   - isa2mzml
