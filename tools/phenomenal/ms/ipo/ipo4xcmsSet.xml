@@ -37,14 +37,14 @@
         #end if
 
         parametersOutput $parametersOutput
-        
-        optimResultsRdataOutput $resultPeakpicking
 
-        samplebyclass $samplebyclass
+        optimResultsRdataOutput $resultPeakpicking
+        
+        @COMMAND_NSLAVES@
 
         ## profmethod $profmethod
-        @COMMAND_NSLAVES@
-        method $methods.method
+
+	method $methods.method
         #if $methods.method == "centWave":
             ppm "c($methods.section_centwave_optiomizable.conditional_parameter.ppm)"
             min_peakwidth "c($methods.section_centwave_optiomizable.conditional_parameter.min_peakwidth)"
@@ -72,8 +72,6 @@
     <inputs>
 
         <param name="ipo4xcmsSet_input" type="data" format="mzxml,mzml,mzdata,netcdf,no_unzip.zip,zip" label="File(s) from your history containing your chromatograms" help="Single file mode for the format: mzxml, mzml, mzdata and netcdf. Zip file mode for the format: no_unzip.zip, zip. See the help section below." />
-
-        <param name="samplebyclass" type="integer" value="2" label="Number of samples used per class to estimate the best parameters" help="Set to 0 to use the whole dataset. To save time, reduce this number" />
 
         <conditional name="methods">
             <param name="method" type="select" label="Extraction method for peaks detection" help="[method] See the help section below">
@@ -174,7 +172,6 @@
     <tests>
         <test>
             <param name="ipo4xcmsSet_input" value="MM14.mzML"  ftype="mzxml" />
-            <param name="samplebyclass" value="0" />
             <conditional name="methods">
                 <param name="method" value="centWave" />
                 <section name="section_centwave_optiomizable" >
@@ -191,7 +188,6 @@
         </test>
         <test>
             <param name="ipo4xcmsSet_input" value="MM14.mzML"  ftype="mzxml" />
-            <param name="samplebyclass" value="0" />
             <conditional name="methods">
                 <param name="method" value="centWave" />
                 <section name="section_centwave_optiomizable" >
@@ -210,7 +206,6 @@
         <!--<test>
             <param name="inputs|ipo4xcmsSet_input" value="zip_file" />
             <param name="inputs|zip_file" value="sacuri_2files.zip"  ftype="zip" />
-            <param name="samplebyclass" value="1" />
             <param name="methods|method" value="centWave" />
             <param name="methods|ppm" value="25" />
             <param name="methods|min_peakwidth" value="20,30" />
@@ -221,7 +216,6 @@
         <!--<test>
             <param name="inputs|ipo4xcmsSet_input" value="zip_file" />
             <param name="inputs|zip_file" value="sacuri_2files.zip"  ftype="zip" />
-            <param name="samplebyclass" value="1" />
             <param name="methods|method" value="matchedFilter" />
             <param name="methods|step" value="0.05,0.15" />
             <param name="methods|fwhm" value="25,35" />
@@ -260,7 +254,7 @@ Description
 
 -----------------
 Workflow position
------------------  
+-----------------
 
 |
 
@@ -270,7 +264,7 @@ Workflow position
  Name                      output file    format   parameter
 ========================= ============== ======== ===========
  NA                        NA             NA       NA
-========================= ============== ======== ===========  
+========================= ============== ======== ===========
 
 |
 
@@ -280,13 +274,13 @@ Workflow position
 | Name                      | Output file                    | Format          |
 +===========================+================================+=================+
 | ipo4retgroup              | IPO_parameters4retcorGroup.tsv | Tabular         |
-+---------------------------+--------------------------------+-----------------+  
++---------------------------+--------------------------------+-----------------+
 
 |
 
 -----------
 Input files
------------  
+-----------
 
 |
 
@@ -294,7 +288,7 @@ Input files
 | Parameter : num + label   |   Format                              |
 +===========================+=======================================+
 | 1 : Choose your inputs    |   zip, mzML, mzXML, mzData, netCDF    |
-+---------------------------+---------------------------------------+  
++---------------------------+---------------------------------------+
 
 |
 
@@ -302,8 +296,7 @@ Input files
 
 You have three methods for your inputs:
 
-    | Zip file (recommended): You can put a zip file containing your inputs: myinputs.zip (containing all your conditions as sub-directories).
-    | library folder: You must specify the name of your "library" (folder) created within your space project (for example: /projet/externe/institut/login/galaxylibrary/yourlibrary). Your library must contain all your conditions as sub-directories.
+    | Zip file (recommended): You can put a zip file containing your inputs: myinputs.zip (all mz files inside, no subdirectories).
     | MZ file: You can give only one mz file (mzData, mzML, mzXML, netCDF) as input.
 
 |
@@ -313,27 +306,15 @@ Steps for creating the zip file
 
 |
 
-**Step1: Creating your directory and hierarchize the subdirectories**
+**Step1: Creating a zip file**
 
-|
+Create your zip file (e.g.: arabidopsis.zip, with mzML or mzData or mzXML or netCDF files inside only).
 
-VERY IMPORTANT: If you zip your files under Windows, you must use the 7Zip software (http://www.7-zip.org/), otherwise your zip will not be well unzipped on the platform W4M (zip corrupted bug).
-
-Your zip should contain all your conditions as sub-directories. For example, two conditions (mutant and wild):
-arabidopsis/wild/01.raw
-arabidopsis/mutant/01.raw
-
-**Step2: Creating a zip file**
-
-Create your zip file (e.g.: arabidopsis.zip).
-
-**Step 3 : Uploading it to our Galaxy server**
+**Step 2 : Uploading it to our Galaxy server**
 
 If your zip file is less than 2Gb, you get use the Get Data tool to upload it.
 
 Otherwise if your zip file is larger than 2Gb, please refer to the HOWTO on workflow4metabolomics.org (http://application.sb-roscoff.fr/download/w4m/howto/galaxy_upload_up_2Go.pdf).
-
-For more informations, don't hesitate to send us an email at supportATworkflow4metabolomics.org).
 
 Advices for converting your files for the XCMS input
 ----------------------------------------------------
