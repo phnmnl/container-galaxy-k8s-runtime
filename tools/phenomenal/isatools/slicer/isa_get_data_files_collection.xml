@@ -1,14 +1,21 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <tool id="isa_get_data_files_collection" name="Get data files collection"
       version="1.0">
-    <description>Get a collection of ISA-Tab study data files filtered on
-        factor values</description>
+    <description>
+        Get a collection of MetaboLights study data files filtered on factor
+        values
+    </description>
+
+    <requirements>
+        <requirement type="package" version="6.7">click</requirement>
+        <requirement type="package" version="0.9.4">isatools</requirement>
+    </requirements>
 
     <stdio>
         <exit_code range="1:" level="fatal"/>
     </stdio>
     <command><![CDATA[
-        run_mtblisa.py isa-tab-get-data-collection
+        isaslicer.py isa-tab-get-data-collection
         "${isatab_input.extra_files_path}" "./"
         --json-query "{ \"$factor_name\": \"$factor_value\" }"
 ]]>
@@ -43,9 +50,9 @@
 
     <help>
 <!-- @@@BEGIN_RST@@@ -->
-===================================
-Get a ISA-Tab study data files list
-===================================
+========================================
+Get a MetaboLights study data files list
+========================================
 
 This tool returns a list of data files sliced on a filtered factor name
 and value.
@@ -58,6 +65,11 @@ ISA-Tab input source
 ====================
 Choose an input source, either direct from Metabolights or from an ISA-Tab
 history item that has already been downloaded or created in Galaxy.
+
+MetaboLights Study Identifier
+=============================
+If the input source is Metabolights, then provide the MTBLS identifier
+available at MetaboLights, e.g. MTBLS2.
 
 ISA-Tab datatype history item
 =============================

@@ -36,7 +36,8 @@ RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transpo
 RUN git clone --depth 1 --single-branch --branch release_18.01_plus_isa_runnerRestartJobs https://github.com/phnmnl/galaxy.git
 WORKDIR /galaxy
 
-RUN echo "pykube==0.15.0" >> requirements.txt 
+RUN echo "pykube==0.15.0" >> requirements.txt && \
+    echo "isa-rwval==0.10.2" >> requirements.txt
 
 RUN virtualenv .config_script_venv
 RUN /bin/bash -c "source .config_script_venv/bin/activate && \
@@ -70,10 +71,12 @@ COPY config/datatypes_conf.xml \
      config/sanitize_whitelist.txt \
      config/tool_conf.xml \
      config/dependency_resolvers_conf.xml \
+     config/tool_data_table_conf.xml \
   config/
 
 COPY rules/k8s_destinations.py lib/galaxy/jobs/rules/k8s_destination.py
 COPY tools/phenomenal tools/phenomenal
+COPY tool-data/isa_cvterms.loc tool-data/
 
 # Galaxy tours which guide users through the subsequent steps in an analysis
 COPY config/plugins/tours/*.yaml config/plugins/tours/

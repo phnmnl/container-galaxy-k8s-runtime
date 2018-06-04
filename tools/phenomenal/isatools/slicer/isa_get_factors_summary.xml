@@ -1,8 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <tool id="isa_get_factors_summary" name="Get summary of factors" version="1.0">
-    <description>Produce a summary table of variable factors of a ISA-Tab
+    <description>Produce a summary table of variable factors of a MetaboLights
         study
     </description>
+
+    <requirements>
+        <requirement type="package" version="6.7">click</requirement>
+        <requirement type="package" version="0.9.4">isatools</requirement>
+    </requirements>
 
     <stdio>
         <exit_code range="1:" level="fatal"/>
@@ -16,10 +21,10 @@
 
         #if $data_file.input == "isatab_input"
             #set $command = "isa-tab-get-factors-summary"
-            #set $source = $data_file.isatab_input
+            #set $source = $data_file.isatab_input.extra_files_path
         #end if
 
-        run_mtblisa.py "$command" "${source}" "${output}"
+        isaslicer.py "$command" "${source}" "${output}"
 
 ]]>
     </command>
