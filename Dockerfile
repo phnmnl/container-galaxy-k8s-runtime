@@ -40,7 +40,7 @@ RUN echo "pykube==0.15.0" >> requirements.txt
 
 RUN virtualenv .config_script_venv
 RUN /bin/bash -c "source .config_script_venv/bin/activate && \
-                  pip install bioblend>=0.9.0 && \
+                  pip install 'bioblend>=0.9.0' && \
                   deactivate"
 
 

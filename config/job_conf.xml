@@ -58,7 +58,15 @@
       <param id="type">python</param>
       <param id="function">k8s_wrapper_xlarge</param>
     </destination>
-    
+   
+    <destination id="ipo-container" runner="k8s">
+      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+      <param id="docker_owner_override">phnmnl</param>
+      <param id="docker_image_override">ipo</param>
+      <param id="docker_tag_override">latest</param>
+      <param id="max_pod_retrials">3</param>
+      <param id="docker_enabled">true</param>
+    </destination>
     <destination id="biosigner-container" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -217,6 +225,11 @@
     <!-- W4M Sacurine -->
     <tool id="mtbls-dwnld" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa2w4m" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa2mzml" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa2mzxml" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa2mzdata" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa2nmrml" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa2netcdf" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="Univariate" destination="dynamic-k8s-small" resources="all"/>
     <tool id="Multivariate" destination="dynamic-k8s-small" resources="all"/>
     <tool id="biosigner" destination="dynamic-k8s-large" resources="all"/>
@@ -248,6 +261,9 @@
     <tool id="Metabolite_ID_Converter" destination="container-metaboliteidconverter" />
     <tool id="metabomatching" destination="dynamic-k8s-small" resources="all"/>
     <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
+    <!-- new IPO -->
+    <tool id="ipo4xcmsSet" destination="dynamic-k8s-xlarge" resources="all"/>
+    <tool id="ipo4retgroup" destination="dynamic-k8s-xlarge" resources="all"/>
     <!-- new XCMS -->
     <tool id="xcms-find-peaks" destination="dynamic-k8s-large" resources="all"/>
     <tool id="xcms-collect-peaks" destination="dynamic-k8s-medium" resources="all"/>

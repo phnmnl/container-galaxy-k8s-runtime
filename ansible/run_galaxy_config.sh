@@ -6,6 +6,7 @@
 
 my_name="$(basename "${0}")"
 WorkflowDir='./workflows'
+LOG_FILE=${GALAXY_PROCESS_LOG_FILE:-"paster.log"}
 
 function log() {
   # Date not necessary -- k8s already dates all log entries
@@ -82,11 +83,11 @@ if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GA
     if ! current_pid_in_file=$(cat paster.pid); then
         log "Galaxy process died, interrupting"
         log "Writing failure log to $GALAXY_PVC_MOUNT_POINT/failed_start.log accessible on the shared file system being used."
-        cp --force paster.log $GALAXY_PVC_MOUNT_POINT/failed_start.log || { log "Failed to copy log file."; }
+        cp --force $LOG_FILE $GALAXY_PVC_MOUNT_POINT/failed_start.log || { log "Failed to copy log file."; }
         exit 1
     fi
     # Search for all pids in the logs and tail for the last one
-    latest_pid=$(egrep '^Starting server in PID [0-9]+\.$' "paster.log" -o | tail -n 1 | sed 's/Starting server in PID //g;s/\.$//g')
+    latest_pid=$(egrep '^Starting server in PID [0-9]+\.$' $LOG_FILE -o | tail -n 1 | sed 's/Starting server in PID //g;s/\.$//g')
     # If they're equivalent, then the current pid file agrees with our logs
     # and we've succesfully started
     [ -n "$latest_pid" ] && [ "$latest_pid" -eq "$current_pid_in_file" ] && break
