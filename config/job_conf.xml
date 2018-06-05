@@ -10,6 +10,7 @@
             set in universe_wsgi.ini (or equivalent general galaxy config file).  -->
       <param id="k8s_persistent_volume_claim_mount_path" from_environ="GALAXY_RUNNERS_K8S_PERSISTENT_VOLUME_CLAIM_MOUNT_PATH">/opt/galaxy_data</param>
       <param id="k8s_namespace" from_environ="GALAXY_RUNNERS_K8S_NAMESPACE">default</param>
+      <param id="k8s_galaxy_instance_id" from_environ="GALAXY_RUNNERS_K8S_GALAXY_INSTANCE_ID">?</param>
       <param id="k8s_supplemental_group_id" from_environ="GALAXY_RUNNERS_K8S_SUPPLEMENTAL_GROUP_ID">0</param>
       <param id="k8s_fs_group_id" from_environ="GALAXY_RUNNERS_K8S_FS_GROUP_ID">0</param>
       <param id="k8s_pull_policy" from_environ="GALAXY_RUNNERS_K8S_PULL_POLICY">IfNotPresent</param>
@@ -198,14 +199,6 @@
       <param id="docker_owner_override">phnmnl</param>
       <param id="docker_image_override">escher-fluxomics</param>
       <param id="docker_tag_override">v1.6.0-beta.4_cv1.0.9</param>
-      <param id="max_pod_retrials">3</param>
-      <param id="docker_enabled">true</param>
-    </destination>
-    <destination id="container-isatab-create" runner="k8s">
-      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-      <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">isatab-create</param>
-      <param id="docker_tag_override">v0.9.5_cv0.3.14.60</param>
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
@@ -401,7 +394,7 @@
     <tool id="aggregatemetfrag" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="passatutto" destination="dynamic-k8s-medium" resources="all"/>
     <!-- ISA related tools -->
-    <tool id="isa_create_metabo" destination="container-isatab-create" resources="all"/>
+    <tool id="isacreator_metabo" destination="dynamic-k8s-small" resources="all"/>
     <tool id="isa_get_data_files_list" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_get_data_files_collection" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_get_factors_summary" destination="dynamic-k8s-tiny" resources="all"/>
