@@ -73,7 +73,7 @@ assignment:
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_tag_override: v1.1.0_cv1.4.11
-  max_pod_retrials: 3
+  max_pod_retrials: 1
   tools_id:
   - isa2w4m
 - docker_image_override: normalization
@@ -259,7 +259,7 @@ assignment:
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_tag_override: latest
-  max_pod_retrials: 3
+  max_pod_retrials: 1
   tools_id:
   - isa_get_data_files_list
   - isa_get_data_files_collection
@@ -301,7 +301,7 @@ assignment:
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_tag_override: latest
-  max_pod_retrials: 3
+  max_pod_retrials: 1
   tools_id:
   - isatab2json
 - docker_image_override: batman
@@ -343,14 +343,14 @@ assignment:
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_tag_override: v0.5.0_cv0.1.20
-  max_pod_retrials: 3
+  max_pod_retrials: 1
   tools_id:
   - mw2isa
 - docker_image_override: nmrml2isa
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_tag_override: v0.3.0_cv0.2.12 
-  max_pod_retrials: 3
+  max_pod_retrials: 1
   tools_id:
   - nmrml2isa
 - docker_image_override: pwiz
@@ -364,7 +364,7 @@ assignment:
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_tag_override: latest
-  max_pod_retrials: 3
+  max_pod_retrials: 1
   tools_id:
   - isatab_validator
 - docker_image_override: metabolab
@@ -392,7 +392,7 @@ assignment:
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_tag_override: v0.4.28_cv0.3.26 
-  max_pod_retrials: 3
+  max_pod_retrials: 1
   tools_id:
   - mzml2isa
 - docker_image_override: soap-nmr

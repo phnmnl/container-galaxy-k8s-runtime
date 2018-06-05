@@ -8,30 +8,26 @@
 
     <requirements>
         <requirement type="package" version="6.7">click</requirement>
-        <requirement type="package" version="0.9.4">isatools</requirement>
+        <requirement type="package" version="0.9.5">isatools</requirement>
     </requirements>
-
     <stdio>
         <exit_code range="1:" level="fatal"/>
     </stdio>
     <command><![CDATA[
         isaslicer.py isa-tab-get-data-collection
         "${isatab_input.extra_files_path}" "./"
-        --json-query "{ \"$factor_name\": \"$factor_value\" }"
+        --galaxy_parameters_file="$inputs"
 ]]>
     </command>
+    <configfiles>
+        <inputs name="inputs" />
+    </configfiles>
     <inputs>
-	    <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab"
-               help="An ISA-Tab datatype history item"/>
-        <param name="factor_name" type="text" label="Factor name to filter on."
-               help="Factor name relevant to the specified MetaboLights study,
-               e.g. genotype. You can get a study's factor names by using the
-               study_factors tool."/>
-        <param name="factor_value" type="text"
-               label="Factor value to filter on."
-               help="Factor value relevant to the specified MetaboLights study,
-               e.g. cyp79. You can get a study's factor values by using the
-               study_factor_values tool."/>
+	    <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab" help="An ISA-Tab datatype history item"/>
+        <repeat name="factor_value_series" title="Factor selection criteria" default="1">
+            <param name="factor_name" type="text" label="Factor name to filter on." help="Factor name relevant to the specified MetaboLights study, e.g. genotype."/>
+            <param name="factor_value" type="text" label="Factor value to filter on." help="Factor value relevant to the specified MetaboLights study, e.g. cyp79."/>
+        </repeat>
     </inputs>
     <outputs>
         <collection type="list" label="Factor-sliced data file collection" name="raw_files">

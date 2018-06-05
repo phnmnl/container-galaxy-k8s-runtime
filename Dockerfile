@@ -28,7 +28,7 @@ RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transpo
               python-virtualenv \
               sudo \
     && \
-    curl https://bootstrap.pypa.io/get-pip.py | python && \
+    pip install --upgrade pip && \
     apt-get purge -y software-properties-common && \
     apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -50,7 +50,7 @@ RUN virtualenv .venv
 # update their wheel server to include docutils==0.14, which Galaxy 17.09 requires.
 
 RUN /bin/bash -c "source .venv/bin/activate && \
-                  curl https://bootstrap.pypa.io/get-pip.py | python && \
+                  pip install --upgrade pip && \
                   pip install -r requirements.txt \
                       --index-url https://wheels.galaxyproject.org/simple \
                       --extra-index-url https://pypi.python.org/simple && \
