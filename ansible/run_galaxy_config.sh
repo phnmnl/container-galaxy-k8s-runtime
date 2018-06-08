@@ -6,7 +6,8 @@
 
 my_name="$(basename "${0}")"
 WorkflowDir='./workflows'
-LOG_FILE=${GALAXY_PROCESS_LOG_FILE:-"paster.log"}
+LOG_FILE=${GALAXY_PROCESS_LOG_FILE:-galaxy.log}
+PID_FILE=${GALAXY_PROCESS_PID_FILE:-galaxy.pid}
 
 function log() {
   # Date not necessary -- k8s already dates all log entries
@@ -71,7 +72,7 @@ if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GA
   # ini file will be set already at this point with these variables, we only need to start galaxy
   # wait for it to be available for API calls and create the new user
   log "Need to set up galaxy database for admin user setup..."
-  rm -f paster.pid
+  rm -f "${PID_FILE}"
   ./run.sh --daemon
   # Running ./run.sh --daemon --wait doesn't work for single instances set up, discuss with galaxy core.
   # Using similar logic inside run.sh in the meantime.
@@ -80,7 +81,7 @@ if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GA
     sleep 1
     printf "." >&2
     # Grab the current pid from the pid file
-    if ! current_pid_in_file=$(cat paster.pid); then
+    if ! current_pid_in_file=$(cat "${PID_FILE}"); then
         log "Galaxy process died, interrupting"
         log "Writing failure log to $GALAXY_PVC_MOUNT_POINT/failed_start.log accessible on the shared file system being used."
         cp --force $LOG_FILE $GALAXY_PVC_MOUNT_POINT/failed_start.log || { log "Failed to copy log file."; }
