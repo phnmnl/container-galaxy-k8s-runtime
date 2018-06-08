@@ -64,9 +64,6 @@ if [ -z $GALAXY_PVC_MOUNT_POINT ]; then
   GALAXY_PVC_MOUNT_POINT=/opt/galaxy_data
 fi
 
-# remove old failed start log, if it exists
-rm -f "${GALAXY_PVC_MOUNT_POINT}/failed_start.log"
-
 # if admin email, api and password env variables are set, then start galaxy, run user creation and stop galaxy
 if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GALAXY_API_KEY ]; then
   # ini file will be set already at this point with these variables, we only need to start galaxy
@@ -77,18 +74,19 @@ if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GA
   # Running ./run.sh --daemon --wait doesn't work for single instances set up, discuss with galaxy core.
   # Using similar logic inside run.sh in the meantime.
   start_time=$(date +%s)
+  touch "${LOG_FILE}" # Create the log file if it doesn't exist
+  # Background process that asynchronously prints the galaxy log to stdout
+  tail -f "${LOG_FILE}" </dev/null &
   while true; do
     sleep 1
-    printf "." >&2
     # Grab the current pid from the pid file
     if ! current_pid_in_file=$(cat "${PID_FILE}"); then
         log "Galaxy process died, interrupting"
-        log "Writing failure log to $GALAXY_PVC_MOUNT_POINT/failed_start.log accessible on the shared file system being used."
-        cp --force $LOG_FILE $GALAXY_PVC_MOUNT_POINT/failed_start.log || { log "Failed to copy log file."; }
+        kill %1 || true # kill the background tail
         exit 1
     fi
     # Search for all pids in the logs and tail for the last one
-    latest_pid=$(egrep '^Starting server in PID [0-9]+\.$' $LOG_FILE -o | tail -n 1 | sed 's/Starting server in PID //g;s/\.$//g')
+    latest_pid=$(egrep '^Starting server in PID [0-9]+\.$' "${LOG_FILE}" -o | tail -n 1 | sed 's/Starting server in PID //g;s/\.$//g')
     # If they're equivalent, then the current pid file agrees with our logs
     # and we've succesfully started
     [ -n "$latest_pid" ] && [ "$latest_pid" -eq "$current_pid_in_file" ] && break
@@ -104,6 +102,7 @@ if [ ! -z $GALAXY_ADMIN_EMAIL ] && [ ! -z $GALAXY_ADMIN_PASSWORD ] && [ ! -z $GA
   ./run.sh --stop-daemon
   log "Galaxy instance configured and stopped.  Removing the master API key"
   ansible-playbook -i "localhost," -c local ansible/remove-api-key.yaml
+  kill %1 || true # kill the background tail
   # galaxy is started again as part of the next command outside of this script.
 fi
 
