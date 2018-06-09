@@ -1,0 +1,80 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings "all";
+use Getopt::Long;
+use Pod::Usage;
+
+# Constants {{{1
+################################################################
+
+my $PROG_NAME="mtbls-dwnld"; # TODO find a way to get program name dynamically.
+
+# Variables {{{1
+################################################################
+
+my $INPUT_FOLDER = '.';
+my $HELP = 0;
+
+# Print help {{{1
+################################################################
+
+sub print_help {
+	print "Usage: $PROG_NAME [options]
+
+This program will scan the configuration files for tools, and check
+that they are correctly defined.
+
+Options:
+   -h, --help           Print this help message and exits.
+   -i,--input <FOLDER>  Set the input folder to use. Default is '.'.
+"
+}
+
+# Read args {{{1
+################################################################
+
+sub read_args {
+
+	GetOptions('help|h' => \$HELP, 'input|i' => \$INPUT_FOLDER) or print_help();
+
+	print_help() if $HELP;
+
+	if (@ARGV > 0) {
+		print "No arguments allowed.\n";
+		print_help();
+	}
+}
+
+# List tools {{{1
+################################################################
+
+sub list_tools {
+
+	# Read tool_conf.xml and get all XML tool paths.
+	
+	# In each XML, get:
+	#    - the tool ID,
+	#    - the tool name
+	#    - the version number
+	#    - the command
+}
+
+# Check command {{{1
+################################################################
+
+sub check_command (\%) {
+	my ($tools) = @_;
+}
+
+# Main {{{1
+################################################################
+
+my %tools = list_tools();
+read_args();
+check_command(\%tools);
+# Check phenomenal_tools2container.yaml
+# Check job_conf.xml
+# Get containers repos and check tool version in README
+# Check that container exists
+# Check latest container version on Jenkins.
