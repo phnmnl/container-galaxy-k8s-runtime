@@ -65,7 +65,7 @@ assignment:
 - docker_image_override: mtbls-dwnld
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v3.1.1_cv1.3.25
+  docker_tag_override: latest
   max_pod_retrials: 3
   tools_id:
   - mtbls-dwnld
