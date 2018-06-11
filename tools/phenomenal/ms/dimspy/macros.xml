@@ -1,0 +1,162 @@
+<macros>
+    <xml name="requirements">
+        <requirements>
+            <requirement type="package" version="1.1.0">dimspy</requirement>
+        </requirements>
+    </xml>
+    <xml name="stdio">
+        <stdio>
+            <exit_code range="1:" />
+        </stdio>
+    </xml>
+    
+    <token name="@HDF5_PM_TO_TXT@">
+        dimspy hdf5-pm-to-txt
+        --input "$hdf5_file_out"
+        --output "$matrix_file_out"
+        --delimiter $delimiter
+        --attribute_name $hdf5_to_txt.matrix_attr
+        --representation-samples $hdf5_to_txt.representation_samples
+    </token>
+
+    <token name="@HDF5_PM_TO_TXT_COMPREHENSIVE@">
+        dimspy hdf5-pm-to-txt
+        --input "$hdf5_file_out"
+        --output "$matrix_comprehensive_file_out"
+        --delimiter $delimiter
+        --comprehensive
+        --attribute_name $hdf5_to_txt.matrix_attr
+        --representation-samples $hdf5_to_txt.representation_samples
+    </token>
+
+    <xml name="hdf5_pm_to_txt">
+        <section name="hdf5_to_txt" title="Show options for addtional output (*.tsv files)" expanded="False">
+            <param name="standard" type="boolean" checked="false" truevalue="true" falsevalue="false" label="Standard output?" help="Set to &quot;yes&quot; to produce a &quot;standard&quot; Peak Matrix (i.e. m/z and intensity)."/>
+            <param name="comprehensive" type="boolean" checked="false" truevalue="true" falsevalue="false" label="Comprehensive output?" help="Set to &quot;yes&quot; to produce a Peak Matrix with additional information (e.g. m/z and intensity, rsd, missing values)."/>
+            <param name="representation_samples" type="select" label="Should the rows or columns represent the samples?">
+                <option value="rows" selected="true">Rows</option>
+                <option value="columns">Columns</option>
+            </param>
+            <param name="matrix_attr" type="select" label="The Peak Matrix should contain ... values">
+                <option value="intensity" selected="true">Intensity</option>
+                <option value="mz">m/z</option>
+                <option value="snr">Signal-to-noise ratio (SNR)</option>
+            </param>
+        </section>
+    </xml>
+
+    <xml name="outputs_peak_intensity_matrix">
+        <data name="hdf5_file_out" format="h5" label="${tool.name} on ${on_string}: Peak Intensity Matrix (HDF5 file)"/>
+        <data name="matrix_file_out" format="tsv" label="${tool.name} on ${on_string}: Peak Intensity Matrix">
+            <filter>hdf5_to_txt["standard"] is True</filter>
+        </data>
+        <data name="matrix_comprehensive_file_out" format="tsv" label="${tool.name} on ${on_string}: Peak Intensity Matrix (comprehensive)" >
+            <filter>hdf5_to_txt["comprehensive"] is True</filter>
+        </data>
+    </xml>
+    
+    <xml name="citations">
+        <citations>
+            <citation type="doi">10.1038/nprot.2016.156</citation>
+            <citation type="doi">10.1038/sdata.2014.12</citation>
+            <citation type="doi">10.1021/ac062446p</citation>
+            <citation type="doi">10.1021/ac2001803</citation>
+            <yield />
+        </citations>
+    </xml>
+    
+    <token name="@example_filelist@">
+  <![CDATA[
+
+        +-----------------+-----------+-------+------------+----------------+
+        | filename        | replicate | batch | classLabel | injectionOrder |
+        +-----------------+-----------+-------+------------+----------------+
+        | sample_rep1.raw | 1         | 1     | sample     | 1              |
+        +-----------------+-----------+-------+------------+----------------+
+        | sample_rep2.raw | 2         | 1     | sample     | 2              |
+        +-----------------+-----------+-------+------------+----------------+
+        | sample_rep3.raw | 3         | 1     | sample     | 3              |
+        +-----------------+-----------+-------+------------+----------------+
+        | sample_rep4.raw | 4         | 1     | sample     | 4              |
+        +-----------------+-----------+-------+------------+----------------+
+        | blank_rep1.raw  | 1         | 1     | blank      | 5              |
+        +-----------------+-----------+-------+------------+----------------+
+        | blank_rep2.raw  | 2         | 1     | blank      | 6              |
+        +-----------------+-----------+-------+------------+----------------+
+        | blank_rep3.raw  | 3         | 1     | blank      | 7              |
+        +-----------------+-----------+-------+------------+----------------+
+        | blank_rep4.raw  | 4         | 1     | blank      | 8              |
+        +-----------------+-----------+-------+------------+----------------+
+        | ...             | ...       | ...   | ...        | ...            |
+        +-----------------+-----------+-------+------------+----------------+
+
+  ]]>
+    </token>
+
+
+    <token name="@help_options_addtional_output@">
+| 
+| **Show options for additonal output(s)** (OPTIONAL)
+| 
+
+**\A. Standard output** (default = &quot;No&quot;)
+
+Boolean toggle where selection of: 
+
+- &quot;Yes&quot; will generate a .txt formatted Peak Matrix (i.e. m/z and intensity).	
+- &quot;No&quot; will prevent the creation of a .txt formatted Peak Matrix.
+
+**\B. Comprehensive output** (default = &quot;No&quot;)
+
+Boolean toggle where selection of:
+
+- &quot;Yes&quot; generates a Peak Matrix containing the m/z, intensity, missing values and other metrics associated with the aligned peaks.
+- &quot;No&quot; will prevent the creation of a .txt formatted comprehensive Peak Matrix..
+
+**\C. Should rows or columns represent the samples?** (default = &quot;rows&quot;)
+
+Binary toggle (default = &quot;rows&quot;) where selection of:
+
+- &quot;rows&quot; puts sample information in to the rows and m/z values (for aligned mass spectral peaks) in to columns of any output Peak Matrix.			
+- &quot;columns&quot; puts sample information in the columns and m/z values (for aligned mass spectral peaks) in to the rows of any output Peak Matrix.
+
+**\D. The Peak Matrix should contain ... values**
+
+Use this option to define which metric is inserted in to the cells of the output Peak Matrix.
+
+- &quot;Intensity&quot; writes the absolute peak intensity to the Peak Matrix.
+- &quot;m/z&quot; writes the m/z value to the Peak Matrix.
+- &quot;Signal-to-noise ratio (SNR)&quot; writes the signal-to-noise ratio to the Peak Matrix. 
+
+Output file(s)
+--------------
+
+| A HDF5 file containing a Peak Matrix
+| 
+| **OPTIONAL**
+| A (standard and/or comprehenstive) Peak Matrix comprising samples on one axis and m/z values on the perpendicular axis
+| 
+
+- Tab-delimited text file containing a numeric data matrix, with . as decimal, and NA for missing values.
+- File only created if user toggles &quot;Standard output&quot; and/or &quot;Comprehensive output&quot; to &quot;Yes&quot;
+- By default, samples are in rows and peaks are in columns. Altering the &quot;Should rows or columns represent samples&quot; toggle will transpose this matrix.
+
+    </token>
+
+    <token name="@github_developers_contributors@"> 
+Github respository (source code)
+--------------------------------
+
+https://github.com/computational-metabolomics/dimspy-galaxy/
+
+Developers and contributors
+---------------------------
+
+- **Ralf Weber (r.j.weber@bham.ac.uk) - University of Birmingham (UK)**
+- **Martin R. Jones (m.r.jones.1@bham.ac.uk) - University of Birmingham (UK)**
+- **Thomas Lawson (tnl495@bham.ac.uk) - University of Birmingham (UK)**
+
+| 
+    </token>
+
+</macros>

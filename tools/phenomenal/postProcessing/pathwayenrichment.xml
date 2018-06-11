@@ -1,98 +1,157 @@
-<tool id="pathway_enrichment" name="Pathway_Enrichment" version="1.0">
+<tool id="pathway_enrichment" name="Pathway_Enrichment" version="2.0">
 
-  <description>predicts enrichment among a (human) metabolic network (Recon 2v3)</description>
+  <description>predicts differences in metabolomic pathway expression among a (human) network (Recon v2.02)</description>
 
-  <command> 
-  	<![CDATA[
+  <edam_topics>
+      <edam_topic>topic_3172</edam_topic>
+      <edam_topic>topic_0602</edam_topic>
+  </edam_topics>
+
+  <edam_operations>
+      <edam_operation>operation_3561</edam_operation>
+      <edam_operation>operation_3501</edam_operation>
+  </edam_operations>
+
+  <version_command>java -jar $__tool_directory__/pathwayEnrichment.jar -v</version_command>
+  <command detect_errors="exit_code"> 
+    <![CDATA[
      java -jar /pathwayEnrichment.jar
       -i $input
-      -o1 $output_file_1
-      -o2 $output_file_2
-      -o3 $output_file_3
-      -l$inchi_layers
-      #if $chooseSbml.opt == "yes":
-       -s $chooseSbml.sbml
+      -o2 $mapping_out
+      -o3 $pathwayEnrichment_out
+      -gal $log_out
+      #if $sbml.advanced:
+       -s $sbml.file
       #else
-       -s /data/recon2.v03_ext_noCompartment_noTransport_v2.xml
+       -s /data/recon2.02_without_compartment.xml
       #end if
-      #if $noFilter.opt == "yes":
-        -f -1
-      #else:
-        -f $noFilter.filtered_column
+      #if $parse.advanced:
+        -sepID $parse.separatorID
+        #if $parse.check.step == "no":
+        -noCheck
+        #else:
+         #if $parse.check.file:
+          -o1 $check_out -lWarn
+         #end if
+        #end if
+        #if $parse.separator == "tab"
+          -sep \\t
+        #else
+          -sep $parse.separator
+        #end if
+        $parse.header
       #end if
-      #if $noCHEBI.opt == "yes":
-        -chebi -1
-      #else:
-        -chebi $noCHEBI.chebi_column
+      #if $mapping.advanced:
+        -t $mapping.bioEntity
+        -nameCol $mapping.name_column
+        -$mapping.database.value $mapping.IDcolumn
+        #if $mapping.database.value == "inchi":
+         -l $mapping.database.inchiLayers
+        #end if
+        #if $mapping.database.value == "mass":
+          -prec $mapping.database.precision
+        #end if
       #end if
-      #if $noInChI.opt == "yes":
-        -inchi -1
-      #else:
-        -inchi $noInChI.inchi_column
-      #end if        
     ]]>
   </command>
 
   <inputs>
-    <param format="tsv,tabular" name="input" type="data" label="Dataset"/>      
-    <conditional name="chooseSbml">
-      <param name="opt" type="select" label="Choose another Sbml (default: Recon 2v3 flat)">
-        <option value="yes">Yes</option>
-        <option value="no" selected="true">No</option>
-      </param>
-      <when value="yes">
-        <param format="xml" name="sbml" type="data" label="Sbml file"/>
-      </when>
-      <when value="no"/>
-    </conditional>
-    <param name="inchi_layers" type="select" label="Mapped InChI layers" help="InChI layers choosed for a mapping between the input and the network files (e.g., Recon 2v3) among: connections (c), hydrogens atoms (h), charge (q), protons (p), double-bond stereo (b), tetrahedral sp3 stereo (t), isotopic atoms (i), fixed hydrogens (f) and reconnected layers (r).">
-      <option value="">formula</option>
-      <option value=" c">(formula,)c</option>
-      <option value=" c,h" selected="true">(formula,)c,h</option>
-      <option value=" c,h,q">(formula,)c,h,q</option>
-      <option value=" c,h,q,p">(formula,)c,h,q,p</option>
-      <option value=" c,h,q,p,b">(formula,)c,h,q,p,b</option>
-      <option value=" c,h,q,p,b,t">(formula,)c,h,q,p,b,t</option>
-      <option value=" c,h,q,p,b,t,i">(formula,)c,h,q,p,b,t,i</option>
-      <option value=" c,h,q,p,b,t,i,f">(formula,)c,h,q,p,b,t,i,f</option>
-      <option value=" c,h,q,p,b,t,i,f,r">(formula,)c,h,q,p,b,t,i,f,r</option>
-    </param>
-    <conditional name="noInChI">
-      <param name="opt" type="select" label="Disable InChI column" help="Could be optional only if CHEBI column is activated" >
-        <option value="yes">Yes</option>
-        <option value="no" selected="true">No</option>
-      </param>
-      <when value="yes"/>
-      <when value="no">
-        <param name="inchi_column" value="5" type="data_column" data_ref="input" label="InChI column" />
+    <param name="input" format="tsv,tabular,csv" type="data" label="Fingerprint dataset (name and database identifier columns at least)" help="This file should be composed by at least a column with the name of the chemical entities (metabolites, reactions, ...) and another one with a database identifier (ChEBI, InChI, InChI key, KEGG, HMDB,...)."/>
+
+    <conditional name="sbml">
+      <param name="advanced" type="boolean" label="Specify another SBML (by default: Recon v2.02 without compartment)" help="XML in Systems Biology Markup Language (SBML) format. SBML is usually composed of lists of units, compartment and chemical species. The 2nd version of the human metabolism bionetwork is used by default (Thiele et al., 2013)."/>
+      <when value="true">
+        <param name="file" format="xml" type="data" label="SBML file"/>
       </when>
     </conditional>
-    <conditional name="noCHEBI">
-      <param name="opt" type="select" label="Disable CHEBI column" help="Could be optional only if InChI column is activated" >
-        <option value="yes">Yes</option>
-        <option value="no" selected="true">No</option>
-      </param>
-      <when value="yes"/>
-      <when value="no">
-        <param name="chebi_column" value="2" type="data_column" data_ref="input" label="CHEBI column" />
+
+    <conditional name="parse">
+      <param name="advanced" type="boolean" label="Change parsing of the fingerprint dataset parameters (by default, on tabulated file with an header)"/>
+      <when value="true">
+
+        <conditional name="check">
+        <param name="step" type="boolean" truevalue="yes" falsevalue="no" checked="true" label="Check the format of the database identifiers"/>
+        <when value="yes">
+          <param name="file" type="boolean" label="Write checking format results into a file"/>
+        </when>
+        </conditional>
+        <param name="header" type="boolean" truevalue="" falsevalue="--header" checked="true" label="Consider first row as header of columns"/>
+
+        <param name="separator" type="select" display="radio" label="Column separator" help="Character used to separate the column in the fingerprint dataset (by default: tabulation). ">
+          <option value="tab" selected="true">Tabulation</option>
+          <option value=";">Semicolon</option>
+          <option value=",">Comma</option>
+        </param>
+
+        <param name="separatorID" type="select" display="radio" label="Database dentifier separator" help="Character used to separate multiple values in a database identifier column of the fingerprint dataset (by default: semicolon). ">
+          <option value=";" selected="true">Semicolon</option>
+          <option value=",">Comma</option>
+        </param>
+
       </when>
     </conditional>
-    <conditional name="noFilter">
-      <param name="opt" type="select" label="Disable filtered column" help="Lines containing empty values among the selected column are discarded from the analysis (for example, after a statistical pre-selection).">
-        <option value="yes">Yes</option>
-        <option value="no" selected="true">No</option>
-      </param>
-      <when value="yes"/>
-      <when value="no">
-        <param name="filtered_column" value="30" type="data_column" data_ref="input" label="Filtered_column" />
+
+    <conditional name="mapping">
+      <param name="advanced" display="radio" type="boolean" label="Change mapping parameters (by default: on the second one containing SBML IDs)" help="Map the chemical entities (metabolites or reactions) contained in the fingerprint dataset on those contained in the SBML network file (by default, Recon v2.02 without the compartments)." />
+      <when value="true">
+
+        <param name="bioEntity" type="select" display="radio" label="Type of chemical entities used in the fingerprint file">
+          <option value="1">Metabolites</option>
+          <option value="2">Reactions</option>
+          <option value="4">Enzymes</option>
+          <option value="5">Proteins</option>
+          <option value="6">Genes</option>
+        </param>
+
+        <param name="name_column" type="data_column" value="1" data_ref="input" label="Name of the entities (n° of column)" help="Select the number of the column from the fingerprint dataset. The names of the chemical entities are used in the output files" />
+
+        <param name="IDcolumn" type="data_column" value="2" data_ref="input" label="Database identifier (n° of column)" help="Select the number of the column from the fingerprint dataset. This column must contain identifiers from the chosen database to map with the SBML." />
+
+        <conditional name="database">
+          <param name="value" type="select" label="Database" >
+            <option value="csid" >ChemSpider</option>
+            <option value="chebi" >ChEBI</option>
+            <option value="hmdb" >Human Metabolome DataBase</option>
+            <option value="inchi">InChI</option>
+            <option value="inchikey" >InChI key</option>
+            <option value="mass">Isotopic mass</option>
+            <option value="kegg" >KEGG</option>
+            <option value="pubchem" >PubChem</option>
+            <option value="idSBML" selected = "true">SBML ID</option>
+            <option value="smiles">SMILES</option>
+          </param>
+
+            <when value="inchi">
+              <param name="inchiLayers" optional="false" type="select" multiple="true" display="checkboxes" label="InChI layers used for mapping">
+                  <option value="c" selected="true">Connections (c)</option>
+                  <option value="h" selected="true">Hydrogens atoms (h)</option>
+                  <option value="p">Protons (p)</option>
+                  <option value="q">Charge (q)</option>
+                  <option value="b">Double-bond stereo (b)</option>
+                  <option value="t">Tetrahedral sp3 stereo (t)</option>
+                  <option value="i">Isotopic atoms (i)</option>
+                  <option value="f">Fixed hydrogens</option>
+                  <option value="r">Reconnected layers (r)</option>
+              </param>
+            </when>
+
+            <when value="mass">
+              <param name="precision" type="integer" label="Indicate the allowed error (in ppm; max: 100)" value = "2" min = "1" max = "100" help="" />
+            </when>
+
+        </conditional>
+
       </when>
     </conditional>
   </inputs>
 
   <outputs>
-    <data name="output_file_1" label="mapping.tsv" format="tabular" />
-    <data name="output_file_2" label="pathwayEnrichment.tsv" format="tabular" />
-    <data name="output_file_3" label="info.txt" format="txt" />
+    <data name="check_out" label="checking_format.tsv" format="tabular" >
+      <filter>parse['advanced'] is True and parse['check']['file'] is True</filter>
+    </data>
+    <data name="mapping_out" label="mapping.tsv" format="tabular" />
+    <data name="pathwayEnrichment_out" label="pathway_enrichment.tsv" format="tabular" />
+    <data name="log_out" label="information.txt" format="txt" />
   </outputs>
 
   <help>
@@ -107,26 +166,131 @@
 
 .. class:: infomark
 
-**Website** https://metexplore.toulouse.inra.fr
+**Website** https://www.metexplore.fr
 
 ---------------------------------------------------
 
-Metabolites extracted from the input file are mapped on a Recon network (Thiele et al., 2013) by providing either INCHI or CHEBI (or both) information. Pathway enrichment is calculated with an exact Fisher one-tailed test corrected by Bonferroni and Benjamini Hochberg methods. This tool is part of the MetExplore's project consisting in a web server based on graph theory and vizualisation tools to allow users performing various analysis (Cottret et al., 2010).
+==================================
+PATHWAY ANALYSIS (From MetExplore)
+==================================
 
-**Input files**
-    | - a dataset (tsv or tabular format): a list of detected metabolites containing at least their names (first column), their InChI or their CHEBI, and eventually a discriminant information about some significant metabolites.
-    | - a bionetwork : eventually, a sbml file a containing metabolites network (Recon 2v3 is included by default).
-    | 
+------------
+Description
+------------
 
-**Output files**
-    | - "mapping.tsv": each line corresponds to metabolites from the dataset file: the success or the failure of the mapping, their names in the dataset, those of one or several elements of the network in case of matching.
-    | - "pathwayEnrichment.tsv" contains for each pathway associated with the mapped metabolites: their names, the Fisher's p value of enrichment, the Bonferroni (or other test correction) q-value, the list of mapped metabolites, the number of mapped metabolites and the coverage of mapped metabolites on the total of metabolites contained by the studied pathway.
-    | - "info.txt" contains general information about mapping and pathway enrichment results. These informations correspond to the total number of mapped metabolites, the total number of metabolites from the dataset, the total number of pathway after mapping and the total number of pathway in the SBML.
+Chemical entities (metabolites, reactions, enzymes, proteines or genes) belonging to the fingerprint (the input file) are mapped on Recon2 network (Thiele et al., 2013) using identifiers from a chosen database (among ChEBI, ChemSpider, InChI, InChI key, KEGG, Human Metabolome DataBase, PubChem or SMILES) or by using their isotopic weight. Pathway enrichment is calculated with an exact Fisher one-tailed test (and corrected by Bonferroni and Benjamini Hochberg methods). This tool is part of the MetExplore's project consisting in a web server dedicated to the analysis of omics data in the context of genome scale metabolic networks (Cottret et al., 2010).
 
-**References**
+-----------
+Input files
+-----------
+    | - a **fingerprint** (tsv or tabular format): requiered, composed by at least a column with the name of the chemical entities and another one with identifier values from a chemical database to map them on the SBML files..
+    | - a **metabolic network** (SBML) : optional, by default Recon v2.02 SBML file (without compartments) (Thiele et al., 2013).
 
-    | Thiele I, Swainston N, Fleming RMT, et al. A community-driven global reconstruction of human metabolism (2013). *Nature biotechnology* **31(5)**:10. doi:10.1038/nbt.2488.
-    | L. Cottret, D. Wildridge, F. Vinson, M. P. Barrett, H. Charles, M-F Sagot and F. Jourdan. MetExplore: a web server to link metabolomic experiments and genome-scale metabolic networks. (2010) *Nucleic Acids Research* **1**:38 Suppl:W132-7. doi:10.1093/nar/gkq312.
+------------
+Output files
+------------
+    
+    | - **checking_format.tsv** (optional) could be used to collect the results for the database identifiers checking. Each possible format error are indicated by: the line number in the fingerprint, the name of the concerned bio-entity, the one of the database, the badly formatted InChI layer (if concerned) and the database identifier.
+    | - **mapping.tsv**: each line corresponds to the chemical entities (metabolites, reactions or other) from the dataset file: the success or the failure of the mapping, their names in the dataset, those of one or several elements of the network in case of matching, their identifier in the SBML and the matched values in the fingerprint and in the SBML.
+    | - **pathwayEnrichment.tsv** contains for each pathway associated with the mapped entities: their names, the number of mapped entities and their coverage on the total of metabolites contained in the studied pathway, the Fisher's p value of enrichment, the Bonferroni and the Benjamini-Hochberg corrections, the list of mapped entities, the number of mapped metabolites and their corresponding name and identifiers in the SBML.
+    | - **information.txt** includes general information about mapping and pathway enrichment results. This file contains the total number of mapped entities with the coverage in the dataset and in the network, the total number of enriched pathways and the coverage in the network. Eventually, warnings alert about default settings and doublets in mapping wich are discarded from the pathway analysis. In this last case, the user must choose the corresponded entities' identifiers in the network in order to add them to their fingerprint dataset. Then, the program must be relaunched by using the SBML identifiers mapping only.
+
+---------------------------------------------------
+
+==================================
+EXAMPLES
+==================================
+
+------------------------
+Fingerprint dataset
+------------------------
+
+*Example 1: an only column with SBML ID*
+
++---------------------------+---------------------------+
+| Name                      | SBML ID                   |
++===========================+===========================+
+| Testosterone glucuronide  | M_tststeroneglc           |
++---------------------------+---------------------------+
+| Malic acid                | M_mal_L                   |
++---------------------------+---------------------------+
+| Cinnamoylglycine          | M_Cin                     |
++---------------------------+---------------------------+
+
+|
+
+*Example 2: dataset from Sacurine workflow*
+
++--------------------------+---------------------+-----+---------------------------------+-----+----------------+
+| variableMetadata         | database_identifier | ... | inchi                           | ... | gender_tier_S  |
++==========================+=====================+=====+=================================+=====+================+
+| Testosterone glucuronide | CHEBI:28835         | ... | InChI=1S/C25H36O8/c1-24-9-7-... | ... | plsda          |
++--------------------------+---------------------+-----+---------------------------------+-----+----------------+
+| Malic acid               | CHEBI:6650          | ... | InChI=1S/C4H6O5/c5-2(4(8)9)1... | ... |                |
++--------------------------+---------------------+-----+---------------------------------+-----+----------------+
+| Cinnamoylglycine         | CHEBI:68616         | ... | InChI=1S/C4H6O5/c5-2(4(8)9)1... | ... |                |
++--------------------------+---------------------+-----+---------------------------------+-----+----------------+
+| ...                      | ...                 | ... |                             ... | ... |        ...     |
++--------------------------+---------------------+-----+---------------------------------+-----+----------------+
+
+
+------------
+Mapping
+------------
+
++--------+--------------------------+------------------------------------+-----------------+-----------------------------+----------------------------+
+| Mapped | Name (fingerprint)       | Name (network)                     | Network ID      | Matched value (fingerprint) | Matched value (network)    |
++========+==========================+====================================+=================+=============================+============================+
+| true   | Malic acid               | (S)-malate(2-)                     | M_mal_L         | InChI=1S/C4H6O5/c5-2...     | InChI=1S/C4H6O5/c5-2...    |
++--------+--------------------------+------------------------------------+-----------------+-----------------------------+----------------------------+
+| true   | Testosterone glucuronide | testosterone 3-glucosiduronic acid | M_tststeroneglc | InChI=1S/C25H36O8/c1-24...  | InChI=1S/C25H36O8/c1-24... |
++--------+--------------------------+------------------------------------+-----------------+-----------------------------+----------------------------+
+| false  | Cinnamoylglycine         |                                    |                 |                             |                            |
++--------+--------------------------+------------------------------------+-----------------+-----------------------------+----------------------------+
+| ...    | ...                      |             ...                    |        ...      |             ...             |            ...             |
++--------+--------------------------+------------------------------------+-----------------+-----------------------------+----------------------------+
+
+
+------------------------
+Pathway enrichment
+------------------------
+
++----------------------------------+------------------+-----------------------+-------------------------------+--------------------------------------+--------------+--------------+
+| Pathway_Enrichment               | Fisher's p-value | Bonferroni correction | Benjamini-Hochberg correction | Mapped metabolites                   | Nb of mapped | Coverage (%) |
++==================================+==================+=======================+===============================+======================================+==============+==============+
+| Citric acid cycle                | 1.37E-12         | 5.19E-11              | 2.60E-11                      | (S)-malate(2-)2-oxoglutarate(2-);... | 4            | 13.33        |
++----------------------------------+------------------+-----------------------+-------------------------------+--------------------------------------+--------------+--------------+
+| Alanine and aspartate metabolism | 9.38E-06         | 3.56E-04              | 5.94E-05                      | 2-oxoglutarate(2-);Fumarate;...      | 4            | 12.5         |
++----------------------------------+------------------+-----------------------+-------------------------------+--------------------------------------+--------------+--------------+
+| ...                              | ...              | ...                   | ...                           | ...                                  | ...          | ...          |
++----------------------------------+------------------+-----------------------+-------------------------------+--------------------------------------+--------------+--------------+
+
+
+------------------------
+General information
+------------------------
+    | [WARNING] No mapping parameters has been chosen. By default, it was set on the SBML identifiers at the 2nd column of your dataset. Other mapping available: ChEBI, InChI, InChIKey, SMILES, CSID, PubChem, isotopic mass and HMDB (check -help).
+    | [WARNING] No column number has been chosen for the name of the chemicals; by default it was set to the 1rst column.
+    | All your databases identifiers seem valid.
+    | 33 metabolites have been mapped on 110 in the fingerprint dataset (30.0%) and on 2592 in the network (1.27%).
+    | 39 pathways are concerned among the network (on 97 in the network; 40.21%).
+
+---------------------------------------------------
+
+=====
+NEWS
+=====
+
+------------------------
+Changes in version 2.0
+------------------------
+
+
+    | - A pre-process step has been added to check the bad format of some database identifier (e.g., wrong InChI layer)
+    | - The parsing of the fingerprint file could be customized (header or not, type of separators, ...)
+    | - Mapping could now be performed on isotopic mass and on more database identifiers (ChemSpider, HMDB, InChIKey, KEGG, PubChem and SMILES)
+    | - In addition to metabolites, fingerprint file could also includes reactions, proteins, enzymes or genes
+
 
   </help>
 

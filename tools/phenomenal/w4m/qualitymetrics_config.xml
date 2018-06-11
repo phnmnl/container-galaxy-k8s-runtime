@@ -2,8 +2,8 @@
   <description>Metrics and graphics to check the quality of the data</description>
 
   <requirements>
-    <requirement type="package">r-batch</requirement>
-    <requirement type="package">bioconductor-ropls</requirement>
+    <requirement type="package" version="1.1_4">r-batch</requirement>
+    <requirement type="package" version="1.10.0">bioconductor-ropls</requirement>
   </requirements>
   
   <stdio>
@@ -12,7 +12,6 @@
   
   <command><![CDATA[
   qualitymetrics_wrapper.R
-  
   dataMatrix_in "$dataMatrix_in"
   sampleMetadata_in "$sampleMetadata_in"
   variableMetadata_in "$variableMetadata_in"
@@ -34,6 +33,8 @@
   
   sampleMetadata_out "$sampleMetadata_out"      
   variableMetadata_out "$variableMetadata_out"
+  sampleTypeColName "$advPar.sampleTypeColName"
+  sampleTypeTags "blank=$advPar.sampleTypeTagBlank,pool=$advPar.sampleTypeTagPool,sample=$advPar.sampleTypeTagSample"
   figure "$figure"
   information "$information"
   ]]></command>
@@ -67,10 +68,18 @@
 	<option value="full">Full parameter list</option>
       </param>     
       <when value="full">
-	<param name="poolAsPool1L" type="boolean" checked="true" truevalue="TRUE" falsevalue="FALSE" label="Use 'pool' samples as 'pool1' when computing the correlation with dilution?"/>
+		<param name="poolAsPool1L" type="boolean" checked="true" truevalue="TRUE" falsevalue="FALSE" label="Use 'pool' samples as 'pool1' when computing the correlation with dilution?"/>
+		<param name="sampleTypeColName" type="text" size="64" value="sampleType" label="Set the name for the sample type column."/>
+		<param name="sampleTypeTagPool" type="text" size="64"  value="pool" label="Set the name used to tag samples as pool."/>
+		<param name="sampleTypeTagBlank" type="text" size="64"  value="blank" label="Set the name used to tag samples as blank."/>
+		<param name="sampleTypeTagSample" type="text" size="64"  value="sample" label="Set the name used to tag samples as real sample."/>
       </when>
       <when value="default">
       	<param name="poolAsPool1L" type="hidden" value="TRUE"/>
+		<param name="sampleTypeColName" type="hidden" value="sampleType"/>
+		<param name="sampleTypeTagPool" type="hidden" value="pool"/>
+		<param name="sampleTypeTagBlank" type="hidden" value="blank"/>
+		<param name="sampleTypeTagSample" type="hidden" value="sample"/>
       </when>
     </conditional>
     
@@ -91,6 +100,19 @@
       <param name="CV" value="FALSE"/>
       <param name="optC" value="default"/>
       <output name="sampleMetadata_out" file="output-sampleMetadata.tsv"/>
+      <output name="variableMetadata_out" file="output-variableMetadata.tsv"/>
+    </test>
+    <test>
+      <param name="dataMatrix_in" value="input-dataMatrix.tsv"/>
+      <param name="sampleMetadata_in" value="input-sampleMetadata-customSampleType.tsv"/>
+      <param name="variableMetadata_in" value="input-variableMetadata.tsv"/>
+      <param name="sampleTypeColName" value="MySampType"/>
+		<param name="sampleTypeTagPool" value="lot"/>
+		<param name="sampleTypeTagBlank" value="blanc"/>
+		<param name="sampleTypeTagSample" value="echant"/>
+      <param name="CV" value="FALSE"/>
+      <param name="optC" value="default"/>
+      <output name="sampleMetadata_out" file="output-sampleMetadata-customSampleType.tsv"/>
       <output name="variableMetadata_out" file="output-variableMetadata.tsv"/>
     </test>
   </tests>
@@ -115,9 +137,9 @@ See the **NEWS** section at the bottom of this page
 
 **References**
 
-| Thevenot EA., Roux A., Xu Y., Ezan E., and Junot C. (2015). Analysis of the human adult urinary metabolome variations with age, body mass index and gender by implementing a comprehensive workflow for univariate and OPLS statistical analyses. *Journal of Proteome Research*, **14**:3322-3335 (http://dx.doi.org/10.1021/acs.jproteome.5b00354)
+| Thevenot EA., Roux A., Xu Y., Ezan E., and Junot C. (2015). Analysis of the human adult urinary metabolome variations with age, body mass index and gender by implementing a comprehensive workflow for univariate and OPLS statistical analyses. *Journal of Proteome Research*, **14**:3322-3335 (https://doi.org/10.1021/acs.jproteome.5b00354)
 | Mason R., Tracy N. and Young J. (1997). A practical approach for interpreting multivariate T2 control chart signals. *Journal of Quality Technology*, **29**:396-406.
-| Alonso A., Julia A., Beltran A., Vinaixa M., Diaz M., Ibanez L., Correig X. and Marsal S. (2011). AStream: an R package for annotating LC/MS metabolomic data. *Bioinformatics*, **27**:1339-1340. (http://dx.doi.org/10.1093/bioinformatics/btr138)
+| Alonso A., Julia A., Beltran A., Vinaixa M., Diaz M., Ibanez L., Correig X. and Marsal S. (2011). AStream: an R package for annotating LC/MS metabolomic data. *Bioinformatics*, **27**:1339-1340. (https://doi.org/10.1093/bioinformatics/btr138)
 
 ---------------------------------------------------
 
@@ -204,6 +226,21 @@ Threshold (only if CV=yes)
 PoolAsPool1 (Advanced parameter)
 	| If 'poolN' (where N is a dilution factor) sample types are present in the 'sampleType' column of the sample metadata file, the Pearson correlation of the intensity with the dilution factor is computed for each variable; the 'PoolAsPool1' parameter indicates whether samples of 'pool' types should be considered as 'pool1' (and hence included in the computation of dilution correlations); default is TRUE
 	
+sampleTypeColName (Advanced parameter)
+	| If the sample type column of the sample metadata file is not named "sampleType", then set this field to the right name.
+ default is "sampleType"
+	
+sampleTypeTagPool (Advanced parameter)
+	| Set the tag used to identify pool samples inside the sample type column of the sample metadata file.
+ default is "pool"
+	
+sampleTypeTagBlank (Advanced parameter)
+	| Set the tag used to identify blank samples inside the sample type column of the sample metadata file.
+ default is "blank"
+	
+sampleTypeTagSample (Advanced parameter)
+	| Set the tag used to identify real samples inside the sample type column of the sample metadata file.
+ default is "sample"
 
 ------------
 Output files

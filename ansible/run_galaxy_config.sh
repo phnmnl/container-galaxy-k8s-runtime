@@ -13,7 +13,7 @@ function log() {
 }
 
 function error_trap() {
-  log "**** Error at line ${BASH_LINENO[0]} running command ${BASH_COMMAND} ****"
+  log "#### Error at line ${BASH_LINENO[0]} running command ${BASH_COMMAND} ####"
 }
 
 trap error_trap ERR
