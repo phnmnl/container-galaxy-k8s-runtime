@@ -2,13 +2,16 @@
 
 use strict;
 use warnings "all";
+use File::Basename;
+use File::Spec::Functions 'catfile';
 use Getopt::Long;
-use Pod::Usage;
+use XML::Simple;
 
 # Constants {{{1
 ################################################################
 
-my $PROG_NAME="mtbls-dwnld"; # TODO find a way to get program name dynamically.
+my $SCRIPTNAME = basename($0);
+my $SCRIPTPATH = dirname($0);
 
 # Variables {{{1
 ################################################################
@@ -20,7 +23,7 @@ my $HELP = 0;
 ################################################################
 
 sub print_help {
-	print "Usage: $PROG_NAME [options]
+	print "Usage: $SCRIPTNAME [options]
 
 This program will scan the configuration files for tools, and check
 that they are correctly defined.
@@ -51,8 +54,15 @@ sub read_args {
 
 sub list_tools {
 
+	my $tool_conf_file = catfile($SCRIPTPATH, 'config', 'tool_conf.xml');
+	die "No file \"$tool_conf_file\"." unless -f $tool_conf_file;
+
 	# Read tool_conf.xml and get all XML tool paths.
-	
+	my $xml_parser = new XML::Simple;
+	my $tools = $xml_parser->XMLin($tool_conf_file);
+	use Data::Dumper;
+	print Dumper($tools);
+
 	# In each XML, get:
 	#    - the tool ID,
 	#    - the tool name
@@ -70,9 +80,9 @@ sub check_command (\%) {
 # Main {{{1
 ################################################################
 
-my %tools = list_tools();
 read_args();
-check_command(\%tools);
+my %tools = list_tools();
+#check_command(\%tools);
 # Check phenomenal_tools2container.yaml
 # Check job_conf.xml
 # Get containers repos and check tool version in README
