@@ -1,0 +1,18 @@
+language: perl
+perl:
+    - "5.24"
+
+notifications:
+ email:
+  recipients:
+   - pk.roger@icloud.com
+     
+before_install:
+    - cpan Deep::Hash::Utils
+    - cpan File::Basename
+    - cpan File::Spec::Functions
+    - cpan Getopt::Long
+    - cpan XML::Simple
+ 
+script:
+    - ./check-tools
