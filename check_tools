@@ -7,6 +7,7 @@ use File::Basename;
 use File::Spec::Functions 'catfile';
 use Getopt::Long;
 use XML::Simple;
+use YAML::Tiny;
 
 # Constants {{{1
 ################################################################
@@ -50,6 +51,24 @@ sub read_args {
 	}
 }
 
+# Tool error {{{1
+################################################################
+
+sub tool_error($) {
+	my ($msg) = @_;
+
+	print("[TOOL ERROR] $msg\n");
+}
+
+# Tool warning {{{1
+################################################################
+
+sub tool_warning($) {
+	my ($msg) = @_;
+
+	print("[TOOL WARNING] $msg\n");
+}
+
 # Get tool XML files {{{1
 ################################################################
 
@@ -72,10 +91,10 @@ sub get_tool_xml_files {
 	return @tool_xml_files;
 }
 
-# Get tools info {{{1
+# Read tool XML files {{{1
 ################################################################
 
-sub get_tools_info {
+sub read_tool_xml_files() {
 
 	my @tool_xml_files = get_tool_xml_files();
 	my %tools;
@@ -111,22 +130,49 @@ sub get_tools_info {
 	return %tools;
 }
 
-# Tool error {{{1
+# Read PhenoMeNal tools2container YAML {{{1
 ################################################################
 
-sub tool_error($) {
-	my ($msg) = @_;
+sub read_phenomenal_tools2container_yaml(\%) {
 
-	print("[TOOL ERROR] $msg\n");
+	my ($tools) = @_;
+	my $yaml_file = catfile($INPUT_FOLDER, 'config', 'phenomenal_tools2container.yaml');
+	die "No file \"$yaml_file\"." unless -f $yaml_file;
+
+	# Load YAML file
+	my $phn_tools2cont = YAML::Tiny->read($yaml_file)->[0];
+	die "Unable to find assignment key in $yaml_file." unless exists($$phn_tools2cont{assignment});
+	for my $container (@{$$phn_tools2cont{assignment}}) {
+
+		# Check that required field are defined
+		for my $field (qw(docker_image_override docker_tag_override tools_id)) {
+			die "No $field field in container." unless exists($$container{$field});
+		}
+
+		# Loop on all tools of the container
+		for my $tool_id (@{$$container{tools_id}}) {
+			tool_error("Unknown tool $tool_id found in container $$container{docker_image_override}, file $yaml_file.") unless exists($$tools{$tool_id});
+			$tools->{$tool_id}->{container_image} = $$container{docker_image_override};
+			$tools->{$tool_id}->{container_tag} = $$container{docker_tag_override};
+		}
+	}
+	exit(1);
+	use Data::Dumper;
+	print(Data::Dumper->Dump([$phn_tools2cont]));
 }
 
-# Tool warning {{{1
+# Get tools info {{{1
 ################################################################
 
-sub tool_warning($) {
-	my ($msg) = @_;
+sub get_tools_info {
 
-	print("[TOOL WARNING] $msg\n");
+	# Read first info from tool XML files
+	my %tools = read_tool_xml_files();
+
+	# Read phenomenal_tools2container.yaml
+	read_phenomenal_tools2container_yaml(%tools);
+
+	return %tools;
 }
 
 # Check command {{{1

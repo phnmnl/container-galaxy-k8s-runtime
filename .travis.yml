@@ -13,6 +13,7 @@ before_install:
     - cpan File::Spec::Functions
     - cpan Getopt::Long
     - cpan XML::Simple
+    - cpan YAML::Tiny
  
 script:
     - ./check-tools
