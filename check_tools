@@ -88,27 +88,45 @@ sub get_tools_info {
 		my $tool_name = $$tool{name};
 		my $tool_version = $$tool{version};
 		my $tool_command = $$tool{command};
-		$tools{$tool_id} = { name => $tool_name, version => $tool_version, command => $tool_command };
+		$tools{$tool_id} = { id => $tool_id, name => $tool_name, version => $tool_version, command => $tool_command };
 	}
-	use Data::Dumper;
-	print(Data::Dumper->Dump([\%tools]));
 
 	return %tools;
+}
+
+# Tool error {{{1
+################################################################
+
+sub tool_error($) {
+	my ($msg) = @_;
+
+	print("[TOOL ERROR] $msg\n");
 }
 
 # Check command {{{1
 ################################################################
 
-sub check_command (\%) {
-	my ($tools) = @_;
+sub check_command(\%) {
+	my ($tool) = @_;
+
+	tool_error("Command of tool $$tool{id} uses \$__tool_directory__ variable. Please remove it, as it will prevent the tool to launch in PhenoMeNal Galaxy.") if grep(/\$__tool_directory__/, $$tool{command});
 }
 
 # Main {{{1
 ################################################################
 
+# Read arguments
 read_args();
+
+# Get tool list
 my %tools = get_tools_info();
-# TODO check_command(\%tools); # no __tool_directory__ variable.
+
+# Loop on all tools
+foreach my $tool_id (sort keys %tools) {
+	check_command(%{$tools{$tool_id}});
+}
+
+# TODO check_command(\%tools); # TOOL_WARNING multiple/complex commands should be avoided (use of `;` or `&&`).
 # TODO Check phenomenal_tools2container.yaml
 # TODO Check job_conf.xml
 # TODO Get containers repos and check tool version in README
@@ -118,3 +136,4 @@ my %tools = get_tools_info();
 # TODO Run it automatically on Travis-CI.
 # TODO Pay attention to do not publish names in this file.
 # TODO Try to publish report on slack, on some channel (public-admin or release_dalcotidine?).
+# TODO Add color option.
