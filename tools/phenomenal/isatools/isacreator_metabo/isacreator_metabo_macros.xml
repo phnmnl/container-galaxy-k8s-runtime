@@ -1,0 +1,472 @@
+<macros>
+    <xml name="study_info_macro">
+        <section name="study_overview" title="Study Description">
+            <param name="study_title" type="text" label="Title" help="e.g. Metabolomics study of the effect of ... on ..."/>
+            <param name="study_description" area="True" size="5x25" type="text" label="Description" help="Provide a textual description for the study. e.g. The study of... by means of metabolite profiling using ..."/>
+            <param name="study_pi_first_name" type="text" label="PI first name" help="e.g. Marie"/>
+            <param name="study_pi_last_name" type="text" label="PI last name" help="e.g. Sklodowska Curie"/>
+            <param name="study_pi_email" type="text" label="PI email address" help="e.g. marie.sklodowska-curie@gmail.com"/>
+            <param name="study_pi_affiliation" type="text" label="PI affiliation" help="e.g. Radium Institute, Paris"/>
+            <param name="study_consent" type="select" label="Consent Information (ICO:0000011)">
+                <options from_data_table="isa_cvterms">
+                    <column name="value" index="1"/>
+                    <filter type="static_value" column="2" value="consent"/>
+                    <filter type="add_value" value="user_defined_consent_information"/>
+                </options>
+            </param>
+            <param name="study_use_condition" type="select" label="Data Use Requirement (DUO:0000017)">
+                <options from_data_table="isa_cvterms">
+                    <column name="value" index="1"/>
+                    <filter type="static_value" column="2" value="data use requirement"/>
+                    <filter type="add_value" value="user_defined_data_use_requirement"/>
+                </options>
+            </param>
+        </section>
+    </xml>
+    <xml name="treatment_plan_macro">
+        <section name="treatment_plan" title="Treatment Plan">
+            <conditional name="study_type_cond">
+                <param name="study_type" type="select" label="Type of study" help="See example below">
+                    <option value="intervention">full factorial intervention</option>
+                    <option value="intervention_fractional">fractional factorial intervention</option>
+                </param>
+                <when value="intervention_fractional">
+                    <conditional name="one_or_more">
+                        <param name="single_or_multiple" type="select" label="Single or repeated treatments">
+                            <option value="single" selected="True">single</option>
+                            <option value="multiple">multiple</option>
+                        </param>
+                        <when value="single">
+                            <param name="select_intervention_type" type="select" label="Intervention type">
+                                <option value="chemical intervention" selected="True">chemical intervention</option>
+                                <option value="dietary intervention">dietary intervention</option>
+                                <option value="behavioural intervention">behavioral intervention</option>
+                                <option value="biological intervention">biological intervention</option>
+                                <option value="surgical intervention">surgical intervention</option>
+                            </param>
+                            <param name="study_factors" type="text" label="Study factors" value="agent, intensity, duration"/>
+                            <repeat name="factor_value_groups" title="Study group">
+                                <param name="factor_values" type="text" label="Factor values" value="aspirin, low dose, t0"/>
+                            </repeat>
+                        </when>
+                        <when value="multiple"/>
+                    </conditional>
+                </when>
+                <when value="intervention">
+                    <conditional name="one_or_more">
+                        <param name="single_or_multiple" type="select" label="Single or repeated treatments">
+                            <option value="single" selected="True">single</option>
+                            <option value="multiple">multiple</option>
+                        </param>
+                        <when value="single">
+                            <conditional name="intervention_type">
+                                <param name="select_intervention_type" type="select" label="Select an intervention type">
+                                    <option value="chemical intervention" selected="True">chemical intervention</option>
+                                    <option value="dietary intervention">dietary intervention</option>
+                                    <option value="behavioural intervention">behavioral intervention</option>
+                                    <option value="biological intervention">biological intervention</option>
+                                    <option value="surgical intervention">surgical intervention</option>
+                                </param>
+                                <when value="chemical intervention">
+                                    <param name="agent" type="text" value="aspirin,ibuprofen,morphine"/>
+                                    <param name="intensity" type="text" value="low dose,moderate dose,high dose"/>
+                                    <param name="duration" type="text" value="t0,t1,t2"/>
+                                </when>
+                                <when value="behavioural intervention">
+                                    <param name="agent" type="text" value="physical activity,speech therapy"/>
+                                    <param name="intensity" type="text" value="low intensity,moderate intensity,high intensity"/>
+                                    <param name="duration" type="text" value="t0,t1,t2"/>
+                                </when>
+                                <when value="biological intervention">
+                                    <param name="agent" type="text" value="viral strain a, viral strain b"/>
+                                    <param name="intensity" type="text" value="low dose,moderate dose,high dose"/>
+                                    <param name="duration" type="text" value="t0,t1,t2"/>
+                                </when>
+                                <when value="surgical intervention">
+                                    <param name="agent" type="text" value="procedure 1,procedure 2"/>
+                                    <param name="intensity" type="text" value="standard"/>
+                                    <param name="duration" type="text" value="t0,t1,t2"/>
+                                </when>
+                                <when value="dietary intervention">
+                                    <param name="agent" type="text" value="vitamin supplementation,caloric restriction,food composition variation"/>
+                                    <param name="intensity" type="text" value="low,moderate,high"/>
+                                    <param name="duration" type="text" value="t0,t1,t2"/>
+                                </when>
+                            </conditional>
+                        </when>
+                        <when value="multiple">
+                            <repeat name="multiple_intervention"
+                                    title="Repeated intervention">
+                                <conditional name="intervention_type">
+                                    <param name="select_intervention_type" type="select" label="Select an intervention type">
+                                        <option value="chemical intervention" selected="True">chemical ntervention </option>
+                                        <option value="dietary intervention">dietary intervention</option>
+                                        <option value="behavioural intervention"> behavioral intervention</option>
+                                        <option value="biological intervention">biological intervention</option>
+                                        <option value="surgical intervention">surgical intervention</option>
+                                    </param>
+                                    <when value="chemical intervention">
+                                        <param name="agent" type="text" value="aspirin,ibuprofen,morphine"/>
+                                        <param name="intensity" type="text" value="low dose,moderate dose,high dose"/>
+                                        <param name="duration" type="text" value="t0,t1,t2"/>
+                                    </when>
+                                    <when value="behavioural intervention">
+                                        <param name="agent" type="text" value="physical activity,speech therapy"/>
+                                        <param name="intensity" type="text" value="low intensity,moderate intensity,high intensity"/>
+                                        <param name="duration" type="text" value="t0,t1,t2"/>
+                                    </when>
+                                    <when value="biological intervention">
+                                        <param name="agent" type="text" value="viral strain a, viral strain b"/>
+                                        <param name="intensity" type="text" value="low dose,moderate dose,high dose"/>
+                                        <param name="duration" type="text" value="t0,t1,t2"/>
+                                    </when>
+                                    <when value="surgical intervention">
+                                        <param name="agent" type="text" value="procedure 1,procedure 2"/>
+                                        <param name="intensity" type="text" value="standard"/>
+                                        <param name="duration" type="text" value="t0,t1,t2"/>
+                                    </when>
+                                    <when value="dietary intervention">
+                                        <param name="agent" type="text" value="vitamin supplementation,caloric restriction,food composition variation"/>
+                                        <param name="intensity" type="text" value="low,moderate,high"/>
+                                        <param name="duration" type="text" value="t0,t1,t2"/>
+                                    </when>
+                                </conditional>
+                            </repeat>
+                        </when>
+                    </conditional>
+                </when>
+            </conditional>
+            <!-- INPUT FOR SETTING CHARACTERISTICS OF STUDY GROUPS -->
+            <conditional name="study_groups">
+                <param name="group_balanced" type="select" label="Study design balance">
+                    <option value="balanced" selected="True">balanced</option>
+                </param>
+                <when value="balanced">
+                    <param name="study_group_size" type="integer"  label="Study group size" value="3"/>
+                </when>
+            </conditional>
+        </section>
+    </xml>
+    <xml name="sample_assay_plan_macro">
+        <section name="sampling_and_assay_plans"
+                 title="Sampling and Assay Plans">
+            <!-- INPUT FOR SAMPLING PLAN -->
+            <repeat name="sample_record_series" title="Sampling plan">
+                <param name="sample_type" type="select" min="1" label="Sample type">
+                    <options from_data_table="isa_cvterms">
+                        <column name="value" index="1"/>
+                        <filter type="static_value" column="2" value="animal_mat"/>
+                        <filter type="add_value" value="user_defined_sample_type"/>
+                    </options>
+                </param>
+                <param name="sample_size" type="integer" label="Number of sample collections" value="1"/>
+                <!-- INPUT FOR ASSAY PLAN -->
+                <repeat name="assay_record_series" title="Assay plan">
+                    <conditional name="assay_type">
+                        <param name="assay_type" type="select" label="Assay type">
+                            <option value="mass spectrometry" selected="True">mass spectrometry</option>
+                            <option value="nmr spectroscopy">nmr spectroscopy</option>
+                        </param>
+                        <when value="mass spectrometry">
+                            <repeat name="samp_frac_series" title="Sample fractions">
+                                <param name="fraction" type="select" min="1" label="Sample fraction of interest">
+                                    <option value="polar"/>
+                                    <option value="non-polar" selected="True"/>
+                                </param>
+                            </repeat>
+                            <repeat name="inj_mod_series" title="Injection series">
+                                <conditional name="inj_mod_cond">
+                                    <param name="inj_mod" type="select" min="1" label="Sample introduction method">
+                                        <option value="DI">direct infusion
+                                        </option>
+                                        <option value="FIA" selected="True">flow infusion assay</option>
+                                        <option value="LC">liquid chromatography</option>
+                                        <option value="GC">gas chromatography</option>
+                                    </param>
+                                    <when value="DI">
+                                        <param name="instrument" type="select" min="1" label="MS instrument">
+                                            <options from_data_table="isa_cvterms">
+                                                <column name="value" index="1"/>
+                                                <filter type="static_value" column="2" value="mass spectrometry instrument"/>
+                                                <filter type="add_value" value="user_defined_ms_instrument"/>
+                                            </options>
+                                            <option value="none reported">none reported</option>
+                                        </param>
+                                        <repeat name="acq_mod_series"  title="Acquisition series">
+                                            <param name="acq_mod" type="select" min="1" label="acquisition method">
+                                                <option value="negative" selected="True"/>
+                                                <option value="positive"/>
+                                                <option value="positive/negative"/>
+                                            </param>
+                                            <param name="technical_replicates" type="integer" label="Number of technical repeats" value="1"/>
+                                        </repeat>
+                                    </when>
+                                    <when value="FIA">
+                                        <param name="instrument" type="select" min="1" label="MS instrument">
+                                            <options from_data_table="isa_cvterms">
+                                                <column name="value" index="1"/>
+                                                <filter type="static_value" column="2" value="mass spectrometry instrument"/>
+                                                <filter type="add_value" value="user_defined_ms_instrument"/>
+                                            </options>
+                                            <option value="none reported">none reported</option>
+                                        </param>
+                                        <repeat name="acq_mod_series"  title="Acquisition series">
+                                            <param name="acq_mod" type="select" min="1" label="Acquisition method">
+                                                <option value="negative" selected="True"/>
+                                                <option value="positive"/>
+                                                <option value="positive/negative"/>
+                                            </param>
+                                            <param name="technical_replicates" type="integer" label="Number of technical repeats" value="1"/>
+                                        </repeat>
+                                    </when>
+                                    <when value="LC">
+                                        <param name="chromato_col" type="select" min="1" label="Chromatography column">
+                                            <option value="none reported">none reported</option>
+                                            <option value="HILIC"/>
+                                            <option value="reverse phase"/>
+                                            <option value="other"/>
+                                        </param>
+                                        <param name="chromato" type="select" min="1" label="Chromatography instrument">
+                                            <options from_data_table="isa_cvterms">
+                                                <column name="value" index="1"/>
+                                                <filter type="static_value" column="2" value="iquid chromatography instrument"/>
+                                                <filter type="add_value" value="user_defined_lc_instrument"/>
+                                            </options>
+                                            <option value="none reported">none reported</option>
+                                        </param>
+                                        <param name="instrument" type="select" label="MS instrument">
+                                            <options from_data_table="isa_cvterms">
+                                                <column name="value" index="1"/>
+                                                <filter type="static_value" column="2" value="mass spectrometry instrument"/>
+                                                <filter type="add_value" value="user_defined_ms_instrument"/>
+                                            </options>
+                                            <option value="none reported">none reported</option>
+                                        </param>
+                                        <repeat name="acq_mod_series" title="Acquisition series">
+                                            <param name="acq_mod" type="select" min="1" label="acquisition method">
+                                                <option value="negative" selected="True"/>
+                                                <option value="positive"/>
+                                                <option value="positive/negative"/>
+                                            </param>
+                                            <param name="technical_replicates" type="integer" label="Number of technical repeats" value="1"/>
+                                        </repeat>
+                                    </when>
+                                    <when value="GC">
+                                        <param name="chromato" type="select"  min="1" label="Chromatography instrument">
+                                            <options from_data_table="isa_cvterms">
+                                                <column name="value" index="1"/>
+                                                <filter type="static_value" column="2" value="gas chromatography instrument"/>
+                                                <filter type="add_value" value="user_defined_gc_instrument"/>
+                                            </options>
+                                            <option value="none reported">none reported</option>
+                                        </param>
+                                        <param name="instrument" type="select" min="1" label="MS instrument">
+                                            <options from_data_table="isa_cvterms">
+                                                <column name="value" index="1"/>
+                                                <filter type="static_value" column="2" value="MS instrument for GC"/>
+                                                <filter type="add_value" value="user_defined_ms_instrument"/>
+                                            </options>
+                                            <option value="none reported">none reported</option>
+                                        </param>
+                                        <repeat name="acq_mod_series" title="Acquisition series">
+                                            <param name="acq_mod" type="select" label="acquisition method">
+                                                <option value="negative" selected="True"/>
+                                                <option value="positive"/>
+                                                <option value="positive/negative"/>
+                                            </param>
+                                            <param name="technical_replicates" type="integer" label="Number of technical repeats" value="1"/>
+                                        </repeat>
+                                        <repeat name="derivatization_series" title="Derivatizations">
+                                            <param name="derivatization" type="select" label="derivatization">
+                                                <options from_data_table="isa_cvterms">
+                                                    <column name="value" index="1"/>
+                                                    <filter type="static_value" column="2" value="derivatization"/>
+                                                    <filter type="add_value" value="user_defined_derivatization"/>
+                                                </options>
+                                                <option value="none reported">none reported</option>
+                                            </param>
+                                        </repeat>
+                                    </when>
+                                </conditional>
+                            </repeat>
+                        </when>
+                        <when value="nmr spectroscopy">
+                            <conditional name="acq_mod_cond">
+                                <param name="acq_mod" type="select" min="1" label="Acquisition method">
+                                    <option value="1D 1H NMR"/>
+                                    <option value="1D 13C NMR"/>
+                                    <option value="2D 1H-1H NMR"/>
+                                    <option value="2D 13C-13C NMR"/>
+                                    <option value="2D 1H-13C NMR"/>
+                                </param>
+                                <when value="1D 1H NMR">
+                                    <param name="nmr_instrument" type="select" min="1" label="NMR instrument">
+                                        <options from_data_table="isa_cvterms">
+                                            <column name="value" index="1"/>
+                                            <filter type="static_value" column="2" value="NMR instrument"/>
+                                            <filter type="add_value" value="user_defined_nmr_instrument"/>
+                                        </options>
+                                        <option value="none reported">none reported</option>
+                                    </param>
+                                    <param name="pulse_seq" type="select"  min="1" label="Pulse sequence">
+                                        <options from_data_table="isa_cvterms">
+                                            <column name="value" index="1"/>
+                                            <filter type="static_value" column="2" value="1d 1H pulse sequence"/>
+                                            <filter type="add_value" value="user_defined_pulse_sequence"/>
+                                        </options>
+                                        <option value="none reported">none reported</option>
+                                    </param>
+                                    <param name="magnet" type="text" label="NMR magnet power" value="600 Mhz"/>
+                                    <param name="technical_replicates" type="integer" label="Number of technical repeats" value="1"/>
+                                </when>
+                                <when value="1D 13C NMR">
+                                    <param name="nmr_instrument" type="select" min="1" label="NMR instrument">
+                                        <options from_data_table="isa_cvterms">
+                                            <column name="value" index="1"/>
+                                            <filter type="static_value" column="2" value="NMR instrument"/>
+                                            <filter type="add_value" value="user_defined_nmr_instrument"/>
+                                        </options>
+                                        <option value="none reported">none reported</option>
+                                    </param>
+                                    <param name="pulse_seq" type="select" min="1" label="Pulse sequence">
+                                        <options from_data_table="isa_cvterms">
+                                            <column name="value" index="1"/>
+                                            <filter type="static_value" column="2" value="1d 13C pulse sequence"/>
+                                            <filter type="add_value" value="user_defined_pulse_sequence"/>
+                                        </options>
+                                        <option value="none reported">none reported</option>
+                                    </param>
+                                    <param name="magnet" type="text" label="NMR magnet power" value="600 Mhz"/>
+                                    <param name="technical_replicates" type="integer" label="Number of technical repeats" value="1"/>
+                                </when>
+                                <when value="2D 1H-1H NMR">
+                                    <param name="nmr_instrument" type="select" min="1" label="NMR instrument">
+                                        <options from_data_table="isa_cvterms">
+                                            <column name="value" index="1"/>
+                                            <filter type="static_value" column="2" value="NMR instrument"/>
+                                            <filter type="add_value" value="user_defined_nmr_instrument"/>
+                                        </options>
+                                        <option value="none reported">none reported</option>
+                                    </param>
+                                    <param name="pulse_seq" type="select" min="1" label="Pulse sequence">
+                                        <options from_data_table="isa_cvterms">
+                                            <column name="value" index="1"/>
+                                            <filter type="static_value" column="2" value="2d 1H-1H pulse sequence"/>
+                                            <filter type="add_value" value="user_defined_pulse_sequence"/>
+                                        </options>
+                                        <option value="none reported">none reported</option>
+                                    </param>
+                                    <param name="magnet" type="text" label="nmr magnet power" value="600 Mhz"/>
+                                    <param name="technical_replicates" type="integer" label="Number of technical repeats" value="1"/>
+                                </when>
+                                <when value="2D 13C-13C NMR">
+                                    <param name="nmr_instrument" type="select" min="1" label="NMR instrument">
+                                        <options from_data_table="isa_cvterms">
+                                            <column name="value" index="1"/>
+                                            <filter type="static_value" column="2" value="NMR instrument"/>
+                                            <filter type="add_value" value="user_defined_nmr_instrument"/>
+                                        </options>
+                                        <option value="none reported">none reported</option>
+                                    </param>
+                                    <param name="pulse_seq" type="select" min="1" label="Pulse sequence">
+                                        <options from_data_table="isa_cvterms">
+                                            <column name="value" index="1"/>
+                                            <filter type="static_value" column="2" value="2d 13C-13C pulse sequence"/>
+                                            <filter type="add_value" value="user_defined_pulse_sequence"/>
+                                        </options>
+                                        <option value="none reported">none reported</option>
+                                    </param>
+                                    <param name="magnet" type="text" label="NMR magnet power" value="600 Mhz"/>
+                                    <param name="technical_replicates" type="integer" label="Number of technical repeats" value="1"/>
+                                </when>
+                                <when value="2D 1H-13C NMR">
+                                    <param name="nmr_instrument" type="select" min="1" label="NMR instrument">
+                                        <options from_data_table="isa_cvterms">
+                                            <column name="value" index="1"/>
+                                            <filter type="static_value" column="2" value="NMR instrument"/>
+                                            <filter type="add_value" value="user_defined_nmr_instrument"/>
+                                        </options>
+                                        <option value="none reported">none reported</option>
+                                    </param>
+                                    <param name="pulse_seq" type="select" min="1" label="Pulse sequence">
+                                        <options from_data_table="isa_cvterms">
+                                            <column name="value" index="1"/>
+                                            <filter type="static_value" column="2" value="2d 1H-13C pulse sequence"/>
+                                            <filter type="add_value" value="user_defined_pulse_sequence"/>
+                                        </options>
+                                        <option value="none reported">none reported</option>
+                                    </param>
+                                    <param name="magnet" type="text" label="NMR magnet power" value="600 Mhz"/>
+                                    <param name="technical_replicates" type="integer" label="Number of technical repeats" value="1"/>
+                                </when>
+                            </conditional>
+                        </when>
+                        <!--
+                            <when value="DNA sequencing">
+                                <param name="seq_instrument" type="text"></param>
+                                <param name="single_or_paired" type="select" label="select library type" argument="library">
+                                    <option value="single end"/>
+                                    <option value="paired end"/>
+                                </param>
+                                <param name="technical_replicates" type="integer" label="number of technical repeats" argument="tech_rep" value="1"></param>
+                            </when>
+
+                            <when value="DNA microarray">
+                                <param name="array_design" type="select" label="select array design name" argument="arraydes">
+                                    <option value="Affymetrix 1"/>
+                                    <option value="Affymetrix 2"/>
+                                    <option value="Illumina A"/>
+                                    <option value="Illumina B"/>
+                                </param>
+                                <param name="technical_replicates" type="integer" label="number of technical repeats" argument="tech_rep" value="1"></param>
+                            </when>
+                        -->
+                    </conditional>
+                </repeat>
+            </repeat>
+        </section>
+    </xml>
+    <xml name="qc_plan_macro">
+        <section name="qc_plan"
+                 title="Quality Control / Quality Assurance Plan">
+            <repeat name="qc_record_series"
+                    title="Quality Control / Quality Assurance Plan">
+                <conditional name="qc_type_conditional">
+                    <param name="qc_type" type="select" label="QC type">
+                        <option value="interval series" selected="True">interval series</option>
+                        <option value="pre-run dilution series">dilution series (pre-run batch)</option>
+                        <option value="post-run dilution series">dilution series (post-run batch)</option>
+                    </param>
+                    <when value="interval series">
+                        <param name="qc_material_type" type="select" label="Study QC types">
+                            <options from_data_table="isa_cvterms">
+                                <column name="value" index="1"/>
+                                <filter type="static_value" column="2" value="QC terms"/>
+                            </options>
+                        </param>
+                        <param name="injection_freq" type="integer" label="Injection frequency" value="10"/>
+                    </when>
+                    <when value="pre-run dilution series">
+                        <param name="qc_material_type" type="select" label="Material type">
+                            <options from_data_table="isa_cvterms">
+                                <column name="value" index="1"/>
+                                <filter type="static_value" column="2" value="QC terms"/>
+                            </options>
+                        </param>
+                        <param name="quantity_type" type="text" label="Quantity type" value="Amount in ml"/>
+                        <param name="values" type="text" label="Values (comma-separated)" value="1,3,5,10"/>
+                    </when>
+                    <when value="post-run dilution series">
+                        <param name="qc_material_type" type="select" label="Material type">
+                            <options from_data_table="isa_cvterms">
+                                <column name="value" index="1"/>
+                                <filter type="static_value" column="2" value="QC terms"/>
+                            </options>
+                        </param>
+                        <param name="values" type="text" label="Quantity (comma-separated)" value="10,5,3,1"/>
+                    </when>
+                </conditional>
+            </repeat>
+        </section>
+    </xml>
+</macros>
