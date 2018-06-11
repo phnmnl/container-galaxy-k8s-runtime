@@ -2,6 +2,7 @@
 
 use strict;
 use warnings "all";
+use Deep::Hash::Utils;
 use File::Basename;
 use File::Spec::Functions 'catfile';
 use Getopt::Long;
@@ -49,25 +50,50 @@ sub read_args {
 	}
 }
 
-# List tools {{{1
+# Get tool XML files {{{1
 ################################################################
 
-sub list_tools {
+sub get_tool_xml_files {
 
-	my $tool_conf_file = catfile($SCRIPTPATH, 'config', 'tool_conf.xml');
+	my $tool_conf_file = catfile($INPUT_FOLDER, 'config', 'tool_conf.xml');
 	die "No file \"$tool_conf_file\"." unless -f $tool_conf_file;
 
 	# Read tool_conf.xml and get all XML tool paths.
+	my @tool_xml_files;
 	my $xml_parser = new XML::Simple;
 	my $tools = $xml_parser->XMLin($tool_conf_file);
-	use Data::Dumper;
-	print Dumper($tools);
+	while (my @keys = Deep::Hash::Utils::reach($tools)) {
+		push(@tool_xml_files, $keys[-1]) if ($keys[-2] eq 'file');
+	}
 
-	# In each XML, get:
-	#    - the tool ID,
-	#    - the tool name
-	#    - the version number
-	#    - the command
+	# Filter out non-PhenoMeNal tools
+	@tool_xml_files = grep(/^phenomenal\//, @tool_xml_files);
+
+	return @tool_xml_files;
+}
+
+# Get tools info {{{1
+################################################################
+
+sub get_tools_info {
+
+	my @tool_xml_files = get_tool_xml_files();
+	my %tools;
+
+	my $xml_parser = new XML::Simple();
+	for my $xml_file (@tool_xml_files) {
+		my $xml_file_path = catfile($INPUT_FOLDER, 'tools', $xml_file);
+		my $tool = $xml_parser->XMLin($xml_file_path);
+		my $tool_id = $$tool{id};
+		my $tool_name = $$tool{name};
+		my $tool_version = $$tool{version};
+		my $tool_command = $$tool{command};
+		$tools{$tool_id} = { name => $tool_name, version => $tool_version, command => $tool_command };
+	}
+	use Data::Dumper;
+	print(Data::Dumper->Dump([\%tools]));
+
+	return %tools;
 }
 
 # Check command {{{1
@@ -81,10 +107,14 @@ sub check_command (\%) {
 ################################################################
 
 read_args();
-my %tools = list_tools();
-#check_command(\%tools);
-# Check phenomenal_tools2container.yaml
-# Check job_conf.xml
-# Get containers repos and check tool version in README
-# Check that container exists
-# Check latest container version on Jenkins.
+my %tools = get_tools_info();
+# TODO check_command(\%tools); # no __tool_directory__ variable.
+# TODO Check phenomenal_tools2container.yaml
+# TODO Check job_conf.xml
+# TODO Get containers repos and check tool version in README
+# TODO Check that container exists
+# TODO Check latest container version on Jenkins.
+# TODO Check version of tools in workflows.
+# TODO Run it automatically on Travis-CI.
+# TODO Pay attention to do not publish names in this file.
+# TODO Try to publish report on slack, on some channel (public-admin or release_dalcotidine?).
