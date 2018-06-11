@@ -8,7 +8,7 @@ notifications:
    - pk.roger@icloud.com
      
 before_install:
-    - cpan -i Deep::Hash::Utils File::Basename File::Spec::Functions Getopt::Long XML::Simple YAML::Tiny
+    - yes | cpan -i Deep::Hash::Utils File::Basename File::Spec::Functions Getopt::Long XML::Simple YAML::Tiny
  
 script:
     - ./check-tools
