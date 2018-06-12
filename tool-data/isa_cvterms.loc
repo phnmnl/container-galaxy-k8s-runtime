@@ -1,0 +1,446 @@
+#<dbkey>	<name>	<value>
+1	Illumina Genome Analyzer II	illumina
+2	Illumina Genome Analyzer Iix	illumina
+3	Illumina HiSeq 1000	illumina
+4	Illumina HiSeq  2000	illumina
+5	Illumina HiSeq	illumina
+6	Illumina HiSeq 2500	illumina
+7	Illumina HiSeq 3000	illumina
+8	Illumina HiSeq 4000	illumina
+9	Illumina HiScanSQ	illumina
+10	Illumina MiSeq	illumina
+11	HiSeq X Five	illumina
+12	HiSeq X Ten	illumina
+13	NextSeq 500	illumina
+14	NextSeq 550	illumina
+15	MinIon	OxfordNanopore
+16	GridIon	OxfordNanopore
+17	PacBio RS	pacific biosciences
+18	PacBio RS II	pacific biosciences
+19	Sequel	pacific biosciences
+20	454 GS	454
+21	454 GS 20	454
+22	454 GS FLX	454
+23	454 GS FLX Plus	454
+24	454 GS FLX Titanium	454
+25	454 GS Junior	454
+26	AB 3730xL Genetic Analyzer	AB SOLiD
+27	AB SOLiD System	AB SOLiD
+28	AB SOLiD System 2.0	AB SOLiD
+29	AB SOLiD System 3.0	AB SOLiD
+30	AB SOLiD 3 Plus System	AB SOLiD
+31	AB SOLiD 4 System	AB SOLiD
+32	AB SOLiD 4hq System	AB SOLiD
+33	AB SOLiD 5500	AB SOLiD
+34	AB SOLiD 5500xl	AB SOLiD
+35	AB 5500 Genetic Analyzer	AB SOLiD
+36	AB 5500xl Genetic analyzer	AB SOLiD
+37	AB 5500xl-W Genetic Analysis System	AB SOLiD
+38	AB 3730 Genetic Analyzer	AB SOLiD
+39	AB 5500xl-W Genetic Analysis System	AB SOLiD
+40	AB 3730 Genetic Analyzer	AB SOLiD
+41	AB 3130xL Genetic Analyzer	AB SOLiD
+42	AB 3130 Genetic Analyzer	AB SOLiD
+43	AB 310 Genetic Analyzer	AB SOLiD
+44	unspecified	AB SOLiD
+45	Ion Torrent PGM	ion torrent
+46	Ion Torrent Proton	ion torrent
+#END_SEQ_INSTR
+47	blood (UBERON:0000178)	animal_mat
+48	cerebrospinal fluid (UBERON:0001359)	animal_mat
+49	plasma (UBERON:0001969)	animal_mat
+50	semen (UBERON:0001968)	animal_mat
+51	sweat (UBERON:0001089)	animal_mat
+52	tear (UBERON:0001827)	animal_mat
+53	urine (UBERON:0001088)	animal_mat
+#END_ANIMAL_MAT
+54	cone	plant_mat
+55	flower (PO:0009046)	plant_mat
+56	fruit (PO:0009001)	plant_mat
+57	leaf (PO:0025034)	plant_mat
+58	nectar (PO:0000000)	plant_mat
+59	pollen (PO:0025281)	plant_mat
+60	root (PO:0009005)	plant_mat
+61	seed (PO:0009010)	plant_mat
+62	stem (PO:0009047)	plant_mat
+#END_PLANT_MAT
+63	Peer reviewed (http://purl.org/spar/pso/peer-reviewed)	publication
+64	Published (http://purl.org/spar/pso/published)	publication
+65	Draft (http://purl.org/spar/pso/draft)	publication
+66	Anonymized (http://purl.org/spar/pso/anonymized)	publication
+67	Republished (http://purl.org/spar/pso/republished)	publication
+68	Open access (http://purl.org/spar/pso/open-access)	publication
+69	Under review (http://purl.org/spar/pso/under-review)	publication
+70	Corrected (http://purl.org/spar/pso/corrected)	publication
+71	Confidential (http://purl.org/spar/pso/confidential)	publication
+72	Rejected for publication (http://purl.org/spar/pso/rejected-for-publication)	publication
+73	Unpublished (http://purl.org/spar/pso/unpublished)	publication
+74	Catalogued (http://purl.org/spar/pso/catalogued)	publication
+75	Green open access (http://purl.org/spar/pso/green-open-access)	publication
+76	Reviewed (http://purl.org/spar/pso/reviewed)	publication
+77	Restricted access (http://purl.org/spar/pso/restricted-access)	publication
+78	Withdrawn from submission (http://purl.org/spar/pso/withdrawn-from-submission)	publication
+79	Embargoed (http://purl.org/spar/pso/embargoed)	publication
+80	Revised (http://purl.org/spar/pso/revised)	publication
+81	Accepted for publication (http://purl.org/spar/pso/accepted-for-publication)	publication
+82	Final draft (http://purl.org/spar/pso/final-draft)	publication
+83	Archived (http://purl.org/spar/pso/archived)	publication
+84	Proof (http://purl.org/spar/pso/proof)	publication
+85	Version of record (http://purl.org/spar/pso/version-of-record)	publication
+86	Gold open access (http://purl.org/spar/pso/gold-open-access)	publication
+87	Gratis open access (http://purl.org/spar/pso/gratis-open-access)	publication
+88	Subscription access (http://purl.org/spar/pso/subscription-access)	publication
+89	Non-confidential (http://purl.org/spar/pso/non-confidential)	publication
+90	Initial draft (http://purl.org/spar/pso/initial-draft)	publication
+91	Retracted from publication (http://purl.org/spar/pso/retracted-from-publication)	publication
+92	Copy-edited (http://purl.org/spar/pso/copy-edited)	publication
+93	Submitted (http://purl.org/spar/pso/submitted)	publication
+94	Libre open access (http://purl.org/spar/pso/libre-open-access)	publication
+95	In press (http://purl.org/spar/pso/in-press)	publication
+#END PUBLICATION
+96	rna extraction (OBI:)	protocols
+97	dna extraction (OBI:)	protocols
+98	labeling (OBI:)	protocols
+99	dna library preparation (OBI:)	protocols
+100	dna microarray hybridization (OBI:)	protocols
+101	data acquisition (OBI:)	protocols
+102	data normalization (OBI:)	protocols
+103	data transformation(OBI:)	protocols
+#END PROTOCOLS
+104	author	roles
+105	corresponding author	roles
+106	principal investigator	roles
+107	curator	roles
+#END ROLES
+108	gene expression profiling using DNA microarray	assay
+109	gene expression profiling using DNA sequencing	assay
+110	transcription profiling using DNA microarray	assay
+111	transcription profiling using DNA sequencing	assay
+112	environmental gene survey using DNA sequencing	assay
+113	chromatin modification profiling using DNA sequencing	assay
+114	histone modification profiling using DNA sequencing	assay
+115	metagenome sequencing using DNA sequencing	assay
+116	exome sequencing using DNA sequencing	assay
+117	protein-DNA binding site identification using DNA sequencing	assay
+118	protein-RNA binding site identification using DNA sequencing	assay
+119	metabolite profiling using mass spectrometry	assay
+120	metabolite profiling using direct infusion mass spectrometry	assay
+121	metabolite profiling using liquid chromatography mass spectrometry	assay
+122	metabolite profiling using gas chromatography mass spectrometry	assay
+123	metabolite profiling using NMR spectroscopy	assay
+124	metabolite profiling using 1D 1H NMR spectroscopy	assay
+125	metabolite profiling using 1D 13C NMR spectroscopy	assay
+126	metabolite profiling using 2D 1H-1H NMR spectroscopy	assay
+127	metabolite profiling using 2D 1H-13C NMR spectroscopy	assay
+128	metabolite profiling using 2D 13C-13C NMR spectroscopy	assay
+#END ASSAY
+129	acetylation (MSIO:0000112)	derivatization
+130	trifluoroacetylation (MSIO:0000113)	derivatization
+131	alkylation (MSIO:0000114)	derivatization
+132	methylation (MSIO:0000115)	derivatization
+133	oxymation (MSIO:0000116)	derivatization
+134	silylation (MSIO:0000117)	derivatization
+135	other	derivatization
+#END DERIVATIZATION
+136	AB SCIEX API 4000	mass spectrometry instrument
+137	AB SCIEX QTRAP 4000	mass spectrometry instrument
+138	AB SCIEX 4800 Plus MALDI TOF/TOF	mass spectrometry instrument
+139	AB SCIEX QTRAP 5500	mass spectrometry instrument
+140	AB SCIEX QTRAP 6500	mass spectrometry instrument
+141	AB SCIEX TripleTOF 5600	mass spectrometry instrument
+142	AB SCIEX TripleTOF 5600+	mass spectrometry instrument
+143	AB SCIEX TOF/TOF 5800	mass spectrometry instrument
+144	AB SCIEX TripleTOF 6600+	mass spectrometry instrument
+145	Agilent 6210 TOF	mass spectrometry instrument
+146	Agilent 6230 Accurate-Mass TOF	mass spectrometry instrument
+147	Agilent 6460 Triple Quadrupole	mass spectrometry instrument
+148	Agilent 6490 Triple Quadrupole	mass spectrometry instrument
+149	Agilent 6520 Q-TOF	mass spectrometry instrument
+150	Agilent 6530 Accurate-Mass Q-TOF	mass spectrometry instrument
+151	Agilent 6540 Q-TOF	mass spectrometry instrument
+152	Agilent 6545 Q-TOF	mass spectrometry instrument
+153	Agilent 6550 iFunnel Q-TOF	mass spectrometry instrument
+154	Agilent 6560 Ion Mobility Q-TOF	mass spectrometry instrument
+155	Bruker APEX-Qe 9.4T	mass spectrometry instrument
+156	Bruker CaptiveSpray nanoBooster and amaZon speed	mass spectrometry instrument
+157	Bruker compact	mass spectrometry instrument
+158	Bruker Esquire 3000	mass spectrometry instrument
+159	Bruker Esquire 6000	mass spectrometry instrument
+160	Bruker maXis impact UHR-QTOF	mass spectrometry instrument
+161	Bruker maXis UHR-ToF	mass spectrometry instrument
+162	Bruker maXis 4G UHR-ToF	mass spectrometry instrument
+163	Bruker micrOTOF	mass spectrometry instrument
+164	Bruker micrOTOF-Q I	mass spectrometry instrument
+165	Bruker micrOTOF-Q II	mass spectrometry instrument
+166	Bruker micrOTOF-Q III	mass spectrometry instrument
+167	Bruker solariX FTMS	mass spectrometry instrument
+168	Bruker ultrafleXtreme	mass spectrometry instrument
+169	Shimadzu LCMS-IT-TOF	mass spectrometry instrument
+170	Thermo Fisher LTQ	mass spectrometry instrument
+171	Thermo Scientific Exactive	mass spectrometry instrument
+172	Thermo Scientific LTQ FT Ultra	mass spectrometry instrument
+173	Thermo Scientific LTQ FT Ultra	mass spectrometry instrument
+174	Thermo Scientific LTQ Orbitrap	mass spectrometry instrument
+175	Thermo Scientific LTQ Orbitrap Classic	mass spectrometry instrument
+176	Thermo Scientific LTQ Orbitrap Classic	mass spectrometry instrument
+177	Thermo Scientific LTQ Orbitrap XL	mass spectrometry instrument
+178	Thermo Scientific LTQ Orbitrap Discovery	mass spectrometry instrument
+179	Thermo Scientific LTQ Orbitrap Velos	mass spectrometry instrument
+180	Thermo Scientific LTQ Orbitrap Velos ETD	mass spectrometry instrument
+181	Thermo Scientific LTQ XL linear ion trap	mass spectrometry instrument
+182	Thermo Scientific Orbitrap Elite	mass spectrometry instrument
+183	Thermo Scientific Orbitrap Velos Pro	mass spectrometry instrument
+184	Thermo Scientific Q Exactive	mass spectrometry instrument
+185	Thermo Scientific Q Exactive Plus	mass spectrometry instrument
+186	Thermo Scientific Q Exactive HF	mass spectrometry instrument
+187	Thermo Scientific TSQ Quantum Access MAX	mass spectrometry instrument
+188	Thermo Scientific TSQ Quantum Ultra	mass spectrometry instrument
+189	Thermo Scientific TSQ Vantage	mass spectrometry instrument
+190	Waters ACQUITY TQD	mass spectrometry instrument
+191	Waters LCT	mass spectrometry instrument
+192	Waters Micromass Q-Tof micro	mass spectrometry instrument
+193	Waters Micromass Quattro micro API	mass spectrometry instrument
+194	Waters Q-Tof Premier	mass spectrometry instrument
+195	Waters Quattro Premier XE	mass spectrometry instrument
+196	Waters SYNAPT G1 HDMS System	mass spectrometry instrument
+197	Waters SYNAPT G2 HDMS System	mass spectrometry instrument
+198	Waters SYNAPT G2-S HDMS	mass spectrometry instrument
+199	Waters SYNAPT HDMS System	mass spectrometry instrument
+200	Waters Xevo G2 QTof	mass spectrometry instrument
+201	Waters Xevo G2-XS QTof	mass spectrometry instrument
+202	Waters Xevo TQ	mass spectrometry instrument
+203	Waters Xevo TQ-S	mass spectrometry instrument
+#END MS INSTRUMENT
+204	Agilent 1100 Series HPLC System	liquid chromatography instrument
+205	Agilent 1100 Series LC	liquid chromatography instrument
+206	Agilent 1200 Series HPLC System	liquid chromatography instrument
+207	Agilent 1200 Series Rapid Resolution LC System	liquid chromatography instrument
+208	Agilent 1260 Infinity LC	liquid chromatography instrument
+209	Agilent 1260 Infinity II LC System	liquid chromatography instrument
+210	 Agilent 1290 Infinity HPLC	liquid chromatography instrument
+211	Agilent 1290 Infinity LC	liquid chromatography instrument
+212	Aglient 1290 Infinity II LC	liquid chromatography instrument
+213	Agilent 1290 Infinity UHPLC	liquid chromatography instrument
+214	Beckman Coulter System Gold HPLC 127 pump	liquid chromatography instrument
+215	Eksigent NanoLC-Ultra 2D system	liquid chromatography instrument
+216	Flux Rheos Allegro UHPLC pump	liquid chromatography instrument
+217	Hitachi L-7100 HPLC pump	liquid chromatography instrument
+218	Hitachi LaChrome Ultra	liquid chromatography instrument
+219	Michrom BioResources Paradigm MS4 HPLC system	liquid chromatography instrument
+220	Shimadzu LC-10AD pump and SCL-10A controller	liquid chromatography instrument
+221	Shimadzu LC-30AD pump and CBM-20A controller	liquid chromatography instrument
+222	Shimadzu Nexera UHPLC system	liquid chromatography instrument
+223	Shimadzu Nexera UHPLC system (LC-30AD pump and CBM-20A controller)	liquid chromatography instrument
+224	Shimadzu Prominence HPLC system	liquid chromatography instrument
+225	Shimadzu Prominence LC-20AD system	liquid chromatography instrument
+226	Shimadzu Prominence UFLC system	liquid chromatography instrument
+227	Shimadzu SIL20-A LC system	liquid chromatography instrument
+228	Thermo Scientific Accela 600 Pump	liquid chromatography instrument
+229	Thermo Scientific Accela 1250 Pump	liquid chromatography instrument
+230	Thermo Scientific Accela II HPLC system	liquid chromatography instrument
+231	Thermo Scientific Accela UHPLC System	liquid chromatography instrument
+232	Thermo Scientific Dionex Ultimate 3000 HPLC system	liquid chromatography instrument
+233	Thermo Scientific Dionex UltiMate 3000 System	liquid chromatography instrument
+234	Thermo Scientific Dionex UltiMate 3000 RSLC System	liquid chromatography instrument
+235	Thermo Scientific Dionex UltiMate 3000 RSLCnano System	liquid chromatography instrument
+236	Thermo Scientific Dionex Ultimate 3000 UHPLC system	liquid chromatography instrument
+237	Thermo Scientific Dionex UltiMate 3000 XRS System	liquid chromatography instrument
+238	Thermo Scientific Dionex UltiMate HPLC system	liquid chromatography instrument
+239	Thermo Scientific Dionex UltiMate LC system	liquid chromatography instrument
+240	Thermo Scientific Surveyor HPLC system	liquid chromatography instrument
+241	Thermo Scientific Surveyor MS Pump Plus	liquid chromatography instrument
+242	Waters 1525 Micro Binary HPLC Pump	liquid chromatography instrument
+243	Waters nanoACQUITY UPLC system	liquid chromatography instrument
+244	Waters ACQUITY UPLC H-Class System	liquid chromatography instrument
+245	Waters ACQUITY UPLC I-Class System	liquid chromatography instrument
+246	Waters ACQUITY UPLC system	liquid chromatography instrument
+247	Waters ACQUITY UPLC system and PDA detector	liquid chromatography instrument
+248	Waters Alliance 2695 Separations Module (modified)	liquid chromatography instrument
+#END LC INSTRUMENT
+249	Agilent 6890 GC	gas chromatography instrument
+250	Agilent 6890N GC	gas chromatography instrument
+251	Agilent 7890A GC	gas chromatography instrument
+252	Agilent 7890B GC	gas chromatography instrument
+253	Shimadzu GCMS-QP2010 Ultra	gas chromatography instrument
+254	Thermo Electron FOCUS GC	gas chromatography instrument
+255	Thermo Electron TRACE GC	gas chromatography instrument
+256	Thermo Electron TRACE GC Ultra	gas chromatography instrument
+257	Thermo Scientific TRACE GC Ultra	gas chromatography instrument
+258	Thermo Scientific TRACE 1310 GC	gas chromatography instrument
+259	ThermoQuest GC 8000	gas chromatography instrument
+#END GC INSTRUMENT
+260	Agilent 5973N MSD	MS instrument for GC
+261	Agilent 5975C inert XL MSD	MS instrument for GC
+262	Agilent 5975C MSD	MS instrument for GC
+263	Agilent 5977A MSD	MS instrument for GC
+264	Agilent 5977B MSD	MS instrument for GC
+265	Agilent 7000C Triple Quadrupole	MS instrument for GC
+266	Agilent 7200 Q-TOF	MS instrument for GC
+267	JEOL AccuTOF GCv	MS instrument for GC
+268	LECO Pegasus	MS instrument for GC
+269	LECO Pegasus 4D	MS instrument for GC
+270	LECO Pegasus III	MS instrument for GC
+271	LECO Pegasus IV	MS instrument for GC
+272	LECO Pegasus HT TOFMS	MS instrument for GC
+273	Shimadzu GCMS-QP2010 Ultra	MS instrument for GC
+274	Thermo Electron PolarisQ	MS instrument for GC
+275	Thermo Electron TRACE DSQ	MS instrument for GC
+276	Thermo Finnigan TRACE DSQ	MS instrument for GC
+277	Thermo Scientific ISQ	MS instrument for GC
+278	Thermo Scientific ITQ 900	MS instrument for GC
+279	Thermo Scientific TRACE DSQ	MS instrument for GC
+280	Thermo Scientific TSQ 8000	MS instrument for GC
+281	Thermo Scientific TSQ Quantum XLS	MS instrument for GC
+282	ThermoQuest Voyager	MS instrument for GC
+283	Waters GCT Premier	MS instrument for GC
+#END MS INSTRUMENT FOR GC
+284	Bruker 400 MHz spectrometer	NMR instrument
+285	Bruker 500 MHz spectrometer	NMR instrument
+286	Bruker 600 MHz spectrometer	NMR instrument
+287	Bruker 600 MHz Ultrashield spectrometer	NMR instrument
+288	Bruker AVANCE 500 MHz spectrometer	NMR instrument
+289	Bruker AVANCE 600 MHz spectrometer	NMR instrument
+290	Bruker AVANCE 700 MHz spectrometer	NMR instrument
+291	Bruker AVANCE 900 MHz spectrometer	NMR instrument
+292	Bruker AVANCE AV 500 MHz spectrometer	NMR instrument
+293	Bruker AVANCE AV 600 MHz spectrometer	NMR instrument
+294	Bruker AVANCE DRX 500 MHz spectrometer	NMR instrument
+295	Bruker AVANCE DRX 600 MHz spectrometer	NMR instrument
+296	Bruker AVANCE DRX 700 MHz spectrometer	NMR instrument
+297	Bruker AVANCE II 500 MHz spectrometer	NMR instrument
+298	Bruker AVANCE II 500 MHz Ultrashield spectrometer	NMR instrument
+299	Bruker AVANCE II+ 500 MHz spectrometer	NMR instrument
+300	Bruker AVANCE II 600 MHz spectrometer	NMR instrument
+301	Bruker AVANCE II 700 MHz spectrometer	NMR instrument
+302	Bruker AVANCE II 800 MHz US2 spectrometer	NMR instrument
+303	Bruker AVANCE III 400 MHz spectrometer	NMR instrument
+304	Bruker AVANCE III 500 MHz 	NMR instrument
+305	Bruker AVANCE III 600 MHz	NMR instrument
+306	Bruker AVANCE III 800 MHz spectrometer	NMR instrument
+307	Bruker AVANCE III HD 600 MHz spectrometer	NMR instrument
+308	Bruker AVANCE III HD 700 MHz spectrometer	NMR instrument
+309	Bruker AVANCE III HD 800 MHz spectrometer	NMR instrument
+310	Bruker Avance IV Dr	NMR instrument
+311	Bruker DNP-NMR	NMR instrument
+312	Bruker Fourier-300HD	NMR instrument
+313	Varian Mercury AS400 MHz spectrometer	NMR instrument
+314	Varian Unity Inova 400 MHz spectrometer	NMR instrument
+315	Varian Unity Inova 500 MHz spectrometer	NMR instrument
+316	Varian Unity Inova 600 MHz spectrometer	NMR instrument
+317	Varian VNMRS 600 MHz spectrometer	NMR instrument
+318	other	NMR instrument
+#END NMR INSTRUMENT
+319	zg30	1d 1H pulse sequence
+320	presat	1d 1H pulse sequence
+321	wet	1d 1H pulse sequence
+322	zgpr	1d 1H pulse sequence
+323	zgesgp	1d 1H pulse sequence
+324	CPMG	1d 1H pulse sequence
+325	water suppression	1d 1H pulse sequence
+326	watergate	1d 1H pulse sequence
+327	flip-flop	1d 1H pulse sequence
+328	noesypr1d	1d 1H pulse sequence
+329	noesygppr1d	1d 1H pulse sequence
+330	tnnoesy	1d 1H pulse sequence							
+#END 1D 1H
+331	CPMG	1d 13C pulse sequence
+332	noesypr1d	1d 13C pulse sequence
+333	water suppression	1d 13C pulse sequence
+334	watergate	1d 13C pulse sequence
+335	flip-flop	1d 13C pulse sequence
+#END 1D 13C
+336	NOESY	2d 1H-1H pulse sequence
+337	TOCSY	2d 1H-1H pulse sequence
+338	watergate	2d 1H-1H pulse sequence
+339	flip-flop	2d 1H-1H pulse sequence
+340	noesyesgpph	2d 1H-1H pulse sequence	
+341	hsqcphpr	2d 1H-1H pulse sequence
+342	hsqcetgpsp.2	2d 1H-1H pulse sequence
+343	hsqcetgpsp.2.cl	2d 1H-1H pulse sequence
+344	hsqcetgpsisp2.2	2d 1H-1H pulse sequence
+345	hsqcetgpsisp2.3	2d 1H-1H pulse sequence
+346	jresesgp2	2d 1H-1H pulse sequence
+347	jresesgp	2d 1H-1H pulse sequence
+348	mlevphpr	2d 1H-1H pulse sequence
+349	COSY	2d 1H-1H pulse sequence
+#END 2D 1H-1H
+350	HOESY	2d 13C-13C pulse sequence
+351	INADEQUATE	2d 13C-13C pulse sequence
+352	watergate	2d 13C-13C pulse sequence
+353	flip-flop	2d 13C-13C pulse sequence
+354	noesyesgpph	2d 13C-13C pulse sequence	
+355	hsqcphpr	2d 13C-13C pulse sequence
+356	hsqcetgpsp.2	2d 13C-13C pulse sequence
+357	hsqcetgpsp.2.cl	2d 13C-13C pulse sequence
+358	hsqcetgpsisp2.2	2d 13C-13C pulse sequence
+359	hsqcetgpsisp2.3	2d 13C-13C pulse sequence
+360	jresesgp2	2d 13C-13C pulse sequence
+361	jresesgp	2d 13C-13C pulse sequence
+362	mlevphpr	2d 13C-13C pulse sequence
+363	COSY	2d 13C-13C pulse sequence				
+#END 2D 13C-13C
+364	2D 1H-13C HSQC (hsqcetgppr)	2d 1H-13C pulse sequence
+365	HOESY	2d 1H-13C pulse sequence
+366	HSQC	2d 1H-13C pulse sequence
+367	HMBC	2d 1H-13C pulse sequence
+368	HMQC	2d 1H-13C pulse sequence
+369	HETCOR	2d 1H-13C pulse sequence
+#END 2D 1H-13C			
+#END PULSE SEQUENCE
+370	long term reference (MSIO:0000019)	QC terms
+371	study reference (MSIO:0000027)	QC terms
+372	reference compound (MSIO:0000023)	QC terms
+373	reference compound mix (MSIO:0000024)	QC terms
+374	sample preparation blank (MSIO:0000025)	QC terms
+375	solvent blank (MSIO:0000026)	QC terms
+376	dilution series reference (MSIO:0000016)	QC terms
+#END QC TERMS
+377	no restriction (DUO:0000004)	consent
+378	no-general methods research (DUO:0000015)	consent
+379	research use only (DUO:0000014)	consent
+380	research-specific restriction (DUO:0000012)	consent
+381	general research and clinical care (DUO:0000005)	consent
+382	disease-specific research and clinical care (DUO:0000007)	consent
+383	health/medical/biomedical research and clinical care (DUO:0000006)	consent
+384	population origins or ancestry research (DUO:0000011)	consent
+#END CONSENT TERMS
+385	collaboration required (DUO:0000020)	data use requirement
+386	ethics approval required (DUO:0000021)	data use requirement
+387	geographical restriction (DUO:0000022)	data use requirement
+388	not-for-profit use only (DUO:0000018)	data use requirement
+389	institution-specific restriction (DUO:0000028)	data use requirement
+390	project-specific restriction (DUO:0000027)	data use requirement
+391	user-specific restriction (DUO:0000026)	data use requirement
+392	publication moratorium (DUO:0000024)	data use requirement
+393	publication required (DUO:0000019)	data use requirement
+394	return-to-database/resource (DUO:0000029)	data use requirement
+395	time limit on use (DUO:0000025)	data use requirement
+#END DATA USER TERMS
+396	multiple testing correction method (OBI:0200089)	statistics
+397	false discovery rate correction method (OBI:0200163)	statistics
+398	Benjamini and Hochberg false discovery rate correction method (OBI:0200036)	statistics
+399	Benjamini and Yekutieli false discovery rate correction method (OBI:0200049)	statistics
+400	Holm-Bonferroni family-wise error rate correction method (OBI:0200066)	statistics
+401	Holm false discovery rate correction (STATO:000541)	statistics
+402 Hommel false discovery rate correction (STATO:000542)	statistics
+403 Student's t-test (OBI:0000739)	statistics
+404 Wilcoxon rank sum test (STATO:0000076)	statistics
+405 Kruskal-Wallis test (STATO:0000094)	statistics
+406 Pearson's correlation coefficient (STATO:0000280)	statistics
+407 Spearman's correlation coefficient (STATO:0000201)	statistics
+408 Pareto scaling (OBI:0200037)	statistics
+409	mean centering (OBI:0200029)	statistics
+410 unit-variance scaling (OBI:0200149)	statistics
+411 logarithmic transformation (OBI:0200094)	statistics
+412	PCA by singular value decomposition (OBI:0200051)	statistics
+413	PLS by nonlinear iterative partial least squares (OBI:0200107)	statistics
+414	OPLS by nonlinear iterative partial least squares ()	statistics
+415	number of cross-validation segment (STATO:0000554)	statistics
+416	number of predictive components (STATO:0000555)	statistics
+417	number of orthogonal components (STATO:0000556)	statistics
+#END STAT TERMS
+
+
+
+
+

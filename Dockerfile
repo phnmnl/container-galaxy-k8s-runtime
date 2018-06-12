@@ -49,7 +49,7 @@ RUN virtualenv .venv
 # update their wheel server to include docutils==0.14, which Galaxy 17.09 requires.
 
 RUN /bin/bash -c "source .venv/bin/activate && \
-                  pip install 'pip>=8.1' && \
+                  pip install --upgrade pip && \
                   pip install -r requirements.txt \
                       --index-url https://wheels.galaxyproject.org/simple \
                       --extra-index-url https://pypi.python.org/simple && \
@@ -70,10 +70,12 @@ COPY config/datatypes_conf.xml \
      config/sanitize_whitelist.txt \
      config/tool_conf.xml \
      config/dependency_resolvers_conf.xml \
+     config/tool_data_table_conf.xml \
   config/
 
 COPY rules/k8s_destinations.py lib/galaxy/jobs/rules/k8s_destination.py
 COPY tools/phenomenal tools/phenomenal
+COPY tool-data/isa_cvterms.loc tool-data/
 
 # Galaxy tours which guide users through the subsequent steps in an analysis
 COPY config/plugins/tours/*.yaml config/plugins/tours/
