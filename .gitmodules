@@ -1,4 +1,4 @@
 [submodule "docker-galaxy-stable"]
 	path = docker-galaxy-stable
 	url = https://github.com/pcm32/docker-galaxy-stable
-	branch = feature/isatools_lite
+	branch = 18.01-k8s 
