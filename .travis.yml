@@ -9,6 +9,8 @@ notifications:
      
 before_install:
     - yes | cpan -i Deep::Hash::Utils File::Basename File::Spec::Functions Getopt::Long XML::Simple YAML::Tiny
+      
+before_script:
  
 script:
     - ./check-tools
