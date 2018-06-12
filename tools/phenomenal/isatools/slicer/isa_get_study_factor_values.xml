@@ -2,14 +2,12 @@
 <tool id="isa_get_study_factor_values" name="Get values of a study factor"
       version="1.0">
     <description>
-        Get list of factor values for given factor used in a MetaboLights study
+        Get list of factor values for given factor used in a ISA study
     </description>
-
     <requirements>
         <requirement type="package" version="6.7">click</requirement>
         <requirement type="package" version="0.9.5">isatools</requirement>
     </requirements>
-
     <stdio>
         <exit_code range="1:" level="fatal"/>
     </stdio>
@@ -49,7 +47,6 @@
         <data format="json" name="output"
               label="Study factor values list"/>
     </outputs>
-
     <tests>
         <test>
             <param name="mtbls_id" value="MTBLS1"/>
@@ -57,16 +54,15 @@
             <output name="output" file="mtbls1_factor_values_out.json" compare="sim_size"/>
         </test>
     </tests>
-
     <help>
 <!-- @@@BEGIN_RST@@@ -->
-==================================================
-Get list of study factors for a MetaboLights study
-==================================================
+=========================================
+Get list of study factors for a ISA study
+=========================================
 
-This tool gets the list of factor values from a MetaboLights study for a
+This tool gets the list of factor values from a ISA study for a
 given study factor name. It extracts the factor values from the ISA-Tab
-study and assay tables for the MetaboLights study.
+study and assay tables.
 
 -----
 Input
@@ -92,7 +88,7 @@ Factor name
 ===========
 A factor name from the list of factors in the study metadata. You can
 get the relevant factor names for a particular study by using the
-`study_factors` tool.
+`Get list of study factors` tool.
 
 ------
 Output
@@ -109,11 +105,9 @@ e.g.
 
 <!-- @@@END_RST@@@ -->
     </help>
-
     <citations>
         <citation type="doi">10.1093/nar/gks1004</citation>
         <citation type="doi">10.5281/zenodo.163640</citation>
         <citation type="doi">10.1038/ng.1054</citation>
     </citations>
-
 </tool>
