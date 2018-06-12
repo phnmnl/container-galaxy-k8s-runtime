@@ -156,9 +156,6 @@ sub read_phenomenal_tools2container_yaml(\%) {
 			$tools->{$tool_id}->{container_tag} = $$container{docker_tag_override};
 		}
 	}
-	exit(1);
-	use Data::Dumper;
-	print(Data::Dumper->Dump([$phn_tools2cont]));
 }
 
 # Get tools info {{{1
@@ -179,11 +176,34 @@ sub get_tools_info {
 ################################################################
 
 sub check_command(\%) {
+
 	my ($tool) = @_;
 
 	tool_warning("Command of tool $$tool{id} uses an interpreter attribute. Use of interpreter attribute inside command tag is discouraged. It tends to make embedded code more complex and renders difficult testing. Please get rid of your explicit call to \"$$tool{command}->{interpreter}\" interpreter, and write a script using a shebang that you will call directly from inside the command tag content, using command line arguments to get different behavious. Testing if such a script is a lot easier, since it can be done outside of Galaxy scope.") if exists $$tool{command}->{interpreter};
 	tool_error("Command of tool $$tool{id} uses \$__tool_directory__ variable. Please remove it, as it will prevent the tool to launch in PhenoMeNal Galaxy.") if grep(/\$__tool_directory__/, $$tool{command}->{content});
 	tool_warning("Command of tool $$tool{id} uses a complex command (use of && or ; operators). Please simply by calling only one script or program that you can test more accurately outside of Galaxy environment.") if grep(/(&&|;)/, $$tool{command}->{content});
+}
+
+# Check container {{{1
+################################################################
+
+sub check_container(\%) {
+
+	my ($tool) = @_;
+
+	# Check container tag format
+	if ($tool->{container_tag} eq 'latest') {
+		tool_error("Container tag of tool $tool->{id} is set to latest.");
+	}
+	elsif ($tool->{container_tag} =~ m/^(dev_)?v.+_cv.+$/) {
+
+		# Extract tool version
+		(my $tool_version = $tool->{container_tag}) =~ s/^(dev_)?v(.+)_cv.+$/$2/;
+		tool_error("The tool version ($tool_version) contained inside container tag $tool->{container_tag} of tool $tool->{id} does not match the tool version ($tool->{version}) defined inside the tool XML file.") unless $tool_version eq $tool->{version};
+	}
+	else {
+		tool_error("Container tag $tool->{container_tag} of tool $tool->{id} does not match the format '^(dev_)?v.+_cv.+\$'.");
+	}
 }
 
 # Main {{{1
@@ -198,9 +218,9 @@ my %tools = get_tools_info();
 # Loop on all tools
 foreach my $tool_id (sort keys %tools) {
 	check_command(%{$tools{$tool_id}});
+	check_container(%{$tools{$tool_id}});
 }
 
-# TODO Check phenomenal_tools2container.yaml
 # TODO Check job_conf.xml
 # TODO Get containers repos and check tool version in README
 # TODO Check that container exists
@@ -210,3 +230,4 @@ foreach my $tool_id (sort keys %tools) {
 # TODO Pay attention to do not publish names in this file.
 # TODO Try to publish report on slack, on some channel (public-admin or release_dalcotidine?).
 # TODO Add color option.
+# TODO Fail (exit > 0) when at least one error is encountered.
