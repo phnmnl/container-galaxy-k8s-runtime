@@ -20,6 +20,7 @@ RUN wget -O ephemeris.tar https://api.github.com/repos/galaxyproject/ephemeris/t
 
 #COPY config/galaxy.ini config/galaxy.ini
 COPY config/job_conf.xml config/job_conf.xml
+RUN sed -i 's/HANDLERS -->//' config/job_conf.xml && sed -i 's/<!-- HANDLERS//g' config/job_conf.xml
 COPY config/tool_conf.xml config/tool_conf.xml
 COPY config/sanitize_whitelist.txt config/sanitize_whitelist.txt
 COPY tools/phenomenal tools/phenomenal
