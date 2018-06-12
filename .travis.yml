@@ -7,10 +7,8 @@ notifications:
   recipients:
    - pk.roger@icloud.com
      
-before_install:
+install:
     - yes | cpan -i Deep::Hash::Utils File::Basename File::Spec::Functions Getopt::Long XML::Simple YAML::Tiny
-      
-before_script:
  
 script:
     - ./check-tools
