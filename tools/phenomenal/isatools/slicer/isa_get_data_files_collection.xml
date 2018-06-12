@@ -2,10 +2,8 @@
 <tool id="isa_get_data_files_collection" name="Get data files collection"
       version="1.0">
     <description>
-        Get a collection of MetaboLights study data files filtered on factor
-        values
+        Get a collection of ISA study data files filtered on factor values
     </description>
-
     <requirements>
         <requirement type="package" version="6.7">click</requirement>
         <requirement type="package" version="0.9.5">isatools</requirement>
@@ -34,7 +32,6 @@
             <discover_datasets pattern="(?P&lt;designation&gt;.+)\.[a-zA-Z0-9]+$"/>
         </collection>
     </outputs>
-
     <tests>
         <test>
             <param name="mtbls_id" value="MTBLS1"/>
@@ -43,12 +40,11 @@
             <output_collection name="raw_files" type="list" count="1"/>
         </test>
     </tests>
-
     <help>
 <!-- @@@BEGIN_RST@@@ -->
-========================================
-Get a MetaboLights study data files list
-========================================
+=====================================
+Get a ISA study data files collection
+=====================================
 
 This tool returns a list of data files sliced on a filtered factor name
 and value.
@@ -73,17 +69,11 @@ If the input source is an ISA-Tab history item, select from existing data
 history items. ISA-Tab items can be created by using the Metabolights
 downloader or the ISA-Tab metadata creation tools.
 
-Factor name to filter on
-========================
-Factor name relevant to the specified MetaboLights study, e.g.
-replicate. You can get the relevant factor names for a particular study
-by using the `study_factors` tool.
-
-Factor value to filter on
-=========================
-Factor value relevant to the specified MetaboLights study, e.g. Exp2.
-You can get the relevant factor values for a particular study and factor
-by using the `study_factor_values` tool.
+Factor names and values to filter on
+====================================
+Factor name-value pairs relevant to the specified ISA study. You can
+get the relevant factor names for a particular study by using the
+`Get summary of factors` tool.
 
 ------
 Output
@@ -173,11 +163,9 @@ list. e.g.
     ]
 <!-- @@@END_RST@@@ -->
     </help>
-
     <citations>
         <citation type="doi">10.1093/nar/gks1004</citation>
         <citation type="doi">10.5281/zenodo.163640</citation>
         <citation type="doi">10.1038/ng.1054</citation>
     </citations>
-
 </tool>

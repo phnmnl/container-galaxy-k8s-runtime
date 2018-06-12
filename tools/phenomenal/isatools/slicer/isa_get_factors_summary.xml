@@ -1,14 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <tool id="isa_get_factors_summary" name="Get summary of factors" version="1.0">
-    <description>Produce a summary table of variable factors of a MetaboLights
-        study
-    </description>
-
+    <description>Produce a summary table of variable factors of a ISA study</description>
     <requirements>
         <requirement type="package" version="6.7">click</requirement>
         <requirement type="package" version="0.9.5">isatools</requirement>
     </requirements>
-
     <stdio>
         <exit_code range="1:" level="fatal"/>
     </stdio>
@@ -51,12 +47,11 @@
             <output name="output" file="mtbls1_factors_summary_out.json" compare="sim_size"/>
         </test>
     </tests>
-
     <help>
 <!-- @@@BEGIN_RST@@@ -->
-===============================================
-Get summary of factors for a MetaboLights study
-===============================================
+======================================
+Get summary of factors for a ISA study
+======================================
 
 This tool returns a table of sample names and related associated factor
 values. The tool calculates this by inspecting the ISA study and assay
@@ -177,11 +172,9 @@ A list of sample names and factor name-value pairs JSON list. e.g.
     ]
 <!-- @@@END_RST@@@ -->
     </help>
-
     <citations>
         <citation type="doi">10.1093/nar/gks1004</citation>
         <citation type="doi">10.5281/zenodo.163640</citation>
         <citation type="doi">10.1038/ng.1054</citation>
     </citations>
-
 </tool>
