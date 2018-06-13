@@ -158,6 +158,23 @@ sub read_phenomenal_tools2container_yaml(\%) {
 	}
 }
 
+# Read job conf XML {{{1
+################################################################
+
+sub read_job_conf(\%) {
+
+	my ($tools) = @_;
+	my $xml_file = catfile($INPUT_FOLDER, 'config', 'job_conf.xml');
+	die "No file \"$xml_file\"." unless -f $xml_file;
+
+	# Load XML file
+	my $xml_parser = new XML::Simple();
+	my $job_conf = $xml_parser->XMLin($xml_file);
+	while (my ($tool_id, $job) = each %{$job_conf->{tools}->{tool}}) {
+		$tools->{$tool_id}->{job_destination} = $job->{destination} if exists $tools->{$tool_id} && exists($job->{destination});
+	}
+}
+
 # Get tools info {{{1
 ################################################################
 
@@ -168,6 +185,9 @@ sub get_tools_info {
 
 	# Read phenomenal_tools2container.yaml
 	read_phenomenal_tools2container_yaml(%tools);
+
+	# Read job_conf.xml
+	read_job_conf(%tools);
 
 	return %tools;
 }
@@ -206,6 +226,17 @@ sub check_container(\%) {
 	}
 }
 
+# Check job destination {{{1
+################################################################
+
+sub check_job_destination(\%) {
+
+	my ($tool) = @_;
+
+	tool_error("No job destination defined for tool $tool->{id}.") if not exists($tool->{job_destination});
+	tool_warning("Tool $tool->{id} job destination ($tool->{job_destination}) is not generic.") if $tool->{job_destination} !~ m/^dynamic-k8s-.*$/;
+}
+
 # Main {{{1
 ################################################################
 
@@ -217,11 +248,12 @@ my %tools = get_tools_info();
 
 # Loop on all tools
 foreach my $tool_id (sort keys %tools) {
-	check_command(%{$tools{$tool_id}});
-	check_container(%{$tools{$tool_id}});
+	my %tool = %{$tools{$tool_id}};
+	check_command(%tool);
+	check_container(%tool);
+	check_job_destination(%tool);
 }
 
-# TODO Check job_conf.xml
 # TODO Get containers repos and check tool version in README
 # TODO Check that container exists
 # TODO Check latest container version on Jenkins.
