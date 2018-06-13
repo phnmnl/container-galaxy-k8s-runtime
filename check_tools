@@ -54,19 +54,19 @@ sub read_args {
 # Tool error {{{1
 ################################################################
 
-sub tool_error($) {
-	my ($msg) = @_;
+sub tool_error($$) {
+	my ($id, $msg) = @_;
 
-	print("[TOOL ERROR] $msg\n");
+	print("[ERROR   ON TOOL $id] $msg\n");
 }
 
 # Tool warning {{{1
 ################################################################
 
-sub tool_warning($) {
-	my ($msg) = @_;
+sub tool_warning($$) {
+	my ($id, $msg) = @_;
 
-	print("[TOOL WARNING] $msg\n");
+	print("[WARNING ON TOOL $id] $msg\n");
 }
 
 # Get tool XML files {{{1
@@ -151,7 +151,7 @@ sub read_phenomenal_tools2container_yaml(\%) {
 
 		# Loop on all tools of the container
 		for my $tool_id (@{$$container{tools_id}}) {
-			tool_error("Unknown tool $tool_id found in container $$container{docker_image_override}, file $yaml_file.") unless exists($$tools{$tool_id});
+			tool_error($tool_id, "Unknown tool found in container $$container{docker_image_override}, file $yaml_file.") unless exists($$tools{$tool_id});
 			$tools->{$tool_id}->{container_image} = $$container{docker_image_override};
 			$tools->{$tool_id}->{container_tag} = $$container{docker_tag_override};
 		}
@@ -199,9 +199,9 @@ sub check_command(\%) {
 
 	my ($tool) = @_;
 
-	tool_warning("Command of tool $$tool{id} uses an interpreter attribute. Use of interpreter attribute inside command tag is discouraged. It tends to make embedded code more complex and renders difficult testing. Please get rid of your explicit call to \"$$tool{command}->{interpreter}\" interpreter, and write a script using a shebang that you will call directly from inside the command tag content, using command line arguments to get different behavious. Testing if such a script is a lot easier, since it can be done outside of Galaxy scope.") if exists $$tool{command}->{interpreter};
-	tool_error("Command of tool $$tool{id} uses \$__tool_directory__ variable. Please remove it, as it will prevent the tool to launch in PhenoMeNal Galaxy.") if grep(/\$__tool_directory__/, $$tool{command}->{content});
-	tool_warning("Command of tool $$tool{id} uses a complex command (use of && or ; operators). Please simply by calling only one script or program that you can test more accurately outside of Galaxy environment.") if grep(/(&&|;)/, $$tool{command}->{content});
+	tool_warning($tool->{id}, "Command uses an interpreter attribute. Use of interpreter attribute inside command tag is discouraged. It tends to make embedded code more complex and renders difficult testing. Please get rid of your explicit call to \"$$tool{command}->{interpreter}\" interpreter, and write a script using a shebang that you will call directly from inside the command tag content, using command line arguments to get different behavious. Testing if such a script is a lot easier, since it can be done outside of Galaxy scope.") if exists $$tool{command}->{interpreter};
+	tool_error($tool->{id}, "Command uses \$__tool_directory__ variable. Please remove it, as it will prevent the tool to launch in PhenoMeNal Galaxy.") if grep(/\$__tool_directory__/, $$tool{command}->{content});
+	tool_warning($tool->{id}, "Command uses a complex command (use of && or ; operators). Please simply by calling only one script or program that you can test more accurately outside of Galaxy environment.") if grep(/(&&|;)/, $$tool{command}->{content});
 }
 
 # Check container {{{1
@@ -213,16 +213,16 @@ sub check_container(\%) {
 
 	# Check container tag format
 	if ($tool->{container_tag} eq 'latest') {
-		tool_error("Container tag of tool $tool->{id} is set to latest.");
+		tool_error($tool->{id}, "Container tag is set to latest.");
 	}
 	elsif ($tool->{container_tag} =~ m/^(dev_)?v.+_cv.+$/) {
 
 		# Extract tool version
 		(my $tool_version = $tool->{container_tag}) =~ s/^(dev_)?v(.+)_cv.+$/$2/;
-		tool_error("The tool version ($tool_version) contained inside container tag $tool->{container_tag} of tool $tool->{id} does not match the tool version ($tool->{version}) defined inside the tool XML file.") unless $tool_version eq $tool->{version};
+		tool_error($tool->{id}, "Version ($tool_version) contained inside container tag $tool->{container_tag} does not match the version ($tool->{version}) defined inside the tool XML file.") unless $tool_version eq $tool->{version};
 	}
 	else {
-		tool_error("Container tag $tool->{container_tag} of tool $tool->{id} does not match the format '^(dev_)?v.+_cv.+\$'.");
+		tool_error($tool->{id}, "Container tag $tool->{container_tag} does not match the format '^(dev_)?v.+_cv.+\$'.");
 	}
 }
 
@@ -233,8 +233,8 @@ sub check_job_destination(\%) {
 
 	my ($tool) = @_;
 
-	tool_error("No job destination defined for tool $tool->{id}.") if not exists($tool->{job_destination});
-	tool_warning("Tool $tool->{id} job destination ($tool->{job_destination}) is not generic.") if $tool->{job_destination} !~ m/^dynamic-k8s-.*$/;
+	tool_error($tool->{id}, "No job destination defined.") if not exists($tool->{job_destination});
+	tool_warning($tool->{id}, "Job destination ($tool->{job_destination}) is not generic.") if $tool->{job_destination} !~ m/^dynamic-k8s-.*$/;
 }
 
 # Main {{{1
