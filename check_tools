@@ -1,10 +1,14 @@
 #!/usr/bin/env perl
+# vi: fdm=marker
+
+# Use directives {{{1
+################################################################
 
 use strict;
 use warnings "all";
 use Deep::Hash::Utils;
 use File::Basename;
-use File::Spec::Functions 'catfile';
+use File::Spec::Functions;
 use File::Temp;
 use Getopt::Long;
 use Git::Repository;
@@ -77,7 +81,7 @@ sub tool_warning($$) {
 
 sub get_tool_xml_files {
 
-	my $tool_conf_file = catfile($INPUT_FOLDER, 'config', 'tool_conf.xml');
+	my $tool_conf_file = File::Spec::Functions::catfile($INPUT_FOLDER, 'config', 'tool_conf.xml');
 	die "No file \"$tool_conf_file\"." unless -f $tool_conf_file;
 
 	# Read tool_conf.xml and get all XML tool paths.
@@ -104,7 +108,7 @@ sub read_tool_xml_files() {
 
 	my $xml_parser = new XML::Simple();
 	for my $xml_file (@tool_xml_files) {
-		my $xml_file_path = catfile($INPUT_FOLDER, 'tools', $xml_file);
+		my $xml_file_path = File::Spec::Functions::catfile($INPUT_FOLDER, 'tools', $xml_file);
 		my $tool = $xml_parser->XMLin($xml_file_path);
 
 		# Version
@@ -139,7 +143,7 @@ sub read_tool_xml_files() {
 sub read_phenomenal_tools2container_yaml(\%) {
 
 	my ($tools) = @_;
-	my $yaml_file = catfile($INPUT_FOLDER, 'config', 'phenomenal_tools2container.yaml');
+	my $yaml_file = File::Spec::Functions::catfile($INPUT_FOLDER, 'config', 'phenomenal_tools2container.yaml');
 	die "No file \"$yaml_file\"." unless -f $yaml_file;
 
 	# Load YAML file
@@ -167,7 +171,7 @@ sub read_phenomenal_tools2container_yaml(\%) {
 sub read_job_conf(\%) {
 
 	my ($tools) = @_;
-	my $xml_file = catfile($INPUT_FOLDER, 'config', 'job_conf.xml');
+	my $xml_file = File::Spec::Functions::catfile($INPUT_FOLDER, 'config', 'job_conf.xml');
 	die "No file \"$xml_file\"." unless -f $xml_file;
 
 	# Load XML file
