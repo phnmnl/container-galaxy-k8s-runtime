@@ -5,7 +5,10 @@ use warnings "all";
 use Deep::Hash::Utils;
 use File::Basename;
 use File::Spec::Functions 'catfile';
+use File::Temp;
 use Getopt::Long;
+use Git::Repository;
+use LWP::Simple;
 use XML::Simple;
 use YAML::Tiny;
 
@@ -237,6 +240,28 @@ sub check_job_destination(\%) {
 	tool_warning($tool->{id}, "Job destination ($tool->{job_destination}) is not generic.") if $tool->{job_destination} !~ m/^dynamic-k8s-.*$/;
 }
 
+# Check container repos {{{1
+################################################################
+
+sub check_container_repos(\%) {
+
+	my ($tool) = @_;
+
+	# Try to clone repos
+	my $repos_name = "container-$tool->{container_image}";
+	my $repos_url = "https://github.com/phnmnl/$repos_name";
+	if (head($repos_url)) {
+# TODO Get containers repos and check tool version in README
+		# TODO optmize by not testing multiple times the same container. => Keep an hash about containers. Then just test version number for tools.
+		my $dir = File::Temp::tempdir();
+		Git::Repository->run(clone => $repos_url, $dir);
+		my $r = Git::Repository->new(work_tree => $dir );
+	}
+	else {
+		tool_error($tool->{id}, "Cannot find container GitHub repository $repos_name at $repos_url.");
+	}
+}
+
 # Main {{{1
 ################################################################
 
@@ -252,9 +277,9 @@ foreach my $tool_id (sort keys %tools) {
 	check_command(%tool);
 	check_container(%tool);
 	check_job_destination(%tool);
+	check_container_repos(%tool);
 }
 
-# TODO Get containers repos and check tool version in README
 # TODO Check that container exists
 # TODO Check latest container version on Jenkins.
 # TODO Check version of tools in workflows.
