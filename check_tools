@@ -106,7 +106,6 @@ sub get_tool_xml_files {
 sub read_tool_xml_files() {
 
 	my @tool_xml_files = get_tool_xml_files();
-	my %tools;
 
 	my $xml_parser = new XML::Simple();
 	for my $xml_file (@tool_xml_files) {
@@ -116,35 +115,32 @@ sub read_tool_xml_files() {
 		# Version
 		die "No tool ID defined inside XML tool file $xml_file_path." if ( ! exists($$tool{id}));
 		my $tool_id = $$tool{id};
-		$tools{$tool_id} = { id => $tool_id };
+		$TOOLS{$tool_id} = { id => $tool_id };
 
 		# Name
-		$tools{$tool_id}->{name} = $$tool{name} if exists($$tool{name});
+		$TOOLS{$tool_id}->{name} = $$tool{name} if exists($$tool{name});
 			
 		# Version
-		$tools{$tool_id}->{version} = $$tool{version} if exists($$tool{version});
+		$TOOLS{$tool_id}->{version} = $$tool{version} if exists($$tool{version});
 
 		# Command
 		if (exists($$tool{command})) {
 			if (ref($$tool{command})) {
-				$tools{$tool_id}->{command}->{interpreter} = $$tool{command}->{interpreter} if exists($$tool{command}->{interpreter});
-				$tools{$tool_id}->{command}->{content} = $$tool{command}->{content} if exists($$tool{command}->{content});
+				$TOOLS{$tool_id}->{command}->{interpreter} = $$tool{command}->{interpreter} if exists($$tool{command}->{interpreter});
+				$TOOLS{$tool_id}->{command}->{content} = $$tool{command}->{content} if exists($$tool{command}->{content});
 			}
 			else {
-				$tools{$tool_id}->{command}->{content} = $$tool{command};
+				$TOOLS{$tool_id}->{command}->{content} = $$tool{command};
 			}
 		}
 	}
-
-	return %tools;
 }
 
 # Read PhenoMeNal tools2container YAML {{{1
 ################################################################
 
-sub read_phenomenal_tools2container_yaml(\%) {
+sub read_phenomenal_tools2container_yaml() {
 
-	my ($tools) = @_;
 	my $yaml_file = File::Spec::Functions::catfile($INPUT_FOLDER, 'config', 'phenomenal_tools2container.yaml');
 	die "No file \"$yaml_file\"." unless -f $yaml_file;
 
@@ -164,8 +160,8 @@ sub read_phenomenal_tools2container_yaml(\%) {
 
 		# Loop on all tools of the container
 		for my $tool_id (@{$$container{tools_id}}) {
-			tool_error($tool_id, "Unknown tool found in container $name, file $yaml_file.") unless exists($$tools{$tool_id});
-			$tools->{$tool_id}->{container} = $CONTAINERS{$name};
+			tool_error($tool_id, "Unknown tool found in container $name, file $yaml_file.") unless exists($TOOLS{$tool_id});
+			$TOOLS{$tool_id}->{container} = $CONTAINERS{$name};
 		}
 	}
 }
@@ -173,9 +169,8 @@ sub read_phenomenal_tools2container_yaml(\%) {
 # Read job conf XML {{{1
 ################################################################
 
-sub read_job_conf(\%) {
+sub read_job_conf() {
 
-	my ($tools) = @_;
 	my $xml_file = File::Spec::Functions::catfile($INPUT_FOLDER, 'config', 'job_conf.xml');
 	die "No file \"$xml_file\"." unless -f $xml_file;
 
@@ -183,25 +178,23 @@ sub read_job_conf(\%) {
 	my $xml_parser = new XML::Simple();
 	my $job_conf = $xml_parser->XMLin($xml_file);
 	while (my ($tool_id, $job) = each %{$job_conf->{tools}->{tool}}) {
-		$tools->{$tool_id}->{job_destination} = $job->{destination} if exists $tools->{$tool_id} && exists($job->{destination});
+		$TOOLS{$tool_id}->{job_destination} = $job->{destination} if exists $TOOLS{$tool_id} && exists($job->{destination});
 	}
 }
 
-# Get tools info {{{1
+# Read tools info {{{1
 ################################################################
 
-sub get_tools_info {
+sub read_tools_info {
 
 	# Read first info from tool XML files
-	my %tools = read_tool_xml_files();
+	read_tool_xml_files();
 
 	# Read phenomenal_tools2container.yaml
-	read_phenomenal_tools2container_yaml(%tools);
+	read_phenomenal_tools2container_yaml();
 
 	# Read job_conf.xml
-	read_job_conf(%tools);
-
-	return %tools;
+	read_job_conf();
 }
 
 # Check command {{{1
@@ -277,8 +270,8 @@ sub check_container_repos(\%) {
 # Read arguments
 read_args();
 
-# Get tool list
-%TOOLS = get_tools_info();
+# Read tools info
+read_tools_info();
 
 # Loop on all tools
 foreach my $tool_id (sort keys %TOOLS) {
