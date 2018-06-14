@@ -321,6 +321,7 @@
     <section name="Post-Processing" id="pheno-postprocessing">
       <tool file="phenomenal/postProcessing/metaboliteidconverter.xml"/>
       <tool file="phenomenal/postProcessing/pathwayenrichment.xml"/>
+      <tool file="phenomenal/postProcessing/fingerprintclustering.xml"/>
     </section>
     
     
