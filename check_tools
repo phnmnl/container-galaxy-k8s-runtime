@@ -27,6 +27,8 @@ my $SCRIPTPATH = dirname($0);
 
 my $INPUT_FOLDER = '.';
 my $HELP = 0;
+my %CONTAINERS;
+my %TOOLS;
 
 # Print help {{{1
 ################################################################
@@ -156,11 +158,14 @@ sub read_phenomenal_tools2container_yaml(\%) {
 			die "No $field field in container." unless exists($$container{$field});
 		}
 
+		my $name = $$container{docker_image_override};
+		my $tag = $$container{docker_tag_override};
+		$CONTAINERS{$name} = { name => $name, tag => $tag };
+
 		# Loop on all tools of the container
 		for my $tool_id (@{$$container{tools_id}}) {
-			tool_error($tool_id, "Unknown tool found in container $$container{docker_image_override}, file $yaml_file.") unless exists($$tools{$tool_id});
-			$tools->{$tool_id}->{container_image} = $$container{docker_image_override};
-			$tools->{$tool_id}->{container_tag} = $$container{docker_tag_override};
+			tool_error($tool_id, "Unknown tool found in container $name, file $yaml_file.") unless exists($$tools{$tool_id});
+			$tools->{$tool_id}->{container} = $CONTAINERS{$name};
 		}
 	}
 }
@@ -219,17 +224,17 @@ sub check_container(\%) {
 	my ($tool) = @_;
 
 	# Check container tag format
-	if ($tool->{container_tag} eq 'latest') {
+	if ($tool->{container}->{tag} eq 'latest') {
 		tool_error($tool->{id}, "Container tag is set to latest.");
 	}
-	elsif ($tool->{container_tag} =~ m/^(dev_)?v.+_cv.+$/) {
+	elsif ($tool->{container}->{tag} =~ m/^(dev_)?v.+_cv.+$/) {
 
 		# Extract tool version
-		(my $tool_version = $tool->{container_tag}) =~ s/^(dev_)?v(.+)_cv.+$/$2/;
-		tool_error($tool->{id}, "Version ($tool_version) contained inside container tag $tool->{container_tag} does not match the version ($tool->{version}) defined inside the tool XML file.") unless $tool_version eq $tool->{version};
+		(my $tool_version = $tool->{container}->{tag}) =~ s/^(dev_)?v(.+)_cv.+$/$2/;
+		tool_error($tool->{id}, "Version ($tool_version) contained inside container tag $tool->{container}->{tag} does not match the version ($tool->{version}) defined inside the tool XML file.") unless $tool_version eq $tool->{version};
 	}
 	else {
-		tool_error($tool->{id}, "Container tag $tool->{container_tag} does not match the format '^(dev_)?v.+_cv.+\$'.");
+		tool_error($tool->{id}, "Container tag $tool->{container}->{tag} does not match the format '^(dev_)?v.+_cv.+\$'.");
 	}
 }
 
@@ -252,7 +257,7 @@ sub check_container_repos(\%) {
 	my ($tool) = @_;
 
 	# Try to clone repos
-	my $repos_name = "container-$tool->{container_image}";
+	my $repos_name = "container-$tool->{container}->{name}";
 	my $repos_url = "https://github.com/phnmnl/$repos_name";
 	if (head($repos_url)) {
 # TODO Get containers repos and check tool version in README
@@ -273,11 +278,11 @@ sub check_container_repos(\%) {
 read_args();
 
 # Get tool list
-my %tools = get_tools_info();
+%TOOLS = get_tools_info();
 
 # Loop on all tools
-foreach my $tool_id (sort keys %tools) {
-	my %tool = %{$tools{$tool_id}};
+foreach my $tool_id (sort keys %TOOLS) {
+	my %tool = %{$TOOLS{$tool_id}};
 	check_command(%tool);
 	check_container(%tool);
 	check_job_destination(%tool);
