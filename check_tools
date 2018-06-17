@@ -25,9 +25,13 @@ my $SCRIPTPATH = dirname($0);
 # Variables {{{1
 ################################################################
 
-my $INPUT_FOLDER = '.';
-my $HELP = 0;
+my $CHECK_ALL = 0;
+my $CHECK_CONTAINERS = 0;
+my $CHECK_TOOLS = 0;
+my $CHECK_WORKFLOWS = 0;
 my %CONTAINERS;
+my $HELP = 0;
+my $INPUT_FOLDER = '.';
 my %TOOLS;
 
 # Print help {{{1
@@ -40,9 +44,14 @@ This program will scan the configuration files for tools, and check
 that they are correctly defined.
 
 Options:
-   -h, --help           Print this help message and exits.
-   -i,--input <FOLDER>  Set the input folder to use. Default is '.'.
-"
+   -a, --check-all        Check all.
+   -c, --check-containers Check containers.
+   -h, --help             Print this help message and exits.
+   -i,--input <FOLDER>    Set the input folder to use. Default is '.'.
+   -t, --check-tools      Check tools.
+   -w, --check-workflows  Check workflows.
+";
+	exit(0);
 }
 
 # Read args {{{1
@@ -50,32 +59,36 @@ Options:
 
 sub read_args {
 
-	GetOptions('help|h' => \$HELP, 'input|i' => \$INPUT_FOLDER) or print_help();
+	GetOptions(
+		'check-all|a' => \$CHECK_ALL,
+		'check-containers|c' => \$CHECK_CONTAINERS,
+		'help|h' => \$HELP,
+		'input|i' => \$INPUT_FOLDER,
+		'check-tools|t' => \$CHECK_TOOLS,
+		'check-workflows|w' => \$CHECK_WORKFLOWS
+	) or print_help();
 
+	# Help
 	print_help() if $HELP;
 
+	# Check left arguments.
 	if (@ARGV > 0) {
 		print "No arguments allowed.\n";
 		print_help();
 	}
+
+	# Check all
+	$CHECK_CONTAINERS = $CHECK_TOOLS = $CHECK_WORKFLOWS = 1 if $CHECK_ALL;
 }
 
-# Tool error {{{1
+# Check message {{{1
 ################################################################
 
-sub tool_error($$) {
-	my ($id, $msg) = @_;
+sub check_msg($$$$) {
 
-	print("[ERROR   ON TOOL $id] $msg\n");
-}
+	my ($msg_type, $type, $id, $msg) = @_;
 
-# Tool warning {{{1
-################################################################
-
-sub tool_warning($$) {
-	my ($id, $msg) = @_;
-
-	print("[WARNING ON TOOL $id] $msg\n");
+	print(uc("[$msg_type on $type")." $id] $msg\n");
 }
 
 # Get tool XML files {{{1
@@ -160,7 +173,7 @@ sub read_phenomenal_tools2container_yaml() {
 
 		# Loop on all tools of the container
 		for my $tool_id (@{$$container{tools_id}}) {
-			tool_error($tool_id, "Unknown tool found in container $name, file $yaml_file.") unless exists($TOOLS{$tool_id});
+			check_msg("ERROR", "TOOL", $tool_id, "Unknown tool found in container $name, file $yaml_file.") unless exists($TOOLS{$tool_id});
 			$TOOLS{$tool_id}->{container} = $CONTAINERS{$name};
 		}
 	}
@@ -204,9 +217,9 @@ sub check_command(\%) {
 
 	my ($tool) = @_;
 
-	tool_warning($tool->{id}, "Command uses an interpreter attribute. Use of interpreter attribute inside command tag is discouraged. It tends to make embedded code more complex and renders difficult testing. Please get rid of your explicit call to \"$$tool{command}->{interpreter}\" interpreter, and write a script using a shebang that you will call directly from inside the command tag content, using command line arguments to get different behavious. Testing if such a script is a lot easier, since it can be done outside of Galaxy scope.") if exists $$tool{command}->{interpreter};
-	tool_error($tool->{id}, "Command uses \$__tool_directory__ variable. Please remove it, as it will prevent the tool to launch in PhenoMeNal Galaxy.") if grep(/\$__tool_directory__/, $$tool{command}->{content});
-	tool_warning($tool->{id}, "Command uses a complex command (use of && or ; operators). Please simply by calling only one script or program that you can test more accurately outside of Galaxy environment.") if grep(/(&&|;)/, $$tool{command}->{content});
+	check_msg("WARNING", "TOOL", $tool->{id}, "Command uses an interpreter attribute. Use of interpreter attribute inside command tag is discouraged. It tends to make embedded code more complex and renders difficult testing. Please get rid of your explicit call to \"$$tool{command}->{interpreter}\" interpreter, and write a script using a shebang that you will call directly from inside the command tag content, using command line arguments to get different behavious. Testing if such a script is a lot easier, since it can be done outside of Galaxy scope.") if exists $$tool{command}->{interpreter};
+	check_msg("ERROR", "TOOL", $tool->{id}, "Command uses \$__tool_directory__ variable. Please remove it, as it will prevent the tool to launch in PhenoMeNal Galaxy.") if grep(/\$__tool_directory__/, $$tool{command}->{content});
+	check_msg("WARNING", "TOOL", $tool->{id}, "Command uses a complex command (use of && or ; operators). Please simply by calling only one script or program that you can test more accurately outside of Galaxy environment.") if grep(/(&&|;)/, $$tool{command}->{content});
 }
 
 # Check container {{{1
@@ -218,16 +231,16 @@ sub check_container(\%) {
 
 	# Check container tag format
 	if ($tool->{container}->{tag} eq 'latest') {
-		tool_error($tool->{id}, "Container tag is set to latest.");
+		check_msg("ERROR", "TOOL", $tool->{id}, "Container tag is set to latest.");
 	}
 	elsif ($tool->{container}->{tag} =~ m/^(dev_)?v.+_cv.+$/) {
 
 		# Extract tool version
 		(my $tool_version = $tool->{container}->{tag}) =~ s/^(dev_)?v(.+)_cv.+$/$2/;
-		tool_error($tool->{id}, "Version ($tool_version) contained inside container tag $tool->{container}->{tag} does not match the version ($tool->{version}) defined inside the tool XML file.") unless $tool_version eq $tool->{version};
+		check_msg("ERROR", "TOOL", $tool->{id}, "Version ($tool_version) contained inside container tag $tool->{container}->{tag} does not match the version ($tool->{version}) defined inside the tool XML file.") unless $tool_version eq $tool->{version};
 	}
 	else {
-		tool_error($tool->{id}, "Container tag $tool->{container}->{tag} does not match the format '^(dev_)?v.+_cv.+\$'.");
+		check_msg("ERROR", "TOOL", $tool->{id}, "Container tag $tool->{container}->{tag} does not match the format '^(dev_)?v.+_cv.+\$'.");
 	}
 }
 
@@ -238,8 +251,8 @@ sub check_job_destination(\%) {
 
 	my ($tool) = @_;
 
-	tool_error($tool->{id}, "No job destination defined.") if not exists($tool->{job_destination});
-	tool_warning($tool->{id}, "Job destination ($tool->{job_destination}) is not generic.") if $tool->{job_destination} !~ m/^dynamic-k8s-.*$/;
+	check_msg("ERROR", "TOOL", $tool->{id}, "No job destination defined.") if not exists($tool->{job_destination});
+	check_msg("WARNING", "TOOL", $tool->{id}, "Job destination ($tool->{job_destination}) is not generic.") if $tool->{job_destination} !~ m/^dynamic-k8s-.*$/;
 }
 
 # Check container repos {{{1
@@ -260,7 +273,7 @@ sub check_container_repos(\%) {
 		my $r = Git::Repository->new(work_tree => $dir );
 	}
 	else {
-		tool_error($tool->{id}, "Cannot find container GitHub repository $repos_name at $repos_url.");
+		check_msg("ERROR", "TOOL", $tool->{id}, "Cannot find container GitHub repository $repos_name at $repos_url.");
 	}
 }
 
@@ -276,10 +289,10 @@ read_tools_info();
 # Loop on all tools
 foreach my $tool_id (sort keys %TOOLS) {
 	my %tool = %{$TOOLS{$tool_id}};
-	check_command(%tool);
-	check_container(%tool);
-	check_job_destination(%tool);
-	check_container_repos(%tool);
+	check_command(%tool) if $CHECK_TOOLS;
+	check_container(%tool) if $CHECK_CONTAINERS;
+	check_job_destination(%tool) if $CHECK_CONTAINERS;
+	check_container_repos(%tool) if $CHECK_CONTAINERS;
 }
 
 # TODO Check that container exists
