@@ -215,7 +215,7 @@
          a tag, a handler or destination that matches that tag will be
          chosen at random.  -->
     <tool id="pathway_enrichment" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="fingerprint_clustering" destination="container-fingerprintclustering"/>
+    <tool id="fingerprint_clustering" destination="dynamic-k8s-medium" resources="all"/>
     
     <!-- Fluxomics -->
     <tool id="iso2flux" destination="dynamic-k8s-small" resources="all"/>     
