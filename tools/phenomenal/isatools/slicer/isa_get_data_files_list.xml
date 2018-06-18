@@ -1,30 +1,36 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <tool id="isa_get_data_files_list" name="Get data files list" version="1.0">
-    <description>Get a list of study data files filtered on factor values</description>
+    <description>Get a list of MetaboLights study data files filtered on factor
+        values
+    </description>
 
     <requirements>
         <requirement type="package" version="6.7">click</requirement>
-        <requirement type="package" version="0.9.4">isatools</requirement>
+        <requirement type="package" version="0.9.5">isatools</requirement>
     </requirements>
 
     <stdio>
         <exit_code range="1:" level="fatal"/>
     </stdio>
-
     <command><![CDATA[
+
         #if $data_file.input == "mtbls_id"
-            run_mtblisa.py mtbls-get-data-list
-            "${data_file.mtbls_id}" "${output}"
-            --json-query "{ \"$factor_name\": \"$factor_value\" }"
+            #set $command = "mtbls-get-data-list"
+            #set $source = $data_file.mtbls_id
         #end if
 
         #if $data_file.input == "isatab_input"
-            run_mtblisa.py isa-tab-get-data-list
-            "${data_file.isatab_input.extra_files_path}" "${output}"
-            --json-query "{ \"$factor_name\": \"$factor_value\" }"
+            #set $command = "isa-tab-get-data-list"
+            #set $source = $data_file.isatab_input.extra_files_path
         #end if
-]]>
+
+        isaslicer.py "$command" "${source}" "${output}" --galaxy_parameters_file="$inputs"
+
+    ]]>
     </command>
+    <configfiles>
+        <inputs name="inputs" />
+    </configfiles>
     <inputs>
 	    <conditional name="data_file">
             <param name="input" type="select" label="Choose your ISA-Tab input source">
@@ -38,15 +44,13 @@
                 <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab"  help="An ISA-Tab datatype history item"/>
             </when>
         </conditional>
-        <param name="factor_name" type="text" label="Factor name to filter on."
-               help="Factor name relevant to the specified MetaboLights study, e.g. genotype. You can get a study's factor names by using the study_factors tool."/>
-        <param name="factor_value" type="text"
-               label="Factor value to filter on."
-               help="Factor value relevant to the specified MetaboLights study, e.g. cyp79. You can get a study's factor values by using the study_factor_values tool."/>
+        <repeat name="factor_value_series" title="Factor selection criteria" default="1">
+            <param name="factor_name" type="text" label="Factor name to filter on." help="Factor name relevant to the specified MetaboLights study, e.g. genotype."/>
+            <param name="factor_value" type="text" label="Factor value to filter on." help="Factor value relevant to the specified MetaboLights study, e.g. cyp79."/>
+        </repeat>
     </inputs>
     <outputs>
-        <data format="json" name="output"
-              label="Study sliced data files list"/>
+        <data format="json" name="output" label="Study sliced data files list"/>
     </outputs>
 
     <tests>
@@ -60,13 +64,12 @@
 
     <help>
 <!-- @@@BEGIN_RST@@@ -->
-==============================================================
-Get a list of study data files from MetaboLights or an ISA-Tab
-==============================================================
+========================================
+Get a MetaboLights study data files list
+========================================
 
 This tool returns a list of data files sliced on a filtered factor name
-and value. Queries can be made directly to MetaboLights or on existing ISA-Tab
-Galaxy history items.
+and value.
 
 -----
 Input
@@ -97,7 +100,6 @@ by using the `study_factors` tool.
 Factor value to filter on
 =========================
 Factor value relevant to the specified MetaboLights study, e.g. Exp2.
-
 You can get the relevant factor values for a particular study and factor
 by using the `study_factor_values` tool.
 

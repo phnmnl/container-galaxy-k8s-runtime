@@ -47,7 +47,7 @@ if [ -n $ANSIBLE_REPO ]
        fi
 fi
 
-GALAXY_RELEASE=release_17.09_plus_isa_k8s_resource_limts
+GALAXY_RELEASE=release_17.09_isa_k8s_resource_limts_runnerRestartJobs
 GALAXY_REPO=phnmnl/galaxy
 
 GALAXY_INIT_PHENO_TAG=$DOCKER_REPO$DOCKER_USER/galaxy-init-pheno:$TAG
@@ -100,7 +100,14 @@ POSTGRES_TAG=$DOCKER_REPO$DOCKER_USER/galaxy-postgres:$POSTGRES_VERSION"_for_"$G
 docker build -t $POSTGRES_TAG -f docker-galaxy-stable/compose/galaxy-postgres/Dockerfile docker-galaxy-stable/compose/galaxy-postgres/
 docker push $POSTGRES_TAG
 
+# Build proftpd
+PROFTPD_TAG=$DOCKER_REPO$DOCKER_USER/galaxy-proftpd:for_galaxy_v$GALAXY_VER_FOR_POSTGRES
+docker build -t $PROFTPD_TAG -f docker-galaxy-stable/compose/galaxy-proftpd/Dockerfile docker-galaxy-stable/compose/galaxy-proftpd/
+docker push $PROFTPD_TAG
+
+
 echo "Relevant containers:"
 echo "Web:          $GALAXY_WEB_K8S_TAG"
 echo "Init Flavour: $GALAXY_INIT_PHENO_FLAVOURED_TAG"
 echo "Postgres:     $POSTGRES_TAG"
+echo "Proftpd:      $PROFTPD_TAG"

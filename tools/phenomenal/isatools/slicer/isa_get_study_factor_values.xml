@@ -2,27 +2,31 @@
 <tool id="isa_get_study_factor_values" name="Get values of a study factor"
       version="1.0">
     <description>
-        Get list of factor values for given factor used in a study
+        Get list of factor values for given factor used in a MetaboLights study
     </description>
 
     <requirements>
         <requirement type="package" version="6.7">click</requirement>
-        <requirement type="package" version="0.9.4">isatools</requirement>
+        <requirement type="package" version="0.9.5">isatools</requirement>
     </requirements>
 
     <stdio>
         <exit_code range="1:" level="fatal"/>
     </stdio>
     <command><![CDATA[
+
         #if $data_file.input == "mtbls_id"
-            run_mtblisa.py mtbls-get-factor-values
-            "${mtbls_id}" "${factor_name}" "${output}"
+            #set $command = "mtbls-get-factor-values"
+            #set $source = $data_file.mtbls_id
         #end if
 
         #if $data_file.input == "isatab_input"
-            run_mtblisa.py isa-tab-get-factor-values
-            "${data_file.isatab_input.extra_files_path}" "${factor_name}" "${output}"
+            #set $command = "isa-tab-get-factor-values"
+            #set $source = $data_file.isatab_input.extra_files_path
         #end if
+
+        isaslicer.py "$command" "${source}" "${factor_name}" "${output}"
+
 ]]>
     </command>
     <inputs>
@@ -60,10 +64,9 @@
 Get list of study factors for a MetaboLights study
 ==================================================
 
-This tool gets the list of factor values from a study for a
+This tool gets the list of factor values from a MetaboLights study for a
 given study factor name. It extracts the factor values from the ISA-Tab
-study and assay tables. Queries can be made directly to MetaboLights or on
-existing ISA-Tab Galaxy history items.
+study and assay tables for the MetaboLights study.
 
 -----
 Input

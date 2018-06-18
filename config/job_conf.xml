@@ -57,7 +57,15 @@
       <param id="type">python</param>
       <param id="function">k8s_wrapper_xlarge</param>
     </destination>
-    
+   
+    <destination id="ipo-container" runner="k8s">
+      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+      <param id="docker_owner_override">phnmnl</param>
+      <param id="docker_image_override">ipo</param>
+      <param id="docker_tag_override">latest</param>
+      <param id="max_pod_retrials">3</param>
+      <param id="docker_enabled">true</param>
+    </destination>
     <destination id="biosigner-container" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -193,12 +201,12 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
-    <destination id="container-isatab-create" runner="k8s">
+    <destination id="container-fingerprintclustering" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">isatab-create</param>
-      <param id="docker_tag_override">v0.9.5_cv0.3.14.60</param>
-      <param id="max_pod_retrials">3</param>
+      <param id="docker_image_override">fingerprintclustering</param>
+      <param id="docker_tag_override">v_cv1.2.6</param>
+      <param id="max_pod_retrials">1</param>
       <param id="docker_enabled">true</param>
     </destination>
 </destinations>
@@ -225,6 +233,11 @@
     <!-- W4M Sacurine -->
     <tool id="mtbls-dwnld" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa2w4m" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa2mzml" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa2mzxml" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa2mzdata" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa2nmrml" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="isa2netcdf" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="Univariate" destination="dynamic-k8s-small" resources="all"/>
     <tool id="Multivariate" destination="dynamic-k8s-small" resources="all"/>
     <tool id="biosigner" destination="dynamic-k8s-large" resources="all"/>
@@ -256,6 +269,9 @@
     <tool id="Metabolite_ID_Converter" destination="container-metaboliteidconverter" />
     <tool id="metabomatching" destination="dynamic-k8s-small" resources="all"/>
     <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
+    <!-- new IPO -->
+    <tool id="ipo4xcmsSet" destination="dynamic-k8s-xlarge" resources="all"/>
+    <tool id="ipo4retgroup" destination="dynamic-k8s-xlarge" resources="all"/>
     <!-- new XCMS -->
     <tool id="xcms-find-peaks" destination="dynamic-k8s-large" resources="all"/>
     <tool id="xcms-collect-peaks" destination="dynamic-k8s-medium" resources="all"/>
@@ -386,7 +402,7 @@
     <tool id="aggregatemetfrag" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="passatutto" destination="dynamic-k8s-medium" resources="all"/>
     <!-- ISA related tools -->
-    <tool id="isa_create_metabo" destination="container-isatab-create" resources="all"/>
+    <tool id="isacreator_metabo" destination="dynamic-k8s-small" resources="all"/>
     <tool id="isa_get_data_files_list" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_get_data_files_collection" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_get_factors_summary" destination="dynamic-k8s-tiny" resources="all"/>
