@@ -12,6 +12,7 @@ use File::Spec::Functions;
 use File::Temp;
 use Getopt::Long;
 use Git::Repository;
+use JSON;
 use LWP::Simple;
 use XML::Simple;
 use YAML::Tiny;
@@ -33,6 +34,7 @@ my %CONTAINERS;
 my $HELP = 0;
 my $INPUT_FOLDER = '.';
 my %TOOLS;
+my %WORKFLOWS;
 
 # Print help {{{1
 ################################################################
@@ -88,6 +90,10 @@ sub check_msg($$$$) {
 
 	my ($msg_type, $type, $id, $msg) = @_;
 
+	# Check message type
+	die "Unknown message type $msg_type." unless grep(lc($msg_type), qw(error warning));
+
+	# Print message
 	print(uc("[$msg_type on $type")." $id] $msg\n");
 }
 
@@ -198,16 +204,29 @@ sub read_job_conf() {
 # Read tools info {{{1
 ################################################################
 
-sub read_tools_info {
+sub read_tools_info() {
 
-	# Read first info from tool XML files
-	read_tool_xml_files();
+	if (keys(%TOOLS) == 0) {
+		# Read first info from tool XML files
+		read_tool_xml_files();
+	}
+}
 
-	# Read phenomenal_tools2container.yaml
-	read_phenomenal_tools2container_yaml();
+# Read containers info {{{1
+################################################################
 
-	# Read job_conf.xml
-	read_job_conf();
+sub read_containers_info() {
+
+	if (keys(%CONTAINERS) == 0) {
+
+		read_tools_info();
+
+		# Read phenomenal_tools2container.yaml
+		read_phenomenal_tools2container_yaml();
+
+		# Read job_conf.xml
+		read_job_conf();
+	}
 }
 
 # Check command {{{1
@@ -277,6 +296,79 @@ sub check_container_repos(\%) {
 	}
 }
 
+# Read workflows info {{{1
+################################################################
+
+sub read_workflows_info() {
+
+	if (keys(%WORKFLOWS) == 0) {
+
+		# List .ga files in workflows folder
+		my @ga_files = <workflows/*.ga>;
+
+		# Load all .ga files
+		for my $ga_file (@ga_files) {
+			my $workflow;
+			{
+				local $/;
+				open my $fh, '<', $ga_file or die "can't open $ga_file: $!";
+				my $json = <$fh>;
+				$workflow = JSON::decode_json($json);
+			}
+
+			# Check that required field are defined
+			for my $field (qw(uuid name steps)) {
+				die "No $field field in workflow file \"$ga_file\"." unless exists($workflow->{$field});
+			}
+
+			# List tools
+			my @tools;
+			while (my ($step_n, $step) = each %{$workflow->{steps}}) {
+				if (exists($step->{tool_id}) && defined $step->{tool_id}) {
+					my %tool = (id => $step->{tool_id});
+					if (exists($step->{tool_version}) && defined $step->{tool_version}) {
+						$tool{version} = $step->{tool_version};
+					}
+					else {
+						check_msg('ERROR', 'WORKFLOW', $workflow->{name}, "No tool version defined for tool $step->{tool_id} at step $step_n of workflow.");
+					}
+					push(@tools, \%tool);
+				}
+				else {
+					check_msg('ERROR', 'WORKFLOW', $workflow->{name}, "No tool ID defined for step $step_n of workflow.");
+				}
+			}
+
+			# Set new workflow
+			$WORKFLOWS{$workflow->{uuid}} = { id => $workflow->{uuid}, name => $workflow->{name}, tools => \@tools};
+		}
+	}
+}
+
+# Check workflows {{{1
+################################################################
+
+sub check_workflows() {
+
+	# Load files
+	read_tools_info();
+	read_workflows_info();
+
+	# Loop on all workflows
+	foreach my $workflow (values %WORKFLOWS) {
+
+		# Loop on all workflow's tools
+		foreach my $tool (@{$workflow->{tools}}) {
+
+			# Check that the tool is known
+			check_msg('ERROR', 'WORKFLOW', $workflow->{name}, "Unknown tool $tool->{id}.") unless exists($TOOLS{$tool->{id}});
+
+			# Check tool version
+			check_msg('ERROR', 'WORKFLOW', $workflow->{name}, "Version $tool->{version} of tool $tool->{id} requested by workflow, but version $TOOLS{$tool->{id}}->{version} declared in tool_conf.xml.") unless $TOOLS{$tool->{id}}->{version} eq $tool->{version};
+		}
+	}
+}
+
 # Main {{{1
 ################################################################
 
@@ -295,11 +387,13 @@ foreach my $tool_id (sort keys %TOOLS) {
 	check_container_repos(%tool) if $CHECK_CONTAINERS;
 }
 
+check_workflows if $CHECK_WORKFLOWS;
+
 # TODO Check that container exists
 # TODO Check latest container version on Jenkins.
 # TODO Check version of tools in workflows.
 # TODO Run it automatically on Travis-CI.
 # TODO Pay attention to do not publish names in this file.
 # TODO Try to publish report on slack, on some channel (public-admin or release_dalcotidine?).
-# TODO Add color option.
+# TODO Add color option. Use Ncurses?
 # TODO Fail (exit > 0) when at least one error is encountered.
