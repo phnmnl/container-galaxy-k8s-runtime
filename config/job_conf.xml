@@ -201,22 +201,14 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
-    <destination id="container-fingerprintclustering" runner="k8s">
-      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-      <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">fingerprintclustering</param>
-      <param id="docker_tag_override">v_cv1.2.6</param>
-      <param id="max_pod_retrials">1</param>
-      <param id="docker_enabled">true</param>
-    </destination>
-  </destinations>
+</destinations>
   <tools>
     <!-- Tools can be configured to use specific destinations or handlers,
          identified by either the "id" or "tags" attribute.  If assigned to
          a tag, a handler or destination that matches that tag will be
          chosen at random.  -->
     <tool id="pathway_enrichment" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="fingerprint_clustering" destination="container-fingerprintclustering"/>
+    <tool id="fingerprint_clustering" destination="dynamic-k8s-medium" resources="all"/>
     
     <!-- Fluxomics -->
     <tool id="iso2flux" destination="dynamic-k8s-small" resources="all"/>     
