@@ -443,13 +443,6 @@ assignment:
   max_pod_retrials: 1
   tools_id:
    - pathway_enrichment
-   - docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_owner_override: phnmnl
-  docker_image_override: fingerprintclustering
-  docker_tag_override: latest
-  max_pod_retrials: 1
-  tools_id:
-   - fingerprint_clustering
 - docker_image_override: scp-aspera
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
