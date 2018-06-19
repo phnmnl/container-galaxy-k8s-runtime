@@ -201,13 +201,6 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
-    <destination id="container-fingerprintclustering" runner="k8s">
-      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-      <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">fingerprintclustering</param>
-      <param id="docker_tag_override">v_cv1.2.6</param>
-      <param id="max_pod_retrials">1</param>
-    </destination>
   </destinations>
   <tools>
     <!-- Tools can be configured to use specific destinations or handlers,
