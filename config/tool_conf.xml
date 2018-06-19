@@ -317,6 +317,8 @@
       <tool file="phenomenal/w4m/transformation_config.xml" labels="W4M"/>
       <tool file="phenomenal/w4m/batch_correction.xml" labels="W4M"/> 
       <tool file="phenomenal/w4m/NmrNormalization_xml.xml" labels="W4M"/>
+      <tool file="phenomenal/reshape2/melt.xml" labels="reshape2"/>
+      <tool file="phenomenal/reshape2/cast.xml" labels="reshape2"/>
     </section>
  
     <section name="Post-Processing" id="pheno-postprocessing">
