@@ -26,6 +26,7 @@
     <param name="metfrag_cli_batch_multiple_database_file" type="data" format="csv" optional="True" label="Database File" help="File containing candidates used as database" />
     <param name="additional_metfrag_scores" type="select" display="checkboxes" multiple="true" label="Additional MetFrag scores" help="Add additional MetFrag scores used to score candidates">
       <option value="OfflineMetFusionScore">Spectral Similarity (MoNA)</option>
+      <option value="StatisticalScore">Statistical Scoring</option>
     </param>
   </inputs>
   <outputs>
@@ -120,6 +121,12 @@ metfrag_cli_batch_multiple_output_1.csv
 ----
 NEWS
 ----
+
+CHANGES IN VERSION 0.4
+========================
+
+- added statistical scoring option
+
 
 CHANGES IN VERSION 0.3
 ========================

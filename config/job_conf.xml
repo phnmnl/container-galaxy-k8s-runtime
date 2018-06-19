@@ -57,7 +57,6 @@
       <param id="type">python</param>
       <param id="function">k8s_wrapper_xlarge</param>
     </destination>
-   
     <destination id="ipo-container" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -189,7 +188,7 @@
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
       <param id="docker_image_override">metfrag-vis</param>
-      <param id="docker_tag_override">v0.1_cv0.1.12</param>
+      <param id="docker_tag_override">v0.4.1_cv0.5.31</param>
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
@@ -387,6 +386,7 @@
     <tool id="map-msms2camera" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="msms2metfrag" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="metfrag-vis" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="metfrag-vis-multiple" destination="dynamic-k8s-small" resources="all"/>
     <tool id="metfrag-cli-batch-multiple" destination="dynamic-k8s-large" resources="all"/>
     <tool id="msnbase-filter-merge-msms" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="msms2metfrag-multiple" destination="dynamic-k8s-medium" resources="all"/>

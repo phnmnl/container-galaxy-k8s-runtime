@@ -278,6 +278,7 @@
     <tool file="phenomenal/ms/metfrag/metfrag-cli-batch.xml" labels="Metfrag"/>
     <tool file="phenomenal/ms/metfrag/metfrag-cli-batch-multiple.xml" labels="Metfrag"/>
     <tool file="phenomenal/ms/metfrag/metfrag-vis.xml" labels="Metfrag"/>
+    <tool file="phenomenal/ms/metfrag/metfrag-vis-multiple.xml" labels="Metfrag"/>
     <tool file="phenomenal/ms/metfrag/metfrag-aggregatemetfrag.xml" labels="Metfrag"/>
     <tool file="phenomenal/ms/metfrag/passatutto-pepscore.xml" labels="Metfrag"/>
     <tool file="phenomenal/ms/metfrag/msnbase-filter-merge-msms.xml" labels="Metfrag"/>
