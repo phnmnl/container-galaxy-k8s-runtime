@@ -517,3 +517,17 @@ assignment:
   tools_id:
   - ipo4xcmsSet
   - ipo4retgroup
+- docker_image_override: reshape2-melt
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: latest
+  max_pod_retrials: 3
+  tools_id:
+  - reshape2-melt
+- docker_image_override: reshape2-cast
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: latest
+  max_pod_retrials: 3
+  tools_id:
+  - reshape2-cast
