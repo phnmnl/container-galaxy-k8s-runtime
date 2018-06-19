@@ -140,6 +140,6 @@ echo "Init Flavour: $GALAXY_INIT_PHENO_FLAVOURED_TAG"
 echo "Postgres:     $POSTGRES_TAG"
 echo "Proftpd:      $PROFTPD_TAG"
 
-if [[ "${DOCKER_PUSH_ENABLED:-}" = "true" ]]; then
-  echo "Containers not pushed.  They are only available in your current Docker daemon"
+if [[ "${DOCKER_PUSH_ENABLED:-}" != "true" ]]; then
+  echo "Container images not pushed.  They are only available in your current Docker daemon"
 fi
