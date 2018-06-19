@@ -61,6 +61,16 @@ Note: maintainers are for containers, not necessarily tool authors. Follow links
 
 - https://github.com/phnmnl/container-galaxy-k8s-runtime.git
 
+The repository refers to some submodules.  To check it out completely use the `--recurse-submodules` option with `git clone`:
+
+    git clone --recurse-submodules  https://github.com/phnmnl/container-galaxy-k8s-runtime.git
+
+If you later want to pull latest version and also pull latest submodule updates:
+
+    git pull --recurse-submodules
+    git submodule update --recursive --remote
+
+
 ## Installation 
 
 This Galaxy deployment will be available at all **PhenoMeNal CRE deployments** (cloud, bare-metal, development, etc), which can be created through the [PhenoMeNal Portal](https://portal.phenomenal-h2020.eu/) or by using more advanced methods.

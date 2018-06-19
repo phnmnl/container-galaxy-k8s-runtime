@@ -2,10 +2,10 @@ FROM pcm32/galaxy-init-pheno
 
 MAINTAINER PhenoMeNal-H2020 Project <phenomenal-h2020-users@googlegroups.com>
 
-LABEL Description="Galaxy 17.05-phenomenal for running inside Kubernetes."
+LABEL Description="Galaxy 18.01-pheno-dev for running inside Kubernetes."
 LABEL software="Galaxy Init"
-LABEL software.version="17.05-pheno-lr"
-LABEL version="1.3"
+LABEL software.version="18.01-pheno-dev"
+LABEL version="1.5"
 
 RUN wget -O ephemeris.tar https://api.github.com/repos/galaxyproject/ephemeris/tarball/eeee87a57379b8b639b06c2a50038ef449c28d73 && \
     tar -xf ephemeris.tar && rm ephemeris.tar && \
@@ -20,6 +20,7 @@ RUN wget -O ephemeris.tar https://api.github.com/repos/galaxyproject/ephemeris/t
 
 #COPY config/galaxy.ini config/galaxy.ini
 COPY config/job_conf.xml config/job_conf.xml
+RUN sed -i 's/HANDLERS -->//' config/job_conf.xml && sed -i 's/<!-- HANDLERS//g' config/job_conf.xml
 COPY config/tool_conf.xml config/tool_conf.xml
 COPY config/sanitize_whitelist.txt config/sanitize_whitelist.txt
 COPY tools/phenomenal tools/phenomenal
