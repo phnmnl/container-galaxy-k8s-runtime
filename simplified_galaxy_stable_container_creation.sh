@@ -54,7 +54,7 @@ if [[ ! -f "${PG_Dockerfile}" ]]; then
   echo "Error!  The galaxy-postgres Dockerfile is missing under docker-galaxy-stable/.  Have you updated the repository submodules?" >&2
   exit 99
 fi
-POSTGRES_VERSION=`grep FROM "${PG_Dockerfile}" | awk -F":" '{ print $2 }'`
+POSTGRES_VERSION=$(grep FROM "${PG_Dockerfile}" | awk -F":" '{ print $2 }')
 
 POSTGRES_TAG=$DOCKER_REPO$DOCKER_USER/galaxy-postgres:$POSTGRES_VERSION"_for_"$GALAXY_VER_FOR_POSTGRES
 PROFTPD_TAG=$DOCKER_REPO$DOCKER_USER/galaxy-proftpd:for_galaxy_v$GALAXY_VER_FOR_POSTGRES
@@ -81,7 +81,7 @@ if [ -n $GALAXY_REPO ]
        if [ -n $ANSIBLE_REPO ]
        then
            sed s+$GALAXY_BASE_FROM_TO_REPLACE+$GALAXY_BASE_PHENO_TAG+ docker-galaxy-stable/compose/galaxy-init/Dockerfile > docker-galaxy-stable/compose/galaxy-init/Dockerfile_init
-           FROM=`grep ^FROM docker-galaxy-stable/compose/galaxy-init/Dockerfile_init | awk '{ print $2 }'`
+           FROM=$(grep ^FROM docker-galaxy-stable/compose/galaxy-init/Dockerfile_init | awk '{ print $2 }')
            echo "Using FROM $FROM for galaxy init"
            DOCKERFILE_INIT_1=Dockerfile_init
        fi
