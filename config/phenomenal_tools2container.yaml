@@ -241,7 +241,7 @@ assignment:
 - docker_image_override: metfrag-vis
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: latest
+  docker_tag_override: v0.4.1_cv0.5.31
   max_pod_retrials: 3
   tools_id:
   - metfrag-vis
@@ -281,7 +281,7 @@ assignment:
 - docker_image_override: metfrag-cli-batch
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v2.4.3_cv0.6.52
+  docker_tag_override: v2.4.5_cv0.7.68
   max_pod_retrials: 3
   tools_id:
   - metfrag-cli-batch
@@ -472,7 +472,7 @@ assignment:
 - docker_image_override: msnbase
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v2.2_cv0.7.54
+  docker_tag_override: v2.2_cv0.8.57
   max_pod_retrials: 3
   tools_id:
   - msnbase-read-msms

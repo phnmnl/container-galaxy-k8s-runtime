@@ -5,10 +5,13 @@
   <description>Generate a PDF summary for MetFrag result files.</description>
   <command><![CDATA[
   	mkdir /tmp/outputdir/;
-        bash /usr/local/bin/visualize-metfrag-multiple.sh $metfrag_vis_input_1 /tmp/outputdir/combined_top1_cands.csv;
-        java -jar /usr/local/bin/ConvertMetFragCSV.jar csv=/tmp/outputdir/combined_top1_cands.csv output=/tmp/outputdir/combined_top1_cands.tex propertyWhiteList=Score,SampleName,Identifier,MolecularFormula,CompoundName,NumberPeaksUsed,NoExplPeaks,MetFragWebURL,parentMZ,parentRT format=tex;
+        mkdir -p "$metfrag_vis_output_1.extra_files_path";
+        java -cp /usr/local/bin/MetFrag-Tools.jar de.ipbhalle.metfrag.conversion.PrepareMetFragOutputCSV csv=$metfrag_vis_input_1 scorenames=FragmenterScore,AutomatedPeakFingerprintAnnotationScore,AutomatedLossFingerprintAnnotationScore,OfflineMetFusionScore scoreweights=1.0,1.0,1.0,1.0 exclude=AutomatedLossFingerprintAnnotationScore_Probtypes,AutomatedPeakFingerprintAnnotationScore_Probtypes,AutomatedPeakFingerprintAnnotationScore_Values,AutomatedLossFingerprintAnnotationScore_Values output="$metfrag_vis_output_1.extra_files_path"/metfrag_vis_temp.csv;
+        bash /usr/local/bin/visualize-metfrag-multiple.sh "$metfrag_vis_output_1.extra_files_path"/metfrag_vis_temp.csv "$metfrag_vis_output_1.extra_files_path"/metfrag_vis_temp_top1.csv;
+        java -jar /usr/local/bin/ConvertMetFragCSV.jar csv="$metfrag_vis_output_1.extra_files_path"/metfrag_vis_temp_top1.csv output=/tmp/outputdir/combined_top1_cands.tex propertyWhiteList=Score,SampleName,Identifier,MolecularFormula,CompoundName,NumberPeaksUsed,NoExplPeaks,MetFragWebURL,parentMZ,parentRT format=tex;
         pdflatex -output-directory /tmp/outputdir/ /tmp/outputdir/combined_top1_cands.tex;
         mv /tmp/outputdir/combined_top1_cands.pdf $metfrag_vis_output_1;
+        rm "$metfrag_vis_output_1.extra_files_path"/metfrag_vis_temp_top1.csv "$metfrag_vis_output_1.extra_files_path"/metfrag_vis_temp.csv;
         rm -rf /tmp/outputdir/;
         rm /tmp/*.png;
   ]]>
