@@ -440,10 +440,17 @@ assignment:
 - docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: pathwayenrichment
-  docker_tag_override: v_cv2.0.20
+  docker_tag_override: v2.0_cv2.1.21
   max_pod_retrials: 1
   tools_id:
    - pathway_enrichment
+- docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_owner_override: phnmnl
+  docker_image_override: fingerprintsubnetwork
+  docker_tag_override: dev_v1.1_cv1.2.3
+  max_pod_retrials: 1
+  tools_id:
+   - fingerprint_subnetwork
 - docker_image_override: scp-aspera
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
