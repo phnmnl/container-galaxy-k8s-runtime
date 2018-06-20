@@ -6,7 +6,7 @@
     <expand macro="requirements"/>
     <expand macro="error_handling"/>
     <command detect_errors="exit_code"><![CDATA[
-        $__tool_directory__/cast.R -i '$input' -o '$output'
+        cast.R -i '$input' -o '$output'
     ]]></command>
     <inputs>
         <param name="input" type="data" format="tabular" label="Input should be molten data"/>
