@@ -422,16 +422,16 @@
 399	Benjamini and Yekutieli false discovery rate correction method (OBI:0200049)	statistics
 400	Holm-Bonferroni family-wise error rate correction method (OBI:0200066)	statistics
 401	Holm false discovery rate correction (STATO:000541)	statistics
-402 Hommel false discovery rate correction (STATO:000542)	statistics
-403 Student's t-test (OBI:0000739)	statistics
-404 Wilcoxon rank sum test (STATO:0000076)	statistics
-405 Kruskal-Wallis test (STATO:0000094)	statistics
-406 Pearson's correlation coefficient (STATO:0000280)	statistics
-407 Spearman's correlation coefficient (STATO:0000201)	statistics
-408 Pareto scaling (OBI:0200037)	statistics
+402	Hommel false discovery rate correction (STATO:000542)	statistics
+403	Student's t-test (OBI:0000739)	statistics
+404	Wilcoxon rank sum test (STATO:0000076)	statistics
+405	Kruskal-Wallis test (STATO:0000094)	statistics
+406	Pearson's correlation coefficient (STATO:0000280)	statistics
+407	Spearman's correlation coefficient (STATO:0000201)	statistics
+408	Pareto scaling (OBI:0200037)	statistics
 409	mean centering (OBI:0200029)	statistics
-410 unit-variance scaling (OBI:0200149)	statistics
-411 logarithmic transformation (OBI:0200094)	statistics
+410	unit-variance scaling (OBI:0200149)	statistics
+411	logarithmic transformation (OBI:0200094)	statistics
 412	PCA by singular value decomposition (OBI:0200051)	statistics
 413	PLS by nonlinear iterative partial least squares (OBI:0200107)	statistics
 414	OPLS by nonlinear iterative partial least squares ()	statistics
