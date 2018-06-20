@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Eco-Metabolomics]-->
+<tool id="mtbls520_12_species_marchantia" name="mtbls520_12_species_marchantia" version="1.1">
+  <requirements>
+    <container type="docker">korseby/mtbls520</container>
+  </requirements>
+  <description>Exemplary annotation of MS1 features in the profile of Marchantia polymorpha as part of the MTBLS520 study.</description>
+  <stdio>
+    <regex match="" source="stderr" level="warning" description="R messages" />
+    <exit_code range="1:" level="fatal" description="Tool error" />
+  </stdio>
+  <command><![CDATA[
+mtbls520_12_species_marchantia.r $infile1 $outfile1;
+  ]]>
+  </command>
+  <inputs>
+    <param name="infile1" type="data" format="rdata" optional="False" label="Input Rdata file" />
+  </inputs>
+  <outputs>
+    <data name="outfile1" type="data" format="pdf" label="Marchantia polymorpha profile" />
+  </outputs>
+  <help>
+==================================
+MTBLS520 Eco-Metabolomics workflow
+==================================
+
+This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
+
+Module
+	| Species Marchantia
+	|
+
+Description
+	| Exemplary annotation of MS1 features in the profile of Marchantia polymorpha
+	|
+
+-----
+Input
+-----
+
+Input Rdata
+	| Rdata file
+	|
+
+------
+Output
+------
+
+Marchantia polymorpha profile
+	| PDF plot
+	|
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+For updates and documentation, please visit **https://github.com/korseby/container-mtbls520** or contact **Kristian Peters (kpeters@ipb-halle.de)**.
+
+  </help>
+</tool>
+

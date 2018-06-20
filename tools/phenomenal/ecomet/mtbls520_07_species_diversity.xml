@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Eco-Metabolomics]-->
+<tool id="mtbls520_07_species_diversity" name="mtbls520_07_species_diversity" version="1.1">
+  <requirements>
+    <container type="docker">korseby/mtbls520</container>
+  </requirements>
+  <description>Generate matrix of various species diversity indices from the MTBLS520 study.</description>
+  <stdio>
+    <regex match="" source="stderr" level="warning" description="R messages" />
+    <exit_code range="1:" level="fatal" description="Tool error" />
+  </stdio>
+  <command><![CDATA[
+mtbls520_07_species_diversity.r $infile1 $divcsv $rdata;
+  ]]>
+  </command>
+  <inputs>
+    <param name="infile1" type="data" format="rdata" optional="False" label="Input Preprocess Rdata file" />
+  </inputs>
+  <outputs>
+    <data name="divcsv" type="data" format="csv" label="Species diversity matrix" />
+    <data name="rdata" type="data" format="rdata" label="Final Rdata file" />
+  </outputs>
+  <help>
+==================================
+MTBLS520 Eco-Metabolomics workflow
+==================================
+
+This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
+
+Module
+	| Species diversity
+	|
+
+Description
+	| Generate matrix of various species diversity indices
+	|
+
+-----
+Input
+-----
+
+Preprocess Rdata
+	| Input Rdata file
+	|
+
+------
+Output
+------
+
+Species diversity matrix
+	| Species diversity matrix in CSV format
+	|
+
+Final Rdata
+	| Rdata file. Please connect this Rdata file to the subsequent modules of the MTBLS520 workflow.
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+For updates and documentation, please visit **https://github.com/korseby/container-mtbls520** or contact **Kristian Peters (kpeters@ipb-halle.de)**.
+
+  </help>
+</tool>
+
