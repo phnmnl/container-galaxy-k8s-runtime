@@ -161,14 +161,6 @@
       <param id="max_pod_retrials">1</param>
       <param id="docker_enabled">true</param>
     </destination>
-    <destination id="mtbls-labs-uploader-container" runner="k8s">
-      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
-      <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">mtbl-labs-uploader</param>
-      <param id="docker_tag_override">v0.1.0_cv0.3.11</param>
-      <param id="max_pod_retrials">3</param>
-      <param id="docker_enabled">true</param>
-    </destination>
     <destination id="container-metaboliteidconverter" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -255,7 +247,7 @@
     <tool id="mzml2isa" destination="dynamic-k8s-small" resources="all"/>
     <tool id="nmrml2isa" destination="dynamic-k8s-small" resources="all"/>
     <tool id="mtbls-downloader" destination="mtbls-downloader-container"/>
-    <tool id="mtbls-labs-uploader" destination="mtbls-labs-uploader-container"/>
+    <tool id="mtbls-labs-uploader" destination="dynamic-k8s-small"/>
     <tool id="metfragcli" destination="metfrag-cli-container"/>
     <tool id="Metabolite_ID_Converter" destination="container-metaboliteidconverter" />
     <tool id="metabomatching" destination="dynamic-k8s-small" resources="all"/>
@@ -394,7 +386,7 @@
     <tool id="aggregatemetfrag" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="passatutto" destination="dynamic-k8s-medium" resources="all"/>
     <!-- ISA related tools -->
-    <tool id="isacreator_metabo" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="isacreate_metabo" destination="dynamic-k8s-small" resources="all"/>
     <tool id="isa_get_data_files_list" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_get_data_files_collection" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_get_factors_summary" destination="dynamic-k8s-tiny" resources="all"/>
@@ -402,7 +394,7 @@
     <tool id="isa_get_study_factors" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isatab2json" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isatab_validator" destination="dynamic-k8s-tiny" resources="all"/>
-    <tool id="mtbls-factors-viz" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="isa_factors_viz" destination="dynamic-k8s-small" resources="all"/>
     <tool id="mw2isa" destination="dynamic-k8s-small" resources="all"/>
     <!-- Other tools -->
     <tool id="melt" destination="dynamic-k8s-tiny" resources="all"/>
