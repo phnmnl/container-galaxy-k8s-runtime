@@ -1,10 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<tool id="isa_get_data_files_list" name="Get data files list" version="1.0">
+<tool id="isa_get_data_files_list" name="isa_get_data_files_list" version="1.1">
     <description>Get a list of ISA study data files filtered on factor values</description>
     <requirements>
         <requirement type="package" version="6.7">click</requirement>
         <requirement type="package" version="0.9.5">isatools</requirement>
     </requirements>
+
     <stdio>
         <exit_code range="1:" level="fatal"/>
     </stdio>
@@ -34,7 +35,9 @@
                 <option value="isatab_input">ISA-Tab datatype history item</option>
             </param>
             <when value="mtbls_id">
-                <param name="mtbls_id" type="text" label="MetaboLights Study Identifier" help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
+                <param name="mtbls_id" type="text" label="MetaboLights Study Identifier" help="MTBLS ID available at MetaboLights, e.g. MTBLS1.">
+                    <validator type="regex" message="ID must look like a valid MTBLS identifier">^MTBLS[0-9]*$</validator>
+                </param>
             </when>
             <when value="isatab_input">
                 <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab"  help="An ISA-Tab datatype history item"/>
@@ -77,7 +80,7 @@ history item that has already been downloaded or created in Galaxy.
 MetaboLights Study Identifier
 =============================
 If the input source is Metabolights, then provide the MTBLS identifier
-available at MetaboLights, e.g. MTBLS2.
+available at MetaboLights, e.g. MTBLS.
 
 ISA-Tab datatype history item
 =============================
