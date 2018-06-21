@@ -1,69 +1,93 @@
-<tool id="mtbls-labs-uploader" name="MetaboLights Labs Uploader" version="0.1.0">
-    <description>Uploads data to a user workspace's within the MetaboLights Labs staging area at the European Bioinformatics Institute (EBI).</description>
-
-    
+<tool id="mtbls-labs-uploader" name="MetaboLights Labs Uploader" version="0.2.0">
+    <description>
+        Uploads data to a user workspace's within the MetaboLights Labs
+        staging area at the European Bioinformatics Institute (EBI).
+    </description>
+    <stdio>
+        <exit_code range="1:" />
+    </stdio>
     <command><![CDATA[
-	    #if str( $maf_file ) != "None":
-	    ln -s "$maf_file" maf.zip;
-	    #end if
-	    #if str( $data_file) != "None":
-	    ln -s "$data_file" data.tar;
-	    #end if
-	    ln -s "$isa_file" isa.zip;
-	    uploadToMetaboLightsLabs.py -t "$metabolights_labs_key" -i 
-	    #if str( $maf_file ) != "None":
-	    maf.zip
-	    #end if
-	    #if str( $data_file) != "None":
-	    data.tar
-	    #end if
-	    isa.zip
-	    #if str( $labs_project_id ) != "None" and str( $new_project.create ) == "no":
-	    -p "$labs_project_id" 
-	    #end if
-	    #if str( $new_project.create ) == "yes":
-	    -n
-	    #end if
-	    -s dev
-	    ]]>
-    </command>
-
+        #if str( $input_type.input_type_selector) == "isa-tab":
+            uploadToMetaboLightsLabs.py -t "$metabolights_labs_key"
+            --I $isatab_input.extra_files_path
+            --v $validation_report
+        #else:
+            ln -s "$maf_file" maf.zip;
+            ln -s "$data_file" data.tar;
+            ln -s "$isa_file" isa.zip;
+            uploadToMetaboLightsLabs.py -t "$metabolights_labs_key"
+            #if str( $maf_file ) != None:
+                --i maf.zip data.tar isa.zip
+            #else:
+                --i data.tar isa.zip
+            #end if
+        #end if
+        #if str( $labs_project_id ) != None and str( $create_new_project ) == "no":
+            -p "$labs_project_id"
+        #end if
+        #if str( $create_new_project ) == "yes":
+            -n
+        #end if
+        -s dev
+]]></command>
     <inputs>
-	<param name="metabolights_labs_key" format="txt" type="text" label="MetaboLights Labs Key"  help="You should get this from the MetaboLights Labs Website or the MetaboLights website (see help below)"/>
-        <param name="maf_file" type="data" format="zip" label="Zip file containing MAF files." help="The MAF Zip file is optional" optional="true"/>
-        <param name="isa_file" type="data" format="zip" label="Zip file containing ISA files." optional="false"/>
-	<param name="data_file" type="data" format="tar" label="TAR file containing RAW data files"  help="" optional="true"/>
-	<conditional name="new_project">
-          <param name="create" label="Create new project" type="select">
+        <param name="metabolights_labs_key" format="txt" type="text" label="MetaboLights Labs Key" help="You should get this from the MetaboLights Labs Website or the MetaboLights website (see help below)"/>
+	    <conditional name="input_type">
+            <param name="input_type_selector" type="select" label="Choose your ISA-Tab input source">
+                <option value="isa-tab" selected="true">ISA-Tab datatype history item</option>
+                <option value="archives">Individual compressed archives</option>
+            </param>
+            <when value="isa-tab">
+                <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab"  help="An ISA-Tab datatype history item" optional="false"/>
+                <param format="json" name="validation_report" type="data" label="Validation report"  help="Validation report in JSON format" optional="true"/>
+            </when>
+            <when value="archives">
+                <param name="isa_file" type="data" format="zip" label="Zip file containing ISA files." optional="false"/>
+                <param name="data_file" type="data" format="tar" label="TAR file containing RAW data files" help="" optional="true"/>
+                <param name="maf_file" type="data" format="zip" label="Zip file containing MAF files." help="The MAF Zip file is optional" optional="true"/>
+            </when>
+        </conditional>
+        <param name="create_new_project" label="Create new project" type="select">
             <option value="yes">Yes</option>
             <option value="no" selected="true">No</option>
-          </param>
-        </conditional>
-        <param name="labs_project_id" format="txt" type="text" label="Existing MetaboLights Labs Project ID"  help="Enter the MetaboLights Labs Project ID if you want to add files to an existing project"/>
-     </inputs>
-    <outputs> 
-	<data name="log_file" format="txt" label="Uploader Log" from_work_dir="cli.log" visible="true"/>
+        </param>
+        <param name="labs_project_id" format="txt" type="text" label="Existing MetaboLights Labs Project ID" help="Enter the MetaboLights Labs Project ID if you want to add files to an existing project"/>
+    </inputs>
+    <outputs>
+        <data name="log_file" format="txt" label="Uploader Log" from_work_dir="cli.log"/>
     </outputs>
     <tests>
         <test>
+            <output name="log_file" file="cli.log"/>
         </test>
     </tests>
-    <help><![CDATA[
+    <help>
+        <![CDATA[
 **Overview**
 
-A program to upload metabolomics data to MetaboLights Labs, previously to converting them to studies. The aim of the tool is to assist researchers in the deposition of metabolomics data into MetaboLights, by providing upload facilities for data and meta-data that should be part of a deposition, but that are not completely finalized to be directly deposited. The MetaboLights Labs interface provides the user with the ability to make necessary adjustments to go from those files uploaded to a properly formatted MetaboLights Study for deposition.
+A program to upload metabolomics data to MetaboLights Labs, previously to
+converting them to studies. The aim of the tool is to assist researchers in
+the deposition of metabolomics data into MetaboLights, by providing upload
+facilities for data and meta-data that should be part of a deposition, but
+that are not completely finalized to be directly deposited. The MetaboLights
+Labs interface provides the user with the ability to make necessary
+adjustments to go from those files uploaded to a properly formatted
+MetaboLights Study for deposition.
+
 
 **How to get your MetaboLights Labs Key**
 
-Go to https://wwwdev.ebi.ac.uk/metabolights, press on the login button to the top right (or create an account if you don't have one). Once logged in, in the section of account options, press the "My Account" button. In this new page you will see a form, scroll down to the bottom of it to find your MetaboLights API Key (it is the same key for Labs). Press the copy button to the right, which will add the key to your clipboard. You can paste it now in the MetaboLights Labs Key field in the Galaxy tool above.
-    ]]></help>
+Go to https://wwwdev.ebi.ac.uk/metabolights, press on the login button to the
+top right (or create an account if you don't have one). Once logged in, in the
+section of account options, press the "My Account" button. In this new page
+you will see a form, scroll down to the bottom of it to find your MetaboLights
+API Key (it is the same key for Labs). Press the copy button to the right,
+which will add the key to your clipboard. You can paste it now in the
+MetaboLights Labs Key field in the Galaxy tool above.
+]]></help>
     <citations>
         <citation type="doi">10.1002/0471250953.bi1413s53</citation>
         <citation type="doi">10.1007/s11306-015-0879-3</citation>
         <citation type="doi">10.1038/ng.1054</citation>
     </citations>
 </tool>
-
-
-
-
