@@ -406,34 +406,31 @@
     <tool id="mtbls520_02a_raw_extract" destination="dynamic-k8s-large" resources="all"/>
     <tool id="mtbls520_02b_qc_extract" destination="dynamic-k8s-large" resources="all"/>
     <tool id="mtbls520_02_extract" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="mtbls520_03_quality_control" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="mtbls520_04_preparations" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="mtbls520_05a_import_maf" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="mtbls520_05b_peak_picking" destination="dynamic-k8s-xlarge" resources="all"/>
-    <tool id="mtbls520_06_import_traits" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="mtbls520_07_species_diversity" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="mtbls520_08a_species_shannon" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="mtbls520_08b_species_unique" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="mtbls520_08c_species_variability" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="mtbls520_08d_concentration" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="mtbls520_08e_species_features" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="mtbls520_09_species_venn" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="mtbls520_10_species_varpart" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="mtbls520_11_species_nmds" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="mtbls520_12_species_marchantia" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="mtbls520_14_ecology_varpart" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="mtbls520_15_ecology_pca" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="mtbls520_16_ecology_rda" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="mtbls520_17_ecology_splsda" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="mtbls520_18_phylogeny" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="mtbls520_19a_seasons_shannon" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="mtbls520_19b_seasons_unique" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="mtbls520_19c_seasons_variability" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="mtbls520_19d_seasons_concentration" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="mtbls520_19e_seasons_features" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="mtbls520_22_seasons_pca" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="mtbls520_23_seasons_rda" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="mtbls520_24_seasons_nmds" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_quality_control" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_preparations" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_import_maf" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_peak_picking" destination="dynamic-k8s-xlarge" resources="all"/>
+    <tool id="ecomet_import_traits" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_species_diversity" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_species_shannon" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_species_unique" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_species_variability" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_concentration" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_species_features" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_species_venn" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_species_varpart" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_species_nmds" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_species_marchantia" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_ecology_varpart" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_ecology_rda" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_phylogeny" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_seasons_shannon" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_seasons_unique" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_seasons_variability" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_seasons_concentration" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_seasons_features" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_seasons_rda" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_seasons_nmds" destination="dynamic-k8s-large" resources="all"/>
     <!-- ISA related tools -->
     <tool id="isacreator_metabo" destination="dynamic-k8s-small" resources="all"/>
     <tool id="isa_get_data_files_list" destination="dynamic-k8s-tiny" resources="all"/>
