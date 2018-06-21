@@ -44,7 +44,7 @@ assignment:
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: mtbls-factors-viz
-  docker_tag_override: v0.4_cv0.3.11
+  docker_tag_override: latest
   max_pod_retrials: 3
   
 - tools_id:
@@ -484,8 +484,8 @@ assignment:
 - docker_image_override: mtbl-labs-uploader
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v0.1.0_cv0.3.11
-  max_pod_retrials: 3
+  docker_tag_override: latest
+  max_pod_retrials: 1
   tools_id:
   - mtbls-labs-uploader
 - docker_image_override: isatab-create
