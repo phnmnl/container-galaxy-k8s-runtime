@@ -58,7 +58,7 @@
   <section name="Data Transfer" id="MetaboLights_transfer">
     <tool file="phenomenal/w4m/mtbls-dwnld.xml" labels="W4M"/>
     <tool file="phenomenal/transfer/metabolights-labs-uploader.xml" labels="MTBLS"/>
-    <tool file="phenomenal/isatools/mw2isatab.xml" labels="ISA"/>
+    <tool file="phenomenal/isatools/other/mw2isatab.xml" labels="ISA"/>
    </section>
     
    <section name="Study Metadata Exploration" id="explore_metadata">
