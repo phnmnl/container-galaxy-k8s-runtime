@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="mtbls520_06_import_traits" name="mtbls520_06_import_traits" version="1.1">
+<tool id="ecomet_import_traits" name="Import Traits" version="1.1">
   <requirements>
     <container type="docker">korseby/mtbls520</container>
   </requirements>
@@ -21,9 +21,9 @@ mtbls520_06_import_traits.r $infile1 $infile2 $rdata;
     <data name="rdata" type="data" format="rdata" label="Preprocess Rdata file" />
   </outputs>
   <help>
-==================================
-MTBLS520 Eco-Metabolomics workflow
-==================================
+=========================
+Eco-Metabolomics workflow
+=========================
 
 This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
 

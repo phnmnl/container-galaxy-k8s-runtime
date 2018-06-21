@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="mtbls520_23_seasons_rda" name="mtbls520_23_seasons_rda" version="1.1">
+<tool id="ecomet_seasons_rda" name="Seasons RDA" version="1.1">
   <requirements>
     <container type="docker">korseby/mtbls520</container>
   </requirements>
@@ -21,9 +21,9 @@ mtbls520_23_seasons_rda.r $infile1 $outfile1 $outfile2;
     <data name="outfile2" type="data" format="pdf" label="Seasons dbRDA plot" />
   </outputs>
   <help>
-==================================
-MTBLS520 Eco-Metabolomics workflow
-==================================
+=========================
+Eco-Metabolomics workflow
+=========================
 
 This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
 

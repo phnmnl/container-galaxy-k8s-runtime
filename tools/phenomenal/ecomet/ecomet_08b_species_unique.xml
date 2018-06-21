@@ -1,38 +1,37 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="mtbls520_16_ecology_rda" name="mtbls520_16_ecology_rda" version="1.1">
+<tool id="ecomet_species_unique" name="Species Unique" version="1.1">
   <requirements>
     <container type="docker">korseby/mtbls520</container>
   </requirements>
-  <description>Perform distance-based redundancy analysis (dbRDA) on the species with ecological characteristics.</description>
+  <description>Calculate species unique features from the MTBLS520 study.</description>
   <stdio>
     <regex match="" source="stderr" level="warning" description="R messages" />
     <exit_code range="1:" level="fatal" description="Tool error" />
   </stdio>
   <command><![CDATA[
-mtbls520_16_ecology_rda.r $infile1 $outfile1 $outfile2;
+mtbls520_08b_species_unique.r $infile1 $outfile1;
   ]]>
   </command>
   <inputs>
     <param name="infile1" type="data" format="rdata" optional="False" label="Input Rdata file" />
   </inputs>
   <outputs>
-    <data name="outfile1" type="data" format="csv" label="Summary of species dbRDA envfit" />
-    <data name="outfile2" type="data" format="pdf" label="Species dbRDA plot" />
+    <data name="outfile1" type="data" format="pdf" label="Species unique features" />
   </outputs>
   <help>
-==================================
-MTBLS520 Eco-Metabolomics workflow
-==================================
+=========================
+Eco-Metabolomics workflow
+=========================
 
 This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
 
 Module
-	| Species dbRDA
+	| Species unique features
 	|
 
 Description
-	| Perform distance-based redundancy analysis (dbRDA) on the species with ecological characteristics
+	| Calculate species unique features
 	|
 
 -----
@@ -47,11 +46,7 @@ Input Rdata
 Output
 ------
 
-Summary of species dbRDA
-	| Summary in text format
-	|
-
-Species dbRDA
+Species unique features
 	| PDF plot
 	|
 

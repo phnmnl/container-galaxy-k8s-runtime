@@ -1,38 +1,37 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="mtbls520_19c_seasons_variability" name="mtbls520_19c_seasons_variability" version="1.1">
+<tool id="ecomet_species_varpart" name="Species Varpart" version="1.1">
   <requirements>
     <container type="docker">korseby/mtbls520</container>
   </requirements>
-  <description>Show seasons variability from the MTBLS520 study.</description>
+  <description>Perform variation partitioning on the species data from the MTBLS520 study.</description>
   <stdio>
     <regex match="" source="stderr" level="warning" description="R messages" />
     <exit_code range="1:" level="fatal" description="Tool error" />
   </stdio>
   <command><![CDATA[
-mtbls520_19c_seasons_variability.r $infile1 $outfile1 $outfile2;
+mtbls520_10_species_varpart.r $infile1 $outfile1;
   ]]>
   </command>
   <inputs>
     <param name="infile1" type="data" format="rdata" optional="False" label="Input Rdata file" />
   </inputs>
   <outputs>
-	<data name="outfile1" type="data" format="pdf" label="Seasons variability Histogram" />
-    <data name="outfile2" type="data" format="pdf" label="Seasons variability plot" />
+    <data name="outfile1" type="data" format="pdf" label="Species variation partitioning" />
   </outputs>
   <help>
-==================================
-MTBLS520 Eco-Metabolomics workflow
-==================================
+=========================
+Eco-Metabolomics workflow
+=========================
 
 This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
 
 Module
-	| Seasons variability
+	| Species variation partitioning
 	|
 
 Description
-	| Calculate seasons variability
+	| Perform variation partitioning on the species data
 	|
 
 -----
@@ -47,13 +46,9 @@ Input Rdata
 Output
 ------
 
-Seasons variability Histogram
+Species variation partitioning
 	| PDF plot
-	| 
-
-Seasons variability
-	| PDF plot
-	| 
+	|
 
 ---------------------------------------------------
 

@@ -285,38 +285,35 @@
     <tool file="phenomenal/ms/metfrag.xml"  labels="Metfrag"/>
   </section>
   <section name="Eco-Metabolomics" id="ecomet">
-    <tool file="phenomenal/ecomet/mtbls520_01_mtbls_download.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_02a_raw_extract.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_02b_qc_extract.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_02_extract.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_03_quality_control.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_04_preparations.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_05a_import_maf.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_05b_peak_picking.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_06_import_traits.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_07_species_diversity.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_08a_species_shannon.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_08b_species_unique.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_08c_species_variability.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_08d_concentration.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_08e_species_features.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_09_species_venn.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_10_species_varpart.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_11_species_nmds.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_12_species_marchantia.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_14_ecology_varpart.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_15_ecology_pca.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_16_ecology_rda.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_17_ecology_splsda.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_18_phylogeny.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_19a_seasons_shannon.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_19b_seasons_unique.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_19c_seasons_variability.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_19d_seasons_concentration.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_19e_seasons_features.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_22_seasons_pca.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_23_seasons_rda.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/mtbls520_24_seasons_nmds.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_01_mtbls_download.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_02a_raw_extract.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_02b_qc_extract.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_02_extract.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_03_quality_control.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_04_preparations.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_05a_import_maf.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_05b_peak_picking.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_06_import_traits.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_07_species_diversity.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_08a_species_shannon.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_08b_species_unique.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_08c_species_variability.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_08d_concentration.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_08e_species_features.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_09_species_venn.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_10_species_varpart.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_11_species_nmds.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_12_species_marchantia.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_14_ecology_varpart.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_16_ecology_rda.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_18_phylogeny.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_19a_seasons_shannon.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_19b_seasons_unique.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_19c_seasons_variability.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_19d_seasons_concentration.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_19e_seasons_features.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_23_seasons_rda.xml" labels="EcoMet"/>
+    <tool file="phenomenal/ecomet/ecomet_24_seasons_nmds.xml" labels="EcoMet"/>
   </section>
   <section name="miscellaneous" id="pheno-misc">
     <tool file="phenomenal/ms/convertCAMERAToOpenMS/cameraToFeatureXML.xml" labels="OpenMS"/> 

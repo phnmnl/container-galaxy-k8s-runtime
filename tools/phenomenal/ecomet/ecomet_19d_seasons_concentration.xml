@@ -1,39 +1,37 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="mtbls520_18_phylogeny" name="mtbls520_18_phylogeny" version="1.1">
+<tool id="ecomet_seasons_concentration" name="Seasons Concentration" version="1.1">
   <requirements>
     <container type="docker">korseby/mtbls520</container>
   </requirements>
-  <description>Perform phylogeny comparison analysis from the MTBLS520 study.</description>
+  <description>Calculate seasons concentrations from the MTBLS520 study</description>
   <stdio>
     <regex match="" source="stderr" level="warning" description="R messages" />
     <exit_code range="1:" level="fatal" description="Tool error" />
   </stdio>
   <command><![CDATA[
-mtbls520_18_phylogeny.r $infile1 $infile2 $outfile1 $outfile2;
+mtbls520_19d_seasons_concentration.r $infile1 $outfile1;
   ]]>
   </command>
   <inputs>
     <param name="infile1" type="data" format="rdata" optional="False" label="Input Rdata file" />
-    <param name="infile2" type="data" format="txt" optional="False" label="Input phylogeny file" />
   </inputs>
   <outputs>
-    <data name="outfile1" type="data" format="pdf" label="Phylogeny Procrustes analysis" />
-    <data name="outfile2" type="data" format="pdf" label="Phylogeny comparison plot" />
+    <data name="outfile1" type="data" format="pdf" label="Seasons concentration" />
   </outputs>
   <help>
-==================================
-MTBLS520 Eco-Metabolomics workflow
-==================================
+=========================
+Eco-Metabolomics workflow
+=========================
 
 This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
 
 Module
-	| Phylogeny and chemotaxonomy comparison analysis
+	| Seasons concentrations
 	|
 
 Description
-	| Perform phylogeny and chemotaxonomy comparison analysis
+	| Calculate seasons concentrations
 	|
 
 -----
@@ -44,19 +42,11 @@ Input Rdata
 	| Rdata file
 	|
 
-Input phylogeny
-	| Text file
-	|
-
 ------
 Output
 ------
 
-Phylogeny Procrustes analysis
-	| PDF plot
-	| 
-
-Phylogeny and chemotaxonomy comparison
+Seasons concentration
 	| PDF plot
 	| 
 

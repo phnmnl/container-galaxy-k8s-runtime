@@ -1,58 +1,59 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="mtbls520_07_species_diversity" name="mtbls520_07_species_diversity" version="1.1">
+<tool id="ecomet_import_maf" name="Import MAF" version="1.1">
   <requirements>
     <container type="docker">korseby/mtbls520</container>
   </requirements>
-  <description>Generate matrix of various species diversity indices from the MTBLS520 study.</description>
+  <description>Import MAF file from the MTBLS520 study.</description>
   <stdio>
     <regex match="" source="stderr" level="warning" description="R messages" />
     <exit_code range="1:" level="fatal" description="Tool error" />
   </stdio>
   <command><![CDATA[
-mtbls520_07_species_diversity.r $infile1 $divcsv $rdata;
+mtbls520_05a_import_maf.r $infile1 $infile2 $rdata;
   ]]>
   </command>
   <inputs>
     <param name="infile1" type="data" format="rdata" optional="False" label="Input Preprocess Rdata file" />
+    <param name="infile2" type="data" format="tabular" optional="False" label="Input Study MAF file" />
   </inputs>
   <outputs>
-    <data name="divcsv" type="data" format="csv" label="Species diversity matrix" />
-    <data name="rdata" type="data" format="rdata" label="Final Rdata file" />
+    <data name="rdata" type="data" format="rdata" label="Preprocess Rdata file" />
   </outputs>
   <help>
-==================================
-MTBLS520 Eco-Metabolomics workflow
-==================================
+=========================
+Eco-Metabolomics workflow
+=========================
 
 This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
 
 Module
-	| Species diversity
+	| Import MAF
 	|
 
 Description
-	| Generate matrix of various species diversity indices
+	| Import MAF file
 	|
 
 -----
 Input
 -----
 
-Preprocess Rdata
-	| Input Rdata file
+Input Preprocess Rdata
+	| Rdata file from the preparations module
+	|
+
+Input study MAF
+	| Metabolights Assignment file containing the feature matrix
 	|
 
 ------
 Output
 ------
 
-Species diversity matrix
-	| Species diversity matrix in CSV format
+Preprocess Rdata
+	| Rdata file. Please connect this Rdata file to the ecological characteristics module of the MTBLS520 workflow.
 	|
-
-Final Rdata
-	| Rdata file. Please connect this Rdata file to the subsequent modules of the MTBLS520 workflow.
 
 ---------------------------------------------------
 

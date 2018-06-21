@@ -1,37 +1,37 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="mtbls520_08b_species_unique" name="mtbls520_08b_species_unique" version="1.1">
+<tool id="ecomet_species_marchantia" name="Species Marchantia" version="1.1">
   <requirements>
     <container type="docker">korseby/mtbls520</container>
   </requirements>
-  <description>Calculate species unique features from the MTBLS520 study.</description>
+  <description>Exemplary annotation of MS1 features in the profile of Marchantia polymorpha as part of the MTBLS520 study.</description>
   <stdio>
     <regex match="" source="stderr" level="warning" description="R messages" />
     <exit_code range="1:" level="fatal" description="Tool error" />
   </stdio>
   <command><![CDATA[
-mtbls520_08b_species_unique.r $infile1 $outfile1;
+mtbls520_12_species_marchantia.r $infile1 $outfile1;
   ]]>
   </command>
   <inputs>
     <param name="infile1" type="data" format="rdata" optional="False" label="Input Rdata file" />
   </inputs>
   <outputs>
-    <data name="outfile1" type="data" format="pdf" label="Species unique features" />
+    <data name="outfile1" type="data" format="pdf" label="Marchantia polymorpha profile" />
   </outputs>
   <help>
-==================================
-MTBLS520 Eco-Metabolomics workflow
-==================================
+=========================
+Eco-Metabolomics workflow
+=========================
 
 This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
 
 Module
-	| Species unique features
+	| Species Marchantia
 	|
 
 Description
-	| Calculate species unique features
+	| Exemplary annotation of MS1 features in the profile of Marchantia polymorpha
 	|
 
 -----
@@ -46,7 +46,7 @@ Input Rdata
 Output
 ------
 
-Species unique features
+Marchantia polymorpha profile
 	| PDF plot
 	|
 

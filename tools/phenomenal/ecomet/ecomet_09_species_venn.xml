@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="mtbls520_09_species_venn" name="mtbls520_09_species_venn" version="1.1">
+<tool id="ecomet_species_venn" name="Species Venn" version="1.1">
   <requirements>
     <container type="docker">korseby/mtbls520</container>
   </requirements>
@@ -30,9 +30,9 @@ mtbls520_09_species_venn.r $infile1 $outfile1 $outfile2 $outfile3 $outfile4 $out
     <data name="outfile11" type="data" format="pdf" label="Venn Diagram for acrocarpous species" />
   </outputs>
   <help>
-==================================
-MTBLS520 Eco-Metabolomics workflow
-==================================
+=========================
+Eco-Metabolomics workflow
+=========================
 
 This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
 

@@ -1,25 +1,25 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="mtbls520_17_ecology_splsda" name="mtbls520_17_ecology_splsda" version="1.0">
+<tool id="ecomet_species_nmds" name="Species NMDS" version="1.0">
   <requirements>
     <container type="docker">korseby/mtbls520</container>
   </requirements>
-  <description>Perform sPLS-DA on the data with ecological characteristics from the MTBLS520 study.</description>
+  <description>Perform NMDS on the data from the MTBLS520 study.</description>
   <stdio>
     <regex match="" source="stderr" level="warning" description="R messages" />
     <exit_code range="1:" level="fatal" description="Tool error" />
   </stdio>
   <command><![CDATA[
-mtbls520_17_ecology_splsda.r $infile1 $outfile1 $outfile2 $outfile3;
+mtbls520_11_species_nmds.r $infile1 $outfile1 $outfile2 $outfile3;
   ]]>
   </command>
   <inputs>
     <param name="infile1" type="data" format="rdata" optional="False" label="Input Rdata file" />
   </inputs>
   <outputs>
-    <data name="outfile1" type="data" format="txt" label="Summary of sPLS-DA model" />
-    <data name="outfile2" type="data" format="pdf" label="sPLS-DA plot" />
-    <data name="outfile3" type="data" format="pdf" label="sPLS-DA validation plot" />
+    <data name="outfile1" type="data" format="pdf" label="Species NMDS Stress" />
+    <data name="outfile2" type="data" format="pdf" label="Species NMDS Procrustes" />
+    <data name="outfile3" type="data" format="pdf" label="Species NMDS" />
   </outputs>
   <help><![CDATA[
 This is the MTBLS520 study.

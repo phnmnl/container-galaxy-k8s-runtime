@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="mtbls520_03_quality_control" name="mtbls520_03_quality_control" version="1.1">
+<tool id="ecomet_quality_control" name="Quality Control" version="1.1">
   <requirements>
     <container type="docker">korseby/mtbls520</container>
   </requirements>
@@ -51,9 +51,9 @@ mtbls520_03_qc_perform.r $polarity $qcmaf $qcrtcorr $qcmzrtdev $qcmzdev $qcrtdev
     <data name="qcrdata" type="data" format="rdata" optional="False" label="QC Rdata file" />
   </outputs>
   <help>
-==================================
-MTBLS520 Eco-Metabolomics workflow
-==================================
+=========================
+Eco-Metabolomics workflow
+=========================
 
 This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
 

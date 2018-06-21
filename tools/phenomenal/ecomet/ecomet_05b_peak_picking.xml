@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="mtbls520_05b_peak_picking" name="mtbls520_05b_peak_picking" version="1.1">
+<tool id="ecomet_peak_picking" name="Peak Picking" version="1.1">
   <requirements>
     <container type="docker">korseby/mtbls520</container>
   </requirements>
@@ -28,22 +28,22 @@ mtbls520_05b_peak_picking.r temp.rdata $maf $rdata;
   ]]>
   </command>
   <inputs>
-    <param name="polarity" type="select" value="positive" optional="False" label="MTBLS520: polarity" help="The polarity used for the mode of acquisition">
+    <param name="polarity" type="select" value="positive" optional="False" label="polarity" help="The polarity used for the mode of acquisition">
 	    <option value="positive" selected="True">positive</option>
 	    <option value="negative">negative</option>
 	</param>
-    <param name="studyfolder" type="data_collection" collection_type="list" format="mzml" multiple="true" label="MTBLS520: RAW mzML files" />
-    <param name="afile" type="data" format="tabular" label="MTBLS520: analytical metadata" />
-    <param name="sfile" type="data" format="tabular" label="MTBLS520: sample metadata" />
+    <param name="studyfolder" type="data_collection" collection_type="list" format="mzml" multiple="true" label="RAW mzML files" />
+    <param name="afile" type="data" format="tabular" label="analytical metadata" />
+    <param name="sfile" type="data" format="tabular" label="sample metadata" />
   </inputs>
   <outputs>
     <data name="maf" type="data" format="tabular" optional="False" label="Study MAF file" />
     <data name="rdata" type="data" format="rdata" optional="False" label="Preprocess Rdata file" />
   </outputs>
   <help>
-==================================
-MTBLS520 Eco-Metabolomics workflow
-==================================
+=========================
+Eco-Metabolomics workflow
+=========================
 
 This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
 
