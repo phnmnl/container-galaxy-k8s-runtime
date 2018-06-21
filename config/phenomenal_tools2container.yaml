@@ -354,10 +354,10 @@ assignment:
 - docker_image_override: mw2isa
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v0.5.0_cv0.1.20
+  docker_tag_override: latest
   max_pod_retrials: 1
   tools_id:
-  - mw2isa
+  - mw2isatab
 - docker_image_override: nmrml2isa
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
