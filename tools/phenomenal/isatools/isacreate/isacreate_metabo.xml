@@ -1,5 +1,5 @@
-<tool id="isacreate_metabo" name="ISAcreate Metabolomics" version="@VERSION@">
-    <description>Create ISA templates based on study design information.</description>
+<tool id="isacreate_metabo" name="isacreate_metabo" version="@VERSION@">
+    <description>Create ISA templates for metabolomics based on study design information.</description>
     <macros>
         <import>macros.xml</import>
     </macros>
