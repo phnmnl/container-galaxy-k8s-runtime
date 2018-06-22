@@ -1,25 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
 
-<tool id="nmr_integrals" name="Compare Bruker NMR/metabolites " version="1.0">
+<tool id="nmr-integrals" name="Compare Bruker NMR/metabolites " version="1.0">
   <description>Compare specific metabolite levels in two NMR spectra</description>
   <command detect_errors="exit_code"><![CDATA[
-		ReferenceDir="${PWD}/input/reference"
-		TestDir="${PWD}/input/test"
-		mkdir --parents "${ReferenceDir}" "${TestDir}"
-		echo "Unzipping input archives" >&2
-		unzip -q -d "${ReferenceDir}" "${reference_spec}
-		unzip -q -d "${TestDir}" "${test_spec}
-		echo "Analyzing" >&2
-		integrals.R --left=${left} --right=${right} --where=${where} --plotfile "${output_plotfile}" "${signal_metabolites}" "${ReferenceDir}" "${TestDir}" > "${output_table}"
+    integrals_galaxy_wrapper.sh "\${PWD}" ${left} ${right} ${where} "${output_plotfile}" "${signal_metabolites}" "${reference_spec}" "${test_spec}" "${output_table}"
   ]]>
   </command>
   <inputs>
-    <param name="left" type="float" value="0" label="Left" help="Left"/>
-    <param name="right" type="float" value="0" label="Right" help="Right"/>
-    <param name="where" type="float" value="0" label="Where" help="Where"/>
+    <param name="left" type="float" value="0" label="Left" help="Left (e.g., 5.225)"/>
+    <param name="right" type="float" value="0" label="Right" help="Right (e.g., 5.257)"/>
+    <param name="where" type="float" value="0" label="Where" help="Where (e.g., 5.243)"/>
     <param name="signal_metabolites" type="data" format="tsv" label="Signal Metabolites" help="Table of the metabolites to be used to compare the two spectra."/>
-    <param name="reference_spec" type="data" format="zip" label="Reference" help="Reference spectrum (zipped Bruker NMR dataset)"/>
-    <param name="test_spec" type="data" format="zip" label="Test" help="Test spectrum (zipped Bruker NMR dataset)"/>
+    <param name="reference_spec" type="data" format="bruker_zip" label="Reference" help="Reference spectrum (zipped Bruker NMR dataset)"/>
+    <param name="test_spec" type="data" format="bruker_zip" label="Test" help="Test spectrum (zipped Bruker NMR dataset)"/>
   </inputs>
   <outputs>
     <data format="pdf" name="output_plotfile" label="Metabolite plots" />
