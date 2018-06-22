@@ -216,7 +216,7 @@
         </valid>
       </sanitizer>
     </param>
-    <param name="param_inspect_input" type="data" format="text" label="name for the input file of Inspect (may only be used in a full run)" help="(-inspect_input) "/>
+    <param name="param_inspect_input" type="data" format="txt" label="name for the input file of Inspect (may only be used in a full run)" help="(-inspect_input) "/>
     <param name="param_multicharge" display="radio" type="boolean" truevalue="-multicharge" falsevalue="" checked="false" optional="True" label="attempt to guess the precursor charge and mass, &lt;br&gt;and consider multiple charge states if feasible" help="(-multicharge) "/>
     <param name="param_max_modifications_pp" type="integer" value="-1" label="number of PTMs permitted in a single peptide" help="(-max_modifications_pp) "/>
     <param name="param_tag_count" type="integer" value="-1" label="number of tags to generate" help="(-tag_count) "/>
