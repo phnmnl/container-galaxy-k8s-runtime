@@ -44,8 +44,8 @@ assignment:
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: mtbls-factors-viz
-  docker_tag_override: latest
-  max_pod_retrials: 1
+  docker_tag_override: v0.5_cv0.4.2.19
+  max_pod_retrials: 3
   
 - tools_id:
    - power-analysis
@@ -270,8 +270,8 @@ assignment:
 - docker_image_override: mtblisa
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: latest
-  max_pod_retrials: 1
+  docker_tag_override: v0.10.0_cv0.7.8.94
+  max_pod_retrials: 3
   tools_id:
   - isa_get_data_files_list
   - isa_get_data_files_collection
@@ -312,8 +312,8 @@ assignment:
 - docker_image_override: isatab2json
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: latest
-  max_pod_retrials: 1
+  docker_tag_override: v0.10.0_cv0.6.1.69
+  max_pod_retrials: 3
   tools_id:
   - isatab2json
 - docker_image_override: batman
@@ -354,8 +354,8 @@ assignment:
 - docker_image_override: mw2isa
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: latest
-  max_pod_retrials: 1
+  docker_tag_override: v0.9.4_cv0.5.34
+  max_pod_retrials: 3
   tools_id:
   - mw2isatab
 - docker_image_override: nmrml2isa
@@ -375,8 +375,8 @@ assignment:
 - docker_image_override: isatab-validator
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: latest
-  max_pod_retrials: 1
+  docker_tag_override: v0.10.0_cv0.7.1.42
+  max_pod_retrials: 3
   tools_id:
   - isatab_validator
 - docker_image_override: metabolab
@@ -484,15 +484,15 @@ assignment:
 - docker_image_override: mtbl-labs-uploader
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: latest
-  max_pod_retrials: 1
+  docker_tag_override: v0.1.1_cv0.5.15
+  max_pod_retrials: 3
   tools_id:
   - mtbls-labs-uploader
 - docker_image_override: isatab-create
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: latest
-  max_pod_retrials: 1
+  docker_tag_override: v0.10.0_cv0.5.1.73
+  max_pod_retrials: 3
   tools_id:
   - isacreate_metabo
 - docker_image_override: dimspy
@@ -520,14 +520,14 @@ assignment:
 - docker_image_override: reshape2-melt
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: latest
+  docker_tag_override: v0.1_cv0.1.1.3
   max_pod_retrials: 3
   tools_id:
   - melt
 - docker_image_override: reshape2-cast
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: latest
+  docker_tag_override: v0.1_cv0.1.1.3
   max_pod_retrials: 3
   tools_id:
   - cast
