@@ -1,0 +1,100 @@
+<tool id="plotnmr" name="Plot NMR" version="1.0.3">
+    <requirements>
+        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
+    </requirements>
+    <description> spectra </description>
+    <command><![CDATA[
+        PlotNMR.R --input=$input --output=$output --outDir=$output.files_path --ppmInt=$ppmInt --spread=$spread
+        
+        #if $groups_choice.factCond == "Y":
+          --group=Y --fact=$groups_choice.fact --factCol=$groups_choice.factCol
+        #else
+          --group=N
+        #end if
+        
+        #if $aggr_choice.aggr == "Y":
+          --aggr=Y --aggrAvg=$aggr_choice.aggrAvg
+        #else
+          --aggr=N
+        #end if
+        
+        #if $plotBins_choice.plotBins == "Y":
+          --plotBins=Y --bins=$plotBins_choice.bins
+        #else
+          --plotBins=N
+        #end if
+        ]]>
+        
+    </command>
+
+    <inputs>
+        <param name="input" type="data" label="NMR Spectra" />
+        <param name="ppmInt" type="text" label="Interval to plot (ppm)" value="10-0" />
+        <param name="spread" type="boolean" label="Spread" checked="False" truevalue="Y" falsevalue="N"/>
+            
+        <conditional name="groups_choice">
+          <param name="factCond" type="boolean" label="Group" checked="False" truevalue="Y" falsevalue="N" />
+          <when value="Y">
+            <param name="fact" type="data" label="Grouping factor file" />
+            <param name="factCol" type="integer" label="Which column (factor) to use" value="1" />
+          </when>
+        </conditional>
+        
+        <conditional name="aggr_choice">
+          <param name="aggr" type="boolean" label="Aggregate" checked="False" truevalue="Y" falsevalue="N" />
+          <when value="Y">
+            <param name="aggrAvg" type="select" label="Aggregation method">
+              <option value="median" selected="True">Median</option>
+              <option value="mean" selected="True">Mean</option>
+            </param>
+          </when>
+        </conditional>
+        
+        <conditional name="plotBins_choice">
+          <param name="plotBins" type="boolean" label="Plot bins" checked="False" truevalue="Y" falsevalue="N" />
+          <when value="Y">
+            <param name="bins" type="data" label="Bin table" />
+          </when>
+        </conditional>
+        
+    </inputs>
+
+    <outputs>
+        <data format="html" name="output" label="NMR Plot"/>
+    </outputs>
+
+    <!--
+    <requirements>
+    </requirements>
+
+    <tests>
+    </tests-->
+
+    <help>
+      This tool plots NMR spectra in a variety of arangements. As the outputs are static files it is recommended to 
+      plot limited size portions of the spectra. This can be specified by changing the interval to be plotted in the
+      **Interval to plot** box.
+      
+      **Options**
+      
+      **Spread** - spreads the spectra on the Y axis as opposed to overlapping them.
+      
+      **Group** - groups spectra according to specified grouping factor.
+     
+      **Aggregate** - aggregates spectra by calculating mean or median of all the spectra or within groups.
+      
+      **Plot Bins** - plots bins on top of the spectra. A prepared pattern file is required.
+      
+      .. class:: infomark '''TIPS'''
+      
+      The options can be used in combination. For example *spreading* spectra without grouping will show each spectrum
+      individually on a new axis while *spreading* and *grouping* spreads the groups rather than each spectrum.
+      
+      Aggregation is useful when comparing groups of spectra. *Spread + group + aggregate* is a good way of getting an
+      easy first view of differences between groups.
+      
+      Plotting bins can be useful for visualising pattern files before binning the spectra.
+    </help>
+</tool>
+      
+      

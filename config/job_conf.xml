@@ -145,6 +145,14 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
+    <destination id="tamenmr-container" runner="k8s">
+      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+      <param id="docker_owner_override">phnmnl</param>
+      <param id="docker_image_override">tamenmr</param>
+      <param id="docker_tag_override">latest</param>
+      <param id="max_pod_retrials">3</param>
+      <param id="docker_enabled">true</param>
+    </destination>
     <destination id="mtbls-downloader-container" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -253,6 +261,28 @@
     <tool id="Metabolite_ID_Converter" destination="container-metaboliteidconverter" />
     <tool id="metabomatching" destination="dynamic-k8s-small" resources="all"/>
     <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
+<!-- tameNMR -->
+    <tool id="addremmerge" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="align" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="anova" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="binning" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="globalalign" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="import_to_csv" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="import_to_nmrML" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="factorTemp" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="normalise_data" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="normalise" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="pca" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="peakpick" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="plotnmr" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="plotnmrsig" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="pls-da" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="prepPattern" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="quantilePlot" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="scaling" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="slice" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="transform" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="ttest" destination="dynamic-k8s-small" resources="all"/>
     <!-- new IPO -->
     <tool id="ipo4xcmsSet" destination="dynamic-k8s-xlarge" resources="all"/>
     <tool id="ipo4retgroup" destination="dynamic-k8s-xlarge" resources="all"/>

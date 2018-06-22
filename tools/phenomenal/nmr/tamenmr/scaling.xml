@@ -1,0 +1,55 @@
+<tool id="scaling" name="Scaling" version="0.0.3">
+    <requirements>
+        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
+    </requirements>
+    <description> </description>
+    <command><![CDATA[
+        Scaling.R --input=$input --output=$output --method=$method <!--meanCnt=$meanCnt/-->
+        ]]>
+    </command>
+
+    <inputs>
+        <param name="input" type="data" label="Data table" />
+        <!--param name="meanCnt" type="boolean" label="Mean-centering" truevalue="Y" falsevalue="N"/-->
+        <param name="method" type="select" label="Method" >
+            <option value="auto">Auto</option>
+            <option value="pareto">Pareto</option>
+            <option value="range">Range</option>
+            <option value="mean">Mean-center</option>
+        </param>
+    </inputs>
+
+    <outputs>
+        <data format="tabular" name="output" label="Scaled Data"/>
+    </outputs>
+
+    <!--
+    <requirements>
+    </requirements>
+
+    <tests>
+    </tests-->
+
+    <help>
+      This tool scales the data. This referes to multiplying each column (variable) of the data table by
+      a number. It is often useful to scale the data before multivariate analysis as the scale of variables will
+      influence the results such that variables with larger values will contribute more "weight" than variables
+      with smaller values.
+      
+      **Methods**
+      
+      Auto scaling mean-centers and divides each column by its standard deviation.
+      
+      Pareto scaling mean-centers and divides each column by the square root of its standard deviation.
+      
+      Range scaling mean-centers and divides each column by it range.
+      
+      Mean-centering subtracts the column (variable) mean from each value in the corresponding column.
+      
+      
+      '''TIP''' Auto scaling is a standard way to scale data. Pareto scaling is useful when some variables contain
+      noise (e.g. NMR spectra binned incrementally) and helps to reduce the influence from the low-valued
+      noisy bins by leaving them relatively lower in scale.
+      
+    </help>
+</tool>

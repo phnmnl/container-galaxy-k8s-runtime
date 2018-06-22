@@ -1,0 +1,51 @@
+<tool id="anova" name="One-way ANOVA" version="0.0.3">
+    <requirements>
+        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
+    </requirements>
+    <description>  </description>
+    <command><![CDATA[
+        Anova.R --input=$input --output=$output --outdir=$output.files_path --factorFile=$factorFile --factorCol=$factorCol --adjust=$adjust --conf_level=$conf_level
+        ]]>
+    </command>
+
+    <inputs>
+        <param name="input" type="data" label="Data"/>
+        <param name="factorFile" type="data" label="Group factor"/>
+        <param name="factorCol" type="integer" label="Factor column to use" value="1"/>
+        <param name="conf_level" type="float" label="Confidence level" value="0.05" min="0" max="1"/>
+
+        <param name="adjust" type="select" label="Multiple testing correction">
+            <option value="none">None</option>
+            <option value="BH" selected="true">Benjamini-Hochberg</option>
+            <option value="BY">Benjamini-Yakutieli</option>
+            <option value="bonferroni">Bonferoni</option>
+            <option value="hochberg">Hochberg</option>
+            <option value="holm">Holm</option>
+            <option value="hommel">Hommel</option>
+        </param>
+        <!--param /-->
+    </inputs>
+
+    <outputs>
+        <data format="html" name="output" label="Anova results"/>
+        <!--data format="csv" name="output" label="Anova results"/-->
+    </outputs>
+
+    <!--
+    <requirements>
+    </requirements>
+
+    <tests>
+    </tests-->
+
+    <help>
+      This tool performs a one-way ANOVA test on each column (variable) in the dataset. The groups are specified
+      by using a factor file. 
+      
+      **Options**
+      
+      * *Confidence level* - the confidence level to be used for hypothesis testing.
+      * *Multiple testing correction* - method for multiple testing correction of p-values.
+      
+    </help>
+</tool>

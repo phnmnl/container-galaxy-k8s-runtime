@@ -1,0 +1,36 @@
+<tool id="slice" name="Slice" version="0.0.3">
+    <requirements>
+        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
+    </requirements>
+    <description> NMR spectra </description>
+    <command><![CDATA[
+        SliceSpectra.R --input=$input --output=$output --retainPpm=$retain --remWater=$remWater
+        ]]>
+    </command>
+
+    <inputs>
+        <param name="input" type="data" label="NMR Spectra" />
+        <param name="retain" type="text" label="Retain ppm" value="10-0"/>
+        <param name="remWater" type="boolean" label="Remove water signal (4.3 - 4.9 ppm)" checked="true" truevalue="Y" falsevalue="N"/>
+    </inputs>
+
+    <outputs>
+        <data format="tabular" name="output" label="Sliced Data"/>
+    </outputs>
+
+    <!--
+    <requirements>
+    </requirements>
+
+    <tests>
+    </tests>
+-->
+
+    <help>
+    This tool retains selected regions of the spectra and removes the rest. The regions should be specified 
+    in ppm and separated by commas. Ex: "10-0" will remove any spectral regions outside of the range 0 to 10 ppm,
+    and "8-6,4-2" will only keep spectral regions 6 to 8 ppm and 2 to 4 ppm.
+    
+    Choose **Remove water signal** (default) to remove the region 4.9-4.3 ppm.
+    </help>
+</tool>

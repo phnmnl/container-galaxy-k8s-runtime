@@ -1,0 +1,41 @@
+<tool id="quantilePlot" name="Quantile plot" version="1.0.3">
+    <requirements>
+        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
+    </requirements>
+    <description> </description>
+    <command><![CDATA[
+        QuantilePlot.R --input=$input --output=$output --outDir=$output.files_path --ppmInt=$ppmInt --pltMean=$pltMean
+        ]]>
+    </command>
+
+    <inputs>
+        <param name="input" type="data" label="NMR Spectra" />
+        <param name="ppmInt" type="text" label="Interval to plot (ppm)" value="10-0" />
+        <param name="pltMean" type="select" label="Calculate average spectrum by">
+          <option value="mean" selected="True">Mean</option>
+          <option value="median">Median</option>
+        </param>
+    </inputs>
+
+    <outputs>
+        <data format="html" name="output" label="Quantile Plot"/>
+    </outputs>
+
+    <!--
+    <requirements>
+    </requirements>
+
+    <tests>
+    </tests-->
+
+    <help>
+      This tool plots a quantile plot of a set of spectra. It calculates the quantiles of the spectra at each point and
+      plots the quantiles as a colour gradient. The average spectrum is plotted as a black line. This can be a mean or median
+      spectrum as chosen in the **Calculate average spectrum by** box.
+      
+      quantile plots allow to easily visualise variation in the spectra in a dataset.
+      
+      '''TIP''' Quantile plots can be succeptible to peak shifts in the spectra. Misaligned peaks show up as larger variation
+      regions in the spectra. All regions of interest should be instpected by plotting overlapped spectra (*PlotNMR tool*).
+    </help>
+</tool>

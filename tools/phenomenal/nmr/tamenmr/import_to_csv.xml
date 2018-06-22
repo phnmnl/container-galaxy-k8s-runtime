@@ -1,0 +1,72 @@
+<tool id="import_to_csv" name="Import" version="0.0.2">
+    <requirements>
+        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
+    </requirements>
+    <description> Bruker NMR data </description>
+    <command interpreter="python"><![CDATA[
+        #if str($input_type.source) == "data":
+            import2csv.py $input_type.input $output data
+        #else:
+            import2csv.py $input_type.input $output ftp
+        #end if
+        ]]>
+    </command>
+
+    <inputs>
+        <conditional name="input_type">
+            <param name="source" type="select" label="NMR data source">
+                <option value="data" selected="True">Data</option>
+                <option value="ftp">FTP</option>
+            </param>
+            <when value="data">
+                <param name="input" type="data" label="Bruker Experiment" />
+            </when>
+            <when value="ftp">
+                <param name="input" type="ftpfile" label="Bruker Experiment" />
+            </when>
+        </conditional>
+
+
+
+        <!--param name="vendor" type="select" label="NMR Vendor">
+            <option value="bruker">Bruker</option>
+            <option value="varian">Varian</option>
+        </param>
+        <param name="proc" type="select" label="Is the data processed?">
+            <option value="processed">Processed</option>
+            <option value="raw">Raw</option>
+        </param-->
+    </inputs>
+
+    <outputs>
+        <data format="tabular" name="output" label="Imported NMR data"/>
+    </outputs>
+    <requirements>
+        <requirement type="package" version="0.5">nmrglue</requirement>
+        <requirement type="package" version="1.11.3">numpy</requirement>
+        <requirement type="package" version="0.19.2">pandas</requirement>
+        <!--requirement type="package">scipy</requirement>
+        <requirement type="package">pandas</requirement-->
+    </requirements>
+
+    <!--
+    <tests>
+    </tests>
+-->
+
+    <help>
+        
+        This tool converts a Bruker experiment files to a format used internaly within tameNMR.
+        
+        .. class:: infomark
+        
+        It requires a zip file uploaded through the upload tool
+        to your account. The file should contain a set of Bruker NMR experiments without
+        the parent directory. To make the zip file you can enter your Bruker experiment
+        folder containing folders with spectra(e.g. 10, 20, 30 etc.), select all folders that you want
+        to add to zip file, right-click, choose compress, select zip format and click OK. The resulting
+        file can then be uploaded and imported using this tool.
+
+    </help>
+
+</tool>

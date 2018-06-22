@@ -1,0 +1,54 @@
+<tool id="addremmerge" name="Add/Remove/Merge" version="0.0.3">
+    <requirements>
+        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
+    </requirements>
+    <description> spectra</description>
+    <command> <![CDATA[
+        #if $method_choice.method == "remove"
+            norm_data.R --input1=$input --output=$output --action=$method_choice.method --colName=$method_choice.param
+        #else if $method_choice.method == "add"
+            norm_data.R --input1=$input --input2=$input --output=$output --action=$method_choice.method --colName=$method_choice.param
+        #else if $method_choice.method == "merge"
+            norm_data.R --input1=$input --input2=$input --output=$output --action=$method_choice.method
+        #end if
+        ]]></command>
+
+    <inputs>
+        <conditional name="action_choice">
+            <param name="action" type="select" label="Choose Action">
+                <option value="add">Add Spectrum</option>
+                <option value="remove">Remove Spectrum</option>
+                <option value="merge">Merge Spectra Files</option>
+            </param>
+            <when value="add">
+                <param name="input_from" type="data" label="From File"/>
+                <param name="input_to" type="data" label="To File"/>
+                <param name="param" type="text" label="Spectrum Name"/>
+            </when>
+            <when value="remove">
+                <param name="input_from" type="data" label="From File"/>
+                <param name="param" type="text" label="Spectrum Name"/>
+            </when>
+            <when value="merge">
+                <param name="input_1" type="data" label="Spectra File 1"/>
+                <param name="input_2" type="data" label="Spectra File 2"/>
+            </when>
+        </conditional>
+    </inputs>
+
+    <outputs>
+        <data format="tabular" name="output" label="Modified data"/>
+    </outputs>
+
+    <!--
+    <requirements>
+    </requirements>
+
+    <tests>
+    </tests-->
+
+    <help>
+      This tool allows adding/removing spectra from data sets as well as merging datasets. Note that the spectra
+      have to be imported the same way and contain the same number of raw points.
+    </help>
+</tool>

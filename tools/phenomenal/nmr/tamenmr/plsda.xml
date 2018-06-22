@@ -1,0 +1,31 @@
+<tool id="pls-da" name="PLS-DA" version="1.0.3">
+    <requirements>
+        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
+    </requirements>
+    <description> </description>
+    <command><![CDATA[
+        PLSDA.R --input=$input --output=$output --outDir=$output.files_path --factorFile=$factor --factorCol=$factorCol
+        ]]>
+    </command>
+
+    <inputs>
+        <param name="input" type="data" label="Data" />
+        <param name="factor" type="data" label="Group factor" />
+        <param name="factorCol" type="integer" value="1" label="Factor column" />
+    </inputs>
+
+    <outputs>
+        <data format="html" name="output" label="PLS-DA Results"/>
+    </outputs>
+
+    <!--
+    <requirements>
+    </requirements>
+
+    <tests>
+    </tests-->
+
+    <help>
+      This tool performs a Partial least squared discriminant analysis and plots the results.
+    </help>
+</tool>

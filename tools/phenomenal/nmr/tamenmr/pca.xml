@@ -1,0 +1,58 @@
+<tool id="pca" name="PCA" version="0.0.3">
+    <requirements>
+        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
+    </requirements>
+    <description> </description>
+    <command><![CDATA[
+      PCA.R --input=$input --output=$output --outdir=$output.files_path --scale=$scale --pcs=$pcs
+      #if $group_choice.group == "Y":
+      --factorFile=$group_choice.factorFile --factorCol=$group_choice.factorCol
+      #end if
+      ]]>
+    </command>
+
+    <inputs>
+        <param name="input" type="data" label="Data" />
+          
+        <conditional name="group_choice">
+          <param name="group" type="boolean" label="Colour by group" checked="False" truevalue="Y" falsevalue="N" />
+          <when value="Y">
+            <param name="factorFile" type="data" label="Group factor"/>
+            <param name="factorCol" type="integer" label="Factor column to use" value="1"/>
+          </when>
+        </conditional>
+        
+        <param name="scale" type="boolean" truevalue='Y' falsevalue='N' label="Scale by standard deviation"/>
+        <param name="pcs" type="text" label="Principal component pairs (separate with commas)" value="1-2,2-3,1-3"/>
+    </inputs>
+
+    <outputs>
+        <data format="html" name="output" label="PCA results"/>
+    </outputs>
+
+    <!--
+    <requirements>
+    </requirements>
+
+    <tests>
+    </tests-->
+
+    <help>
+      This tool performs a pricipal component analysis and plots the results.
+      
+      **Options**
+      
+      **Colour by group** - colours the observations by group based on the given grouping factor.
+      
+      **Scale by standard deviation** - scales the data by standard deviation. Useful if data is unscaled to remove
+      the bias introduced by variable magnitude differences.
+      
+      **Principal component pairs** - specifies which principal component (PC) pairs to plot. Pairs are specified by
+      comma separated list of pairs of numbers. Each pair of numbers is separated by comma.
+      
+      '''EXAMPLE'''
+      
+      1-3,2-6,1,7 - will plot 3 sets of plots: PC1 vs PC3, PC2 vs PC6 and PC1 vs PC7.
+      
+    </help>
+</tool>

@@ -1,0 +1,97 @@
+<tool id="prepPattern" name="Prepare" version="0.0.3">
+    <requirements>
+        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
+    </requirements>
+    <description> pattern file </description>
+    <command><![CDATA[
+        #if $method_choice.method == "uniform"
+            prepPattern.R --method=$method_choice.method --output=$output  --dataSet=$method_choice.dataSet --binSize=$method_choice.binSize
+        #else if $method_choice.method == "brukerPattern"
+            prepPattern.R --method=$method_choice.method --output=$output  --pattern=$method_choice.pattern
+        #else if $method_choice.method == "csvTable"
+            prepPattern.R --method=$method_choice.method --output=$output  --pattern=$method_choice.pattern
+        #else
+            prepPattern.R --method=$method_choice.method --output=$output  --dataSet=$method_choice.dataSet
+        #end if
+        ]]>
+    </command>
+
+    <inputs>
+      
+        <conditional name="method_choice">
+            <param name="method" type="select" label="Action">
+                <option value="uniform" selected="true">Make uniform pattern file</option>
+                <option value="brukerPattern">Import Bruker pattern file</option>
+                <option value="csvTable">Import pattern from table</option>
+                <!--option value="intelligent">Make pattern file using Intelligent binning (in)</option-->
+            </param>
+            
+            <when value="uniform">
+                <param name="dataSet" type="data" label="Spectra"/>
+                <param name="binSize" type="float" value="0.02" label="Bin size in ppm"/>
+            </when>
+            <when value="brukerPattern">
+                <param name="pattern" type="data" label="Bruker Pattern File"/>
+            </when>
+            <when value="csvTable">
+                <param name="pattern" type="data" label="CSV Pattern File"/>
+            </when>
+            <when value="intelligent">
+                <param name="dataSet" type="data" label="Spectra"/>
+            </when>
+        </conditional>
+        
+    </inputs>
+
+    <outputs>
+        <data format="tabular" name="output" label="Pattern"/>
+    </outputs>
+
+    <!--
+    <requirements>
+    </requirements>
+
+    <tests>
+    </tests>
+-->
+
+    <help>
+     
+     This tool allows a user to import or create a pattern file for binning NMR spectra. The *Action*
+     drop-down menu contains possible choices of pattern creation. The created pattern file can then be used
+     to bin the spectra using the *Binning* tool or plotted using the *PlotNMR* tool.
+    
+     **Action**
+     
+     **Make uniform pattern file** creates a pattern file by dividing the spectra into same size intervals
+     of length specified in the parameter **Bin size in ppm**. This option requires spectra to be imported and
+     selected in the *Spectra* box.
+     
+     **Import Bruker pattern file** creates a pattern file from a standard Bruker pattern file format.
+     If you have a pattern file made following said format, you can upload it to the server and convert it
+     using this tool.
+     
+     **Import pattern from table** creates a pattern from a table that can be made in a spreadsheet 
+     software (OO Calc, MS Excel). The file is required to have 3 columns without headers, delimited by
+     commas or tabs:
+     
+     +------+------+--------+
+     | 9.2  | 9.18 | peak_1 |
+     +------+------+--------+
+     | 7.18 | 7.16 | peak_2 |
+     +------+------+--------+
+     | 6.88 | 6.84 | peak_3 |
+     +------+------+--------+
+     | 6.84 | 6.80 | peak_4 |
+     +------+------+--------+
+     | 5.22 | 5.20 | peak_5 |
+     +------+------+--------+
+     | 4.96 | 4.90 | peak_6 |
+     +------+------+--------+
+     | 3.44 | 2.99 | peak_7 |
+     +------+------+--------+
+     
+      
+    </help>
+    
+</tool>

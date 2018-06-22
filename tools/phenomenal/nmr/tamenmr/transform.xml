@@ -1,0 +1,34 @@
+<tool id="transform" name="Transform" version="0.0.3">
+    <requirements>
+        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
+    </requirements>
+    <description> data </description>
+    <command><![CDATA[
+        transform.R --input=$input --output=$output --method=$method
+        ]]>
+    </command>
+
+    <inputs>
+        <param name="input" type="data" label="Data table" />
+        <param name="method" type="select" label="Method" >
+            <option value="log">Natural log</option>
+            <option value="sqrt">Square root</option>
+        </param>
+    </inputs>
+
+    <outputs>
+        <data format="tabular" name="output" label="Transformed data"/>
+    </outputs>
+
+    <!--
+    <requirements>
+    </requirements>
+
+    <tests>
+    </tests-->
+
+    <help>
+      Thid tool transforms the data table using one of standard mathematical functions. 
+      It can sometimes help if the data is very scewed.
+    </help>
+</tool>
