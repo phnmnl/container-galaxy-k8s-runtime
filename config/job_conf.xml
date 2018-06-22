@@ -247,7 +247,7 @@
     <tool id="mzml2isa" destination="dynamic-k8s-small" resources="all"/>
     <tool id="nmrml2isa" destination="dynamic-k8s-small" resources="all"/>
     <tool id="mtbls-downloader" destination="mtbls-downloader-container"/>
-    <tool id="mtbls-labs-uploader" destination="dynamic-k8s-small"/>
+    <tool id="mtbls-labs-uploader" destination="dynamic-k8s-small" resources="all"/>
     <tool id="metfragcli" destination="metfrag-cli-container"/>
     <tool id="Metabolite_ID_Converter" destination="container-metaboliteidconverter" />
     <tool id="metabomatching" destination="dynamic-k8s-small" resources="all"/>
