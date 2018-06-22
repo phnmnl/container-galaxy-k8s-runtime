@@ -396,6 +396,9 @@
     <tool id="isatab_validator" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_factors_viz" destination="dynamic-k8s-small" resources="all"/>
     <tool id="mw2isatab" destination="dynamic-k8s-medium" resources="all"/>
+    <!-- Other tools -->
+    <tool id="melt" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="cast" destination="dynamic-k8s-tiny" resources="all"/>
     <!-- DIMSpy tools -->
     <tool id="dimspy_process_scans" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="dimspy_replicate_filter" destination="dynamic-k8s-medium" resources="all"/>

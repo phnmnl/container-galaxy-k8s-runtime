@@ -1,0 +1,32 @@
+<tool id="melt" name="melt" version="@VERSION@">
+    <description>collapse combinations of variables:values to single lines</description>
+    <macros>
+        <import>macros.xml</import>
+    </macros>
+    <expand macro="requirements"/>
+    <expand macro="error_handling"/>
+    <command><![CDATA[
+        melt.R -i '$input' -o '$output'
+]]></command>
+    <inputs>
+        <param name="input" type="data" format="tabular" label="Input should have column headers - these will be the variable IDs that are summarized"/>
+    </inputs>
+    <outputs>
+        <data name="output" format="tabular" from_work_dir="output.tabular"/>
+    </outputs>
+    <tests>
+        <test>
+            <param name="input" value="mtcars.txt"/>
+            <output name="output" file="melt_result1.tabular"/>
+        </test>
+    </tests>
+    <help><![CDATA[
+This tool will apply the melt function of the reshape2 R package.
+
+The melt function summarizes each unique variable:value combination on a single line. An example can be found here: http://www.statmethods.net/management/reshape.html
+
+    ]]></help>
+    <citations>
+        <citation type="doi">10.18637/jss.v021.i12</citation>
+    </citations>
+</tool>
