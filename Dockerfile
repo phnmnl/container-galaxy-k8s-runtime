@@ -94,7 +94,6 @@ ENV GALAXY_CONFIG_BRAND PhenoMeNal
 # Missing XCMS datatypes for w4m
 COPY external-datatypes/rdata_xcms_datatype.py \
      external-datatypes/rdata_camera_datatype.py \
-     external-datatypes/no_unzip_datatypes.py \
      external-datatypes/nmrml_datatype.py \
   /galaxy/lib/galaxy/datatypes/
 
