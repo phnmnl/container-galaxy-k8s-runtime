@@ -308,6 +308,7 @@
 
   <label id="phenomenal-stats" text="Statistical Analysis Tools" /> 
     <section name="Statistical Analysis" id="pheno-stats">
+      <tool file="phenomenal/stats/iterative_signature_algorithm.xml"/>
       <tool file="phenomenal/stats/papy.xml"/>
       <tool file="phenomenal/w4m/generic_filter.xml" labels="W4M"/>
       <tool file="phenomenal/w4m/qualitymetrics_config.xml" labels="W4M"/> 

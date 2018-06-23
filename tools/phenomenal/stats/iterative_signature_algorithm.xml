@@ -1,0 +1,177 @@
+<tool id="iterative-signature-algorithm" name="iterative-signature-algorithm">
+	<description>Iterative Signature Algorithm [ISA]</description>
+	<requirements>
+		<container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/iterative-signature-algorithm</container>
+	</requirements>
+	<command>
+	<![CDATA[isawrp.py -i "$data" -o module.csv
+		--sgr $module.sgr
+		--sgc $module.sgc
+		--thr $threshold.row
+		--thc $threshold.col
+		--dsame $module.delta
+		--nseed $seed.number
+		--seedsparsity $seed.sparsity
+		--maxiter $iteration.max
+		--dconv $iteration.delta
+		#if $nt:
+		  --nt 
+		#end if
+		#if $inputhasheaders:
+		  --inputhasheaders
+                #end if
+                #if $inputhaslabels:
+                  --inputhaslabels
+                #end if
+	]]>
+	</command>
+	<inputs>
+	<param 
+		name="data" type="data" format="csv" 
+		label="Data Matrix" 
+		help="Data matrix in which to seek modules." 
+		/>
+	<param
+		name="nt" type="boolean" optional="False"
+		label="Non-threshold output"
+		help="By default, rows and columns that are not included in a given module have scores 0. Setting this option to true runs an additional iteration without thresholding, so that scores are also attributed to excluded rows and columns"
+		checked="false"
+		/>
+	<param
+		name="inputhaslabels" type="boolean" optional="False"
+		label="First column of data matrix contains labels"
+		help="If the data matrix has labels, the output files will use them where applicable"
+		checked="true"
+		/>
+	<param
+		name="inputhasheaders" type="boolean" optional="False"
+		label="First row of data matrix contains headers"
+		help="If the data matrix has headers, the output files will use them where applicable"
+		checked="true"
+		/>
+	<section name="threshold" title="Thresholds" expanded="true">
+	<param name="row" type="text" value="1:1:3"
+		label="Row thresholds"
+		help="Pass thresholds as a list [for example: 1,2,3] or as a range [for example: 1:1:3]"
+	/>
+	<param name="col" type="text" value="1:1:3"
+		label="Column thresholds"
+		help="As above, but for columns."
+	/>
+	</section>
+	<section name="module" title="Module Options" expanded="true">
+	<param 
+		name="sgr" type="select" value="0" 
+		label="Row signature"
+		help="Row signature"
+		>
+		<option type="integer" value="-1" selected="False">-1</option>
+		<option type="integer" value="0" selected="True">0</option>
+		<option type="integer" value="1" selected="False">1</option>
+	</param>
+	<param 
+		name="sgc" type="select" value="1" 
+		label="Column signature"
+		help="Column signature"
+		>
+		<option value="-1" selected="False">-1</option>
+		<option value="0" selected="False">0</option>
+		<option value="1" selected="True">1</option>
+	</param>
+	<param 
+		name="delta" type="float" value="0.800" 
+		label="Delta Same"
+		help="If the correlation between the scores of two module is greater than Delta Same, the modules are considered equal. The module with the lower robustness of the two is dropped."
+		/>
+	</section>
+	<section name="seed" title="Seeding Options" expanded="True">
+	<param 
+		name="number" type="integer" value="100" 
+		label="Number of seeds"
+		help="Number of seeds used by ISA."
+		/>
+	<param 
+		name="sparsity" type="integer" value="0" 
+		label="Seed sparsity"
+		help="If set to 0, a random matrix will be used as seed matrix. If set to i greater than 0, each seed column will have i randomly selected element(s) set to 1, all others being 0."
+		/>
+	</section>
+	<section name="iteration" title="Iteration Options" expanded="False">
+	<param 
+		name="delta" type="float" value="0.975" 
+		label="Delta Convergence"
+		help="A given module is considered converged when two successive iterations of the algorithm produce scores of correlation greater than Delta Convergence."
+		/>
+	<param 
+		name="max" type="integer" value="50" 
+		label="Maximum number of iterations"
+		help="Any module that has not converged after this maximum number of iterations is dropped."
+	/>
+	</section>
+	</inputs>
+	<outputs>
+		<data
+			name="modulerowscore" 
+			format="tsv" 
+			from_work_dir="module.rowscore.tsv" 
+			label="ISA Module Row Scores"
+		/>
+		<data
+			name="modulecolscore" 
+			format="tsv" 
+			from_work_dir="module.colscore.tsv" 
+			label="ISA Module Column Scores"
+		/>
+		<data
+			name="moduleinfo" 
+			format="tsv" 
+			from_work_dir="module.info.csv" 
+			label="ISA Module Info"
+		/>
+	</outputs>
+	<help>
+-----------
+Description
+-----------
+
+A basic python3 implementation of the Iterative Signature Algorithm [ISA]. 
+
+A more fully fledged R version is available here : https://bioconductor.org/packages/release/bioc/html/eisa.html
+
+
+-----------
+Input Files 
+-----------
+	
+**Data Matrix**
+	| The data matrix in which the iterative signature algorithm will seek modules. The first row and first column are expected to contain labels, and are therefore not passed to the algorithm
+	|
+
+**Test Files**
+	| A sample data matrix is available here : https://raw.githubusercontent.com/rrueedi/isa-py/init/ts/ts.csv
+	| It has headers and labels
+
+------------
+Output Files
+------------
+	
+**module.rowscore.tsv**
+	| A tab-separated values file containing the row scores for each module.
+	| If the input file has labeled rows, the output file has labeled rows, with the same labels
+
+**module.colscore.tsv**
+	| A tab-separated values file containing the column scores for each module.
+	| If the input file has headers, the output file uses the headers as row labels
+
+**module.info.tsv**
+	| A tab-separated values file containg information about the modules found. Specifically:
+	| * row 1 : module name
+	| * row 2 : module robustness
+	| * row 3 : row threshold at which module was found
+	| * row 4 : column threshold at which module was found
+
+	</help>
+	<citations>
+	 <citation type="doi">10.1103/PhysRevE.67.031902</citation> 
+	</citations>
+ </tool>
