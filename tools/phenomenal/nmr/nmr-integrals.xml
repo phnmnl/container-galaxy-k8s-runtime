@@ -23,12 +23,20 @@
   </stdio>
 
   <help>
-## Short Description
+
+===================
+NMR-integrals
+===================
+
+---------------------
+Short Description
+---------------------
 
 Compares specific metabolite levels in two NMR spectra.
 
-
-## Description
+---------------
+Description
+---------------
 
 This tool implements a comparison between the NMR spectra of a reference sample
 and a test sample, based on selected metabolite signals.  The operation is part
@@ -38,7 +46,6 @@ periodically analyzed to detected and measure long-term quality decay.
 
 The tool generates a table and a set of plots indicating the signal differences
 and whether they are significant.
-```
   </help>
 
 </tool>
