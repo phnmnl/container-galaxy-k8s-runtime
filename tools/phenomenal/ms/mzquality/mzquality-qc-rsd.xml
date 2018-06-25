@@ -1,0 +1,20 @@
+<tool id="mzquality-qc-rsd" name="qc-rsd" version="1.0">
+    <description>determines RSD QC.</description>
+    <requirements>
+        <container type="docker">phnmnl/mzquality</container>
+    </requirements>
+     <command>python /files/mzQuality/qcli.py qc-rsd --qc-corrected-file=$input1 --by-batch=$input2 --qc-rsd-file=$output1</command>
+    <inputs>
+        <param name="input1" type="data" format="tabular" multiple="false" label="QC corrected file" />
+	    <param name="input2" type="select" label="report by batch">
+        	<option value="False" selected="true">no</option>
+        	<option value="True">yes</option>
+	    </param>        
+    </inputs>
+    <outputs>
+        <data name="output1" format="tabular" label="qc-rsd.txt"/>
+    </outputs>
+    <help><![CDATA[
+        Determines the relative standard deviation of the compoud in the QC samples.
+    ]]></help>
+</tool>
