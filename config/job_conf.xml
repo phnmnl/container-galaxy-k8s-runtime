@@ -181,7 +181,7 @@
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
       <param id="docker_image_override">ms-vfetc</param>
-      <param id="docker_tag_override">latest</param>
+      <param id="docker_tag_override">v0.6_cv1.1.26</param>
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
@@ -189,7 +189,7 @@
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
       <param id="docker_image_override">mzquality</param>
-      <param id="docker_tag_override">latest</param>
+      <param id="docker_tag_override">v0.9.5_cv0.9.5.15</param>
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>    
