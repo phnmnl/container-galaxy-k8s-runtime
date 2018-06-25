@@ -82,11 +82,11 @@ PROFTPD_TAG=$DOCKER_REPO$DOCKER_USER/galaxy-proftpd:for_galaxy_v$GALAXY_VER_FOR_
 
 function debug {
 
-	local msg=$1
-	local level=$2
-	[[ -n $level ]] || level=1
+    local msg=$1
+    local level=$2
+    [[ -n $level ]] || level=1
 
-	[[ $DEBUG -lt $level ]] || echo "[DEBUG] $msg" >&2
+    [[ $DEBUG -lt $level ]] || echo "[DEBUG] $msg" >&2
 }
 
 # Warning {{{1
@@ -94,30 +94,30 @@ function debug {
 
 function warning {
 
-	local msg=$1
+    local msg=$1
 
-	echo "[WARNING] ***** $msg *****" >&2
+    echo "[WARNING] ***** $msg *****" >&2
 }
 
 # Print help {{{1
 ################################################################
 
 function print_help {
-	echo "Usage: $SCRIPT_NAME [options]"
-	echo
-	echo "Build PhenoMeNal Galaxy docker images."
-	echo
-	echo "Options:"
-	echo "   -g, --debug                 Debug mode."
-	echo "   -h, --help                  Print this help message."
-	echo "       --init-tag       <tag>  Set the tag for the Galaxy Init Flavour container image."
-	echo "   -p, --push                  Push dockers. You can also set environment variable DOCKER_PUSH_ENABLED to \"true\". Enabled by default."
-	echo "   +p, --no-push               Do not push dockers. You can also set environment variable DOCKER_PUSH_ENABLED to \"false\"."
-	echo "       --postgres-tag   <tag>  Set the tag for the Galaxy Postgres container image."
-	echo "       --proftpd-tag    <tag>  Set the tag for the Galaxy Proftpd container image."
-	echo "   -u, --container-user <user> Set the container user. You can also set the environment variable CONTAINER_USER."
-	echo "       --web-tag        <tag>  Set the tag for the Galaxy Web k8s container image."
-	echo
+    echo "Usage: $SCRIPT_NAME [options]"
+    echo
+    echo "Build PhenoMeNal Galaxy docker images."
+    echo
+    echo "Options:"
+    echo "   -g, --debug                 Debug mode."
+    echo "   -h, --help                  Print this help message."
+    echo "       --init-tag       <tag>  Set the tag for the Galaxy Init Flavour container image."
+    echo "   -p, --push                  Push dockers. You can also set environment variable DOCKER_PUSH_ENABLED to \"true\". Enabled by default."
+    echo "   +p, --no-push               Do not push dockers. You can also set environment variable DOCKER_PUSH_ENABLED to \"false\"."
+    echo "       --postgres-tag   <tag>  Set the tag for the Galaxy Postgres container image."
+    echo "       --proftpd-tag    <tag>  Set the tag for the Galaxy Proftpd container image."
+    echo "   -u, --container-user <user> Set the container user. You can also set the environment variable CONTAINER_USER."
+    echo "       --web-tag        <tag>  Set the tag for the Galaxy Web k8s container image."
+    echo
 }
 
 # Read args {{{1
@@ -125,41 +125,41 @@ function print_help {
 
 function read_args {
 
-	local args="$*" # save arguments for debugging purpose
-	
-	# Read options
-	while true ; do
-		shift_count=1
-		case $1 in
-			-g|--debug)              DEBUG=$((DEBUG + 1)) ;;
-			-h|--help)               print_help ; exit 0 ;;
-			-p|--push)               DOCKER_PUSH_ENABLED=$TRUE ;;
-			+p|--no-push)            DOCKER_PUSH_ENABLED=$FALSE ;;
-			--postgres-tag)          POSTGRES_TAG="$2" ; shift_count=2 ;;
-			--proftpd-tag)           PROFTPD_TAG="$2" ; shift_count=2 ;;
-			--init-tag)              GALAXY_INIT_PHENO_FLAVOURED_TAG="$2" ; shift_count=2 ;;
-			--web-tag)               GALAXY_WEB_K8S_TAG="$2" ; shift_count=2 ;;
-			-u|--container-user)     DOCKER_USER="$2" ; shift_count=2 ;;
-			-) error "Illegal option $1." ;;
-			--) error "Illegal option $1." ;;
-			--*) error "Illegal option $1." ;;
-			-?) error "Unknown option $1." ;;
-			-[^-]*) split_opt=$(echo $1 | sed 's/^-//' | sed 's/\([a-zA-Z0-9]\)/ -\1/g') ; set -- $1$split_opt "${@:2}" ;;
-			*) break
-		esac
-		shift $shift_count
-	done
-	shift $((OPTIND - 1))
+    local args="$*" # save arguments for debugging purpose
 
-	# Debug messages
-	debug "Command line arguments: $args"
-	debug "Argument DEBUG=$DEBUG"
-	debug "Argument DOCKER_PUSH_ENABLED=$DOCKER_PUSH_ENABLED"
-	debug "Argument DOCKER_USER=$DOCKER_USER"
-	debug "Argument GALAXY_INIT_PHENO_FLAVOURED_TAG=$GALAXY_INIT_PHENO_FLAVOURED_TAG"
-	debug "Argument GALAXY_WEB_K8S_TAG=$GALAXY_WEB_K8S_TAG"
-	debug "Argument POSTGRES_TAG=$POSTGRES_TAG"
-	debug "Argument PROFTPD_TAG=$PROFTPD_TAG"
+    # Read options
+    while true ; do
+        shift_count=1
+        case $1 in
+            -g|--debug)              DEBUG=$((DEBUG + 1)) ;;
+            -h|--help)               print_help ; exit 0 ;;
+            -p|--push)               DOCKER_PUSH_ENABLED=$TRUE ;;
+            +p|--no-push)            DOCKER_PUSH_ENABLED=$FALSE ;;
+            --postgres-tag)          POSTGRES_TAG="$2" ; shift_count=2 ;;
+            --proftpd-tag)           PROFTPD_TAG="$2" ; shift_count=2 ;;
+            --init-tag)              GALAXY_INIT_PHENO_FLAVOURED_TAG="$2" ; shift_count=2 ;;
+            --web-tag)               GALAXY_WEB_K8S_TAG="$2" ; shift_count=2 ;;
+            -u|--container-user)     DOCKER_USER="$2" ; shift_count=2 ;;
+            -) error "Illegal option $1." ;;
+            --) error "Illegal option $1." ;;
+            --*) error "Illegal option $1." ;;
+            -?) error "Unknown option $1." ;;
+            -[^-]*) split_opt=$(echo $1 | sed 's/^-//' | sed 's/\([a-zA-Z0-9]\)/ -\1/g') ; set -- $1$split_opt "${@:2}" ;;
+            *) break
+        esac
+        shift $shift_count
+    done
+    shift $((OPTIND - 1))
+
+    # Debug messages
+    debug "Command line arguments: $args"
+    debug "Argument DEBUG=$DEBUG"
+    debug "Argument DOCKER_PUSH_ENABLED=$DOCKER_PUSH_ENABLED"
+    debug "Argument DOCKER_USER=$DOCKER_USER"
+    debug "Argument GALAXY_INIT_PHENO_FLAVOURED_TAG=$GALAXY_INIT_PHENO_FLAVOURED_TAG"
+    debug "Argument GALAXY_WEB_K8S_TAG=$GALAXY_WEB_K8S_TAG"
+    debug "Argument POSTGRES_TAG=$POSTGRES_TAG"
+    debug "Argument PROFTPD_TAG=$PROFTPD_TAG"
 }
 
 # MAIN {{{1
