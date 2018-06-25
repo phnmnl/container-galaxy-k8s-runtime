@@ -3,24 +3,113 @@
 
 set -e
 
-# Constants {{{1
-################################################################
+### Constants ###
 
 SCRIPT_NAME="${0##*/}"
 TRUE='true'
 FALSE='false'
 DFT_DOCKER_PUSH_ENABLED=$TRUE
 
-# Global variables {{{1
-################################################################
+### Functions ###
+
+function log() {
+  echo -e "$@" >&2
+}
+
+function error {
+
+	local msg=$1
+	local code=$2
+	[[ -z $code ]] && code=1
+
+	log "[ERROR] $msg"
+
+	exit $code
+}
+
+
+function debug {
+
+    local msg=$1
+    local level=$2
+    [[ -n $level ]] || level=1
+
+    [[ $DEBUG -lt $level ]] || log "[DEBUG] $msg"
+}
+
+function warning {
+
+    local msg=$1
+
+    log "[WARNING] ##### $msg #####"
+}
+
+function print_help {
+    (
+        echo "Usage: $SCRIPT_NAME [options]"
+        echo
+        echo "Build PhenoMeNal Galaxy docker images."
+        echo
+        echo "Options:"
+        echo "   -g, --debug                    Debug mode. [false]"
+        echo "   -h, --help                     Print this help message."
+        echo "   -p, --push                     Push docker images. You can also set environment variable DOCKER_PUSH_ENABLED to \"true\". [true]"
+        echo "   +p, --no-push                  Do not push dockers. You can also set environment variable DOCKER_PUSH_ENABLED to \"false\"."
+        echo "       --push-intermediate        Also push intermediate images [false]"
+        echo "       --no-cache                 Tell Docker not to use cached images. [false]"
+        echo "       --init-tag       <tag>     Set the tag for the Galaxy Init Flavour container image."
+        echo "       --postgres-tag   <tag>     Set the tag for the Galaxy Postgres container image."
+        echo "       --proftpd-tag    <tag>     Set the tag for the Galaxy Proftpd container image."
+        echo "       --web-tag        <tag>     Set the tag for the Galaxy Web k8s container image."
+        echo "   -u, --container-user <user>    Set the container user. You can also set the environment variable CONTAINER_USER. [pcm32]"
+        echo "   -r, --container-registry <reg> Set the container registry. You can also set the environment variable CONTAINER_REGISTRY."
+        echo
+    ) >&2
+}
+
+function read_args {
+
+    local args="$*" # save arguments for debugging purpose
+
+    # Read options
+    while [[ $# > 0 ]] ; do
+        shift_count=1
+        case $1 in
+            -g|--debug)              DEBUG=$((DEBUG + 1)) ;;
+            -h|--help)               print_help ; exit 0 ;;
+            -p|--push)               DOCKER_PUSH_ENABLED=$TRUE ;;
+            +p|--no-push)            DOCKER_PUSH_ENABLED=$FALSE ;;
+            --push-intermediate)     PUSH_INTERMEDIATE_IMAGES=$TRUE ;;
+            --no-cache)              NO_CACHE="--no-cache" ;;
+            --postgres-tag)          OVERRIDE_POSTGRES_TAG="$2" ; shift_count=2 ;;
+            --proftpd-tag)           OVERRIDE_PROFTPD_TAG="$2" ; shift_count=2 ;;
+            --init-tag)              OVERRIDE_GALAXY_INIT_PHENO_FLAVOURED_TAG="$2" ; shift_count=2 ;;
+            --web-tag)               OVERRIDE_GALAXY_WEB_K8S_TAG="$2" ; shift_count=2 ;;
+            -u|--container-user)     CONTAINER_USER="$2" ; shift_count=2 ;;
+            -r|--container-registry) CONTAINER_REGISTRY="$2" ; shift_count=2 ;;
+            *) error "Illegal option $1." 98 ;;
+        esac
+        shift $shift_count
+    done
+
+    # Debug messages
+    debug "Command line arguments: $args"
+    debug "Argument DEBUG=$DEBUG"
+    debug "Argument DOCKER_PUSH_ENABLED=$DOCKER_PUSH_ENABLED"
+    debug "Argument DOCKER_USER=$DOCKER_USER"
+    debug "Argument OVERRIDE_GALAXY_INIT_PHENO_FLAVOURED_TAG=$OVERRIDE_GALAXY_INIT_PHENO_FLAVOURED_TAG"
+    debug "Argument OVERRIDE_GALAXY_WEB_K8S_TAG=$OVERRIDE_GALAXY_WEB_K8S_TAG"
+    debug "Argument OVERRIDE_POSTGRES_TAG=$OVERRIDE_POSTGRES_TAG"
+    debug "Argument OVERRIDE_PROFTPD_TAG=$OVERRIDE_PROFTPD_TAG"
+    debug "shift_count=$shift_count"
+}
+
+### MAIN ###
+
+read_args "$@"
+
 
 DOCKER_PUSH_ENABLED=${DOCKER_PUSH_ENABLED:-$DFT_DOCKER_PUSH_ENABLED}
-
-# Uncomment to avoid using the cache when building docker images.
-#NO_CACHE="--no-cache"
-
-# Uncomment to push intermediate images, otherwise only the images needed for the helm chart are pushed.
-#PUSH_INTERMEDIATE_IMAGES=yes
 
 DOCKER_REPO=${CONTAINER_REGISTRY:-}
 DOCKER_USER=${CONTAINER_USER:-pcm32}
@@ -52,128 +141,41 @@ fi
 
 GALAXY_BASE_PHENO_TAG=$DOCKER_REPO$DOCKER_USER/galaxy-base-pheno:$TAG
 GALAXY_INIT_PHENO_TAG=$DOCKER_REPO$DOCKER_USER/galaxy-init-pheno:$TAG
-GALAXY_INIT_PHENO_FLAVOURED_TAG=$DOCKER_REPO$DOCKER_USER/galaxy-init-pheno-flavoured:$TAG
-GALAXY_WEB_K8S_TAG=$DOCKER_REPO$DOCKER_USER/galaxy-web-k8s:$TAG
-
-PG_Dockerfile="docker-galaxy-stable/compose/galaxy-postgres/Dockerfile"
-
-[[ -f "${PG_Dockerfile}" ]] || error "The galaxy-postgres Dockerfile is missing under docker-galaxy-stable/.  Have you updated the repository submodules?" 99
-POSTGRES_VERSION=$(grep FROM "${PG_Dockerfile}" | awk -F":" '{ print $2 }')
-
-POSTGRES_TAG=$DOCKER_REPO$DOCKER_USER/galaxy-postgres:$POSTGRES_VERSION"_for_"$GALAXY_VER_FOR_POSTGRES
-PROFTPD_TAG=$DOCKER_REPO$DOCKER_USER/galaxy-proftpd:for_galaxy_v$GALAXY_VER_FOR_POSTGRES
-
-function log() {
-  echo -e "$@" >&2
-}
-
-# Error {{{1
-################################################################
-
-function error {
-
-	local msg=$1
-	local code=$2
-	[[ -z $code ]] && code=1
-
-	log "[ERROR] $msg"
-
-	exit $code
-}
 
 
-# Debug {{{1
-################################################################
+### Set tags ###
+if [[ -n "${OVERRIDE_GALAXY_INIT_PHENO_FLAVOURED_TAG:-}" ]]; then
+    GALAXY_INIT_PHENO_FLAVOURED_TAG="${OVERRIDE_GALAXY_INIT_PHENO_FLAVOURED_TAG}"
+else
+    GALAXY_INIT_PHENO_FLAVOURED_TAG=$DOCKER_REPO$DOCKER_USER/galaxy-init-pheno-flavoured:$TAG
+fi
 
-function debug {
+if [[ -n "${OVERRIDE_GALAXY_WEB_K8S_TAG:-}" ]]; then
+    GALAXY_WEB_K8S_TAG="${OVERRIDE_GALAXY_WEB_K8S_TAG}"
+else
+    GALAXY_WEB_K8S_TAG=$DOCKER_REPO$DOCKER_USER/galaxy-web-k8s:$TAG
+fi
 
-    local msg=$1
-    local level=$2
-    [[ -n $level ]] || level=1
+if [[ -n "${OVERRIDE_POSTGRES_TAG:-}" ]]; then
+    POSTGRES_TAG="${OVERRIDE_POSTGRES_TAG}"
+else
+    PG_Dockerfile="docker-galaxy-stable/compose/galaxy-postgres/Dockerfile"
 
-    [[ $DEBUG -lt $level ]] || log "[DEBUG] $msg"
-}
+    [[ -f "${PG_Dockerfile}" ]] || error "The galaxy-postgres Dockerfile is missing under docker-galaxy-stable/.  Have you updated the repository submodules?" 99
+    POSTGRES_VERSION=$(grep FROM "${PG_Dockerfile}" | awk -F":" '{ print $2 }')
 
-# Warning {{{1
-################################################################
+    POSTGRES_TAG=$DOCKER_REPO$DOCKER_USER/galaxy-postgres:$POSTGRES_VERSION"_for_"$GALAXY_VER_FOR_POSTGRES
+fi
 
-function warning {
 
-    local msg=$1
+if [[ -n "${OVERRIDE_PROFTPD_TAG:-}" ]]; then
+    PROFTPD_TAG="${OVERRIDE_PROFTPD_TAG}"
+else
+    PROFTPD_TAG=$DOCKER_REPO$DOCKER_USER/galaxy-proftpd:for_galaxy_v$GALAXY_VER_FOR_POSTGRES
+fi
 
-    log "[WARNING] ##### $msg #####"
-}
 
-# Print help {{{1
-################################################################
-
-function print_help {
-    (
-        echo "Usage: $SCRIPT_NAME [options]"
-        echo
-        echo "Build PhenoMeNal Galaxy docker images."
-        echo
-        echo "Options:"
-        echo "   -g, --debug                 Debug mode."
-        echo "   -h, --help                  Print this help message."
-        echo "       --init-tag       <tag>  Set the tag for the Galaxy Init Flavour container image."
-        echo "   -p, --push                  Push dockers. You can also set environment variable DOCKER_PUSH_ENABLED to \"true\". Enabled by default."
-        echo "   +p, --no-push               Do not push dockers. You can also set environment variable DOCKER_PUSH_ENABLED to \"false\"."
-        echo "       --postgres-tag   <tag>  Set the tag for the Galaxy Postgres container image."
-        echo "       --proftpd-tag    <tag>  Set the tag for the Galaxy Proftpd container image."
-        echo "   -u, --container-user <user> Set the container user. You can also set the environment variable CONTAINER_USER."
-        echo "       --web-tag        <tag>  Set the tag for the Galaxy Web k8s container image."
-        echo
-    ) >&2
-}
-
-# Read args {{{1
-################################################################
-
-function read_args {
-
-    local args="$*" # save arguments for debugging purpose
-
-    # Read options
-    while true ; do
-        shift_count=1
-        case $1 in
-            -g|--debug)              DEBUG=$((DEBUG + 1)) ;;
-            -h|--help)               print_help ; exit 0 ;;
-            -p|--push)               DOCKER_PUSH_ENABLED=$TRUE ;;
-            +p|--no-push)            DOCKER_PUSH_ENABLED=$FALSE ;;
-            --postgres-tag)          POSTGRES_TAG="$2" ; shift_count=2 ;;
-            --proftpd-tag)           PROFTPD_TAG="$2" ; shift_count=2 ;;
-            --init-tag)              GALAXY_INIT_PHENO_FLAVOURED_TAG="$2" ; shift_count=2 ;;
-            --web-tag)               GALAXY_WEB_K8S_TAG="$2" ; shift_count=2 ;;
-            -u|--container-user)     DOCKER_USER="$2" ; shift_count=2 ;;
-            -) error "Illegal option $1." 98 ;;
-            --) error "Illegal option $1." 98 ;;
-            --*) error "Illegal option $1." 98 ;;
-            -?) error "Unknown option $1." 98 ;;
-            -[^-]*) split_opt=$(echo $1 | sed 's/^-//' | sed 's/\([a-zA-Z0-9]\)/ -\1/g') ; set -- $1$split_opt "${@:2}" ;;
-            *) break
-        esac
-        shift $shift_count
-    done
-    shift $((OPTIND - 1))
-
-    # Debug messages
-    debug "Command line arguments: $args"
-    debug "Argument DEBUG=$DEBUG"
-    debug "Argument DOCKER_PUSH_ENABLED=$DOCKER_PUSH_ENABLED"
-    debug "Argument DOCKER_USER=$DOCKER_USER"
-    debug "Argument GALAXY_INIT_PHENO_FLAVOURED_TAG=$GALAXY_INIT_PHENO_FLAVOURED_TAG"
-    debug "Argument GALAXY_WEB_K8S_TAG=$GALAXY_WEB_K8S_TAG"
-    debug "Argument POSTGRES_TAG=$POSTGRES_TAG"
-    debug "Argument PROFTPD_TAG=$PROFTPD_TAG"
-    debug "shift_count=$shift_count"
-}
-
-# MAIN {{{1
-################################################################
-
-read_args "$@"
+### do work
 
 if [ -n $ANSIBLE_REPO ]
     then
