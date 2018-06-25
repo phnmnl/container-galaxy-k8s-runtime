@@ -1,6 +1,6 @@
 <tool id="pathway_enrichment" name="Pathway_Enrichment" version="2.0">
 
-  <description>predicts differences in metabolomic pathway expression among a (human) network (Recon v2.02)</description>
+  <description>predicts differences in metabolomic pathway expression among a (human) network (Recon v2.03)</description>
 
   <edam_topics>
       <edam_topic>topic_3172</edam_topic>
@@ -59,7 +59,7 @@
     <param name="input" format="tsv,tabular,csv" type="data" label="Fingerprint dataset (name and database identifier columns at least)" help="This file should be composed by at least a column with the name of the chemical entities (metabolites, reactions, ...) and another one with a database identifier (ChEBI, InChI, InChI key, KEGG, HMDB,...)."/>
 
     <conditional name="sbml">
-      <param name="advanced" type="boolean" label="Specify another SBML (by default: Recon v2.02 without compartment)" help="XML in Systems Biology Markup Language (SBML) format. SBML is usually composed of lists of units, compartment and chemical species. The 2nd version of the human metabolism bionetwork is used by default (Thiele et al., 2013)."/>
+      <param name="advanced" type="boolean" label="Specify another SBML (by default: Recon v2.03 without compartment)" help="XML in Systems Biology Markup Language (SBML) format. SBML is usually composed of lists of units, compartment and chemical species. The 2nd version of the human metabolism bionetwork is used by default (Thiele et al., 2013)."/>
       <when value="true">
         <param name="file" format="xml" type="data" label="SBML file"/>
       </when>
@@ -92,7 +92,7 @@
     </conditional>
 
     <conditional name="mapping">
-      <param name="advanced" display="radio" type="boolean" label="Change mapping parameters (by default: on the second one containing SBML IDs)" help="Map the chemical entities (metabolites or reactions) contained in the fingerprint dataset on those contained in the SBML network file (by default, Recon v2.02 without the compartments)." />
+      <param name="advanced" display="radio" type="boolean" label="Change mapping parameters (by default: on the second one containing SBML IDs)" help="Map the chemical entities (metabolites or reactions) contained in the fingerprint dataset on those contained in the SBML network file (by default, Recon v2.03 without the compartments)." />
       <when value="true">
 
         <param name="bioEntity" type="select" display="radio" label="Type of chemical entities used in the fingerprint file">
@@ -184,7 +184,7 @@ Chemical entities (metabolites, reactions, enzymes, proteines or genes) belongin
 Input files
 -----------
     | - a **fingerprint** (tsv or tabular format): requiered, composed by at least a column with the name of the chemical entities and another one with identifier values from a chemical database to map them on the SBML files..
-    | - a **metabolic network** (SBML) : optional, by default Recon v2.02 SBML file (without compartments) (Thiele et al., 2013).
+    | - a **metabolic network** (SBML) : optional, by default Recon v2.03 SBML file (without compartments) (Thiele et al., 2013).
 
 ------------
 Output files

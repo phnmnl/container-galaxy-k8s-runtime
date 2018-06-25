@@ -446,7 +446,7 @@ assignment:
    - pathway_enrichment
   docker_owner_override: phnmnl
   docker_image_override: fingerprintsubnetwork
-  docker_tag_override: v1.1_cv1.2.2
+  docker_tag_override: v1.1_cv1.3.4
   max_pod_retrials: 1
   tools_id:
 - docker_repo_override: container-registry.phenomenal-h2020.eu
