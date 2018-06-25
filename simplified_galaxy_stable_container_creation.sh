@@ -140,10 +140,10 @@ function read_args {
             --init-tag)              GALAXY_INIT_PHENO_FLAVOURED_TAG="$2" ; shift_count=2 ;;
             --web-tag)               GALAXY_WEB_K8S_TAG="$2" ; shift_count=2 ;;
             -u|--container-user)     DOCKER_USER="$2" ; shift_count=2 ;;
-            -) error "Illegal option $1." ;;
-            --) error "Illegal option $1." ;;
-            --*) error "Illegal option $1." ;;
-            -?) error "Unknown option $1." ;;
+            -) error "Illegal option $1." 98 ;;
+            --) error "Illegal option $1." 98 ;;
+            --*) error "Illegal option $1." 98 ;;
+            -?) error "Unknown option $1." 98 ;;
             -[^-]*) split_opt=$(echo $1 | sed 's/^-//' | sed 's/\([a-zA-Z0-9]\)/ -\1/g') ; set -- $1$split_opt "${@:2}" ;;
             *) break
         esac
