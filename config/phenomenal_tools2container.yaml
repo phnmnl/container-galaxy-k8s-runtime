@@ -312,7 +312,7 @@ assignment:
 - docker_image_override: iterative-signature-algorithm
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: latest
+  docker_tag_override: v0.1_cv0.1.26
   max_pod_retrials: 2
   tools_id:
   - iterative-signature-algorithm

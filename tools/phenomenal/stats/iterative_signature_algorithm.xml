@@ -14,15 +14,21 @@
 		--seedsparsity $seed.sparsity
 		--maxiter $iteration.max
 		--dconv $iteration.delta
+                        #if $seedmatrix
+                        --seedmatrix sd.csv
+                        #end if
 		#if $nt:
 		  --nt 
 		#end if
 		#if $inputhasheaders:
 		  --inputhasheaders
-                #end if
-                #if $inputhaslabels:
-                  --inputhaslabels
-                #end if
+                        #end if
+                        #if $inputhaslabels:
+                            --inputhaslabels
+                        #end if
+                        #if $gopseudo:
+                            --gopseudo
+                        #end if
 	]]>
 	</command>
 	<inputs>
@@ -35,6 +41,12 @@
 		name="nt" type="boolean" optional="False"
 		label="Non-threshold output"
 		help="By default, rows and columns that are not included in a given module have scores 0. Setting this option to true runs an additional iteration without thresholding, so that scores are also attributed to excluded rows and columns"
+		checked="false"
+		/>
+            <param
+		name="gopseudo" type="boolean" optional="False"
+		label="Output pseudospectrum"
+		help="If the data matrix is an NMR feature metabolome (where rows are samples and columns are chemical shifts in ppm, ISA can output the column scores as a file compliant to metabomatching input format. Methodologically, 'Non-threshold output' should also be set to true."
 		checked="false"
 		/>
 	<param
@@ -85,6 +97,11 @@
 		/>
 	</section>
 	<section name="seed" title="Seeding Options" expanded="True">
+            <param 
+		name="seedmatrix" type="data" format="csv"  optional="true"
+		label="Seed matrix" 
+		help="A seed matrix can be provided to ISA. This is useful, in particular, for repeatability." 
+		/>
 	<param 
 		name="number" type="integer" value="100" 
 		label="Number of seeds"
@@ -125,16 +142,17 @@
 		<data
 			name="moduleinfo" 
 			format="tsv" 
-			from_work_dir="module.info.csv" 
+			from_work_dir="module.info.tsv" 
 			label="ISA Module Info"
 		/>
 	</outputs>
 	<help>
+            
 -----------
 Description
 -----------
 
-A basic python3 implementation of the Iterative Signature Algorithm [ISA]. 
+A basic python3 implementation of the Iterative Signature Algorithm [ISA], version-20180625T1800.
 
 A more fully fledged R version is available here : https://bioconductor.org/packages/release/bioc/html/eisa.html
 
@@ -158,10 +176,12 @@ Output Files
 **module.rowscore.tsv**
 	| A tab-separated values file containing the row scores for each module.
 	| If the input file has labeled rows, the output file has labeled rows, with the same labels
+	|
 
 **module.colscore.tsv**
 	| A tab-separated values file containing the column scores for each module.
 	| If the input file has headers, the output file uses the headers as row labels
+	|
 
 **module.info.tsv**
 	| A tab-separated values file containg information about the modules found. Specifically:
@@ -169,6 +189,7 @@ Output Files
 	| * row 2 : module robustness
 	| * row 3 : row threshold at which module was found
 	| * row 4 : column threshold at which module was found
+	|
 
 	</help>
 	<citations>
