@@ -225,7 +225,7 @@ assignment:
 - docker_image_override: nmrmlconv
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v1.1b_cv0.5.52
+  docker_tag_override: v1.1b_cv0.6.53
   max_pod_retrials: 3
   tools_id:
   - mtbls_nmr_raw_dummy_importer
@@ -289,7 +289,7 @@ assignment:
 - docker_image_override: rnmr1d
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v1.2.18_cv0.2.1.48 
+  docker_tag_override: v1.2.22_cv0.3.49 
   max_pod_retrials: 3
   tools_id:
   - rnmr1d
