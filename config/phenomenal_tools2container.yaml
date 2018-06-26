@@ -28,7 +28,7 @@ assignment:
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: tamenmr
-  docker_tag_override: latest
+  docker_tag_override: v1.0_cv0.5.10
   max_pod_retrials: 3
 # Fluxomics
 - tools_id: 
