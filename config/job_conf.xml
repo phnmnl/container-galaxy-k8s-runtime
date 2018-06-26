@@ -193,14 +193,16 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
+    <!--
     <destination id="ecomet-container" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
       <param id="docker_image_override">ecomet</param>
-      <param id="docker_tag_override">dev_v1.1_cv0.1.26</param>
+      <param id="docker_tag_override">v1.1_cv0.1.27</param>
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
+    -->
     <destination id="container-escher-fluxomics" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
