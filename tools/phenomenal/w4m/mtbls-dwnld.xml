@@ -1,5 +1,5 @@
 <!-- vi: se fdm=marker : -->
-<tool id="mtbls-dwnld" name="Metabolights downloader" version="4.0.4">
+<tool id="mtbls-dwnld" name="Metabolights downloader" version="4.0.5">
 
 	<description>Import public and private MetaboLights studies</description>
 
@@ -169,6 +169,12 @@ Then to use it inside the command tag, one must use the variable ``$isa.extra_fi
 
 The easiest way to use the ISA archive inside the run program is then to use the Python3 library isatools to load it. See https://github.com/ISA-tools/isa-api for information.
 
+----------------------
+Network considerations
+----------------------
+	    
+The networking of the Galaxy instance needs to allow UDP connections with source port 33001 for the fast Aspera download. This is the case for most commercial providers, including Amazon AWS and Google GCP, but some local installations might have additional firewall rules in place. See also https://test-connect.asperasoft.com/ for more information. If these connections are not allowed, the fallback to the wget download via is still possible.	    
+	    
 <!-- @@@END_RST@@@ -->
     </help>
 
