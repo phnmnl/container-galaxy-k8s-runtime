@@ -7,8 +7,8 @@
   ]]>
   </command>
   <inputs>
-    <param name="left" type="float" value="0" label="Left" help="Left (e.g., 5.225)"/>
-    <param name="right" type="float" value="0" label="Right" help="Right (e.g., 5.257)"/>
+    <param name="left" type="float" value="0" label="Left" help="Left (e.g., 5.257)"/>
+    <param name="right" type="float" value="0" label="Right" help="Right (e.g., 5.225)"/>
     <param name="where" type="float" value="0" label="Where" help="Where (e.g., 5.243)"/>
     <param name="signal_metabolites" type="data" format="tsv" label="Signal Metabolites" help="Table of the metabolites to be used to compare the two spectra."/>
     <param name="reference_spec" type="data" format="no_unzip.zip" label="Reference" help="Reference spectrum (zipped Bruker NMR dataset)"/>
