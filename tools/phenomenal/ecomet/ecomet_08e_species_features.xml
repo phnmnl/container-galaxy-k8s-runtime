@@ -1,10 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="ecomet_species_features" name="Species Features" version="1.1">
-  <requirements>
-    <container type="docker">korseby/mtbls520</container>
-  </requirements>
-  <description>Calculate species total features from the MTBLS520 study.</description>
+<tool id="ecomet_species_features" name="ecomet_species_features" version="1.1">
+  <description>Calculate species total features</description>
   <stdio>
     <regex match="" source="stderr" level="warning" description="R messages" />
     <exit_code range="1:" level="fatal" description="Tool error" />

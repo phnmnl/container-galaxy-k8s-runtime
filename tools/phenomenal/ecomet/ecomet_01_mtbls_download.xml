@@ -1,9 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="mtbls520_01_mtbls_download" name="mtbls520_01_mtbls_download" version="1.1">
-  <requirements>
-    <container type="docker">korseby/mtbls520</container>
-  </requirements>
+<tool id="ecomet_download" name="ecomet_download" version="1.1">
   <description>Download MTBLS study via https</description>
   <command><![CDATA[
 mtbls520_01_mtbls_download.sh $id $mtblszip $token 2>&1;
@@ -17,9 +14,9 @@ mtbls520_01_mtbls_download.sh $id $mtblszip $token 2>&1;
     <data name="mtblszip" type="data" format="zip" label="MTBLS dataset" help="MTBLS study dataset in ZIP format" />
   </outputs>
   <help>
-==================================
-MTBLS520 Eco-Metabolomics workflow
-==================================
+=========================
+Eco-Metabolomics workflow
+=========================
 
 This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
 

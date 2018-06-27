@@ -1,10 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="ecomet_import_traits" name="Import Traits" version="1.1">
-  <requirements>
-    <container type="docker">korseby/mtbls520</container>
-  </requirements>
-  <description>Import and process ecological characteristics file of the MTBLS520 study.</description>
+<tool id="ecomet_import_traits" name="ecomet_import_traits" version="1.1">
+  <description>Import and process ecological characteristics file of the MTBLS study</description>
   <stdio>
     <regex match="" source="stderr" level="warning" description="R messages" />
     <exit_code range="1:" level="fatal" description="Tool error" />

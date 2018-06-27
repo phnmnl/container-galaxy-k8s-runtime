@@ -252,10 +252,9 @@ assignment:
   docker_tag_override: v1.1_cv0.1.27
   max_pod_retrials: 3
   tools_id:
-  - mtbls520_01_mtbls_download
-  - mtbls520_02a_raw_extract
-  - mtbls520_02b_qc_extract
-  - mtbls520_02_extract
+  - ecomet_download
+  - ecomet_raw_extract
+  - ecomet_qc_extract
   - ecomet_quality_control
   - ecomet_preparations
   - ecomet_import_maf

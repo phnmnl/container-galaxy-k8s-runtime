@@ -1,35 +1,32 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="mtbls520_02a_raw_extract" name="mtbls520_02a_raw_extract" version="1.1">
-  <requirements>
-    <container type="docker">korseby/mtbls520</container>
-  </requirements>
-  <description>Extract RAW files from MTBLS520 study</description>
+<tool id="ecomet_raw_extract" name="ecomet_raw_extract" version="1.1">
+  <description>Extract RAW files from MTBLS study</description>
   <command><![CDATA[
-mtbls520_02_extract.sh $mtbls520 $polarity rawfolder $rawmaf qcfolder qcmaf $traitsfile $phylofile $afile $sfile;
+mtbls520_02_extract.sh $mtblsid $polarity rawfolder $rawmaf qcfolder qcmaf $traitsfile $phylofile $afile $sfile;
   ]]>
   </command>
   <inputs>
-    <param name="mtbls520" type="data" format="zip" label="MTBLS520 study" />
+    <param name="mtblsid" type="data" format="zip" label="MTBLS study" />
     <param name="polarity" type="select" value="positive" optional="False" label="Polarity" help="The polarity used for the mode of acquisition">
 	    <option value="positive" selected="True">positive</option>
 	    <option value="negative">negative</option>
 	</param>
   </inputs>
   <outputs>
-    <collection name="rawfiles" type="list" format="mzml" label="MTBLS520: RAW mzML files" >
+    <collection name="rawfiles" type="list" format="mzml" label="RAW mzML files" >
       <discover_datasets pattern="__name__" directory="rawfolder" type="data" format="mzml" visible="false" />
     </collection>
-    <data name="rawmaf" type="data" format="tabular" label="MTBLS520: Study MAF peak table" />
-    <data name="traitsfile" type="data" format="csv" label="MTBLS520: Ecological characteristics" />
-    <data name="phylofile" type="data" format="txt" label="MTBLS520: Phylogeny tree" />
-    <data name="afile" type="data" format="tabular" label="MTBLS520: Analytical metadata" />
-    <data name="sfile" type="data" format="tabular" label="MTBLS520: Sample metadata" />
+    <data name="rawmaf" type="data" format="tabular" label="Study MAF peak table" />
+    <data name="traitsfile" type="data" format="csv" label="Ecological characteristics" />
+    <data name="phylofile" type="data" format="txt" label="Phylogeny tree" />
+    <data name="afile" type="data" format="tabular" label="Analytical metadata" />
+    <data name="sfile" type="data" format="tabular" label="Sample metadata" />
   </outputs>
   <help>
-==================================
-MTBLS520 Eco-Metabolomics workflow
-==================================
+=========================
+Eco-Metabolomics workflow
+=========================
 
 This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
 
@@ -45,8 +42,8 @@ Description
 Input
 -----
 
-MTBLS520 study
-	| Zipped MTBLS520 study
+MTBLS study
+	| Zipped MTBLS study
 	|
 
 Polarity

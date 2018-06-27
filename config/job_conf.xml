@@ -404,10 +404,9 @@
     <tool id="aggregatemetfrag" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="passatutto" destination="dynamic-k8s-medium" resources="all"/>
     <!-- Eco-Metabolomics -->
-    <tool id="mtbls520_01_mtbls_download" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="mtbls520_02a_raw_extract" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="mtbls520_02b_qc_extract" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="mtbls520_02_extract" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_download" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_raw_extract" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_qc_extract" destination="dynamic-k8s-large" resources="all"/>
     <tool id="ecomet_quality_control" destination="dynamic-k8s-large" resources="all"/>
     <tool id="ecomet_preparations" destination="dynamic-k8s-large" resources="all"/>
     <tool id="ecomet_import_maf" destination="dynamic-k8s-large" resources="all"/>

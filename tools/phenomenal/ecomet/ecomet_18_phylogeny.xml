@@ -1,10 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--Proposed Tool Section: [Eco-Metabolomics]-->
-<tool id="ecomet_phylogeny" name="Phylogeny Comparison" version="1.1">
-  <requirements>
-    <container type="docker">korseby/mtbls520</container>
-  </requirements>
-  <description>Perform phylogeny comparison analysis from the MTBLS520 study.</description>
+<tool id="ecomet_phylogeny" name="ecomet_phylogeny" version="1.1">
+  <description>Perform phylogeny comparison analysis</description>
   <stdio>
     <regex match="" source="stderr" level="warning" description="R messages" />
     <exit_code range="1:" level="fatal" description="Tool error" />
