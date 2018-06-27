@@ -653,7 +653,6 @@
     <datatype extension="rdata.xcms.group" type="galaxy.datatypes.rdata_xcms_datatype:RdataXcmsGroup" mimetype="application/x-gzip" subclass="true" display_in_upload="true" />
     <datatype extension="rdata.xcms.raw" type="galaxy.datatypes.rdata_xcms_datatype:RdataXcmsRaw" mimetype="application/x-gzip" subclass="true" display_in_upload="true" />
     <datatype extension="rdata.xcms.retcor" type="galaxy.datatypes.rdata_xcms_datatype:RdataXcmsRetcor" mimetype="application/x-gzip" subclass="true" display_in_upload="true" />
-    <datatype extension="bruker_zip" type="galaxy.datatypes.binary:CompressedZipArchive" subclass="true" display_in_upload="true"/>
   </registration>
   <sniffers>
     <!--
