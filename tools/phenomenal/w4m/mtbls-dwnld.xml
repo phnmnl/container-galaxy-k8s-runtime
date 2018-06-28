@@ -1,5 +1,5 @@
 <!-- vi: se fdm=marker : -->
-<tool id="mtbls-dwnld" name="Metabolights downloader" version="4.0.5">
+<tool id="mtbls-dwnld" name="Metabolights downloader" version="4.1.1">
 
 	<description>Import public and private MetaboLights studies</description>
 
@@ -14,7 +14,7 @@
 
 		mtbls-dwnld
 
-		-q
+		-q -T
 		#if $token:
 			-t "$token"
 		#end if
