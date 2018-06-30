@@ -1,7 +1,11 @@
 <!-- vi: se fdm=marker : -->
-<tool id="mtbls-dwnld" name="Metabolights downloader" version="3.1.0">
+<tool id="mtbls-dwnld" name="Metabolights downloader" version="4.0.5">
 
 	<description>Import public and private MetaboLights studies</description>
+
+	<requirements>
+		<requirement type="package" version="0.9.5">isatools</requirement>
+	</requirements>
 
 	<!-- Command {{{1 -->
 
@@ -10,7 +14,7 @@
 
 		mtbls-dwnld
 
-		-qq
+		-q
 		#if $token:
 			-t "$token"
 		#end if
@@ -22,13 +26,18 @@
 		#end if
 
 		## Download only the metadata
-		#if $metadata:
+		#if $only_metadata == 'yes':
 			-M
 		#end if
 
 		## Set output file
 		-H "$isastudy"
 		-o "$isastudy.files_path"
+
+		## Factor slicing
+		#if $factor_slicing.factor_name:
+			-f "$factor_slicing.factor_name=$factor_slicing.factor_value"
+		#end if
 
 		## Study to output
 		"$study"
@@ -55,11 +64,20 @@
 			<option value="aspera">Aspera</option>
 		</param>
 
-		<!-- Metadata -->
-		<param name="metadata" label="Download only the metadata" type="boolean" help="If set to 'No', the whole study will be downloaded (i.e.: metadata and raw data)." checked="true" truevalue="yes" falsevalue=""/>
-
 		<!-- Token -->
-		<param name="token" type="text" optional="true" format="txt" label="Token"  help="Token is required for private study or for downloading with Aspera client."/>
+		<param name="token" type="text" optional="true" format="txt" label="Token"  help="A token is required for private studies. A default token is provided for downloading public studies with aspera, but you can set your own if you wish."/>
+
+		<!-- Metadata -->
+		<param name="only_metadata" label="Content to download" type="select" display="radio" help="Specify here what files you want to download from the study.">
+			<option value="yes">ISA-Tab metadata only.</option>
+			<option value="no">Full study including raw data and ISA-Tab metadata.</option>
+		</param>
+
+		<!-- Factor slicing -->
+		<section name="factor_slicing" title="Slicing by factor value" expanded="true" help="With this option, you can restrict the set of files you download from the study.">
+			<param name="factor_name" type="text" size="128" label="Factor title"/>
+			<param name="factor_value" type="text" size="128" label="Factor value"/>
+		</section>
 	</inputs>
 
 	<!-- Outputs {{{1 -->
@@ -151,6 +169,12 @@ Then to use it inside the command tag, one must use the variable ``$isa.extra_fi
 
 The easiest way to use the ISA archive inside the run program is then to use the Python3 library isatools to load it. See https://github.com/ISA-tools/isa-api for information.
 
+----------------------
+Network considerations
+----------------------
+	    
+The networking of the Galaxy instance needs to allow UDP connections with source port 33001 for the fast Aspera download. This is the case for most commercial providers, including Amazon AWS and Google GCP, but some local installations might have additional firewall rules in place. See also https://test-connect.asperasoft.com/ for more information. If these connections are not allowed, the fallback to the wget download via is still possible.	    
+	    
 <!-- @@@END_RST@@@ -->
     </help>
 
