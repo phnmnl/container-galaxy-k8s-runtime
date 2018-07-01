@@ -1,5 +1,5 @@
 <!-- vi: se fdm=marker : -->
-<tool id="mtbls-dwnld" name="Metabolights downloader" version="4.1.1">
+<tool id="mtbls-dwnld" name="Metabolights downloader" version="4.1.3">
 
 	<description>Import public and private MetaboLights studies</description>
 
