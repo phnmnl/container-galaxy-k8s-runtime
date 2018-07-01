@@ -1,10 +1,9 @@
-<tool id="Univariate" name="Univariate" version="2.2.3">
+<tool id="Univariate" name="Univariate" version="2.2.6">
   <description>Univariate statistics</description>
   
   <requirements>
-    <requirement type="package" version="3.2.2">R</requirement>
-    <requirement type="package">r-batch</requirement>
-    <requirement type="package">r-PMCMR</requirement>
+    <requirement type="package" version="1.1_4">r-batch</requirement>
+    <requirement type="package" version="4.1">r-PMCMR</requirement>
   </requirements>
 
   <stdio>
@@ -12,7 +11,7 @@
   </stdio>
   
   <command><![CDATA[
-   univariate_wrapper.R
+  univariate_wrapper.R
 
   dataMatrix_in "$dataMatrix_in"
   sampleMetadata_in "$sampleMetadata_in"
@@ -33,21 +32,20 @@
     <param name="variableMetadata_in" label="Variable metadata file" type="data" format="tabular" help="variable x metadata, decimal: '.', missing: NA, mode: character and numerical, sep: tabular"  />
     <param name="facC" label="Factor of interest" type="text" help="Name of the column of the sample metadata table corresponding to the qualitative or quantitative variable"/>
     <param name="tesC" label="Test" type="select" help="">
-      <option value="ttest">ttest (qualitative, 2 levels)</option>
-      <option value="wilcoxon">Wilcoxon test (qualitative, 2 levels)</option>      
+      <option value="ttest">Student t-test (qualitative, 2 levels)</option>
+      <option value="wilcoxon">Wilcoxon rank sum test (qualitative, 2 levels)</option>      
       <option value="anova">Analysis of variance (qualitative, more than 2 levels)</option>
-      <option value="kruskal">Kruskal-Wallis rank test (qualitative, more than 2 levels)</option>
+      <option value="kruskal">Kruskal-Wallis test (qualitative, more than 2 levels)</option>
       <option value="pearson">Pearson correlation test (quantitative)</option>
       <option value="spearman">Spearman correlation rank test (quantitative)</option>
     </param>
-    <param name="adjC" label="Method for multiple testing correction" type="select" help="">
-      <option value="fdr">fdr</option>
-      <option value="BH">BH</option>
-      <option value="bonferroni">bonferroni</option>
-      <option value="BY">BY</option>
-      <option value="hochberg">hochberg</option>
-      <option value="holm">holm</option>
-      <option value="hommel">hommel</option>
+    <param name="adjC" label="Multiple testing correction method" type="select" help="">
+      <option value="fdr">Benjamini and Hochberg false discovery rate (fdr or BH)</option>
+      <option value="BY">Benjamini and Yekutieli false discovery rate (BY)</option>
+      <option value="bonferroni">Bonferroni family-wise error rate (bonferroni)</option>
+      <option value="holm">Holm-Bonferroni family-wise error rate (holm)</option>
+      <option value="hochberg">Hochberg family-wise error rate (hochberg)</option>
+      <option value="hommel">Hommel family-wise error rate (hommel)</option>
       <option value="none">none</option>
     </param>
     <param name="thrN" type="float" value="0.05" label="(Corrected) p-value significance threshold" help="Must be between 0 and 1"/>
@@ -117,7 +115,7 @@ Univariate statistics
 Description
 -----------
 
-| The module performs two sample tests (t-test and Wilcoxon rank test), analysis of variance and Kruskal-Wallis rank test, and correlation tests (by using either the pearson or the spearman correlation)
+| The module performs two sample tests (Student t-test and Wilcoxon rank sum test), analysis of variance and Kruskal-Wallis test, and correlation tests (by using either the pearson or the spearman correlation)
 
 -----------------
 Workflow position
@@ -163,21 +161,33 @@ Factor
 Test
 	| Depending on the factor of interest (qualitative with 2 or more levels, or quantitative), and on the normality of the sample values (determining whether a parametric or nonparametric test is required), you can choose one of the 6 tests available:
 
-
-+---------------------------+------------------+----------------------+----------------------+
-| Factor to be tested       | Number of levels |    Parametric test   |  Nonparametric test  |
-+===========================+==================+======================+======================+
-| Qualitative               |         2        |       t-test         |    Wilcoxon test     |
-+                           +------------------+----------------------+----------------------+
-|                           |        > 2       | Analysis of variance |    Kruskal-Wallis    |
-+---------------------------+------------------+----------------------+----------------------+
-| Quantitative              |                  | Pearson correlation  | Spearman correlation |
-+---------------------------+------------------+----------------------+----------------------+
++--------------+--------+----------------+---------------------------+----------------------------------------------+
+| Factor       | Levels |                | Test                      | Ontology                                     |
++==============+========+================+===========================+==============================================+
+| Qualitative  |    2   | Parametric     | Student t-test            | http://purl.obolibrary.org/obo/OBI_0000739   |
+|              |        | Non-parametric | Wilcoxon rank sum test    | http://purl.obolibrary.org/obo/STATO_0000076 |
+|              |  > 2   | Parametric     | Analysis of variance      | http://purl.obolibrary.org/obo/OBI_0200201   |
+|              |        | Non-parametric | Kruskal-Wallis test       | http://purl.obolibrary.org/obo/STATO_0000094 |
++--------------+--------+----------------+---------------------------+----------------------------------------------+
+| Quantitative |        | Parametric     | Pearson correlation test  |                                              |
+|              |        | Non-parametric | Spearman correlation test |                                              |
++--------------+--------+----------------+---------------------------+----------------------------------------------+
 
 Method for multiple testing correction
 	| The 7 methods implemented in the 'p.adjust' R function are available and documented as follows:
 	| "The adjustment methods include the Bonferroni correction ("bonferroni") in which the p-values are multiplied by the number of comparisons. Less conservative corrections are also included by Holm (1979) ("holm"), Hochberg (1988) ("hochberg"), Hommel (1988) ("hommel"), Benjamini and Hochberg (1995) ("BH" or its alias "fdr"), and Benjamini and Yekutieli (2001) ("BY"), respectively. A pass-through option ("none") is also included. The set of methods are contained in the p.adjust.methods vector for the benefit of methods that need to have the method as an option and pass it on to p.adjust. The first four methods are designed to give strong control of the family-wise error rate. There seems no reason to use the unmodified Bonferroni correction because it is dominated by Holm's method, which is also valid under arbitrary assumptions. Hochberg's and Hommel's methods are valid when the hypothesis tests are independent or when they are non-negatively associated (Sarkar, 1998; Sarkar and Chang, 1997). Hommel's method is more powerful than Hochberg's, but the difference is usually small and the Hochberg p-values are faster to compute. The "BH" (aka "fdr") and "BY" method of Benjamini, Hochberg, and Yekutieli control the false discovery rate, the expected proportion of false discoveries amongst the rejected hypotheses. The false discovery rate is a less stringent condition than the family-wise error rate, so these methods are more powerful than the others."
 	|
+
++-------------------------------------------------------+---------------------------------------------+-------------+
+| Multiple testing correction method                    | http://purl.obolibrary.org/obo/OBI_0200089  | R name      |
++=======================================================+=============================================+=============+
+| Benjamini and Hochberg  false discovery rate (FDR)    | http://purl.obolibrary.org/obo/OBI_0200036  | BH (or fdr) |
+| Benjamini and Yekutieli false discovery rate          | http://purl.obolibrary.org/obo/OBI_0200049  | BY          |
+| Bonferroni              family-wise error rate (FWER) |                                             | bonferroni  |
+| Holm-Bonferroni         family-wise error rate        | http://purl.obolibrary.org/obo/OBI_0200066  | holm        |
+| Hochberg                family-wise error rate        |                                             | hochberg    |
+| Hommel                  family-wise error rate        |                                             | hommel      |
++-------------------------------------------------------+---------------------------------------------+-------------+
 
 (Corrected) p-value significance threshold
 	|
@@ -220,6 +230,20 @@ See the **W4M00001a_sacurine-subset-statistics**, **W4M00001b_sacurine-subset-co
 NEWS
 ----
 
+CHANGES IN VERSION 2.2.6
+========================
+
+NEW FEATURE
+
+Tests and correction methods have been renamed according to the controlled vocabulary of the Ontology for Biomedical Investigations (OBI; http://obi-ontology.org/) and the statistics ontology (STATO; http://stato-ontology.org/), in collaboration with Philippe Rocca-Serra (University of Oxford)
+
+CHANGES IN VERSION 2.2.4
+========================
+
+MINOR MODIFICATION
+
+Internal minor modifications for building and testing
+
 CHANGES IN VERSION 2.2.0
 ========================
 
@@ -234,7 +258,6 @@ All values in the 'dif', adjusted p-value, and 'sig' columns are now displayed (
 NEW FEATURE
 
 Graphic: a single pdf file containing the graphics of all significant tests is now produced as '_figure.pdf' output: boxplots (respectively scatterplots with the regression line in red and the R2 value) are displayed when the factor of interest is qualitative (respectively quantitative). The corrected p-value is indicated in the title of each plot
-
 
 CHANGES IN VERSION 2.1.4
 ========================
@@ -279,19 +302,8 @@ NEW FEATURE
     year = {2016},
     url = {https://www.R-project.org/},
     }</citation>
-    <citation type="bibtex">@Article{Thevenot2015,
-    Title                    = {Analysis of the human adult urinary metabolome variations with age, body mass index and gender by implementing a comprehensive workflow for univariate and OPLS statistical analyses},
-    Author                   = {Thevenot, Etienne A. and Roux, Aurelie and Xu, Ying and Ezan, Eric and Junot, Christophe},
-    Journal                  = {Journal of Proteome Research},
-    Year                     = {2015},
-    Note                     = {PMID: 26088811},
-    Number                   = {8},
-    Pages                    = {3322-3335},
-    Volume                   = {14},
-    
-    Doi                      = {10.1021/acs.jproteome.5b00354},
-    Url                      = {http://pubs.acs.org/doi/full/10.1021/acs.jproteome.5b00354}
-    }</citation>
+    <citation type="doi">10.1021/acs.jproteome.5b00354</citation>
+    <citation type="doi">10.1016/j.biocel.2017.07.002</citation>
     <citation type="doi">10.1093/bioinformatics/btu813</citation>
   </citations>
   
