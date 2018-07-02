@@ -59,33 +59,33 @@
         <param name="seuil" type="float" label="Threshold" value="1.25" min="0.0000000000000001" help="if comparing pool and sample CVs, corresponds to the max ratio tolerated (basically between 1.0 and 1.25) ; else corresponds to the max pool CV tolerated (basically 0.3)"/>
       </when>
       <when value="FALSE">
-	<param name="Compa" type="hidden" value="TRUE"/>
-	<param name="seuil" type="hidden" value="1"/>
+        <param name="Compa" type="hidden" value="TRUE"/>
+        <param name="seuil" type="hidden" value="1"/>
       </when>	
     </conditional>
     
     <conditional name="advPar">
       <param name="optC" type="select" label="Advanced parameters" >
-	<option value="default" selected="true">Use default</option>
-	<option value="full">Full parameter list</option>
+        <option value="default" selected="true">Use default</option>
+        <option value="full">Full parameter list</option>
       </param>     
       <when value="full">
-		<param name="poolAsPool1L" type="boolean" checked="true" truevalue="TRUE" falsevalue="FALSE" label="Use 'pool' samples as 'pool1' when computing the correlation with dilution?"/>
-		<param name="injectionOrderColName" type="text" size="64" value="injectionOrder" label="Set the name for the injection order column from sampleMetadata."/>    
-		<param name="batchColName" type="text" size="64" value="batch" label="Set the name for the batch column from sampleMetadata."/>
-		<param name="sampleTypeColName" type="text" size="64" value="sampleType" label="Set the name for the sample type column from sampleMetadata."/>
-		<param name="sampleTypeTagPool" type="text" size="64"  value="pool" label="Set the name used to tag samples as pool."/>
-		<param name="sampleTypeTagBlank" type="text" size="64"  value="blank" label="Set the name used to tag samples as blank."/>
-		<param name="sampleTypeTagSample" type="text" size="64"  value="sample" label="Set the name used to tag samples as biological sample."/>
+        <param name="poolAsPool1L" type="boolean" checked="true" truevalue="TRUE" falsevalue="FALSE" label="Use 'pool' samples as 'pool1' when computing the correlation with dilution?"/>
+        <param name="injectionOrderColName" type="text" size="64" value="injectionOrder" label="Set the name for the injection order column from sampleMetadata."/>    
+        <param name="batchColName" type="text" size="64" value="batch" label="Set the name for the batch column from sampleMetadata."/>
+        <param name="sampleTypeColName" type="text" size="64" value="sampleType" label="Set the name for the sample type column from sampleMetadata."/>
+        <param name="sampleTypeTagPool" type="text" size="64"  value="pool" label="Set the name used to tag samples as pool."/>
+        <param name="sampleTypeTagBlank" type="text" size="64"  value="blank" label="Set the name used to tag samples as blank."/>
+        <param name="sampleTypeTagSample" type="text" size="64"  value="sample" label="Set the name used to tag samples as biological sample."/>
       </when>
       <when value="default">
-      	<param name="poolAsPool1L" type="hidden" value="TRUE"/>
-      	<param name="injectionOrderColName" type="hidden" value="injectionOrder"/>    
+        <param name="poolAsPool1L" type="hidden" value="TRUE"/>
+        <param name="injectionOrderColName" type="hidden" value="injectionOrder"/>    
         <param name="batchColName" type="hidden" value="batch"/>
-    		<param name="sampleTypeColName" type="hidden" value="sampleType"/>
-	     	<param name="sampleTypeTagPool" type="hidden" value="pool"/>
-    		<param name="sampleTypeTagBlank" type="hidden" value="blank"/>
-    		<param name="sampleTypeTagSample" type="hidden" value="sample"/>
+        <param name="sampleTypeColName" type="hidden" value="sampleType"/>
+        <param name="sampleTypeTagPool" type="hidden" value="pool"/>
+        <param name="sampleTypeTagBlank" type="hidden" value="blank"/>
+        <param name="sampleTypeTagSample" type="hidden" value="sample"/>
       </when>
     </conditional>
     
@@ -113,9 +113,9 @@
       <param name="sampleMetadata_in" value="input-sampleMetadata-customSampleType.tsv"/>
       <param name="variableMetadata_in" value="input-variableMetadata.tsv"/>
       <param name="sampleTypeColName" value="MySampType"/>
-		<param name="sampleTypeTagPool" value="lot"/>
-		<param name="sampleTypeTagBlank" value="blanc"/>
-		<param name="sampleTypeTagSample" value="echant"/>
+      <param name="sampleTypeTagPool" value="lot"/>
+      <param name="sampleTypeTagBlank" value="blanc"/>
+      <param name="sampleTypeTagSample" value="echant"/>
       <param name="CV" value="FALSE"/>
       <param name="optC" value="default"/>
       <output name="sampleMetadata_out" file="output-sampleMetadata-customSampleType.tsv"/>
