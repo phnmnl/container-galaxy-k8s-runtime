@@ -1,4 +1,4 @@
-<tool id="import_to_nmrML" name="Convert" version="0.0.2">
+<tool id="tamenmr-import_to_nmrML" name="Convert" version="0.0.2">
     <requirements>
         <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
     </requirements>

@@ -4,27 +4,27 @@ global:
 assignment:
 # tameNMR
 - tools_id:
-   - addremmerge
-   - align
-   - anova
-   - binning
-   - globalalign
-   - import_to_csv
-   - import_to_nmrML
-   - factorTemp
-   - normalise_data
-   - normalise
-   - pca
-   - peakpick
-   - plotnmr
-   - plotnmrsig
-   - pls-da
-   - prepPattern
-   - quantilePlot
-   - scaling
-   - slice
-   - transform
-   - ttest
+   - tamenmr-addremmerge
+   - tamenmr-align
+   - tamenmr-anova
+   - tamenmr-binning
+   - tamenmr-globalalign
+   - tamenmr-import_to_csv
+   - tamenmr-import_to_nmrML
+   - tamenmr-factorTemp
+   - tamenmr-normalise_data
+   - tamenmr-normalise
+   - tamenmr-pca
+   - tamenmr-peakpick
+   - tamenmr-plotnmr
+   - tamenmr-plotnmrsig
+   - tamenmr-pls-da
+   - tamenmr-prepPattern
+   - tamenmr-quantilePlot
+   - tamenmr-scaling
+   - tamenmr-slice
+   - tamenmr-transform
+   - tamenmr-ttest
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: tamenmr

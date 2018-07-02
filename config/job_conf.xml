@@ -264,27 +264,27 @@
     <tool id="metabomatching" destination="dynamic-k8s-small" resources="all"/>
     <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
 <!-- tameNMR -->
-    <tool id="addremmerge" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="align" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="anova" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="binning" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="globalalign" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="import_to_csv" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="import_to_nmrML" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="factorTemp" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="normalise_data" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="normalise" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="pca" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="peakpick" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="plotnmr" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="plotnmrsig" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="pls-da" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="prepPattern" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="quantilePlot" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="scaling" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="slice" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="transform" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="ttest" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-addremmerge" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-align" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-anova" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-binning" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-globalalign" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-import_to_csv" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-import_to_nmrML" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-factorTemp" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-normalise_data" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-normalise" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-pca" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-peakpick" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-plotnmr" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-plotnmrsig" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-pls-da" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-prepPattern" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-quantilePlot" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-scaling" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-slice" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-transform" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="tamenmr-ttest" destination="dynamic-k8s-small" resources="all"/>
     <!-- new IPO -->
     <tool id="ipo4xcmsSet" destination="dynamic-k8s-xlarge" resources="all"/>
     <tool id="ipo4retgroup" destination="dynamic-k8s-xlarge" resources="all"/>

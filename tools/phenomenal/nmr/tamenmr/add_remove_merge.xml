@@ -1,4 +1,4 @@
-<tool id="addremmerge" name="Add/Remove/Merge" version="0.0.3">
+<tool id="tamenmr-addremmerge" name="Add/Remove/Merge" version="0.0.3">
     <requirements>
         <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
     </requirements>

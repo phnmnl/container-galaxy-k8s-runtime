@@ -1,4 +1,4 @@
-<tool id="peakpick" name="Peak picking" version="0.0.3">
+<tool id="tamenmr-peakpick" name="Peak picking" version="0.0.3">
     <requirements>
         <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
     </requirements>
