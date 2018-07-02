@@ -1,0 +1,126 @@
+<tool id="simid" name="simid" version="1.0">
+<stdio>
+<exit_code range="1:" />
+</stdio>
+<description>Supports the initial step of workflow of fluxomic analysis of stable isotope (13C) propagation in cellular metabolites. SIMID evaluates the peaks of mass isotopomer distribution (MID) for metabolites of interest, making them ready for the next step of the workflow: correction for natural isotope occurrence.</description>
+<command><![CDATA[
+mkdir cdfdata;
+#for $cdf in $cdf_files
+echo 'Linking file $cdf to cdfdata/$cdf.name';
+ln -s $cdf 'cdfdata/$cdf.name';
+#end for
+runsimid.R -i "$metadata" -z cdfdata -o "$outputExchange";
+rm -rf cdfdata
+]]></command>
+<inputs>
+	<param type="data" name="metadata" format="txt" label="Met-data" help="R formatted lists of metabolites and conditions" />
+	<param type="data" name="cdf_files" multiple="true" format="netcdf" label="netCDF GC-MS files" help="netCDF files referenced in met-data"/>
+</inputs>
+<outputs>
+    <data name="outputExchange" format="csv" label="Isotopologues file"/>
+</outputs>
+<help>
+==============
+SIMID
+==============
+
+Version: 1.0
+
+-----------------
+Short description
+-----------------
+
+- **SIMID** is an R-program that reads netCDF files, created by a mass spectrometer, and extracts and primarily corrects the mass spectra of 13C-labeled metabolites using a short description of data. It provides the evaluated spectra and supporting information in a file exchangeable with a database Metabolights (further called as exchange file) thus preparing the data for uploading to this database. It supports the initial step of workflow of fluxomic analysis of stable isotope (13C) propagation in cellular metabolites, making them ready for the next step of the workflow: correction for natural isotope occurrence.
+
+-----------
+Description
+-----------
+
+SIMID is a computer program, written in R, designed to read the machine-generated files saved in netCDF format containing time courses of m/z spectra registered for various metabolites. It evaluates the peaks of mass isotopomer distribution (MID) of metabolites, thus preparing the data to further correction for natural isotope occurrence. The github repository "https://github.com/seliv55/SIMID" is used to create the docker image. 
+
+SIMID reads the CDF files presented in the working directory, finds the spectra corresponding to specific metabolites of interest; corrects baseline for each peak in the spectra; choses the time points where the distribution of peaks is less contaminated by other compounds and thus is the most representative of the real distribution of mass isotopomers in the analyzed metabolite; evaluates this distribution, and saves it in files readable by MIDcor, a program, which performs the next step of analysis, i.e. correction of the SIMID spectra for natural isotope occurrence, which is necessary to perform a further spep, fluxomic analysis that reveals the distribution of metabolic fluxes in the studied cells that corresponds to the evaluated distribution of artificially introduced 13C isotopes.
+The functions performed by SIMID are similar to those of RaMID (https://github.com/seliv55/ramid), however there is a difference in the input data for both programs. Ramid uses the description of metabolites of interest provided in the format of table exchangeable with the database Metabolights, therefore it designed for primary analysis of mass spectra already presented in this database. A table in such a format is dificult to to provide manually, it is supposed that it is downloaded from the database. SIMID is designed for the primary anlysis of recently obtained data that are not uploaded to Metabolights yet. In addition to the analysis of data SIMID provides them in the format of table exchangeable with Metabolights, thus preparing them for uploading.
+The difference in the format of input data description determines also an essential difference in the code. Input tables for RaMID provide direct link between each measurement for a given metabolite and a corresponding CDF file. The input information for SIMID does not contain such a link. This simplify the data description for the user, but makes the code more complicated: it searches the desired spectra one by one through all the provided CDF files.
+------------
+Key features
+------------
+
+- Primary processing of 13C mass isotopomer data obtained with GCMS: evaluation of mass spectra for the metabolites of interest.
+
+-------------
+Functionality
+-------------
+
+- Preprocessing of raw data
+- Initiation of workflows
+
+----------
+Approaches
+----------
+
+- Isotopic Labeling Analysis / 13C
+
+---------------------
+Instrument Data Types
+---------------------
+
+- MS
+
+-------------
+Data Analysis
+-------------
+
+Each netCDF file contains a time course of mass spectra of metabolites registered in one injection to a gas chromatograph/mass spectrometer. All the files corresponding a whole experiment (or several experiments) are provided in a single folder. An additional information should be provided in a text file in maximally simplified for manual description format. The output information provided in a file exchangeable with Metabolights database in the format of csv table, containing columns entitled as: 
+"Raw Data filename", "cells", "tracer molecule", "labelled positions", "abundance", "injection", "Replicate", "Incubation time", "Metabolite name", "CHEBI identifier", "fragment position to the parent molecule", "Empirical formula derivatized molecule/fragment", "retention(min)", "m/z monitored", "signal intensity", "isotopologue", "isotologue relative concentration".
+
+*SIMID* reads one by one the provided CDF files and extracts mass spectra of the metabolites of interest specified in the input file of data description, identifying them by the indicated region of m/z and retention time, corrects baseline, and writes the obtained data in the the exchange file in the column entitled "signal intensity". The “R” code of SIMID together with a description of its using (README.md) can be downloaded from https://github.com/seliv55/SIMID.
+
+This tool is adapted for using data contained in the database Metabolights, provided in the format accepted for the exchange file. Then it supplies the Metabolights with more data prepared for the next step of analysis peformed by MIDcor. The latter is a program, which corrects the RaMID spectra for natural isotope occurrence, which is necessary to perform a fluxomic analysis, for H+ loss produced by electron impact, and peaks overlapping.
+	
+-------------------------------------
+ The format of input data description
+-------------------------------------
+
+- The input data description file (here "metdata") contains the additional information prepared by the data provider that is necessary for the analysis and for the output table to write in the format accepted as exchangeable with the Metabolights database. It should contain four main parts:
+(i) list of metabolites of interest, which spectra should be extracted from the provided CDF files,
+(ii) list of substrates with artificially introduced tracers (13C atoms), which were used to label intracellular metabolites in the given series of experiments,
+(iii) list of timepoints during cells incubation, where the measurements of labeling were performed,
+(iv) list of conditions (cell types) whose data are presented in the CDF files, but which should be analyzed separately.
+
+These parts are labeled by the keywords: "metabs", "tracer", "inctime", "cells". These keywords should not be changed, az well as the words list(), c().
+
+Here is an example of such description:
+    
+    metabs=list(
+cit=list(mz0=459,rt=37.5,Cder="C20H39O6Si3",Cfrg="C1-C6", metname="Citrate",  chebi="CHEBI:35804"),
+asp=list(mz0=418,rt=28.5,Cder="C18H40O4N1Si3",Cfrg="C1-C4", metname="Aspartate", chebi="CHEBI:29991"),
+mal=list(mz0=419,rt=27.2,Cder="C18H39O5Si3",Cfrg="C1-C4", metname="Malate", chebi="CHEBI:"),
+glc=list(mz0=328,rt=3.74,Cder="C14H18O8N1",Cfrg="C1-C6",  metname="Glucose", chebi="CHEBI:"),
+glu24=list(mz0=152,rt=3.79,Cder="C5H5O1N1F3",Cfrg="C2-C4", metname="Glutamate2-4", chebi="CHEBI:"),
+glu25=list(mz0=198,rt=3.79,Cder="C6H7O3N1F3",Cfrg="C2-C5", metname="Glutamate2-5", chebi="CHEBI:"),
+lac=list(mz0=328,rt=5.33,Cder="C10H13O3N1F7",Cfrg="C1-C3", metname="Lactate", chebi="CHEBI:"),
+rib=list(mz0=256,rt=5.28,Cder="C11H14O6N1",Cfrg="C1-C5", metname="Ribose", chebi="CHEBI:")
+)
+tracer=list(
+list(nik="Gluc",name="D-[1,2-C13]-Glucose",pos="1,1,0,0,0,0",abund=50),
+list(nik="Glutam",name="[3-C13]-Glutamine",pos="0,0,1,0,0",abund=100)
+)
+inctime=c(0,24)
+cells=c("A549","NCI","BEAS2B")
+
+First part (i) should include m/z value for unlabeled isotopomers, retention time, the formula of molecules derivated for gas chromatography, the location of the analyzed fragment in the parent molecule, name, chebi identification. The information could be different but the key words ("metabs", "mz0", "rt", "Cder", "Cfrg", "metname", "chebi" respectively) should not be changed.
+The list of tracers used (ii) contains niknames (keyword "nik"), name, positions of labels in the carbon skeleton (pos), and the fraction of labeled molecules (abund).
+Part (iii) is a list of time moments where the measurements were performed; (iv) is the list of names of conditions (types of cells analyzed) that analyzed separately.
+
+----------------------------------
+The names of CDF files provided
+----------------------------------
+
+- The input file (metdata) provides the general informarion used by the program. Moreover, the names of CDF files should contain a specific information referred to each separate measurement. Here is an example of filename: "20120720 NCI 24h Glucosa C1C2 2_03.CDF".
+The last number (3) refers to the injection number from the same sample registered in the given file, the number before it (2) is the number of sample, "C1C2" are the labeled atoms, "Glucosa" is the labeled metabolite, 24h is the timepoint of taking the sample for the analysis, "NCI" is the type of cells whose recording is presented in the file.
+
+Based on this information and that extracted from the CDF files presented in the working directory SIMID evaluates the mass spectra of the metabolites listed in "metdata", and saves it in tables accepted as exchangeable with Metabolights database.
+
+
+</help>
+</tool>
