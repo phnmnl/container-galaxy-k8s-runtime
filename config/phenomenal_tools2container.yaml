@@ -263,7 +263,7 @@ assignment:
 - docker_image_override: multivariate
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v2.3.10_cv1.2.20
+  docker_tag_override: v2.3.12_cv1.3.24
   max_pod_retrials: 3
   tools_id:
   - Multivariate
