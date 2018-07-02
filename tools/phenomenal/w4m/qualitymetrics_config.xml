@@ -1,4 +1,4 @@
-<tool id="quality_metrics" name="Quality Metrics" version="2.2.8">
+<tool id="quality_metrics" name="Quality Metrics" version="2.2.11">
   <description>Metrics and graphics to check the quality of the data</description>
 
   <requirements>
@@ -33,6 +33,8 @@
   
   sampleMetadata_out "$sampleMetadata_out"      
   variableMetadata_out "$variableMetadata_out"
+  injectionOrderColName "$advPar.injectionOrderColName"
+  batchColName "$advPar.batchColName"
   sampleTypeColName "$advPar.sampleTypeColName"
   sampleTypeTags "blank=$advPar.sampleTypeTagBlank,pool=$advPar.sampleTypeTagPool,sample=$advPar.sampleTypeTagSample"
   figure "$figure"
@@ -43,7 +45,7 @@
     <param name="dataMatrix_in" type="data" label="Data matrix file" help="" format="tabular" />
     <param name="sampleMetadata_in" type="data" label="Sample metadata file" help="" format="tabular" />
     <param name="variableMetadata_in" type="data" label="Variable metadata file" help="" format="tabular" />
-    
+
     <conditional name="CV_condition">
       <param name="CV" type="select" label="Coefficient of Variation" help="">
         <option value="FALSE">no</option>
@@ -57,29 +59,33 @@
         <param name="seuil" type="float" label="Threshold" value="1.25" min="0.0000000000000001" help="if comparing pool and sample CVs, corresponds to the max ratio tolerated (basically between 1.0 and 1.25) ; else corresponds to the max pool CV tolerated (basically 0.3)"/>
       </when>
       <when value="FALSE">
-	<param name="Compa" type="hidden" value="TRUE"/>
-	<param name="seuil" type="hidden" value="1"/>
+        <param name="Compa" type="hidden" value="TRUE"/>
+        <param name="seuil" type="hidden" value="1"/>
       </when>	
     </conditional>
     
     <conditional name="advPar">
       <param name="optC" type="select" label="Advanced parameters" >
-	<option value="default" selected="true">Use default</option>
-	<option value="full">Full parameter list</option>
+        <option value="default" selected="true">Use default</option>
+        <option value="full">Full parameter list</option>
       </param>     
       <when value="full">
-		<param name="poolAsPool1L" type="boolean" checked="true" truevalue="TRUE" falsevalue="FALSE" label="Use 'pool' samples as 'pool1' when computing the correlation with dilution?"/>
-		<param name="sampleTypeColName" type="text" size="64" value="sampleType" label="Set the name for the sample type column."/>
-		<param name="sampleTypeTagPool" type="text" size="64"  value="pool" label="Set the name used to tag samples as pool."/>
-		<param name="sampleTypeTagBlank" type="text" size="64"  value="blank" label="Set the name used to tag samples as blank."/>
-		<param name="sampleTypeTagSample" type="text" size="64"  value="sample" label="Set the name used to tag samples as real sample."/>
+        <param name="poolAsPool1L" type="boolean" checked="true" truevalue="TRUE" falsevalue="FALSE" label="Use 'pool' samples as 'pool1' when computing the correlation with dilution?"/>
+        <param name="injectionOrderColName" type="text" size="64" value="injectionOrder" label="Set the name for the injection order column from sampleMetadata."/>    
+        <param name="batchColName" type="text" size="64" value="batch" label="Set the name for the batch column from sampleMetadata."/>
+        <param name="sampleTypeColName" type="text" size="64" value="sampleType" label="Set the name for the sample type column from sampleMetadata."/>
+        <param name="sampleTypeTagPool" type="text" size="64"  value="pool" label="Set the name used to tag samples as pool."/>
+        <param name="sampleTypeTagBlank" type="text" size="64"  value="blank" label="Set the name used to tag samples as blank."/>
+        <param name="sampleTypeTagSample" type="text" size="64"  value="sample" label="Set the name used to tag samples as biological sample."/>
       </when>
       <when value="default">
-      	<param name="poolAsPool1L" type="hidden" value="TRUE"/>
-		<param name="sampleTypeColName" type="hidden" value="sampleType"/>
-		<param name="sampleTypeTagPool" type="hidden" value="pool"/>
-		<param name="sampleTypeTagBlank" type="hidden" value="blank"/>
-		<param name="sampleTypeTagSample" type="hidden" value="sample"/>
+        <param name="poolAsPool1L" type="hidden" value="TRUE"/>
+        <param name="injectionOrderColName" type="hidden" value="injectionOrder"/>    
+        <param name="batchColName" type="hidden" value="batch"/>
+        <param name="sampleTypeColName" type="hidden" value="sampleType"/>
+        <param name="sampleTypeTagPool" type="hidden" value="pool"/>
+        <param name="sampleTypeTagBlank" type="hidden" value="blank"/>
+        <param name="sampleTypeTagSample" type="hidden" value="sample"/>
       </when>
     </conditional>
     
@@ -107,9 +113,9 @@
       <param name="sampleMetadata_in" value="input-sampleMetadata-customSampleType.tsv"/>
       <param name="variableMetadata_in" value="input-variableMetadata.tsv"/>
       <param name="sampleTypeColName" value="MySampType"/>
-		<param name="sampleTypeTagPool" value="lot"/>
-		<param name="sampleTypeTagBlank" value="blanc"/>
-		<param name="sampleTypeTagSample" value="echant"/>
+      <param name="sampleTypeTagPool" value="lot"/>
+      <param name="sampleTypeTagBlank" value="blanc"/>
+      <param name="sampleTypeTagSample" value="echant"/>
       <param name="CV" value="FALSE"/>
       <param name="optC" value="default"/>
       <output name="sampleMetadata_out" file="output-sampleMetadata-customSampleType.tsv"/>
@@ -137,9 +143,9 @@ See the **NEWS** section at the bottom of this page
 
 **References**
 
-| Thevenot EA., Roux A., Xu Y., Ezan E., and Junot C. (2015). Analysis of the human adult urinary metabolome variations with age, body mass index and gender by implementing a comprehensive workflow for univariate and OPLS statistical analyses. *Journal of Proteome Research*, **14**:3322-3335 (https://doi.org/10.1021/acs.jproteome.5b00354)
+| Thevenot EA., Roux A., Xu Y., Ezan E., and Junot C. (2015). Analysis of the human adult urinary metabolome variations with age, body mass index and gender by implementing a comprehensive workflow for univariate and OPLS statistical analyses. *Journal of Proteome Research*, **14**:3322-3335 (http://dx.doi.org/10.1021/acs.jproteome.5b00354)
 | Mason R., Tracy N. and Young J. (1997). A practical approach for interpreting multivariate T2 control chart signals. *Journal of Quality Technology*, **29**:396-406.
-| Alonso A., Julia A., Beltran A., Vinaixa M., Diaz M., Ibanez L., Correig X. and Marsal S. (2011). AStream: an R package for annotating LC/MS metabolomic data. *Bioinformatics*, **27**:1339-1340. (https://doi.org/10.1093/bioinformatics/btr138)
+| Alonso A., Julia A., Beltran A., Vinaixa M., Diaz M., Ibanez L., Correig X. and Marsal S. (2011). AStream: an R package for annotating LC/MS metabolomic data. *Bioinformatics*, **27**:1339-1340. (http://dx.doi.org/10.1093/bioinformatics/btr138)
 
 ---------------------------------------------------
 
@@ -289,6 +295,13 @@ See the **W4M00001b_sacurine-complete** shared history in the **Shared Data/Publ
 ----
 NEWS
 ----
+
+CHANGES IN VERSION 2.2.10 
+=========================
+
+NEW FEATURE
+
+Names of the injectionOrder, batch, and sampleType columns from sampleMetadata can now be selected by the user (as well as the names from the sample types)
 
 CHANGES IN VERSION 2.2.8
 ========================
