@@ -4,42 +4,42 @@ description: a Galaxy tool to bootstrap creation of experimental metadata in ISA
 title_default: "Describe your metabolomics study with ISA"
 
 steps:
-	- title: "Provide basic study description and author information"
-	content: "This short tour will guide you creating an ISA document for your experiment.<br>
-                You can navigate with your arrow keys and leave the tour at any time point with 'Escape' or the 'End tour' button."
+  - title: "Provide basic study description and author information"
+    content: "This short tour will guide you creating an ISA document for your experiment.<br>
+              You can navigate with your arrow keys and leave the tour at any time point with 'Escape' or the 'End tour' button."
     backdrop: true
 
-	- title: "Provide General Information"
-	      element: ".uid-62"
-	      content: "A section to provide information about study authors and general description of the study"
-	      placement: "right"
-	      postclick:
-	        - ".uid-62"
+  - title: "Provide General Information"
+        element: ".uid-62"
+        content: "A section to provide information about study authors and general description of the study"
+        placement: "right"
+        postclick:
+          - ".uid-62"
 
-	- title: "Define the plan of treatments"
-	      element: ".uid-70"
-	      content: "This section is meant for you to declare the study variables, predictors variables and their range of values, supplied as discretized element and separated by commas (as in value-1,value-2)"
-	      placement: "right"
-	      postclick:
-	        - ".uid-70"
+  - title: "Define the plan of treatments"
+        element: ".uid-70"
+        content: "This section is meant for you to declare the study variables, predictors variables and their range of values, supplied as discretized element and separated by commas (as in value-1,value-2)"
+        placement: "right"
+        postclick:
+          - ".uid-70"
 
-	- title: "Define the sample collection and assay plans"
-	      element: ".uid-100"
-	      content: "This section is meant for you to declare the responses variables and identify which biological materials collected over the course of the study will be used as input to the data acquisition process."
-	      placement: "right"
-	      postclick:
-	        - ".uid-100"
+  - title: "Define the sample collection and assay plans"
+        element: ".uid-100"
+        content: "This section is meant for you to declare the responses variables and identify which biological materials collected over the course of the study will be used as input to the data acquisition process."
+        placement: "right"
+        postclick:
+          - ".uid-100"
 
-	- title: "Define the quality control plans"
-	      element: ".uid-105"
-	      content: "This section is meant to allow reporting the type and frequency of measurements made on known material for quality assurance and quality control purpose."
-	      placement: "right"
-	      postclick:
-	        - ".uid-105"
+  - title: "Define the quality control plans"
+        element: ".uid-105"
+        content: "This section is meant to allow reporting the type and frequency of measurements made on known material for quality assurance and quality control purpose."
+        placement: "right"
+        postclick:
+          - ".uid-105"
 
-	- title: "running the metadata creator"
-	      element: ".execute"
-	      content: "hit the button to launch the job"
-	      placement: "right"
-	      postclick:
-	        - ".execute"
+  - title: "running the metadata creator"
+        element: ".execute"
+        content: "hit the button to launch the job"
+        placement: "right"
+        postclick:
+          - ".execute"
