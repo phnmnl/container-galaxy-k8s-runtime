@@ -119,7 +119,7 @@ assignment:
 - docker_image_override: qualitymetrics
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: vphenomenal_2018.02.20_2_cv0.2.6
+  docker_tag_override: v2.2.11_cv1.0.11
   max_pod_retrials: 3
   tools_id:
   - quality_metrics
