@@ -302,6 +302,13 @@ assignment:
   - rnmr1d
   - rnmr1d-stacked-plot
   - rnmr1d-prepare-output
+- docker_image_override: nmr-integrals
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: latest
+  max_pod_retrials: 3
+  tools_id:
+  - nmr-integrals
 - docker_image_override: metabomatching
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu

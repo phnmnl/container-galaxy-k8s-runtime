@@ -133,6 +133,7 @@
       <!-- <tool file="phenomenal/nmr/mtbls2nmrglue.xml"/> -->
       <tool file="phenomenal/nmr/soap_process.xml"/>
       <tool file="phenomenal/nmr/soap_opls.xml"/>
+      <tool file="phenomenal/nmr/nmr-integrals.xml"/>
    </section>
 
   <label id="phenomenal-ms" text="MS Data Analysis Tools" /> 

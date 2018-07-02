@@ -240,6 +240,7 @@
     <tool id="rnmr1d" destination="dynamic-k8s-xlarge" resources="all"/>
     <tool id="rnmr1d-stacked-plot" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="rnmr1d-prepare-output" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="nmr-integrals" destination="dynamic-k8s-tiny" resources="all"/>
     <!-- old NMR -->
     <!-- <tool id="mtbls2nmrglue" destination="nmrglue-container"/> -->
     <tool id="soap_process" destination="soap-nmr-container"/>
