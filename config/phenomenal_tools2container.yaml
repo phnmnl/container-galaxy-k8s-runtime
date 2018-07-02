@@ -458,7 +458,7 @@ assignment:
 - docker_image_override: univariate
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v2.2.3_cv1.3.29
+  docker_tag_override: v2.2.6_cv1.3.32
   max_pod_retrials: 3
   tools_id:
   - Univariate
