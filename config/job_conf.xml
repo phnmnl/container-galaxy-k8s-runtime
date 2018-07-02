@@ -173,10 +173,18 @@
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
       <param id="docker_image_override">ms-vfetc</param>
-      <param id="docker_tag_override">v0.4_cv1.3.10</param>
+      <param id="docker_tag_override">v0.6_cv1.1.26</param>
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
+    <destination id="leidenuniv-mzquality-container" runner="k8s">
+      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+      <param id="docker_owner_override">phnmnl</param>
+      <param id="docker_image_override">mzquality</param>
+      <param id="docker_tag_override">v0.9.5_cv0.9.5.15</param>
+      <param id="max_pod_retrials">3</param>
+      <param id="docker_enabled">true</param>
+    </destination>    
     <destination id="metfrag-vis-container" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -410,6 +418,16 @@
     <tool id="dimspy_hdf5_to_txt" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="dimspy_merge_peaklists" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="dimspy_get_peaklists" destination="dynamic-k8s-medium" resources="all"/>
+    <!-- mzQuality tools -->
+    <tool id="ms-vfetc" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="mzquality-rtshifts" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="mzquality-blank-effect" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="mzquality-qc-correction" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="mzquality-qc-rsd" destination="dynamic-k8s-small" resources="all"/>    
+    <tool id="mzquality-is-rsd" destination="dynamic-k8s-small" resources="all"/>    
+    <tool id="mzquality-rep-rsd" destination="dynamic-k8s-small" resources="all"/>   
+    <tool id="mzquality-export-measurements" destination="dynamic-k8s-medium" resources="all"/>                
+    <tool id="mzquality-plot-compounds" destination="dynamic-k8s-medium" resources="all"/>  
   </tools>
   <resources default="default">
     <!-- Group different parameters defined in job_resource_params_conf.xml

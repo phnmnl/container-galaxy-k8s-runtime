@@ -1,0 +1,16 @@
+<tool id="mzquality-rtshifts" name="rt-shifts" version="1.0">
+    <description>calculates retention time shifts.</description>
+    <requirements>
+        <container type="docker">phnmnl/mzquality</container>
+    </requirements>
+     <command>python /files/mzQuality/qcli.py rt-shifts --mea-file=$input1 --rt-shifts-file=$output1</command>
+    <inputs>
+        <param name="input1" type="data" format="txt" multiple="false" label="Measurements file (ms-vfetc output)" />
+    </inputs>
+    <outputs>
+        <data name="output1" format="tabular" label="rt-shifts.txt"/>
+    </outputs>
+    <help><![CDATA[
+        Calculates retention time shifts.
+    ]]></help>
+</tool>

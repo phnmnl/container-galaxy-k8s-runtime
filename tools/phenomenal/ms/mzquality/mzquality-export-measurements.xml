@@ -1,0 +1,21 @@
+<tool id="mzquality-export-measurements" name="export-measurements" version="1.0">
+    <description>as sample/compound matrix.</description>
+    <requirements>
+        <container type="docker">phnmnl/mzquality</container>
+    </requirements>
+     <command>python /files/mzQuality/qcli.py export_measurements --file=$input1 --column=$input2 --export-location=$output1 --include_is=True</command>
+    <inputs>
+        <param name="input1" type="data" format="tabular" multiple="false" label="QC corrected file" />
+	    <param name="input2" type="select" label="Choose column">
+        	<option value="inter_median_qc_corrected" selected="true">QC corrected ratio</option>
+        	<option value="ratio">ratio</option>
+        	<option value="area">area</option>
+	    </param>        
+    </inputs>    
+    <outputs>
+        <data name="output1" format="tabular" label="export.txt"/>
+    </outputs>
+    <help><![CDATA[
+        Exports measurements as a sample/compound matrix.
+    ]]></help>
+</tool>
