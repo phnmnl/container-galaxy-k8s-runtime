@@ -1,8 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<tool id="isaslicer" name="ISAslicer2" version="2.0">
+<tool id="ISAslicer2" name="ISAslicer2" version="2.0">
     <description>Query and get a slice of data files from an ISA study</description>
     <requirements>
-        <requirement type="package" version="0.9.5">isatools</requirement>
+        <requirement type="package" version="6.7">click</requirement>
+        <requirement type="package" version="0.10.0">isatools</requirement>
     </requirements>
     <stdio>
         <exit_code range="1:" level="fatal"/>
@@ -11,7 +12,7 @@
 
         #if $input.input_selector == "mtbls"
             #set $command = "query-mtbls"
-            #set $source = $input.mtbls
+            #set $source = ""
         #end if
 
         #if $input.input_selector == "isa-tab"
@@ -19,7 +20,12 @@
             #set $source = $input.isatab_input.extra_files_path
         #end if
 
-        $__tool_directory__/isaslicer2.py "$command" --source_dir="${source}" --galaxy_parameters_file="$inputs"
+        isaslicer.py isaslicer2-slice
+        #if $source
+            --source_dir="${source}"
+        #end if
+        --galaxy_parameters_file="$inputs"
+        --output="$output"
 
     ]]>
     </command>
@@ -39,7 +45,7 @@
             </when>
             <when value="isa-tab">
                 <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab"  help="An ISA-Tab datatype history item"/>
-                <param name="collection_output" type="boolean" checked="false" label="Output new dataset collection"/>
+                <!--<param name="collection_output" type="boolean" checked="false" label="Output new dataset collection"/>-->
             </when>
         </conditional>
         <section name="query" title="Query Builder" expanded="true">
@@ -65,8 +71,18 @@
     </outputs>
 
     <tests>
-        <param name="mtbls_id" value="MTBLS1"/>
-        <output_collection name="raw_files" type="list" count="1"/>
+        <test>
+            <param name="input_selector" value="isa-tab"/>
+            <param name="isatab_input" value="MTBLS36.zip" ftype="isa-tab"/>
+            <section name="query">
+                <param name="measurement_type" value="metabolite profiling"/>
+                <repeat name="factor_selection">
+                    <param name="factor_name" value="Cultivars"/>
+                    <param name="factor_value" value="RIN"/>
+                </repeat>
+            </section>
+            <output name="output" file="query_results.json" compare="sim_size"/>
+        </test>
     </tests>
 
     <help>
@@ -99,11 +115,6 @@ If the input source is an ISA-Tab history item, select from existing data
 history items. ISA-Tab items can be created by using the Metabolights
 downloader or the ISA-Tab metadata creation tools.
 
-Output new dataset collection
-=============================
-Whether or not to output a dataset collection containing the data files
-corresponding to the query result.
-
 Measurement and technology types
 ================================
 Measurement and technology types of the assay to filter the data files. You
@@ -116,11 +127,12 @@ preview metadata.
 Sample material type
 ====================
 Material type of the samples relating to the data files of interest. This field
-corresponds to the ISA-Tab `Material Type` column. Leave this field blank if
-you wish to select data files across all samples.
+corresponds to the ISA-Tab `Material Type` or `Characteristic[Material Type]`
+column. Leave this field blank if you wish to select data files across all
+samples.
 
 You can get the relevant sample materials by inspecting the study's ISA
-dataset preview metadata.
+dataset preview metadata or the raw ISA-Tab table files.
 
 Factor selection criteria
 =========================
@@ -217,11 +229,6 @@ list. e.g.
             "sample": "Ex2-cyp79-48h-Ag-4"
         }
     ]
-
-Collection of data files
-========================
-If the relevant option was selected, the tool will additionally output a
-collection of data files corresponding to the query result.
 
 <!-- @@@END_RST@@@ -->
     </help>
