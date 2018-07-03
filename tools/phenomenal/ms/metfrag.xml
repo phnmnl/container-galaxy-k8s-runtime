@@ -1,24 +1,25 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/).-->
 <!--Proposed Tool Section: [PhenoMeNal]-->
-<tool id="metfragcli" name="metfragcli" version="0.2">
-  <requirements>
+<tool id="metfragcli" name="metfragcli" version="0.4">
+  <!--<requirements>
         <container type="docker">phnmnl/metfrag-cli</container>
-  </requirements>
+  </requirements> -->
   <description>Run a single MetFrag query given a MS/MS peak list and the precursor m/z or molecular formula.</description>
   <command><![CDATA[
-        java -jar /usr/local/bin/MetFragCLI.jar PeakListPath=$infile MetFragDatabaseType=$MetFragDatabaseType IonizedPrecursorMass=$IonizedPrecursorMass DatabaseSearchRelativeMassDeviation=$DatabaseSearchRelativeMassDeviation FragmentPeakMatchAbsoluteMassDeviation=$FragmentPeakMatchAbsoluteMassDeviation FragmentPeakMatchRelativeMassDeviation=$FragmentPeakMatchRelativeMassDeviation PrecursorIonMode=$PrecursorIonMode IsPositiveIonMode=$IsPositiveIonMode MetFragCandidateWriter=CSV SampleName=Galaxy ResultsFile=$outfile MaximumTreeDepth=$MaximumTreeDepth MetFragPreProcessingCandidateFilter=UnconnectedCompoundFilter
+        java -jar /usr/local/bin/MetFragCLI.jar PeakListPath=$metfragcli_input_1 MetFragDatabaseType=$MetFragDatabaseType IonizedPrecursorMass=$IonizedPrecursorMass DatabaseSearchRelativeMassDeviation=$DatabaseSearchRelativeMassDeviation FragmentPeakMatchAbsoluteMassDeviation=$FragmentPeakMatchAbsoluteMassDeviation FragmentPeakMatchRelativeMassDeviation=$FragmentPeakMatchRelativeMassDeviation PrecursorIonMode=$PrecursorIonMode IsPositiveIonMode=$IsPositiveIonMode MetFragCandidateWriter=CSV SampleName=Galaxy ResultsFile=$metfragcli_output_1 MaximumTreeDepth=$MaximumTreeDepth MetFragPreProcessingCandidateFilter=UnconnectedCompoundFilter
         #if $additional_metfrag_scores != "None":
-            MetFragScoreTypes=FragmenterScore,$additional_metfrag_scores MetFragScoreWeights=1.0,`echo $additional_metfrag_scores | sed "s/[a-zA-Z0-9]\+/1.0/g"`
+            MetFragScoreTypes=FragmenterScore,`echo $additional_metfrag_scores | sed "s/StatisticalScore/AutomatedPeakFingerprintAnnotationScore,AutomatedLossFingerprintAnnotationScore/"` MetFragScoreWeights=1.0,`echo $additional_metfrag_scores | sed "s/StatisticalScore/AutomatedPeakFingerprintAnnotationScore,AutomatedLossFingerprintAnnotationScore/" | sed "s/[a-zA-Z0-9]\+/1.0/g"`
 	#else:
 	    MetFragScoreTypes=FragmenterScore MetFragScoreWeights=1.0
         #end if
   ]]>
   </command>
   <inputs>
-    <param name="infile" type="data" format="txt" optional="False" label="Input file with peak list in tsv/txt format" />
+    <param name="metfragcli_input_1" type="data" format="txt" optional="False" label="Input file with peak list in tsv/txt format" />
     <param name="MetFragDatabaseType" type="select" value="PubChem" optional="False" label="Database" help="Database to which queries are sent. At the moment, only PubChem is supported.">
-      <option value="PubChem" selected="True">PubChem</option>
+      <option value="PubChem" selected="False">PubChem</option>
+      <option value="KEGG" selected="True">KEGG</option>
     </param>
     <param name="IonizedPrecursorMass" type="text" value="345.0874" optional="False" label="Ionized precursor mass" help="Enter ionized precursor mass here." />
     <param name="DatabaseSearchRelativeMassDeviation" type="text" value="5" optional="False" label="Relative mass deviation for database search" help="Relative mass deviation used for database search." />
@@ -34,12 +35,129 @@
     </param>
     <param name="additional_metfrag_scores" type="select" display="checkboxes" multiple="true" label="Add additional MetFrag scores" help="Add additional MetFrag scores">
       <option value="OfflineMetFusionScore">Spectral Similarity (MoNA)</option>
+      <option value="StatisticalScore">StatisticalScore</option>
     </param>
     <param name="MaximumTreeDepth" type="text" value="1" optional="False" label="Maximum tree depth" help="Maximum depth of fragmentation tree." />
   </inputs>
   <outputs>
-    <data name="outfile" type="text" format="csv" label="csv outfile file" />
+    <data name="metfragcli_output_1" type="text" format="csv" label="MetFrag result file" />
   </outputs>
-  <help>MetFrag: In silico fragmentation for computer assisted identification of metabolite mass spectra.</help>
+  <help>
+     
+.. class:: infomark
+
+| **Tool update: See the 'NEWS' section at the bottom of the page**
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+| **Christoph Ruttkies (christoph.ruttkies@ipb-halle.de)** and **Kristian Peters(kristian.peters@ipb-halle.de)** wrote and maintain this wrapper for performing MetFrag processing.
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Please cite**
+
+Ruttkies, C., Schymanski, E. L., Wolf, S., Hollender, J. and Neumann, S. MetFrag relaunched: incorporating strategies beyond in silico fragmentation. J Cheminform 8:3, (2016) DOI: 10.1186/s13321-016-0115-9
+
+---------------------------------------------------
+
+===========
+MetFrag CLI
+===========
+
+-----------
+Description
+-----------
+
+| This module is used to run MetFrag on a single MS/MS spectrum for compound annotation. As output a CSV file is generated containing ranked candidates by the scores selected by the user.
+
+-----------
+Input files
+-----------
+
++------------------------------+------------+
+| File                         |   Format   |
++==============================+============+
+| 1) Peaklist file             |    txt     |
++------------------------------+------------+
+
+----------
+Parameters
+----------
+
+Peaklist file
+        | File containing a peaklist with m/z intensity pairs (one pair per line)
+        |
+
+Database
+        | Select the database type. Currently KEGG and PubChem are supported.
+        |
+
+Ionized precursor mass
+        | The ionized mass (m/z) of the parent (precursor) ion.
+        |
+
+Relative mass deviation for database search
+        | The relative mass deviation used together with ionized mass for candidate selection from the database.
+        |
+
+Fragment peak match absolute mass deviation
+        | Absolute mass deviation (Da) to match generated fragments against mass peaks in the peaklist. This value is dependent on the MS instrument settings.
+        |
+
+Fragment peak match relative mass deviation
+        | Relative mass deviation (ppm) to match generated fragments against mass peaks in the peaklist. This value is dependent on the MS instrument settings.
+        |
+
+Precursor ion mode
+        | The ion (adduct) type of the parent (precursor) ion. Currently [M+H]+ (positive) and [M-H]- (negative) mode are supported.
+        |
+
+Ion Mode
+        | The ion mode of the parent (precursor) ion. Select positive or negative mode.
+        |
+
+Additional MetFrag scores
+        | Add additional MetFrag scores used to score candidates
+        |
+
+Maximum tree depth
+        | The maximum tree depth used to generate fragments. Usually the value is set to 2.
+        |
+
+------------
+Output files
+------------
+
+metfragcli_output_1
+        | A csv output file with scored candidates and properties
+        |
+
+---------------------------------------------------
+
+----
+NEWS
+----
+
+CHANGES IN VERSION 0.4
+========================
+
+- added statistical scoring option
+
+CHANGES IN VERSION 0.3
+========================
+
+- updated to MetFrag version 2.4.5
+
+CHANGES IN VERSION 0.1
+========================
+
+- First version
+  </help>
 </tool>
 

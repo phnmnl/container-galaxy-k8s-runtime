@@ -3385,7 +3385,7 @@
         <option value="trifluoro (L)">trifluoro (L)</option>
       </param>
     </repeat>
-    <param name="param_omssa_executable" type="data" format="text" value="omssacl" label="The 'omssacl' executable of the OMSSA installation" help="(-omssa_executable) "/>
+    <param name="param_omssa_executable" type="data" format="txt" value="omssacl" label="The 'omssacl' executable of the OMSSA installation" help="(-omssa_executable) "/>
     <param name="param_v" type="integer" value="1" label="number of missed cleavages allowed" help="(-v) "/>
     <param name="param_enzyme" type="select" optional="False" value="Trypsin" label="The enzyme used for peptide digestion" help="(-enzyme) ">
       <option value="Trypsin" selected="true">Trypsin</option>

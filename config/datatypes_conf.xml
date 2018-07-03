@@ -645,7 +645,7 @@
     <datatype extension="smat" type="galaxy.datatypes.plant_tribes:Smat" display_in_upload="true" />
 
     <!-- PhenoMeNal section -->
-    <datatype extension="no_unzip.zip" type="galaxy.datatypes.no_unzip_datatypes:NoUnzip" display_in_upload="true" />
+    <datatype extension="no_unzip.zip" type="galaxy.datatypes.binary:CompressedZipArchive" subclass="true" display_in_upload="true" />
     <datatype extension="rdata.camera.positive" type="galaxy.datatypes.rdata_camera_datatype:RdataCameraPositive" mimetype="application/x-gzip" subclass="true" display_in_upload="true" />
     <datatype extension="rdata.camera.negative" type="galaxy.datatypes.rdata_camera_datatype:RdataCameraNegative" mimetype="application/x-gzip" subclass="true" display_in_upload="true" />
     <datatype extension="rdata.camera.quick" type="galaxy.datatypes.rdata_camera_datatype:RdataCameraQuick" mimetype="application/x-gzip" subclass="true" display_in_upload="true" />

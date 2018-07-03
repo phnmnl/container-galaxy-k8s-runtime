@@ -47,6 +47,5 @@ RUN chmod u+x post-start-actions.sh
 # Missing XCMS datatypes for w4m
 COPY external-datatypes/rdata_xcms_datatype.py /galaxy-central/lib/galaxy/datatypes/
 COPY external-datatypes/rdata_camera_datatype.py /galaxy-central/lib/galaxy/datatypes/
-COPY external-datatypes/no_unzip_datatypes.py /galaxy-central/lib/galaxy/datatypes/
 COPY external-datatypes/nmrml_datatype.py /galaxy-central/lib/galaxy/datatypes/
 COPY config/datatypes_conf.xml config/datatypes_conf.xml

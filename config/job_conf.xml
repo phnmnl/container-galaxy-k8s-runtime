@@ -126,12 +126,20 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
-    -->
-    <destination id="metfrag-cli-container" runner="k8s">
+    <destination id="nmrglue-container" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
-      <param id="docker_image_override">metfrag-cli</param>
-      <param id="docker_tag_override">v2.4.2_cv0.3.24</param>
+      <param id="docker_image_override">nmrglue</param>
+      <param id="docker_tag_override">latest</param>
+      <param id="max_pod_retrials">3</param>
+      <param id="docker_enabled">true</param>
+    </destination>
+   -->
+    <destination id="soap-nmr-container" runner="k8s">
+      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+      <param id="docker_owner_override">phnmnl</param>
+      <param id="docker_image_override">soap-nmr</param>
+      <param id="docker_tag_override">v1.0_cv0.4.1016</param>
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
@@ -190,6 +198,7 @@
          a tag, a handler or destination that matches that tag will be
          chosen at random.  -->
     <tool id="pathway_enrichment" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="fingerprint_clustering" destination="dynamic-k8s-medium" resources="all"/>
     
     <!-- Fluxomics -->
     <tool id="iso2flux" destination="dynamic-k8s-small" resources="all"/>     
@@ -229,12 +238,15 @@
     <tool id="rnmr1d" destination="dynamic-k8s-xlarge" resources="all"/>
     <tool id="rnmr1d-stacked-plot" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="rnmr1d-prepare-output" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="nmr-integrals" destination="dynamic-k8s-tiny" resources="all"/>
+    <!-- old NMR -->
+    <!-- <tool id="mtbls2nmrglue" destination="nmrglue-container"/> -->
     <!-- other NMR -->
     <tool id="mzml2isa" destination="dynamic-k8s-small" resources="all"/>
     <tool id="nmrml2isa" destination="dynamic-k8s-small" resources="all"/>
     <tool id="mtbls-downloader" destination="mtbls-downloader-container"/>
     <tool id="mtbls-labs-uploader" destination="mtbls-labs-uploader-container"/>
-    <tool id="metfragcli" destination="metfrag-cli-container"/>
+    <tool id="metfragcli" destination="dynamic-k8s-large" resources="all"/>
     <tool id="Metabolite_ID_Converter" destination="container-metaboliteidconverter" />
     <tool id="metabomatching" destination="dynamic-k8s-small" resources="all"/>
     <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
@@ -382,6 +394,9 @@
     <tool id="isatab_validator" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="mtbls-factors-viz" destination="dynamic-k8s-small" resources="all"/>
     <tool id="mw2isa" destination="dynamic-k8s-small" resources="all"/>
+    <!-- Other tools -->
+    <tool id="melt" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="cast" destination="dynamic-k8s-tiny" resources="all"/>
     <!-- DIMSpy tools -->
     <tool id="dimspy_process_scans" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="dimspy_replicate_filter" destination="dynamic-k8s-medium" resources="all"/>
