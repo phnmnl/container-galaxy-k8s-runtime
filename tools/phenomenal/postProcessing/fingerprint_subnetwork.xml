@@ -1,0 +1,63 @@
+<tool id="fingerprint_subnetwork" name="Fingerprint_Subnetwork" version="1.1">
+
+    <description>calculates distance between metabolites in a network</description>
+
+    <command><![CDATA[
+        java -jar /fingerprintSubnetwork.jar
+        -network /data/recon2.v03_ext_noCompartment_noTransport.xml
+        -fingerprint $fingerprint
+        -atommapping /data/recon2.v03_ext_noCompartment_noTransport_C-AAM-weights.tab
+        -matrixresult $matrix
+        -reactionresult $reaction
+        -algo ShortestAsUndirected
+    ]]></command>
+
+    <inputs>
+        <param name="fingerprint" format="tsv,tabular,txt" type="data" label="Fingerprint dataset" help="a one-column file containing the identifiers of Recon v2.03 biological network. These identifiers could be found by using 'Metabolites' tabs from https://metexplore.toulouse.inra.fr/metexplore2/?idBioSource=3223."/>
+    </inputs>
+
+    <outputs>
+        <data name="matrix" label="distance.tsv" format="tsv" />
+        <data name="reaction" label="reactions.json" format="json" />
+    </outputs>
+
+    <help>
+        
+
+.. class:: infomark
+
+**Author**  MetExplore team (INRA Toulouse, Toxalim, MeX, contact-metexplore@inra.fr)
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Website** https://www.metexplore.fr
+
+---------------------------------------------------
+
+============================================
+Fingerprint Subnetwork (from MetExplore)
+============================================
+
+Calculates shortest paths between pairwise metabolites in a network (Recon v2.03; Thiele et al., 2003) from a fingerprint. The number of reactions separated two metabolites do not take account of the reversibility of each reactions and a path between metabolites could cross over several times through the same reactions. This tool is part of the MetExplore's project consisting in a web server dedicated to the analysis of omics data in the context of genome scale metabolic networks (Cottret et al., 2018).
+
+-----------
+Input files
+-----------
+    | - a **fingerprint** (txt) : a one-column file containing the identifiers of Recon v2.03 biological network (SBML). These identifiers could be found by using "Metabolites" tabs from https://metexplore.toulouse.inra.fr/metexplore2/?idBioSource=3223.
+
+------------
+Output files
+------------
+    | - **distance** (tsv) : a distance matrix between pairwise metabolites. The metabolites network identifiers are in the first column; there is no header.
+    | - **reactions** (json) : a list of reactions associated with each metabolites in a network.
+
+    </help>
+
+    <citations>
+        <citation type="doi">10.1093/nar/gky301</citation>
+        <citation type="doi">10.1038/nbt.2488</citation>
+    </citations>
+
+</tool>
