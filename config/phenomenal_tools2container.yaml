@@ -289,16 +289,23 @@ assignment:
 - docker_image_override: rnmr1d
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v1.2.18_cv0.2.1.48 
+  docker_tag_override: v1.2.22_cv0.3.49 
   max_pod_retrials: 3
   tools_id:
   - rnmr1d
   - rnmr1d-stacked-plot
   - rnmr1d-prepare-output
+- docker_image_override: nmr-integrals
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: latest
+  max_pod_retrials: 3
+  tools_id:
+  - nmr-integrals
 - docker_image_override: metabomatching
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v0.2.0_cv0.4.62
+  docker_tag_override: v0.2.1_cv0.4.1.67
   max_pod_retrials: 3
   tools_id:
   - metabomatching
@@ -319,7 +326,7 @@ assignment:
 - docker_image_override: nmrml2batman
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v1.0_cv1.0.4
+  docker_tag_override: v1.0_cv1.1.10
   max_pod_retrials: 3
   tools_id:
   - nmrml2batman
@@ -340,7 +347,7 @@ assignment:
 - docker_image_override: metfrag-cli
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v2.4.2_cv0.3.24
+  docker_tag_override: v2.4.5_cv0.4.28
   max_pod_retrials: 3
   tools_id:
   - metfragcli
@@ -425,10 +432,17 @@ assignment:
 - docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: pathwayenrichment
-  docker_tag_override: v_cv2.0.20
+  docker_tag_override: v2.0_cv2.1.21
   max_pod_retrials: 1
   tools_id:
    - pathway_enrichment
+- docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_owner_override: phnmnl
+  docker_image_override: fingerprintclustering
+  docker_tag_override: v3.1.2_cv1.3.12
+  max_pod_retrials: 1
+  tools_id:
+   - fingerprint_clustering
 - docker_image_override: scp-aspera
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
@@ -502,3 +516,17 @@ assignment:
   tools_id:
   - ipo4xcmsSet
   - ipo4retgroup
+- docker_image_override: reshape2-melt
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: latest
+  max_pod_retrials: 3
+  tools_id:
+  - melt
+- docker_image_override: reshape2-cast
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: latest
+  max_pod_retrials: 3
+  tools_id:
+  - cast

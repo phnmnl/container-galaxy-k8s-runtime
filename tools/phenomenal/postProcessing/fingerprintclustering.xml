@@ -1,0 +1,161 @@
+<tool id="fingerprint_clustering" name="Fingerprint_Clustering" version="1.0">
+
+    <description>performs unsupervised clustering and automatically determine the best number of cluster</description>
+
+    <command><![CDATA[
+        Rscript /fingerprint_clustering.R
+        -i $input 
+        --output1 $average_silhouette --output2 $silhouette --output3 $pca --output4 $heatmap --output5 $summary --output6 $clusters --output7 $dendrogram
+        #if $parse.advanced:
+            -s $parse.separator
+            $parse.header
+        #end if
+        #if $clustering.advanced:
+            -t $clustering.classif_algorithm 
+            -d $clustering.distance_type 
+            -m $clustering.maximum_clusters 
+            #if $clustering.nb_clusters.selected: 
+                -n $clustering.nb_clusters.value
+            #end if
+        #end if
+    ]]></command>
+
+    <inputs>
+        <param type="data" name="input" label="Dataset" help="the first column should contains the individuals' names (e.g., identifier values to map on a network file), and the other, the variables (e.g., the individuals name in case of a a pseudo-distance matrix between metabolites among a network). Except for the first one, columns with characters values will be discarded from the analysis. NA values are not tolerated by the algorithms." format="tsv,tabular,txt,csv" />        
+        
+
+        <conditional name="parse">
+            <param name="advanced" type="boolean" label="Change parsing of the fingerprint dataset parameters (by default, on tabulated file with an header)"/>
+            <when value="true">
+                 <param name="header" type="boolean" truevalue="" falsevalue="-H" checked="true" label="Consider first row as header of columns"/>
+                 <param name="separator" type="select" display="radio" label="Column separator" help="Character used to separate the column in the fingerprint dataset (by default: tabulation). ">
+                  <option value="1" selected="true">Tabulation</option>
+                  <option value="2">Semicolon</option>
+                </param>
+            </when>
+        </conditional>
+
+        <conditional name="clustering">
+            <param name="advanced" type="boolean" label="Change clustering of the fingerprint dataset parameters (by default, with CAH complete links algorithm, euclidean distance and a maximum of 6 clusters)"/>
+            <when value="true">
+                <param name="classif_algorithm" type="select" label="Clustering algorithm" help="K-means is a non-hierchical clustering algorithm. For a given number of clusters (k), k centers are randomly chosen. Then: (i) each individuals is affected to the closest center, (ii), centers are re-calculated. And so on, until convergence. K-medoids is a more robust K-means version where centers are real individuals (called medoids)." >
+                    <option value="1">K-medoids</option>
+                    <option value="2">K-means</option>
+                    <option value="3">Ward</option>
+                    <option value="4" selected="true">Complete links</option>
+                    <option value="5">Single links</option>
+                    <option value="6">UPGMA</option>
+                    <option value="7">WPGMA</option>
+                    <option value="8">WPGMC</option>
+                    <option value="9">UPGMC</option>
+                </param>
+                <param name="distance_type" type="select" label="Distance type" help="Unlike the others, Euclidean and Manhattan are non binary distances.">
+                    <option value="1" selected="true">Euclidean</option>
+                    <option value="2">Manhattan</option>
+                    <option value="3">Jaccard</option>
+                    <option value="4">Sokal and Michener</option>
+                    <option value="5">Sorensen (Dice)</option>
+                    <option value="6">Ochiai</option>
+                </param>
+                <param name="maximum_clusters" type="integer" label="Maximum number of clusters" value="6" min="3" max="100" />
+                <conditional name="nb_clusters">
+                    <param name="selected" type="boolean" label="Force to select a pre-determined number of clusters"/>
+                    <when value="true">
+                         <param name="value" type="integer" label="Fixed number of clusters" value="2" min="2" max="100" />
+                    </when>
+                </conditional>
+            </when>
+        </conditional>
+
+    </inputs>
+
+    <outputs>
+        <data name="average_silhouette" label="average_silhouette.pdf" format="pdf" from_work_dir="test-data/average_silhouette.pdf" />
+        <data name="silhouette" label="silhouette.pdf" format="pdf" from_work_dir="test-data/silhouette.pdf" />
+        <data name="pca" label="pca.pdf" format="pdf" from_work_dir="test-data/pca1-2.pdf" />
+        <data name="heatmap" label="heatmap.pdf" format="pdf" from_work_dir="test-data/heatmap.pdf" />
+        <data name="summary" label="summary.tsv" format="tsv" />
+        <data name="clusters" label="clusters.tsv" format="tsv"  />
+        <data name="dendrogram" label="dendrogram.pdf" format="pdf" from_work_dir="test-data/dendrogram.pdf" />
+    </outputs>
+
+    <help>
+
+
+.. class:: infomark
+
+**Author**  MetExplore team (INRA Toulouse, Toxalim, MeX, contact-metexplore@inra.fr)
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Website** https://www.metexplore.fr
+
+---------------------------------------------------
+
+==================================
+CLUSTERING (From MetExplore)
+==================================
+
+------------
+Description
+------------
+
+Unsupervised algorithm to classify each individuals (e.g., metabolites) in a optimal number of clusters (i.e., sub-network with common chemical mecanisms). This optimum is determined automatically by the Silhouette's index (Rousseeuw, 1987). This index is based on: a) the average distance of a point to each points of its cluster, b) the average distance with each points of the closest cluster. For a given partitioning, the average width of the silhouette index is calculated on each s(i) = ( b(i) - a(i) ) / max{ a(i), b(i) }. This index vary from 1 (where the individuals are well fitted in their class) to -1 (where they are closer to another cluster). The best partition is determined by the minimum average silhouette width. This tool is part of the MetExplore's project consisting in a web server dedicated to the analysis of omics data in the context of genome scale metabolic networks (Cottret et al., 2018).
+
+-----------
+Input file
+-----------
+
+    | - a **fingerprint** (csv or tsv) : the first column should contains the individuals' names (e.g., identifier values to map on a network file), and the other, the variables (e.g., the individuals name in case of a a pseudo-distance matrix between metabolites among a network). Except for the first one, columns with characters values will be discarded from the analysis. "NA" values are not tolerated by the algorithms.
+
+------------
+Output files
+------------
+
+    | - **heatmap.pdf** : distance matrix between individuals colored by a gradient of color (from minimal distance, in red, to maximum distance, in blank). In case of hierarchical clustering, the individuals are ranked according to dendrogram result. In case of clustering by partitioning (or in advanced mode), they are ordered by the Silhouette's score.
+    | - **average_silhouette.pdf**: optimal number of clusters according to the average Silhouette's index (x: number of clusters; y: average width of silhouette).
+    | - **silhouette.pdf** : for the optimal number of clusters (determined above), the Silhouette's index for each individuals and for each cluster.
+    | - **pca.pdf**: individuals projection in the first axis of a PCA. Individuals are colorized according to their belonging to each clusters. Each clusters is represented by a centroid and an elliptical dispersion.
+    | - **summary.tsv** : for each partitioning, the bewteen- and the (sum of the) within-inertia, the between-inertia differences with the previous partition, the average silhouette width.
+    | - **clusters.tsv** : for each individuals, the name of the individuals (ranked by silhouette's score), the numerical identifier of their cluster, their pca coordinates on the first two axis, their silhouette's index.
+    | - **dendrogram.pdf** (empty for K-medoids and K-means): agglomerative tree for all paired combinations and the colored chosen clusters.
+
+
+============
+Algorithms
+============
+    
+------------------------------------------------
+Hierarchical Clustering
+------------------------------------------------
+
+With AHC, at each iteration, a pair of objects (singleton or cluster) is aggregated. Each individual begins into a separate cluster and ends - after the final step - into a common one. The opposite pattern is used in divisive algorithm (DHC). This (hierarchical) process could be resumed into a dendrogram.
+
+*Agglomerative Hierarchical Clustering (AHC)*
+
+The algorithm selects a aggregation based on the smaller distance between an individual (or another cluster) and (i) the closest one of each cluster (**"Single links"**) or (ii) with the farthest one (**"Complete links"**). "Unweighted Pair-Group Method using Arithmetic averages" (**UPGMA**) algorithm used the smaller average distance with all individuals of each clusters, whereas **UPGCA** used the centroid of each cluster. **WPGMA** and **WPGCA** respectivly used ponderation for averages and centroids.
+
+Unlike algorithm by links, **Ward** is not based on a distance metric. At each iteration, an individual is agglomerated with the cluster with the smaller within-cluster inertia increase.
+
+------------------------------------------------
+Clustering by partioning
+------------------------------------------------
+
+Unlike hierarchical process, clustering by partitioning do not agglomerate pairs of objects until they are all agglomerated (or all divided for DCH). With these algorithms, a dendrogram could not be used. For a fixed number of clusters (k), the algorithm try to find for each cluster their best centroids according to their associated individuals. This limit of a fixed k could be overcome by running different k and selects the best (here, according to the Silhouette's index).
+
+    | - **K-means** : For a given number of clusters (k), k centers are randomly chosen. Then: (i) each individuals is affected to the closest center, (ii), centers are re-calculated. And so on, until convergence. 
+    | - **K-medoids**: is a more robust K-means version where centers are real individuals (called medoids). With medoids, they are less afected by outliers. Unlike K-means, distances other than euclidean could be chosen.
+
+
+</help>
+
+    <citations>
+        <citation type="doi">10.1093/nar/gky301</citation>
+        <citation type="doi">10.1111/1467-9868.00293</citation>
+        <citation type="doi">10.1016/0377-0427(87)90125-7</citation>
+        
+    </citations>
+
+</tool>
