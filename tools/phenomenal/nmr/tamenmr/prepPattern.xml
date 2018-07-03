@@ -36,9 +36,11 @@
             <when value="csvTable">
                 <param name="pattern" type="data" label="CSV Pattern File"/>
             </when>
+            <!--
             <when value="intelligent">
                 <param name="dataSet" type="data" label="Spectra"/>
             </when>
+            -->
         </conditional>
         
     </inputs>
