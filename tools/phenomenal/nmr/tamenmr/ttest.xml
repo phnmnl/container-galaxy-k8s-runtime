@@ -1,0 +1,73 @@
+<tool id="tamenmr-ttest" name="Student's t-test" version="0.0.3">
+    <requirements>
+        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
+    </requirements>
+    <description>  </description>
+    <command><![CDATA[
+        Ttest.R --input=$input --output=$output --outdir=$output.files_path --factorFile=$factorFile --factorCol=$factorCol --tails=$way --conf_level=$conf_level --adjust=$adjust
+        
+        #if $paired_choice.paired == "Y":
+          --paired=Y --factorFile2=$paired_choice.fact2 --factorCol2=$paired_choice.factCol2
+        #else
+          --paired=N
+        #end if
+        ]]>
+    </command>
+
+    <inputs>
+        <param name="input" type="data" label="Data"/>
+        <param name="factorFile" type="data" label="Group factor"/>
+        <param name="factorCol" type="integer" label="Factor column to use" value="1"/>
+        <param name="way" type="select" label="Type of test">
+            <option value="greater">One-way greater</option>
+            <option value="less">One-way lower</option>
+            <option value="two.sided" selected="true">Two-way</option>
+        </param>
+        <!--param name="var.equal" type="boolean" label="Are the variances asumed equal?" truevalue="Y" falsevalue="N"/-->
+        <conditional name="paired_choice">
+          <param name="paired" type="boolean" label="Are observations paired?" checked="False" truevalue="Y" falsevalue="N" />
+          <when value="Y">
+            <param name="fact2" type="data" label="Grouping factor file" />
+            <param name="factCol2" type="integer" label="Which column (factor) to use" value="1" />
+          </when>
+        </conditional>
+        <param name="conf_level" type="float" label="Confidence level" value="0.05" min="0" max="1"/>
+
+        <param name="adjust" type="select" label="Multiple testing correction">
+            <option value="none">None</option>
+            <option value="BH" selected="true">Benjamini-Hochberg</option>
+            <option value="BY">Benjamini-Yakutieli</option>
+            <option value="bonferroni">Bonferroni</option>
+            <option value="hochberg">Hochberg</option>
+            <option value="holm">Holm</option>
+            <option value="hommel">Hommel</option>
+        </param>
+        <!--param /-->
+    </inputs>
+
+    <outputs>
+        <data format="html" name="output" label="t-test results"/>
+        <!--data format="csv" name="output" label="t-test results"/-->
+    </outputs>
+
+    <!--
+    <requirements>
+    </requirements>
+
+    <tests>
+    </tests-->
+
+    <help>
+      This tool performs a standard Student's t-test. It requires a data-table and a group factor containing a 2-group
+      column.
+      
+      **Options**
+      
+      * *Type of test* - allows to choose the type of alternative hypothesis ("greater", "lower" or "not equal")
+      * *Are observations paired* - choose if the observations in the data are paired. Requires a separate factor where each sample is in its own group and its "partner" has the same number but negative.
+      * *Confidence level* - the confidence level to be used for hypothesis testing.
+      * *Multiple testing correction* - method for multiple testing correction of p-values.
+      
+      
+    </help>
+</tool>

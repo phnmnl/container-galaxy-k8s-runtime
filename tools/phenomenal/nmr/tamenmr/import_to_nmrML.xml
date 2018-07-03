@@ -1,0 +1,41 @@
+<tool id="tamenmr-import_to_nmrML" name="Convert" version="0.0.2">
+    <requirements>
+        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
+    </requirements>
+    <description> NMR data to nmrML</description>
+    <command interpreter="python">
+        <![CDATA[
+        import2nmrML.py $input $output $proc
+        ]]>
+    </command>
+
+    <inputs>
+        <param name="input" type="data" label="Zip file" />
+        <!--param name="vendor" type="select" label="NMR Vendor">
+            <option value="bruker">Bruker</option>
+            <option value="varian">Varian</option>
+        </param-->
+        <param name="proc" type="select" label="Is the data processed?">
+            <option value="processed">Processed</option>
+            <option value="raw">Raw</option>
+        </param>
+    </inputs>
+
+    <outputs>
+        <data format="zip" name="output" label="nmrML zip file"/>
+    </outputs>
+    <requirements>
+        <!--requirement type="package" version="0.5">nmrglue</requirement>
+        <requirement type="package">numpy</requirement>
+        <requirement type="package">scipy</requirement>
+        <requirement type="package">pandas</requirement-->
+    </requirements>
+
+    <!--
+    <tests>
+    </tests>
+
+    <help>
+    </help>
+-->
+</tool>

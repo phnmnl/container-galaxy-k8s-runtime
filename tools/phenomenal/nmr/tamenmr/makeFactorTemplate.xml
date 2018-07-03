@@ -1,0 +1,65 @@
+<tool id="tamenmr-factorTemp" name="Make" version="0.0.3">
+    <requirements>
+        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
+    </requirements>
+    <description> a factor template  </description>
+    <command><![CDATA[
+        MakeFactTemp.R --input=$input --output=$output
+        ]]>
+    </command>
+
+    <inputs>
+        <param name="input" type="data" label="Binned Data"/>
+    </inputs>
+
+    <outputs>
+        <data format="tabular" name="output" label="Factor template"/>
+    </outputs>
+
+    <!--
+    <requirements>
+    </requirements>
+
+    <tests>
+    </tests-->
+
+    <help>
+      This tool creates a file with the sample names in a dataset in the order the spectra have been imported.
+      It is useful for creating a factor file used in plotting and statistical analysis. Simply select a file with
+      binned spectra and click *execute*. Download the created file, open it in a spreadsheet editor (OO Calc, MS excel etc.)
+      and add columns next to the *Samples* column that contains the names of the samples in order.
+      
+      '''EXAMPLE'''
+      
+      To add two groupings to the file:
+      
+     +---------+------+--------+
+     | Samples | Grp1 | Grp2   |
+     +---------+------+--------+
+     | Smpl_1  | Trtm | Drug_1 |
+     +---------+------+--------+
+     | Smpl_2  | Trtm | Drug_1 |
+     +---------+------+--------+
+     | Smpl_3  | Trtm | Drug_2 |
+     +---------+------+--------+
+     | Smpl_4  | Trtm | Drug_2 |
+     +---------+------+--------+
+     | Smpl_5  | Trtm | Drug_3 |
+     +---------+------+--------+
+     | Smpl_6  | Trtm | Drug_3 |
+     +---------+------+--------+
+     | Smpl_7  | Ctrl | Ctrl   |
+     +---------+------+--------+
+     | Smpl_8  | Ctrl | Ctrl   |
+     +---------+------+--------+
+      
+      .. class:: warningmark
+      
+      Once the grouping columns are added save the file as **tab** delimited. Otherwise it will not work.
+      The file can then be uploaded to the server as usual.
+      
+      '''TIP''' All tools that use the grouping factor file and ask for a column number ignore the *Samples* 
+      column and start counting columns from your added one (e.g. Grp1 would be column 1). 
+
+    </help>
+</tool>

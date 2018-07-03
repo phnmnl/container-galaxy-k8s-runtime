@@ -1,0 +1,51 @@
+<tool id="tamenmr-plotnmrsig" name="Plot NMR" version="1.0.3">
+    <requirements>
+        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
+    </requirements>
+    <description> significant bins </description>
+    <command><![CDATA[
+        PlotNMRSig.R --input=$input --output=$output --outDir=$output.files_path --ppmInt=$ppmInt --bins=$binFile --pvals=$pvalFile --colourbar=$cbar
+        ]]>
+    </command>
+
+    <inputs>
+        <param name="input" type="data" label="NMR Spectra" />
+        <param name="ppmInt" type="text" label="Interval to plot (ppm)" value="10-0" />
+        <param name="binFile" type="data" label="Pattern file" />
+        <param name="pvalFile" type="data" label="Statistical test results" />
+        <param name="cbar" type="select" label="Colour the spectra:">
+          <option value="continuous">Continuous</option>
+          <option value="discrete" selected="True">Discrete</option>
+        </param>
+    </inputs>
+
+    <outputs>
+        <data format="html" name="output" label="NMR Sig. Bins"/>
+    </outputs>
+
+    <!--
+    <requirements>
+    </requirements>
+
+    <tests>
+    </tests-->
+
+    <help>
+      This tool plots the T-test or ANOVA results as colours on a mean spectrum. Given an NMR spectra file it
+      calculates the mean spectrum and plots the selected interval of it. The plot is coloured based on the results
+      of a statistical test performed on the spectra after binning. The tool requires the **pattern file** used for
+      binning the data and the results of the performed test.
+      
+      **Colour the spectra**
+      
+      **Discrete** - colours the spectra in discrete intervals: [0, 0.001]; (0.001, 0.01]; (0.01, 0.05]; (0.05, 1]
+      
+      **Continuous** - colours the plot in a contunuous fashion based on p-values in the interval [0,1]
+      
+      
+      .. class:: warningmark 
+      
+      The continuous plot is much harder to interpret and will likely be changed in the future.
+      
+    </help>
+</tool>
