@@ -80,6 +80,9 @@ COPY tool-data/isa_cvterms.loc tool-data/
 # Galaxy tours which guide users through the subsequent steps in an analysis
 COPY config/plugins/tours/*.yaml config/plugins/tours/
 
+# Galaxy visualization plugins to add extra visualization capability to datasets
+COPY config/plugins/visualizations/ config/plugins/visualizations/
+
 COPY html/partners.png static/welcome_partners.png
 COPY html/PhenoMeNal_logo.png static/welcome_PhenoMeNal_logo.png
 COPY html/welcome.html static/
