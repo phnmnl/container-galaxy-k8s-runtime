@@ -185,6 +185,16 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
+    <!--
+    <destination id="ecomet-container" runner="k8s">
+      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+      <param id="docker_owner_override">phnmnl</param>
+      <param id="docker_image_override">ecomet</param>
+      <param id="docker_tag_override">v1.1_cv0.1.33</param>
+      <param id="max_pod_retrials">3</param>
+      <param id="docker_enabled">true</param>
+    </destination>
+    -->
     <destination id="container-escher-fluxomics" runner="k8s">
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
@@ -387,6 +397,35 @@
     <tool id="msms2metfrag-multiple" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="aggregatemetfrag" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="passatutto" destination="dynamic-k8s-medium" resources="all"/>
+    <!-- Eco-Metabolomics -->
+    <tool id="ecomet_download" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="ecomet_raw_extract" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_qc_extract" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_quality_control" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_preparations" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_import_maf" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_peak_picking" destination="dynamic-k8s-xlarge" resources="all"/>
+    <tool id="ecomet_import_traits" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_species_diversity" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_species_shannon" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_species_unique" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_species_variability" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_concentration" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_species_features" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_species_venn" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_species_varpart" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_species_nmds" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_species_marchantia" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_ecology_varpart" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_ecology_rda" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_phylogeny" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_seasons_shannon" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_seasons_unique" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_seasons_variability" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_seasons_concentration" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_seasons_features" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="ecomet_seasons_rda" destination="dynamic-k8s-large" resources="all"/>
+    <tool id="ecomet_seasons_nmds" destination="dynamic-k8s-large" resources="all"/>
     <!-- ISA related tools -->
     <tool id="isacreator_metabo" destination="dynamic-k8s-small" resources="all"/>
     <tool id="isa_get_data_files_list" destination="dynamic-k8s-tiny" resources="all"/>

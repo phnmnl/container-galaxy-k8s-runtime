@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Eco-Metabolomics]-->
+<tool id="ecomet_qc_extract" name="ecomet_qc_extract" version="1.1">
+  <description>Extract QC files from MTBLS study</description>
+  <command><![CDATA[
+mtbls520_02_extract.sh $mtblsid $polarity rawfolder rawmaf qcfolder $qcmaf traitsfile phylofile $afile $sfile;
+  ]]>
+  </command>
+  <inputs>
+    <param name="mtblsid" type="data" format="zip" label="MTBLS study" />
+    <param name="polarity" type="select" value="positive" optional="False" label="Polarity" help="The polarity used for the mode of acquisition">
+	    <option value="positive" selected="True">positive</option>
+	    <option value="negative">negative</option>
+	</param>
+  </inputs>
+  <outputs>
+    <collection name="qcfiles" type="list" format="mzml" label="QC mzML files" >
+      <discover_datasets pattern="__name__" directory="qcfolder" type="data" format="mzml" visible="false" />
+    </collection>
+    <data name="qcmaf" type="data" format="tabular" label="QC MAF peak table" />
+    <data name="afile" type="data" format="tabular" label="Analytical metadata" />
+    <data name="sfile" type="data" format="tabular" label="Sample metadata" />
+  </outputs>
+  <help>
+=========================
+Eco-Metabolomics workflow
+=========================
+
+This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
+
+Module
+	| MTBLS QC Extraction
+	|
+
+Description
+	| Extract QC files
+	|
+
+-----
+Input
+-----
+
+MTBLS study
+	| Zipped MTBLS study
+	|
+
+Polarity
+	| The polarity of the acquition mode, defaults to positive. Allowed values: positive or negative.
+	|
+
+------
+Output
+------
+
+QC mzML files
+	| Dataset collection of QC mzML files
+	| 
+
+QC MAF peak table
+	| Metabolights Assignment file
+	| 
+
+Analytical metadata
+	| ISA-Tab format Assay metadata file
+	| 
+
+Sample metadata
+	| ISA-Tab format Sample metadata file
+	| 
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+For updates and documentation, please visit **https://github.com/korseby/container-mtbls520** or contact **Kristian Peters (kpeters@ipb-halle.de)**.
+
+  </help>
+</tool>
+

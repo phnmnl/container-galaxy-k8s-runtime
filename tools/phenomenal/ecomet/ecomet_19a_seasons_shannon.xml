@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Eco-Metabolomics]-->
+<tool id="ecomet_seasons_shannon" name="ecomet_seasons_shannon" version="1.1">
+  <description>Calculate Shannon diversity index for the seasons</description>
+  <stdio>
+    <regex match="" source="stderr" level="warning" description="R messages" />
+    <exit_code range="1:" level="fatal" description="Tool error" />
+  </stdio>
+  <command><![CDATA[
+mtbls520_19a_seasons_shannon.r $infile1 $outfile1;
+  ]]>
+  </command>
+  <inputs>
+    <param name="infile1" type="data" format="rdata" optional="False" label="Input Rdata file" />
+  </inputs>
+  <outputs>
+    <data name="outfile1" type="data" format="pdf" label="Seasons Shannon diversity index" />
+  </outputs>
+  <help>
+=========================
+Eco-Metabolomics workflow
+=========================
+
+This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
+
+Module
+	| Seasons Shannon diversity index
+	|
+
+Description
+	| Calculate Shannon diversity index for the seasons
+	|
+
+-----
+Input
+-----
+
+Input Rdata
+	| Rdata file
+	|
+
+------
+Output
+------
+
+Seasons Shannon diversity index
+	| PDF plot
+	| 
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+For updates and documentation, please visit **https://github.com/korseby/container-mtbls520** or contact **Kristian Peters (kpeters@ipb-halle.de)**.
+
+  </help>
+</tool>
+

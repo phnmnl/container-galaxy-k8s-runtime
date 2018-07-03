@@ -246,6 +246,40 @@ assignment:
   tools_id:
   - metfrag-vis
   - metfrag-vis-multiple
+- docker_image_override: ecomet
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v1.1_cv0.1.33
+  max_pod_retrials: 3
+  tools_id:
+  - ecomet_download
+  - ecomet_raw_extract
+  - ecomet_qc_extract
+  - ecomet_quality_control
+  - ecomet_preparations
+  - ecomet_import_maf
+  - ecomet_peak_picking
+  - ecomet_import_traits
+  - ecomet_species_diversity
+  - ecomet_species_shannon
+  - ecomet_species_unique
+  - ecomet_species_variability
+  - ecomet_concentration
+  - ecomet_species_features
+  - ecomet_species_venn
+  - ecomet_species_varpart
+  - ecomet_species_nmds
+  - ecomet_species_marchantia
+  - ecomet_ecology_varpart
+  - ecomet_ecology_rda
+  - ecomet_phylogeny
+  - ecomet_seasons_shannon
+  - ecomet_seasons_unique
+  - ecomet_seasons_variability
+  - ecomet_seasons_concentration
+  - ecomet_seasons_features
+  - ecomet_seasons_rda
+  - ecomet_seasons_nmds
 - docker_image_override: container-passatutto
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu

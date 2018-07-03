@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Eco-Metabolomics]-->
+<tool id="ecomet_ecology_rda" name="ecomet_species_rda" version="1.1">
+  <description>Perform distance-based redundancy analysis (dbRDA) on the species with ecological characteristics</description>
+  <stdio>
+    <regex match="" source="stderr" level="warning" description="R messages" />
+    <exit_code range="1:" level="fatal" description="Tool error" />
+  </stdio>
+  <command><![CDATA[
+mtbls520_16_ecology_rda.r $infile1 $outfile1 $outfile2;
+  ]]>
+  </command>
+  <inputs>
+    <param name="infile1" type="data" format="rdata" optional="False" label="Input Rdata file" />
+  </inputs>
+  <outputs>
+    <data name="outfile1" type="data" format="csv" label="Summary of species dbRDA envfit" />
+    <data name="outfile2" type="data" format="pdf" label="Species dbRDA plot" />
+  </outputs>
+  <help>
+=========================
+Eco-Metabolomics workflow
+=========================
+
+This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
+
+Module
+	| Species dbRDA
+	|
+
+Description
+	| Perform distance-based redundancy analysis (dbRDA) on the species with ecological characteristics
+	|
+
+-----
+Input
+-----
+
+Input Rdata
+	| Rdata file
+	|
+
+------
+Output
+------
+
+Summary of species dbRDA
+	| Summary in text format
+	|
+
+Species dbRDA
+	| PDF plot
+	|
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+For updates and documentation, please visit **https://github.com/korseby/container-mtbls520** or contact **Kristian Peters (kpeters@ipb-halle.de)**.
+
+  </help>
+</tool>
+

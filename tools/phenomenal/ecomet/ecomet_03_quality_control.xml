@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Eco-Metabolomics]-->
+<tool id="ecomet_quality_control" name="ecomet_quality_control" version="1.1">
+  <description>Quality Control of the MTBLS study</description>
+  <stdio>
+    <regex match="" source="stderr" level="warning" description="R messages" />
+    <exit_code range="1:" level="fatal" description="Tool error" />
+  </stdio>
+  <command><![CDATA[
+export studyfile_names=' 
+#for $studyfile in $studyfolder: 
+${studyfile.name},
+#end for
+';
+export studyfile_files='
+#for $studyfile in $studyfolder:
+${studyfile},
+#end for
+';
+echo \$studyfile_names | perl -pe 's/mzML\, /mzML\n/g' > /tmp/studyfile_names.txt;
+echo \$studyfile_files | perl -pe 's/dat\, /dat\n/g' > /tmp/studyfile_files.txt;
+mtbls520_03_qc_preparations.sh $polarity $afile $sfile;
+mtbls520_03_qc_perform.r $polarity $qcmaf $qcrtcorr $qcmzrtdev $qcmzdev $qcrtdev $qcchroma $qcprofiles $qcstacked $qchist $qcvar $qccompounds $qcpca $qcrdata;
+  ]]>
+  </command>
+  <inputs>
+    <param name="polarity" type="select" value="positive" optional="False" label="Polarity" help="The polarity used for the mode of acquisition">
+	    <option value="positive" selected="True">positive</option>
+	    <option value="negative">negative</option>
+	</param>
+    <param name="studyfolder" type="data_collection" collection_type="list" format="mzml" multiple="true" label="QC mzML files" />
+    <param name="afile" type="data" format="tabular" label="Analytical metadata" />
+    <param name="sfile" type="data" format="tabular" label="Sample metadata" />
+  </inputs>
+  <outputs>
+    <data name="qcmaf" type="data" format="tabular" optional="False" label="QC MAF file" />
+    <data name="qcrtcorr" type="data" format="pdf" label="QC RT Correction" />
+    <data name="qcmzrtdev" type="data" format="pdf" label="QC MZ Deviation vs. RT" />
+    <data name="qcmzdev" type="data" format="pdf" label="QC MZ Deviation for samples" />
+    <data name="qcrtdev" type="data" format="pdf" label="QC RT Deviation for samples" />
+    <data name="qcchroma" type="data" format="pdf" label="QC Chromatograms" />
+    <data name="qcprofiles" type="data" format="pdf" label="QC Profiles" />
+    <data name="qcstacked" type="data" format="pdf" label="QC Profiles stacked" />
+    <data name="qchist" type="data" format="pdf" label="QC Histogram" />
+    <data name="qcvar" type="data" format="pdf" label="QC Variation" />
+    <data name="qccompounds" type="data" format="pdf" label="QC Compounds" />
+    <data name="qcpca" type="data" format="pdf" label="QC PCA" />
+    <data name="qcrdata" type="data" format="rdata" optional="False" label="QC Rdata file" />
+  </outputs>
+  <help>
+=========================
+Eco-Metabolomics workflow
+=========================
+
+This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
+
+Module
+	| Quality Control
+	|
+
+Description
+	| Quality Control
+	|
+
+-----
+Input
+-----
+
+Polarity
+	| The polarity used for the mode of acquisition
+	|
+
+QC mzML
+	| Dataset collection of the QC mzML files
+	|
+
+Analytical metadata
+	| ISA-Tab format Assay metadata file
+	| 
+
+Sample metadata
+	| ISA-Tab format Sample metadata file
+	| 
+
+------
+Output
+------
+
+QC MAF
+	| Metabolights Assignment file
+	| 
+
+QC RT Correction
+	| PDF plot
+	| 
+
+QC MZ Deviation vs. RT
+	| PDF plot
+	| 
+
+QC MZ Deviation for samples
+	| PDF plot
+	| 
+
+QC RT Deviation for samples
+	| PDF plot
+	| 
+
+QC Chromatograms
+	| PDF plot
+	| 
+
+QC Profiles
+	| PDF plot
+	| 
+
+QC Profiles stacked
+	| PDF plot
+	| 
+
+QC Histogram
+	| PDF plot
+	| 
+
+QC Compound Variation
+	| PDF plot
+	| 
+
+QC Compounds
+	| PDF plot
+	| 
+
+QC PCA
+	| PDF plot
+	| 
+
+QC Rdata
+	| Rdata file
+	| 
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+For updates and documentation, please visit **https://github.com/korseby/container-mtbls520** or contact **Kristian Peters (kpeters@ipb-halle.de)**.
+
+  </help>
+</tool>
+

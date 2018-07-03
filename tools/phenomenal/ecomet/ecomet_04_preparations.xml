@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Eco-Metabolomics]-->
+<tool id="ecomet_preparations" name="ecomet_preparations" version="1.1">
+  <description>Preparations for MTBLS study</description>
+  <stdio>
+    <regex match="" source="stderr" level="warning" description="R messages" />
+    <exit_code range="1:" level="fatal" description="Tool error" />
+  </stdio>
+  <command><![CDATA[
+export studyfile_names='
+#for $studyfile in $studyfolder:
+${studyfile.name},
+#end for
+';
+export studyfile_files='
+#for $studyfile in $studyfolder:
+${studyfile},
+#end for
+';
+echo \$studyfile_names | perl -pe 's/mzML\, /mzML\n/g' > /tmp/studyfile_names.txt;
+echo \$studyfile_files | perl -pe 's/dat\, /dat\n/g' > /tmp/studyfile_files.txt;
+mtbls520_04_preparations.sh $polarity /tmp/studyfile_names.txt /tmp/studyfile_files.txt $afile $sfile;
+mtbls520_04_preparations.r $polarity $rdata;
+  ]]>
+  </command>
+  <inputs>
+    <param name="polarity" type="select" value="positive" optional="False" label="polarity" help="The polarity used for the mode of acquisition">
+	    <option value="positive" selected="True">positive</option>
+	    <option value="negative">negative</option>
+	</param>
+    <param name="studyfolder" type="data_collection" collection_type="list" format="mzml" multiple="true" label="RAW mzML files" />
+    <param name="afile" type="data" format="tabular" label="analytical metadata" />
+    <param name="sfile" type="data" format="tabular" label="sample metadata" />
+  </inputs>
+  <outputs>
+    <data name="rdata" type="data" format="rdata" optional="False" label="Preprocess Rdata file" />
+  </outputs>
+  <help>
+=========================
+Eco-Metabolomics workflow
+=========================
+
+This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
+
+Module
+	| Preparations
+	|
+
+Description
+	| Preparations and preprocessing of parameters
+	|
+
+-----
+Input
+-----
+
+Polarity
+	| The polarity of the acquition mode, defaults to positive. Allowed values: positive or negative.
+	|
+
+RAW mzML files
+	| Dataset collection raw mzML files
+	|
+
+Analytical metadata
+	| ISA-Tab Assay file
+	|
+
+Sample metadata
+	| ISA-Tab Sample file
+	|
+
+------
+Output
+------
+
+Preprocess Rdata
+	| Rdata file. Please connect this Rdata file to the module import maf.
+	|
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+For updates and documentation, please visit **https://github.com/korseby/container-mtbls520** or contact **Kristian Peters (kpeters@ipb-halle.de)**.
+
+  </help>
+</tool>
+
