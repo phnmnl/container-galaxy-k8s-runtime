@@ -43,21 +43,21 @@ assignment:
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: iso2flux
-  docker_tag_override: v0.6.1_cv2.1.47          
+  docker_tag_override: v0.7_cv2.1.52          
   max_pod_retrials: 3
 - tools_id:
    - midcor
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: midcor
-  docker_tag_override: v1.0_cv1.0.40
+  docker_tag_override: v1.0_cv1.0.46
   max_pod_retrials: 3
 - tools_id:
    - ramid
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: ramid
-  docker_tag_override: v1.0_cv1.0.14
+  docker_tag_override: v1.0_cv1.0.17
   max_pod_retrials: 3
 - tools_id:
    - cdf2mid
