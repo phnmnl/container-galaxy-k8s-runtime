@@ -386,6 +386,13 @@ assignment:
   max_pod_retrials: 3
   tools_id:
   - metabomatching
+- docker_image_override: iterative-signature-algorithm
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v0.1_cv0.1.27
+  max_pod_retrials: 2
+  tools_id:
+  - iterative-signature-algorithm
 - docker_image_override: isatab2json
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
