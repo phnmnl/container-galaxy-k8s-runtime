@@ -130,9 +130,6 @@
       <tool file="phenomenal/nmr/nmrml2batman.xml"/>
       <tool file="phenomenal/nmr/bruker2batman.xml"/>
       <tool file="phenomenal/nmr/metabomatching.xml"/>
-      <!-- <tool file="phenomenal/nmr/mtbls2nmrglue.xml"/> -->
-      <tool file="phenomenal/nmr/soap_process.xml"/>
-      <tool file="phenomenal/nmr/soap_opls.xml"/>
       <tool file="phenomenal/nmr/nmr-integrals.xml"/>
    </section>
 

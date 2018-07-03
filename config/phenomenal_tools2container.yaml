@@ -54,13 +54,6 @@ assignment:
   docker_image_override: papy
   docker_tag_override: v2.0_cv1.0.25
   max_pod_retrials: 3
-- docker_image_override: nmrglue
-  docker_owner_override: phnmnl
-  docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: latest
-  max_pod_retrials: 3
-  tools_id:
-  - mtbls2nmrglue
 
 - docker_image_override: mtbls-dwnld
   docker_owner_override: phnmnl
@@ -232,7 +225,7 @@ assignment:
 - docker_image_override: nmrmlconv
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v1.1b_cv0.4.46
+  docker_tag_override: v1.1b_cv0.6.54
   max_pod_retrials: 3
   tools_id:
   - mtbls_nmr_raw_dummy_importer
@@ -330,7 +323,7 @@ assignment:
 - docker_image_override: rnmr1d
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: dev_v1.2.8_cv0.4.34 
+  docker_tag_override: v1.2.22_cv0.3.49 
   max_pod_retrials: 3
   tools_id:
   - rnmr1d
@@ -346,7 +339,7 @@ assignment:
 - docker_image_override: metabomatching
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v0.2.1_cv0.4.1.64
+  docker_tag_override: v0.2.1_cv0.4.1.67
   max_pod_retrials: 3
   tools_id:
   - metabomatching
@@ -448,14 +441,6 @@ assignment:
   max_pod_retrials: 1
   tools_id:
   - mzml2isa
-- docker_image_override: soap-nmr
-  docker_owner_override: phnmnl
-  docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v1.0_cv0.4.1016
-  max_pod_retrials: 3
-  tools_id:
-  - soap_process
-  - soap_opls
 - docker_image_override: xcms-1.x
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
