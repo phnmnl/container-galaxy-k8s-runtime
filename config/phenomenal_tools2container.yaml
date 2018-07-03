@@ -344,10 +344,24 @@ assignment:
 - docker_image_override: ms-vfetc
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v0.4_cv1.3.10
+  docker_tag_override: v0.6_cv1.1.26
   max_pod_retrials: 3
   tools_id:
   - ms-vfetc
+- docker_image_override: mzquality
+  docker_owner_override: phnmnl
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_tag_override: v0.9.5_cv0.9.5.15
+  max_pod_retrials: 3
+  tools_id:
+  - mzquality-rtshifts
+  - mzquality-blank-effect
+  - mzquality-qc-correction
+  - mzquality-qc-rsd
+  - mzquality-rep-rsd
+  - mzquality-is-rsd 
+  - mzquality-export-measurements   
+  - mzquality-plot-compounds
 - docker_image_override: rnmr1d
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu

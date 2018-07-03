@@ -281,6 +281,17 @@
     <tool file="phenomenal/ms/dimspy/merge_peaklists.xml" />
     <tool file="phenomenal/ms/dimspy/get_peaklists.xml" /> 
   </section>  
+  <section name="mzQuality" id="pheno-mzquality">
+    <tool file="phenomenal/ms/mzquality/ms-vfetc.xml"/>
+    <tool file="phenomenal/ms/mzquality/mzquality-rtshifts.xml"/>
+    <tool file="phenomenal/ms/mzquality/mzquality-blank-effect.xml"/>
+    <tool file="phenomenal/ms/mzquality/mzquality-qc-correction.xml"/>
+    <tool file="phenomenal/ms/mzquality/mzquality-qc-rsd.xml"/> 
+    <tool file="phenomenal/ms/mzquality/mzquality-is-rsd.xml"/> 
+    <tool file="phenomenal/ms/mzquality/mzquality-rep-rsd.xml"/>         
+    <tool file="phenomenal/ms/mzquality/mzquality-export-measurements.xml"/>         
+    <tool file="phenomenal/ms/mzquality/mzquality-plots.xml"/>            
+  </section>  
   <label id="phenomenal-annot" text="Annotation" /> 
   <section name="Camera" id="pheno-camera">
     <tool file="phenomenal/ms/camera/camera-annotate-peaks.xml" labels="Camera"/>
@@ -343,7 +354,6 @@
     <tool file="phenomenal/ms/convertCAMERAToOpenMS/featureXMLToXcms.xml" labels="OpenMS"/>  
     <tool file="phenomenal/ms/save_chromatogram.xml"/>
     <tool file="phenomenal/ms/show_chromatogram.xml"/>
-    <tool file="phenomenal/ms/ms-vfetc.xml"/>
     <tool file="phenomenal/postProcessing/metaboliteidconverter.xml" labels="INRA"/>
   </section>
 
