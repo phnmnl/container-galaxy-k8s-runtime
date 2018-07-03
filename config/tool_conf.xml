@@ -54,40 +54,21 @@
   </section>
   -->
 
-
- <!--  <section name="ISA tools" id="isa-tools">
-    <tool file="phenomenal/isatools/get_study.xml"/>
-    <tool file="phenomenal/isatools/get_study_json.xml"/>
-    <tool file="phenomenal/isatools/study_factors.xml"/>
-    <tool file="phenomenal/isatools/study_factor_values.xml"/>
-    <tool file="phenomenal/isatools/data_files.xml"/>
-    <tool file="phenomenal/isatools/factors_summary.xml"/>
-    <tool file="phenomenal/isatools/mtbls-factors-viz.xml"/>
-    <tool file="phenomenal/isatools/isatab_validator.xml"/>
-    <tool file="phenomenal/isatools/isajson_validator.xml"/>
-    <tool file="phenomenal/isatools/mw2isa.xml"/>
-    <tool file="phenomenal/ms/mzml2isa/mzml2isa.xml" labels="MS"/>
-    <tool file="phenomenal/nmr/nmrml2isa/nmrml2isa.xml" labels="NMR"/>
-    <tool file="phenomenal/isatools/isatab2json.xml"/>
-    <tool file="phenomenal/isatools/json2isatab.xml"/>
-   </section>-->
-
-
   <label id="phenomenal-data" text="Getting Data" /> 
   <section name="Data Transfer" id="MetaboLights_transfer">
-    <tool file="phenomenal/transfer/metabolights-downloader.xml" labels="MTBLS"/>
-    <tool file="phenomenal/transfer/metabolights-labs-uploader.xml" labels="MTBLS"/>
     <tool file="phenomenal/w4m/mtbls-dwnld.xml" labels="W4M"/>
-    <tool file="phenomenal/isatools/mw2isa.xml" labels="ISA"/>
+    <tool file="phenomenal/transfer/metabolights-labs-uploader.xml" labels="MTBLS"/>
+    <tool file="phenomenal/isatools/other/mw2isatab.xml" labels="ISA"/>
    </section>
     
    <section name="Study Metadata Exploration" id="explore_metadata">
-     <tool file="phenomenal/isatools/slicer/isa_get_study_factors.xml" labels="ISA"/>
-     <tool file="phenomenal/isatools/slicer/isa_get_study_factor_values.xml" labels="ISA"/>
-     <tool file="phenomenal/isatools/slicer/isa_get_data_files_list.xml" labels="ISA"/>
-     <tool file="phenomenal/isatools/slicer/isa_get_data_files_collection.xml" labels="ISA"/>
-     <tool file="phenomenal/isatools/slicer/isa_get_factors_summary.xml" labels="ISA"/>
-     <tool file="phenomenal/isatools/mtbls-factors-viz.xml" labels="ISA"/>
+     <tool file="phenomenal/isatools/isaslicer/isa_get_study_factors.xml" labels="ISA"/>
+     <tool file="phenomenal/isatools/isaslicer/isa_get_study_factor_values.xml" labels="ISA"/>
+     <tool file="phenomenal/isatools/isaslicer/isa_get_data_files_list.xml" labels="ISA"/>
+     <tool file="phenomenal/isatools/isaslicer/isa_get_data_files_collection.xml" labels="ISA"/>
+     <tool file="phenomenal/isatools/isaslicer/isa_get_factors_summary.xml" labels="ISA"/>
+     <tool file="phenomenal/isatools/visualizations/isa_factors_viz.xml" labels="ISA"/>
+     <tool file="phenomenal/isatools/isaslicer2/isaslicer2.xml" labels="ISA"/>
    </section> 
 
   <section name="Study Raw Data Extraction" id="pheno_extract_rawdata">
@@ -101,14 +82,13 @@
   <label id="phenomenal-metadata" text="Creating MetaData" /> 
  
   <section name="Study Metadata Creation" id="pheno_data_manage">
-    <tool file="phenomenal/isatools/isacreator_metabo/isacreator_metabo.xml" labels="ISA"/>
+    <tool file="phenomenal/isatools/isacreate/isacreate_metabo.xml" labels="ISA"/>
     <tool file="phenomenal/ms/mzml2isa/mzml2isa.xml" labels="ISA"/>
     <tool file="phenomenal/nmr/nmrml2isa/nmrml2isa.xml" labels="ISA"/>
   </section>
     
   <section name="Study Metadata Format Conversion" id="pheno_convert_metadata">
     <tool file="phenomenal/isatools/converters/isatab2json.xml"  labels="ISA"/>
-    <!-- <tool file="phenomenal/isatools/json2isatab.xml" labels="ISA"/> -->
     <tool file="phenomenal/w4m/isa2w4m.xml" labels="W4M"/>
   </section>  
     
@@ -327,6 +307,8 @@
       <tool file="phenomenal/w4m/transformation_config.xml" labels="W4M"/>
       <tool file="phenomenal/w4m/batch_correction.xml" labels="W4M"/> 
       <tool file="phenomenal/w4m/NmrNormalization_xml.xml" labels="W4M"/>
+      <tool file="phenomenal/reshape2/melt.xml" labels="reshape2"/>
+      <tool file="phenomenal/reshape2/cast.xml" labels="reshape2"/>
     </section>
  
     <section name="Post-Processing" id="pheno-postprocessing">

@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<tool id="isa_get_data_files_collection" name="Get data files collection"
-      version="1.0">
+<tool id="isa_get_data_files_collection" name="isa_get_data_files_collection" version="1.1">
     <description>
         Get a collection of ISA study data files filtered on factor values
     </description>
@@ -34,7 +33,7 @@
     </outputs>
     <tests>
         <test>
-            <param name="mtbls_id" value="MTBLS1"/>
+            <param name="isatab_input" value="BII-S-7.zip" ftype="isa-tab"/>
             <param name="factor_name" value="Gender"/>
             <param name="factor_value" value="Female"/>
             <output_collection name="raw_files" type="list" count="1"/>
@@ -79,88 +78,8 @@ get the relevant factor names for a particular study by using the
 Output
 ------
 
-List of data files as JSON
-==========================
+Collection of data files as a history item.
 
-A list of data files, related sample name, and query used as a JSON
-list. e.g.
-
-::
-
-    [
-        {
-            "query_used": {
-                "replicate": "Exp2"
-            },
-            "data_files": [
-                "MSpos-Ex2-Col0-48h-Ag-1_1-A,2_01_9827.mzData"
-            ],
-            "sample": "Ex2-Col0-48h-Ag-1"
-        },
-        {
-            "query_used": {
-                "replicate": "Exp2"
-            },
-            "data_files": [
-                "MSpos-Ex2-Col0-48h-Ag-2_1-A,3_01_9829.mzData"
-            ],
-            "sample": "Ex2-Col0-48h-Ag-2"
-        },
-        {
-            "query_used": {
-                "replicate": "Exp2"
-            },
-            "data_files": [
-                "MSpos-Ex2-Col0-48h-Ag-3_1-A,4_01_9831.mzData"
-            ],
-            "sample": "Ex2-Col0-48h-Ag-3"
-        },
-        {
-            "query_used": {
-                "replicate": "Exp2"
-            },
-            "data_files": [
-                "MSpos-Ex2-Col0-48h-Ag-4_1-A,2_01_9833.mzData"
-            ],
-            "sample": "Ex2-Col0-48h-Ag-4"
-        },
-        {
-            "query_used": {
-                "replicate": "Exp2"
-            },
-            "data_files": [
-                "MSpos-Ex2-cyp79-48h-Ag-1_1-B,3_01_9828.mzData"
-            ],
-            "sample": "Ex2-cyp79-48h-Ag-1"
-        },
-        {
-            "query_used": {
-                "replicate": "Exp2"
-            },
-            "data_files": [
-                "MSpos-Ex2-cyp79-48h-Ag-2_1-B,4_01_9830.mzData"
-            ],
-            "sample": "Ex2-cyp79-48h-Ag-2"
-        },
-        {
-            "query_used": {
-                "replicate": "Exp2"
-            },
-            "data_files": [
-                "MSpos-Ex2-cyp79-48h-Ag-3_1-B,3_01_9832.mzData"
-            ],
-            "sample": "Ex2-cyp79-48h-Ag-3"
-        },
-        {
-            "query_used": {
-                "replicate": "Exp2"
-            },
-            "data_files": [
-                "MSpos-Ex2-cyp79-48h-Ag-4_1-B,4_01_9834.mzData"
-            ],
-            "sample": "Ex2-cyp79-48h-Ag-4"
-        }
-    ]
 <!-- @@@END_RST@@@ -->
     </help>
     <citations>

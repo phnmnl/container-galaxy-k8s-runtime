@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<tool id="isa_get_factors_summary" name="Get summary of factors" version="1.0">
+<tool id="isa_get_factors_summary" name="isa_get_factors_summary" version="1.1">
     <description>Produce a summary table of variable factors of a ISA study</description>
     <requirements>
         <requirement type="package" version="6.7">click</requirement>
@@ -31,7 +31,9 @@
                 <option value="isatab_input">ISA-Tab datatype history item</option>
             </param>
             <when value="mtbls_id">
-                <param name="mtbls_id" type="text" label="MetaboLights Study Identifier" help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
+                <param name="mtbls_id" type="text" label="MetaboLights Study Identifier" help="MTBLS ID available at MetaboLights, e.g. MTBLS1.">
+                    <validator type="regex" message="ID must look like a valid MTBLS identifier">^MTBLS[0-9]*$</validator>
+                </param>
             </when>
             <when value="isatab_input">
                 <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab"  help="An ISA-Tab datatype history item"/>
