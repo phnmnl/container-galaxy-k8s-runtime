@@ -1,5 +1,5 @@
 <!-- vi: se fdm=marker : -->
-<tool id="isa2nmrml" name="ISA to nmrML" version="1.1.0">
+<tool id="isa2nmrml" name="ISA to nmrML" version="1.1.3">
 
 	<description>Extract nmrML files from an ISA dataset and output a collection of nmrML dataset.</description>
 
@@ -26,7 +26,7 @@
 
     <outputs>
 		<collection name="nmrML" type="list" label="nmrML files">
-			<discover_datasets pattern="__name_and_ext__" directory="nmrML" format="nmrml"/>
+			<discover_datasets pattern="(?P&lt;designation&gt;.+)\.[nN][mM][rR][mM][lL]$" directory="nmrML" format="nmrml"/>
 		</collection>
 	</outputs>
 
