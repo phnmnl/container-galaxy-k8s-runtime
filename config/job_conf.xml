@@ -219,6 +219,14 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
+    <destination id="container-mtbl-labs-uploader" runner="k8s">
+      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+      <param id="docker_owner_override">phnmnl</param>
+      <param id="docker_image_override">mtbl-labs-uploader</param>
+      <param id="docker_tag_override">v0.1.1_cv0.5.15</param>
+      <param id="max_pod_retrials">3</param>
+      <param id="docker_enabled">true</param>
+    </destination>
   </destinations>
   <tools>
     <!-- Tools can be configured to use specific destinations or handlers,
@@ -274,7 +282,7 @@
     <tool id="nmrml2isa" destination="dynamic-k8s-small" resources="all"/>
     <tool id="mtbls-downloader" destination="mtbls-downloader-container"/>
     <tool id="metfragcli" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="mtbls-labs-uploader" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="mtbls-labs-uploader" destination="container-mtbl-labs-uploader" resources="all"/>
     <tool id="Metabolite_ID_Converter" destination="container-metaboliteidconverter" />
     <tool id="metabomatching" destination="dynamic-k8s-small" resources="all"/>
     <tool id="iterative-signature-algorithm" destination="dynamic-k8s-large" resources="all"/>
