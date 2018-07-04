@@ -72,12 +72,24 @@ def k8s_wrapper_xlarge(resource_params, tool_id):
 
 
 def __read_assignments(resource_params, tool_id):
-    stream = open(__path_tool2container, mode='r')
-    mappings = yaml.load(stream)
-    for mapping in mappings['assignment']:
-        if tool_id in mapping['tools_id']:
-            resource_params.update(mapping)
-            break
+
+    try:
+        stream = open(__path_tool2container, mode='r')
+        mappings = yaml.load(stream)
+    except:
+        print("\n----------------------")
+        print('File {} not found!\n'.format(__path_tool2container))
+        raise
+
+    try:
+        for mapping in mappings['assignment']:
+            if tool_id in mapping['tools_id']:
+                resource_params.update(mapping)
+                break
+    except:
+        print("\n----------------------")
+        print('Error parsing file: {}\n'.format(__path_tool2container))
+        raise          
 
 
 def __setup_resources(resource_params, settings):
