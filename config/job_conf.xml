@@ -211,6 +211,14 @@
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
+    <destination id="container-isatab-create" runner="k8s">
+      <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
+      <param id="docker_owner_override">phnmnl</param>
+      <param id="docker_image_override">isatab-create</param>
+      <param id="docker_tag_override">v0.10.0_cv0.5.3.77</param>
+      <param id="max_pod_retrials">3</param>
+      <param id="docker_enabled">true</param>
+    </destination>
   </destinations>
   <tools>
     <!-- Tools can be configured to use specific destinations or handlers,
@@ -456,7 +464,7 @@
     <tool id="ecomet_seasons_rda" destination="dynamic-k8s-large" resources="all"/>
     <tool id="ecomet_seasons_nmds" destination="dynamic-k8s-large" resources="all"/>
     <!-- ISA related tools -->
-    <tool id="isacreate_metabo" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="isacreate_metabo" destination="container-isatab-create" resources="all"/>
     <tool id="isa_get_data_files_list" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_get_data_files_collection" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_get_factors_summary" destination="dynamic-k8s-tiny" resources="all"/>
