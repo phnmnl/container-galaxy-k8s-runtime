@@ -15,7 +15,7 @@ assignment:
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: iso2flux
-  docker_tag_override: v0.7_cv2.1.52          
+  docker_tag_override: v0.7_cv2.1.52
   max_pod_retrials: 3
 - tools_id:
    - midcor
@@ -46,7 +46,7 @@ assignment:
   docker_image_override: mtbls-factors-viz
   docker_tag_override: v0.5_cv0.4.2.19
   max_pod_retrials: 3
-  
+
 - tools_id:
    - power-analysis
   docker_repo_override: container-registry.phenomenal-h2020.eu
@@ -305,13 +305,13 @@ assignment:
   - mzquality-qc-correction
   - mzquality-qc-rsd
   - mzquality-rep-rsd
-  - mzquality-is-rsd 
-  - mzquality-export-measurements   
+  - mzquality-is-rsd
+  - mzquality-export-measurements
   - mzquality-plot-compounds
 - docker_image_override: rnmr1d
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: dev_v1.2.8_cv0.4.34 
+  docker_tag_override: dev_v1.2.8_cv0.4.34
   max_pod_retrials: 3
   tools_id:
   - rnmr1d
@@ -341,7 +341,7 @@ assignment:
 - docker_image_override: batman
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v1.2.12.0_cv1.1.72 
+  docker_tag_override: v1.2.12.0_cv1.1.72
   max_pod_retrials: 3
   tools_id:
   - batman-nmr
@@ -383,7 +383,7 @@ assignment:
 - docker_image_override: nmrml2isa
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v0.3.0_cv0.2.12 
+  docker_tag_override: v0.3.0_cv0.2.12
   max_pod_retrials: 1
   tools_id:
   - nmrml2isa
@@ -425,7 +425,7 @@ assignment:
 - docker_image_override: mzml2isa
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v0.4.28_cv0.3.26 
+  docker_tag_override: v0.4.28_cv0.3.26
   max_pod_retrials: 1
   tools_id:
   - mzml2isa
