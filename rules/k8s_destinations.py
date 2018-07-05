@@ -1,6 +1,10 @@
-from galaxy.jobs import JobDestination
+
+import logging
 import yaml
 
+from galaxy.jobs import JobDestination
+
+log = logging.getLogger(__name__)
 
 # Sizes for the different set of resources to be used in Kubernetes
 # CPU values are in CPU units (0.1 means 100 mili CPUs)
@@ -72,13 +76,11 @@ def k8s_wrapper_xlarge(resource_params, tool_id):
 
 
 def __read_assignments(resource_params, tool_id):
-
     try:
         stream = open(__path_tool2container, mode='r')
         mappings = yaml.load(stream)
     except:
-        print("\n----------------------")
-        print('File {} not found!\n'.format(__path_tool2container))
+        log.error("Couldn't load %s file!\n", __path_tool2container)
         raise
 
     try:
@@ -86,10 +88,11 @@ def __read_assignments(resource_params, tool_id):
             if tool_id in mapping['tools_id']:
                 resource_params.update(mapping)
                 break
-    except:
-        print("\n----------------------")
-        print('Error parsing file: {}\n'.format(__path_tool2container))
-        raise          
+    except StandardError as e:
+        log.error('Error parsing file: %s\n', __path_tool2container)
+        log.error(str(e))
+        log.error("Problem in the following assignment mapping: %s", mapping)
+        raise
 
 
 def __setup_resources(resource_params, settings):
