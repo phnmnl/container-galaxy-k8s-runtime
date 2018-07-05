@@ -16,31 +16,31 @@ __tiny = {'requests_cpu': 0.1,
           'limits_cpu': 0.5,
           'requests_memory': 0.3,
           'limits_memory': 0.6
-          }
+         }
 
 __small = {'requests_cpu': 0.4,
            'limits_cpu': 0.8,
            'requests_memory': 0.5,
            'limits_memory': 0.9
-           }
+          }
 
 __medium = {'requests_cpu': 0.7,
             'limits_cpu': 2,
             'requests_memory': 0.8,
             'limits_memory': 2
-            }
+           }
 
 __large = {'requests_cpu': 1.5,
            'limits_cpu': 4,
            'requests_memory': 1.8,
            'limits_memory': 5
-           }
+          }
 
 __xlarge = {'requests_cpu': 4,
             'limits_cpu': 8,
             'requests_memory': 8,
             'limits_memory': 16
-            }
+           }
 
 __path_tool2container = "config/phenomenal_tools2container.yaml"
 
