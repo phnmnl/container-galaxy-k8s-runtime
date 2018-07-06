@@ -33,7 +33,7 @@ RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transpo
     apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Clone galaxy into /galaxy directory
-RUN git clone --depth 1 --single-branch --branch release_18.01_plus_isa_runnerRestartJobs https://github.com/phnmnl/galaxy.git
+RUN git clone --depth 1 --single-branch --branch release_18.01_plus_isa_runnerRJ_clean https://github.com/phnmnl/galaxy.git
 WORKDIR /galaxy
 
 RUN echo "pykube==0.15.0" >> requirements.txt 
