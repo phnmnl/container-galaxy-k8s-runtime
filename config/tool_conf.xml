@@ -300,7 +300,6 @@
     <tool file="phenomenal/ecomet/ecomet_01_mtbls_download.xml" labels="EcoMet"/>
     <tool file="phenomenal/ecomet/ecomet_02a_raw_extract.xml" labels="EcoMet"/>
     <tool file="phenomenal/ecomet/ecomet_02b_qc_extract.xml" labels="EcoMet"/>
-    <tool file="phenomenal/ecomet/ecomet_02_extract.xml" labels="EcoMet"/>
     <tool file="phenomenal/ecomet/ecomet_03_quality_control.xml" labels="EcoMet"/>
     <tool file="phenomenal/ecomet/ecomet_04_preparations.xml" labels="EcoMet"/>
     <tool file="phenomenal/ecomet/ecomet_05a_import_maf.xml" labels="EcoMet"/>
