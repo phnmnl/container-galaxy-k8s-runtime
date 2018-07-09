@@ -24,8 +24,6 @@ use YAML::Tiny;
 my $SCRIPTNAME = basename($0);
 my $SCRIPTPATH = dirname($0);
 
-$ENV{HEADL_LWP_SSL_VERIFY_HOSTNAME} = 0;
-
 # Variables {{{1
 ################################################################
 
@@ -33,9 +31,9 @@ my $CHECK_ALL = 0;
 my $CHECK_CONTAINERS = 0;
 my $CHECK_TOOLS = 0;
 my $CHECK_WORKFLOWS = 0;
-my %CONTAINERS;
 my $HELP = 0;
 my $INPUT_FOLDER = '.';
+my %CONTAINERS;
 my %TOOLS;
 my %WORKFLOWS;
 my %DATA = (container => {}, tool => {}, workflow => {});
@@ -328,7 +326,10 @@ sub check_container_repos($) {
 	# Try to clone repos
 	my $repos_name = "container-$container->{name}";
 	my $repos_url = "https://github.com/phnmnl/$repos_name";
-	if (LWP::UserAgent->new()->request(new HTTP::Request GET => $repos_url)->content) {
+	my $ua = LWP::UserAgent->new();
+	$ua->ssl_opts( verify_hostname => 0 );
+	my $res = $ua->request(new HTTP::Request GET => $repos_url);
+	if ($res->is_success) {
 # TODO Get containers repos and check tool version in README
 		my $dir = File::Temp::tempdir();
 		Git::Repository->run(clone => $repos_url, $dir);
