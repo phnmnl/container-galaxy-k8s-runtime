@@ -261,7 +261,7 @@ sub check_command(\%) {
 
 	my ($tool) = @_;
 
-	check_msg("WARNING", "TOOL", $tool->{id}, "Command uses an interpreter attribute. Use of interpreter attribute inside command tag is discouraged. It tends to make embedded code more complex and renders difficult testing. Please get rid of your explicit call to \"$$tool{command}->{interpreter}\" interpreter, and write a script using a shebang that you will call directly from inside the command tag content, using command line arguments to get different behavious. Testing if such a script is a lot easier, since it can be done outside of Galaxy scope.") if exists $$tool{command}->{interpreter};
+	check_msg("WARNING", "TOOL", $tool->{id}, "Command uses an interpreter attribute. Use of interpreter attribute inside command tag is discouraged. It tends to make embedded code more complex and renders difficult testing. Please get rid of your explicit call to \"$$tool{command}->{interpreter}\" interpreter, and write a script using a shebang that you will call directly from inside the command tag content, using command line arguments to get different behavious. Testing of such a script is a lot easier, since it can be done outside of Galaxy scope.") if exists $$tool{command}->{interpreter};
 	check_msg("ERROR", "TOOL", $tool->{id}, "Command uses \$__tool_directory__ variable. Please remove it, as it will prevent the tool to launch in PhenoMeNal Galaxy.") if grep(/\$__tool_directory__/, $$tool{command}->{content});
 	check_msg("WARNING", "TOOL", $tool->{id}, "Command uses a complex command (use of && or ; operators). Please simply by calling only one script or program that you can test more accurately outside of Galaxy environment.") if grep(/(&&|;)/, $$tool{command}->{content});
 }
@@ -402,6 +402,7 @@ read_args();
 
 # Read tools info
 read_tools_info();
+read_containers_info() if $CHECK_CONTAINERS;
 
 # Loop on all tools
 foreach my $tool_id (sort keys %TOOLS) {
