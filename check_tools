@@ -37,6 +37,7 @@ my %CONTAINERS;
 my %TOOLS;
 my %WORKFLOWS;
 my %DATA = (container => {}, tool => {}, workflow => {});
+my $N_ERRORS = 0;
 
 # Print help {{{1
 ################################################################
@@ -95,8 +96,9 @@ sub check_msg($$$$) {
 	# Check message type
 	die "Unknown message type $msg_type." unless grep(lc($msg_type), qw(error warning success));
 
-	# Count message
+	# Count messages
 	++$DATA{lc($type)}->{$id}->{messages}->{lc($msg_type)};
+	++$N_ERRORS if lc($msg_type) eq 'error';
 
 	# Set color
 	my %type2color = (error => 'red', warning => 'yellow', success => 'green');
@@ -312,8 +314,12 @@ sub check_job_destination($) {
 
 	my ($tool) = @_;
 
-	check_msg("ERROR", "TOOL", $tool->{id}, "No job destination defined.") if not exists($tool->{job_destination});
-	check_msg("WARNING", "TOOL", $tool->{id}, "Job destination ($tool->{job_destination}) is not generic.") if $tool->{job_destination} !~ m/^dynamic-k8s-.*$/;
+	if (exists($tool->{job_destination})) {
+		check_msg("WARNING", "TOOL", $tool->{id}, "Job destination ($tool->{job_destination}) is not generic.") if $tool->{job_destination} !~ m/^dynamic-k8s-.*$/;
+	}
+	else {
+		check_msg("ERROR", "TOOL", $tool->{id}, "No job destination defined.");
+	}
 }
 
 # Check container repos {{{1
@@ -457,20 +463,13 @@ sub check_tools() {
 # Read arguments
 read_args();
 
-# Read tools info
-read_tools_info();
-read_containers_info() if $CHECK_CONTAINERS;
-
 # Check
 check_tools() if $CHECK_TOOLS;
 check_containers() if $CHECK_CONTAINERS;
 check_workflows if $CHECK_WORKFLOWS;
 
+exit(1) if $N_ERRORS;
 # TODO Check that container exists
 # TODO Check latest container version on Jenkins.
-# TODO Check version of tools in workflows.
-# TODO Run it automatically on Travis-CI.
 # TODO Pay attention to do not publish names in this file.
 # TODO Try to publish report on slack, on some channel (public-admin or release_dalcotidine?).
-# TODO Add color option. Use Ncurses?
-# TODO Fail (exit > 0) when at least one error is encountered.
