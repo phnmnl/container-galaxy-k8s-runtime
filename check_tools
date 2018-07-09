@@ -128,11 +128,18 @@ sub get_tool_xml_files {
 	# Filter out non-PhenoMeNal tools
 	@tool_xml_files = grep(/^phenomenal\//, @tool_xml_files);
 
-	# Check that all files exist
+	# Filter out all non existing files
+	my @only_existing_files;
 	for my $xml_file (@tool_xml_files) {
 		my $xml_file_full_path = get_tool_xml_file_full_path($xml_file);
-		check_msg("ERROR", "TOOL", "unknown", "Cannot find tool XML file \"$xml_file_full_path\", while reading \"$tool_conf_file\".") unless -f $xml_file_full_path;
+		if ( -f $xml_file_full_path) {
+			push(@only_existing_files, $xml_file);
+		}
+		else {
+			check_msg("ERROR", "TOOL", "unknown", "Cannot find tool XML file \"$xml_file_full_path\", while reading \"$tool_conf_file\".");
+		}
 	}
+	@tool_xml_files = @only_existing_files;
 
 	return @tool_xml_files;
 }
