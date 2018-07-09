@@ -97,6 +97,18 @@ sub check_msg($$$$) {
 	print(uc("[$msg_type on $type")." $id] $msg\n");
 }
 
+# Get tool XML file full path {{{1
+################################################################
+
+sub get_tool_xml_file_full_path($) {
+
+	my ($xml_file) = @_;
+
+	my $xml_file_path = File::Spec::Functions::catfile($INPUT_FOLDER, 'tools', $xml_file);
+
+	return $xml_file_path;
+}
+
 # Get tool XML files {{{1
 ################################################################
 
@@ -115,6 +127,12 @@ sub get_tool_xml_files {
 
 	# Filter out non-PhenoMeNal tools
 	@tool_xml_files = grep(/^phenomenal\//, @tool_xml_files);
+
+	# Check that all files exist
+	for my $xml_file (@tool_xml_files) {
+		my $xml_file_full_path = get_tool_xml_file_full_path($xml_file);
+		check_msg("ERROR", "TOOL", "unknown", "Cannot find tool XML file \"$xml_file_full_path\", while reading \"$tool_conf_file\".") unless -f $xml_file_full_path;
+	}
 
 	return @tool_xml_files;
 }
