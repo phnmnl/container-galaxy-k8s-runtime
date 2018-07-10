@@ -8,14 +8,17 @@ isodyn "$tracing_data" "$parameters_file" "$num_iterations";
 isodyn "$tracing_data" "$parameters_file" s
 ]]></command>
 <inputs>
+    <param type="data" name="tracing_data" format="txt" label="Metabolites labeling"/> <!-- Experimental data file -->
+    <param type="data" name="concentrations" format="txt" label="Metabolites concentrations"/> <!-- Experimental data file -->
     <param type="data" name="parameters_file" format="txt" label="Kinetic parameters file" /> <!-- Parameters file -->
-    <param type="data" name="tracing_data" format="csv" label="Midcor output file"/> <!-- Experimental data file -->
+    <param type="text" name="outdir" label="path to output directory"/>
+    <param type="data" name="flux_stat" format="csv" label="statistics for fluxes" /> 
+    <param type="data" name="compare_stat" format="csv" label="fluxes to compare" /> 
     <param type="text" name="num_iterations" label="Number of iterations to be completed"/>
+    <param type="text" name="FNCKAS" label="Various modes of execution"/>
 </inputs>
 <outputs>
     <data name="fluxes_confidence" format="csv" from_work_dir="statfl" label="Confidence intervals for all fluxes"/> <!-- Flux & tracing distributions -->
-    <data name="metabolites_confidence" format="csv" from_work_dir="statpar" label="Confidence intervals for all metabolites"/>
-    <data name="concentration_plot" format="png" from_work_dir="figs/sconc.png" label="Plot of concentration profiles for metabolites"/>
     <!--
          TODO finish this file set recognition.
          Variable number of outputs for fluxes, numbered from the smallest number used as file name in the working
