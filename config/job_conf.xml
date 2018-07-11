@@ -270,7 +270,6 @@
     <tool id="Metabolite_ID_Converter" destination="container-metaboliteidconverter" />
     <tool id="metabomatching" destination="dynamic-k8s-small" resources="all"/>
     <tool id="iterative-signature-algorithm" destination="dynamic-k8s-large" resources="all"/>
-    <tool id="ms-vfetc" destination="leidenuniv-ms-vfetc-container"/>
     <!-- tameNMR -->
     <tool id="tamenmr-addremmerge" destination="dynamic-k8s-small" resources="all"/>
     <tool id="tamenmr-align" destination="dynamic-k8s-small" resources="all"/>
