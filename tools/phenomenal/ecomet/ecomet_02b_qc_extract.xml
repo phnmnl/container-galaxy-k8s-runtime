@@ -18,8 +18,8 @@ mtbls520_02_extract.sh $mtblsid $polarity rawfolder rawmaf qcfolder $qcmaf trait
       <discover_datasets pattern="__name__" directory="qcfolder" type="data" format="mzml" visible="false" />
     </collection>
     <data name="qcmaf" type="data" format="tabular" label="QC MAF peak table" />
-    <data name="afile" type="data" format="tabular" label="Analytical metadata" />
-    <data name="sfile" type="data" format="tabular" label="Sample metadata" />
+    <data name="afile" type="data" format="tabular" label="QC Analytical metadata" />
+    <data name="sfile" type="data" format="tabular" label="QC Sample metadata" />
   </outputs>
   <help>
 =========================
