@@ -15,6 +15,6 @@
         <data name="output1" format="tabular" label="is-rsd.txt"/>
     </outputs>
     <help><![CDATA[
-        Determines the relative standard deviation of the internal standards.
+        This reports the relative standard deviation (RSD) of internal standards. The internal standards are used to calculate the reported ratio of a compound; also called the internal standard corrected intensity. The denominator of the RSD is the absolute value of the mean, so the RSD will always be positive.
     ]]></help>
 </tool>

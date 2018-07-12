@@ -15,6 +15,6 @@
         <data name="output1" format="tabular" label="qc-rsd.txt"/>
     </outputs>
     <help><![CDATA[
-        Determines the relative standard deviation of the compoud in the QC samples.
+        This reports the relative standard deviation (RSD) of the QC samples. The denominator of the RSD is the absolute value of the mean, so the RSD will always be positive.
     ]]></help>
 </tool>

@@ -16,6 +16,6 @@
         <data name="output1" format="tabular" label="export.txt"/>
     </outputs>
     <help><![CDATA[
-        Exports measurements as a sample/compound matrix.
+        A dataframe of samples (rows) vs. compounds (columns) is exported as a tab separated file.
     ]]></help>
 </tool>

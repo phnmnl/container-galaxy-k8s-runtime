@@ -12,6 +12,6 @@
     </outputs>
     
     <help><![CDATA[
-        Plots compound data.
+        This provides a plot showing the uncorrected area per compound, the internal standard and qc corrected ratio per compound and the retention time per compound. These plots allow the assessment of quality per project.
     ]]></help>
 </tool>
