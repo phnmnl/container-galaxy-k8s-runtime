@@ -270,7 +270,7 @@ assignment:
 - docker_image_override: ecomet
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v1.1_cv0.1.33
+  docker_tag_override: v1.1_cv0.3
   max_pod_retrials: 3
   tools_id:
   - ecomet_download
