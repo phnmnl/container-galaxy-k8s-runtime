@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<tool id="isa_get_study_factors" name="Get study factors" version="1.0">
+<tool id="isa_get_study_factor_values" name="isa_get_study_factor_values"
+      version="1.1">
     <description>
-        Get list of study factors for a ISA study
+        Get list of factor values for given factor used in a ISA study
     </description>
     <requirements>
         <requirement type="package" version="6.7">click</requirement>
@@ -13,16 +14,16 @@
     <command><![CDATA[
 
         #if $data_file.input == "mtbls_id"
-            #set $command = "mtbls-get-factors"
+            #set $command = "mtbls-get-factor-values"
             #set $source = $data_file.mtbls_id
         #end if
 
         #if $data_file.input == "isatab_input"
-            #set $command = "isa-tab-get-factors"
+            #set $command = "isa-tab-get-factor-values"
             #set $source = $data_file.isatab_input.extra_files_path
         #end if
 
-        isaslicer.py "$command" "${source}" "${output}"
+        isaslicer.py "$command" "${source}" "${factor_name}" "${output}"
 
 ]]>
     </command>
@@ -33,20 +34,26 @@
                 <option value="isatab_input">ISA-Tab datatype history item</option>
             </param>
             <when value="mtbls_id">
-                <param name="mtbls_id" type="text" label="MetaboLights Study Identifier" help="MTBLS ID available at MetaboLights, e.g. MTBLS2."/>
+                <param name="mtbls_id" type="text" label="MetaboLights Study Identifier" help="MTBLS ID available at MetaboLights, e.g. MTBLS1.">
+                    <validator type="regex" message="ID must look like a valid MTBLS identifier">^MTBLS[0-9]*$</validator>
+                </param>
             </when>
             <when value="isatab_input">
-                <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab"  help="An ISA-Tab zip"/>
+                <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab"  help="An ISA-Tab datatype history item"/>
             </when>
         </conditional>
+        <param name="factor_name" type="text" label="Factor name to filter on."
+               help="Factor name relevant to the specified MetaboLights study, e.g. genotype. You can get a study's factor names by using the study_factors tool."/>
     </inputs>
     <outputs>
-        <data format="json" name="output" label="Study factors list"/>
+        <data format="json" name="output"
+              label="Study factor values list"/>
     </outputs>
     <tests>
         <test>
             <param name="mtbls_id" value="MTBLS1"/>
-            <output name="output" file="mtbls1_factors_out.json" compare="sim_size"/>
+            <param name="factor" value="Gender"/>
+            <output name="output" file="mtbls1_factor_values_out.json" compare="sim_size"/>
         </test>
     </tests>
     <help>
@@ -55,8 +62,9 @@
 Get list of study factors for a ISA study
 =========================================
 
-This tool gets the list of study factors from a ISA study. It
-extracts the factors from the ISA-Tab metadata.
+This tool gets the list of factor values from a ISA study for a
+given study factor name. It extracts the factor values from the ISA-Tab
+study and assay tables.
 
 -----
 Input
@@ -70,7 +78,7 @@ history item that has already been downloaded or created in Galaxy.
 MetaboLights Study Identifier
 =============================
 If the input source is Metabolights, then provide the MTBLS identifier
-available at MetaboLights, e.g. MTBLS2.
+available at MetaboLights, e.g. MTBLS1.
 
 ISA-Tab datatype history item
 =============================
@@ -78,22 +86,24 @@ If the input source is an ISA-Tab history item, select from existing data
 history items. ISA-Tab items can be created by using the Metabolights
 downloader or the ISA-Tab metadata creation tools.
 
+Factor name
+===========
+A factor name from the list of factors in the study metadata. You can
+get the relevant factor names for a particular study by using the
+`Get list of study factors` tool.
+
 ------
 Output
 ------
 
-List of study factors as JSON
+List of factor values as JSON
 =============================
 
-A list of factor names as a JSON list. e.g.
+A list of factor values for the specified factor name as a JSON list.
+e.g.
 
 ::
-
-    [
-        "replicate",
-        "genotype"
-    ]
-
+    ["Exp2", "Exp1"]
 
 <!-- @@@END_RST@@@ -->
     </help>

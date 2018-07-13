@@ -1,5 +1,5 @@
 <!-- vi: se fdm=marker : -->
-<tool id="isa2mzxml" name="ISA to mzXML" version="1.1.0">
+<tool id="isa2mzxml" name="ISA to mzXML" version="1.1.3">
 
 	<description>Extract mzXML files from an ISA dataset and output a collection of mzXML dataset.</description>
 
@@ -26,7 +26,7 @@
 
     <outputs>
 		<collection name="mzXML" type="list" label="mzXML files">
-			<discover_datasets pattern="__name_and_ext__" directory="mzXML" format="mzxml"/>
+			<discover_datasets pattern="(?P&lt;designation&gt;.+)\.[mM][zZ][xX][mM][lL]$" directory="mzXML" format="mzxml"/>
 		</collection>
 	</outputs>
 
