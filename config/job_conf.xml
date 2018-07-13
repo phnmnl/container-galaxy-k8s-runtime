@@ -219,7 +219,7 @@
          chosen at random.  -->
     <tool id="pathway_enrichment" destination="dynamic-k8s-large" resources="all"/>
     <tool id="fingerprint_clustering" destination="dynamic-k8s-medium" resources="all"/>
-    
+    <tool id="fingerprint_subnetwork" destination="dynamic-k8s-medium" resources="all"/>
     <!-- Fluxomics -->
     <tool id="iso2flux" destination="dynamic-k8s-small" resources="all"/>     
     <tool id="midcor" destination="dynamic-k8s-small" resources="all"/>
