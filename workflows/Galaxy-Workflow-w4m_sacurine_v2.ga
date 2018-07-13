@@ -25,10 +25,10 @@
             },
             "post_job_actions": {},
             "tool_id": "mtbls-dwnld",
-            "tool_state": "{\"__page__\": null, \"downloader\": \"\\\"wget\\\"\", \"study\": \"\\\"MTBLS404\\\"\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"token\": \"\\\"\\\"\", \"type\": \"\\\"public\\\"\", \"__rerun_remap_job_id__\": null, \"metadata\": \"\\\"true\\\"\"}",
-            "tool_version": "3.1.0",
+            "tool_state": "{\"__page__\": null, \"only_metadata\": \"\\\"yes\\\"\", \"downloader\": \"\\\"wget\\\"\", \"study\": \"\\\"MTBLS404\\\"\", \"factor_slicing\": \"{\\\"factor_value\\\": \\\"\\\", \\\"factor_name\\\": \\\"\\\"}\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"token\": \"\\\"\\\"\", \"type\": \"\\\"public\\\"\", \"__rerun_remap_job_id__\": null, \"metadata\": \"\\\"true\\\"\"}",
+            "tool_version": "4.1.3",
             "type": "tool",
-            "uuid": "c2fcd777-f5d0-4d38-ba0f-cf02744ae120",
+            "uuid": "52b718c5-4440-478d-a04a-749d84bad2d8",
             "workflow_outputs": []
         },
         "1": {
@@ -73,7 +73,7 @@
             "tool_state": "{\"__page__\": null, \"sample_na_filtering\": \"\\\"\\\"\", \"assay\": \"\\\"\\\"\", \"study\": \"\\\"\\\"\", \"variable_na_filtering\": \"\\\"\\\"\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"isa\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.4",
             "type": "tool",
-            "uuid": "d328d889-d03c-4c38-b801-142a96225546",
+            "uuid": "7483db5a-49d9-4a0e-835e-b04c409384dd",
             "workflow_outputs": []
         },
         "10": {
@@ -127,6 +127,10 @@
                 {
                     "name": "information",
                     "type": "txt"
+                },
+                {
+                    "name": "ropls_out",
+                    "type": "rdata"
                 }
             ],
             "position": {
@@ -135,10 +139,10 @@
             },
             "post_job_actions": {},
             "tool_id": "Multivariate",
-            "tool_state": "{\"advGph\": \"{\\\"parLabVc\\\": \\\"none\\\", \\\"parCexN\\\": \\\"0.8\\\", \\\"parMahalC\\\": \\\"Factor.Value.Gender.\\\", \\\"typeC\\\": \\\"summary\\\", \\\"parPc1I\\\": \\\"1\\\", \\\"__current_case__\\\": 1, \\\"opgC\\\": \\\"full\\\", \\\"parPc2I\\\": \\\"2\\\", \\\"parAsColC\\\": \\\"none\\\"}\", \"__page__\": null, \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"predI\": \"\\\"NA\\\"\", \"respC\": \"\\\"none\\\"\", \"orthoI\": \"\\\"0\\\"\", \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"advCpt\": \"{\\\"opcC\\\": \\\"default\\\", \\\"__current_case__\\\": 0}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"testL\": \"\\\"FALSE\\\"\"}",
-            "tool_version": "2.3.10",
+            "tool_state": "{\"advGph\": \"{\\\"parLabVc\\\": \\\"none\\\", \\\"parCexN\\\": \\\"0.8\\\", \\\"parMahalC\\\": \\\"Factor.Value.Gender.\\\", \\\"typeC\\\": \\\"summary\\\", \\\"parPc1I\\\": \\\"1\\\", \\\"__current_case__\\\": 1, \\\"opgC\\\": \\\"full\\\", \\\"parPc2I\\\": \\\"2\\\", \\\"parAsColC\\\": \\\"none\\\"}\", \"__page__\": null, \"save_rdata\": \"\\\"false\\\"\", \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"predI\": \"\\\"NA\\\"\", \"respC\": \"\\\"none\\\"\", \"orthoI\": \"\\\"0\\\"\", \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"advCpt\": \"{\\\"opcC\\\": \\\"default\\\", \\\"__current_case__\\\": 0}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"testL\": \"\\\"FALSE\\\"\"}",
+            "tool_version": "2.3.12",
             "type": "tool",
-            "uuid": "f8092d0f-0850-411b-91e3-089f13d95c6a",
+            "uuid": "97a798ab-ae59-4b5f-913e-7a91fcb93f89",
             "workflow_outputs": []
         },
         "11": {
@@ -197,9 +201,9 @@
             "post_job_actions": {},
             "tool_id": "Univariate",
             "tool_state": "{\"thrN\": \"\\\"0.05\\\"\", \"__page__\": null, \"facC\": \"\\\"Factor.Value.Gender.\\\"\", \"__rerun_remap_job_id__\": null, \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"tesC\": \"\\\"ttest\\\"\", \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"adjC\": \"\\\"fdr\\\"\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
-            "tool_version": "2.2.3",
+            "tool_version": "2.2.6",
             "type": "tool",
-            "uuid": "9f00d14d-3df0-459b-8cae-949bc7b9edc6",
+            "uuid": "ca586e09-0742-4fb4-b6e4-803c6ca41aba",
             "workflow_outputs": []
         },
         "12": {
@@ -253,6 +257,10 @@
                 {
                     "name": "information",
                     "type": "txt"
+                },
+                {
+                    "name": "ropls_out",
+                    "type": "rdata"
                 }
             ],
             "position": {
@@ -261,10 +269,10 @@
             },
             "post_job_actions": {},
             "tool_id": "Multivariate",
-            "tool_state": "{\"advGph\": \"{\\\"__current_case__\\\": 0, \\\"opgC\\\": \\\"default\\\"}\", \"__page__\": null, \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"predI\": \"\\\"1\\\"\", \"respC\": \"\\\"Factor.Value.Gender.\\\"\", \"orthoI\": \"\\\"NA\\\"\", \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"advCpt\": \"{\\\"opcC\\\": \\\"default\\\", \\\"__current_case__\\\": 0}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"testL\": \"\\\"FALSE\\\"\"}",
-            "tool_version": "2.3.10",
+            "tool_state": "{\"advGph\": \"{\\\"__current_case__\\\": 0, \\\"opgC\\\": \\\"default\\\"}\", \"__page__\": null, \"save_rdata\": \"\\\"false\\\"\", \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"predI\": \"\\\"1\\\"\", \"respC\": \"\\\"Factor.Value.Gender.\\\"\", \"orthoI\": \"\\\"NA\\\"\", \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"advCpt\": \"{\\\"opcC\\\": \\\"default\\\", \\\"__current_case__\\\": 0}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"testL\": \"\\\"FALSE\\\"\"}",
+            "tool_version": "2.3.12",
             "type": "tool",
-            "uuid": "12c0d79e-e30d-4497-9596-bbeebb7c0611",
+            "uuid": "775a67be-6528-4a51-9e86-359bc01a0fab",
             "workflow_outputs": []
         },
         "13": {
@@ -329,7 +337,7 @@
             "tool_state": "{\"__page__\": null, \"respC\": \"\\\"Factor.Value.Gender.\\\"\", \"__rerun_remap_job_id__\": null, \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"advCpt\": \"{\\\"seedI\\\": \\\"123\\\", \\\"tierC\\\": \\\"S\\\", \\\"pvalN\\\": \\\"0.05\\\", \\\"methodC\\\": \\\"all\\\", \\\"__current_case__\\\": 1, \\\"bootI\\\": \\\"50\\\", \\\"opcC\\\": \\\"full\\\"}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
             "tool_version": "2.2.7",
             "type": "tool",
-            "uuid": "19e47c83-839a-48e1-bfb8-6fdf57817442",
+            "uuid": "224c26b6-57cf-4fe0-bce6-43e3e3b4f3fd",
             "workflow_outputs": []
         },
         "2": {
@@ -390,7 +398,7 @@
             "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"numeric_condition\": \"{\\\"__current_case__\\\": 1, \\\"Factors\\\": \\\"FALSE\\\"}\", \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"qualitative_condition\": \"{\\\"qualitative_repeat\\\": [{\\\"factor_col\\\": \\\"Factor.Value.Material.type.\\\", \\\"__index__\\\": 0, \\\"qual_file\\\": \\\"sample\\\", \\\"factors_value\\\": \\\"blank\\\"}], \\\"__current_case__\\\": 0, \\\"Factors\\\": \\\"TRUE\\\"}\"}",
             "tool_version": "2017.06",
             "type": "tool",
-            "uuid": "0210efd4-1864-45b8-b9ad-8d929ba35629",
+            "uuid": "7b618e5b-45b6-4dbe-a519-53c9bd04ee4a",
             "workflow_outputs": []
         },
         "3": {
@@ -453,9 +461,9 @@
             "post_job_actions": {},
             "tool_id": "Batch_correction",
             "tool_state": "{\"sample_type_col_name\": \"\\\"Factor.Value.Material.type.\\\"\", \"injection_order_col_name\": \"\\\"Factor.Value.Injection.order.\\\"\", \"sampleTypeTagBlank\": \"\\\"blank\\\"\", \"sampleTypeTagSample\": \"\\\"biological material\\\"\", \"batch_col_name\": \"\\\"Factor.Value.Batch.\\\"\", \"dataMatrix\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": null, \"sampleTypeTagPool\": \"\\\"pool\\\"\", \"__rerun_remap_job_id__\": null, \"span_condition\": \"{\\\"span\\\": \\\"1.0\\\", \\\"method\\\": \\\"all_loess_pool\\\", \\\"__current_case__\\\": 3}\", \"sampleMetadata\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"variableMetadata\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
-            "tool_version": "2.2.0",
+            "tool_version": "2.2.2",
             "type": "tool",
-            "uuid": "10c64fc7-1a92-40bb-8514-2abcd756d259",
+            "uuid": "7f27eb1c-9298-46bb-a91b-ecf18b6733fb",
             "workflow_outputs": []
         },
         "4": {
@@ -517,10 +525,10 @@
             },
             "post_job_actions": {},
             "tool_id": "quality_metrics",
-            "tool_state": "{\"__page__\": null, \"advPar\": \"{\\\"sampleTypeTagBlank\\\": \\\"blank\\\", \\\"sampleTypeTagSample\\\": \\\"biological material\\\", \\\"sampleTypeColName\\\": \\\"Factor.Value.Material.type.\\\", \\\"sampleTypeTagPool\\\": \\\"pool\\\", \\\"poolAsPool1L\\\": \\\"true\\\", \\\"optC\\\": \\\"full\\\", \\\"__current_case__\\\": 0}\", \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"__rerun_remap_job_id__\": null, \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"CV_condition\": \"{\\\"Compa\\\": \\\"TRUE\\\", \\\"CV\\\": \\\"FALSE\\\", \\\"__current_case__\\\": 1, \\\"seuil\\\": \\\"1\\\"}\"}",
-            "tool_version": "2.2.8",
+            "tool_state": "{\"__page__\": null, \"advPar\": \"{\\\"sampleTypeTagBlank\\\": \\\"blank\\\", \\\"sampleTypeTagSample\\\": \\\"biological material\\\", \\\"sampleTypeColName\\\": \\\"Factor.Value.Material.type.\\\", \\\"sampleTypeTagPool\\\": \\\"pool\\\", \\\"poolAsPool1L\\\": \\\"true\\\", \\\"optC\\\": \\\"full\\\", \\\"batchColName\\\": \\\"batch\\\", \\\"injectionOrderColName\\\": \\\"injectionOrder\\\", \\\"__current_case__\\\": 0}\", \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"__rerun_remap_job_id__\": null, \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"CV_condition\": \"{\\\"Compa\\\": \\\"TRUE\\\", \\\"CV\\\": \\\"FALSE\\\", \\\"__current_case__\\\": 1, \\\"seuil\\\": \\\"1\\\"}\"}",
+            "tool_version": "2.2.11",
             "type": "tool",
-            "uuid": "7458e116-8419-4774-aa84-361e88e74dd9",
+            "uuid": "c8349e16-e8c8-401f-8749-557a25cdf16e",
             "workflow_outputs": []
         },
         "5": {
@@ -581,7 +589,7 @@
             "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"numeric_condition\": \"{\\\"__current_case__\\\": 1, \\\"Factors\\\": \\\"FALSE\\\"}\", \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"qualitative_condition\": \"{\\\"qualitative_repeat\\\": [{\\\"factor_col\\\": \\\"Factor.Value.Material.type.\\\", \\\"__index__\\\": 0, \\\"qual_file\\\": \\\"sample\\\", \\\"factors_value\\\": \\\"pool\\\"}], \\\"__current_case__\\\": 0, \\\"Factors\\\": \\\"TRUE\\\"}\"}",
             "tool_version": "2017.06",
             "type": "tool",
-            "uuid": "8a58b871-a0b8-471f-a504-74fb5fc86832",
+            "uuid": "d5fcdb36-f4e9-46cc-9db0-4c699f0aceaf",
             "workflow_outputs": []
         },
         "6": {
@@ -634,7 +642,7 @@
             "tool_state": "{\"dataMatrix\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"graphType\": \"\\\"None\\\"\", \"scalingMethod\": \"{\\\"sampleMetadata\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"method\\\": \\\"QuantitativeVariable\\\", \\\"__current_case__\\\": 3, \\\"factor\\\": \\\"Factor.Value.Osmolality.\\\"}\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\"}",
             "tool_version": "1.0.6",
             "type": "tool",
-            "uuid": "f552375b-add4-438a-9016-173ddc4a0a4e",
+            "uuid": "6e8f9f8b-326c-4b8a-b215-85131af1db57",
             "workflow_outputs": []
         },
         "7": {
@@ -675,7 +683,7 @@
             "tool_state": "{\"__page__\": null, \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"method\": \"\\\"log10\\\"\"}",
             "tool_version": "2.2.0",
             "type": "tool",
-            "uuid": "1c9f5c71-aa96-4c75-89bf-b07c0a29f177",
+            "uuid": "fb3f5c8a-5d6d-4075-b02c-5db7740d0a0c",
             "workflow_outputs": []
         },
         "8": {
@@ -737,10 +745,10 @@
             },
             "post_job_actions": {},
             "tool_id": "quality_metrics",
-            "tool_state": "{\"__page__\": null, \"advPar\": \"{\\\"sampleTypeTagBlank\\\": \\\"blank\\\", \\\"sampleTypeTagSample\\\": \\\"biological material\\\", \\\"sampleTypeColName\\\": \\\"Factor.Value.Material.type.\\\", \\\"sampleTypeTagPool\\\": \\\"pool\\\", \\\"poolAsPool1L\\\": \\\"true\\\", \\\"optC\\\": \\\"full\\\", \\\"__current_case__\\\": 0}\", \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"__rerun_remap_job_id__\": null, \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"CV_condition\": \"{\\\"Compa\\\": \\\"TRUE\\\", \\\"CV\\\": \\\"FALSE\\\", \\\"__current_case__\\\": 1, \\\"seuil\\\": \\\"1\\\"}\"}",
-            "tool_version": "2.2.8",
+            "tool_state": "{\"__page__\": null, \"advPar\": \"{\\\"sampleTypeTagBlank\\\": \\\"blank\\\", \\\"sampleTypeTagSample\\\": \\\"biological material\\\", \\\"sampleTypeColName\\\": \\\"Factor.Value.Material.type.\\\", \\\"sampleTypeTagPool\\\": \\\"pool\\\", \\\"poolAsPool1L\\\": \\\"true\\\", \\\"optC\\\": \\\"full\\\", \\\"batchColName\\\": \\\"batch\\\", \\\"injectionOrderColName\\\": \\\"injectionOrder\\\", \\\"__current_case__\\\": 0}\", \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"__rerun_remap_job_id__\": null, \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"CV_condition\": \"{\\\"Compa\\\": \\\"TRUE\\\", \\\"CV\\\": \\\"FALSE\\\", \\\"__current_case__\\\": 1, \\\"seuil\\\": \\\"1\\\"}\"}",
+            "tool_version": "2.2.11",
             "type": "tool",
-            "uuid": "13d2bc6d-14b3-4bc9-b15f-6f2893550a95",
+            "uuid": "b23d8542-a16a-4d4a-a7fc-027bfbd89f94",
             "workflow_outputs": []
         },
         "9": {
@@ -801,10 +809,10 @@
             "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"numeric_condition\": \"{\\\"numeric_repeat\\\": [{\\\"__index__\\\": 0, \\\"interval_condition\\\": {\\\"interval\\\": \\\"lower\\\", \\\"low_value\\\": \\\"0.0001\\\", \\\"__current_case__\\\": 0}, \\\"parm_col_num\\\": \\\"hotelling_pval\\\", \\\"num_file\\\": \\\"sample\\\"}], \\\"__current_case__\\\": 0, \\\"Factors\\\": \\\"TRUE\\\"}\", \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"qualitative_condition\": \"{\\\"__current_case__\\\": 1, \\\"Factors\\\": \\\"FALSE\\\"}\"}",
             "tool_version": "2017.06",
             "type": "tool",
-            "uuid": "a6c6810e-c1a6-4525-9346-5a7d35ad726e",
+            "uuid": "6950b884-8e34-471d-b482-eb6b00a0183b",
             "workflow_outputs": []
         }
     },
     "tags": [],
-    "uuid": "4846c164-35c3-471c-a095-83f2c9b7decc"
+    "uuid": "e5d6525c-caf9-4f94-827c-392ff4020ae3"
 }
