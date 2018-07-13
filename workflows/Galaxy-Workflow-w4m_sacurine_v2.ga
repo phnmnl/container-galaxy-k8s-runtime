@@ -2,7 +2,7 @@
     "a_galaxy_workflow": "true",
     "annotation": "This workflow shows an example of statistical analysis on a multivariate metabolomics dataset. It starts with batch correction, normalization, and outlier filtering, and then performs univariate testing, multivariate modeling, and feature selection.",
     "format-version": "0.1",
-    "name": "Metabolomics univariate and multivariate statistics",
+    "name": "Metabolomics univariate and multivariate statistics (aka sacurine v2)",
     "steps": {
         "0": {
             "annotation": "Imports the MTBLS404 (Sacurine) dataset from MetaboLights",
