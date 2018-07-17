@@ -4,12 +4,13 @@
         <import>macros.xml</import>
     </macros>
     <expand macro="requirements"/>
+    <code file="isa_cvterms.py"/>
     <expand macro="stdio"/>
     <command>
         <![CDATA[
         mkdir study_dir &&
         mkdir -p '${output.files_path}' &&
-        isacreate.py
+        $__tool_directory__/isacreate.py
         --galaxy_parameters_file='$inputs'
         --target_dir='study_dir/' &&
         cp study_dir/* '${output.files_path}'

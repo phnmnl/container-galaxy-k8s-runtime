@@ -70,12 +70,10 @@ COPY config/datatypes_conf.xml \
      config/sanitize_whitelist.txt \
      config/tool_conf.xml \
      config/dependency_resolvers_conf.xml \
-     config/tool_data_table_conf.xml \
   config/
 
 COPY rules/k8s_destinations.py lib/galaxy/jobs/rules/k8s_destination.py
 COPY tools/phenomenal tools/phenomenal
-COPY tool-data/isa_cvterms.loc tool-data/
 
 # Galaxy tours which guide users through the subsequent steps in an analysis
 COPY config/plugins/tours/*.yaml config/plugins/tours/
