@@ -94,7 +94,7 @@
       <param id="docker_repo_override">container-registry.phenomenal-h2020.eu</param>
       <param id="docker_owner_override">phnmnl</param>
       <param id="docker_image_override">isodyn</param>
-      <param id="docker_tag_override">v1.0_cv0.2.30</param>
+      <param id="docker_tag_override">v1.0_cv0.2.48</param>
       <param id="max_pod_retrials">3</param>
       <param id="docker_enabled">true</param>
     </destination>
