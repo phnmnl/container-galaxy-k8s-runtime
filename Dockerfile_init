@@ -33,10 +33,6 @@ COPY rules/k8s_destinations.py /galaxy-central/lib/galaxy/jobs/rules/k8s_destina
 # Galaxy tours which guide users through the subsequent steps in an analysis
 COPY config/plugins/tours/*.yaml config/plugins/tours/
 
-# ISA Controlled Vocabulary terms table used by ISA-tools
-COPY tool-data/isa_cvterms.loc tool-data/
-COPY config/tool_data_table_conf.xml config/tool_data_table_conf.xml
-
 COPY html/partners.png welcome/welcome_partners.png
 COPY html/PhenoMeNal_logo.png welcome/welcome_PhenoMeNal_logo.png
 COPY html/welcome.html welcome/welcome.html
