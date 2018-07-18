@@ -1,0 +1,413 @@
+{
+    "uuid": "3071d5af-60b6-42b2-a505-19dab1d2121b",
+    "tags": [],
+    "format-version": "0.1",
+    "name": "imported: imported: W4M Omics generic biosigner feature selection statistics (imported from API)",
+    "steps": {
+        "0": {
+            "tool_id": "mtbls-dwnld",
+            "tool_version": "4.1.3",
+            "outputs": [
+                {
+                    "type": "isa-tab",
+                    "name": "isastudy"
+                }
+            ],
+            "workflow_outputs": [],
+            "input_connections": {},
+            "tool_state": "{\"__page__\": null, \"only_metadata\": \"\\\"yes\\\"\", \"downloader\": \"\\\"wget\\\"\", \"study\": \"\\\"MTBLS404\\\"\", \"factor_slicing\": \"{\\\"factor_value\\\": \\\"\\\", \\\"factor_name\\\": \\\"\\\"}\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"token\": \"\\\"\\\"\", \"type\": \"\\\"public\\\"\", \"__rerun_remap_job_id__\": null, \"metadata\": \"\\\"true\\\"\"}",
+            "id": 0,
+            "uuid": "5e35a4c2-476d-4676-ad52-4235282a7c8e",
+            "errors": null,
+            "name": "Metabolights downloader",
+            "post_job_actions": {},
+            "label": null,
+            "inputs": [],
+            "position": {
+                "top": 200,
+                "left": 154
+            },
+            "annotation": "",
+            "content_id": "mtbls-dwnld",
+            "type": "tool"
+        },
+        "1": {
+            "tool_id": null,
+            "tool_version": null,
+            "outputs": [],
+            "workflow_outputs": [],
+            "input_connections": {},
+            "tool_state": "{\"name\": \"Input Dataset\"}",
+            "id": 1,
+            "uuid": "ffcbd84a-691e-4ebc-a8aa-7ed13c12ee58",
+            "errors": null,
+            "name": "Input dataset",
+            "label": null,
+            "inputs": [
+                {
+                    "name": "Input Dataset",
+                    "description": ""
+                }
+            ],
+            "position": {
+                "top": 340,
+                "left": 1213.5
+            },
+            "annotation": "",
+            "content_id": null,
+            "type": "data_input"
+        },
+        "2": {
+            "tool_id": "isa2w4m",
+            "tool_version": "1.0.4",
+            "outputs": [
+                {
+                    "type": "tabular",
+                    "name": "w4m_variable_metadata"
+                },
+                {
+                    "type": "tabular",
+                    "name": "w4m_sample_metadata"
+                },
+                {
+                    "type": "tabular",
+                    "name": "w4m_data_matrix"
+                }
+            ],
+            "workflow_outputs": [],
+            "input_connections": {
+                "isa": {
+                    "output_name": "isastudy",
+                    "id": 0
+                }
+            },
+            "tool_state": "{\"__page__\": null, \"sample_na_filtering\": \"\\\"\\\"\", \"assay\": \"\\\"\\\"\", \"study\": \"\\\"\\\"\", \"variable_na_filtering\": \"\\\"\\\"\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"isa\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null}",
+            "id": 2,
+            "uuid": "4943e660-090f-439b-a812-fba02bb38c8d",
+            "errors": null,
+            "name": "ISA to W4M",
+            "post_job_actions": {},
+            "label": null,
+            "inputs": [
+                {
+                    "name": "isa",
+                    "description": "runtime parameter for tool ISA to W4M"
+                }
+            ],
+            "position": {
+                "top": 377,
+                "left": 285
+            },
+            "annotation": "",
+            "content_id": "isa2w4m",
+            "type": "tool"
+        },
+        "3": {
+            "tool_id": "generic_filter",
+            "tool_version": "2017.06",
+            "outputs": [
+                {
+                    "type": "tabular",
+                    "name": "dataMatrix_out"
+                },
+                {
+                    "type": "tabular",
+                    "name": "sampleMetadata_out"
+                },
+                {
+                    "type": "tabular",
+                    "name": "variableMetadata_out"
+                }
+            ],
+            "workflow_outputs": [],
+            "input_connections": {
+                "variableMetadata_in": {
+                    "output_name": "w4m_variable_metadata",
+                    "id": 2
+                },
+                "dataMatrix_in": {
+                    "output_name": "w4m_data_matrix",
+                    "id": 2
+                },
+                "sampleMetadata_in": {
+                    "output_name": "w4m_sample_metadata",
+                    "id": 2
+                }
+            },
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"numeric_condition\": \"{\\\"__current_case__\\\": 1, \\\"Factors\\\": \\\"FALSE\\\"}\", \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"qualitative_condition\": \"{\\\"qualitative_repeat\\\": [{\\\"factor_col\\\": \\\"Factor.Value.Gender.\\\", \\\"__index__\\\": 0, \\\"qual_file\\\": \\\"sample\\\", \\\"factors_value\\\": \\\"NA\\\"}], \\\"__current_case__\\\": 0, \\\"Factors\\\": \\\"TRUE\\\"}\"}",
+            "id": 3,
+            "uuid": "3d42dc56-51a9-420a-affa-1e9132afa9ff",
+            "errors": null,
+            "name": "Generic_Filter",
+            "post_job_actions": {},
+            "label": null,
+            "inputs": [
+                {
+                    "name": "sampleMetadata_in",
+                    "description": "runtime parameter for tool Generic_Filter"
+                },
+                {
+                    "name": "variableMetadata_in",
+                    "description": "runtime parameter for tool Generic_Filter"
+                },
+                {
+                    "name": "dataMatrix_in",
+                    "description": "runtime parameter for tool Generic_Filter"
+                }
+            ],
+            "position": {
+                "top": 276,
+                "left": 584.5
+            },
+            "annotation": "",
+            "content_id": "generic_filter",
+            "type": "tool"
+        },
+        "4": {
+            "tool_id": "Univariate",
+            "tool_version": "2.2.6",
+            "outputs": [
+                {
+                    "type": "tabular",
+                    "name": "variableMetadata_out"
+                },
+                {
+                    "type": "pdf",
+                    "name": "figure"
+                },
+                {
+                    "type": "txt",
+                    "name": "information"
+                }
+            ],
+            "workflow_outputs": [],
+            "input_connections": {
+                "variableMetadata_in": {
+                    "output_name": "variableMetadata_out",
+                    "id": 3
+                },
+                "dataMatrix_in": {
+                    "output_name": "dataMatrix_out",
+                    "id": 3
+                },
+                "sampleMetadata_in": {
+                    "output_name": "sampleMetadata_out",
+                    "id": 3
+                }
+            },
+            "tool_state": "{\"thrN\": \"\\\"0.05\\\"\", \"__page__\": null, \"facC\": \"\\\"Factor.Value.Gender.\\\"\", \"__rerun_remap_job_id__\": null, \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"tesC\": \"\\\"ttest\\\"\", \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"adjC\": \"\\\"fdr\\\"\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+            "id": 4,
+            "uuid": "9788e1a8-7e42-424f-bc85-32cb65fa6e3f",
+            "errors": null,
+            "name": "Univariate",
+            "post_job_actions": {},
+            "label": null,
+            "inputs": [
+                {
+                    "name": "sampleMetadata_in",
+                    "description": "runtime parameter for tool Univariate"
+                },
+                {
+                    "name": "variableMetadata_in",
+                    "description": "runtime parameter for tool Univariate"
+                },
+                {
+                    "name": "dataMatrix_in",
+                    "description": "runtime parameter for tool Univariate"
+                }
+            ],
+            "position": {
+                "top": 654,
+                "left": 683
+            },
+            "annotation": "",
+            "content_id": "Univariate",
+            "type": "tool"
+        },
+        "5": {
+            "tool_id": "Multivariate",
+            "tool_version": "2.3.12",
+            "outputs": [
+                {
+                    "type": "tabular",
+                    "name": "sampleMetadata_out"
+                },
+                {
+                    "type": "tabular",
+                    "name": "variableMetadata_out"
+                },
+                {
+                    "type": "pdf",
+                    "name": "figure"
+                },
+                {
+                    "type": "txt",
+                    "name": "information"
+                },
+                {
+                    "type": "rdata",
+                    "name": "ropls_out"
+                }
+            ],
+            "workflow_outputs": [],
+            "input_connections": {
+                "variableMetadata_in": {
+                    "output_name": "variableMetadata_out",
+                    "id": 4
+                },
+                "dataMatrix_in": {
+                    "output_name": "dataMatrix_out",
+                    "id": 3
+                },
+                "sampleMetadata_in": {
+                    "output_name": "sampleMetadata_out",
+                    "id": 3
+                }
+            },
+            "tool_state": "{\"advGph\": \"{\\\"__current_case__\\\": 0, \\\"opgC\\\": \\\"default\\\"}\", \"__page__\": null, \"save_rdata\": \"\\\"false\\\"\", \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"predI\": \"\\\"1\\\"\", \"respC\": \"\\\"Factor.Value.Gender.\\\"\", \"orthoI\": \"\\\"NA\\\"\", \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"advCpt\": \"{\\\"opcC\\\": \\\"default\\\", \\\"__current_case__\\\": 0}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"testL\": \"\\\"FALSE\\\"\"}",
+            "id": 5,
+            "uuid": "7f94001a-3e3f-44f0-94a7-8d59b9d8e739",
+            "errors": null,
+            "name": "Multivariate",
+            "post_job_actions": {},
+            "label": null,
+            "inputs": [
+                {
+                    "name": "sampleMetadata_in",
+                    "description": "runtime parameter for tool Multivariate"
+                },
+                {
+                    "name": "variableMetadata_in",
+                    "description": "runtime parameter for tool Multivariate"
+                },
+                {
+                    "name": "dataMatrix_in",
+                    "description": "runtime parameter for tool Multivariate"
+                }
+            ],
+            "position": {
+                "top": 432,
+                "left": 936
+            },
+            "annotation": "",
+            "content_id": "Multivariate",
+            "type": "tool"
+        },
+        "6": {
+            "tool_id": "biosigner",
+            "tool_version": "2.2.8",
+            "outputs": [
+                {
+                    "type": "tabular",
+                    "name": "variableMetadata_out"
+                },
+                {
+                    "type": "pdf",
+                    "name": "figure_tier"
+                },
+                {
+                    "type": "pdf",
+                    "name": "figure_boxplot"
+                },
+                {
+                    "type": "txt",
+                    "name": "information"
+                }
+            ],
+            "workflow_outputs": [],
+            "input_connections": {
+                "variableMetadata_in": {
+                    "output_name": "variableMetadata_out",
+                    "id": 5
+                },
+                "dataMatrix_in": {
+                    "output_name": "dataMatrix_out",
+                    "id": 3
+                },
+                "sampleMetadata_in": {
+                    "output_name": "sampleMetadata_out",
+                    "id": 5
+                }
+            },
+            "tool_state": "{\"__page__\": null, \"respC\": \"\\\"Factor.Value.Gender.\\\"\", \"__rerun_remap_job_id__\": null, \"sampleMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"variableMetadata_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"advCpt\": \"{\\\"seedI\\\": \\\"123\\\", \\\"tierC\\\": \\\"S\\\", \\\"pvalN\\\": \\\"0.05\\\", \\\"methodC\\\": \\\"all\\\", \\\"__current_case__\\\": 1, \\\"bootI\\\": \\\"50\\\", \\\"opcC\\\": \\\"full\\\"}\", \"dataMatrix_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+            "id": 6,
+            "uuid": "e3efe417-282a-4e7e-a2cf-7e8c0c7c7b92",
+            "errors": null,
+            "name": "Biosigner",
+            "post_job_actions": {},
+            "label": null,
+            "inputs": [
+                {
+                    "name": "sampleMetadata_in",
+                    "description": "runtime parameter for tool Biosigner"
+                },
+                {
+                    "name": "variableMetadata_in",
+                    "description": "runtime parameter for tool Biosigner"
+                },
+                {
+                    "name": "dataMatrix_in",
+                    "description": "runtime parameter for tool Biosigner"
+                }
+            ],
+            "position": {
+                "top": 718,
+                "left": 1165
+            },
+            "annotation": "",
+            "content_id": "biosigner",
+            "type": "tool"
+        },
+        "7": {
+            "tool_id": "lcmsmatching",
+            "tool_version": "3.4.3",
+            "outputs": [
+                {
+                    "type": "tabular",
+                    "name": "mainoutput"
+                },
+                {
+                    "type": "tabular",
+                    "name": "peaksoutput"
+                }
+            ],
+            "workflow_outputs": [],
+            "input_connections": {
+                "db|dburl": {
+                    "output_name": "output",
+                    "id": 1
+                },
+                "mzrtinput": {
+                    "output_name": "variableMetadata_out",
+                    "id": 6
+                }
+            },
+            "tool_state": "{\"inputfields\": \"\\\"mz=mass_to_charge,rt=retention_time\\\"\", \"chromcols\": \"\\\"\\\"\", \"toly\": \"\\\"0.8\\\"\", \"tolx\": \"\\\"5.0\\\"\", \"mzrtinput\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"tolz\": \"\\\"5.0\\\"\", \"mzshift\": \"\\\"0.0\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"molidssep\": \"\\\"|\\\"\", \"db\": \"{\\\"dbtoken\\\": \\\"\\\", \\\"dbmsmodes\\\": \\\"pos=pos,neg=neg\\\", \\\"dburl\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"dbrtunit\\\": \\\"sec\\\", \\\"dbtype\\\": \\\"inhouse\\\", \\\"dbfields\\\": \\\"mztheo=peak.mz,chromcolrt=chromcolrt,compoundid=accession,chromcol=chromcol,msmode=msmode,peakcomp=peak.formula,fullnames=name,compoundmass=mass,compoundcomp=formula,inchi=inchi,inchikey=inchikey\\\", \\\"__current_case__\\\": 0}\", \"prec\": \"{\\\"__current_case__\\\": 0, \\\"match\\\": \\\"false\\\"}\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"mzprec\": \"\\\"10.0\\\"\", \"mzmode\": \"\\\"neg\\\"\", \"inputrtunit\": \"\\\"sec\\\"\"}",
+            "id": 7,
+            "uuid": "920f11ca-c429-4f73-82a4-0794159145a9",
+            "errors": null,
+            "name": "LC/MS matching",
+            "post_job_actions": {},
+            "label": null,
+            "inputs": [
+                {
+                    "name": "mzrtinput",
+                    "description": "runtime parameter for tool LC/MS matching"
+                },
+                {
+                    "name": "db",
+                    "description": "runtime parameter for tool LC/MS matching"
+                }
+            ],
+            "position": {
+                "top": 362,
+                "left": 1477.5
+            },
+            "annotation": "",
+            "content_id": "lcmsmatching",
+            "type": "tool"
+        }
+    },
+    "annotation": "",
+    "a_galaxy_workflow": "true"
+}
