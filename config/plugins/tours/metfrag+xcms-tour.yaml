@@ -10,9 +10,10 @@ steps:
       demonstrate the MetFrag workflow, which goes a first step to annotate
       molecules from compound (metabolite) databases  to MS/MS (tandem mass
       spectrometry) spectra. This annotation is based on the mapping of in
-      silico generated fragments to the experimental spectra  and scoring of
-      your arrow keys and leave the tour at any time point with 'Escape' or the
-      'End tour' button.
+      silico generated fragments to the experimental spectra and scoring of 
+      candidates retrieved from a molecular database.
+      Use your arrow keys to jump from step to step and leave the tour 
+      at any time point with 'Escape' or the 'End tour' button.
     backdrop: true
   - title: Upload your LC/MS data
     element: .upload-button
