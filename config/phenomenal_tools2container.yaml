@@ -301,7 +301,7 @@ assignment:
   - ecomet_seasons_features
   - ecomet_seasons_rda
   - ecomet_seasons_nmds
-- docker_image_override: container-passatutto
+- docker_image_override: passatutto
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_tag_override: v201604_cv0.1.8
@@ -375,7 +375,7 @@ assignment:
 - docker_image_override: nmr-integrals
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: latest
+  docker_tag_override: v0.1.0_cv0.1.13
   max_pod_retrials: 3
   tools_id:
   - nmr-integrals
