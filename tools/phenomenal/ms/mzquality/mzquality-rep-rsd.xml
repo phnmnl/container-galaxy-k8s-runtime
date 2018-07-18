@@ -15,6 +15,6 @@
         <data name="output1" format="tabular" label="rep-rsd.txt"/>
     </outputs>
     <help><![CDATA[
-        Determines the relative standard deviation of the compoud in the replicate samples.
+        This reports the relative standard deviation (RSD) of replicated samples. Replicated samples are included to assess drift of the mass spec during a batch. The denominator of the RSD is the absolute value of the mean, so the RSD will always be positive.
     ]]></help>
 </tool>

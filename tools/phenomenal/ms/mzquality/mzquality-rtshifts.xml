@@ -11,6 +11,6 @@
         <data name="output1" format="tabular" label="rt-shifts.txt"/>
     </outputs>
     <help><![CDATA[
-        Calculates retention time shifts.
+        What is the variation of the retention time per metabolite and batch? This is used to ensure that the right compound was chosen and acts as a quality control tool. Some variation or drift is expected, but outliers indicate that a different compound was accidentally chosen.
     ]]></help>
 </tool>

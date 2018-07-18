@@ -1,11 +1,11 @@
 <tool id="ms-vfetc" name="ms-vfetc" version="1.0">
-    <description>converts MS vendor exports to a generic tabular file.</description>
+    <description>is able to convert MS vendor exports to a generic tabular file.</description>
     <requirements>
         <container type="docker">phnmnl/ms-vfetc</container>
     </requirements>
      <command>php /files/ms-vfetc/src/vfetc.php files=${",".join(map(str, $input1))} outputfile=$output1</command>
     <inputs>
-        <param name="input1" type="data" format="no_unzip.zip,zip" multiple="true" label="Vendor export file" />
+        <param name="input1" type="data" format="no_unzip.zip" multiple="true" label="Vendor export file" />
     </inputs>
     <outputs>
         <data name="output1" format="tabular" label="combined.txt"/>

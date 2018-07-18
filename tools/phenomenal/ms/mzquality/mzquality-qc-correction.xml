@@ -11,6 +11,6 @@
         <data name="output1" format="tabular" label="qc_corrected.txt"/>
     </outputs>
     <help><![CDATA[
-        Applies QC correction to the samples.
+        The quality control (QC) samples included in the run are used to correct for between batch variation. All QCs have the same concentrations, so they can be used for batch correction.
     ]]></help>
 </tool>
