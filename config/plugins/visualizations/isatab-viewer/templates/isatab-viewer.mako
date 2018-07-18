@@ -47,7 +47,7 @@
     <!-- Load from gist -->
     <div class="toolbar">
         Load ISA-Tab file to view <input type="text" name="gist" id="gist_id"><span class="btn btn-green" onclick="load_file()">Load File</span>
-        <div style="float: right; margin-right: 25px; margin-top: 3px" id="download-button"/>
+        <div style="float: right; margin-right: 25px; margin-top: 3px" id="download-button"></div>
     </div>
     <!-- end of load from gist -->
 
@@ -70,16 +70,17 @@
 <script id="study-list-template" type="text/x-handlebars-template">
 
     <dl>
-       <!-- <dt>
+       <dt>
             <h4 onclick="ISATabViewer.rendering.render_investigation()">Investigation {{this.investigation_id}}</h4>
         </dt>
         <dd>
-        -->
-        {{#each studies}}
-        <li id="list-{{this.hash}}" onclick="ISATabViewer.rendering.render_study('{{this.id}}', '{{this.hash}}')">
-        {{this.id}}
-        </li>
-        {{/each}}
+            <ul>
+                {{#each studies}}
+                <li id="list-{{this.hash}}" onclick="ISATabViewer.rendering.render_study('{{this.id}}', '{{this.hash}}')">
+                    {{this.id}}
+                </li>
+                {{/each}}
+            </ul>
         </dd>
     </dl>
 
@@ -89,20 +90,20 @@
 
     <table id="assay-table" class="table table-hover">
         <thead>
-        <tr>
-            {{#each headers}}
-            <th>{{this}}</th>
-            {{/each}}
+            <tr>
+                {{#each headers}}
+                <th>{{this}}</th>
+                {{/each}}
+            </tr>
         </thead>
-        </tr>
         <tbody>
-        {{#each rows}}
-        <tr>
-            {{#each columns}}
-            <td>{{this}}</td>
+            {{#each rows}}
+            <tr>
+                {{#each columns}}
+                <td>{{this}}</td>
+                {{/each}}
+            </tr>
             {{/each}}
-        </tr>
-        {{/each}}
         </tbody>
     </table>
 
@@ -141,10 +142,8 @@
             {{#each contacts}}
             <li>
                 <p class="investigation-contact">{{[Investigation Person First Name]}} {{[Investigation Person Last Name]}}</p>
-
                 <p class="investigation-contact-address">{{[Investigation Person Address]}}</p>
-
-                <p class="investigation-contact-affiliation">{{[Investigation Person Affiliation]}}</span></p>
+                <p class="investigation-contact-affiliation">{{[Investigation Person Affiliation]}}</p>
             </li>
             {{/each}}
         </ul>
@@ -157,11 +156,8 @@
             {{#each publications}}
             <li>
                 <p class="publication-title">{{[Investigation Publication Title]}}</p>
-
                 <p class="publication-authors">{{[Investigation Publication Author List]}}</p>
-
                 <p class="publication-pubmedid">Pubmed ID <span style="color:#26B99A">{{[Investigation PubMed ID]}}</span></p>
-
                 <p class="publication-doi">DOI <span style="color:#26B99A">{{[Investigation Publication DOI]}}</span></p>
             </li>
             {{/each}}
@@ -185,9 +181,7 @@
 
         <br/><br/>
 
-        <span class="btn btn-green" style="width:auto;"
-              onclick="ISATabViewer.rendering.render_assay('{{study_id}}','{{study_id_hash}}','{{study_file}}')">
-            View Samples</span>
+        <span class="btn btn-green" style="width:auto;" onclick="ISATabViewer.rendering.render_assay('{{study_id}}','{{study_id_hash}}','{{study_file}}')">View Samples</span>
 
         <br/>
 
@@ -217,16 +211,10 @@
             <li>
                 <div class="assay-icon {{icon}}"></div>
                 <p class="measurement-type">{{[Study Assay Measurement Type]}}</p>
-
                 <p class="technology-type">{{[Study Assay Technology Type]}}</p>
-
                 <p class="technology-platform">{{[Study Assay Technology Platform]}}</p>
-
                 <p class="assay-file-name">{{[Study Assay File Name]}}</p>
-
-                <p class="btn btn-green"
-                   onclick="ISATabViewer.rendering.render_assay('{{../study_id}}','{{../study_id_hash}}','{{[Study Assay File Name]}}')">
-                    View</p>
+                <p class="btn btn-green" onclick="ISATabViewer.rendering.render_assay('{{../study_id}}','{{../study_id_hash}}','{{[Study Assay File Name]}}')">View</p>
             </li>
             {{/each}}
         </ul>
@@ -241,11 +229,8 @@
             {{#each publications}}
             <li>
                 <p class="publication-title">{{[Study Publication Title]}}</p>
-
                 <p class="publication-authors">{{[Study Publication Author List]}}</p>
-
                 <p class="publication-pubmedid">Pubmed ID <span style="color:#26B99A">{{[Study PubMed ID]}}</span></p>
-
                 <p class="publication-doi">DOI <span style="color:#26B99A">{{[Study Publication DOI]}}</span></p>
             </li>
             {{/each}}
@@ -262,10 +247,8 @@
             {{#each contacts}}
             <li>
                 <p class="publication-title">{{[Study Person First Name]}} {{[Study Person Last Name]}}</p>
-
                 <p class="publication-authors">{{[Study Person Address]}}</p>
-
-                <p class="publication-pubmedid">{{[Study Person Affiliation]}}</span></p>
+                <p class="publication-pubmedid">{{[Study Person Affiliation]}}</p>
             </li>
             {{/each}}
         </ul>

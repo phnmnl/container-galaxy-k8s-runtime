@@ -20,6 +20,8 @@ ISATabViewer.spreadsheets = {
     "files": {}
 };
 
+ISATabViewer.rawdatadict = {};
+
 hashCode = function (s) {
     return s.split("").reduce(function (a, b) {
         a = ((a << 5) - a) + b.charCodeAt(0);
@@ -106,8 +108,9 @@ ISATabViewer.rendering = {
     },
 
     process_rawdatadict: function (entrypoint, rawdatadict, placement) {
+        ISATabViewer.rawdatadict = rawdatadict;
         var file_contents;
-        file_contents = rawdatadict[entrypoint]
+        file_contents = rawdatadict[entrypoint];
         var lines = file_contents.split(/\r\n|\r|\n/g);
         var current_section = "";
         var current_study;
@@ -150,14 +153,9 @@ ISATabViewer.rendering = {
 
             var assays = ISATabViewer.rendering.generate_records(study_information, "STUDY ASSAYS");
 
-            for (var assay in assays) {
-                $.ajax({
-                    success: function() {
-                        var assay_file;
-                        assay_file = assays[assay]["Study Assay File Name"]
-                        ISATabViewer.rendering.process_assay_file(assay_file, rawdatadict[assay_file]);
-                    }
-                });
+            for (i = 0; i < assays.length; i++) {
+                var assay_file = assays[i]["Study Assay File Name"];
+                ISATabViewer.rendering.process_assay_file(assay_file, ISATabViewer.rawdatadict[assay_file]);
             }
         }
 
