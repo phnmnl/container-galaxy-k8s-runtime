@@ -505,7 +505,7 @@ All the study design related information is semantically marked up using terms f
                                     <option value="2D 1H-13C NMR"/>
                                 </param>
                                 <when value="1D 1H NMR">
-                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR Instrument')"/>
+                                    <param name="NMR instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR instrument')"/>
                                     <param name="pulse_sequence" type="select" label="Pulse Sequence"  dynamic_options="get_terms('1d 1H pulse sequence')"/>
                                     <param name="magnet" type="text" label="NMR Magnet Power" value="600 Mhz"/>
                                     <param name="technical_replicates" type="integer" label="Number of Technical Replicates" value="1">
@@ -513,7 +513,7 @@ All the study design related information is semantically marked up using terms f
                                     </param>
                                 </when>
                                 <when value="1D 13C NMR">
-                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR Instrument')"/>
+                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR instrument')"/>
                                     <param name="pulse_sequence" type="select" label="Pulse Sequence"  dynamic_options="get_terms('1d 13C pulse sequence')"/>
                                     <param name="magnet" type="text" label="NMR Magnet Power" value="600 Mhz"/>
                                     <param name="technical_replicates" type="integer" label="Number of Technical Replicates" value="1">
@@ -521,7 +521,7 @@ All the study design related information is semantically marked up using terms f
                                     </param>
                                 </when>
                                 <when value="2D 1H-1H NMR">
-                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR Instrument')"/>
+                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR instrument')"/>
                                     <param name="pulse_sequence" type="select" label="Pulse Sequence"  dynamic_options="get_terms('2d 1H-1H pulse sequence')"/>
                                     <param name="magnet" type="text" label="NMR Magnet Power" value="600 Mhz"/>
                                     <param name="technical_replicates" type="integer" label="Number of Technical Replicates" value="1">
@@ -529,7 +529,7 @@ All the study design related information is semantically marked up using terms f
                                     </param>
                                 </when>
                                 <when value="2D 13C-13C NMR">
-                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR Instrument')"/>
+                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR instrument')"/>
                                     <param name="pulse_sequence" type="select" label="Pulse Sequence"  dynamic_options="get_terms('2d 13C-13C pulse sequence')"/>
                                     <param name="magnet" type="text" label="NMR Magnet Power" value="600 Mhz"/>
                                     <param name="technical_replicates" type="integer" label="Number of Technical Replicates" value="1">
@@ -537,7 +537,7 @@ All the study design related information is semantically marked up using terms f
                                     </param>
                                 </when>
                                 <when value="2D 1H-13C NMR">
-                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR Instrument')"/>
+                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR instrument')"/>
                                     <param name="pulse_sequence" type="select" label="Pulse Sequence"  dynamic_options="get_terms('2d 1H-13C pulse sequence')"/>
                                     <param name="magnet" type="text" label="NMR Magnet Power" value="600 Mhz"/>
                                     <param name="technical_replicates" type="integer" label="Number of Technical Replicates" value="1">

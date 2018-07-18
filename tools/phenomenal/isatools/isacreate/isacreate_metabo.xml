@@ -10,7 +10,7 @@
         <![CDATA[
         mkdir study_dir &&
         mkdir -p '${output.files_path}' &&
-        $__tool_directory__/isacreate.py
+        isacreate.py
         --galaxy_parameters_file='$inputs'
         --target_dir='study_dir/' &&
         cp study_dir/* '${output.files_path}'
