@@ -4,6 +4,7 @@
         <import>macros.xml</import>
     </macros>
     <expand macro="requirements"/>
+    <code file="isa_cvterms.py"/>
     <expand macro="stdio"/>
     <command>
         <![CDATA[

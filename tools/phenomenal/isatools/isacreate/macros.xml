@@ -5,7 +5,7 @@
     <xml name="requirements">
         <requirements>
             <requirement type="package" version="6.7">click</requirement>
-            <!--<requirement type="package" version="0.9.5">isatools</requirement>-->
+            <requirement type="package" version="0.10.0">isatools</requirement>
         </requirements>
     </xml>
 
@@ -32,20 +32,8 @@
                 <validator type="regex" message="Must look like a valid email adddress">(^$|^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)</validator>
             </param>
             <param name="affiliation" type="text" label="Study PI Affiliation" value="Affiliation" help="e.g. Radium Institute, Paris"/>
-            <param name="study_consent" type="select" label="Consent Information (ICO:0000011)">
-                <options from_data_table="isa_cvterms">
-                    <column name="value" index="1"/>
-                    <filter type="static_value" column="2" value="consent"/>
-                    <filter type="add_value" value="user_defined_consent_information"/>
-                </options>
-            </param>
-            <param name="study_use_condition" type="select" label="Data Use Requirement (DUO:0000017)">
-                <options from_data_table="isa_cvterms">
-                    <column name="value" index="1"/>
-                    <filter type="static_value" column="2" value="data use requirement"/>
-                    <filter type="add_value" value="user_defined_data_use_requirement"/>
-                </options>
-            </param>
+            <param name="study_consent" type="select" label="Consent Information (ICO:0000011)" dynamic_options="get_terms('consent')"/>
+            <param name="study_use_condition" type="select" label="Data Use Requirement (DUO:0000017)" dynamic_options="get_terms('data use requirement')"/>
         </section>
     </xml>
 
@@ -242,12 +230,7 @@
     <xml name="qc_plan">
         <section name="qc_planning" title="Quality Control / Quality Assurance Plan">
             <repeat name="qc_plans" title="Quality Control / Quality Assurance Plan">
-                <param name="material_type" type="select" label="Material Type">
-                    <options from_data_table="isa_cvterms">
-                        <column name="value" index="1"/>
-                        <filter type="static_value" column="2" value="QC terms"/>
-                    </options>
-                </param>
+                <param name="material_type" type="select" label="Material Type" dynamic_options="get_terms('QC terms')"/>
                 <conditional name="qc_type">
                     <param name="qc_type_selector" type="select" label="QC Type">
                         <option value="interval_series" selected="True">interval series</option>
@@ -423,13 +406,7 @@ All the study design related information is semantically marked up using terms f
     <xml name="sample_assay_plan_metabo">
         <section name="sample_and_assay_planning" title="Sampling and Assay Plans">
             <repeat name="sample_plans" title="Sampling Plan">
-                <param name="material_type" type="select" min="1" label="Sample Material Type">
-                    <options from_data_table="isa_cvterms">
-                        <column name="value" index="1"/>
-                        <filter type="static_value" column="2" value="animal_mat"/>
-                        <filter type="add_value" value="user_defined_sample_type"/>
-                    </options>
-                </param>
+                <param name="material_type" type="select" label="Sample Material Type" dynamic_options="get_terms('animal_mat')"/>
                 <param name="sample_collections" type="integer" label="Number of Sample Collections" value="1"/>
                 <repeat name="assay_plans" title="Assay Plan">
                     <conditional name="assay_type">
@@ -453,14 +430,7 @@ All the study design related information is semantically marked up using terms f
                                         <option value="GC">gas chromatography</option>
                                     </param>
                                     <when value="DI">
-                                        <param name="instrument" type="select" min="1" label="MS Instrument">
-                                            <options from_data_table="isa_cvterms">
-                                                <column name="value" index="1"/>
-                                                <filter type="static_value" column="2" value="mass spectrometry instrument"/>
-                                                <filter type="add_value" value="user_defined_ms_instrument"/>
-                                            </options>
-                                            <option value="none reported">none reported</option>
-                                        </param>
+                                        <param name="instrument" type="select" label="MS Instrument" dynamic_options="get_terms('mass spectrometry instrument')"/>
                                         <repeat name="acquisitions"  title="Acquisition Series">
                                             <param name="acquisition_mode" type="select" min="1" label="Acquisition Mode">
                                                 <option value="negative" selected="True"/>
@@ -473,14 +443,7 @@ All the study design related information is semantically marked up using terms f
                                         </repeat>
                                     </when>
                                     <when value="FIA">
-                                        <param name="instrument" type="select" min="1" label="MS Instrument">
-                                            <options from_data_table="isa_cvterms">
-                                                <column name="value" index="1"/>
-                                                <filter type="static_value" column="2" value="mass spectrometry instrument"/>
-                                                <filter type="add_value" value="user_defined_ms_instrument"/>
-                                            </options>
-                                            <option value="none reported">none reported</option>
-                                        </param>
+                                        <param name="instrument" type="select" label="MS Instrument" dynamic_options="get_terms('mass spectrometry instrument')"/>
                                         <repeat name="acquisitions"  title="Acquisition Series">
                                             <param name="acquisition_mode" type="select" min="1" label="Acquisition Mode">
                                                 <option value="negative" selected="True"/>
@@ -499,22 +462,8 @@ All the study design related information is semantically marked up using terms f
                                             <option value="reverse phase"/>
                                             <option value="other"/>
                                         </param>
-                                        <param name="chromatography_instrument" type="select" min="1" label="Chromatography Instrument">
-                                            <options from_data_table="isa_cvterms">
-                                                <column name="value" index="1"/>
-                                                <filter type="static_value" column="2" value="liquid chromatography instrument"/>
-                                                <filter type="add_value" value="user_defined_lc_instrument"/>
-                                            </options>
-                                            <option value="none reported">none reported</option>
-                                        </param>
-                                        <param name="instrument" type="select" min="1" label="MS Instrument">
-                                            <options from_data_table="isa_cvterms">
-                                                <column name="value" index="1"/>
-                                                <filter type="static_value" column="2" value="mass spectrometry instrument"/>
-                                                <filter type="add_value" value="user_defined_ms_instrument"/>
-                                            </options>
-                                            <option value="none reported">none reported</option>
-                                        </param>
+                                        <param name="chromatography_instrument" type="select" label="Chromatography Instrument" dynamic_options="get_terms('liquid chromatography instrument')"/>
+                                        <param name="instrument" type="select" min="1" label="MS Instrument"  dynamic_options="get_terms('mass spectrometry instrument')"/>
                                         <repeat name="acquisitions"  title="Acquisition Series">
                                             <param name="acquisition_mode" type="select" min="1" label="Acquisition Mode">
                                                 <option value="negative" selected="True"/>
@@ -527,22 +476,8 @@ All the study design related information is semantically marked up using terms f
                                         </repeat>
                                     </when>
                                     <when value="GC">
-                                        <param name="chromatography_instrument" type="select"  min="1" label="Chromatography Instrument">
-                                            <options from_data_table="isa_cvterms">
-                                                <column name="value" index="1"/>
-                                                <filter type="static_value" column="2" value="gas chromatography instrument"/>
-                                                <filter type="add_value" value="user_defined_gc_instrument"/>
-                                            </options>
-                                            <option value="none reported">none reported</option>
-                                        </param>
-                                        <param name="instrument" type="select" min="1" label="MS Instrument">
-                                            <options from_data_table="isa_cvterms">
-                                                <column name="value" index="1"/>
-                                                <filter type="static_value" column="2" value="mass spectrometry instrument"/>
-                                                <filter type="add_value" value="user_defined_ms_instrument"/>
-                                            </options>
-                                            <option value="none reported">none reported</option>
-                                        </param>
+                                        <param name="chromatography_instrument" type="select" label="Chromatography Instrument"  dynamic_options="get_terms('gas chromatography instrument')"/>
+                                        <param name="instrument" type="select" label="MS Instrument"  dynamic_options="get_terms('mass spectrometry instrument')"/>
                                         <repeat name="acquisitions"  title="Acquisition Series">
                                             <param name="acquisition_mode" type="select" min="1" label="Acquisition Mode">
                                                 <option value="negative" selected="True"/>
@@ -554,14 +489,7 @@ All the study design related information is semantically marked up using terms f
                                             </param>
                                         </repeat>
                                         <repeat name="derivatizations" title="Derivatizations">
-                                            <param name="derivatization" type="select" label="Derivatization">
-                                                <options from_data_table="isa_cvterms">
-                                                    <column name="value" index="1"/>
-                                                    <filter type="static_value" column="2" value="derivatization"/>
-                                                    <filter type="add_value" value="user_defined_derivatization"/>
-                                                </options>
-                                                <option value="none reported">none reported</option>
-                                            </param>
+                                            <param name="derivatization" type="select" label="Derivatization"  dynamic_options="get_terms('derivatization')"/>
                                         </repeat>
                                     </when>
                                 </conditional>
@@ -577,110 +505,40 @@ All the study design related information is semantically marked up using terms f
                                     <option value="2D 1H-13C NMR"/>
                                 </param>
                                 <when value="1D 1H NMR">
-                                    <param name="nmr_instrument" type="select" min="1" label="NMR Instrument">
-                                        <options from_data_table="isa_cvterms">
-                                            <column name="value" index="1"/>
-                                            <filter type="static_value" column="2" value="NMR instrument"/>
-                                            <filter type="add_value" value="user_defined_nmr_instrument"/>
-                                        </options>
-                                        <option value="none reported">none reported</option>
-                                    </param>
-                                    <param name="pulse_sequence" type="select"  min="1" label="Pulse Sequence">
-                                        <options from_data_table="isa_cvterms">
-                                            <column name="value" index="1"/>
-                                            <filter type="static_value" column="2" value="1d 1H pulse sequence"/>
-                                            <filter type="add_value" value="user_defined_pulse_sequence"/>
-                                        </options>
-                                        <option value="none reported">none reported</option>
-                                    </param>
+                                    <param name="NMR instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR instrument')"/>
+                                    <param name="pulse_sequence" type="select" label="Pulse Sequence"  dynamic_options="get_terms('1d 1H pulse sequence')"/>
                                     <param name="magnet" type="text" label="NMR Magnet Power" value="600 Mhz"/>
                                     <param name="technical_replicates" type="integer" label="Number of Technical Replicates" value="1">
                                         <validator type="in_range" message="Technical replicates must be more than 0 and less than 3" min="0" exclude_min="true" max="3"/>
                                     </param>
                                 </when>
                                 <when value="1D 13C NMR">
-                                    <param name="nmr_instrument" type="select" min="1" label="NMR Instrument">
-                                        <options from_data_table="isa_cvterms">
-                                            <column name="value" index="1"/>
-                                            <filter type="static_value" column="2" value="NMR instrument"/>
-                                            <filter type="add_value" value="user_defined_nmr_instrument"/>
-                                        </options>
-                                        <option value="none reported">none reported</option>
-                                    </param>
-                                    <param name="pulse_sequence" type="select" min="1" label="Pulse Sequence">
-                                        <options from_data_table="isa_cvterms">
-                                            <column name="value" index="1"/>
-                                            <filter type="static_value" column="2" value="1d 13C pulse sequence"/>
-                                            <filter type="add_value" value="user_defined_pulse_sequence"/>
-                                        </options>
-                                        <option value="none reported">none reported</option>
-                                    </param>
+                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR instrument')"/>
+                                    <param name="pulse_sequence" type="select" label="Pulse Sequence"  dynamic_options="get_terms('1d 13C pulse sequence')"/>
                                     <param name="magnet" type="text" label="NMR Magnet Power" value="600 Mhz"/>
                                     <param name="technical_replicates" type="integer" label="Number of Technical Replicates" value="1">
                                         <validator type="in_range" message="Technical replicates must be more than 0 and less than 3" min="0" exclude_min="true" max="3"/>
                                     </param>
                                 </when>
                                 <when value="2D 1H-1H NMR">
-                                    <param name="nmr_instrument" type="select" min="1" label="NMR Instrument">
-                                        <options from_data_table="isa_cvterms">
-                                            <column name="value" index="1"/>
-                                            <filter type="static_value" column="2" value="NMR instrument"/>
-                                            <filter type="add_value" value="user_defined_nmr_instrument"/>
-                                        </options>
-                                        <option value="none reported">none reported</option>
-                                    </param>
-                                    <param name="pulse_seq" type="select" min="1" label="Pulse Sequence">
-                                        <options from_data_table="isa_cvterms">
-                                            <column name="value" index="1"/>
-                                            <filter type="static_value" column="2" value="2d 1H-1H pulse sequence"/>
-                                            <filter type="add_value" value="user_defined_pulse_sequence"/>
-                                        </options>
-                                        <option value="none reported">none reported</option>
-                                    </param>
+                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR instrument')"/>
+                                    <param name="pulse_sequence" type="select" label="Pulse Sequence"  dynamic_options="get_terms('2d 1H-1H pulse sequence')"/>
                                     <param name="magnet" type="text" label="NMR Magnet Power" value="600 Mhz"/>
                                     <param name="technical_replicates" type="integer" label="Number of Technical Replicates" value="1">
                                         <validator type="in_range" message="Technical replicates must be more than 0 and less than 3" min="0" exclude_min="true" max="3"/>
                                     </param>
                                 </when>
                                 <when value="2D 13C-13C NMR">
-                                    <param name="nmr_instrument" type="select" min="1" label="NMR Instrument">
-                                        <options from_data_table="isa_cvterms">
-                                            <column name="value" index="1"/>
-                                            <filter type="static_value" column="2" value="NMR instrument"/>
-                                            <filter type="add_value" value="user_defined_nmr_instrument"/>
-                                        </options>
-                                        <option value="none reported">none reported</option>
-                                    </param>
-                                    <param name="pulse_seq" type="select" min="1" label="Pulse Sequence">
-                                        <options from_data_table="isa_cvterms">
-                                            <column name="value" index="1"/>
-                                            <filter type="static_value" column="2" value="2d 13C-13C pulse sequence"/>
-                                            <filter type="add_value" value="user_defined_pulse_sequence"/>
-                                        </options>
-                                        <option value="none reported">none reported</option>
-                                    </param>
+                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR instrument')"/>
+                                    <param name="pulse_sequence" type="select" label="Pulse Sequence"  dynamic_options="get_terms('2d 13C-13C pulse sequence')"/>
                                     <param name="magnet" type="text" label="NMR Magnet Power" value="600 Mhz"/>
                                     <param name="technical_replicates" type="integer" label="Number of Technical Replicates" value="1">
                                         <validator type="in_range" message="Technical replicates must be more than 0 and less than 3" min="0" exclude_min="true" max="3"/>
                                     </param>
                                 </when>
                                 <when value="2D 1H-13C NMR">
-                                    <param name="nmr_instrument" type="select" min="1" label="NMR Instrument">
-                                        <options from_data_table="isa_cvterms">
-                                            <column name="value" index="1"/>
-                                            <filter type="static_value" column="2" value="NMR instrument"/>
-                                            <filter type="add_value" value="user_defined_nmr_instrument"/>
-                                        </options>
-                                        <option value="none reported">none reported</option>
-                                    </param>
-                                    <param name="pulse_seq" type="select" min="1" label="Pulse Sequence">
-                                        <options from_data_table="isa_cvterms">
-                                            <column name="value" index="1"/>
-                                            <filter type="static_value" column="2" value="2d 1H-13C pulse sequence"/>
-                                            <filter type="add_value" value="user_defined_pulse_sequence"/>
-                                        </options>
-                                        <option value="none reported">none reported</option>
-                                    </param>
+                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR instrument')"/>
+                                    <param name="pulse_sequence" type="select" label="Pulse Sequence"  dynamic_options="get_terms('2d 1H-13C pulse sequence')"/>
                                     <param name="magnet" type="text" label="NMR Magnet Power" value="600 Mhz"/>
                                     <param name="technical_replicates" type="integer" label="Number of Technical Replicates" value="1">
                                         <validator type="in_range" message="Technical replicates must be more than 0 and less than 3" min="0" exclude_min="true" max="3"/>
@@ -697,13 +555,7 @@ All the study design related information is semantically marked up using terms f
     <xml name="sample_assay_plan_genomics">
         <section name="sample_and_assay_planning" title="Sampling and Assay Plans">
             <repeat name="sample_plans" title="Sampling Plan">
-                <param name="material_type" type="select" min="1" label="Sample Material Type">
-                    <options from_data_table="isa_cvterms">
-                        <column name="value" index="1"/>
-                        <filter type="static_value" column="2" value="animal_mat"/>
-                        <filter type="add_value" value="user_defined_sample_type"/>
-                    </options>
-                </param>
+                <param name="material_type" type="select" label="Sample Material Type" dynamic_options="get_terms('animal_mat')"/>
                 <param name="sample_collections" type="integer" label="Number of Sample Collections" value="1"/>
                 <repeat name="assay_plans" title="Assay Plan">
                     <conditional name="assay_type">
@@ -722,76 +574,22 @@ All the study design related information is semantically marked up using terms f
                                     <option value="pacific_biosciences">Pacific Biosciences</option>
                                 </param>
                                 <when value="454">
-                                    <param name="instrument" type="select" label="Sequencing Instrument">
-                                        <option value="454 GS"/>
-                                        <option value="454 GS 20"/>
-                                        <option value="454 GS FLX"/>
-                                        <option value="454 GS FLX Plus"/>
-                                        <option value="454 GS FLX Titanium"/>
-                                        <option value="454 GS Junior"/>
-                                    </param>
+                                    <param name="instrument" type="select" label="Sequencing Instrument" dynamic_options="get_terms('454')"/>
                                 </when>
                                 <when value="ab_solid">
-                                    <param name="instrument" type="select" label="Squencing Instrument">
-                                        <option value="AB 3730xL Genetic Analyzer"/>
-                                        <option value="AB SOLiD System"/>
-                                        <option value="AB SOLiD System 2.0"/>
-                                        <option value="AB SOLiD System 3.0"/>
-                                        <option value="AB SOLiD 3 Plus System"/>
-                                        <option value="AB SOLiD 4 System"/>
-                                        <option value="AB SOLiD 4hq System"/>
-                                        <option value="AB SOLiD 4hq System"/>
-                                        <option value="AB SOLiD 5500"/>
-                                        <option value="AB SOLiD 5500xl"/>
-                                        <option value="AB 5500 Genetic Analyzer"/>
-                                        <option value="AB 5500xl Genetic analyzer"/>
-                                        <option value="AB 5500xl-W Genetic Analysis System"/>
-                                        <option value="AB 3730 Genetic Analyzer"/>
-                                        <option value="AB 3500xL Genetic Analyzer"/>
-                                        <option value="AB 3500 Genetic Analyzer"/>
-                                        <option value="AB 3130xL Genetic Analyzer"/>
-                                        <option value="AB 3130 Genetic Analyzer"/>
-                                        <option value="AB 310 Genetic Analyzer"/>
-                                        <option value="unspecified"/>
-                                    </param>
+                                    <param name="instrument" type="select" label="Sequencing Instrument" dynamic_options="get_terms('ab_solid')"/>
                                 </when>
                                 <when value="illumina">
-                                    <param name="instrument" type="select" label="Sequencing Instrument" help="&lt;`a href='http://purl.obolibrary.org/obo/OBI_0400103'&gt;">
-                                        <option value="Illumina Genome Analyzer"/>
-                                        <option value="Illumina Genome Analyzer II"/>
-                                        <option value="Illumina Genome Analyzer IIx"/>
-                                        <option value="Illumina HiSeq 1000"/>
-                                        <option value="Illumina HiSeq  2000"/>
-                                        <option value="Illumina HiSeq"/>
-                                        <option value="Illumina HiSeq 2500"/>
-                                        <option value="Illumina HiSeq 3000"/>
-                                        <option value="Illumina HiSeq 4000"/>
-                                        <option value="Illumina HiScanSQ"/>
-                                        <option value="Illumina MiSeq"/>
-                                        <option value="HiSeq X Five"/>
-                                        <option value="HiSeq X Ten"/>
-                                        <option value="NextSeq 500"/>
-                                        <option value="NextSeq 550"/>
-                                    </param>
+                                    <param name="instrument" type="select" label="Sequencing Instrument" dynamic_options="get_terms('illumina')"/>
                                 </when>
                                 <when value="ion_torrent">
-                                    <param name="instrument" type="select" label="Sequencing Instrument">
-                                        <option value="Ion Torrent PGM"/>
-                                        <option value="Ion Torrent Proton"/>
-                                    </param>
+                                    <param name="instrument" type="select" label="Sequencing Instrument" dynamic_options="get_terms('ion_torrent')"/>
                                 </when>
                                 <when value="oxford_nanopore">
-                                    <param name="instrument" type="select" label="Sequencing Instrument">
-                                        <option value="MinION"/>
-                                        <option value="GridION"/>
-                                    </param>
+                                    <param name="instrument" type="select" label="Sequencing Instrument" dynamic_options="get_terms('oxford_nanopore')"/>
                                 </when>
                                 <when value="pacific_biosciences">
-                                    <param name="instrument" type="select" label="Sequencing Instrument">
-                                        <option value="PacBio RS"/>
-                                        <option value="PacBio RS II"/>
-                                        <option value="Sequel"/>
-                                    </param>
+                                    <param name="instrument" type="select" label="Sequencing Instrument" dynamic_options="get_terms('pacific_biosciences')"/>
                                 </when>
                             </conditional>
                             <param name="library_type" type="select" label="Library Type">

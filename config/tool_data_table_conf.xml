@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<tables>
-    <!-- Locations of terminology files under genome directory -->
-    <table name="isa_cvterms" comment_char="#">
-        <columns>dbkey, name, value</columns>
-        <file path="tool-data/isa_cvterms.loc" />
-    </table>
-</tables>
