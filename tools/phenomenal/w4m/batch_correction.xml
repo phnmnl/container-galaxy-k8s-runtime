@@ -1,11 +1,11 @@
-<tool id="Batch_correction" name="Batch_correction" version="2.2.2">
+<tool id="Batch_correction" name="Batch_correction" version="2.2.3">
   <description>Corrects intensities for signal drift and batch-effects</description>
 
   <requirements>
-    <requirement type="package">r-batch</requirement>
-    <requirement type="package">r-ade4</requirement>
-    <requirement type="package">bioconductor-pcamethods</requirement>
-    <requirement type="package">bioconductor-ropls</requirement>
+    <requirement type="package" version="1.1_4">r-batch</requirement>
+    <requirement type="package" version="1.7_8">r-ade4</requirement>
+    <requirement type="package" version="1.70.0">bioconductor-pcamethods</requirement>
+    <requirement type="package" version="1.10.0">bioconductor-ropls</requirement>
   </requirements>
 
   <stdio>
@@ -46,7 +46,9 @@
     #end if
     dataMatrix_out "$dataMatrix_out" variableMetadata_out "$variableMetadata_out"
     graph_output "$graph_output"  rdata_output "$rdata_output"
-    batch_col_name "$batch_col_name" injection_order_col_name "$injection_order_col_name" sample_type_col_name "$sample_type_col_name"
+    batch_col_name "$batch_col_name" injection_order_col_name "$injection_order_col_name"
+	sample_type_col_name "$sample_type_col_name"
+ 	sample_type_tags "blank=$sampleTypeTagBlank,pool=$sampleTypeTagPool,sample=$sampleTypeTagSample"
   ]]></command>
 
 	<inputs>
@@ -57,6 +59,9 @@
 		<param name="batch_col_name" label="Batch column name" type="text" size="64" value="batch" help="The name of the column containing the batch values."/>
 		<param name="injection_order_col_name" label="Injection order column name" type="text" size="64" value="injectionOrder" help="The name of the column containing the injection order values."/>
 		<param name="sample_type_col_name" label="Sample type column name" type="text" size="64" value="sampleType" help="The name of the column containing the sample type values."/>
+		<param name="sampleTypeTagPool" type="text" size="64"  value="pool" label="Set the name used to tag samples as pool."/>
+		<param name="sampleTypeTagBlank" type="text" size="64"  value="blank" label="Set the name used to tag samples as blank."/>
+		<param name="sampleTypeTagSample" type="text" size="64"  value="sample" label="Set the name used to tag samples as real sample."/>
 		
 		<conditional name="span_condition">
 			<param name="method" label="Type of regression model " type="select" help="To select between linear or non-linear (lowess or loess) methods to be used in Van der Kloet algorithm ; when using loess, you can choose to use pools or samples to model batch effect.">
@@ -127,6 +132,18 @@
       <param name="variableMetadata" value="input-batchcorrection-variableMetadata.tsv"/>
       <param name="method" value="all_loess_pool"/>
       <param name="span" value="1"/>
+      <output name="dataMatrix_out" file="output-batchcorrection-dataMatrix.tsv"/>
+    </test>
+    <test>
+      <param name="dataMatrix" value="input-batchcorrection-dataMatrix.tsv"/>
+      <param name="sampleMetadata" value="input-batchcorrection-sampleMetadata-customSampleType.tsv"/>
+      <param name="variableMetadata" value="input-batchcorrection-variableMetadata.tsv"/>
+      <param name="method" value="all_loess_pool"/>
+      <param name="span" value="1"/>
+      <param name="sample_type_col_name" value="MySampType"/>
+      <param name="sampleTypeTagPool" value="lot"/>
+      <param name="sampleTypeTagBlank" value="blanc"/>
+      <param name="sampleTypeTagSample" value="echant"/>
       <output name="dataMatrix_out" file="output-batchcorrection-dataMatrix.tsv"/>
     </test>
   </tests>
