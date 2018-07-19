@@ -391,18 +391,20 @@ sub read_workflows_info() {
 			my @tools;
 			foreach my $step_n (sort keys %{$workflow->{steps}}) {
 				my $step = $workflow->{steps}->{$step_n};
-				if (exists($step->{tool_id}) && defined $step->{tool_id}) {
-					my %tool = (id => $step->{tool_id});
-					if (exists($step->{tool_version}) && defined $step->{tool_version}) {
-						$tool{version} = $step->{tool_version};
+				if (exists($step->{type}) && $step->{type} eq 'tool') {
+					if (exists($step->{tool_id}) && defined $step->{tool_id}) {
+						my %tool = (id => $step->{tool_id});
+						if (exists($step->{tool_version}) && defined $step->{tool_version}) {
+							$tool{version} = $step->{tool_version};
+						}
+						else {
+							check_msg('ERROR', 'WORKFLOW', $workflow->{name}, "No tool version defined for tool $step->{tool_id} at step $step_n of workflow.");
+						}
+						push(@tools, \%tool);
 					}
 					else {
-						check_msg('ERROR', 'WORKFLOW', $workflow->{name}, "No tool version defined for tool $step->{tool_id} at step $step_n of workflow.");
+						check_msg('ERROR', 'WORKFLOW', $workflow->{name}, "No tool ID defined for step $step_n of workflow.");
 					}
-					push(@tools, \%tool);
-				}
-				else {
-					check_msg('ERROR', 'WORKFLOW', $workflow->{name}, "No tool ID defined for step $step_n of workflow.");
 				}
 			}
 
