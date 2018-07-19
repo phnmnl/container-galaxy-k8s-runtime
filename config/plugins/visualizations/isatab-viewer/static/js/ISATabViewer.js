@@ -52,13 +52,13 @@ ISATabViewer.rendering = {
 
         for (let i = 0; i < lines.length; i++) {
             let __ret = ISATabViewer.rendering.process_investigation_file_line(lines[i], current_study, current_section);
-            if (__ret !== undefined) {
+            if (typeof __ret !== 'undefined') {
                 current_study = __ret.current_study;
                 current_section = __ret.current_section;
             }
         }
 
-        if (current_study !== undefined)
+        if (typeof current_study !== 'undefined')
             ISATabViewer.investigation["STUDY"].push(current_study);
 
         ISATabViewer.rendering.render_study_list(placement);
@@ -112,7 +112,7 @@ ISATabViewer.rendering = {
 
         for (let i = 0; i < lines.length; i++) {
             let __ret = ISATabViewer.rendering.process_investigation_file_line(lines[i], current_study, current_section);
-            if (typeof __ret !== undefined) {
+            if (typeof __ret !== 'undefined') {
                 current_study = __ret.current_study;
                 current_section = __ret.current_section;
             }
@@ -307,7 +307,7 @@ ISATabViewer.rendering = {
 
 
 
-                        if (current_study != undefined) ISATabViewer.investigation["STUDY"].push(current_study);
+                        if (typeof current_study !== 'undefined') ISATabViewer.investigation["STUDY"].push(current_study);
 
                         ISATabViewer.rendering.render_study_list(placement);
                     } else {
@@ -497,7 +497,7 @@ ISATabViewer.rendering = {
                     study.data_record_uris = study_information.STUDY["Comment[Data Record URI]"][0].split(";");
 
                     for (var i = 0; i < study.data_repositories.length; i++) {
-                        if (data_files[i] == undefined) {
+                        if (typeof data_files[i] === 'undefined') {
                             data_files[i] = {}
                         }
                         data_files[i].data_repository = study.data_repositories[i];
@@ -582,7 +582,7 @@ ISATabViewer.rendering = {
 
             var records = study_information[field_name][field];
             for (var i = 0; i < records.length; i++) {
-                if (result[i] == undefined) {
+                if (typeof result[i] == 'undefined') {
                     result[i] = {}
                 }
                 result[i][field] = ISATabViewer.rendering.replace_str("\"", "", records[i]);
