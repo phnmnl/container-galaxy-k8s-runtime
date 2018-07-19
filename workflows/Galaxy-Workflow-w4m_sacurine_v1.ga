@@ -2,7 +2,7 @@
     "uuid": "3071d5af-60b6-42b2-a505-19dab1d2121b",
     "tags": [],
     "format-version": "0.1",
-    "name": "imported: imported: W4M Omics generic biosigner feature selection statistics (imported from API)",
+    "name": "W4M Omics generic biosigner feature selection statistics (aka sacurine v1)",
     "steps": {
         "0": {
             "tool_id": "mtbls-dwnld",
@@ -408,6 +408,6 @@
             "type": "tool"
         }
     },
-    "annotation": "",
+    "annotation": "This workflow demonstrates the use of biosigner tool. It uses tools univariate, multivariate, biosigner and lcmsmatching.",
     "a_galaxy_workflow": "true"
 }
