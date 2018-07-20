@@ -91,12 +91,12 @@
                 </param>
             </when>
             <when value="data_collection">
-                <param name="source" type="data_collection" format="mzml,thermo.raw,raw" label="Data collection of *.mzml or *.raw files" argument="--source" >
+                <param name="source" type="data_collection" format="mzml,thermo.raw" label="Data collection of *.mzml or *.raw files" argument="--source" >
                     <validator type="empty_field" />
                 </param>
             </when>
             <when value="single_file">
-                <param name="source" type="data" format="mzml,thermo.raw,raw" label="Single *.mzml or *.raw" argument="--source" >
+                <param name="source" type="data" format="mzml,thermo.raw" label="Single *.mzml or *.raw" argument="--source" >
                     <validator type="empty_field" />
                 </param>
             </when>
