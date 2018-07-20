@@ -5,7 +5,7 @@ MAINTAINER PhenoMeNal-H2020 Project <phenomenal-h2020-users@googlegroups.com>
 LABEL Description="Galaxy 18.01-pheno-dev for running inside Kubernetes."
 LABEL software="Galaxy Init"
 LABEL software.version="18.01-pheno-dev"
-LABEL version="1.5"
+LABEL version="1.6"
 
 RUN wget -O ephemeris.tar https://api.github.com/repos/galaxyproject/ephemeris/tarball/eeee87a57379b8b639b06c2a50038ef449c28d73 && \
     tar -xf ephemeris.tar && rm ephemeris.tar && \
@@ -32,6 +32,10 @@ COPY rules/k8s_destinations.py /galaxy-central/lib/galaxy/jobs/rules/k8s_destina
 
 # Galaxy tours which guide users through the subsequent steps in an analysis
 COPY config/plugins/tours/*.yaml config/plugins/tours/
+
+# Galaxy visualization plugins to add extra visualization capability to datasets
+COPY config/plugins/visualizations/isatab-viewer config/plugins/visualizations/isatab-viewer/
+COPY config/plugins/visualizations/isatab-viewer/static/ /galaxy-central/static/plugins/visualizations/isatab-viewer/static/
 
 COPY html/partners.png welcome/welcome_partners.png
 COPY html/PhenoMeNal_logo.png welcome/welcome_PhenoMeNal_logo.png
