@@ -452,7 +452,7 @@ assignment:
 - docker_image_override: pwiz
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: latest
+  docker_tag_override: v3.0.18205_cv1.2.51
   max_pod_retrials: 3
   tools_id:
   - msconvert2
@@ -599,14 +599,14 @@ assignment:
   - dimspy_hdf5_to_txt
   - dimspy_merge_peaklists
   - dimspy_get_peaklists
-- docker_image_override: ipo
-  docker_owner_override: phnmnl
-  docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: latest
-  max_pod_retrials: 3
-  tools_id:
-  - ipo4xcmsSet
-  - ipo4retgroup
+#- docker_image_override: ipo
+#  docker_owner_override: phnmnl
+#  docker_repo_override: container-registry.phenomenal-h2020.eu
+#  docker_tag_override: latest
+#  max_pod_retrials: 3
+#  tools_id:
+#  - ipo4xcmsSet
+#  - ipo4retgroup
 - docker_image_override: reshape2-melt
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu

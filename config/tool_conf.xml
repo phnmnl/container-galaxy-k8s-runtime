@@ -138,11 +138,11 @@
 
   <label id="phenomenal-ms" text="MS Data Analysis Tools" /> 
   <section name="XCMS" id="pheno-XCMS">
-    <!-- 
     <tool file="phenomenal/ms/msconvert2.xml"/>
-    -->
+    <!--
     <tool file="phenomenal/ms/ipo/ipo4xcmsSet.xml" labels="IPO"/>
     <tool file="phenomenal/ms/ipo/ipo4retgroup.xml" labels="IPO"/>
+    -->
     <tool file="phenomenal/ms/xcms/xcms-find-peaks.xml" labels="XCMS"/>
     <tool file="phenomenal/ms/xcms/xcms-split-peaks.xml" labels="XCMS"/>
     <tool file="phenomenal/ms/xcms/xcms-collect-peaks.xml" labels="XCMS"/>
