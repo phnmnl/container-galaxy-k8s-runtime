@@ -220,7 +220,6 @@
     <datatype extension="tandem" type="galaxy.datatypes.proteomics:TandemXML" mimetype="application/xml" display_in_upload="true" />
     <datatype extension="thermo.raw" type="galaxy.datatypes.proteomics:ThermoRAW" mimetype="application/octet-stream" display_in_upload="true" />
     <datatype extension="mzml" type="galaxy.datatypes.proteomics:MzML" mimetype="application/xml" display_in_upload="true"/>
-    <datatype extension="nmrml" type="galaxy.datatypes.proteomics:NmrML" mimetype="application/xml" display_in_upload="true" description="nmrML is an open mark-up language for NMR data." description_url="http://nmrml.org/schema/"/>
     <datatype extension="mgf" type="galaxy.datatypes.proteomics:Mgf" display_in_upload="true" />
     <datatype extension="wiff" type="galaxy.datatypes.proteomics:Wiff" display_in_upload="true" />
     <datatype extension="mzxml" type="galaxy.datatypes.proteomics:MzXML" mimetype="application/xml" display_in_upload="true" />
@@ -645,6 +644,7 @@
     <datatype extension="smat" type="galaxy.datatypes.plant_tribes:Smat" display_in_upload="true" />
 
     <!-- PhenoMeNal section -->
+    <datatype extension="nmrml" type="galaxy.datatypes.nmrml_datatype:NmrML" mimetype="application/xml" display_in_upload="true" description="nmrML is an open mark-up language for NMR data." description_url="http://nmrml.org/schema/"/>
     <datatype extension="no_unzip.zip" type="galaxy.datatypes.binary:CompressedZipArchive" subclass="true" display_in_upload="true" />
     <datatype extension="rdata.camera.positive" type="galaxy.datatypes.rdata_camera_datatype:RdataCameraPositive" mimetype="application/x-gzip" subclass="true" display_in_upload="true" />
     <datatype extension="rdata.camera.negative" type="galaxy.datatypes.rdata_camera_datatype:RdataCameraNegative" mimetype="application/x-gzip" subclass="true" display_in_upload="true" />
