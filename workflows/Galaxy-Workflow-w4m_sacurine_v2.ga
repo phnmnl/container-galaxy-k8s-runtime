@@ -2,7 +2,7 @@
     "uuid": "170a44fe-3b59-4abe-b061-99694498d9d5",
     "tags": [],
     "format-version": "0.1",
-    "name": "Metabolomics univariate and multivariate statistics (aka sacurine v2)",
+    "name": "Metabolomics univariate and multivariate statistics (aka sacurine workflow)",
     "steps": {
         "0": {
             "tool_id": "mtbls-dwnld",
