@@ -219,7 +219,7 @@ sub read_phenomenal_tools2container_yaml() {
 
 		# Loop on all tools of the container
 		for my $tool_id (@{$$container{tools_id}}) {
-			check_msg("ERROR", "TOOL", $tool_id, "Unknown tool found in container $name, file $yaml_file.") unless exists($TOOLS{$tool_id});
+			check_msg("WARNING", "TOOL", $tool_id, "Unknown tool found in container $name, file $yaml_file.") unless exists($TOOLS{$tool_id});
 			$TOOLS{$tool_id}->{container} = $CONTAINERS{$name};
 		}
 	}
@@ -294,7 +294,7 @@ sub check_container_tag($) {
 		check_msg("WARNING", "CONTAINER", $container->{name}, "Container tag is not set.");
 	}
 	elsif ($container->{tag} eq 'latest') {
-		check_msg("ERROR", "CONTAINER", $container->{name}, "Container tag is set to latest.");
+		check_msg("WARNING", "CONTAINER", $container->{name}, "Container tag is set to latest.");
 	}
 	elsif ($container->{tag} =~ m/^(dev_)?v.+_cv.+$/) {
 
