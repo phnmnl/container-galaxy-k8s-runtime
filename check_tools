@@ -256,6 +256,57 @@ sub read_tools_info() {
 	}
 }
 
+# Read Jenkins info {{{1
+################################################################
+
+sub read_jenkins_info() {
+
+	my $jenkins_url = "http://phenomenal-h2020.eu/jenkins/api/json?pretty=true&depth=2";
+	my $ua = LWP::UserAgent->new();
+	$ua->ssl_opts( verify_hostname => 0 );
+	my $res = $ua->request(new HTTP::Request GET => $jenkins_url);
+	if ($res->is_success) {
+		my $json = JSON::decode_json($res->content);
+		if (exists($json->{jobs})) {
+
+			# Loop on all jobs
+			foreach my $job (@{$json->{jobs}}) {
+				my $jenkins_project_name = $job->{name};
+				(my $container_id = $jenkins_project_name) =~ s/^(test-)?container-//;
+				if (exists($CONTAINERS{$container_id})) {
+					my %project;
+					$project{name} = $jenkins_project_name;
+					if (exists($job->{builds})) {
+
+						# Loop on all builds
+						my @builds;
+						foreach my $build (@{$job->{builds}}) {
+							my $name = $build->{displayName};
+							(my $tag = $name) =~ s/^.+$container_id:((dev_)?v[^ ]+_cv[^ ]+) .+$/$1/;
+							my $success = $build->{result} eq 'SUCCESS';
+							push(@builds, { tag => $tag, success => $success });
+						}
+						$project{builds} = \@builds;
+					}
+					if ($jenkins_project_name =~ /^test-/) {
+						$CONTAINERS{$container_id}->{jenkins}->{test_project} = \%project;
+					}
+					else {
+						$CONTAINERS{$container_id}->{jenkins}->{build_project} = \%project;
+					}
+				}
+			}
+			
+		}
+		else {
+			die "Cannot find section \"jobs\" in Jenkins report at $jenkins_url."
+		}
+	}
+	else {
+		die "Cannot contact Jenkins server at $jenkins_url.";
+	}
+}
+
 # Read containers info {{{1
 ################################################################
 
@@ -264,9 +315,8 @@ sub read_containers_info() {
 	if (keys(%CONTAINERS) == 0) {
 
 		read_tools_info();
-
-		# Read phenomenal_tools2container.yaml
 		read_phenomenal_tools2container_yaml();
+		read_jenkins_info();
 	}
 }
 
@@ -361,7 +411,7 @@ sub check_container_registry($) {
 	my ($container) = @_;
 
 	my $regsitry_container_name = "phnmnl/$container->{name}";
-	my $list_tags_url = "https://container-registry.phenomenal-h2020.eu/v2/$regsitry_container_name/tags/list";
+	my $list_tags_url = "https://container-registry.phenomenal-h2020.eu/v2/$regsitry_container_name/tags/list"; # See https://docs.docker.com/registry/spec/api/#listing-image-tags
 	my $ua = LWP::UserAgent->new();
 	$ua->ssl_opts( verify_hostname => 0 );
 	my $res = $ua->request(new HTTP::Request GET => $list_tags_url);
@@ -382,6 +432,41 @@ sub check_container_registry($) {
 	}
 }
 
+# Check container Jenkins jobs {{{1
+################################################################
+
+sub check_container_jenkins($) {
+
+	my ($container) = @_;
+
+	# Check build project
+	if ( ! exists($container->{jenkins}) || ! exists($container->{jenkins}->{build_project})) {
+		check_msg("ERROR", "CONTAINER", $container->{name}, "No build project \"container-$container->{name}\" found for this container on Jenkins server.");
+	}
+	elsif (exists($container->{jenkins}->{build_project}->{builds})) {
+
+		# Loop on all builds
+		my $success = undef;
+		foreach my $build (@{$container->{jenkins}->{build_project}->{builds}}) {
+			if ($build->{tag} eq $container->{tag}) {
+				$success = $build->{success};
+				last;
+			}
+		}
+		if ( ! defined($success)) {
+			check_msg("ERROR", "CONTAINER", $container->{name}, "No container tag");
+		}
+	}
+	else {
+		check_msg("ERROR", "CONTAINER", $container->{name}, "No builds found for this container on Jenkins server.");
+	}
+	
+	# Check test project
+# http://jenkins.example.com/api/json?tree=jobs[name,builds[number,actions[parameters[name,value]]]]&pretty=true
+	# TODO Check that container has been built on Jenkins and tested.
+# TODO Check latest container version on Jenkins.
+}
+
 # Check containers {{{1
 ################################################################
 
@@ -395,6 +480,7 @@ sub check_containers() {
 		check_container_tag($container);
 		check_container_repos($container);
 		check_container_registry($container);
+		check_container_jenkins($container);
 		check_msg("SUCCESS", "CONTAINER", $container_id, "Container checked successfully.") unless $DATA{container}->{$container_id}->{messages}->{error} || $DATA{container}->{$container_id}->{messages}->{warning};
 	}
 }
@@ -508,7 +594,3 @@ check_containers() if $CHECK_CONTAINERS;
 check_workflows if $CHECK_WORKFLOWS;
 
 exit(1) if $N_ERRORS;
-# TODO Check that container exists
-# TODO Check latest container version on Jenkins.
-# TODO Pay attention to do not publish names in this file.
-# TODO Try to publish report on slack, on some channel (public-admin or release_dalcotidine?).
