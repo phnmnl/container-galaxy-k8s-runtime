@@ -215,7 +215,7 @@ sub read_phenomenal_tools2container_yaml() {
 
 		my $name = $$container{docker_image_override};
 		my $tag = $$container{docker_tag_override};
-		$CONTAINERS{$name} = { name => $name, tag => $tag };
+		$CONTAINERS{$name} = { name => $name, tag => $tag, tools => $$container{tools_id} };
 
 		# Loop on all tools of the container
 		for my $tool_id (@{$$container{tools_id}}) {
@@ -300,8 +300,14 @@ sub check_container_tag($) {
 
 		# Extract tool version
 		(my $tool_version = $container->{tag}) =~ s/^(dev_)?v(.+)_cv.+$/$2/;
-		# TODO check that all tools of this container have the right version set
-		#check_msg("ERROR", "CONTAINER", $container->{name}, "Version ($tool_version) contained inside container tag $tool->{container}->{tag} does not match the version ($tool->{version}) defined inside the tool XML file.") unless $tool_version eq $tool->{version};
+		check_msg("ERROR", "CONTAINER", $container->{name}, "Unable to extract tool version from container tag $container->{tag}") unless $tool_version;
+
+		# Loop on all tools
+		foreach my $tool_id (@{$container->{tools}}) {
+			if (exists($TOOLS{$tool_id}->{version}) && $TOOLS{$tool_id}->{version} ne $tool_version) {
+				check_msg("WARNING", "CONTAINER", $container->{name}, "Tool $tool_id has version $TOOLS{$tool_id}->{version}, but tool version in container tag $container->{tag} is $tool_version.")
+			}
+		}
 	}
 	else {
 		check_msg("ERROR", "CONTAINER", $container->{name}, "Container tag $container->{tag} does not match the format '^(dev_)?v.+_cv.+\$'.");
@@ -389,7 +395,7 @@ sub check_containers() {
 		check_container_tag($container);
 		check_container_repos($container);
 		check_container_registry($container);
-		check_msg("SUCCESS", "CONTAINER", $container_id, "Container checked successfully.") unless $DATA{container}->{$container_id}->{messages}->{error};
+		check_msg("SUCCESS", "CONTAINER", $container_id, "Container checked successfully.") unless $DATA{container}->{$container_id}->{messages}->{error} || $DATA{container}->{$container_id}->{messages}->{warning};
 	}
 }
 
@@ -486,7 +492,7 @@ sub check_tools() {
 		my $tool = $TOOLS{$tool_id};
 		check_command($tool);
 		check_job_destination($tool);
-		check_msg("SUCCESS", "TOOL", $tool_id, "Tool checked successfully.") unless $DATA{tool}->{$tool_id}->{messages}->{error};
+		check_msg("SUCCESS", "TOOL", $tool_id, "Tool checked successfully.") unless $DATA{tool}->{$tool_id}->{messages}->{error} || $DATA{tool}->{$tool_id}->{messages}->{warning};
 	}
 }
 
