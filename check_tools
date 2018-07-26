@@ -343,7 +343,36 @@ sub check_container_repos($) {
 		my $r = Git::Repository->new(work_tree => $dir );
 	}
 	else {
-		check_msg("ERROR", "CONTAINER", $container->{name}, "Cannot find container GitHub repository $repos_name at $repos_url. $res->message");
+		check_msg("ERROR", "CONTAINER", $container->{name}, "Cannot find container GitHub repository $repos_name at $repos_url. " . $res->message);
+	}
+}
+
+# Check container registry {{{1
+################################################################
+
+sub check_container_registry($) {
+
+	my ($container) = @_;
+
+	my $regsitry_container_name = "phnmnl/$container->{name}";
+	my $list_tags_url = "https://container-registry.phenomenal-h2020.eu/v2/$regsitry_container_name/tags/list";
+	my $ua = LWP::UserAgent->new();
+	$ua->ssl_opts( verify_hostname => 0 );
+	my $res = $ua->request(new HTTP::Request GET => $list_tags_url);
+	if ($res->is_success) {
+		my $json = JSON::decode_json($res->content);
+		if (exists($json->{tags})) {
+			my @tags = @{$json->{tags}};
+			if (grep(/^$container->{tag}$/, @tags) == 0) {
+				check_msg("ERROR", "CONTAINER", $container->{name}, "Tag $container->{tag} cannot be found in PhenoMeNal registry.");
+			}
+		}
+		else {
+			check_msg("ERROR", "CONTAINER", $container->{name}, "No tags found in PhenoMeNal registry.");
+		}
+	}
+	else {
+		check_msg("ERROR", "CONTAINER", $container->{name}, "No image found for container inside PhenoMeNal registry: $list_tags_url. " . $res->message);
 	}
 }
 
@@ -359,6 +388,7 @@ sub check_containers() {
 		my $container = $CONTAINERS{$container_id};
 		check_container_tag($container);
 		check_container_repos($container);
+		check_container_registry($container);
 		check_msg("SUCCESS", "CONTAINER", $container_id, "Container checked successfully.") unless $DATA{container}->{$container_id}->{messages}->{error};
 	}
 }
