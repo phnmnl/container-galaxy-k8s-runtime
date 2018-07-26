@@ -13,6 +13,7 @@ use File::Temp;
 use Getopt::Long;
 use Git::Repository;
 use JSON;
+use LWP::Protocol::https; # Needed by LWP to use HTTPS protocol.
 use LWP::UserAgent;
 use Term::ANSIColor;
 use XML::Simple;
@@ -342,7 +343,7 @@ sub check_container_repos($) {
 		my $r = Git::Repository->new(work_tree => $dir );
 	}
 	else {
-		check_msg("ERROR", "CONTAINER", $container->{name}, "Cannot find container GitHub repository $repos_name at $repos_url.");
+		check_msg("ERROR", "CONTAINER", $container->{name}, "Cannot find container GitHub repository $repos_name at $repos_url. $res->message");
 	}
 }
 
