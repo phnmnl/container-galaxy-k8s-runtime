@@ -279,14 +279,16 @@ sub read_jenkins_info() {
 					if (exists($job->{builds})) {
 
 						# Loop on all builds
-						my @builds;
+						my %builds;
 						foreach my $build (@{$job->{builds}}) {
+							my $number = $build->{number};
 							my $name = $build->{displayName};
-							(my $tag = $name) =~ s/^.+$container_id:((dev_)?v[^ ]+_cv[^ ]+) .+$/$1/;
+							(my $tag = $name) =~ s/^.+$container_id[^:]*:((dev_)?v[^ ]+_cv[^ ]+) .+$/$1/;
 							my $success = $build->{result} eq 'SUCCESS';
-							push(@builds, { tag => $tag, success => $success });
+							$builds{$number} = { number => $number, tag => $tag, success => $success };
 						}
-						$project{builds} = \@builds;
+						$project{builds} = \%builds;
+						$project{last_build} = $job->{lastBuild}->{number} if exists($job->{lastBuild});
 					}
 					if ($jenkins_project_name =~ /^test-/) {
 						$CONTAINERS{$container_id}->{jenkins}->{test_project} = \%project;
@@ -445,16 +447,29 @@ sub check_container_jenkins($) {
 	}
 	elsif (exists($container->{jenkins}->{build_project}->{builds})) {
 
-		# Loop on all builds
-		my $success = undef;
-		foreach my $build (@{$container->{jenkins}->{build_project}->{builds}}) {
-			if ($build->{tag} eq $container->{tag}) {
-				$success = $build->{success};
-				last;
+		# Look for build number
+		my $build_number = undef;
+		if ($container->{tag} eq 'latest') {
+			$build_number = $container->{jenkins}->{build_project}->{last_build};
+		}
+		else {
+			foreach my $build (values(%{$container->{jenkins}->{build_project}->{builds}})) {
+				if ($build->{tag} eq $container->{tag}) {
+					$build_number = $build->{number};
+					last;
+				}
 			}
 		}
-		if ( ! defined($success)) {
-			check_msg("ERROR", "CONTAINER", $container->{name}, "No container tag");
+		if ( ! defined($build_number)) {
+			check_msg("ERROR", "CONTAINER", $container->{name}, "The tag $container->{tag} was not found in Jenkins server.");
+		}
+		elsif ( ! $container->{jenkins}->{build_project}->{builds}->{$build_number}->{success}) {
+			check_msg("ERROR", "CONTAINER", $container->{name}, "The tag $container->{tag} has been found in Jenkins server, but is marked as FAILED.");
+		}
+		if (exists($container->{jenkins}->{build_project}->{last_build}) && $container->{tag} ne 'latest') {
+			my $last_build = $container->{jenkins}->{build_project}->{last_build};
+			my $last_build_tag = $container->{jenkins}->{build_project}->{builds}->{$last_build}->{tag};
+			check_msg("WARNING", "CONTAINER", $container->{name}, "A more recent version ($last_build_tag) of the container has been built on Jenkins server. Current used tag is $container->{tag}.") unless $last_build_tag eq $container->{tag};
 		}
 	}
 	else {
@@ -462,9 +477,17 @@ sub check_container_jenkins($) {
 	}
 	
 	# Check test project
-# http://jenkins.example.com/api/json?tree=jobs[name,builds[number,actions[parameters[name,value]]]]&pretty=true
-	# TODO Check that container has been built on Jenkins and tested.
-# TODO Check latest container version on Jenkins.
+	if ( ! exists($container->{jenkins}) || ! exists($container->{jenkins}->{test_project})) {
+		check_msg("ERROR", "CONTAINER", $container->{name}, "No build project \"test-container-$container->{name}\" found for this container on Jenkins server.");
+	}
+	elsif (exists($container->{jenkins}->{test_project}->{builds}) && exists($container->{jenkins}->{test_project}->{last_build})) {
+		my $last_build = $container->{jenkins}->{test_project}->{last_build};
+		my $build = $container->{jenkins}->{test_project}->{builds}->{$last_build};
+		check_msg("WARNING", "CONTAINER", $container->{name}, "Last build of test project failed.") unless $build->{success};
+	}
+	else {
+		check_msg("ERROR", "CONTAINER", $container->{name}, "No builds found for test project of this container on Jenkins server.");
+	}
 }
 
 # Check containers {{{1
