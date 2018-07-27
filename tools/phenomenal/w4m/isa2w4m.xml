@@ -1,5 +1,5 @@
 <!-- vi: se fdm=marker : -->
-<tool id="isa2w4m" name="ISA to W4M" version="1.0.4">
+<tool id="isa2w4m" name="ISA to W4M" version="1.1.0">
 
 	<description>Convert ISA data type into W4M format</description>
 
