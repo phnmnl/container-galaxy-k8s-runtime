@@ -328,11 +328,7 @@ assignment:
   docker_tag_override: latest
   max_pod_retrials: 3
   tools_id:
-  - isa_get_data_files_list
-  - isa_get_data_files_collection
   - isa_get_factors_summary
-  - isa_get_study_factor_values
-  - isa_get_study_factors
   - ISAslicer2
   - ISAslicer2_data_filter
 - docker_image_override: metfrag-cli-batch
