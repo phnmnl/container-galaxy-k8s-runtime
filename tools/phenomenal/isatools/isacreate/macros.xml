@@ -5,7 +5,7 @@
     <xml name="requirements">
         <requirements>
             <requirement type="package" version="6.7">click</requirement>
-            <requirement type="package" version="0.10.0">isatools</requirement>
+            <requirement type="package" version="0.10.2">isatools</requirement>
         </requirements>
     </xml>
 
@@ -41,18 +41,18 @@
         <section name="treatment_plan" title="Treatment Plan">
             <conditional name="study_type">
                 <param name="study_type_selector" type="select" label="Type of Study" help="See examples in help section below.">
-                    <option value="full_factorial_intervention">full factorial intervention</option>
-                    <option value="fractional_factorial_intervention">fractional factorial intervention</option>
-                    <option value="observation">observation</option>
+                    <option value="full_factorial">full factorial design</option>
+                    <option value="fractional_factorial">fractional factorial design</option>
+                    <!--<option value="observation">observation</option>-->
                 </param>
-                <when value="full_factorial_intervention">
+                <when value="full_factorial">
                     <conditional name="multiple_interventions">
                         <param name="multiple_interventions_selector" type="select" label="Single or multiple interventions?">
                             <option value="single" selected="True">single</option>
                             <option value="multiple">multiple</option>
                         </param>
                         <when value="single">
-                            <param name="group_size" type="text" label="Group Size" value="3">
+                            <param name="group_size" type="text" label="Group Size" value="3" help="The group size specified here will be applied to all study groups.">
                                 <validator type="in_range" min="1" max="1000" message="Study group size must be less than 1000."/>
                             </param>
                             <conditional name="intervention_type">
@@ -94,7 +94,7 @@
                             <param name="group_size" type="text" label="Group Size" value="3">
                                 <validator type="in_range" min="1" max="1000" message="Study group size must be less than 1000."/>
                             </param>
-                            <repeat name="multiple_intervention" title="Multiple Intervention">
+                            <repeat name="multiple_interventions" title="Multiple Interventions">
                                 <conditional name="intervention_type">
                                     <param name="intervention_type_selector" type="select" label="Intervention Type">
                                         <option value="chemical intervention" selected="True">chemical intervention</option>
@@ -133,11 +133,11 @@
                         </when>
                     </conditional>
                 </when>
-                <when value="fractional_factorial_intervention">
+                <when value="fractional_factorial">
                     <conditional name="balance">
                         <param name="balanced_groups" type="boolean" label="Balanced groups?" checked="true"/>
                         <when value="true">
-                            <conditional name="multiple_intervention">
+                            <conditional name="multiple_interventions">
                                 <param name="multiple_interventions_selector" type="select" label="Single or multiple interventions?">
                                     <option value="single" selected="True">single</option>
                                     <option value="multiple">multiple</option>
@@ -162,7 +162,7 @@
                                     <param name="group_size" type="text" label="Group Size" value="3">
                                         <validator type="in_range" min="1" max="1000" message="Study group size must be less than 1000."/>
                                     </param>
-                                    <repeat name="multiple_intervention" title="Multiple intervention">
+                                    <repeat name="multiple_interventions" title="Multiple interventions">
                                         <param name="intervention_type_selector" type="select" label="Intervention Type">
                                             <option value="chemical intervention" selected="True">chemical intervention</option>
                                             <option value="dietary intervention">dietary intervention</option>
@@ -179,7 +179,7 @@
                             </conditional>
                         </when>
                         <when value="false">
-                            <conditional name="multiple_intervention">
+                            <conditional name="multiple_interventions">
                                 <param name="multiple_interventions_selector" type="select" label="Single or multiple interventions?">
                                     <option value="single" selected="True">single</option>
                                     <option value="multiple">multiple</option>
@@ -201,7 +201,7 @@
                                     </repeat>
                                 </when>
                                 <when value="multiple">
-                                    <repeat name="multiple_intervention" title="Multiple Intervention">
+                                    <repeat name="multiple_interventions" title="Multiple Interventions">
                                         <param name="intervention_type_selector" type="select" label="Intervention type">
                                         <option value="chemical intervention" selected="True">chemical intervention</option>
                                         <option value="dietary intervention">dietary intervention</option>
@@ -222,7 +222,7 @@
                         </when>
                     </conditional>
                 </when>
-                <when value="observation"/>
+                <!--<when value="observation"/>-->
             </conditional>
         </section>
     </xml>
@@ -505,7 +505,7 @@ All the study design related information is semantically marked up using terms f
                                     <option value="2D 1H-13C NMR"/>
                                 </param>
                                 <when value="1D 1H NMR">
-                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR instrument')"/>
+                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR Instrument')"/>
                                     <param name="pulse_sequence" type="select" label="Pulse Sequence"  dynamic_options="get_terms('1d 1H pulse sequence')"/>
                                     <param name="magnet" type="text" label="NMR Magnet Power" value="600 Mhz"/>
                                     <param name="technical_replicates" type="integer" label="Number of Technical Replicates" value="1">
@@ -513,7 +513,7 @@ All the study design related information is semantically marked up using terms f
                                     </param>
                                 </when>
                                 <when value="1D 13C NMR">
-                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR instrument')"/>
+                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR Instrument')"/>
                                     <param name="pulse_sequence" type="select" label="Pulse Sequence"  dynamic_options="get_terms('1d 13C pulse sequence')"/>
                                     <param name="magnet" type="text" label="NMR Magnet Power" value="600 Mhz"/>
                                     <param name="technical_replicates" type="integer" label="Number of Technical Replicates" value="1">
@@ -521,7 +521,7 @@ All the study design related information is semantically marked up using terms f
                                     </param>
                                 </when>
                                 <when value="2D 1H-1H NMR">
-                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR instrument')"/>
+                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR Instrument')"/>
                                     <param name="pulse_sequence" type="select" label="Pulse Sequence"  dynamic_options="get_terms('2d 1H-1H pulse sequence')"/>
                                     <param name="magnet" type="text" label="NMR Magnet Power" value="600 Mhz"/>
                                     <param name="technical_replicates" type="integer" label="Number of Technical Replicates" value="1">
@@ -529,7 +529,7 @@ All the study design related information is semantically marked up using terms f
                                     </param>
                                 </when>
                                 <when value="2D 13C-13C NMR">
-                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR instrument')"/>
+                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR Instrument')"/>
                                     <param name="pulse_sequence" type="select" label="Pulse Sequence"  dynamic_options="get_terms('2d 13C-13C pulse sequence')"/>
                                     <param name="magnet" type="text" label="NMR Magnet Power" value="600 Mhz"/>
                                     <param name="technical_replicates" type="integer" label="Number of Technical Replicates" value="1">
@@ -537,7 +537,7 @@ All the study design related information is semantically marked up using terms f
                                     </param>
                                 </when>
                                 <when value="2D 1H-13C NMR">
-                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR instrument')"/>
+                                    <param name="nmr_instrument" type="select" label="NMR Instrument"  dynamic_options="get_terms('NMR Instrument')"/>
                                     <param name="pulse_sequence" type="select" label="Pulse Sequence"  dynamic_options="get_terms('2d 1H-13C pulse sequence')"/>
                                     <param name="magnet" type="text" label="NMR Magnet Power" value="600 Mhz"/>
                                     <param name="technical_replicates" type="integer" label="Number of Technical Replicates" value="1">
