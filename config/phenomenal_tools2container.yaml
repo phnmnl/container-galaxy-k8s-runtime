@@ -334,6 +334,7 @@ assignment:
   - isa_get_study_factor_values
   - isa_get_study_factors
   - ISAslicer2
+  - ISAslicer2_data_filter
 - docker_image_override: metfrag-cli-batch
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu

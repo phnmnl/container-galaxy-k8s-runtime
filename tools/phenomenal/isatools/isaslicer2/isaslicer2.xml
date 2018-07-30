@@ -79,10 +79,6 @@
     </inputs>
     <outputs>
         <data format="json" name="output" label="Study sliced data files list"/>
-        <!--<collection type="list" label="Factor-sliced data file collection" name="raw_files">-->
-            <!--<filter>input_type['collection_output'] == 'true'</filter>-->
-            <!--<discover_datasets pattern="(?P&lt;designation&gt;.+)\.[a-zA-Z0-9]+$"/>-->
-        <!--</collection>-->
     </outputs>
 
     <tests>

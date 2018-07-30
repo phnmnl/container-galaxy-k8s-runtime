@@ -69,6 +69,7 @@
      <tool file="phenomenal/isatools/isaslicer/isa_get_factors_summary.xml" labels="ISA"/>
      <tool file="phenomenal/isatools/visualizations/isa_factors_viz.xml" labels="ISA"/>
      <tool file="phenomenal/isatools/isaslicer2/isaslicer2.xml" labels="ISA"/>
+     <tool file="phenomenal/isatools/isaslicer2/isaslicer2_data_filter.xml" labels="ISA"/>
    </section> 
 
   <section name="Study Raw Data Extraction" id="pheno_extract_rawdata">
