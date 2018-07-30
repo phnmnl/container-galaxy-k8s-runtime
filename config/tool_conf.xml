@@ -62,14 +62,10 @@
    </section>
     
    <section name="Study Metadata Exploration" id="explore_metadata">
-     <tool file="phenomenal/isatools/isaslicer/isa_get_study_factors.xml" labels="ISA"/>
-     <tool file="phenomenal/isatools/isaslicer/isa_get_study_factor_values.xml" labels="ISA"/>
-     <tool file="phenomenal/isatools/isaslicer/isa_get_data_files_list.xml" labels="ISA"/>
-     <tool file="phenomenal/isatools/isaslicer/isa_get_data_files_collection.xml" labels="ISA"/>
-     <tool file="phenomenal/isatools/isaslicer/isa_get_factors_summary.xml" labels="ISA"/>
-     <tool file="phenomenal/isatools/visualizations/isa_factors_viz.xml" labels="ISA"/>
      <tool file="phenomenal/isatools/isaslicer2/isaslicer2.xml" labels="ISA"/>
      <tool file="phenomenal/isatools/isaslicer2/isaslicer2_data_filter.xml" labels="ISA"/>
+     <tool file="phenomenal/isatools/isaslicer/isa_get_factors_summary.xml" labels="ISA"/>
+     <tool file="phenomenal/isatools/visualizations/isa_factors_viz.xml" labels="ISA"/>
    </section> 
 
   <section name="Study Raw Data Extraction" id="pheno_extract_rawdata">
