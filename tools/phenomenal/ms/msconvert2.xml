@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!--This is a configuration file for the integration of a tools into Galaxy (https://galaxyproject.org/). This file was automatically generated using CTD2Galaxy.-->
 <!--Proposed Tool Section: [File Handling]-->
-<tool id="msconvert2" name="msconvert2" version="3.0.9098-2.2">
+<tool id="msconvert2" name="msconvert2" version="1.2">
 <!--
   <requirements>
     <container type="docker">phnmnl/pwiz</container>
