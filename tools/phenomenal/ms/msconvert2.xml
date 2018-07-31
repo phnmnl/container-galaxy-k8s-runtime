@@ -11,9 +11,8 @@
   <command><![CDATA[
     mkdir -p \$PWD/tmp_msconvert/out;
     unzip -q -d \$PWD/tmp_msconvert/out $infile;
-    chown -R xclient:xusers \$PWD/tmp_msconvert;
-    su xclient -c "wine '/home/xclient/.wine/drive_c/Program Files/ProteoWizard/ProteoWizard/msconvert.exe' \$PWD/tmp_msconvert/out --mzML -o \$PWD/tmp_msconvert" 2>/dev/null;
-    sudo mv \$PWD/tmp_msconvert/out.mzML $outfile
+    wine 'msconvert.exe' \$PWD/tmp_msconvert/out --mzML -o \$PWD/tmp_msconvert;
+    mv \$PWD/tmp_msconvert/out.mzML $outfile
   ]]></command>
   <inputs>
     <param name="infile" type="data" format="data" value="&lt;class 'CTDopts.CTDopts._Null'&gt;" optional="False" label="Input file to convert" />
@@ -22,83 +21,87 @@
     <data name="outfile" type="data" format="mzml"/>
   </outputs>
   <help>
-	.. class:: infomark
 
-	| **Tool update: See the 'NEWS' section at the bottom of the page**
-
-	---------------------------------------------------
-
-	.. class:: infomark
-
-	**Authors**
-
-	| Several hundred labs around the world are using ProteoWizard within their development processes and computational workflows. We'd like to thank the many users who have contributed feedback to the project. We also thank the TPP team for their ongoing support.
-    	| See http://proteowizard.sourceforge.net/team.html for the full list of contributors.
-
-	.. class:: infomark
-
-        **Publications**
-
-	Chambers MC, Maclean B, Burke R, Amodei D, Ruderman DL, Neumann S, Gatto L, Fischer B, Pratt B, Egertson J, Hoff K, Kessner D, Tasman N, Shulman N, Frewen B, Baker TA, Brusniak MY, Paulse C, Creasy D, Flashner L, Kani K, Moulding C, Seymour SL, Nuwaysir LM, Lefebvre B, Kuhlmann F, Roark J, Rainer P, Detlev S, Hemenway T, Huhmer A, Langridge J, Connolly B, Chadick T, Holly K, Eckels J, Deutsch EW, Moritz RL, Katz JE, Agus DB, MacCoss M, Tabb DL, Mallick P. A cross-platform toolkit for mass spectrometry and proteomics. Nat Biotechnol. 2012 Oct;30(10):918-20. doi: 10.1038/nbt.2377. PubMed PMID: 23051804; PubMed Central PMCID: PMC3471674.
-
-	.. class:: infomark
-
-	**Licensing**
-
-	| Please see LICENSES/LICENSE, this Apache License Covers Core ProteoWizard Tools and Library. This software does, however, depend on other software libraries which place further restrictions on its use and redistribution, see below.
-ADDENDUM TO APACHE LICENSE
-
-	| To the best of our ability we deliver this software to you under the Apache 2.0 License listed below (the source code is available in the ProteoWizard project). This software does, however, depend on other software libraries which place further restrictions on its use and redistribution. By accepting the license terms for this software, you agree to comply with the restrictions imposed on you by the license agreements of the software libraries on which it depends:
-
-    		- AB Sciex WIFF Reader Library
-    		- Agilent Mass Hunter Data Access Component Library
-   		- Bruker CompassXtract
-    		- Shimadzu SFCS
-    		- Thermo-Scientific MSFileReader Library
-    		- Waters Raw Data Access Component Library
-
-	| NOTE: If you do not plan to redistribute this software yourself, then you are the "end-user" in the above agreements.
-
-	---------------------------------------------------
-
-	==========
-	msconvert2
-	==========
-
-	-----------
-	Description
-	-----------
-
-	| Converts between different MS file formats. For more information, visit http://proteowizard.sourceforge.net/tools/msconvert.html
-
-	-----------
-	Input files
-	-----------
-
-	+------------------------------+------------+
-	| File                         |   Format   |
-	+==============================+============+
-	| 1)  Raw MS data file         |    raw     |
-	+------------------------------+------------+
-
-	------------
-	Output files
-	------------
+.. class:: infomark
 	
-	outfile
-		| mzML file
-		|
+| **Tool update: See the 'NEWS' section at the bottom of the page**
 
-	---------------------------------------------------
+---------------------------------------------------
 
-	----
-	NEWS
-	----
+.. class:: infomark
 
-	CHANGES IN VERSION 1.2
-	======================
+**Authors**
 
-	- conversion of Bruker files
+| Several hundred labs around the world are using ProteoWizard within their development processes and computational workflows. We'd like to thank the many users who have contributed feedback to the project. We also thank the TPP team for their ongoing support.
+| See http://proteowizard.sourceforge.net/team.html for the full list of contributors.
+
+
+.. class:: infomark
+
+**Publications**
+
+Chambers MC, Maclean B, Burke R, Amodei D, Ruderman DL, Neumann S, Gatto L, Fischer B, Pratt B, Egertson J, Hoff K, Kessner D, Tasman N, Shulman N, Frewen B, Baker TA, Brusniak MY, Paulse C, Creasy D, Flashner L, Kani K, Moulding C, Seymour SL, Nuwaysir LM, Lefebvre B, Kuhlmann F, Roark J, Rainer P, Detlev S, Hemenway T, Huhmer A, Langridge J, Connolly B, Chadick T, Holly K, Eckels J, Deutsch EW, Moritz RL, Katz JE, Agus DB, MacCoss M, Tabb DL, Mallick P. A cross-platform toolkit for mass spectrometry and proteomics. Nat Biotechnol. 2012 Oct;30(10):918-20. doi: 10.1038/nbt.2377. PubMed PMID: 23051804; PubMed Central PMCID: PMC3471674.
+
+
+.. class:: infomark
+
+**Licensing**
+
+| Please see LICENSES/LICENSE, this Apache License Covers Core ProteoWizard Tools and Library. This software does, however, depend on other software libraries which place further restrictions on its use and redistribution, see below.
+
+***ADDENDUM TO APACHE LICENSE***
+
+| To the best of our ability we deliver this software to you under the Apache 2.0 License listed below (the source code is available in the ProteoWizard project). This software does, however, depend on other software libraries which place further restrictions on its use and redistribution. By accepting the license terms for this software, you agree to comply with the restrictions imposed on you by the license agreements of the software libraries on which it depends:
+
+	- AB Sciex WIFF Reader Library
+    	- Agilent Mass Hunter Data Access Component Library
+   	- Bruker CompassXtract
+    	- Shimadzu SFCS
+    	- Thermo-Scientific MSFileReader Library
+    	- Waters Raw Data Access Component Library
+
+| NOTE: If you do not plan to redistribute this software yourself, then you are the "end-user" in the above agreements.
+
+---------------------------------------------------
+
+==========
+msconvert2
+==========
+
+-----------
+Description
+-----------
+
+| Converts between different MS file formats. For more information, visit http://proteowizard.sourceforge.net/tools/msconvert.html
+
+-----------
+Input files
+-----------
+
++------------------------------+------------+
+| File                         |   Format   |
++==============================+============+
+| 1)  Raw MS data file         |    raw     |
++------------------------------+------------+
+
+------------
+Output files
+------------
+	
+outfile
+	| mzML file
+	|
+
+---------------------------------------------------
+
+----
+NEWS
+----
+	
+CHANGES IN VERSION 1.2
+======================
+
+- conversion of Bruker files
 
   </help>
 </tool>
