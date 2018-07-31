@@ -449,10 +449,10 @@ assignment:
   max_pod_retrials: 1
   tools_id:
   - nmrml2isa
-- docker_image_override: pwiz
+- docker_image_override: pwiz-i-agree-to-the-vendor-licenses
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: dev_v3.0.18205_cv1.2.50
+  docker_tag_override: v3.0.18205_cv1.3.58
   max_pod_retrials: 3
   tools_id:
   - msconvert2

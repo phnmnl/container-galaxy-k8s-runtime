@@ -251,7 +251,7 @@
     <tool id="generic_filter" destination="dynamic-k8s-small" resources="all"/>
     <tool id="Batch_correction" destination="dynamic-k8s-small" resources="all"/>
     <tool id="normalization" destination="dynamic-k8s-small" resources="all"/>
-    <!-- <tool id="msconvert2" destination="msconvert2-container"/> -->
+    <tool id="msconvert2" destination="dynamic-k8s-small" resources="all"/>
     <!-- new NMR -->
     <tool id="metabolab" destination="dynamic-k8s-large" resources="all"/>
     <tool id="mtbls_nmr_raw_dummy_importer" destination="dynamic-k8s-small" resources="all"/>
