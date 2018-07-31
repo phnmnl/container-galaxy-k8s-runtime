@@ -325,15 +325,12 @@ assignment:
 - docker_image_override: mtblisa
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v0.10.0_cv0.7.10.98
+  docker_tag_override: v0.10.2_cv0.7.14.102
   max_pod_retrials: 3
   tools_id:
-  - isa_get_data_files_list
-  - isa_get_data_files_collection
   - isa_get_factors_summary
-  - isa_get_study_factor_values
-  - isa_get_study_factors
   - ISAslicer2
+  - ISAslicer2_data_filter
 - docker_image_override: metfrag-cli-batch
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
