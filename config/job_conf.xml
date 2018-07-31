@@ -458,12 +458,9 @@
     <tool id="ecomet_seasons_nmds" destination="dynamic-k8s-large" resources="all"/>
     <!-- ISA related tools -->
     <tool id="isacreate_metabo" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="isa_get_data_files_list" destination="dynamic-k8s-tiny" resources="all"/>
-    <tool id="isa_get_data_files_collection" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_get_factors_summary" destination="dynamic-k8s-tiny" resources="all"/>
-    <tool id="isa_get_study_factor_values" destination="dynamic-k8s-tiny" resources="all"/>
-    <tool id="isa_get_study_factors" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="ISAslicer2" destination="dynamic-k8s-tiny" resources="all"/>
+    <tool id="ISAslicer2_data_filter" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isatab2json" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isatab_validator" destination="dynamic-k8s-tiny" resources="all"/>
     <tool id="isa_factors_viz" destination="dynamic-k8s-small" resources="all"/>

@@ -48,11 +48,10 @@
                 <!--<param name="collection_output" type="boolean" checked="false" label="Output new dataset collection"/>-->
             </when>
         </conditional>
-        <section name="query" title="Query Builder" expanded="true">
+        <section name="query" title="Query Builder" expanded="true" help="Queries attempt to match all of the conditions you specify in this section. Please consider each criteria in combinations of logical conjunctions (e.g. Factor Selection 1 AND Characteristics Selection 1, etc.).">
             <param name="measurement_type" type="text" label="Measurement Type." help="e.g. metabolite profiling. To select specific assays, please ensure both measurement and technology types are provided."/>
             <param name="technology_type" type="text" label="Technology Type." help="e.g. mass spectrometry. Leave both measurement and technology types blank if you want to query across all assays."/>
-            <param name="sample_material_type" type="text" label="Sample Material Type." help="e.g. blood. Leave blank if you want to query across all sample types."/>
-            <repeat name="factor_selection" title="Factor selection criteria" default="0">
+            <repeat name="factor_selection" title="Factor selection criteria" default="0" help="Search across all sample Factor Values in a study.">
                 <param name="factor_name" type="text" label="Factor name to filter on." help="Factor name relevant to the specified MetaboLights study. e.g. genotype.">
                     <validator type="empty_field" message="Factor name must not be empty"/>
                 </param>
@@ -60,14 +59,26 @@
                     <validator type="empty_field" message="Factor value must not be empty"/>
                 </param>
             </repeat>
+            <repeat name="characteristics_selection" title="Characteristics selection criteria" default="0" help="Search across all sample Characteristics in a study.">
+                <param name="characteristic_name" type="text" label="Characteristic name to filter on." help="Characteristic name relevant to the specified MetaboLights study. e.g. Organism part.">
+                    <validator type="empty_field" message="Characteristic name must not be empty"/>
+                </param>
+                <param name="characteristic_value" type="text" label="Characteristic value to filter on." help="Characteristic value relevant to the specified MetaboLights study. e.g. blood.">
+                    <validator type="empty_field" message="Characteristic value must not be empty"/>
+                </param>
+            </repeat>
+            <repeat name="parameter_selection" title="Parameter selection criteria" default="0" help="Search across all Parameter Values in a study.">
+                <param name="parameter_name" type="text" label="Parameter name to filter on." help="Parameter name relevant to the specified MetaboLights study. e.g. Scan polarity.">
+                    <validator type="empty_field" message="Parameter name must not be empty"/>
+                </param>
+                <param name="parameter_value" type="text" label="Parameter value to filter on." help="Parameter value relevant to the specified MetaboLights study. e.g. positive.">
+                    <validator type="empty_field" message="Parameter value must not be empty"/>
+                </param>
+            </repeat>
         </section>
     </inputs>
     <outputs>
         <data format="json" name="output" label="Study sliced data files list"/>
-        <!--<collection type="list" label="Factor-sliced data file collection" name="raw_files">-->
-            <!--<filter>input_type['collection_output'] == 'true'</filter>-->
-            <!--<discover_datasets pattern="(?P&lt;designation&gt;.+)\.[a-zA-Z0-9]+$"/>-->
-        <!--</collection>-->
     </outputs>
 
     <tests>
