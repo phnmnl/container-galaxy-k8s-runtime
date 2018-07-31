@@ -1,1 +1,197 @@
-{"uuid": "f8f99742-b321-4647-919f-cf985c3e1881", "tags": [], "format-version": "0.1", "name": "ISA Create-Validate-Upload", "steps": {"0": {"tool_id": "isacreate_metabo", "tool_version": "1.2.0", "outputs": [{"type": "isa-tab", "name": "output"}], "workflow_outputs": [], "input_connections": {}, "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"treatment_plan\": \"{\\\"study_type\\\": {\\\"study_type_selector\\\": \\\"full_factorial_intervention\\\", \\\"__current_case__\\\": 0, \\\"multiple_interventions\\\": {\\\"multiple_interventions_selector\\\": \\\"single\\\", \\\"group_size\\\": \\\"3\\\", \\\"__current_case__\\\": 0, \\\"intervention_type\\\": {\\\"intervention_type_selector\\\": \\\"chemical intervention\\\", \\\"duration\\\": \\\"1 min,2 min,15 min,240 min\\\", \\\"intensity\\\": \\\"low dose,moderate dose,high dose\\\", \\\"agent\\\": \\\"dexamethasone,diclofenac,artemisin\\\", \\\"__current_case__\\\": 0}}}}\", \"study_metadata\": \"{\\\"first_name\\\": \\\"Guillermo\\\", \\\"last_name\\\": \\\"Alvarez-Llamas\\\", \\\"description\\\": \\\"Study DeThe urinary metabolome reflects AKI evolution and severity of injury. Kidney transcriptomics revealed enzymatic expression changes. Enzymatic expression changes may be the potentially underlying cause of changes in urine metabolites. Identified metabolite changes link oxidative stress, energy generation, and H2S availability to AKI\\\\nscription\\\", \\\"study_use_condition\\\": \\\"collaboration required (DUO:0000020)\\\", \\\"title\\\": \\\"Urine metabolomics insight into acute kidney injury point to oxidative stress disruptions in energy generation and H2S availability.\\\", \\\"affiliation\\\": \\\"Department of Immunology\\\", \\\"email\\\": \\\"galvarez@fjd.es\\\", \\\"study_consent\\\": \\\"no restriction (DUO:0000004)\\\"}\", \"sample_and_assay_planning\": \"{\\\"sample_plans\\\": [{\\\"__index__\\\": 0, \\\"material_type\\\": \\\"urine (UBERON:0001088)\\\", \\\"sample_collections\\\": \\\"5\\\", \\\"assay_plans\\\": [{\\\"__index__\\\": 0, \\\"assay_type\\\": {\\\"injections\\\": [{\\\"__index__\\\": 0, \\\"injection_mode\\\": {\\\"acquisitions\\\": [{\\\"__index__\\\": 0, \\\"technical_replicates\\\": \\\"2\\\", \\\"acquisition_mode\\\": \\\"negative\\\"}, {\\\"__index__\\\": 1, \\\"technical_replicates\\\": \\\"3\\\", \\\"acquisition_mode\\\": \\\"positive\\\"}], \\\"injection_mode_selector\\\": \\\"GC\\\", \\\"instrument\\\": \\\"AB SCIEX API 4000\\\", \\\"__current_case__\\\": 3, \\\"derivatizations\\\": [{\\\"__index__\\\": 0, \\\"derivatization\\\": \\\"oxymation (MSIO:0000116)\\\"}], \\\"chromatography_instrument\\\": \\\"Agilent 6890 GC\\\"}}], \\\"sample_fractions\\\": [], \\\"assay_type_selector\\\": \\\"ms\\\", \\\"__current_case__\\\": 0}}]}]}\", \"qc_planning\": \"{\\\"qc_plans\\\": []}\"}", "id": 0, "uuid": "177b4de5-77de-4a9d-8cca-52bc6ee776de", "errors": null, "name": "isacreate_metabo", "post_job_actions": {}, "label": null, "inputs": [], "position": {"top": 402, "left": 206}, "annotation": "", "content_id": "isacreate_metabo", "type": "tool"}, "1": {"tool_id": "isa_get_factors_summary", "tool_version": "1.1", "outputs": [{"type": "json", "name": "output"}], "workflow_outputs": [], "input_connections": {"data_file|isatab_input": {"output_name": "output", "id": 0}}, "tool_state": "{\"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"data_file\": \"{\\\"input\\\": \\\"isatab_input\\\", \\\"isatab_input\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}", "id": 1, "uuid": "7048f39c-2274-46d6-8151-187797c42a01", "errors": null, "name": "isa_get_factors_summary", "post_job_actions": {}, "label": null, "inputs": [{"name": "data_file", "description": "runtime parameter for tool isa_get_factors_summary"}], "position": {"top": 224, "left": 475.5}, "annotation": "", "content_id": "isa_get_factors_summary", "type": "tool"}, "2": {"tool_id": "isatab_validator", "tool_version": "1.0", "outputs": [{"type": "json", "name": "json_output"}, {"type": "html", "name": "html_output"}], "workflow_outputs": [], "input_connections": {"isatab_input": {"output_name": "output", "id": 0}}, "tool_state": "{\"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"isatab_input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", "id": 2, "uuid": "843adf72-c4c3-4692-b212-6cb0755a3297", "errors": null, "name": "isatab_validator", "post_job_actions": {}, "label": null, "inputs": [{"name": "isatab_input", "description": "runtime parameter for tool isatab_validator"}], "position": {"top": 624, "left": 494}, "annotation": "", "content_id": "isatab_validator", "type": "tool"}, "3": {"tool_id": "isa_factors_viz", "tool_version": "0.5", "outputs": [{"type": "pdf", "name": "factors_plot"}], "workflow_outputs": [], "input_connections": {"input_type_conditional|factors_json": {"output_name": "output", "id": 1}}, "tool_state": "{\"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"input_type_conditional\": \"{\\\"input_type\\\": \\\"isa-factors-json\\\", \\\"factors_json\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}", "id": 3, "uuid": "e2284976-b67a-4461-9e56-5b7c74f79b6d", "errors": null, "name": "isa_factors_viz", "post_job_actions": {}, "label": null, "inputs": [{"name": "input_type_conditional", "description": "runtime parameter for tool isa_factors_viz"}], "position": {"top": 292, "left": 809}, "annotation": "", "content_id": "isa_factors_viz", "type": "tool"}, "4": {"tool_id": "mtbls-labs-uploader", "tool_version": "0.2.0", "outputs": [{"type": "txt", "name": "log_file"}], "workflow_outputs": [], "input_connections": {"input_type|isatab_input": {"output_name": "output", "id": 0}, "input_type|validation_report": {"output_name": "json_output", "id": 2}}, "tool_state": "{\"labs_project_id\": \"\\\"\\\"\", \"__page__\": null, \"input_type\": \"{\\\"validation_report\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"isatab_input\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 0, \\\"input_type_selector\\\": \\\"isa-tab\\\"}\", \"__rerun_remap_job_id__\": null, \"create_new_project\": \"\\\"no\\\"\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"metabolights_labs_key\": \"\\\"\\\"\"}", "id": 4, "uuid": "a9f0ec1d-3880-40e2-91a8-105a805cf888", "errors": null, "name": "MetaboLights Labs Uploader", "post_job_actions": {}, "label": null, "inputs": [{"name": "input_type", "description": "runtime parameter for tool MetaboLights Labs Uploader"}, {"name": "input_type", "description": "runtime parameter for tool MetaboLights Labs Uploader"}], "position": {"top": 432, "left": 739}, "annotation": "", "content_id": "mtbls-labs-uploader", "type": "tool"}}, "annotation": "", "a_galaxy_workflow": "true"}
+{
+  "uuid": "f8f99742-b321-4647-919f-cf985c3e1881",
+  "tags": [],
+  "format-version": "0.1",
+  "name": "ISA Create-Validate-Upload",
+  "steps": {
+    "0": {
+      "tool_id": "isacreate_metabo",
+      "tool_version": "1.2.0",
+      "outputs": [
+        {
+          "type": "isa-tab",
+          "name": "output"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {},
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"treatment_plan\": \"{\\\"study_type\\\": {\\\"study_type_selector\\\": \\\"full_factorial\\\", \\\"__current_case__\\\": 0, \\\"multiple_interventions\\\": {\\\"multiple_interventions_selector\\\": \\\"single\\\", \\\"group_size\\\": \\\"3\\\", \\\"__current_case__\\\": 0, \\\"intervention_type\\\": {\\\"intervention_type_selector\\\": \\\"chemical intervention\\\", \\\"duration\\\": \\\"1 min,2 min,15 min,240 min\\\", \\\"intensity\\\": \\\"low dose,moderate dose,high dose\\\", \\\"agent\\\": \\\"dexamethasone,diclofenac,artemisin\\\", \\\"__current_case__\\\": 0}}}}\", \"study_metadata\": \"{\\\"first_name\\\": \\\"Guillermo\\\", \\\"last_name\\\": \\\"Alvarez-Llamas\\\", \\\"description\\\": \\\"Study DeThe urinary metabolome reflects AKI evolution and severity of injury. Kidney transcriptomics revealed enzymatic expression changes. Enzymatic expression changes may be the potentially underlying cause of changes in urine metabolites. Identified metabolite changes link oxidative stress, energy generation, and H2S availability to AKI\\\\nscription\\\", \\\"study_use_condition\\\": \\\"collaboration required (DUO:0000020)\\\", \\\"title\\\": \\\"Urine metabolomics insight into acute kidney injury point to oxidative stress disruptions in energy generation and H2S availability.\\\", \\\"affiliation\\\": \\\"Department of Immunology\\\", \\\"email\\\": \\\"galvarez@fjd.es\\\", \\\"study_consent\\\": \\\"no restriction (DUO:0000004)\\\"}\", \"sample_and_assay_planning\": \"{\\\"sample_plans\\\": [{\\\"__index__\\\": 0, \\\"material_type\\\": \\\"urine (UBERON:0001088)\\\", \\\"sample_collections\\\": \\\"5\\\", \\\"assay_plans\\\": [{\\\"__index__\\\": 0, \\\"assay_type\\\": {\\\"injections\\\": [{\\\"__index__\\\": 0, \\\"injection_mode\\\": {\\\"acquisitions\\\": [{\\\"__index__\\\": 0, \\\"technical_replicates\\\": \\\"2\\\", \\\"acquisition_mode\\\": \\\"negative\\\"}, {\\\"__index__\\\": 1, \\\"technical_replicates\\\": \\\"3\\\", \\\"acquisition_mode\\\": \\\"positive\\\"}], \\\"injection_mode_selector\\\": \\\"GC\\\", \\\"instrument\\\": \\\"AB SCIEX API 4000\\\", \\\"__current_case__\\\": 3, \\\"derivatizations\\\": [{\\\"__index__\\\": 0, \\\"derivatization\\\": \\\"oxymation (MSIO:0000116)\\\"}], \\\"chromatography_instrument\\\": \\\"Agilent 6890 GC\\\"}}], \\\"sample_fractions\\\": [], \\\"assay_type_selector\\\": \\\"ms\\\", \\\"__current_case__\\\": 0}}]}]}\", \"qc_planning\": \"{\\\"qc_plans\\\": []}\"}",
+      "id": 0,
+      "uuid": "177b4de5-77de-4a9d-8cca-52bc6ee776de",
+      "errors": null,
+      "name": "isacreate_metabo",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 402,
+        "left": 206
+      },
+      "annotation": "",
+      "content_id": "isacreate_metabo",
+      "type": "tool"
+    },
+    "1": {
+      "tool_id": "isa_get_factors_summary",
+      "tool_version": "1.1",
+      "outputs": [
+        {
+          "type": "json",
+          "name": "output"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "data_file|isatab_input": {
+          "output_name": "output",
+          "id": 0
+        }
+      },
+      "tool_state": "{\"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"data_file\": \"{\\\"input\\\": \\\"isatab_input\\\", \\\"isatab_input\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}",
+      "id": 1,
+      "uuid": "7048f39c-2274-46d6-8151-187797c42a01",
+      "errors": null,
+      "name": "isa_get_factors_summary",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [
+        {
+          "name": "data_file",
+          "description": "runtime parameter for tool isa_get_factors_summary"
+        }
+      ],
+      "position": {
+        "top": 224,
+        "left": 475.5
+      },
+      "annotation": "",
+      "content_id": "isa_get_factors_summary",
+      "type": "tool"
+    },
+    "2": {
+      "tool_id": "isatab_validator",
+      "tool_version": "1.0",
+      "outputs": [
+        {
+          "type": "json",
+          "name": "json_output"
+        },
+        {
+          "type": "html",
+          "name": "html_output"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "isatab_input": {
+          "output_name": "output",
+          "id": 0
+        }
+      },
+      "tool_state": "{\"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"isatab_input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "id": 2,
+      "uuid": "843adf72-c4c3-4692-b212-6cb0755a3297",
+      "errors": null,
+      "name": "isatab_validator",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [
+        {
+          "name": "isatab_input",
+          "description": "runtime parameter for tool isatab_validator"
+        }
+      ],
+      "position": {
+        "top": 624,
+        "left": 494
+      },
+      "annotation": "",
+      "content_id": "isatab_validator",
+      "type": "tool"
+    },
+    "3": {
+      "tool_id": "isa_factors_viz",
+      "tool_version": "0.5",
+      "outputs": [
+        {
+          "type": "pdf",
+          "name": "factors_plot"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "input_type_conditional|factors_json": {
+          "output_name": "output",
+          "id": 1
+        }
+      },
+      "tool_state": "{\"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"input_type_conditional\": \"{\\\"input_type\\\": \\\"isa-factors-json\\\", \\\"factors_json\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}",
+      "id": 3,
+      "uuid": "e2284976-b67a-4461-9e56-5b7c74f79b6d",
+      "errors": null,
+      "name": "isa_factors_viz",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [
+        {
+          "name": "input_type_conditional",
+          "description": "runtime parameter for tool isa_factors_viz"
+        }
+      ],
+      "position": {
+        "top": 292,
+        "left": 809
+      },
+      "annotation": "",
+      "content_id": "isa_factors_viz",
+      "type": "tool"
+    },
+    "4": {
+      "tool_id": "mtbls-labs-uploader",
+      "tool_version": "0.2.0",
+      "outputs": [
+        {
+          "type": "txt",
+          "name": "log_file"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "input_type|isatab_input": {
+          "output_name": "output",
+          "id": 0
+        },
+        "input_type|validation_report": {
+          "output_name": "json_output",
+          "id": 2
+        }
+      },
+      "tool_state": "{\"labs_project_id\": \"\\\"\\\"\", \"__page__\": null, \"input_type\": \"{\\\"validation_report\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"isatab_input\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 0, \\\"input_type_selector\\\": \\\"isa-tab\\\"}\", \"__rerun_remap_job_id__\": null, \"create_new_project\": \"\\\"no\\\"\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"metabolights_labs_key\": \"\\\"\\\"\"}",
+      "id": 4,
+      "uuid": "a9f0ec1d-3880-40e2-91a8-105a805cf888",
+      "errors": null,
+      "name": "MetaboLights Labs Uploader",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [
+        {
+          "name": "input_type",
+          "description": "runtime parameter for tool MetaboLights Labs Uploader"
+        },
+        {
+          "name": "input_type",
+          "description": "runtime parameter for tool MetaboLights Labs Uploader"
+        }
+      ],
+      "position": {
+        "top": 432,
+        "left": 739
+      },
+      "annotation": "",
+      "content_id": "mtbls-labs-uploader",
+      "type": "tool"
+    }
+  },
+  "annotation": "",
+  "a_galaxy_workflow": "true"
+}
