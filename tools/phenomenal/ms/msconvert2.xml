@@ -11,8 +11,7 @@
   <command><![CDATA[
     mkdir -p \$PWD/tmp_msconvert/out;
     unzip -q -d \$PWD/tmp_msconvert/out $infile;
-    chown -R xclient:xusers \$PWD/tmp_msconvert;
-    su xclient -c "wine '/home/xclient/.wine/drive_c/Program Files/ProteoWizard/ProteoWizard/msconvert.exe' \$PWD/tmp_msconvert/out --mzML -o \$PWD/tmp_msconvert" 2>/dev/null;
+    wine 'msconvert.exe' \$PWD/tmp_msconvert/out --mzML -o \$PWD/tmp_msconvert;
     sudo mv \$PWD/tmp_msconvert/out.mzML $outfile
   ]]></command>
   <inputs>
@@ -46,7 +45,8 @@
 	**Licensing**
 
 	| Please see LICENSES/LICENSE, this Apache License Covers Core ProteoWizard Tools and Library. This software does, however, depend on other software libraries which place further restrictions on its use and redistribution, see below.
-ADDENDUM TO APACHE LICENSE
+
+	***ADDENDUM TO APACHE LICENSE***
 
 	| To the best of our ability we deliver this software to you under the Apache 2.0 License listed below (the source code is available in the ProteoWizard project). This software does, however, depend on other software libraries which place further restrictions on its use and redistribution. By accepting the license terms for this software, you agree to comply with the restrictions imposed on you by the license agreements of the software libraries on which it depends:
 
