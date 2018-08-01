@@ -11,10 +11,10 @@ Galaxy is an open, web-based platform for data intensive biomedical research.
 ## Description
 Increased reliance on computational approaches in the life sciences has revealed grave concerns about how accessible and reproducible computation-reliant results truly are. Galaxy http://usegalaxy.org, an open web-based platform for genomic research, addresses these problems. Galaxy automatically tracks and manages data provenance and provides support for capturing the context and intent of computational methods. Galaxy Pages are interactive, web-based documents that provide users with a medium to communicate a complete computational analysis.
 
-This PhenoMeNal version of Galaxy is a container capable of running inside the Kubernetes container orchestrator, and able to schedule Kubernetes jobs from the inside of the cluster. It is a lighweight container as no toolshed dependencies are needed. The current version includes on top of Galaxy 18.01 PhenoMeNal additions to the Galaxy code base:
+This PhenoMeNal version of Galaxy is a container capable of running inside the Kubernetes container orchestrator, and able to schedule Kubernetes jobs from the inside of the cluster. It is a lighweight container as no toolshed dependencies are needed. The current version extends Galaxy 18.01 with the following:
 
-- Ability to limit resources per tools (CPU and RAM) inside Kubernetes.
 - ISA-tab and ISA-json native Composite datatype support in Galaxy.
+- integrated ISA dataset viewer
 
 The Galaxy - Kubernetes integration and Galaxy helm charts are contributions made entirely by the PhenoMeNal Project to the Galaxy Project.
 
