@@ -1,0 +1,413 @@
+
+/**
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    contenteditable attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that are clearfixed.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}
+
+body {
+    margin: 0;
+}
+/**
+
+ISA-Tab Viewer CSS
+*/
+
+.toolbar {
+    width: 100%;
+
+    padding: 15px;
+    background-color: #f1f2f1;
+
+}
+
+.isa-view {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    color: #35495E;
+    font-size: 12px;
+    width: 100%;
+    height: 100%;
+}
+
+.isa-study-list {
+    height: 100%;
+    width: 15%;
+    padding: 5px;
+    float: left;
+}
+
+.isa-study-list ul {
+    list-style: none;
+    -webkit-padding-start: 10px;
+}
+
+.isa-study-list li {
+    color: #35495E;
+    font-size: 1.25em;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.isa-study-list li:hover, .isa-study-list li.active {
+    color: #26B99A;
+}
+
+.isa-study-list h3 {
+    font-size: 1.4em;
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+.isa-study-list dl {
+    color: #35495E;
+    font-size: 1.25em;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.isa-study-list dl:hover, .isa-study-list li.active {
+    color: #26B99A;
+}
+
+
+.isa-breadcrumbs ul {
+
+    list-style: none;
+    -webkit-padding-start: 10px;
+    font-size: 1.4em;
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+.isa-breadcrumbs li {
+    float: left;
+    margin-left: 5px;
+    color: #26B99A;
+    cursor: pointer;
+}
+
+.isa-breadcrumbs li.active {
+    color: #35495E;
+    cursor: default;
+}
+
+.isa-main-view {
+    float: left;
+    width: 80%;
+    height: 80%;
+    border-left: solid 1px #f1f2f1;
+    padding: 5px;
+}
+
+#study-info {
+    padding-left: 15px;
+    padding-top: 10px;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+}
+
+#study-id {
+    color: #26B99A;
+    font-size: 1.6em;
+    font-weight: bolder;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f1f2f1;
+}
+
+#study-title {
+    font-size: 1.4em;
+    font-weight: bolder;
+}
+
+#investigation-title {
+    font-size: 1.4em;
+    font-weight: bolder;
+}
+
+
+#study-description {
+    padding-top: 10px;
+    font-size: 1.2em;
+    font-weight: normal;
+
+}
+
+#investigation-description {
+    padding-top: 10px;
+    font-size: 1.2em;
+    font-weight: normal;
+
+}
+
+.characteristic_type {
+    font-weight: bolder;
+}
+
+.distribution {
+    float:left;
+    width: 70%;
+}
+.distribution-value {
+    float:right;
+    color: white;
+
+    width: 15%;
+}
+
+.distribution-value span {
+    text-align: center;
+    color: #26B99A;
+
+    font-weight: bolder;
+    padding: 4px 7px;
+}
+
+.section-header {
+    color: #26B99A;
+    font-weight: normal;
+    font-size: 1.5em;
+}
+
+#publications ul, #assays ul, #sample-distribution ul{
+    list-style: none;
+    -webkit-padding-start: 0px;
+    overflow: scroll;
+    width: 100%;
+}
+
+#sample_stats {
+    height: 130px;
+    overflow:scroll;
+}
+
+.distribution-group {
+    margin-bottom: 3px;
+}
+
+#protocols, #factors, #contacts {
+    width: 33%;
+    float: left;
+}
+
+#protocols ul, #factors ul, #contacts ul {
+    list-style: none;
+    -webkit-padding-start: 0px;
+    overflow: scroll;
+    width: 90%;
+}
+
+#publications ul li, #assays ul li, #sample-distribution ul li {
+    float: left;
+    margin-right: 10px;
+    font-size: 1em;
+    width: 270px;
+}
+
+#assays ul li {
+    text-align: center;
+}
+
+#protocols ul li, #factors ul li {
+
+}
+
+.publication-title {
+    font-weight: bolder;
+    font-size: 1em;
+}
+.publication-authors {
+    font-weight: normal;
+    font-size: .8em;
+}
+
+.protocol-description {
+    height: 30px;
+    overflow: scroll;
+}
+
+.protocol-name {
+    font-weight: bolder;
+}
+
+/*
+    assay types
+*/
+
+#assays, #publications, #samples, #data-files {
+    padding-bottom: 30px;
+    padding-top: 30px;
+    border-bottom: #f1f2f1 solid 1px;
+}
+
+.measurement-type, .technology-type, .data-file {
+    font-weight: bolder;
+    font-size: 1.1em;
+
+}
+
+.technology-platform {
+    font-weight: normal;
+    color:#aaa;
+    font-size: 1em;
+}
+
+.assay-icon {
+    background-size: 40px;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+}
+
+.assay-icon-genomics {
+    background: url("../img/assays/sequencing.svg") no-repeat;
+}
+
+.assay-icon-proteomics {
+    background: url("../img/assays/proteomics.svg") no-repeat;
+}
+
+.assay-icon-metabolomics {
+    background: url("../img/assays/metabolite_profiling.svg") no-repeat;
+}
+
+.assay-icon-chemistry {
+    background: url("../img/assays/chemistry.svg") no-repeat;
+}
+
+.assay-icon-transcriptomics {
+    background: url("../img/assays/transcriptomics.svg") no-repeat;
+}
+
+
+/*button*/
+.btn {
+    padding: 4px 7px;
+    font-size: .9em;
+    font-weight: bolder;
+    width: 50px;
+    cursor: pointer;
+    margin: 0 auto;
+    text-decoration: none;
+}
+
+.btn-green {
+    background-color: #26B99A;
+    color: white;
+}
+
+.btn-green:hover {
+    background-color: #35495E;
+}
+
+/*
+Table CSS is largely from Bootstrap 3 with some modifications.
+*/
+
+table {
+    max-width: 100%;
+    background-color: transparent;
+}
+th {
+    text-align: left;
+}
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.table > thead > tr{
+    vertical-align: bottom;
+    border-bottom: 2px solid #dddddd;
+}
+
+.table-hover > tbody > tr:hover > td,
+.table-hover > tbody > tr:hover > th {
+    background-color: #f5f5f5;
+}
+table col[class*="col-"] {
+    position: static;
+    float: none;
+    display: table-column;
+}
+table td[class*="col-"],
+table th[class*="col-"] {
+    position: static;
+    float: none;
+    display: table-cell;
+}
+
+.table-hover > tbody > tr > td.active:hover,
+.table-hover > tbody > tr > th.active:hover,
+.table-hover > tbody > tr.active:hover > td,
+.table-hover > tbody > tr.active:hover > th {
+    background-color: #e8e8e8;
+}
+
+.table-hover > tbody > tr > td.success:hover,
+.table-hover > tbody > tr > th.success:hover,
+.table-hover > tbody > tr.success:hover > td,
+.table-hover > tbody > tr.success:hover > th {
+    background-color: #d0e9c6;
+}
+.table > thead > tr > td.info,
+.table > tbody > tr > td.info,
+.table > tfoot > tr > td.info,
+.table > thead > tr > th.info,
+.table > tbody > tr > th.info,
+.table > tfoot > tr > th.info,
+.table > thead > tr.info > td,
+.table > tbody > tr.info > td,
+.table > tfoot > tr.info > td,
+.table > thead > tr.info > th,
+.table > tbody > tr.info > th,
+.table > tfoot > tr.info > th {
+    background-color: #d9edf7;
+}
+.table-hover > tbody > tr > td.info:hover,
+.table-hover > tbody > tr > th.info:hover,
+.table-hover > tbody > tr.info:hover > td,
+.table-hover > tbody > tr.info:hover > th {
+    background-color: #c4e3f3;
+}
+.table > thead > tr > td.warning,
+.table > tbody > tr > td.warning,
+.table > tfoot > tr > td.warning,
+.table > thead > tr > th.warning,
+.table > tbody > tr > th.warning,
+.table > tfoot > tr > th.warning,
+.table > thead > tr.warning > td,
+.table > tbody > tr.warning > td,
+.table > tfoot > tr.warning > td,
+.table > thead > tr.warning > th,
+.table > tbody > tr.warning > th,
+.table > tfoot > tr.warning > th {
+    background-color: #fcf8e3;
+}
+.table-hover > tbody > tr > td.warning:hover,
+.table-hover > tbody > tr > th.warning:hover,
+.table-hover > tbody > tr.warning:hover > td,
+.table-hover > tbody > tr.warning:hover > th {
+    background-color: #faf2cc;
+}

@@ -1,0 +1,16 @@
+<tool id="mzquality-qc-correction" name="qc-correction" version="1.0">
+    <description>applies qc-correction to the data.</description>
+    <requirements>
+        <container type="docker">phnmnl/mzquality</container>
+    </requirements>
+     <command>python /files/mzQuality/qcli.py qc-correction --mea-file=$input1 --qc-corrected-file=$output1</command>
+    <inputs>
+        <param name="input1" type="data" format="tabular" multiple="false" label="Measurements file (ms-vfetc output)" />
+    </inputs>
+    <outputs>
+        <data name="output1" format="tabular" label="qc_corrected.txt"/>
+    </outputs>
+    <help><![CDATA[
+        The quality control (QC) samples included in the run are used to correct for between batch variation. All QCs have the same concentrations, so they can be used for batch correction.
+    ]]></help>
+</tool>

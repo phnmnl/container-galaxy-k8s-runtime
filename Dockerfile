@@ -33,7 +33,7 @@ RUN apt-get -qq update && apt-get install --no-install-recommends -y apt-transpo
     apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Clone galaxy into /galaxy directory
-RUN git clone --depth 1 --single-branch --branch release_18.01_plus_isa_runnerRestartJobs https://github.com/phnmnl/galaxy.git
+RUN git clone --depth 1 --single-branch --branch release_18.01_plus_isa_runnerRJ_clean https://github.com/phnmnl/galaxy.git
 WORKDIR /galaxy
 
 RUN echo "pykube==0.15.0" >> requirements.txt 
@@ -70,15 +70,17 @@ COPY config/datatypes_conf.xml \
      config/sanitize_whitelist.txt \
      config/tool_conf.xml \
      config/dependency_resolvers_conf.xml \
-     config/tool_data_table_conf.xml \
   config/
 
 COPY rules/k8s_destinations.py lib/galaxy/jobs/rules/k8s_destination.py
 COPY tools/phenomenal tools/phenomenal
-COPY tool-data/isa_cvterms.loc tool-data/
 
 # Galaxy tours which guide users through the subsequent steps in an analysis
 COPY config/plugins/tours/*.yaml config/plugins/tours/
+
+# Galaxy visualization plugins to add extra visualization capability to datasets
+COPY config/plugins/visualizations/isatab-viewer config/plugins/visualizations/isatab-viewer/
+COPY config/plugins/visualizations/isatab-viewer/static/ static/plugins/visualizations/isatab-viewer/static/
 
 COPY html/partners.png static/welcome_partners.png
 COPY html/PhenoMeNal_logo.png static/welcome_PhenoMeNal_logo.png

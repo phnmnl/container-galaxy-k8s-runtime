@@ -1,0 +1,14 @@
+language: perl
+perl:
+    - "5.24"
+
+notifications:
+ email:
+  recipients:
+   - pk.roger@icloud.com
+     
+install:
+    - yes | cpan -i Deep::Hash::Utils File::Basename File::Spec::Functions File::Temp Getopt::Long Git::Repository JSON LWP::Protocol::https LWP::UserAgent Term::ANSIColor XML::Simple YAML::Tiny
+ 
+script:
+    - ./check_tools -a

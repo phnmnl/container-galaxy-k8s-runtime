@@ -5,14 +5,16 @@ title_default: MS-MetFrag-XCMS-Workflow
 steps:
   - title: MS-MetFrag-XCMS-Workflow
     content: >-
-      Metabolite identification is a crucial step when trying to understand e.g.
-      the courses of a disease on the metabolomic level.  In this tour we will
-      demonstrate the MetFrag workflow, which goes a first step to annotate
-      molecules from compound (metabolite) databases  to MS/MS (tandem mass
-      spectrometry) spectra. This annotation is based on the mapping of in
-      silico generated fragments to the experimental spectra  and scoring of
-      your arrow keys and leave the tour at any time point with 'Escape' or the
-      'End tour' button.
+      Metabolite identification is the first step towards trying to understand a
+      biological process (e.g. a disease) at the metabolomic level.  In this
+      tour we will demonstrate the MetFrag workflow, which performs the first
+      step in the process of mapping molecules from compound (metabolite)
+      databases to MS/MS (tandem mass spectrometry) spectra. This annotation
+      is based on the mapping of in silico generated fragments to the
+      experimental spectra, using the fragments to retrieve candidates from a
+      molecular database, and scoring these from most- to least-likely candidate.
+      Use your arrow keys to jump from step to step and leave the
+      tour at any time point with 'Escape' or the 'End tour' button.
     backdrop: true
   - title: Upload your LC/MS data
     element: .upload-button
@@ -30,7 +32,7 @@ steps:
     element: '.upload-text-content:first'
     intro: >-
       URLs separated by a line break are automatically downloaded by Galaxy.
-      Here we use a link to a ZIP file with one mzML file. Galaxy will
+      Here we use a link to a ZIP file containing one mzML file. Galaxy will
       uncompress the file for us and place the result into the history on the
       right.
     position: top
@@ -53,7 +55,7 @@ steps:
   - title: Tools
     element: '#left'
     intro: >-
-      The toolsbox in the PhenoMeNal Galaxy includes (among others) functions
+      The Tools panel in PhenoMeNal Galaxy includes (among others) tools
       from XCMS, MSnbase and MetFrag.
     position: right
 
@@ -219,7 +221,7 @@ steps:
       - 'a[href$="/tool_runner?tool_id=metfrag-vis"]'
   - title: metfrag-vis
     element: '#center-panel'
-    intro: Before execution, make sure to switch the both input boxes to "Dataset collection", and select the "MetFrag result file" and "MetFrag parameters" input collections.
+    intro: Before execution, make sure to switch both input boxes to "Dataset collection", and select the "MetFrag result file" and "MetFrag parameters" input collections.
     position: right
   - title: metfrag-vis
     element: '#execute'

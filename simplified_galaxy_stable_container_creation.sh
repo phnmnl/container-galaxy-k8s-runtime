@@ -120,7 +120,7 @@ ANSIBLE_RELEASE=18.01-k8s
 GALAXY_BASE_FROM_TO_REPLACE=quay.io/bgruening/galaxy-base:18.01
 
 GALAXY_REPO=phnmnl/galaxy
-GALAXY_RELEASE=release_18.01_plus_isa_runnerRestartJobs
+GALAXY_RELEASE=release_18.01_plus_isa_runnerRJ_clean
 
 GALAXY_VER_FOR_POSTGRES=18.01
 

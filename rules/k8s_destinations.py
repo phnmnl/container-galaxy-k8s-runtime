@@ -1,6 +1,10 @@
-from galaxy.jobs import JobDestination
+
+import logging
 import yaml
 
+from galaxy.jobs import JobDestination
+
+log = logging.getLogger(__name__)
 
 # Sizes for the different set of resources to be used in Kubernetes
 # CPU values are in CPU units (0.1 means 100 mili CPUs)
@@ -12,31 +16,31 @@ __tiny = {'requests_cpu': 0.1,
           'limits_cpu': 0.5,
           'requests_memory': 0.3,
           'limits_memory': 0.6
-          }
+         }
 
 __small = {'requests_cpu': 0.4,
            'limits_cpu': 0.8,
            'requests_memory': 0.5,
            'limits_memory': 0.9
-           }
+          }
 
 __medium = {'requests_cpu': 0.7,
             'limits_cpu': 2,
             'requests_memory': 0.8,
             'limits_memory': 2
-            }
+           }
 
 __large = {'requests_cpu': 1.5,
            'limits_cpu': 4,
            'requests_memory': 1.8,
            'limits_memory': 5
-           }
+          }
 
 __xlarge = {'requests_cpu': 4,
             'limits_cpu': 8,
             'requests_memory': 8,
             'limits_memory': 16
-            }
+           }
 
 __path_tool2container = "config/phenomenal_tools2container.yaml"
 
@@ -72,12 +76,23 @@ def k8s_wrapper_xlarge(resource_params, tool_id):
 
 
 def __read_assignments(resource_params, tool_id):
-    stream = open(__path_tool2container, mode='r')
-    mappings = yaml.load(stream)
-    for mapping in mappings['assignment']:
-        if tool_id in mapping['tools_id']:
-            resource_params.update(mapping)
-            break
+    try:
+        stream = open(__path_tool2container, mode='r')
+        mappings = yaml.load(stream)
+    except:
+        log.error("Couldn't load %s file!\n", __path_tool2container)
+        raise
+
+    try:
+        for mapping in mappings['assignment']:
+            if tool_id in mapping['tools_id']:
+                resource_params.update(mapping)
+                break
+    except StandardError as e:
+        log.error('Error parsing file: %s\n', __path_tool2container)
+        log.error(str(e))
+        log.error("Problem in the following assignment mapping: %s", mapping)
+        raise
 
 
 def __setup_resources(resource_params, settings):

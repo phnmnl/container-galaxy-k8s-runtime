@@ -17,9 +17,7 @@ log = logging.getLogger(__name__)
 
 class NmrML(ProteomicsXml):
     """NmrML data"""
-    edam_format = "format_3244"
+    edam_format = "format_3825"
     file_ext = "NmrML"
     blurb = 'nmrML Mass Spectrometry data'
     root = "(NmrML|indexednmrML)"
-
-

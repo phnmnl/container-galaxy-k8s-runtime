@@ -1,0 +1,253 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tool id="ISAslicer2" name="ISAslicer2" version="2.0">
+    <description>Query and get a slice of data files from an ISA study</description>
+    <requirements>
+        <requirement type="package" version="6.7">click</requirement>
+        <requirement type="package" version="0.10.0">isatools</requirement>
+    </requirements>
+    <stdio>
+        <exit_code range="1:" level="fatal"/>
+    </stdio>
+    <command><![CDATA[
+
+        #if $input.input_selector == "mtbls"
+            #set $command = "query-mtbls"
+            #set $source = ""
+        #end if
+
+        #if $input.input_selector == "isa-tab"
+            #set $command = "query-isa-tab"
+            #set $source = $input.isatab_input.extra_files_path
+        #end if
+
+        isaslicer.py isaslicer2-slice
+        #if $source
+            --source_dir="${source}"
+        #end if
+        --galaxy_parameters_file="$inputs"
+        --output="$output"
+
+    ]]>
+    </command>
+    <configfiles>
+        <inputs name="inputs" />
+    </configfiles>
+    <inputs>
+	    <conditional name="input">
+            <param name="input_selector" type="select" label="Choose your ISA-Tab input source">
+                <option value="mtbls" selected="true">Metabolights study ID</option>
+                <option value="isa-tab">ISA-Tab datatype history item</option>
+            </param>
+            <when value="mtbls">
+                <param name="mtbls_id" type="text" label="MetaboLights Study Identifier" help="MTBLS ID available at MetaboLights, e.g. MTBLS1.">
+                    <validator type="regex" message="ID must look like a valid MTBLS identifier">^MTBLS[0-9]*$</validator>
+                </param>
+            </when>
+            <when value="isa-tab">
+                <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab"  help="An ISA-Tab datatype history item"/>
+                <!--<param name="collection_output" type="boolean" checked="false" label="Output new dataset collection"/>-->
+            </when>
+        </conditional>
+        <section name="query" title="Query Builder" expanded="true" help="Queries attempt to match all of the conditions you specify in this section. Please consider each criteria in combinations of logical conjunctions (e.g. Factor Selection 1 AND Characteristics Selection 1, etc.).">
+            <param name="measurement_type" type="text" label="Measurement Type." help="e.g. metabolite profiling. To select specific assays, please ensure both measurement and technology types are provided."/>
+            <param name="technology_type" type="text" label="Technology Type." help="e.g. mass spectrometry. Leave both measurement and technology types blank if you want to query across all assays."/>
+            <repeat name="factor_selection" title="Factor selection criteria" default="0" help="Search across all sample Factor Values in a study.">
+                <param name="factor_name" type="text" label="Factor name to filter on." help="Factor name relevant to the specified MetaboLights study. e.g. genotype.">
+                    <validator type="empty_field" message="Factor name must not be empty"/>
+                </param>
+                <param name="factor_value" type="text" label="Factor value to filter on." help="Factor value relevant to the specified MetaboLights study. e.g. cyp79.">
+                    <validator type="empty_field" message="Factor value must not be empty"/>
+                </param>
+            </repeat>
+            <repeat name="characteristics_selection" title="Characteristics selection criteria" default="0" help="Search across all sample Characteristics in a study.">
+                <param name="characteristic_name" type="text" label="Characteristic name to filter on." help="Characteristic name relevant to the specified MetaboLights study. e.g. Organism part.">
+                    <validator type="empty_field" message="Characteristic name must not be empty"/>
+                </param>
+                <param name="characteristic_value" type="text" label="Characteristic value to filter on." help="Characteristic value relevant to the specified MetaboLights study. e.g. blood.">
+                    <validator type="empty_field" message="Characteristic value must not be empty"/>
+                </param>
+            </repeat>
+            <repeat name="parameter_selection" title="Parameter selection criteria" default="0" help="Search across all Parameter Values in a study.">
+                <param name="parameter_name" type="text" label="Parameter name to filter on." help="Parameter name relevant to the specified MetaboLights study. e.g. Scan polarity.">
+                    <validator type="empty_field" message="Parameter name must not be empty"/>
+                </param>
+                <param name="parameter_value" type="text" label="Parameter value to filter on." help="Parameter value relevant to the specified MetaboLights study. e.g. positive.">
+                    <validator type="empty_field" message="Parameter value must not be empty"/>
+                </param>
+            </repeat>
+        </section>
+    </inputs>
+    <outputs>
+        <data format="json" name="output" label="Study sliced data files list"/>
+    </outputs>
+
+    <tests>
+        <test>
+            <param name="input_selector" value="isa-tab"/>
+            <param name="isatab_input" value="MTBLS36.zip" ftype="isa-tab"/>
+            <section name="query">
+                <param name="measurement_type" value="metabolite profiling"/>
+                <repeat name="factor_selection">
+                    <param name="factor_name" value="Cultivars"/>
+                    <param name="factor_value" value="RIN"/>
+                </repeat>
+            </section>
+            <output name="output" file="query_results.json" compare="sim_size"/>
+        </test>
+    </tests>
+
+    <help>
+<!-- @@@BEGIN_RST@@@ -->
+==========
+ISA Slicer
+==========
+
+This tool returns a list of data files sliced on a user-supplied query, and
+optionally returns a dataset collection of the data files (if available in
+the input collection).
+
+-----
+Input
+-----
+
+ISA-Tab input source
+====================
+Choose an input source, either direct from Metabolights or from an ISA-Tab
+history item that has already been downloaded or created in Galaxy.
+
+MetaboLights Study Identifier
+=============================
+If the input source is Metabolights, then provide the MTBLS identifier
+available at MetaboLights, e.g. MTBLS1.
+
+ISA-Tab datatype history item
+=============================
+If the input source is an ISA-Tab history item, select from existing data
+history items. ISA-Tab items can be created by using the Metabolights
+downloader or the ISA-Tab metadata creation tools.
+
+Measurement and technology types
+================================
+Measurement and technology types of the assay to filter the data files. You
+must provide both fields to select specific assays. Leave both fields blank
+if you wish to query over all assay types.
+
+You can get the relevant assay types by inspecting the study's ISA dataset
+preview metadata.
+
+Sample material type
+====================
+Material type of the samples relating to the data files of interest. This field
+corresponds to the ISA-Tab `Material Type` or `Characteristic[Material Type]`
+column. Leave this field blank if you wish to select data files across all
+samples.
+
+You can get the relevant sample materials by inspecting the study's ISA
+dataset preview metadata or the raw ISA-Tab table files.
+
+Factor selection criteria
+=========================
+Factor selection criteria is supplied as factor name-value pairs relevant to
+the specified ISA study. Leave the factor criteria empty to select all data
+files.
+
+You can get the relevant factor names and values by inspecting the study's ISA
+data set preview metadata.
+
+------
+Output
+------
+
+List of data files as JSON
+==========================
+
+A list of data files, related sample name, and query used as a JSON
+list. e.g.
+
+::
+
+    [
+        {
+            "query_used": {
+                "replicate": "Exp2"
+            },
+            "data_files": [
+                "MSpos-Ex2-Col0-48h-Ag-1_1-A,2_01_9827.mzData"
+            ],
+            "sample": "Ex2-Col0-48h-Ag-1"
+        },
+        {
+            "query_used": {
+                "replicate": "Exp2"
+            },
+            "data_files": [
+                "MSpos-Ex2-Col0-48h-Ag-2_1-A,3_01_9829.mzData"
+            ],
+            "sample": "Ex2-Col0-48h-Ag-2"
+        },
+        {
+            "query_used": {
+                "replicate": "Exp2"
+            },
+            "data_files": [
+                "MSpos-Ex2-Col0-48h-Ag-3_1-A,4_01_9831.mzData"
+            ],
+            "sample": "Ex2-Col0-48h-Ag-3"
+        },
+        {
+            "query_used": {
+                "replicate": "Exp2"
+            },
+            "data_files": [
+                "MSpos-Ex2-Col0-48h-Ag-4_1-A,2_01_9833.mzData"
+            ],
+            "sample": "Ex2-Col0-48h-Ag-4"
+        },
+        {
+            "query_used": {
+                "replicate": "Exp2"
+            },
+            "data_files": [
+                "MSpos-Ex2-cyp79-48h-Ag-1_1-B,3_01_9828.mzData"
+            ],
+            "sample": "Ex2-cyp79-48h-Ag-1"
+        },
+        {
+            "query_used": {
+                "replicate": "Exp2"
+            },
+            "data_files": [
+                "MSpos-Ex2-cyp79-48h-Ag-2_1-B,4_01_9830.mzData"
+            ],
+            "sample": "Ex2-cyp79-48h-Ag-2"
+        },
+        {
+            "query_used": {
+                "replicate": "Exp2"
+            },
+            "data_files": [
+                "MSpos-Ex2-cyp79-48h-Ag-3_1-B,3_01_9832.mzData"
+            ],
+            "sample": "Ex2-cyp79-48h-Ag-3"
+        },
+        {
+            "query_used": {
+                "replicate": "Exp2"
+            },
+            "data_files": [
+                "MSpos-Ex2-cyp79-48h-Ag-4_1-B,4_01_9834.mzData"
+            ],
+            "sample": "Ex2-cyp79-48h-Ag-4"
+        }
+    ]
+
+<!-- @@@END_RST@@@ -->
+    </help>
+
+    <citations>
+        <citation type="doi">10.1093/nar/gks1004</citation>
+        <citation type="doi">10.5281/zenodo.163640</citation>
+        <citation type="doi">10.1038/ng.1054</citation>
+    </citations>
+
+</tool>
