@@ -2,13 +2,25 @@ FROM pcm32/galaxy-init-pheno
 
 MAINTAINER PhenoMeNal-H2020 Project <phenomenal-h2020-users@googlegroups.com>
 
-LABEL Description="Galaxy 17.05-phenomenal for running inside Kubernetes."
+LABEL Description="Galaxy 18.01-pheno-dev for running inside Kubernetes."
 LABEL software="Galaxy Init"
-LABEL software.version="17.05-pheno-lr"
-LABEL version="1.3"
+LABEL software.version="18.01-pheno-dev"
+LABEL version="1.6"
+
+RUN wget -O ephemeris.tar https://api.github.com/repos/galaxyproject/ephemeris/tarball/eeee87a57379b8b639b06c2a50038ef449c28d73 && \
+    tar -xf ephemeris.tar && rm ephemeris.tar && \
+    virtualenv venv-workflow && \
+    /bin/bash -c "source venv-workflow/bin/activate && \
+                  pip install 'pip>=8.1' && \
+                  pip install ./galaxyproject-ephemeris-eeee87a \
+                      --index-url https://pypi.python.org/simple && \
+                  pip install urllib3[secure] && \
+                  deactivate && \
+                  virtualenv --relocatable venv-workflow"
 
 #COPY config/galaxy.ini config/galaxy.ini
 COPY config/job_conf.xml config/job_conf.xml
+RUN sed -i 's/HANDLERS -->//' config/job_conf.xml && sed -i 's/<!-- HANDLERS//g' config/job_conf.xml
 COPY config/tool_conf.xml config/tool_conf.xml
 COPY config/sanitize_whitelist.txt config/sanitize_whitelist.txt
 COPY tools/phenomenal tools/phenomenal
@@ -20,6 +32,10 @@ COPY rules/k8s_destinations.py /galaxy-central/lib/galaxy/jobs/rules/k8s_destina
 
 # Galaxy tours which guide users through the subsequent steps in an analysis
 COPY config/plugins/tours/*.yaml config/plugins/tours/
+
+# Galaxy visualization plugins to add extra visualization capability to datasets
+COPY config/plugins/visualizations/isatab-viewer config/plugins/visualizations/isatab-viewer/
+COPY config/plugins/visualizations/isatab-viewer/static/ /galaxy-central/static/plugins/visualizations/isatab-viewer/static/
 
 COPY html/partners.png welcome/welcome_partners.png
 COPY html/PhenoMeNal_logo.png welcome/welcome_PhenoMeNal_logo.png
@@ -35,6 +51,5 @@ RUN chmod u+x post-start-actions.sh
 # Missing XCMS datatypes for w4m
 COPY external-datatypes/rdata_xcms_datatype.py /galaxy-central/lib/galaxy/datatypes/
 COPY external-datatypes/rdata_camera_datatype.py /galaxy-central/lib/galaxy/datatypes/
-COPY external-datatypes/no_unzip_datatypes.py /galaxy-central/lib/galaxy/datatypes/
 COPY external-datatypes/nmrml_datatype.py /galaxy-central/lib/galaxy/datatypes/
 COPY config/datatypes_conf.xml config/datatypes_conf.xml

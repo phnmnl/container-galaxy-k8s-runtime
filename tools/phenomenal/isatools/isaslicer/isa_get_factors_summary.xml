@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tool id="isa_get_factors_summary" name="isa_get_factors_summary" version="1.1">
+    <description>Produce a summary table of variable factors of a ISA study</description>
+    <requirements>
+        <requirement type="package" version="6.7">click</requirement>
+        <requirement type="package" version="0.9.5">isatools</requirement>
+    </requirements>
+    <stdio>
+        <exit_code range="1:" level="fatal"/>
+    </stdio>
+    <command><![CDATA[
+
+        #if $data_file.input == "mtbls_id"
+            #set $command = "mtbls-get-factors-summary"
+            #set $source = $data_file.mtbls_id
+        #end if
+
+        #if $data_file.input == "isatab_input"
+            #set $command = "isa-tab-get-factors-summary"
+            #set $source = $data_file.isatab_input.extra_files_path
+        #end if
+
+        isaslicer.py "$command" "${source}" "${output}"
+
+]]>
+    </command>
+    <inputs>
+	    <conditional name="data_file">
+            <param name="input" type="select" label="Choose your ISA-Tab input source">
+                <option value="mtbls_id" selected="true">Metabolights study ID</option>
+                <option value="isatab_input">ISA-Tab datatype history item</option>
+            </param>
+            <when value="mtbls_id">
+                <param name="mtbls_id" type="text" label="MetaboLights Study Identifier" help="MTBLS ID available at MetaboLights, e.g. MTBLS1.">
+                    <validator type="regex" message="ID must look like a valid MTBLS identifier">^MTBLS[0-9]*$</validator>
+                </param>
+            </when>
+            <when value="isatab_input">
+                <param format="isa-tab" name="isatab_input" type="data" label="ISA-Tab"  help="An ISA-Tab datatype history item"/>
+            </when>
+        </conditional>
+    </inputs>
+    <outputs>
+        <data format="json" name="output" label="Study factors summary"/>
+    </outputs>
+    <tests>
+        <test>
+            <param name="mtbls_id" value="MTBLS1"/>
+            <output name="output" file="mtbls1_factors_summary_out.json" compare="sim_size"/>
+        </test>
+    </tests>
+    <help>
+<!-- @@@BEGIN_RST@@@ -->
+======================================
+Get summary of factors for a ISA study
+======================================
+
+This tool returns a table of sample names and related associated factor
+values. The tool calculates this by inspecting the ISA study and assay
+tables and computes the study groups and associated sample names.
+
+-----
+Input
+-----
+
+ISA-Tab input source
+====================
+Choose an input source, either direct from Metabolights or from an ISA-Tab
+history item that has already been downloaded or created in Galaxy.
+
+MetaboLights Study Identifier
+=============================
+If the input source is Metabolights, then provide the MTBLS identifier
+available at MetaboLights, e.g. MTBLS2.
+
+ISA-Tab datatype history item
+=============================
+If the input source is an ISA-Tab history item, select from existing data
+history items. ISA-Tab items can be created by using the Metabolights
+downloader or the ISA-Tab metadata creation tools.
+
+------
+Output
+------
+
+Factor summary table
+====================
+
+A list of sample names and factor name-value pairs JSON list. e.g.
+
+::
+
+    [
+        {
+            "replicate": "Exp1",
+            "genotype": "cyp79",
+            "name": "Ex1-cyp79-48h-Ag-3"
+        },
+        {
+            "replicate": "Exp1",
+            "genotype": "cyp79",
+            "name": "Ex1-cyp79-48h-Ag-4"
+        },
+        {
+            "replicate": "Exp1",
+            "genotype": "cyp79",
+            "name": "Ex1-cyp79-48h-Ag-1"
+        },
+        {
+            "replicate": "Exp2",
+            "genotype": "Col-0",
+            "name": "Ex2-Col0-48h-Ag-3"
+        },
+        {
+            "replicate": "Exp1",
+            "genotype": "Col-0",
+            "name": "Ex1-Col0-48h-Ag-4"
+        },
+        {
+            "replicate": "Exp1",
+            "genotype": "cyp79",
+            "name": "Ex1-cyp79-48h-Ag-2"
+        },
+        {
+            "replicate": "Exp2",
+            "genotype": "Col-0",
+            "name": "Ex2-Col0-48h-Ag-1"
+        },
+        {
+            "replicate": "Exp1",
+            "genotype": "Col-0",
+            "name": "Ex1-Col0-48h-Ag-3"
+        },
+        {
+            "replicate": "Exp1",
+            "genotype": "Col-0",
+            "name": "Ex1-Col0-48h-Ag-2"
+        },
+        {
+            "replicate": "Exp1",
+            "genotype": "Col-0",
+            "name": "Ex1-Col0-48h-Ag-1"
+        },
+        {
+            "replicate": "Exp2",
+            "genotype": "cyp79",
+            "name": "Ex2-cyp79-48h-Ag-4"
+        },
+        {
+            "replicate": "Exp2",
+            "genotype": "cyp79",
+            "name": "Ex2-cyp79-48h-Ag-1"
+        },
+        {
+            "replicate": "Exp2",
+            "genotype": "Col-0",
+            "name": "Ex2-Col0-48h-Ag-4"
+        },
+        {
+            "replicate": "Exp2",
+            "genotype": "cyp79",
+            "name": "Ex2-cyp79-48h-Ag-2"
+        },
+        {
+            "replicate": "Exp2",
+            "genotype": "Col-0",
+            "name": "Ex2-Col0-48h-Ag-2"
+        },
+        {
+            "replicate": "Exp2",
+            "genotype": "cyp79",
+            "name": "Ex2-cyp79-48h-Ag-3"
+        }
+    ]
+<!-- @@@END_RST@@@ -->
+    </help>
+    <citations>
+        <citation type="doi">10.1093/nar/gks1004</citation>
+        <citation type="doi">10.5281/zenodo.163640</citation>
+        <citation type="doi">10.1038/ng.1054</citation>
+    </citations>
+</tool>

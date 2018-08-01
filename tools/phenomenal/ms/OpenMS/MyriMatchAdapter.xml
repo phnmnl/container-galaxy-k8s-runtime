@@ -3365,7 +3365,7 @@
         <option value="trifluoro (L)">trifluoro (L)</option>
       </param>
     </repeat>
-    <param name="param_myrimatch_executable" type="data" format="text" value="myrimatch" label="The 'myrimatch' executable of the MyriMatch installation" help="(-myrimatch_executable) "/>
+    <param name="param_myrimatch_executable" type="data" format="txt" value="myrimatch" label="The 'myrimatch' executable of the MyriMatch installation" help="(-myrimatch_executable) "/>
     <param name="param_NumChargeStates" type="integer" value="3" label="The number of charge states that MyriMatch will handle during all stages of the program" help="(-NumChargeStates) "/>
     <param name="param_TicCutoffPercentage" type="float" value="0.98" label="Noise peaks are filtered out by sorting the original peaks in descending order of intensity, and then picking peaks from that list until the cumulative ion current of the picked peaks divided by the total ion current (TIC) is greater than or equal to this paramete" help="(-TicCutoffPercentage) "/>
     <param name="param_MaxDynamicMods" type="integer" value="2" label="This parameter sets the maximum number of modified residues that may be in any candidate sequence" help="(-MaxDynamicMods) "/>

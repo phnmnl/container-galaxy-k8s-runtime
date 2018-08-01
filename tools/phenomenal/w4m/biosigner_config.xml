@@ -1,8 +1,7 @@
-<tool id="biosigner" name="Biosigner" version="2.2.7">
+<tool id="biosigner" name="Biosigner" version="2.2.8">
   <description>Molecular signature discovery from omics data</description>
   
   <requirements>
-    <requirement type="package" version="3.2.2">R</requirement>
     <requirement type="package">r-batch</requirement>
     <requirement type="package">bioconductor-biosigner</requirement>
   </requirements>
@@ -12,7 +11,7 @@
   </stdio>
   
   <command><![CDATA[
-   biosigner_wrapper.R
+  biosigner_wrapper.R
   
   dataMatrix_in "$dataMatrix_in"
   sampleMetadata_in "$sampleMetadata_in"

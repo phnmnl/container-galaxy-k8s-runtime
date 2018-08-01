@@ -1,0 +1,58 @@
+<tool id="tamenmr-normalise_data" name="Normalise" version="0.0.3">
+    <requirements>
+        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
+    </requirements>
+    <description>a data table</description>
+    <command><![CDATA[
+        #if $method_choice.method == "refPeak"
+            norm_data.R --input=$input --output=$output --type=$method_choice.method --param=$method_choice.param
+        #else
+            norm_data.R --input=$input --output=$output --type=$method_choice.method
+        #end if
+        ]]>
+    </command>
+
+    <inputs>
+        <param name="input" type="data" label="Data table"/>
+        <conditional name="method_choice">
+            <param name="method" type="select" label="Normalisation method">
+                <option value="PQN">PQN</option>
+                <option value="totInt">Total Sum</option>
+                <option value="refPeak">Reference Variable</option>
+            </param>
+            <when value="refPeak">
+                <param name="param" type="text" label="Column name"/>
+            </when>
+        </conditional>
+    </inputs>
+
+    <outputs>
+        <data format="tabular" name="output" label="Normalised Data"/>
+    </outputs>
+
+    <!--
+    <requirements>
+    </requirements>
+
+    <tests>
+    </tests-->
+
+    <help>
+      
+      This tool normalizes a data table before further processing. It is meant to correct for dilution effects in
+      the sample data and make them more comparable.
+      
+      **Normalisation methods**
+      
+      **PQN** (probabilistic quotient normalisation) as described in Dieterle *et al.*
+      
+      **Total integral** normalises each row in the data by the total sum of the row.
+      
+      **Reference peak** normalises each row by a user specified reference column. 
+      Enter the name of the column in the **Column name** box.
+      
+      '''TIP''' When analysing NMR data, if possible, it is recommended to normalise the spectra before binning as
+      the parts of the spectra without peaks (that are more constand between samples) help estimate the dilution effects
+      more accurately. The **Normalisation** tool in **Spectra processing** category can be used for that.
+    </help>
+</tool>

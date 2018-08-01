@@ -69,7 +69,7 @@ Description
 | For mass spectrometry data, where multiplicative noise has been reported, logarithm transformation can be useful to make the peak intensity variance independent of the intensity mean (see for example Veselkov et al, 2011).
 | For the logarithm transformations, log(1+X) is used (to avoid returning -Inf for 0 values); NA values remain unchanged
     
-| `Veselkov et al (2011). Optimized Preprocessing of Ultra-Performance Liquid Chromatography/Mass Spectrometry Urinary Metabolic Profiles for Improved Information Recovery. Analytical Chemistry, 83:5864-5872. &lt;http://dx.doi.org/10.1021/ac201065j&gt;`_
+| `Veselkov et al (2011). Optimized Preprocessing of Ultra-Performance Liquid Chromatography/Mass Spectrometry Urinary Metabolic Profiles for Improved Information Recovery. Analytical Chemistry, 83:5864-5872. &lt;https://doi.org/10.1021/ac201065j&gt;`_
     
 -----------------
 Workflow position

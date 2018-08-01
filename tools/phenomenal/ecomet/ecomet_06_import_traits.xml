@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Eco-Metabolomics]-->
+<tool id="ecomet_import_traits" name="ecomet_import_traits" version="1.1">
+  <description>Import and process ecological characteristics file of the MTBLS study</description>
+  <stdio>
+    <regex match="" source="stderr" level="warning" description="R messages" />
+    <exit_code range="1:" level="fatal" description="Tool error" />
+  </stdio>
+  <command><![CDATA[
+mtbls520_06_import_traits.r $infile1 $infile2 $rdata;
+  ]]>
+  </command>
+  <inputs>
+    <param name="infile1" type="data" format="rdata" optional="False" label="Input Preprocess Rdata file." />
+    <param name="infile2" type="data" format="csv" optional="False" label="Input CSV file." />
+  </inputs>
+  <outputs>
+    <data name="rdata" type="data" format="rdata" label="Preprocess Rdata file" />
+  </outputs>
+  <help>
+=========================
+Eco-Metabolomics workflow
+=========================
+
+This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
+
+Module
+	| Ecological characteristics
+	|
+
+Description
+	| Import and process ecological characteristics file
+	|
+
+-----
+Input
+-----
+
+Input Preprocess Rdata
+	| Rdata file from one of the modules peak picking or import MAF
+	|
+
+Input ecological characteristics
+	| CSV file containing the ecological characteristics (traits)
+	|
+
+------
+Output
+------
+
+Preprocess Rdata file
+	| Please connect this Rdata file to the species diversity module of the MTBLS520 workflow
+	|
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+For updates and documentation, please visit **https://github.com/korseby/container-mtbls520** or contact **Kristian Peters (kpeters@ipb-halle.de)**.
+
+  </help>
+</tool>
+

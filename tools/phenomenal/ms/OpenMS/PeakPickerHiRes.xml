@@ -120,7 +120,7 @@
     <param name="param_algorithm_report_FWHM" display="radio" type="boolean" truevalue="-algorithm:report_FWHM" falsevalue="" checked="false" optional="True" label="Add metadata for FWHM (as floatDataArray named 'FWHM' or 'FWHM_ppm', depending on param 'report_FWHM_unit') for each picked peak" help="(-report_FWHM) "/>
     <param name="param_algorithm_report_FWHM_unit" display="radio" type="select" optional="False" value="relative(ppm)" label="Unit of FWHM. Either absolute in the unit of input," help="(-report_FWHM_unit) e.g. 'm/z' for spectra, or relative as ppm (only sensible for spectra, not chromatograms)">
       <option value="absolute">absolute</option>
-      <option value="relative(ppm)" selected="true">relative(ppm)</option>
+      <option value="relative" selected="true">relative(ppm)</option>
     </param>
     <param name="param_algorithm_SignalToNoise_win_len" type="float" min="1.0" optional="True" value="200.0" label="window length in Thomson" help="(-win_len) "/>
     <param name="param_algorithm_SignalToNoise_bin_count" type="integer" min="3" optional="True" value="30" label="number of bins for intensity values" help="(-bin_count) "/>

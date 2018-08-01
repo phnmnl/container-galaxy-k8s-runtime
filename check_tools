@@ -1,0 +1,619 @@
+#!/usr/bin/env perl
+# vi: fdm=marker
+
+# Use directives {{{1
+################################################################
+
+use strict;
+use warnings "all";
+use Deep::Hash::Utils;
+use File::Basename;
+use File::Spec::Functions;
+use File::Temp;
+use Getopt::Long;
+use Git::Repository;
+use JSON;
+use LWP::Protocol::https; # Needed by LWP to use HTTPS protocol.
+use LWP::UserAgent;
+use Term::ANSIColor;
+use XML::Simple;
+use YAML::Tiny;
+
+# Constants {{{1
+################################################################
+
+my $SCRIPTNAME = basename($0);
+my $SCRIPTPATH = dirname($0);
+
+# Variables {{{1
+################################################################
+
+my $CHECK_ALL = 0;
+my $CHECK_CONTAINERS = 0;
+my $CHECK_TOOLS = 0;
+my $CHECK_WORKFLOWS = 0;
+my $HELP = 0;
+my $INPUT_FOLDER = '.';
+my %CONTAINERS;
+my %TOOLS;
+my %WORKFLOWS;
+my %DATA = (container => {}, tool => {}, workflow => {});
+my $N_ERRORS = 0;
+
+# Print help {{{1
+################################################################
+
+sub print_help {
+	print "Usage: $SCRIPTNAME [options]
+
+This program will scan the configuration files for tools, and check
+that they are correctly defined.
+
+Options:
+   -a, --check-all        Check all.
+   -c, --check-containers Check containers.
+   -h, --help             Print this help message and exits.
+   -i,--input <FOLDER>    Set the input folder to use. Default is '.'.
+   -t, --check-tools      Check tools.
+   -w, --check-workflows  Check workflows.
+";
+	exit(0);
+}
+
+# Read args {{{1
+################################################################
+
+sub read_args {
+
+	GetOptions(
+		'check-all|a' => \$CHECK_ALL,
+		'check-containers|c' => \$CHECK_CONTAINERS,
+		'help|h' => \$HELP,
+		'input|i' => \$INPUT_FOLDER,
+		'check-tools|t' => \$CHECK_TOOLS,
+		'check-workflows|w' => \$CHECK_WORKFLOWS
+	) or print_help();
+
+	# Help
+	print_help() if $HELP;
+
+	# Check left arguments.
+	if (@ARGV > 0) {
+		print "No arguments allowed.\n";
+		print_help();
+	}
+
+	# Check all
+	$CHECK_CONTAINERS = $CHECK_TOOLS = $CHECK_WORKFLOWS = 1 if $CHECK_ALL;
+}
+
+# Check message {{{1
+################################################################
+
+sub check_msg($$$$) {
+
+	my ($msg_type, $type, $id, $msg) = @_;
+
+	# Check message type
+	die "Unknown message type $msg_type." unless grep(lc($msg_type), qw(error warning success));
+
+	# Count messages
+	++$DATA{lc($type)}->{$id}->{messages}->{lc($msg_type)};
+	++$N_ERRORS if lc($msg_type) eq 'error';
+
+	# Set color
+	my %type2color = (error => 'red', warning => 'yellow', success => 'green');
+	print color($type2color{lc($msg_type)});
+
+	# Print message
+	print(uc("[$msg_type on $type")." $id] $msg\n");
+
+	# Reset color
+	print color('reset');
+}
+
+# Get tool XML file full path {{{1
+################################################################
+
+sub get_tool_xml_file_full_path($) {
+
+	my ($xml_file) = @_;
+
+	my $xml_file_path = File::Spec::Functions::catfile($INPUT_FOLDER, 'tools', $xml_file);
+
+	return $xml_file_path;
+}
+
+# Get tool XML files {{{1
+################################################################
+
+sub get_tool_xml_files {
+
+	my $tool_conf_file = File::Spec::Functions::catfile($INPUT_FOLDER, 'config', 'tool_conf.xml');
+	die "No file \"$tool_conf_file\"." unless -f $tool_conf_file;
+
+	# Read tool_conf.xml and get all XML tool paths.
+	my @tool_xml_files;
+	my $xml_parser = new XML::Simple;
+	my $tools = $xml_parser->XMLin($tool_conf_file);
+	while (my @keys = Deep::Hash::Utils::reach($tools)) {
+		push(@tool_xml_files, $keys[-1]) if ($keys[-2] eq 'file');
+	}
+
+	# Filter out non-PhenoMeNal tools
+	@tool_xml_files = grep(/^phenomenal\//, @tool_xml_files);
+
+	# Filter out all non existing files
+	my @only_existing_files;
+	for my $xml_file (@tool_xml_files) {
+		my $xml_file_full_path = get_tool_xml_file_full_path($xml_file);
+		if ( -f $xml_file_full_path) {
+			push(@only_existing_files, $xml_file);
+		}
+		else {
+			check_msg("ERROR", "TOOL", "unknown", "Cannot find tool XML file \"$xml_file_full_path\", while reading \"$tool_conf_file\".");
+		}
+	}
+	@tool_xml_files = @only_existing_files;
+
+	return @tool_xml_files;
+}
+
+# Read tool XML files {{{1
+################################################################
+
+sub read_tool_xml_files() {
+
+	my @tool_xml_files = get_tool_xml_files();
+
+	my $xml_parser = new XML::Simple();
+	for my $xml_file (@tool_xml_files) {
+		my $xml_file_path = File::Spec::Functions::catfile($INPUT_FOLDER, 'tools', $xml_file);
+		my $tool = $xml_parser->XMLin($xml_file_path);
+
+		# Version
+		die "No tool ID defined inside XML tool file $xml_file_path." if ( ! exists($$tool{id}));
+		my $tool_id = $$tool{id};
+		$TOOLS{$tool_id} = { id => $tool_id };
+
+		# Name
+		$TOOLS{$tool_id}->{name} = $$tool{name} if exists($$tool{name});
+			
+		# Version
+		$TOOLS{$tool_id}->{version} = $$tool{version} if exists($$tool{version});
+
+		# Command
+		if (exists($$tool{command})) {
+			if (ref($$tool{command})) {
+				$TOOLS{$tool_id}->{command}->{interpreter} = $$tool{command}->{interpreter} if exists($$tool{command}->{interpreter});
+				$TOOLS{$tool_id}->{command}->{content} = $$tool{command}->{content} if exists($$tool{command}->{content});
+			}
+			else {
+				$TOOLS{$tool_id}->{command}->{content} = $$tool{command};
+			}
+		}
+	}
+}
+
+# Read PhenoMeNal tools2container YAML {{{1
+################################################################
+
+sub read_phenomenal_tools2container_yaml() {
+
+	my $yaml_file = File::Spec::Functions::catfile($INPUT_FOLDER, 'config', 'phenomenal_tools2container.yaml');
+	die "No file \"$yaml_file\"." unless -f $yaml_file;
+
+	# Load YAML file
+	my $phn_tools2cont = YAML::Tiny->read($yaml_file)->[0];
+	die "Unable to find assignment key in $yaml_file." unless exists($$phn_tools2cont{assignment});
+	for my $container (@{$$phn_tools2cont{assignment}}) {
+
+		# Check that required field are defined
+		for my $field (qw(docker_image_override docker_tag_override tools_id)) {
+			die "No $field field in container." unless exists($$container{$field});
+		}
+
+		my $name = $$container{docker_image_override};
+		my $tag = $$container{docker_tag_override};
+		$CONTAINERS{$name} = { name => $name, tag => $tag, tools => $$container{tools_id} };
+
+		# Loop on all tools of the container
+		for my $tool_id (@{$$container{tools_id}}) {
+			check_msg("WARNING", "TOOL", $tool_id, "Unknown tool found in container $name, file $yaml_file.") unless exists($TOOLS{$tool_id});
+			$TOOLS{$tool_id}->{container} = $CONTAINERS{$name};
+		}
+	}
+}
+
+# Read job conf XML {{{1
+################################################################
+
+sub read_job_conf() {
+
+	my $xml_file = File::Spec::Functions::catfile($INPUT_FOLDER, 'config', 'job_conf.xml');
+	die "No file \"$xml_file\"." unless -f $xml_file;
+
+	# Load XML file
+	my $xml_parser = new XML::Simple();
+	my $job_conf = $xml_parser->XMLin($xml_file);
+	while (my ($tool_id, $job) = each %{$job_conf->{tools}->{tool}}) {
+		$TOOLS{$tool_id}->{job_destination} = $job->{destination} if exists $TOOLS{$tool_id} && exists($job->{destination});
+	}
+}
+
+# Read tools info {{{1
+################################################################
+
+sub read_tools_info() {
+
+	if (keys(%TOOLS) == 0) {
+
+		# Read first info from tool XML files
+		read_tool_xml_files();
+
+		# Read job_conf.xml
+		read_job_conf();
+	}
+}
+
+# Read Jenkins info {{{1
+################################################################
+
+sub read_jenkins_info() {
+
+	my $jenkins_url = "http://phenomenal-h2020.eu/jenkins/api/json?pretty=true&depth=2";
+	my $ua = LWP::UserAgent->new();
+	$ua->ssl_opts( verify_hostname => 0 );
+	my $res = $ua->request(new HTTP::Request GET => $jenkins_url);
+	if ($res->is_success) {
+		my $json = JSON::decode_json($res->content);
+		if (exists($json->{jobs})) {
+
+			# Loop on all jobs
+			foreach my $job (@{$json->{jobs}}) {
+				my $jenkins_project_name = $job->{name};
+				(my $container_id = $jenkins_project_name) =~ s/^(test-)?container-//;
+				if (exists($CONTAINERS{$container_id})) {
+					my %project;
+					$project{name} = $jenkins_project_name;
+					if (exists($job->{builds})) {
+
+						# Loop on all builds
+						my %builds;
+						foreach my $build (@{$job->{builds}}) {
+							my $number = $build->{number};
+							my $name = $build->{displayName};
+							(my $tag = $name) =~ s/^.+$container_id[^:]*:((dev_)?v[^ ]+_cv[^ ]+) .+$/$1/;
+							my $success = $build->{result} eq 'SUCCESS';
+							$builds{$number} = { number => $number, tag => $tag, success => $success };
+						}
+						$project{builds} = \%builds;
+						$project{last_build} = $job->{lastBuild}->{number} if exists($job->{lastBuild});
+					}
+					if ($jenkins_project_name =~ /^test-/) {
+						$CONTAINERS{$container_id}->{jenkins}->{test_project} = \%project;
+					}
+					else {
+						$CONTAINERS{$container_id}->{jenkins}->{build_project} = \%project;
+					}
+				}
+			}
+			
+		}
+		else {
+			die "Cannot find section \"jobs\" in Jenkins report at $jenkins_url."
+		}
+	}
+	else {
+		die "Cannot contact Jenkins server at $jenkins_url.";
+	}
+}
+
+# Read containers info {{{1
+################################################################
+
+sub read_containers_info() {
+
+	if (keys(%CONTAINERS) == 0) {
+
+		read_tools_info();
+		read_phenomenal_tools2container_yaml();
+		read_jenkins_info();
+	}
+}
+
+# Check command {{{1
+################################################################
+
+sub check_command($) {
+
+	my ($tool) = @_;
+
+	check_msg("WARNING", "TOOL", $tool->{id}, "Command uses an interpreter attribute. Use of interpreter attribute inside command tag is discouraged. It tends to make embedded code more complex and renders difficult testing. Please get rid of your explicit call to \"$$tool{command}->{interpreter}\" interpreter, and write a script using a shebang that you will call directly from inside the command tag content, using command line arguments to get different behavious. Testing of such a script is a lot easier, since it can be done outside of Galaxy scope.") if exists $$tool{command}->{interpreter};
+	check_msg("ERROR", "TOOL", $tool->{id}, "Command uses \$__tool_directory__ variable. Please remove it, as it will prevent the tool to launch in PhenoMeNal Galaxy.") if grep(/\$__tool_directory__/, $$tool{command}->{content});
+	check_msg("WARNING", "TOOL", $tool->{id}, "Command uses a complex command (use of && or ; operators). Please simply by calling only one script or program that you can test more accurately outside of Galaxy environment.") if grep(/(&&|;)/, $$tool{command}->{content});
+}
+
+# Check container tag {{{1
+################################################################
+
+sub check_container_tag($) {
+
+	my ($container) = @_;
+
+	# Check container tag format
+	if ( ! $container->{tag}) {
+		check_msg("WARNING", "CONTAINER", $container->{name}, "Container tag is not set.");
+	}
+	elsif ($container->{tag} eq 'latest') {
+		check_msg("WARNING", "CONTAINER", $container->{name}, "Container tag is set to latest.");
+	}
+	elsif ($container->{tag} =~ m/^(dev_)?v.+_cv.+$/) {
+
+		# Extract tool version
+		(my $tool_version = $container->{tag}) =~ s/^(dev_)?v(.+)_cv.+$/$2/;
+		check_msg("ERROR", "CONTAINER", $container->{name}, "Unable to extract tool version from container tag $container->{tag}") unless $tool_version;
+
+		# Loop on all tools
+		foreach my $tool_id (@{$container->{tools}}) {
+			if (exists($TOOLS{$tool_id}->{version}) && $TOOLS{$tool_id}->{version} ne $tool_version) {
+				check_msg("WARNING", "CONTAINER", $container->{name}, "Tool $tool_id has version $TOOLS{$tool_id}->{version}, but tool version in container tag $container->{tag} is $tool_version.")
+			}
+		}
+	}
+	else {
+		check_msg("ERROR", "CONTAINER", $container->{name}, "Container tag $container->{tag} does not match the format '^(dev_)?v.+_cv.+\$'.");
+	}
+}
+
+# Check job destination {{{1
+################################################################
+
+sub check_job_destination($) {
+
+	my ($tool) = @_;
+
+	if (exists($tool->{job_destination})) {
+		check_msg("WARNING", "TOOL", $tool->{id}, "Job destination ($tool->{job_destination}) is not generic.") if $tool->{job_destination} !~ m/^dynamic-k8s-.*$/;
+	}
+	else {
+		check_msg("ERROR", "TOOL", $tool->{id}, "No job destination defined.");
+	}
+}
+
+# Check container repos {{{1
+################################################################
+
+sub check_container_repos($) {
+
+	my ($container) = @_;
+
+	# Try to clone repos
+	my $repos_name = "container-$container->{name}";
+	my $repos_url = "https://github.com/phnmnl/$repos_name";
+	my $ua = LWP::UserAgent->new();
+	$ua->ssl_opts( verify_hostname => 0 );
+	my $res = $ua->request(new HTTP::Request GET => $repos_url);
+	if ($res->is_success) {
+# TODO Get containers repos and check tool version in README
+		my $dir = File::Temp::tempdir();
+		Git::Repository->run(clone => $repos_url, $dir);
+		my $r = Git::Repository->new(work_tree => $dir );
+	}
+	else {
+		check_msg("ERROR", "CONTAINER", $container->{name}, "Cannot find container GitHub repository $repos_name at $repos_url. " . $res->message);
+	}
+}
+
+# Check container registry {{{1
+################################################################
+
+sub check_container_registry($) {
+
+	my ($container) = @_;
+
+	my $regsitry_container_name = "phnmnl/$container->{name}";
+	my $list_tags_url = "https://container-registry.phenomenal-h2020.eu/v2/$regsitry_container_name/tags/list"; # See https://docs.docker.com/registry/spec/api/#listing-image-tags
+	my $ua = LWP::UserAgent->new();
+	$ua->ssl_opts( verify_hostname => 0 );
+	my $res = $ua->request(new HTTP::Request GET => $list_tags_url);
+	if ($res->is_success) {
+		my $json = JSON::decode_json($res->content);
+		if (exists($json->{tags})) {
+			my @tags = @{$json->{tags}};
+			if (grep(/^$container->{tag}$/, @tags) == 0) {
+				check_msg("ERROR", "CONTAINER", $container->{name}, "Tag $container->{tag} cannot be found in PhenoMeNal registry.");
+			}
+		}
+		else {
+			check_msg("ERROR", "CONTAINER", $container->{name}, "No tags found in PhenoMeNal registry.");
+		}
+	}
+	else {
+		check_msg("ERROR", "CONTAINER", $container->{name}, "No image found for container inside PhenoMeNal registry: $list_tags_url. " . $res->message);
+	}
+}
+
+# Check container Jenkins jobs {{{1
+################################################################
+
+sub check_container_jenkins($) {
+
+	my ($container) = @_;
+
+	# Check build project
+	if ( ! exists($container->{jenkins}) || ! exists($container->{jenkins}->{build_project})) {
+		check_msg("ERROR", "CONTAINER", $container->{name}, "No build project \"container-$container->{name}\" found for this container on Jenkins server.");
+	}
+	elsif (exists($container->{jenkins}->{build_project}->{builds})) {
+
+		# Look for build number
+		my $build_number = undef;
+		if ($container->{tag} eq 'latest') {
+			$build_number = $container->{jenkins}->{build_project}->{last_build};
+		}
+		else {
+			foreach my $build (values(%{$container->{jenkins}->{build_project}->{builds}})) {
+				if ($build->{tag} eq $container->{tag}) {
+					$build_number = $build->{number};
+					last;
+				}
+			}
+		}
+		if ( ! defined($build_number)) {
+			check_msg("ERROR", "CONTAINER", $container->{name}, "The tag $container->{tag} was not found in Jenkins server.");
+		}
+		elsif ( ! $container->{jenkins}->{build_project}->{builds}->{$build_number}->{success}) {
+			check_msg("ERROR", "CONTAINER", $container->{name}, "The tag $container->{tag} has been found in Jenkins server, but is marked as FAILED.");
+		}
+		if (exists($container->{jenkins}->{build_project}->{last_build}) && $container->{tag} ne 'latest') {
+			my $last_build = $container->{jenkins}->{build_project}->{last_build};
+			my $last_build_tag = $container->{jenkins}->{build_project}->{builds}->{$last_build}->{tag};
+			check_msg("WARNING", "CONTAINER", $container->{name}, "A more recent version ($last_build_tag) of the container has been built on Jenkins server. Current used tag is $container->{tag}.") unless $last_build_tag eq $container->{tag};
+		}
+	}
+	else {
+		check_msg("ERROR", "CONTAINER", $container->{name}, "No builds found for this container on Jenkins server.");
+	}
+	
+	# Check test project
+	if ( ! exists($container->{jenkins}) || ! exists($container->{jenkins}->{test_project})) {
+		check_msg("ERROR", "CONTAINER", $container->{name}, "No build project \"test-container-$container->{name}\" found for this container on Jenkins server.");
+	}
+	elsif (exists($container->{jenkins}->{test_project}->{builds}) && exists($container->{jenkins}->{test_project}->{last_build})) {
+		my $last_build = $container->{jenkins}->{test_project}->{last_build};
+		my $build = $container->{jenkins}->{test_project}->{builds}->{$last_build};
+		check_msg("WARNING", "CONTAINER", $container->{name}, "Last build of test project failed.") unless $build->{success};
+	}
+	else {
+		check_msg("ERROR", "CONTAINER", $container->{name}, "No builds found for test project of this container on Jenkins server.");
+	}
+}
+
+# Check containers {{{1
+################################################################
+
+sub check_containers() {
+
+	# Load files
+	read_containers_info();
+
+	foreach my $container_id (sort keys %CONTAINERS) {
+		my $container = $CONTAINERS{$container_id};
+		check_container_tag($container);
+		check_container_repos($container);
+		check_container_registry($container);
+		check_container_jenkins($container);
+		check_msg("SUCCESS", "CONTAINER", $container_id, "Container checked successfully.") unless $DATA{container}->{$container_id}->{messages}->{error} || $DATA{container}->{$container_id}->{messages}->{warning};
+	}
+}
+
+# Read workflows info {{{1
+################################################################
+
+sub read_workflows_info() {
+
+	if (keys(%WORKFLOWS) == 0) {
+
+		# List .ga files in workflows folder
+		my @ga_files = <workflows/*.ga>;
+
+		# Load all .ga files
+		for my $ga_file (@ga_files) {
+			my $workflow;
+			{
+				local $/;
+				open my $fh, '<', $ga_file or die "can't open $ga_file: $!";
+				my $json = <$fh>;
+				$workflow = JSON::decode_json($json);
+			}
+
+			# Check that required field are defined
+			for my $field (qw(uuid name steps)) {
+				die "No $field field in workflow file \"$ga_file\"." unless exists($workflow->{$field});
+			}
+
+			# List tools
+			my @tools;
+			foreach my $step_n (sort keys %{$workflow->{steps}}) {
+				my $step = $workflow->{steps}->{$step_n};
+				if (exists($step->{type}) && $step->{type} eq 'tool') {
+					if (exists($step->{tool_id}) && defined $step->{tool_id}) {
+						my %tool = (id => $step->{tool_id});
+						if (exists($step->{tool_version}) && defined $step->{tool_version}) {
+							$tool{version} = $step->{tool_version};
+						}
+						else {
+							check_msg('ERROR', 'WORKFLOW', $workflow->{name}, "No tool version defined for tool $step->{tool_id} at step $step_n of workflow.");
+						}
+						push(@tools, \%tool);
+					}
+					else {
+						check_msg('ERROR', 'WORKFLOW', $workflow->{name}, "No tool ID defined for step $step_n of workflow.");
+					}
+				}
+			}
+
+			# Set new workflow
+			$WORKFLOWS{$workflow->{uuid}} = { id => $workflow->{uuid}, name => $workflow->{name}, tools => \@tools};
+		}
+	}
+}
+
+# Check workflows {{{1
+################################################################
+
+sub check_workflows() {
+
+	# Load files
+	read_tools_info();
+	read_workflows_info();
+
+	# Loop on all workflows
+	foreach my $workflow_id (sort keys %WORKFLOWS) {
+
+		my $workflow = $WORKFLOWS{$workflow_id};
+
+		# Loop on all workflow's tools
+		foreach my $tool (@{$workflow->{tools}}) {
+
+			# Check that the tool is known
+			check_msg('ERROR', 'WORKFLOW', $workflow->{name}, "Unknown tool $tool->{id}.") unless exists($TOOLS{$tool->{id}});
+
+			# Check tool version
+			check_msg('ERROR', 'WORKFLOW', $workflow->{name}, "Version $tool->{version} of tool $tool->{id} requested by workflow, but version $TOOLS{$tool->{id}}->{version} declared in tool_conf.xml.") unless $TOOLS{$tool->{id}}->{version} eq $tool->{version};
+		}
+
+		check_msg("SUCCESS", "WORKFLOW", $workflow->{name}, "Workflow checked successfully.") unless $DATA{workflow}->{$workflow->{name}}->{messages}->{error};
+	}
+}
+
+# Check tools {{{1
+################################################################
+
+sub check_tools() {
+
+	# Load files
+	read_tools_info();
+
+	# Loop on all tools
+	foreach my $tool_id (sort keys %TOOLS) {
+		my $tool = $TOOLS{$tool_id};
+		check_command($tool);
+		check_job_destination($tool);
+		check_msg("SUCCESS", "TOOL", $tool_id, "Tool checked successfully.") unless $DATA{tool}->{$tool_id}->{messages}->{error} || $DATA{tool}->{$tool_id}->{messages}->{warning};
+	}
+}
+
+# Main {{{1
+################################################################
+
+# Read arguments
+read_args();
+
+# Check
+check_tools() if $CHECK_TOOLS;
+check_containers() if $CHECK_CONTAINERS;
+check_workflows if $CHECK_WORKFLOWS;
+
+exit(1) if $N_ERRORS;

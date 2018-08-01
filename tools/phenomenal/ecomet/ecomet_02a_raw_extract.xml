@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Eco-Metabolomics]-->
+<tool id="ecomet_raw_extract" name="ecomet_raw_extract" version="1.1">
+  <description>Extract RAW files from MTBLS study</description>
+  <command><![CDATA[
+mtbls520_02_extract.sh $mtblsid $polarity rawfolder $rawmaf qcfolder qcmaf $traitsfile $phylofile $afile $sfile;
+  ]]>
+  </command>
+  <inputs>
+    <param name="mtblsid" type="data" format="zip" label="MTBLS study" />
+    <param name="polarity" type="select" value="positive" optional="False" label="Polarity" help="The polarity used for the mode of acquisition">
+	    <option value="positive" selected="True">positive</option>
+	    <option value="negative">negative</option>
+	</param>
+  </inputs>
+  <outputs>
+    <collection name="rawfiles" type="list" format="mzml" label="RAW mzML files" >
+      <discover_datasets pattern="__name__" directory="rawfolder" type="data" format="mzml" visible="false" />
+    </collection>
+    <data name="rawmaf" type="data" format="tabular" label="Study MAF peak table" />
+    <data name="traitsfile" type="data" format="csv" label="Ecological characteristics" />
+    <data name="phylofile" type="data" format="txt" label="Phylogeny tree" />
+    <data name="afile" type="data" format="tabular" label="Analytical metadata" />
+    <data name="sfile" type="data" format="tabular" label="Sample metadata" />
+  </outputs>
+  <help>
+=========================
+Eco-Metabolomics workflow
+=========================
+
+This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
+
+Module
+	| MTBLS RAW Extraction
+	|
+
+Description
+	| Extract RAW mzML files
+	|
+
+-----
+Input
+-----
+
+MTBLS study
+	| Zipped MTBLS study
+	|
+
+Polarity
+	| The polarity of the acquition mode, defaults to positive. Allowed values: positive or negative.
+	|
+
+------
+Output
+------
+
+RAW mzML
+	| Dataset collection of raw mzML files
+	| 
+
+Study MAF peak table
+	| Metabolights Assignment file
+	| 
+
+Ecological characteristics
+	| Ecological characteristics (traits) file in CSV format
+	| 
+
+Phylogeny tree
+	| Phylogenetic information file in TRE format
+	| 
+
+Analytical metadata
+	| ISA-Tab format Assay metadata file
+	| 
+
+Sample metadata
+	| ISA-Tab format Sample metadata file
+	| 
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+For updates and documentation, please visit **https://github.com/korseby/container-mtbls520** or contact **Kristian Peters (kpeters@ipb-halle.de)**.
+
+  </help>
+</tool>
+

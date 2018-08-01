@@ -1,0 +1,68 @@
+<tool id="tamenmr-normalise" name="Normalisation" version="0.0.3">
+    <requirements>
+        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
+    </requirements>
+    <description></description>
+    <command><![CDATA[
+        #if $method_choice.method == "refPeak"
+        Normalise.R --input=$input --output=$output --type=$method_choice.method --param=$method_choice.param
+        #else
+        Normalise.R --input=$input --output=$output --type=$method_choice.method
+        #end if
+        ]]>
+    </command>
+
+    <inputs>
+        <param name="input" type="data" label="NMR Spectra"/>
+        <conditional name="method_choice">
+            <param name="method" type="select" label="Normalisation method">
+                <option value="PQN">PQN</option>
+                <option value="totInt">Total integral</option>
+                <option value="refPeak">Reference peak</option>
+            </param>
+            <when value="refPeak">
+                <param name="param" type="text" label="Peak position in ppm (ex. 0.01-0.011)"/>
+            </when>
+        </conditional>
+    </inputs>
+
+    <outputs>
+        <data format="tabular" name="output" label="Normalised Spectra"/>
+    </outputs>
+
+    <!--
+    <requirements>
+    </requirements>
+
+    <tests>
+    </tests-->
+
+    <help>
+      This tool normalizes NMR spectra before further processing. It is meant to correct for dilution effects in
+      the intensity of the spectra and make them more comparable.
+      
+      **Normalisation methods**
+      
+      **PQN** (probabilistic quotient normalisation) as described in Dieterle *et al.*
+      
+      **Total integral** normalises the spectra by its total integral under the curve.
+      
+      **Reference peak** normalises the spectra by a user specified reference peak. 
+      Enter a ppm interval in the **Peak position** box.
+    </help>
+    
+    <citations>
+      <citation type="bibtex">
+        @article{doi:10.1021/ac051632c,
+        author = {Dieterle, Frank and Ross, Alfred and Schlotterbeck, Götz and Senn, Hans},
+        title = {Probabilistic Quotient Normalization as Robust Method to Account for Dilution of Complex Biological Mixtures. Application in 1H NMR Metabonomics},
+        journal = {Analytical Chemistry},
+        volume = {78},
+        number = {13},
+        pages = {4281-4290},
+        year = {2006},
+        doi = {10.1021/ac051632c},
+        note ={PMID: 16808434}}
+      </citation>
+    </citations>
+</tool>

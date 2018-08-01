@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Proposed Tool Section: [Eco-Metabolomics]-->
+<tool id="ecomet_download" name="ecomet_download" version="1.1">
+  <description>Download MTBLS study via https</description>
+  <command><![CDATA[
+mtbls520_01_mtbls_download.sh $id $mtblszip $token 2>&1;
+  ]]>
+  </command>
+  <inputs>
+    <param name="id" type="text" value="520" label="MetaboLights ID" optional="False" help="Enter the MetaboLights ID here, e.g. 520." />
+    <param name="token" type="text" value="" label="Private Token" optional="True" help="If this is a private study, please enter the Secret MetaboLights Token here, e.g. aabbccdd-1122-4455-66ff-f0e0d0c0b0a0." />
+  </inputs>
+  <outputs>
+    <data name="mtblszip" type="data" format="zip" label="MTBLS dataset" help="MTBLS study dataset in ZIP format" />
+  </outputs>
+  <help>
+=========================
+Eco-Metabolomics workflow
+=========================
+
+This is the computational workflow to study the seasonal variation of secondary metabolites in nine different bryophytes.
+
+Module
+	| MTBLS Download
+	|
+
+Description
+	| Download an entire MTBLS study via https
+	|
+
+-----
+Input
+-----
+
+MetaboLights ID
+	| The ID of the MetaboLights study, e.g. 520
+	|
+
+Private Token
+	| If this is a private study, please enter the Secret MetaboLights Token, e.g. a1f59130-6646-4443-87f3-a070985811e2
+	|
+
+------
+Output
+------
+
+MTBLS dataset
+	| MTBLS study dataset in ZIP format
+	|
+
+---------------------------------------------------
+
+.. class:: infomark
+
+**Authors**
+
+For updates and documentation, please visit **https://github.com/korseby/container-mtbls520** or contact **Kristian Peters (kpeters@ipb-halle.de)**.
+
+  </help>
+</tool>
+

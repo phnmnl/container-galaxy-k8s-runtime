@@ -1,0 +1,20 @@
+<tool id="mzquality-blank-effect" name="blank-effect" version="1.0">
+    <description>determines the blank effect (percentage) of each compound.</description>
+    <requirements>
+        <container type="docker">phnmnl/mzquality</container>
+    </requirements>
+     <command>python /files/mzQuality/qcli.py blank-effect --mea-file=$input1 --by-batch=$input2 --blank-effect-file=$output1</command>
+    <inputs>
+        <param name="input1" type="data" format="tabular" multiple="false" label="Measurements file (ms-vfetc output)" />
+	    <param name="input2" type="select" label="report by batch">
+        	<option value="False" selected="true">no</option>
+        	<option value="True">yes</option>
+	    </param>        
+    </inputs>
+    <outputs>
+        <data name="output1" format="tabular" label="blank_effect.txt"/>
+    </outputs>
+    <help><![CDATA[
+        What is the signal in the blank samples? i.e. empty vials. This measures the signal of the background.
+    ]]></help>
+</tool>

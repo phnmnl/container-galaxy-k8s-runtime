@@ -1,0 +1,31 @@
+<tool id="tamenmr-binning" name="Binning" version="0.0.3">
+    <requirements>
+        <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
+    </requirements>
+    <description> (Bucketing) </description>
+    <command><![CDATA[
+            BinSpectra.R --input=$input --output=$output --pattern=$pattern
+            ]]>
+    </command>
+
+    <inputs>
+        <param name="input" type="data" label="NMR Spectra" />
+        <param name="pattern" type="data" label="Pattern File" />
+    </inputs>
+
+    <outputs>
+        <data format="tabular" name="output" label="Binned Spectra"/>
+    </outputs>
+
+    <!--
+    <requirements>
+    </requirements>
+
+    <tests>
+    </tests-->
+
+    <help>
+      This tool bins NMR spectra based on a given pattern file.
+      Pattern file can be created using **Preapare pattern file** tool.
+    </help>
+</tool>

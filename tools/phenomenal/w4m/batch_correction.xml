@@ -1,4 +1,4 @@
-<tool id="Batch_correction" name="Batch_correction" version="2.2.0">
+<tool id="Batch_correction" name="Batch_correction" version="2.2.3">
   <description>Corrects intensities for signal drift and batch-effects</description>
 
   <requirements>
@@ -330,6 +330,20 @@ See also the reference history:
 ----
 NEWS
 ----
+
+CHANGES IN VERSION 2.2.2  
+========================  
+
+INTERNAL MODIFICATIONS  
+
+Fixed bug for color plot ("all_loess" methods)  
+
+CHANGES IN VERSION 2.2.0  
+========================  
+
+NEW FEATURE  
+
+Specific names for the 'sampleType', 'injectionOrder', and 'batch' from sampleMetadata can be selected by the user (for compatibility with the MTBLS downloader)
 
 CHANGES IN VERSION 2.1.2  
 ========================  

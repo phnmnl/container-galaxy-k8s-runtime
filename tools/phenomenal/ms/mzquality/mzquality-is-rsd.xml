@@ -1,0 +1,20 @@
+<tool id="mzquality-is-rsd" name="is-rsd" version="1.0">
+    <description>determines RSD of the internal standard(s).</description>
+    <requirements>
+        <container type="docker">phnmnl/mzquality</container>
+    </requirements>
+     <command>python /files/mzQuality/qcli.py internal-standard-rsd --qc-corrected-file=$input1 --by-batch=$input2 --is-rsd-file=$output1</command>
+    <inputs>
+        <param name="input1" type="data" format="tabular" multiple="false" label="QC corrected file" />
+	    <param name="input2" type="select" label="report by batch">
+        	<option value="False" selected="true">no</option>
+        	<option value="True">yes</option>
+	    </param>        
+    </inputs>
+    <outputs>
+        <data name="output1" format="tabular" label="is-rsd.txt"/>
+    </outputs>
+    <help><![CDATA[
+        This reports the relative standard deviation (RSD) of internal standards. The internal standards are used to calculate the reported ratio of a compound; also called the internal standard corrected intensity. The denominator of the RSD is the absolute value of the mean, so the RSD will always be positive.
+    ]]></help>
+</tool>
