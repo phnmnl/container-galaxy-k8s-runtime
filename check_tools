@@ -39,6 +39,7 @@ my %TOOLS;
 my %WORKFLOWS;
 my %DATA = (container => {}, tool => {}, workflow => {});
 my $N_ERRORS = 0;
+my $CORRECT_COMMAND = 0;
 
 # Print help {{{1
 ################################################################
@@ -52,6 +53,7 @@ that they are correctly defined.
 Options:
    -a, --check-all        Check all.
    -c, --check-containers Check containers.
+   --correct-command      Correct command tag containt of XML tool files: remove the use of \$__tool_directory__ variable.
    -h, --help             Print this help message and exits.
    -i,--input <FOLDER>    Set the input folder to use. Default is '.'.
    -t, --check-tools      Check tools.
@@ -71,7 +73,8 @@ sub read_args {
 		'help|h' => \$HELP,
 		'input|i' => \$INPUT_FOLDER,
 		'check-tools|t' => \$CHECK_TOOLS,
-		'check-workflows|w' => \$CHECK_WORKFLOWS
+		'check-workflows|w' => \$CHECK_WORKFLOWS,
+		'correct-command' => \$CORRECT_COMMAND,
 	) or print_help();
 
 	# Help
@@ -102,7 +105,7 @@ sub check_msg($$$$) {
 	++$N_ERRORS if lc($msg_type) eq 'error';
 
 	# Set color
-	my %type2color = (error => 'red', warning => 'yellow', success => 'green');
+	my %type2color = (error => 'red', warning => 'yellow', success => 'green', action => 'magenta');
 	print color($type2color{lc($msg_type)});
 
 	# Print message
@@ -174,7 +177,7 @@ sub read_tool_xml_files() {
 		# Version
 		die "No tool ID defined inside XML tool file $xml_file_path." if ( ! exists($$tool{id}));
 		my $tool_id = $$tool{id};
-		$TOOLS{$tool_id} = { id => $tool_id };
+		$TOOLS{$tool_id} = { id => $tool_id, xml_file => $xml_file, xml_file_path => $xml_file_path };
 
 		# Name
 		$TOOLS{$tool_id}->{name} = $$tool{name} if exists($$tool{name});
@@ -330,7 +333,30 @@ sub check_command($) {
 	my ($tool) = @_;
 
 	check_msg("WARNING", "TOOL", $tool->{id}, "Command uses an interpreter attribute. Use of interpreter attribute inside command tag is discouraged. It tends to make embedded code more complex and renders difficult testing. Please get rid of your explicit call to \"$$tool{command}->{interpreter}\" interpreter, and write a script using a shebang that you will call directly from inside the command tag content, using command line arguments to get different behavious. Testing of such a script is a lot easier, since it can be done outside of Galaxy scope.") if exists $$tool{command}->{interpreter};
-	check_msg("ERROR", "TOOL", $tool->{id}, "Command uses \$__tool_directory__ variable. Please remove it, as it will prevent the tool to launch in PhenoMeNal Galaxy.") if grep(/\$__tool_directory__/, $$tool{command}->{content});
+
+	if (grep(/\$__tool_directory__/, $$tool{command}->{content})) {
+		if ($CORRECT_COMMAND) {
+
+			# Edit the XML tool file
+			my $bkp_file = "$tool->{xml_file_path}.bkp";
+			rename $tool->{xml_file_path} => $bkp_file || die "Unable to rename file \"$tool->{xml_file_path}\" into \"$bkp_file\".\n";
+			open(INPUT_XML_FILE, "<:utf8", $bkp_file);
+			open(OUTPUT_XML_FILE, ">:utf8", $tool->{xml_file_path});
+			while(<INPUT_XML_FILE>) {
+				s!\$__tool_directory__/?!!g;
+				print OUTPUT_XML_FILE $_;
+			}
+			close(OUTPUT_XML_FILE);
+			close(INPUT_XML_FILE);
+
+			# Print message
+			check_msg("ACTION", "TOOL", $tool->{id}, "Variable \$__tool_directory__ has been removed from command tag of XML file $tool->{xml_file}.");
+		}
+		else {
+			check_msg("ERROR", "TOOL", $tool->{id}, "Command uses \$__tool_directory__ variable. Please remove it, or this will prevent the tool to launch in PhenoMeNal Galaxy.");
+		}
+	}
+
 	check_msg("WARNING", "TOOL", $tool->{id}, "Command uses a complex command (use of && or ; operators). Please simply by calling only one script or program that you can test more accurately outside of Galaxy environment.") if grep(/(&&|;)/, $$tool{command}->{content});
 }
 
