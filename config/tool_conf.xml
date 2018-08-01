@@ -109,6 +109,7 @@
       <tool file="phenomenal/nmr/metabomatching.xml"/>
       <tool file="phenomenal/nmr/nmr-integrals.xml"/>
    </section>
+<!--
    <section name="tameNMR" id="pheno-tamenmr">
       <tool file="phenomenal/nmr/tamenmr/add_remove_merge.xml"/>
       <tool file="phenomenal/nmr/tamenmr/alignment.xml"/>
@@ -132,7 +133,7 @@
       <tool file="phenomenal/nmr/tamenmr/transform.xml"/>
       <tool file="phenomenal/nmr/tamenmr/ttest.xml"/>
   </section>
-
+-->
   <label id="phenomenal-ms" text="MS Data Analysis Tools" /> 
   <section name="XCMS" id="pheno-XCMS">
     <tool file="phenomenal/ms/msconvert2.xml"/>

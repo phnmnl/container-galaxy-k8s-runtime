@@ -273,6 +273,7 @@
     <tool id="metabomatching" destination="dynamic-k8s-small" resources="all"/>
     <tool id="iterative-signature-algorithm" destination="dynamic-k8s-large" resources="all"/>
     <!-- tameNMR -->
+    <!--
     <tool id="tamenmr-addremmerge" destination="dynamic-k8s-small" resources="all"/>
     <tool id="tamenmr-align" destination="dynamic-k8s-small" resources="all"/>
     <tool id="tamenmr-anova" destination="dynamic-k8s-small" resources="all"/>
@@ -294,6 +295,7 @@
     <tool id="tamenmr-slice" destination="dynamic-k8s-small" resources="all"/>
     <tool id="tamenmr-transform" destination="dynamic-k8s-small" resources="all"/>
     <tool id="tamenmr-ttest" destination="dynamic-k8s-small" resources="all"/>
+    -->
     <!-- new IPO -->
     <tool id="ipo4xcmsSet" destination="dynamic-k8s-xlarge" resources="all"/>
     <tool id="ipo4retgroup" destination="dynamic-k8s-xlarge" resources="all"/>
