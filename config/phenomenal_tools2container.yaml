@@ -36,7 +36,7 @@ assignment:
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: escher-fluxomics
-  docker_tag_override: dev_v1.6.0-beta.4_cv1.1.19 
+  docker_tag_override: v1.6.0-beta.4_cv1.1.20 
   max_pod_retrials: 3
 - tools_id:
    - iso2flux
