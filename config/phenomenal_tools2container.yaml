@@ -50,7 +50,7 @@ assignment:
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: midcor
-  docker_tag_override: v1.0_cv1.0.46
+  docker_tag_override: v1.0_cv1.0.49
   max_pod_retrials: 3
 - tools_id:
    - ramid
@@ -64,7 +64,7 @@ assignment:
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: cdf2mid
-  docker_tag_override: v1.0_cv0.3.7
+  docker_tag_override: v1.0_cv0.3.14
   max_pod_retrials: 3
 
 - tools_id:
