@@ -422,8 +422,8 @@
     <tool id="msnbase-read-msms" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="map-msms2camera" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="msms2metfrag" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="metfrag-vis" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="metfrag-vis-multiple" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="metfrag-vis" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="metfrag-vis-multiple" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="metfrag-cli-batch-multiple" destination="dynamic-k8s-large" resources="all"/>
     <tool id="msnbase-filter-merge-msms" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="msms2metfrag-multiple" destination="dynamic-k8s-medium" resources="all"/>
