@@ -2,6 +2,9 @@ id: MS-MetFrag-XCMS-Workflow
 name: MS-MetFrag-XCMS-Workflow
 description: LC/MS data analysis with XCMS and MetFrag on PhenoMeNal
 title_default: MS-MetFrag-XCMS-Workflow
+tags:
+- "Metabolomics"
+
 steps:
   - title: MS-MetFrag-XCMS-Workflow
     content: >-

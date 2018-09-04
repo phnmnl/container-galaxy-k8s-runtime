@@ -1,6 +1,8 @@
 name: Create NEW ISA compliant Study Metadata
 description: a Galaxy tool to bootstrap creation of experimental metadata in ISA format based on key study design information
 title_default: "Describe your metabolomics study with ISA"
+tags:
+- "Metabolomics"
 
 steps:
 
