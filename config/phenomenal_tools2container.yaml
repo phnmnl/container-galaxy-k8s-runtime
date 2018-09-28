@@ -50,21 +50,21 @@ assignment:
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: midcor
-  docker_tag_override: v1.0_cv1.0.46
+  docker_tag_override: v1.0_cv1.0.55
   max_pod_retrials: 3
 - tools_id:
    - ramid
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: ramid
-  docker_tag_override: v1.0_cv1.0.17
+  docker_tag_override: v1.0_cv1.0.18
   max_pod_retrials: 3
 - tools_id:
    - cdf2mid
   docker_repo_override: container-registry.phenomenal-h2020.eu
   docker_owner_override: phnmnl
   docker_image_override: cdf2mid
-  docker_tag_override: v1.0_cv0.3.7
+  docker_tag_override: v1.0_cv0.3.15
   max_pod_retrials: 3
 
 - tools_id:
@@ -414,7 +414,7 @@ assignment:
 - docker_image_override: isodyn
   docker_owner_override: phnmnl
   docker_repo_override: container-registry.phenomenal-h2020.eu
-  docker_tag_override: v1.0_cv0.2.48
+  docker_tag_override: v1.0_cv0.2.52
   max_pod_retrials: 3
   tools_id:
   - isodyn
