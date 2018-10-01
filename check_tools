@@ -24,6 +24,7 @@ use YAML::Tiny;
 
 my $SCRIPTNAME = basename($0);
 my $SCRIPTPATH = dirname($0);
+my $JENKINS_URL = "http://phenomenal-h2020.eu/jenkins/api/json?pretty=true&depth=2";
 
 # Variables {{{1
 ################################################################
@@ -39,6 +40,7 @@ my %TOOLS;
 my %WORKFLOWS;
 my %DATA = (container => {}, tool => {}, workflow => {});
 my $N_ERRORS = 0;
+my $JENKINS_INFO = undef;
 
 # Print help {{{1
 ################################################################
@@ -53,7 +55,7 @@ Options:
    -a, --check-all        Check all.
    -c, --check-containers Check containers.
    -h, --help             Print this help message and exits.
-   -i,--input <FOLDER>    Set the input folder to use. Default is '.'.
+   -i, --input <FOLDER>   Set the input folder to use. Default is '.'.
    -t, --check-tools      Check tools.
    -w, --check-workflows  Check workflows.
 ";
@@ -256,56 +258,127 @@ sub read_tools_info() {
 	}
 }
 
-# Read Jenkins info {{{1
+# Get Jenkins info {{{1
 ################################################################
 
-sub read_jenkins_info() {
+sub get_jenkins_info() {
 
-	my $jenkins_url = "http://phenomenal-h2020.eu/jenkins/api/json?pretty=true&depth=2";
-	my $ua = LWP::UserAgent->new();
-	$ua->ssl_opts( verify_hostname => 0 );
-	my $res = $ua->request(new HTTP::Request GET => $jenkins_url);
-	if ($res->is_success) {
-		my $json = JSON::decode_json($res->content);
-		if (exists($json->{jobs})) {
-
-			# Loop on all jobs
-			foreach my $job (@{$json->{jobs}}) {
-				my $jenkins_project_name = $job->{name};
-				(my $container_id = $jenkins_project_name) =~ s/^(test-)?container-//;
-				if (exists($CONTAINERS{$container_id})) {
-					my %project;
-					$project{name} = $jenkins_project_name;
-					if (exists($job->{builds})) {
-
-						# Loop on all builds
-						my %builds;
-						foreach my $build (@{$job->{builds}}) {
-							my $number = $build->{number};
-							my $name = $build->{displayName};
-							(my $tag = $name) =~ s/^.+$container_id[^:]*:((dev_)?v[^ ]+_cv[^ ]+) .+$/$1/;
-							my $success = $build->{result} eq 'SUCCESS';
-							$builds{$number} = { number => $number, tag => $tag, success => $success };
-						}
-						$project{builds} = \%builds;
-						$project{last_build} = $job->{lastBuild}->{number} if exists($job->{lastBuild});
-					}
-					if ($jenkins_project_name =~ /^test-/) {
-						$CONTAINERS{$container_id}->{jenkins}->{test_project} = \%project;
-					}
-					else {
-						$CONTAINERS{$container_id}->{jenkins}->{build_project} = \%project;
-					}
-				}
-			}
-			
-		}
-		else {
-			die "Cannot find section \"jobs\" in Jenkins report at $jenkins_url."
+	if ( ! defined($JENKINS_INFO)) {
+		my $ua = LWP::UserAgent->new();
+		$ua->ssl_opts( verify_hostname => 0 );
+		my $res = $ua->request(new HTTP::Request GET => $JENKINS_URL);
+		if ($res->is_success) {
+			$JENKINS_INFO = JSON::decode_json($res->content);
 		}
 	}
 	else {
-		die "Cannot contact Jenkins server at $jenkins_url.";
+		die "Cannot contact Jenkins server at $JENKINS_URL.";
+	}
+
+	return $JENKINS_INFO;
+}
+
+# Get Jenkins jobs {{{1
+################################################################
+
+sub get_jenkins_jobs() {
+
+	my @jobs;
+
+	get_jenkins_info();
+
+	if (defined($JENKINS_INFO)) {
+		if (exists($JENKINS_INFO->{jobs})) {
+			@jobs = @{$JENKINS_INFO->{jobs}};
+		}
+		else {
+			die "Cannot find section \"jobs\" in Jenkins report at $JENKINS_URL."
+		}
+	}
+
+	return @jobs;
+}
+
+# Read Jenkins container jobs info {{{1
+################################################################
+
+sub read_jenkins_container_jobs_info() {
+
+	# Loop on all jobs
+	foreach my $job (get_jenkins_jobs()) {
+		my $jenkins_project_name = $job->{name};
+
+		# Is this a container job?
+		if ($jenkins_project_name =~ /^(test-)?container-/) {
+			(my $container_id = $jenkins_project_name) =~ s/^(test-)?container-//;
+			if (exists($CONTAINERS{$container_id})) {
+				my %project;
+				$project{name} = $jenkins_project_name;
+				if (exists($job->{builds})) {
+
+					# Loop on all builds
+					my %builds;
+					foreach my $build (@{$job->{builds}}) {
+						my $number = $build->{number};
+						my $name = $build->{displayName};
+						(my $tag = $name) =~ s/^.+$container_id[^:]*:((dev_)?v[^ ]+_cv[^ ]+) .+$/$1/;
+						my $success = $build->{result} eq 'SUCCESS';
+						$builds{$number} = { number => $number, tag => $tag, success => $success };
+					}
+					$project{builds} = \%builds;
+					$project{last_build} = $job->{lastBuild}->{number} if exists($job->{lastBuild});
+				}
+				if ($jenkins_project_name =~ /^test-/) {
+					$CONTAINERS{$container_id}->{jenkins}->{test_project} = \%project;
+				}
+				else {
+					$CONTAINERS{$container_id}->{jenkins}->{build_project} = \%project;
+				}
+			}
+		}
+	}
+}
+
+# Read Jenkins workflow jobs info {{{1
+################################################################
+
+sub read_jenkins_workflow_jobs_info() {
+
+	# Loop on all jobs
+	foreach my $job (get_jenkins_jobs()) {
+		my $jenkins_project_name = $job->{name};
+
+		# Workflow job
+		if ($jenkins_project_name =~ /^test-public(dev)?-workflow-/) {
+			(my $workflow_name = $jenkins_project_name) =~ s/^test-public(dev)?-workflow-//;
+			if (exists($WORKFLOWS{$workflow_name})) {
+
+				# Gather project info
+				my %project;
+				$project{name} = $jenkins_project_name;
+				if (exists($job->{builds})) {
+
+					# Loop on all builds
+					my %builds;
+					foreach my $build (@{$job->{builds}}) {
+						my $number = $build->{number};
+						my $success = $build->{result} eq 'SUCCESS';
+						$builds{$number} = { number => $number, success => $success };
+					}
+					$project{builds} = \%builds;
+				}
+				if (exists($job->{lastBuild})) {
+					$project{last_build} = $job->{lastBuild}->{number};
+				}
+
+				if ($jenkins_project_name =~ /^test-publicdev-/) {
+					$WORKFLOWS{$workflow_name}->{jenkins}->{publicdev_project} = \%project;
+				}
+				else {
+					$WORKFLOWS{$workflow_name}->{jenkins}->{public_project} = \%project;
+				}
+			}
+		}
 	}
 }
 
@@ -318,7 +391,7 @@ sub read_containers_info() {
 
 		read_tools_info();
 		read_phenomenal_tools2container_yaml();
-		read_jenkins_info();
+		read_jenkins_container_jobs_info();
 	}
 }
 
@@ -520,6 +593,10 @@ sub read_workflows_info() {
 
 		# Load all .ga files
 		for my $ga_file (@ga_files) {
+
+			(my $workflow_name = $ga_file) =~ s!workflows/Galaxy-Workflow-(.*)\.ga!$1!;
+
+			# Load file
 			my $workflow;
 			{
 				local $/;
@@ -555,7 +632,7 @@ sub read_workflows_info() {
 			}
 
 			# Set new workflow
-			$WORKFLOWS{$workflow->{uuid}} = { id => $workflow->{uuid}, name => $workflow->{name}, tools => \@tools};
+			$WORKFLOWS{$workflow_name} = { uuid => $workflow->{uuid}, name => $workflow_name, title => $workflow->{name}, tools => \@tools};
 		}
 	}
 }
@@ -568,6 +645,7 @@ sub check_workflows() {
 	# Load files
 	read_tools_info();
 	read_workflows_info();
+	read_jenkins_workflow_jobs_info();
 
 	# Loop on all workflows
 	foreach my $workflow_id (sort keys %WORKFLOWS) {
@@ -582,6 +660,22 @@ sub check_workflows() {
 
 			# Check tool version
 			check_msg('ERROR', 'WORKFLOW', $workflow->{name}, "Version $tool->{version} of tool $tool->{id} requested by workflow, but version $TOOLS{$tool->{id}}->{version} declared in tool_conf.xml.") unless $TOOLS{$tool->{id}}->{version} eq $tool->{version};
+		}
+
+		# Check that a test exists for this workflow in Jenkins
+		foreach my $prj_type (qw(publicdev public)) {
+			my $prj = "${prj_type}_project";
+			if ( ! exists($workflow->{jenkins}) || ! exists($workflow->{jenkins}->{$prj})) {
+				check_msg("ERROR", "WORKFLOW", $workflow->{name}, 'No test project "'."test-$prj_type-workflow-$workflow_id".'" found for this workflow on Jenkins server.');
+			}
+			elsif (exists($workflow->{jenkins}->{$prj}->{builds}) && exists($workflow->{jenkins}->{$prj}->{last_build})) {
+				my $last_build = $workflow->{jenkins}->{$prj}->{last_build};
+				my $build = $workflow->{jenkins}->{$prj}->{builds}->{$last_build};
+				check_msg("WARNING", "WORKFLOW", $workflow->{name}, 'Last build of test project '.$workflow->{jenkins}->{$prj}->{name}.'" failed.') unless $build->{success};
+			}
+			else {
+				check_msg('ERROR', 'WORKFLOW', $workflow->{name}, 'No builds found for test project "'.$workflow->{jenkins}->{$prj}->{name}.'" of this workflow on Jenkins server.');
+			}
 		}
 
 		check_msg("SUCCESS", "WORKFLOW", $workflow->{name}, "Workflow checked successfully.") unless $DATA{workflow}->{$workflow->{name}}->{messages}->{error};

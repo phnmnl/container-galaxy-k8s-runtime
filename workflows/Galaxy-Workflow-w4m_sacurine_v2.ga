@@ -33,7 +33,7 @@
         },
         "1": {
             "tool_id": "isa2w4m",
-            "tool_version": "1.0.4",
+            "tool_version": "1.1.0",
             "outputs": [
                 {
                     "type": "tabular",
