@@ -17,14 +17,13 @@ function log() {
 }
 
 function error {
+  local msg=$1
+  local code=$2
+  [[ -z $code ]] && code=1
 
-	local msg=$1
-	local code=$2
-	[[ -z $code ]] && code=1
+  log "[ERROR] $msg"
 
-	log "[ERROR] $msg"
-
-	exit $code
+  exit $code
 }
 
 
@@ -192,6 +191,7 @@ fi
 
 if [ -n $GALAXY_REPO ]
     then
+       log '*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*'
        log "Making custom galaxy-init-pheno:$TAG from $GALAXY_REPO at $GALAXY_RELEASE"
        DOCKERFILE_INIT_1=Dockerfile
        if [ -n $ANSIBLE_REPO ]
@@ -212,6 +212,7 @@ fi
 
 if [ -n $GALAXY_REPO ]
 then
+  log '*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*'
   log "Making custom galaxy-init-pheno-flavoured:$TAG starting from galaxy-init-pheno:$TAG"
   sed s+pcm32/galaxy-init-pheno$+$GALAXY_INIT_PHENO_TAG+ $DOCKERFILE_INIT_FLAVOUR > Dockerfile_init_tagged
   DOCKERFILE_INIT_FLAVOUR=Dockerfile_init_tagged
@@ -225,6 +226,7 @@ fi
 
 if [ -n $GALAXY_REPO ]
 then
+  log '*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*'
   log "Making custom galaxy-web-k8s:$TAG from $GALAXY_REPO at $GALAXY_RELEASE"
   sed s+$GALAXY_BASE_FROM_TO_REPLACE+$GALAXY_BASE_PHENO_TAG+ docker-galaxy-stable/compose/galaxy-web/Dockerfile > docker-galaxy-stable/compose/galaxy-web/Dockerfile_web
   DOCKERFILE_WEB=Dockerfile_web
