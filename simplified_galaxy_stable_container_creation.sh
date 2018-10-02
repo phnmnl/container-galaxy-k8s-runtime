@@ -114,7 +114,8 @@ DOCKER_PUSH_ENABLED=${DOCKER_PUSH_ENABLED:-$DFT_DOCKER_PUSH_ENABLED}
 DOCKER_REPO=${CONTAINER_REGISTRY:-}
 DOCKER_USER=${CONTAINER_USER:-pcm32}
 
-ANSIBLE_REPO=galaxyproject/ansible-galaxy-extras
+#ANSIBLE_REPO=galaxyproject/ansible-galaxy-extras
+ANSIBLE_REPO=phnmnl/ansible-galaxy-extras
 ANSIBLE_RELEASE=18.01-k8s
 
 GALAXY_BASE_FROM_TO_REPLACE=quay.io/bgruening/galaxy-base:18.01
