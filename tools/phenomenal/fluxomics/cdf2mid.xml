@@ -9,7 +9,7 @@ mkdir cdfdata;
 echo 'Linking file $cdf to cdfdata/$cdf.name';
 ln -s $cdf 'cdfdata/$cdf.name';
 #end for
-runcdf2mid.R -i "$metadata" -o "$outputExchange" -z cdfdata;
+runcdf2mid.R -i "$metadata" -o "$outputExchange" -z cdfdata/;
 rm -rf cdfdata
 ]]></command>
 <inputs>
