@@ -1,16 +1,18 @@
 <tool id="cdf2mid" name="cdf2mid" version="1.0">
 <stdio>
-<exit_code range="1:" />
+<exit_code range="1:" level="fatal" />
 </stdio>
 <description>Starting from a set of netCDF files, it evaluates the peaks of mass isotopomer distribution (MID) for metabolites of interest, making them ready for the next step of the workflow: correction for natural isotope occurrence.</description>
-<command><![CDATA[
+<command detect_errors="exit_code"><![CDATA[
 mkdir cdfdata;
 #for $cdf in $cdf_files
 echo 'Linking file $cdf to cdfdata/$cdf.name';
 ln -s $cdf 'cdfdata/$cdf.name';
 #end for
-runcdf2mid.R -i "$metadata" -o "$outputExchange" -z cdfdata;
-rm -rf cdfdata
+runcdf2mid.R -i "$metadata" -o "$outputExchange" -z cdfdata/;
+exit_code=\$?;
+rm -rf cdfdata;
+exit \$exit_code
 ]]></command>
 <inputs>
 	<param type="data" name="metadata" format="txt" label="txt file of MS data description" help="list of metabolites and their MS characteristics (retention, lightest m/z, etc)" />
