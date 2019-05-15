@@ -9,8 +9,6 @@ assignment:
    - tamenmr-anova
    - tamenmr-binning
    - tamenmr-globalalign
-   - tamenmr-import_to_csv
-   - tamenmr-import_to_nmrML
    - tamenmr-factorTemp
    - tamenmr-normalise_data
    - tamenmr-normalise
