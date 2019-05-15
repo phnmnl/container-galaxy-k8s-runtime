@@ -3,33 +3,33 @@ global:
   max_pod_retrials: 3
 assignment:
 # tameNMR
-#- tools_id:
-#   - tamenmr-addremmerge
-#   - tamenmr-align
-#   - tamenmr-anova
-#   - tamenmr-binning
-#   - tamenmr-globalalign
-#   - tamenmr-import_to_csv
-#   - tamenmr-import_to_nmrML
-#   - tamenmr-factorTemp
-#   - tamenmr-normalise_data
-#   - tamenmr-normalise
-#   - tamenmr-pca
-#   - tamenmr-peakpick
-#   - tamenmr-plotnmr
-#   - tamenmr-plotnmrsig
-#   - tamenmr-pls-da
-#   - tamenmr-prepPattern
-#   - tamenmr-quantilePlot
-#   - tamenmr-scaling
-#   - tamenmr-slice
-#   - tamenmr-transform
-#   - tamenmr-ttest
-#  docker_repo_override: container-registry.phenomenal-h2020.eu
-#  docker_owner_override: phnmnl
-#  docker_image_override: tamenmr
-#  docker_tag_override: v1.0_cv0.5.10
-#  max_pod_retrials: 3
+- tools_id:
+   - tamenmr-addremmerge
+   - tamenmr-align
+   - tamenmr-anova
+   - tamenmr-binning
+   - tamenmr-globalalign
+   - tamenmr-import_to_csv
+   - tamenmr-import_to_nmrML
+   - tamenmr-factorTemp
+   - tamenmr-normalise_data
+   - tamenmr-normalise
+   - tamenmr-pca
+   - tamenmr-peakpick
+   - tamenmr-plotnmr
+   - tamenmr-plotnmrsig
+   - tamenmr-pls-da
+   - tamenmr-prepPattern
+   - tamenmr-quantilePlot
+   - tamenmr-scaling
+   - tamenmr-slice
+   - tamenmr-transform
+   - tamenmr-ttest
+  docker_repo_override: container-registry.phenomenal-h2020.eu
+  docker_owner_override: phnmnl
+  docker_image_override: tamenmr
+  docker_tag_override: v1.0_cv0.5.10
+  max_pod_retrials: 3
 # Fluxomics
 - tools_id: 
    - escher-fluxomics
