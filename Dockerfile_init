@@ -7,6 +7,10 @@ LABEL software="Galaxy Init"
 LABEL software.version="18.01-pheno-dev"
 LABEL version="1.6"
 
+# Patch for up to 18.05-dev only, not tested on 19.01 and should not be used >= 19.05
+# Avoids failure due to missing errored job in k8s (line 499)
+COPY patches/kubernetes.py /galaxy-export/galaxy-central/lib/galaxy/jobs/runners/kubernetes.py
+
 RUN wget -O ephemeris.tar https://api.github.com/repos/galaxyproject/ephemeris/tarball/eeee87a57379b8b639b06c2a50038ef449c28d73 && \
     tar -xf ephemeris.tar && rm ephemeris.tar && \
     virtualenv venv-workflow && \
