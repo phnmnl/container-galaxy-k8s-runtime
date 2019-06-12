@@ -1,26 +1,15 @@
-FROM pcm32/galaxy-init-pheno
+FROM container-registry.phenomenal-h2020.eu/phnmnl/galaxy-init-pheno-flavoured:dev_v18.01-pheno-isa_cv1.7.301
 
 MAINTAINER PhenoMeNal-H2020 Project <phenomenal-h2020-users@googlegroups.com>
 
 LABEL Description="Galaxy 18.01-pheno-dev for running inside Kubernetes."
 LABEL software="Galaxy Init"
 LABEL software.version="18.01-pheno-dev"
-LABEL version="1.6"
+LABEL version="1.7"
 
 # Patch for up to 18.05-dev only, not tested on 19.01 and should not be used >= 19.05
 # Avoids failure due to missing errored job in k8s (line 499)
 COPY patches/kubernetes.py /galaxy-export/galaxy-central/lib/galaxy/jobs/runners/kubernetes.py
-
-RUN wget -O ephemeris.tar https://api.github.com/repos/galaxyproject/ephemeris/tarball/eeee87a57379b8b639b06c2a50038ef449c28d73 && \
-    tar -xf ephemeris.tar && rm ephemeris.tar && \
-    virtualenv venv-workflow && \
-    /bin/bash -c "source venv-workflow/bin/activate && \
-                  pip install 'pip>=8.1' && \
-                  pip install ./galaxyproject-ephemeris-eeee87a \
-                      --index-url https://pypi.python.org/simple && \
-                  pip install urllib3[secure] && \
-                  deactivate && \
-                  virtualenv --relocatable venv-workflow"
 
 #COPY config/galaxy.ini config/galaxy.ini
 COPY config/job_conf.xml config/job_conf.xml
