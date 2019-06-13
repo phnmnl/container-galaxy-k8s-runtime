@@ -115,8 +115,6 @@
       <tool file="phenomenal/nmr/tamenmr/anova.xml"/>
       <tool file="phenomenal/nmr/tamenmr/binning.xml"/>
       <tool file="phenomenal/nmr/tamenmr/globalAlign.xml"/>
-      <tool file="phenomenal/nmr/tamenmr/import_to_csv.xml"/>
-      <tool file="phenomenal/nmr/tamenmr/import_to_nmrML.xml"/>
       <tool file="phenomenal/nmr/tamenmr/makeFactorTemplate.xml"/>
       <tool file="phenomenal/nmr/tamenmr/norm_data.xml"/>
       <tool file="phenomenal/nmr/tamenmr/normalisation.xml"/>
