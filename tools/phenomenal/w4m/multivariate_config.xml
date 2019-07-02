@@ -233,7 +233,7 @@
 
 **Please cite**
 
-Etienne A. Thevenot, Aurelie Roux, Ying Xu, Eric Ezan, and Christophe Junot (2015). Analysis of the human adult urinary metabolome variations with age, body mass index and gender by implementing a comprehensive workflow for univariate and OPLS statistical analyses. *Journal of Proteome Research*, **14**:3322-3335 (http://dx.doi.org/10.1021/acs.jproteome.5b00354).
+Etienne A. Thevenot, Aurelie Roux, Ying Xu, Eric Ezan, and Christophe Junot (2015). Analysis of the human adult urinary metabolome variations with age, body mass index and gender by implementing a comprehensive workflow for univariate and OPLS statistical analyses. *Journal of Proteome Research*, **14**:3322-3335 (https://doi.org/10.1021/acs.jproteome.5b00354).
 
 ---------------------------------------------------
 
@@ -284,18 +284,18 @@ Comments
 References
 ----------
 
-| Brereton R.G. and Lloyd G.R. (2014). Partial least squares discriminant analysis: taking the magic away. *Journal of Chemometrics*, 28:213-225. http://dx.doi.org/10.1002/cem.2609
+| Brereton R.G. and Lloyd G.R. (2014). Partial least squares discriminant analysis: taking the magic away. *Journal of Chemometrics*, 28:213-225. https://doi.org/10.1002/cem.2609
 | Eriksson I., Johansson E., Kettaneh-Wold N. and Wold S. (2001). Multi- and megavariate data analysis. Principles and applications. *Umetrics Academy*.
-| Galindo-Prieto B., Eriksson L. and Trygg J. (2014). Variable influence on projection (VIP) for orthogonal projections to latent structures (OPLS). *Journal of Chemometrics*, 28:623-632. http://dx.doi.org/10.1002/cem.2627 
-| Hubert M., Rousseeuw P. and Vanden Branden K. (2005). ROBPCA: a new approach to robust principal component analysis. *Technometrics*, 47:64-79. http://dx.doi.org/10.1198/004017004000000563
-| Mehmood T., Liland K.H., Snipen L. and Saebo S. (2012). A review of variable selection methods in Partial Least Squares Regression. *Chemometrics and Intelligent Laboratory Systems*, 118:62-69. http://dx.doi.org/10.1016/j.chemolab.2012.07.010 
-| Szymanska E., Saccenti E., Smilde A. and Westerhuis J. (2012). Double-check: validation of diagnostic statistics for PLS-DA models in metabolomics studies. *Metabolomics*, 8:3-16. http://dx.doi.org/10.1007/s11306-011-0330-3
+| Galindo-Prieto B., Eriksson L. and Trygg J. (2014). Variable influence on projection (VIP) for orthogonal projections to latent structures (OPLS). *Journal of Chemometrics*, 28:623-632. https://doi.org/10.1002/cem.2627 
+| Hubert M., Rousseeuw P. and Vanden Branden K. (2005). ROBPCA: a new approach to robust principal component analysis. *Technometrics*, 47:64-79. https://doi.org/10.1198/004017004000000563
+| Mehmood T., Liland K.H., Snipen L. and Saebo S. (2012). A review of variable selection methods in Partial Least Squares Regression. *Chemometrics and Intelligent Laboratory Systems*, 118:62-69. https://doi.org/10.1016/j.chemolab.2012.07.010 
+| Szymanska E., Saccenti E., Smilde A. and Westerhuis J. (2012). Double-check: validation of diagnostic statistics for PLS-DA models in metabolomics studies. *Metabolomics*, 8:3-16. https://doi.org/10.1007/s11306-011-0330-3
 | Tenenhaus M. (1998). La regression PLS : theorie et pratique. *Technip*.
-| Thevenot E.A., Roux A., Xu Y., Ezan E. and Junot C. (2015). Analysis of the human adult urinary metabolome variations with age, body mass index and gender by implementing a comprehensive workflow for univariate and OPLS statistical analyses. *Journal of Proteome Research*, 14:3322-3335. http://dx.doi.org/10.1021/acs.jproteome.5b00354
-| Trygg J. and Wold S. (2002). Orthogonal projection to latent structures (O-PLS). *Journal of Chemometrics*, 16:119-128. http://dx.doi.org/10.1002/cem.695
-| Trygg J., Holmes E. and Lundstedt T. (2007). Chemometrics in Metabonomics. *Journal of Proteome Research*, 6:469-479. http://dx.doi.org/10.1021/pr060594q
+| Thevenot E.A., Roux A., Xu Y., Ezan E. and Junot C. (2015). Analysis of the human adult urinary metabolome variations with age, body mass index and gender by implementing a comprehensive workflow for univariate and OPLS statistical analyses. *Journal of Proteome Research*, 14:3322-3335. https://doi.org/10.1021/acs.jproteome.5b00354
+| Trygg J. and Wold S. (2002). Orthogonal projection to latent structures (O-PLS). *Journal of Chemometrics*, 16:119-128. https://doi.org/10.1002/cem.695
+| Trygg J., Holmes E. and Lundstedt T. (2007). Chemometrics in Metabonomics. *Journal of Proteome Research*, 6:469-479. https://doi.org/10.1021/pr060594q
 | Wehrens W. (2011). Chemometrics with R. *Springer*.
-| Wold S., Sjostrom M. and Eriksson L. (2001). PLS-regression: a basic tool of chemometrics. *Chemometrics and Intelligent Laboratory Systems*, 58:109-130. http://dx.doi.org/10.1016/S0169-7439(01)00155-1
+| Wold S., Sjostrom M. and Eriksson L. (2001). PLS-regression: a basic tool of chemometrics. *Chemometrics and Intelligent Laboratory Systems*, 58:109-130. https://doi.org/10.1016/S0169-7439(01)00155-1
 
 -----------------
 Workflow position

@@ -273,14 +273,11 @@
     <tool id="metabomatching" destination="dynamic-k8s-small" resources="all"/>
     <tool id="iterative-signature-algorithm" destination="dynamic-k8s-large" resources="all"/>
     <!-- tameNMR -->
-    <!--
     <tool id="tamenmr-addremmerge" destination="dynamic-k8s-small" resources="all"/>
     <tool id="tamenmr-align" destination="dynamic-k8s-small" resources="all"/>
     <tool id="tamenmr-anova" destination="dynamic-k8s-small" resources="all"/>
     <tool id="tamenmr-binning" destination="dynamic-k8s-small" resources="all"/>
     <tool id="tamenmr-globalalign" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="tamenmr-import_to_csv" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="tamenmr-import_to_nmrML" destination="dynamic-k8s-small" resources="all"/>
     <tool id="tamenmr-factorTemp" destination="dynamic-k8s-small" resources="all"/>
     <tool id="tamenmr-normalise_data" destination="dynamic-k8s-small" resources="all"/>
     <tool id="tamenmr-normalise" destination="dynamic-k8s-small" resources="all"/>
@@ -295,7 +292,6 @@
     <tool id="tamenmr-slice" destination="dynamic-k8s-small" resources="all"/>
     <tool id="tamenmr-transform" destination="dynamic-k8s-small" resources="all"/>
     <tool id="tamenmr-ttest" destination="dynamic-k8s-small" resources="all"/>
-    -->
     <!-- new IPO -->
     <tool id="ipo4xcmsSet" destination="dynamic-k8s-xlarge" resources="all"/>
     <tool id="ipo4retgroup" destination="dynamic-k8s-xlarge" resources="all"/>
@@ -422,8 +418,8 @@
     <tool id="msnbase-read-msms" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="map-msms2camera" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="msms2metfrag" destination="dynamic-k8s-medium" resources="all"/>
-    <tool id="metfrag-vis" destination="dynamic-k8s-small" resources="all"/>
-    <tool id="metfrag-vis-multiple" destination="dynamic-k8s-small" resources="all"/>
+    <tool id="metfrag-vis" destination="dynamic-k8s-medium" resources="all"/>
+    <tool id="metfrag-vis-multiple" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="metfrag-cli-batch-multiple" destination="dynamic-k8s-large" resources="all"/>
     <tool id="msnbase-filter-merge-msms" destination="dynamic-k8s-medium" resources="all"/>
     <tool id="msms2metfrag-multiple" destination="dynamic-k8s-medium" resources="all"/>
