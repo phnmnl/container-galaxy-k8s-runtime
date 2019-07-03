@@ -1,1 +1,1 @@
-bash /galaxy/container-simple-checks.sh
+bash /galaxy-export/container-simple-checks.sh
